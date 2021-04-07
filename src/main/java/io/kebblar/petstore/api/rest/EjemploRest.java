@@ -16,8 +16,8 @@ public class EjemploRest {
     @GetMapping(path = "/prueba.json", produces = "application/json; charset=utf-8")
     public Map<String, String> prueba() throws ServletException {
         Map<String, String> mapa = new HashMap<>();
-        mapa.put("dato-1", "gus");
-        mapa.put("dato-2", "tavo");
+        mapa.put("dato-1", "gus_ok");
+        mapa.put("dato-2", "tavo_bad");
         return mapa;
     }
 
