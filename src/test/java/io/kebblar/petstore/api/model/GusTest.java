@@ -13,6 +13,7 @@ public class GusTest {
     @Test
     public void pruebaSuma() {
         int res=0;
+        
         res = ms.suma(2, 3);
         assert(res==5);
         
@@ -22,8 +23,8 @@ public class GusTest {
         res = ms.suma(0, 0);
         assert(res==0);
 
-        //res = ms.suma(-1, -1);
-        //assert(res==-2);
+        res = ms.suma(-1, -1);
+        assert(res==-2);
 
     }
 }
