@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.kebblar.petstore.api.model.Criterio;
 import io.kebblar.petstore.api.model.Mascota;
+import io.kebblar.petstore.api.model.TickerWrapper;
 import io.kebblar.petstore.api.exceptions.BusinessException;
 
 /**
@@ -74,4 +75,11 @@ public interface MascotaService {
      * @return suma de los enteros dados
      */
     int suma(int a, int b);
+
+    /**
+     * Retorna el valor de una criptomoneda en el nstante actual.
+     * 
+     * @return Clase de modelo que contiene la información de una cripto.
+     */
+    TickerWrapper callTickerMicroservice();
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.ProcesaMascotaResponse;
+import io.kebblar.petstore.api.model.TickerWrapper;
 import io.kebblar.petstore.api.model.Criterio;
 import io.kebblar.petstore.api.model.Mascota;
 import io.kebblar.petstore.api.service.MascotaService;
@@ -82,6 +83,12 @@ public class MascotaController {
     public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws BusinessException {
         int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
+    }
+    
+    
+    @GetMapping(path = "/tickers.json", produces = "application/json; charset=utf-8")
+    public TickerWrapper getTicker() throws BusinessException {
+        return mascotaService.callTickerMicroservice();
     }
 
 }
