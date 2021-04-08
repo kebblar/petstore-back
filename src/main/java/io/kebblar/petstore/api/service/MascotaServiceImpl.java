@@ -52,4 +52,16 @@ public class MascotaServiceImpl implements MascotaService {
         return id;
     }
 
+    @Override
+    public int suma(int a, int b) {
+        int res=0;
+        for(int i=0; i<a; i++) {
+            res++;
+        }
+        for(int j=0; j<b; j++) {
+            res++;
+        }
+        return res;
+    }
+
 }

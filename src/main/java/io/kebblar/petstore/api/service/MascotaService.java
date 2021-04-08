@@ -65,4 +65,13 @@ public interface MascotaService {
      * @return Retorna el ID de la mascota que fué eliminada.
      */
     int delete(int id);
+    
+    /**
+     * Retorna la suma de dos enteros
+     * 
+     * @param a primer entero
+     * @param b segundo entero
+     * @return suma de los enteros dados
+     */
+    int suma(int a, int b);
 }
