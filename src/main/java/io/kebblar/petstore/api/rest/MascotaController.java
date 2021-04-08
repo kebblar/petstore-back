@@ -55,7 +55,7 @@ public class MascotaController {
         return mascotaService.getAll();
     }
     
-    @GetMapping(path = "/mascotas/filtro.json", produces = "application/json; charset=utf-8")
+    @PostMapping(path = "/mascotas/filtro.json", produces = "application/json; charset=utf-8")
     public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws BusinessException {
         return mascotaService.getByCriteria(criterios);
     }
