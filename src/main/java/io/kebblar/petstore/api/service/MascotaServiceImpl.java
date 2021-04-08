@@ -61,7 +61,7 @@ public class MascotaServiceImpl implements MascotaService {
         for(int j=0; j<b; j++) {
             res++;
         }
-        return a+b;
+        return res;
     }
 
 }
