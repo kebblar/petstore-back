@@ -8,7 +8,7 @@ import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.MascotaServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GusTest {
+public class MascotaTest {
     private MascotaService ms = new MascotaServiceImpl();
     
     @Test
