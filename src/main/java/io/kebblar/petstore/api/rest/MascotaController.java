@@ -49,7 +49,7 @@ public class MascotaController {
     }
 
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public InsertaMascotaResponse getMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
+    public InsertaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
         int id = mascotaService.insertaMascota(mascota);
         return new InsertaMascotaResponse(id);
     }
