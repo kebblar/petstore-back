@@ -67,13 +67,14 @@ public class MascotaController {
 
     @PutMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
-        int id = mascotaService.insertaMascota(mascota);
+        int id = mascotaService.actualizaMascota(mascota);
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
     
     @DeleteMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse borraMascota(@PathVariable int id) throws BusinessException {
-        return new ProcesaMascotaResponse("La mascota fué borrada correctamente", id);
+        int result = mascotaService.borraMascota(id);
+        return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
 
 }

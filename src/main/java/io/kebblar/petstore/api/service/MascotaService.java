@@ -43,10 +43,26 @@ public interface MascotaService {
     List<Integer> getPetsByCriteria(List<Criterio> criterios);
 
     /**
-     * Inserta en la base un objeto de tipo "Mascota"
+     * Inserta en la base un objeto de tipo "Mascota".
      *
      * @param mascota Objeto de tipo Mascota en donde el ID no es envado.
-     * @return Retorna el ID de la mascota insertada
+     * @return Retorna el ID de la mascota insertada.
      */
     int insertaMascota(Mascota mascota);
+
+    /**
+     * Actualiza en la base un objeto de tipo "Mascota".
+     *
+     * @param mascota Objeto de tipo Mascota en donde el ID es la llave en la base de datos.
+     * @return Retorna el ID de la mascota a ser actualizada.
+     */
+    int actualizaMascota(Mascota mascota);
+
+    /**
+     * Elimina en la base un objeto de tipo "Mascota".
+     * @param id Identificador de la mascota a ser eliminada de la base de datos.
+     * 
+     * @return Retorna el ID de la mascota que fué eliminada.
+     */
+    int borraMascota(int id);
 }

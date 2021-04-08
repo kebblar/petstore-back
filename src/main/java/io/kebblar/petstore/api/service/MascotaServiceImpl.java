@@ -38,4 +38,14 @@ public class MascotaServiceImpl implements MascotaService {
         return 172;
     }
 
+    @Override
+    public int actualizaMascota(Mascota mascota) {
+        return 321;
+    }
+
+    @Override
+    public int borraMascota(int id) {
+        return id;
+    }
+
 }
