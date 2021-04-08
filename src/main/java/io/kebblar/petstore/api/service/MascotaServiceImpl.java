@@ -23,28 +23,32 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public List<Integer> getPetsByCriteria(List<Criterio> criterios) {
-        return null;
+    public List<Integer> getByCriteria(List<Criterio> criterios) {
+        List<Integer> lista = new ArrayList<>();
+        lista.add(6);
+        lista.add(2);
+        lista.add(7);
+        return lista;
     }
 
     @Override
-    public Mascota getMascota(int id) throws BusinessException {
+    public Mascota getById(int id) throws BusinessException {
         Mascota mascota = new Mascota(id, "Perico", "Ave parlanchina");
         return mascota;
     }
 
     @Override
-    public int insertaMascota(Mascota mascota) {
+    public int insert(Mascota mascota) {
         return 172;
     }
 
     @Override
-    public int actualizaMascota(Mascota mascota) {
+    public int update(Mascota mascota) {
         return 321;
     }
 
     @Override
-    public int borraMascota(int id) {
+    public int delete(int id) {
         return id;
     }
 

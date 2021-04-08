@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.ProcesaMascotaResponse;
+import io.kebblar.petstore.api.model.Criterio;
 import io.kebblar.petstore.api.model.Mascota;
 import io.kebblar.petstore.api.service.MascotaService;
 
@@ -53,27 +54,32 @@ public class MascotaController {
     public List<Mascota> getAll() throws BusinessException {
         return mascotaService.getAll();
     }
+    
+    @GetMapping(path = "/mascotas/filtro.json", produces = "application/json; charset=utf-8")
+    public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws BusinessException {
+        return mascotaService.getByCriteria(criterios);
+    }
 
     @GetMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
     public Mascota getMascota(@PathVariable int id) throws BusinessException {
-        return mascotaService.getMascota(id);
+        return mascotaService.getById(id);
     }
 
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
-        int id = mascotaService.insertaMascota(mascota);
+        int id = mascotaService.insert(mascota);
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
 
     @PutMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
-        int id = mascotaService.actualizaMascota(mascota);
+        int id = mascotaService.update(mascota);
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
     
     @DeleteMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse borraMascota(@PathVariable int id) throws BusinessException {
-        int result = mascotaService.borraMascota(id);
+        int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
 

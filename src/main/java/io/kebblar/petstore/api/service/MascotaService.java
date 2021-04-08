@@ -21,7 +21,7 @@ public interface MascotaService {
      * @return Objeto de tipo "Mascota"
      * @throws BusinessException
      */
-    Mascota getMascota(int id) throws BusinessException;
+    Mascota getById(int id) throws BusinessException;
 
     /**
      * Retorna una lista de objetos de tipo "Mascota" que contiene
@@ -40,7 +40,7 @@ public interface MascotaService {
      * @param criterios Lista de objetos de tipo "Criterio"
      * @return Lista de enteros
      */
-    List<Integer> getPetsByCriteria(List<Criterio> criterios);
+    List<Integer> getByCriteria(List<Criterio> criterios);
 
     /**
      * Inserta en la base un objeto de tipo "Mascota".
@@ -48,7 +48,7 @@ public interface MascotaService {
      * @param mascota Objeto de tipo Mascota en donde el ID no es envado.
      * @return Retorna el ID de la mascota insertada.
      */
-    int insertaMascota(Mascota mascota);
+    int insert(Mascota mascota);
 
     /**
      * Actualiza en la base un objeto de tipo "Mascota".
@@ -56,7 +56,7 @@ public interface MascotaService {
      * @param mascota Objeto de tipo Mascota en donde el ID es la llave en la base de datos.
      * @return Retorna el ID de la mascota a ser actualizada.
      */
-    int actualizaMascota(Mascota mascota);
+    int update(Mascota mascota);
 
     /**
      * Elimina en la base un objeto de tipo "Mascota".
@@ -64,5 +64,5 @@ public interface MascotaService {
      * 
      * @return Retorna el ID de la mascota que fué eliminada.
      */
-    int borraMascota(int id);
+    int delete(int id);
 }
