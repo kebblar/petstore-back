@@ -36,7 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.kebblar.petstore.api.exceptions.BusinessException;
+import io.kebblar.petstore.api.exceptions.ControllerException;
+
 import java.io.IOException;
 
 /**
@@ -75,8 +76,8 @@ public class CustomControllerAdvice {
      * @return un diccionario con los valores a mostrarse en el JSON de salida
      */
     @ResponseBody
-    @ExceptionHandler(value = BusinessException.class)
-    public ResponseEntity<Map<String, Object>> errorHandler(BusinessException geEx) {
+    @ExceptionHandler(value = ControllerException.class)
+    public ResponseEntity<Map<String, Object>> errorHandler(ControllerException geEx) {
         logger.error(getStackTraceExStr(geEx));
         return new ResponseEntity<>(crearMapaRetorno(geEx), geEx.getHttpStatus());
     }
@@ -120,8 +121,8 @@ public class CustomControllerAdvice {
      */
     private Map<String, Object> crearMapaRetorno(Exception ex) {
         Map<String, Object> map = new HashMap<>();
-        if (ex instanceof BusinessException) {
-            BusinessException ad = (BusinessException) (ex);
+        if (ex instanceof ControllerException) {
+            ControllerException ad = (ControllerException) (ex);
             map.put("tipo-error", ad.getLocalExceptionNumber());
             map.put("cve-exception", ad.getLocalExceptionKey());
             map.put("http-error", ad.getHttpStatus());
@@ -138,8 +139,8 @@ public class CustomControllerAdvice {
      */
     private String getStackTraceExStr(Exception excepcion) {
         StringBuilder errorGenerica = new StringBuilder();
-        if (excepcion instanceof BusinessException) {
-            BusinessException ge = (BusinessException) (excepcion);
+        if (excepcion instanceof ControllerException) {
+            ControllerException ge = (ControllerException) (excepcion);
             errorGenerica.append("tipo: ");
             errorGenerica.append(ge.getLocalExceptionNumber());
             errorGenerica.append(": ");

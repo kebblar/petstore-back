@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.exceptions.BusinessException;
+import io.kebblar.petstore.api.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.model.TickerWrapper;
 import io.kebblar.petstore.api.model.Criterio;
@@ -48,46 +48,44 @@ public class MascotaController {
         mapa.put("dato-2", "tavo");
         return mapa;
     }
-    
-    
+
     /* Procesamiento de entidades de tipo "Mascota" */
-    
+
     @GetMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public List<Mascota> getAll() throws BusinessException {
+    public List<Mascota> getAll() throws ControllerException {
         return mascotaService.getAll();
     }
-    
+
     @PostMapping(path = "/mascotas/filtro.json", produces = "application/json; charset=utf-8")
-    public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws BusinessException {
+    public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws ControllerException {
         return mascotaService.getByCriteria(criterios);
     }
 
     @GetMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
-    public Mascota getMascota(@PathVariable int id) throws BusinessException {
+    public Mascota getMascota(@PathVariable int id) throws ControllerException {
         return mascotaService.getById(id);
     }
 
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
+    public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.insert(mascota);
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
 
     @PutMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
+    public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.update(mascota);
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
-    
+
     @DeleteMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws BusinessException {
+    public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws ControllerException {
         int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
-    
-    
+
     @GetMapping(path = "/tickers.json", produces = "application/json; charset=utf-8")
-    public TickerWrapper getTicker() throws BusinessException {
+    public TickerWrapper getTicker() throws ControllerException {
         return mascotaService.callTickerMicroservice();
     }
 
