@@ -12,7 +12,7 @@ public class Mascota {
     @Size(min = 4, max = 8, message = "El nombre de la mascota debe tener una longitud mínima de {min} y máxima de {max}")
     private String nombre;
 
-    @NotBlank
+    @NotBlank(message="La descripción de la mascota debe ser no vacia")
     private String descripcion;
 
     public Mascota() {
