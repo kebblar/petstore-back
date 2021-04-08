@@ -1,5 +1,6 @@
 package io.kebblar.petstore.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +14,12 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public List<Mascota> getAll() throws BusinessException {
-        return null;
+        Mascota mascota1 = new Mascota(1, "Perico", "Ave parlanchina");
+        Mascota mascota2 = new Mascota(2, "Perro", "Perro Mordelón");
+        List<Mascota> lista = new ArrayList<>();
+        lista.add(mascota1);
+        lista.add(mascota2);
+        return lista;
     }
 
     @Override

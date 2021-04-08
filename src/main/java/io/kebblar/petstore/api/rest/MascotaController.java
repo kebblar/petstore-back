@@ -1,6 +1,7 @@
 package io.kebblar.petstore.api.rest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -43,6 +44,14 @@ public class MascotaController {
         mapa.put("dato-1", "gus");
         mapa.put("dato-2", "tavo");
         return mapa;
+    }
+    
+    
+    /* Procesamiento de entidades de tipo "Mascota" */
+    
+    @GetMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    public List<Mascota> getAll() throws BusinessException {
+        return mascotaService.getAll();
     }
 
     @GetMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
