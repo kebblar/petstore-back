@@ -52,7 +52,7 @@ public class CustomControllerAdvice {
     public ResponseEntity<Map<String, Object>> userErrorHandler(MethodArgumentNotValidException geEx) {
         logger.error(getStackTraceExStr(geEx));
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
-        return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.BAD_REQUEST);
     }
 
     @ResponseBody
@@ -107,7 +107,7 @@ public class CustomControllerAdvice {
             err.put("field-name", error.getField());
             lista.add(err);
         }
-        map.put("TipoError", "1777");
+        map.put("TipoError", "3001");
         map.put("errors", lista);
         return map;
     }
