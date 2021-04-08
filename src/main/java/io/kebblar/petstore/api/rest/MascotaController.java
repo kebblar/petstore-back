@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.exceptions.BusinessException;
@@ -77,8 +78,8 @@ public class MascotaController {
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
     
-    @DeleteMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse borraMascota(@PathVariable int id) throws BusinessException {
+    @DeleteMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws BusinessException {
         int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
