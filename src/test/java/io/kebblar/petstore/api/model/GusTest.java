@@ -10,6 +10,7 @@ import io.kebblar.petstore.api.service.MascotaServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class GusTest {
     private MascotaService ms = new MascotaServiceImpl();
+    
     @Test
     public void pruebaSuma() {
         int res=0;
