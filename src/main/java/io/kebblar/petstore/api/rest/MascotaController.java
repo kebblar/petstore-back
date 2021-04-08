@@ -6,15 +6,17 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.InsertaMascotaResponse;
+import io.kebblar.petstore.api.model.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.model.Mascota;
 import io.kebblar.petstore.api.service.MascotaService;
 
@@ -49,9 +51,20 @@ public class MascotaController {
     }
 
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
-    public InsertaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
+    public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
         int id = mascotaService.insertaMascota(mascota);
-        return new InsertaMascotaResponse(id);
+        return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
+    }
+
+    @PutMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws BusinessException {
+        int id = mascotaService.insertaMascota(mascota);
+        return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
+    }
+    
+    @DeleteMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
+    public ProcesaMascotaResponse borraMascota(@PathVariable int id) throws BusinessException {
+        return new ProcesaMascotaResponse("La mascota fué borrada correctamente", id);
     }
 
 }

@@ -1,10 +1,11 @@
 package io.kebblar.petstore.api.model;
 
-public class InsertaMascotaResponse {
-    private String mensaje="La mascota fué insertada correctamente";
+public class ProcesaMascotaResponse {
+    private String mensaje;
     private int id;
 
-    public InsertaMascotaResponse(int id) {
+    public ProcesaMascotaResponse(String mensaje, int id) {
+        this.mensaje = mensaje;
         this.id = id;
     }
 
@@ -35,7 +36,7 @@ public class InsertaMascotaResponse {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        InsertaMascotaResponse other = (InsertaMascotaResponse) obj;
+        ProcesaMascotaResponse other = (ProcesaMascotaResponse) obj;
         if (id != other.id)
             return false;
         if (mensaje == null) {
