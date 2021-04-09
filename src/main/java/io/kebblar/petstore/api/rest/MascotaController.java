@@ -21,7 +21,6 @@ import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 
