@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.ProcesaMascotaResponse;
-import io.kebblar.petstore.api.model.TickerWrapper;
-import io.kebblar.petstore.api.model.Criterio;
-import io.kebblar.petstore.api.model.Mascota;
+import io.kebblar.petstore.api.model.domain.Criterio;
+import io.kebblar.petstore.api.model.domain.Mascota;
+import io.kebblar.petstore.api.model.domain.TickerWrapper;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 
 @RestController

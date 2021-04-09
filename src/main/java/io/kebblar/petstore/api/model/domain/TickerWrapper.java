@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.model;
+package io.kebblar.petstore.api.model.domain;
 
 public class TickerWrapper {
     private String symbol;

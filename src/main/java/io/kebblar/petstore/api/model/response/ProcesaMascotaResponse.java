@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.model;
+package io.kebblar.petstore.api.model.response;
 
 public class ProcesaMascotaResponse {
     private String mensaje;

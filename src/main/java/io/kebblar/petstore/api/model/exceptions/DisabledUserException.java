@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.exceptions;
+package io.kebblar.petstore.api.model.exceptions;
 
 import org.springframework.http.HttpStatus;
 

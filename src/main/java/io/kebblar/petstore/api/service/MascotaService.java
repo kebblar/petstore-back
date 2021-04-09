@@ -2,10 +2,10 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
-import io.kebblar.petstore.api.model.Criterio;
-import io.kebblar.petstore.api.model.Mascota;
-import io.kebblar.petstore.api.model.TickerWrapper;
-import io.kebblar.petstore.api.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.domain.Criterio;
+import io.kebblar.petstore.api.model.domain.Mascota;
+import io.kebblar.petstore.api.model.domain.TickerWrapper;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * Interfaz que define los métodos de negocio asociados a la entidad

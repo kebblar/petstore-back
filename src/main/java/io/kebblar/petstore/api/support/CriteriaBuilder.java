@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.kebblar.petstore.api.model.Criterio;
+import io.kebblar.petstore.api.model.domain.Criterio;
 
 public class CriteriaBuilder {
     private static final String TEMPLATE = "select id_mascota from data where id_categoria=%d and valor=%d";

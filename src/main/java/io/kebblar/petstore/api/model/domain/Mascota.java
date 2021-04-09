@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.model;
+package io.kebblar.petstore.api.model.domain;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

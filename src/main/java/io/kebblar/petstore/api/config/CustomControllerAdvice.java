@@ -29,15 +29,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import io.kebblar.petstore.api.exceptions.ControllerException;
-
 import java.io.IOException;
 
 /**
