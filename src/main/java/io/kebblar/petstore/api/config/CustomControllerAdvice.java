@@ -78,8 +78,8 @@ public class CustomControllerAdvice {
     @ExceptionHandler(value = ControllerException.class)
     public ResponseEntity<Map<String, Object>> errorHandler(ControllerException geEx) {
         logger.error(getStackTraceExStr(geEx));
-        String name = geEx.getHttpStatus().name();
-        return new ResponseEntity<>(crearMapaRetorno(geEx), HttpStatus.valueOf(name));
+        int value = geEx.getHttpStatus().value();
+        return new ResponseEntity<>(crearMapaRetorno(geEx), HttpStatus.valueOf(value));
     }
 
     /**
