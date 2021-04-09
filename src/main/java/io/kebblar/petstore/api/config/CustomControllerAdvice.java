@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.IOException;
 
 /**
  * Controlador que manejara las excepciones lanzadas por los demas
@@ -45,34 +44,28 @@ import java.io.IOException;
  */
 @ControllerAdvice
 public class CustomControllerAdvice {
+    // Take a look at:
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
     private Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
+    /**
+     * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
+     * 
+     * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
+     * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
+     */
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> userErrorHandler(MethodArgumentNotValidException geEx) {
         logger.error(getStackTraceExStr(geEx));
-        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
         return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseBody
-    @ExceptionHandler(value = IOException.class)
-    public ResponseEntity<Map<String, Object>> gusErrorHandler(IOException geEx) {
-        logger.error(getStackTraceExStr(geEx));
-        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
-        return new ResponseEntity<>(buildError(geEx), HttpStatus.UNAUTHORIZED);
-    }
-    private Map<String, Object> buildError(IOException geEx) {
-        Map<String, Object> res = new HashMap<>();
-        res.put("dato", geEx.getMessage());
-        return res;
-    }
-
     /**
-     * Método que maneja las exepciones de {@link GenericaException}.
+     * Método que maneja las exepciones de {@link ControllerException}.
      *
-     * @param geEx la excepcion que manejara
-     * @return un diccionario con los valores a mostrarse en el JSON de salida
+     * @param geEx la excepcion que manejará (de tipo ControllerException).
+     * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
      */
     @ResponseBody
     @ExceptionHandler(value = ControllerException.class)
@@ -83,10 +76,10 @@ public class CustomControllerAdvice {
     }
 
     /**
-     * Mapa de retorno para errores de tipo MethodArgumentNotValidException
+     * Mapa de retorno para errores de tipo MethodArgumentNotValidException.
      *
-     * @param geEx la excepcion a mapear
-     * @return
+     * @param geEx la excepcion a mapear (de tipo MethodArgumentNotValidException).
+     * @return mapa de valores para una respuesta de validación de campos.
      */
     private Map<String, Object> buildValidationErrorResponse(MethodArgumentNotValidException geEx) {
         BindingResult binding = geEx.getBindingResult();
@@ -97,11 +90,9 @@ public class CustomControllerAdvice {
             Map<String, String> err = new HashMap<>();
                 String defMess = error.getDefaultMessage();
                 String[] arr = defMess.split("\\|");
-
                 String index = (arr.length>1)? arr[1]:"0";
             err.put("index", index);
             err.put("description", arr[0]);
-
             err.put("validation-type", error.getCode());
             err.put("object-name", error.getObjectName());
             err.put("rejected-value", error.getRejectedValue()+"");
