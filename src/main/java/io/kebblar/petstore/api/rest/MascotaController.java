@@ -70,7 +70,6 @@ public class MascotaController {
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.insert(mascota);
-        if(id>2) throw new UserAlreadyExistsException();
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
 
