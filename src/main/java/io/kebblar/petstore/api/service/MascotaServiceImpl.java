@@ -13,7 +13,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
-    
+
     private RestTemplate restTemplate;
 
     public MascotaServiceImpl(RestTemplate restTemplate) {

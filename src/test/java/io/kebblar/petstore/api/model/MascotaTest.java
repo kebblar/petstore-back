@@ -13,16 +13,16 @@ import io.kebblar.petstore.api.service.MascotaServiceImpl;
 public class MascotaTest {
     @Mock
     private RestTemplate template;
-    
+
     private MascotaService ms = new MascotaServiceImpl(template);
-    
+
     @Test
     public void pruebaSuma() {
         int res=0;
-        
+
         res = ms.suma(2, 3);
         assert(res==5);
-        
+
         res = ms.suma(2, 0);
         assert(res==2);
 

@@ -62,14 +62,14 @@ public interface MascotaService {
     /**
      * Elimina en la base un objeto de tipo "Mascota".
      * @param id Identificador de la mascota a ser eliminada de la base de datos.
-     * 
+     *
      * @return Retorna el ID de la mascota que fué eliminada.
      */
     int delete(int id);
-    
+
     /**
      * Retorna la suma de dos enteros
-     * 
+     *
      * @param a primer entero
      * @param b segundo entero
      * @return suma de los enteros dados
@@ -78,7 +78,7 @@ public interface MascotaService {
 
     /**
      * Retorna el valor de una criptomoneda en el nstante actual.
-     * 
+     *
      * @return Clase de modelo que contiene la información de una cripto.
      */
     TickerWrapper callTickerMicroservice();

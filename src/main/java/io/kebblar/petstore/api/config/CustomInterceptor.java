@@ -47,11 +47,11 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             String valor = request.getHeader(headerName);
             logger.info("El header "+headerName+" tiene el valor: " + valor);
         }
-        
+
 //        Enumeration<String> names = request.getParameterNames();
-//        while (names.hasMoreElements()) 
-//            System.out.println("Value is: " + names.nextElement()); 
-        
+//        while (names.hasMoreElements())
+//            System.out.println("Value is: " + names.nextElement());
+
 //        String name = "No user is loged in";
         /**
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

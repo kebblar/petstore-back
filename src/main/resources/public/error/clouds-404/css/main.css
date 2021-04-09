@@ -4,7 +4,7 @@ body {
     height:100%;
     font-family:'Inconsolata', Arial, Helvetica, Tahoma, sans-serif;
 }
-a, 
+a,
 a:visited {
     text-decoration:none;
 }
@@ -72,7 +72,7 @@ a:hover {
 }
 .text2_a {
     text-transform:uppercase;
-    color:#fff;    
+    color:#fff;
     font-size:21px;
     position:absolute;
     left:323px;
@@ -90,16 +90,16 @@ a:hover {
 }
 .text4_a {
     text-transform:uppercase;
-    color:#fff;    
-    font-size:18px;    
+    color:#fff;
+    font-size:18px;
     letter-spacing:1px;
     position:absolute;
     left:77px;
     top:177px;
 }
 .text5_a {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:88px;
@@ -107,16 +107,16 @@ a:hover {
 }
 .text6_a {
     text-transform:uppercase;
-    color:#909090;    
-    font-size:22px;    
+    color:#909090;
+    font-size:22px;
     letter-spacing:1px;
     position:absolute;
     left:88px;
     top:220px;
 }
 .text7_a {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:269px;
@@ -124,32 +124,32 @@ a:hover {
 }
 .text8_a {
     text-transform:uppercase;
-    color:#909090;    
-    font-size:22px;    
+    color:#909090;
+    font-size:22px;
     letter-spacing:1px;
     position:absolute;
     left:270px;
     top:220px;
 }
 .text9_a {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:418px;
     top:185px;
 }
 .text10_a {
-    color:#272727;    
-    font-size:50px;    
+    color:#272727;
+    font-size:50px;
     letter-spacing:1px;
     position:absolute;
     left:417px;
     top:195px;
 }
 .text11_a {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:88px;
@@ -157,7 +157,7 @@ a:hover {
 }
 .text12_a {
     text-transform:uppercase;
-    font-size:15px;    
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:88px;
@@ -195,8 +195,8 @@ a:hover {
 }
 .text2_b {
     text-transform:uppercase;
-    color:#272727;    
-    font-size:13px;    
+    color:#272727;
+    font-size:13px;
     letter-spacing:-1px;
     word-spacing:-3px;
     position:absolute;
@@ -204,8 +204,8 @@ a:hover {
     top:48px;
 }
 .text3_b {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
@@ -213,16 +213,16 @@ a:hover {
 }
 .text4_b {
     text-transform:uppercase;
-    color:#909090;    
-    font-size:22px;    
+    color:#909090;
+    font-size:22px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
     top:119px;
 }
 .text5_b {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
@@ -230,40 +230,40 @@ a:hover {
 }
 .text6_b {
     text-transform:uppercase;
-    color:#909090;    
-    font-size:22px;    
+    color:#909090;
+    font-size:22px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
     top:179px;
 }
 .text7_b {
-    color:#272727;    
-    font-size:15px;    
+    color:#272727;
+    font-size:15px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
     top:220px;
 }
 .text8_b {
-    color:#272727;    
-    font-size:30px;    
+    color:#272727;
+    font-size:30px;
     letter-spacing:1px;
     position:absolute;
     left:604px;
     top:234px;
 }
 .text9_b {
-    color:#272727;    
-    font-size:60px;    
+    color:#272727;
+    font-size:60px;
     letter-spacing:1px;
     position:absolute;
     left:722px;
     top:209px;
 }
 .text10_b {
-    color:#272727;    
-    font-size:10px;    
+    color:#272727;
+    font-size:10px;
     letter-spacing:0px;
     position:absolute;
     left:682px;
@@ -273,13 +273,13 @@ a:hover {
 
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
-    #ticket_right, 
-    .text4_a, 
-    .text5_a, 
-    .text6_a, 
-    .text7_a, 
-    .text8_a, 
-    .text9_a, 
+    #ticket_right,
+    .text4_a,
+    .text5_a,
+    .text6_a,
+    .text7_a,
+    .text8_a,
+    .text9_a,
     .text10_a {
         display:none;
     }
