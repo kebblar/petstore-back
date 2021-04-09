@@ -1,7 +1,5 @@
 package io.kebblar.petstore.api.model.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class BadCredentialsException extends BusinessException{
     private static final long serialVersionUID = -7083159020205284484L;
     private final static String mensaje = "Las credenciales proporcionadas son inválidas. Usted tiene %d intentos mas antes de que su usuario quede bloqueado.";

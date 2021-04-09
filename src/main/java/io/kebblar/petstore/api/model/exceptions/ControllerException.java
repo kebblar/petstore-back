@@ -1,15 +1,13 @@
 package io.kebblar.petstore.api.model.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class ControllerException extends Exception {
     private static final long serialVersionUID = -5047974256813565913L;
 
-    protected String shortMessage;
-    protected String detailedMessage;
-    protected int localExceptionNumber;
-    protected String localExceptionKey;
-    protected HttpStatus httpStatus = HttpStatus.ACCEPTED;
+    private String shortMessage;
+    private String detailedMessage;
+    private int localExceptionNumber;
+    private String localExceptionKey;
+    private HttpStatus httpStatus = HttpStatus.ACCEPTED;
 
     public ControllerException(
             String shortMessage,

@@ -1,7 +1,5 @@
 package io.kebblar.petstore.api.model.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class WaitLoginException extends BusinessException {
     private static final long serialVersionUID = 8948866486775990561L;
     private final static String mensaje = "El usuario ha sido bloqueado por los próximos %d minutos y %d segundos debido a que alcanzó el máximo numero de intentos fallidos de ingreso al sistema.";

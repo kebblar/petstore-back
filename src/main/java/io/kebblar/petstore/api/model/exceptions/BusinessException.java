@@ -1,7 +1,5 @@
 package io.kebblar.petstore.api.model.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class BusinessException extends ControllerException {
     private static final long serialVersionUID = -1218087669509474484L;
 

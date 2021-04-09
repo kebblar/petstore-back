@@ -21,6 +21,7 @@ import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 
@@ -69,6 +70,7 @@ public class MascotaController {
     @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.insert(mascota);
+        if(id>2) throw new UserAlreadyExistsException();
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
 

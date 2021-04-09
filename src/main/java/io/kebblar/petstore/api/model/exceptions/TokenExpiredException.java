@@ -1,7 +1,5 @@
 package io.kebblar.petstore.api.model.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class TokenExpiredException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
