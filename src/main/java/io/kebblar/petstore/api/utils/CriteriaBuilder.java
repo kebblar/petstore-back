@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.support;
+package io.kebblar.petstore.api.utils;
 
 import java.util.HashMap;
 import java.util.List;
