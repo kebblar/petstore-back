@@ -25,12 +25,12 @@ import javax.crypto.Cipher;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.ssl.PKCS8Key;
 
-public class Cript {
+public class Crypt {
     String rootPath = "/Users/garellano/emisor/";
     String privateKeyFile = rootPath + "ok.key";
     String certificateFile = rootPath + "ok.cer";
 
-    public Cript(String rootPath, String certificateFile, String privateKeyFile) {
+    public Crypt(String rootPath, String certificateFile, String privateKeyFile) {
         this.rootPath = rootPath;
         this.certificateFile = certificateFile;
         this.privateKeyFile = privateKeyFile;

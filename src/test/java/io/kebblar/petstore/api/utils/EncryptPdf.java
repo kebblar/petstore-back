@@ -44,7 +44,7 @@ public class EncryptPdf {
         document.add(gif);
 
         document.close();
-        String userPassword = HashUtils.getRandomString(32);
+        String userPassword = DigestEncoder.getRandomString(32);
         System.out.println(userPassword);
         protectDocument(path, userPassword);
 
