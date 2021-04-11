@@ -271,14 +271,6 @@ public class CryptoSupport {
 }
 
 /*
-
------BEGIN CERTIFICATE-----
------END CERTIFICATE-----
-
------BEGIN PRIVATE KEY-----
------END PRIVATE KEY-----
-
-
 openssl genrsa -out ok.key 1024
 openssl req -new -x509 -key ok.key -out ok.cer -days 365
 */
