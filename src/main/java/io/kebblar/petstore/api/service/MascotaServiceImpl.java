@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
-import io.kebblar.petstore.api.model.domain.TickerWrapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
-
-    private RestTemplate restTemplate;
-
-    public MascotaServiceImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @Override
     public List<Mascota> getAll() throws BusinessException {
@@ -70,12 +62,6 @@ public class MascotaServiceImpl implements MascotaService {
             res++;
         }
         return res;
-    }
-
-    @Override
-    public TickerWrapper callTickerMicroservice() {
-        String url = "https://api.binance.com/api/v1/ticker/24hr?symbol=ETHUSDT";
-        return restTemplate.getForObject(url, TickerWrapper.class);
     }
 
 }
