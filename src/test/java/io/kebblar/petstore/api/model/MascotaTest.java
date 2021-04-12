@@ -2,19 +2,14 @@ package io.kebblar.petstore.api.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.web.client.RestTemplate;
 
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.MascotaServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MascotaTest {
-    @Mock
-    private RestTemplate template;
-
-    private MascotaService ms = new MascotaServiceImpl(template);
+    private MascotaService ms = new MascotaServiceImpl();
 
     @Test
     public void pruebaSuma() {
