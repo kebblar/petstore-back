@@ -9,6 +9,7 @@ import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
+import io.kebblar.petstore.api.utils.ValidadorClave;
 
 @Service
 public class EstadoServiceImpl implements EstadoService {
@@ -30,6 +31,10 @@ public class EstadoServiceImpl implements EstadoService {
 
     @Override
     public Estado getEstado(int id) throws BusinessException {
+        // Vamos a validar si Kebblar2017 cumple con las reglas de una "clave fuerte"
+        ValidadorClave.validate("Kebblar2017");
+        // Eso es fundamental para contrarestar un ataque de arcoiris contra las claves "hasheadas" y "salteadas" en DB
+
         try {
             return estadoMapper.getEstado(id);
         } catch (SQLException e) {
