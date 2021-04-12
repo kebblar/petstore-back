@@ -1,8 +1,10 @@
 package io.kebblar.petstore.api.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
 
+@Service
 public class RemoteRestCallServiceImpl implements RemoteRestCallService {
 
     private RestTemplate restTemplate;
