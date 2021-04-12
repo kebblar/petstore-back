@@ -23,6 +23,7 @@ import io.kebblar.petstore.api.model.domain.TickerWrapper;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
+import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.support.MailSenderService;
 
@@ -30,13 +31,15 @@ import io.kebblar.petstore.api.support.MailSenderService;
 @RequestMapping(value = "/api")
 public class MascotaController {
     private MascotaService mascotaService;
+    private RemoteRestCallService remoteRestCallService;
     private JwtManagerService jwtManagerService;
     private MailSenderService mailSenderService;
 
-    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, MailSenderService mailSenderService) {
+    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, MailSenderService mailSenderService, RemoteRestCallService remoteRestCallService) {
         this.mascotaService = mascotaService;
         this.jwtManagerService=jwtManagerService;
         this.mailSenderService=mailSenderService;
+        this.remoteRestCallService=remoteRestCallService;
     }
 
     @GetMapping(path = "/prueba.json", produces = "application/json; charset=utf-8")
@@ -94,7 +97,7 @@ public class MascotaController {
 
     @GetMapping(path = "/tickers.json", produces = "application/json; charset=utf-8")
     public TickerWrapper getTicker() throws ControllerException {
-        return mascotaService.callTickerMicroservice();
+        return remoteRestCallService.callTickerMicroservice();
     }
 
 }
