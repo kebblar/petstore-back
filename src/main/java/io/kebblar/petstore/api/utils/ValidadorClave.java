@@ -10,7 +10,7 @@ import org.passay.*;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
-import io.kebblar.petstore.api.model.exceptions.InvalidPasswordException;
+import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 
 public class ValidadorClave {
     
@@ -52,7 +52,7 @@ public class ValidadorClave {
                sb.append(msg);
                sb.append("\n");
            }
-           throw new InvalidPasswordException(sb.toString());
+           throw new StrengthPasswordValidatorException(sb.toString(), messages);
         }
         return true;
       }
