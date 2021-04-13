@@ -73,7 +73,7 @@ public class FileUploadController {
 
 }
 /*
-curl http://localhost:9999/api/upload2.json -X POST \
+curl http://localhost:9999/api/upload.json -X POST \
 -F 'files=@/Users/garellano/Desktop/peliculas/01.jpg' \
 -F 'files=@/Users/garellano/Desktop/peliculas/02.jpg'
 
