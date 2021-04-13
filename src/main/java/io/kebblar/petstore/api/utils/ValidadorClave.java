@@ -45,9 +45,7 @@ public class ValidadorClave {
         PasswordData password = new PasswordData(clave);
         RuleResult result = validator.validate(password);
           
-        if(result.isValid()){
-           return true;
-        } else {
+        if(!result.isValid()) { // NOT valid !!!!
            List<String> messages = validator.getMessages(result);
            StringBuilder sb = new StringBuilder();
            for(String msg : messages) {
@@ -56,5 +54,6 @@ public class ValidadorClave {
            }
            throw new InvalidPasswordException(sb.toString());
         }
+        return true;
       }
 }
