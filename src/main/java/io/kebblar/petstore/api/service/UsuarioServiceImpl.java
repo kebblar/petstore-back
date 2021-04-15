@@ -8,10 +8,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 
 @Service
-public class AccessServiceImpl implements AccessService {
+public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioMapper usuarioMapper;
     
-    public AccessServiceImpl(UsuarioMapper usuarioMapper) {
+    public UsuarioServiceImpl(UsuarioMapper usuarioMapper) {
         this.usuarioMapper = usuarioMapper;
     }
     

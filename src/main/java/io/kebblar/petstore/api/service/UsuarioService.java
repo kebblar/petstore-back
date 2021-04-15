@@ -6,7 +6,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 
-public interface AccessService {
+public interface UsuarioService {
     Usuario createUser(CredencialesRequest cred) throws BusinessException;
     Usuario updateUser(Usuario usuario) throws BusinessException;
     Usuario getUser(int id) throws BusinessException;
