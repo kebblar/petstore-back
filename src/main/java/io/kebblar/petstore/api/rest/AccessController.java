@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
-import io.kebblar.petstore.api.model.exceptions.BadCredentialsException;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MailException;
 import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 
 @RestController
