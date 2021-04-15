@@ -27,12 +27,13 @@ public class AccessServiceImpl implements AccessService {
     }
     
     @Override
-    public void updateUser(Usuario usuario) throws BusinessException {
+    public Usuario updateUser(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.update(usuario);
         } catch (Exception e) {
             throw new BusinessException("Error al actualizar un usuario", e.getMessage());
         }
+        return usuario;
     }
 
     @Override
@@ -40,7 +41,7 @@ public class AccessServiceImpl implements AccessService {
         try {
             return usuarioMapper.getById(id);
         } catch (Exception e) {
-            throw new BusinessException("Error al actualizar un usuario", e.getMessage());
+            throw new BusinessException("Error al obtener un usuario", e.getMessage());
         }
     }
     
@@ -49,7 +50,17 @@ public class AccessServiceImpl implements AccessService {
         try {
             return usuarioMapper.getAll();
         } catch (Exception e) {
-            throw new BusinessException("Error al actualizar un usuario", e.getMessage());
+            throw new BusinessException("Error al obtener la lista de usuarios", e.getMessage());
+        }
+    }
+
+    @Override
+    public Usuario eliminaUsuario(int id) throws BusinessException {
+        try {
+            usuarioMapper.delete(id);
+            return usuarioMapper.getById(id);
+        } catch (Exception e) {
+            throw new BusinessException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
     

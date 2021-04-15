@@ -8,7 +8,9 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 
 public interface AccessService {
     Usuario createUser(CredencialesRequest cred) throws BusinessException;
-    void updateUser(Usuario usuario) throws BusinessException;
+    Usuario updateUser(Usuario usuario) throws BusinessException;
     Usuario getUser(int id) throws BusinessException;
     List<Usuario> getAllUsers() throws BusinessException;
+    Usuario eliminaUsuario(int id) throws BusinessException;
+
 }

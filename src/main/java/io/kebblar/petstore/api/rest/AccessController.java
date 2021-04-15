@@ -3,11 +3,14 @@ package io.kebblar.petstore.api.rest;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
@@ -32,11 +35,6 @@ public class AccessController {
         return new LoginResponse(1, "gus", new Date());
     }
     
-    @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
-    public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws BusinessException {
-        return this.accessService.createUser(credenciales);
-    }
-    
     @GetMapping(path = "/usuarios/{id}.json", produces = "application/json; charset=utf-8")
     public Usuario getUser(@RequestAttribute int id) throws BusinessException {
         return this.accessService.getUser(id);
@@ -45,6 +43,21 @@ public class AccessController {
     @GetMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws BusinessException {
         return this.accessService.getAllUsers();
+    }
+    
+    @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws BusinessException {
+        return this.accessService.createUser(credenciales);
+    }
+        
+    @PutMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    public Usuario updateUsuario(@RequestBody Usuario usuario) throws BusinessException {
+         return this.accessService.updateUser(usuario);
+    }
+    
+    @DeleteMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    public Usuario borraUsuario(@RequestParam int id) throws BusinessException {
+         return this.accessService.eliminaUsuario(id);
     }
 
 }
