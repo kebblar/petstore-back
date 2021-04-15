@@ -12,6 +12,7 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.model.exceptions.BadCredentialsException;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MailException;
+import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -19,7 +20,7 @@ public class AccessController {
     
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
     public LoginResponse login(@RequestBody CredencialesRequest cred) throws BusinessException {
-        if(cred.getClave().length()<3) throw new MailException("Para la clase del diplomado");
+        if(cred.getClave().length()<3) throw new UserAlreadyExistsException();
         return new LoginResponse(1, "gus", new Date());
     }
 
