@@ -20,4 +20,10 @@ public class BusinessException extends ControllerException {
         super(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey);
     }
 
+    public BusinessException(
+            String shortMessage,
+            String detailedMessage) {
+        super(shortMessage, detailedMessage, 0, "CVE_0000");
+    }
+
 }

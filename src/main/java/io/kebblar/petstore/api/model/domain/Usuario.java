@@ -1,5 +1,10 @@
 package io.kebblar.petstore.api.model.domain;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Usuario {
     private int id;
     private String correo;
@@ -14,6 +19,21 @@ public class Usuario {
     private long regeneraClaveInstante;
 
     public Usuario() {
+    }
+    
+    public Usuario(int id, String correo, String clave) {
+        this.setId(id);
+        this.setCorreo(correo);
+        this.setClave(clave);
+        // Default values
+        this.setActivo(true);
+        this.setAccesoNegadoContador(0);
+        this.setCreado(System.currentTimeMillis());
+        this.setInstanteBloqueo(0);
+        this.setInstanteUltimoAcceso(0);
+        this.setInstanteUltimoCambioClave(0);
+        this.setRegeneraClaveInstante(0);
+        this.setRegeneraClaveToken("NA");
     }
 
     public Usuario(int id, String correo, String clave, long creado, boolean activo, int accesoNegadoContador,
@@ -50,7 +70,7 @@ public class Usuario {
     }
 
     public String getClave() {
-        return clave;
+        return toHexString(calculateSHA256(clave, correo));
     }
 
     public void setClave(String clave) {
@@ -194,5 +214,21 @@ public class Usuario {
         return true;
     }
     
+    private byte[] calculateSHA256(String source, String salt) {
+        try {
+            String input = source + salt;
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            return md.digest(input.getBytes(StandardCharsets.UTF_8));
+        } catch(NoSuchAlgorithmException e) {}
+        return "String digest error".getBytes();
+    }
 
+    private String toHexString(byte[] hash) {
+        BigInteger number = new BigInteger(1, hash);
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+        while (hexString.length() < 32) {
+            hexString.insert(0, '0');
+        }
+        return hexString.toString();
+    }
 }

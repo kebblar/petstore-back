@@ -69,7 +69,7 @@ public interface UsuarioMapper {
         @Result(property = "regeneraClaveInstante",     column = "regenera_clave_instante")
         })
     @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ") 
-    Usuario getById(Usuario usuario) throws SQLException;
+    Usuario getById(int id) throws SQLException;
 
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario ") 
@@ -78,17 +78,6 @@ public interface UsuarioMapper {
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario order by correo asc")
     List<Usuario> getAllAscendingByCorreo() throws SQLException;
-    
-    /**
-     * Obtiene un objeto de tipo 'usuario' realizando la búsqueda con base en el ID del Usuario.
-     *
-     * @param int ID del usuario.
-     * @return el usuario encontrado con el criterio de búsqueda.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
-     */
-    @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ")
-    Usuario getById(long id) throws SQLException;
     
     /**
      * Obtiene un objeto de tipo 'usuario' realizando la búsqueda con base en el 'mail' del Usuario.
