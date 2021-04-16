@@ -8,12 +8,12 @@
  * Proyecto:    proyecto
  * Paquete:     mx.qbits.unam.proyecto.api.mapper
  * Modulo:      Anuncio
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano
  * Fecha:       domingo 10 de octubre de 2020 (12_53)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Anuncio 
+ * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
  *
  * Historia:    .
  *              20201025_1253 Generado por arq.gen, basado en los
@@ -32,7 +32,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Rol 
+ * Interface 'Mapper' MyBatis asociado a la entidad Rol
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
@@ -40,13 +40,13 @@ import io.kebblar.petstore.api.model.domain.Rol;
 @Repository
 public interface RolMapper {
 
-    @Select("SELECT id, nombre, activo FROM rol") 
+    @Select("SELECT id, nombre, activo FROM rol")
     List<Rol> getAll() throws SQLException;
 
-    @Select("SELECT id, nombre, activo FROM rol WHERE id = #{id} and activo=true") 
+    @Select("SELECT id, nombre, activo FROM rol WHERE id = #{id} and activo=true")
     Rol getRol(int id) throws SQLException;
 
-    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;") 
+    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
     Rol getUserRoles(int idUser) throws SQLException;
 
 }

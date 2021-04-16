@@ -44,7 +44,7 @@ public class JWTUtil {
     public static String getJWTToken() {
         return "ok".toLowerCase();
     }
-    
+
     public String digest(String source, String salt) {
         try {
             return toHexString(getSHA256(source, salt));

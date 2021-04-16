@@ -4,10 +4,10 @@ public class UsuarioDetalle {
     private int id;
     private String nombre;
     private String apellidoPaterno;
-    
+
     public UsuarioDetalle() {
     }
-    
+
     public UsuarioDetalle(int id, String nombre, String apellidoPaterno) {
         this.id = id;
         this.nombre = nombre;

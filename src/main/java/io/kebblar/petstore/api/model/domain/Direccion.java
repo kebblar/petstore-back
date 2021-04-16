@@ -6,10 +6,10 @@ public class Direccion {
     private String colonia;
     private int delegacion;
     private int estado;
-    
+
     public Direccion() {
     }
-    
+
     public Direccion(int id, String calleNumero, String colonia, int delegacion, int estado) {
         super();
         this.id = id;
@@ -94,5 +94,5 @@ public class Direccion {
     public long getHash() {
         return hashCode();
     }
-    
+
 }

@@ -11,7 +11,7 @@
  * Autor:
  * Fecha:       4/30/20, 11:26 PM
  * Version:     1.0-SNAPSHOT
- *  
+ *
  */
 package io.kebblar.petstore.api.rest;
 
@@ -40,10 +40,10 @@ public class FileUploadController {
 
     @Value("${app.destination-folder}")
     private String destinationFolder;
-        
+
     @Value("${app.max-file-size}")
     private long max;
-    
+
     private final UploadService uploadService;
 
     /**
@@ -69,7 +69,7 @@ public class FileUploadController {
         List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
         return listaUpload;
     }
-    
+
 
 }
 /*

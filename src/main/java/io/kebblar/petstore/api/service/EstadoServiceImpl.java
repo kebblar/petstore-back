@@ -15,11 +15,11 @@ import io.kebblar.petstore.api.utils.ValidadorClave;
 public class EstadoServiceImpl implements EstadoService {
 
     private EstadoMapper estadoMapper;
-    
+
     public EstadoServiceImpl(EstadoMapper estadoMapper) {
         this.estadoMapper = estadoMapper;
     }
-    
+
     @Override
     public List<Estado> getAll() throws BusinessException {
         try {

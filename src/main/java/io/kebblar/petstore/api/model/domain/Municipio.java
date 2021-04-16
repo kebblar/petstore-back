@@ -5,9 +5,9 @@ public class Municipio {
     private int idEstado;
     private int idOrden;
     private String nombre;
-    
+
     public Municipio() {}
-    
+
     public Municipio(int id, int idEstado, int idOrden, String nombre) {
         this.id = id;
         this.idEstado = idEstado;

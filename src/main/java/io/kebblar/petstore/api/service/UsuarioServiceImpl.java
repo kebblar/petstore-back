@@ -10,11 +10,11 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioMapper usuarioMapper;
-    
+
     public UsuarioServiceImpl(UsuarioMapper usuarioMapper) {
         this.usuarioMapper = usuarioMapper;
     }
-    
+
     @Override
     public Usuario createUser(CredencialesRequest cred) throws BusinessException {
         Usuario u = new Usuario(-1, cred.getUsuario(), cred.getClave());
@@ -25,7 +25,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return u;
     }
-    
+
     @Override
     public Usuario updateUser(Usuario usuario) throws BusinessException {
         try {
@@ -44,7 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new BusinessException("Error al obtener un usuario", e.getMessage());
         }
     }
-    
+
     @Override
     public List<Usuario> getAllUsers() throws BusinessException {
         try {
@@ -63,5 +63,5 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new BusinessException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
-    
+
 }

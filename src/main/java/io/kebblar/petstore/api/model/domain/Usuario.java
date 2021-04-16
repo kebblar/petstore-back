@@ -20,7 +20,7 @@ public class Usuario {
 
     public Usuario() {
     }
-    
+
     public Usuario(int id, String correo, String clave) {
         this.setId(id);
         this.setCorreo(correo);
@@ -213,7 +213,7 @@ public class Usuario {
             return false;
         return true;
     }
-    
+
     private byte[] calculateSHA256(String source, String salt) {
         try {
             String input = source + salt;

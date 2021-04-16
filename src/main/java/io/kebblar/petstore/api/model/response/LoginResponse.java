@@ -19,11 +19,11 @@ public class LoginResponse {
     }
 
     public LoginResponse(
-            UsuarioDetalle usuarioDetalle, 
-            Date ultimoAcceso, 
-            String correo, 
-            String jwt, 
-            List<Rol> roles, 
+            UsuarioDetalle usuarioDetalle,
+            Date ultimoAcceso,
+            String correo,
+            String jwt,
+            List<Rol> roles,
             List<Direccion> direcciones) {
         this.usuarioDetalle = usuarioDetalle;
         this.ultimoAcceso = ultimoAcceso;
@@ -56,7 +56,7 @@ public class LoginResponse {
     public void setJwt(String jwt) {
         this.jwt = jwt;
     }
-    
+
     public Date getUltimoAcceso() {
         return ultimoAcceso;
     }
@@ -72,7 +72,7 @@ public class LoginResponse {
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
-    
+
     public List<Direccion> getDirecciones() {
         return direcciones;
     }
@@ -80,7 +80,7 @@ public class LoginResponse {
     public void setDirecciones(List<Direccion> direcciones) {
         this.direcciones = direcciones;
     }
-    
+
     @Override
     public String toString() {
         return "LoginResponse [usuarioDetalle=" + usuarioDetalle + ", correo=" + correo + ", jwt=" + jwt + ", roles="
@@ -141,7 +141,7 @@ public class LoginResponse {
             return false;
         return true;
     }
-    
+
     public long getHash() {
         return this.hashCode();
     }

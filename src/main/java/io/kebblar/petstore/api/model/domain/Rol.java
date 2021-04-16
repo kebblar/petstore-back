@@ -73,7 +73,7 @@ public class Rol {
             return false;
         return true;
     }
-    
+
     public long getHash() {
         return hashCode();
     }

@@ -13,7 +13,7 @@ import io.kebblar.petstore.api.service.AccessService;
 @RestController
 @RequestMapping(value = "/api")
 public class AccessController {
-    
+
     private AccessService as;
     public AccessController(AccessService as) {
         this.as = as;

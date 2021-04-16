@@ -5,7 +5,7 @@ import java.util.List;
 public class StrengthPasswordValidatorException extends BusinessException {
     private static final long serialVersionUID = -1222301152057974505L;
     private List<String> messages = null;
-    
+
     public StrengthPasswordValidatorException(String message,  List<String> messages) {
         super(
             "Clave inválida",
@@ -15,7 +15,7 @@ public class StrengthPasswordValidatorException extends BusinessException {
             HttpStatus.BAD_REQUEST);
         this.messages = messages;
     }
-    
+
     public  List<String> getessages() {
         return this.messages;
     }

@@ -8,12 +8,12 @@
  * Proyecto:    proyecto
  * Paquete:     mx.qbits.unam.proyecto.api.mapper
  * Modulo:      Anuncio
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano
  * Fecha:       domingo 10 de octubre de 2020 (12_53)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Anuncio 
+ * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
  *
  * Historia:    .
  *              20201025_1253 Generado por arq.gen, basado en los
@@ -39,7 +39,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad Estado
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
@@ -52,7 +52,7 @@ public interface UsuarioMapper {
      * Obtiene una lista de objetos de tipo 'usuario'.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta 
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @Results(id="UsuarioMap", value = {
@@ -68,17 +68,17 @@ public interface UsuarioMapper {
         @Result(property = "regeneraClaveToken",        column = "regenera_clave_token"),
         @Result(property = "regeneraClaveInstante",     column = "regenera_clave_instante")
         })
-    @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ") 
+    @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ")
     Usuario getById(int id) throws SQLException;
 
     @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario ") 
+    @Select("SELECT " + CAMPOS + " FROM usuario ")
     List<Usuario> getAll() throws SQLException;
-    
+
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario order by correo asc")
     List<Usuario> getAllAscendingByCorreo() throws SQLException;
-    
+
     /**
      * Obtiene un objeto de tipo 'usuario' realizando la búsqueda con base en el 'mail' del Usuario.
      *
@@ -89,7 +89,7 @@ public interface UsuarioMapper {
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario WHERE correo = #{correo} ")
     Usuario getByCorreo(String correo) throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'usuario' con base en la información dada por el objeto de tipo 'usuario'.
      *
@@ -100,7 +100,7 @@ public interface UsuarioMapper {
     @Insert("INSERT INTO usuario(correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante) VALUES(#{correo}, #{clave}, #{creado}, #{activo}, #{accesoNegadoContador}, #{instanteBloqueo}, #{instanteUltimoAcceso}, #{instanteUltimoCambioClave}, #{regeneraClaveToken}, #{regeneraClaveInstante} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Usuario usr) throws SQLException;
-    
+
     /**
      * Actualiza un objeto de tipo 'usuario' con base en la infrmación dada por el objeto de tipo 'usuario'.
      *
@@ -113,7 +113,7 @@ public interface UsuarioMapper {
 
     /**
      * Borra (de manera lógica y no física) el registro de usuario.
-     * 
+     *
      * @param id id del usuario a ser borrado
      * @return id del usuario borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.

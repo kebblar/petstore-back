@@ -8,12 +8,12 @@
  * Proyecto:    proyecto
  * Paquete:     mx.qbits.unam.proyecto.api.mapper
  * Modulo:      Anuncio
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano
  * Fecha:       domingo 10 de octubre de 2020 (12_53)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Anuncio 
+ * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
  *
  * Historia:    .
  *              20201025_1253 Generado por arq.gen, basado en los
@@ -32,7 +32,7 @@ import io.kebblar.petstore.api.model.domain.Estado;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad Estado
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
@@ -40,10 +40,10 @@ import io.kebblar.petstore.api.model.domain.Estado;
 @Repository
 public interface EstadoMapper {
 
-    @Select("SELECT id, nombre FROM estado ") 
+    @Select("SELECT id, nombre FROM estado ")
     List<Estado> getAll() throws SQLException;
 
-    @Select("SELECT id, nombre FROM estado WHERE id = #{id} ") 
+    @Select("SELECT id, nombre FROM estado WHERE id = #{id} ")
     Estado getEstado(int id) throws SQLException;
 
 }

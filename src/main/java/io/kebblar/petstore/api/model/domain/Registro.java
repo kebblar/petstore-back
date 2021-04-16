@@ -225,25 +225,25 @@ public class Registro implements Serializable {
         }
         Registro other = (Registro) obj;
         return
-               nombre.equals(other.nombre) && 
-               telefono.equals(other.telefono) && 
+               nombre.equals(other.nombre) &&
+               telefono.equals(other.telefono) &&
                calleNumero.equals(other.calleNumero) &&
                correo.equals(other.correo) &&
-               claveHash.equals(other.claveHash) && 
-               fechaRegistro == other.fechaRegistro && 
-               randomString.equals(other.randomString); 
+               claveHash.equals(other.claveHash) &&
+               fechaRegistro == other.fechaRegistro &&
+               randomString.equals(other.randomString);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            nombre, 
-            telefono, 
+            nombre,
+            telefono,
             calleNumero,
             fechaNacimiento,
-            correo, 
-            claveHash, 
-            fechaRegistro, 
+            correo,
+            claveHash,
+            fechaRegistro,
             randomString
         );
     }

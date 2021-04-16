@@ -50,7 +50,7 @@ public class CustomControllerAdvice {
 
     /**
      * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
-     * 
+     *
      * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
      */

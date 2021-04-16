@@ -34,8 +34,8 @@ public class AccessServiceImpl implements AccessService {
         roles.add(r2);
         roles.add(r3);
         roles.add(r4);
-        
-        
+
+
         List<Direccion> direcciones = new ArrayList<>();
         Direccion d1 = new Direccion(1, "calle 1", "col 1", 1, 1);
         Direccion d2 = new Direccion(2, "calle 2", "col 2", 2, 2);
@@ -43,8 +43,8 @@ public class AccessServiceImpl implements AccessService {
         direcciones.add(d1);
         direcciones.add(d2);
         direcciones.add(d3);
-        
-        
+
+
         return new LoginResponse(ud, new Date(), "gus@aol.com", "jwt-bchfjdbchfd", roles, direcciones);
     }
 

@@ -38,7 +38,7 @@ public class CodeGeneratorTest {
 
     /**
      * Test for Generator lib.
-     * 
+     *
      * @param args No necesita parámetros de entrada
      */
     public static void main(String... args) throws IOException {
@@ -46,8 +46,8 @@ public class CodeGeneratorTest {
         long start = System.currentTimeMillis();
         List<Entidad> lista =  GenCode.pop(
                 "jdbc:mariadb://localhost:3306/ejemplo4",//"jdbc:mysql://100.24.41.125:3306/cinepolis?zeroDateTimeBehavior=convertToNull",
-                "garellano", 
-                "garellano", 
+                "garellano",
+                "garellano",
                 "org.mariadb.jdbc.Driver");
         long end = System.currentTimeMillis();
         long total = (end - start) / 1000;
@@ -59,21 +59,21 @@ public class CodeGeneratorTest {
             logger.info(entity.getTableCat());
             //logger.info(jsonString);
         }
-        
+
         logger.info("Creando mapper para json conversion");
         ObjectMapper mapper = new ObjectMapper();
-        
+
         String all = mapper.writeValueAsString(lista);
         logger.info(all);
         List<Entidad> obj = mapper.readValue(all, new TypeReference<List<Entidad>>(){});
-        
+
         // *************************************************************
         logger.info("Seleccionando algunas de las tablas de la DB");
-        String[] tablas = {"usuario","estado"}; 
+        String[] tablas = {"usuario","estado"};
         // *************************************************************
-        
+
         List<Entidad> seleccion = GenCode.filter(obj, tablas);
-        
+
         logger.info("Procesando sólo las tablas seleccionadas");
         for (Entidad entity : seleccion) {
             GenCode gc = new GenCode(entity);
@@ -95,7 +95,7 @@ public class CodeGeneratorTest {
         List<Entidad> obj = mapper.readValue(all, new TypeReference<List<Entidad>>(){});
 
         logger.info("Seleccionando algunas de las tablas de la DB");
-        String[] tablas = {"RESERVA", "CAT_CIUDAD"}; 
+        String[] tablas = {"RESERVA", "CAT_CIUDAD"};
         List<Entidad> seleccion = GenCode.filter(obj, tablas);
 
         logger.info("Procesando sólo las tablas seleccionadas");

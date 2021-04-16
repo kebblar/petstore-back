@@ -3,9 +3,9 @@ package io.kebblar.petstore.api.model.domain;
 public class Estado {
     private int id;
     private String nombre;
-    
+
     public Estado() {}
-    
+
     public Estado(int id, String nombre) {
         super();
         this.id = id;
@@ -24,6 +24,6 @@ public class Estado {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
+
 }
