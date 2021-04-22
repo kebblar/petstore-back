@@ -30,7 +30,7 @@ public class LoginResponse {
         this.correo = correo;
         this.jwt = jwt;
         this.roles = roles;
-        this.setDirecciones(direcciones);
+        this.direcciones = direcciones;
     }
 
     public UsuarioDetalle getUsuarioDetalle() {
@@ -92,10 +92,8 @@ public class LoginResponse {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((correo == null) ? 0 : correo.hashCode());
-        result = prime * result + ((jwt == null) ? 0 : jwt.hashCode());
         result = prime * result + ((roles == null) ? 0 : roles.hashCode());
         result = prime * result + ((usuarioDetalle == null) ? 0 : usuarioDetalle.hashCode());
-        result = prime * result + ((ultimoAcceso == null) ? 0 : ultimoAcceso.hashCode());
         result = prime * result + ((direcciones == null) ? 0 : direcciones.hashCode());
         return result;
     }
@@ -114,11 +112,6 @@ public class LoginResponse {
                 return false;
         } else if (!correo.equals(other.correo))
             return false;
-        if (jwt == null) {
-            if (other.jwt != null)
-                return false;
-        } else if (!jwt.equals(other.jwt))
-            return false;
         if (roles == null) {
             if (other.roles != null)
                 return false;
@@ -128,11 +121,6 @@ public class LoginResponse {
             if (other.usuarioDetalle != null)
                 return false;
         } else if (!usuarioDetalle.equals(other.usuarioDetalle))
-            return false;
-        if (ultimoAcceso == null) {
-            if (other.ultimoAcceso != null)
-                return false;
-        } else if (!ultimoAcceso.equals(other.ultimoAcceso))
             return false;
         if (direcciones == null) {
             if (other.direcciones != null)

@@ -24,7 +24,6 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
@@ -46,24 +45,12 @@ public class Direccion implements Serializable {
     private int idTipoDireccion;
     private String cp;
     private String referencias;
-
-    /**
-     * Constructor por default.
-     */
+    private boolean activo;
+    
     public Direccion() {
     }
-
-    /**
-     * Constructor basado en llaves.
-     */
-    public Direccion(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * Constructor basado en atributos.
-     */
-    public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio, int idTipoDireccion, String cp, String referencias) {
+    public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio,
+            int idTipoDireccion, String cp, String referencias, boolean activo) {
         this.id = id;
         this.calleNumero = calleNumero;
         this.colonia = colonia;
@@ -73,183 +60,138 @@ public class Direccion implements Serializable {
         this.idTipoDireccion = idTipoDireccion;
         this.cp = cp;
         this.referencias = referencias;
+        this.activo = activo;
     }
-
-    /**
-     * Getter para id.
-     */
     public Integer getId() {
         return id;
     }
-    
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    /**
-     * Getter para calleNumero.
-     */
     public String getCalleNumero() {
         return calleNumero;
     }
-    
-    /**
-     * Setter para calleNumero.
-     */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
-    
-    /**
-     * Getter para colonia.
-     */
     public String getColonia() {
         return colonia;
     }
-    
-    /**
-     * Setter para colonia.
-     */
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
-    
-    /**
-     * Getter para idPais.
-     */
     public int getIdPais() {
         return idPais;
     }
-    
-    /**
-     * Setter para idPais.
-     */
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
-    
-    /**
-     * Getter para idEstado.
-     */
     public int getIdEstado() {
         return idEstado;
     }
-    
-    /**
-     * Setter para idEstado.
-     */
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
-    
-    /**
-     * Getter para idMunicipio.
-     */
     public int getIdMunicipio() {
         return idMunicipio;
     }
-    
-    /**
-     * Setter para idMunicipio.
-     */
     public void setIdMunicipio(int idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
-    
-    /**
-     * Getter para idTipoDireccion.
-     */
     public int getIdTipoDireccion() {
         return idTipoDireccion;
     }
-    
-    /**
-     * Setter para idTipoDireccion.
-     */
     public void setIdTipoDireccion(int idTipoDireccion) {
         this.idTipoDireccion = idTipoDireccion;
     }
-    
-    /**
-     * Getter para cp.
-     */
     public String getCp() {
         return cp;
     }
-    
-    /**
-     * Setter para cp.
-     */
     public void setCp(String cp) {
         this.cp = cp;
     }
-    
-    /**
-     * Getter para referencias.
-     */
     public String getReferencias() {
         return referencias;
     }
-    
-    /**
-     * Setter para referencias.
-     */
     public void setReferencias(String referencias) {
         this.referencias = referencias;
     }
-    
+    public boolean isActivo() {
+        return activo;
+    }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
     @Override
     public String toString() {
-        return "[Direccion] : ["
-                + " id =" + this.id
-                + " calleNumero =" + this.calleNumero
-                + " colonia =" + this.colonia
-                + " idPais =" + this.idPais
-                + " idEstado =" + this.idEstado
-                + " idMunicipio =" + this.idMunicipio
-                + " idTipoDireccion =" + this.idTipoDireccion
-                + " cp =" + this.cp
-                + " referencias =" + this.referencias
-                + "]";
+        return "Direccion [id=" + id + ", calleNumero=" + calleNumero + ", colonia=" + colonia + ", idPais=" + idPais
+                + ", idEstado=" + idEstado + ", idMunicipio=" + idMunicipio + ", idTipoDireccion=" + idTipoDireccion
+                + ", cp=" + cp + ", referencias=" + referencias + ", activo=" + activo + "]";
     }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Direccion)) {
-            return false;
-        }
-        Direccion other = (Direccion) obj;
-        return
-               id == other.id && 
-               calleNumero == other.calleNumero && 
-               colonia == other.colonia && 
-               idPais == other.idPais && 
-               idEstado == other.idEstado && 
-               idMunicipio == other.idMunicipio && 
-               idTipoDireccion == other.idTipoDireccion && 
-               cp == other.cp && 
-               referencias == other.referencias; 
-    }
-    
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id, 
-            calleNumero, 
-            colonia, 
-            idPais, 
-            idEstado, 
-            idMunicipio, 
-            idTipoDireccion, 
-            cp, 
-            referencias
-        );
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (activo ? 1231 : 1237);
+        result = prime * result + ((calleNumero == null) ? 0 : calleNumero.hashCode());
+        result = prime * result + ((colonia == null) ? 0 : colonia.hashCode());
+        result = prime * result + ((cp == null) ? 0 : cp.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + idEstado;
+        result = prime * result + idMunicipio;
+        result = prime * result + idPais;
+        result = prime * result + idTipoDireccion;
+        result = prime * result + ((referencias == null) ? 0 : referencias.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Direccion other = (Direccion) obj;
+        if (activo != other.activo)
+            return false;
+        if (calleNumero == null) {
+            if (other.calleNumero != null)
+                return false;
+        } else if (!calleNumero.equals(other.calleNumero))
+            return false;
+        if (colonia == null) {
+            if (other.colonia != null)
+                return false;
+        } else if (!colonia.equals(other.colonia))
+            return false;
+        if (cp == null) {
+            if (other.cp != null)
+                return false;
+        } else if (!cp.equals(other.cp))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (idEstado != other.idEstado)
+            return false;
+        if (idMunicipio != other.idMunicipio)
+            return false;
+        if (idPais != other.idPais)
+            return false;
+        if (idTipoDireccion != other.idTipoDireccion)
+            return false;
+        if (referencias == null) {
+            if (other.referencias != null)
+                return false;
+        } else if (!referencias.equals(other.referencias))
+            return false;
+        return true;
     }
 
 }

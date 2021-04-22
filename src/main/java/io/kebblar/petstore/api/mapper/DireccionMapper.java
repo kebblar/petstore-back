@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.domain.Direccion;
  */
 @Repository
 public interface DireccionMapper {
-    static final String CAMPOS = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias ";
+    static final String CAMPOS = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias, activo ";
 
     @Results(id="DireccionMap", value = {
         @Result(property = "id",          column = "id"),
@@ -49,7 +49,8 @@ public interface DireccionMapper {
         @Result(property = "idMunicipio", column = "id_municipio"),
         @Result(property = "idTipoDireccion", column = "id_tipo_direccion"),
         @Result(property = "cp",          column = "cp"),
-        @Result(property = "referencias", column = "referencias")    
+        @Result(property = "referencias", column = "referencias"),
+        @Result(property = "activo",      column = "activo")    
     })
     @Select("SELECT " + CAMPOS + " FROM direccion WHERE id = #{id} ") 
     Direccion getById(Direccion direccion) throws SQLException;
@@ -58,14 +59,18 @@ public interface DireccionMapper {
     @Select("SELECT " + CAMPOS + " FROM direccion ") 
     List<Direccion> getAll() throws SQLException;
     
-    @Insert("INSERT INTO direccion(id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias) VALUES(#{id}, #{calleNumero}, #{colonia}, #{idPais}, #{idEstado}, #{idMunicipio}, #{idTipoDireccion}, #{cp}, #{referencias} )")
+    @Insert("INSERT INTO direccion(id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias, activo) VALUES(#{id}, #{calleNumero}, #{colonia}, #{idPais}, #{idEstado}, #{idMunicipio}, #{idTipoDireccion}, #{cp}, #{referencias}, #{activo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Direccion direccion) throws SQLException;
 
-    @Update("UPDATE direccion SET calle_numero = #{calleNumero}, colonia = #{colonia}, id_pais = #{idPais}, id_estado = #{idEstado}, id_municipio = #{idMunicipio}, id_tipo_direccion = #{idTipoDireccion}, cp = #{cp}, referencias = #{referencias} WHERE id = #{id} ")
+    @Update("UPDATE direccion SET calle_numero = #{calleNumero}, colonia = #{colonia}, id_pais = #{idPais}, id_estado = #{idEstado}, id_municipio = #{idMunicipio}, id_tipo_direccion = #{idTipoDireccion}, cp = #{cp}, referencias = #{referencias}, activo = #{activo} WHERE id = #{id} ")
     int update(Direccion direccion) throws SQLException;
 
     @Delete("DELETE FROM direccion WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
+
+    @ResultMap("DireccionMap")
+    @Select("select direccion.* from direccion, usuario_direccion where direccion.id=usuario_direccion.id_direccion and direccion.activo=true and id_usuario=#{idUser}")
+    List<Direccion> getUserDirecciones(int idUser) throws SQLException;
 
 }

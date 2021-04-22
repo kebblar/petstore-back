@@ -19,7 +19,7 @@ public class CodeGeneratorTest {
 
     private static void doit(GenCode codeGenerator) {
         logger.info("**************************************************************");
-        logger.info(codeGenerator.generate2("velocity/Template.java.vm", "model"));
+        //logger.info(codeGenerator.generate2("velocity/Template.java.vm", "model"));
         logger.info("**************************************************************");
         //logger.info(codeGenerator.generate2("velocity/TemplateController.java.vm", "controller"));
         logger.info("**************************************************************");
@@ -69,7 +69,7 @@ public class CodeGeneratorTest {
 
         // *************************************************************
         logger.info("Seleccionando algunas de las tablas de la DB");
-        String[] tablas = {"pais","estado","municipio", "tipo_direccion", "direccion"};
+        String[] tablas = {"usuario_detalle"};
         // *************************************************************
 
         List<Entidad> seleccion = GenCode.filter(obj, tablas);

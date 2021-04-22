@@ -28,22 +28,22 @@ public class UsuarioController {
 
     @GetMapping(path = "/usuarios/{id}.json", produces = "application/json; charset=utf-8")
     public Usuario getUser(@RequestAttribute int id) throws BusinessException {
-        return this.usuarioService.getUser(id);
+        return this.usuarioService.obtenUsuarioPorId(id);
     }
 
     @GetMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws BusinessException {
-        return this.usuarioService.getAllUsers();
+        return this.usuarioService.obtenTodosUsuarios();
     }
 
     @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws BusinessException {
-        return this.usuarioService.createUser(credenciales);
+        return this.usuarioService.creaUsuario(credenciales);
     }
 
     @PutMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public Usuario updateUsuario(@RequestBody Usuario usuario) throws BusinessException {
-         return this.usuarioService.updateUser(usuario);
+         return this.usuarioService.actualizaUsuario(usuario);
     }
 
     @DeleteMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
