@@ -7,13 +7,13 @@
  *
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Estado
+ * Modulo:      TipoDireccion
  * Tipo:        clase 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad 'estado'. 
+ * POJO asociado a la entidad 'tipo_direccion'. 
  *
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
@@ -28,39 +28,39 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'estado'. 
+ * POJO asociado a la entidad 'tipo_direccion'. 
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
  */
-public class Estado implements Serializable {
+public class TipoDireccion implements Serializable {
 
-    private static final long serialVersionUID = -4082525936309639098L;
+    private static final long serialVersionUID = 6627523800922208745L;
 
     private Integer id;
-    private int idPais;
     private String nombre;
+    private boolean activo;
 
     /**
      * Constructor por default.
      */
-    public Estado() {
+    public TipoDireccion() {
     }
 
     /**
      * Constructor basado en llaves.
      */
-    public Estado(Integer id) {
+    public TipoDireccion(Integer id) {
         this.id = id;
     }
 
     /**
      * Constructor basado en atributos.
      */
-    public Estado(Integer id, int idPais, String nombre) {
+    public TipoDireccion(Integer id, String nombre, boolean activo) {
         this.id = id;
-        this.idPais = idPais;
         this.nombre = nombre;
+        this.activo = activo;
     }
 
     /**
@@ -78,20 +78,6 @@ public class Estado implements Serializable {
     }
     
     /**
-     * Getter para idPais.
-     */
-    public int getIdPais() {
-        return idPais;
-    }
-    
-    /**
-     * Setter para idPais.
-     */
-    public void setIdPais(int idPais) {
-        this.idPais = idPais;
-    }
-    
-    /**
      * Getter para nombre.
      */
     public String getNombre() {
@@ -105,12 +91,26 @@ public class Estado implements Serializable {
         this.nombre = nombre;
     }
     
+    /**
+     * Getter para activo.
+     */
+    public boolean getActivo() {
+        return activo;
+    }
+    
+    /**
+     * Setter para activo.
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
     @Override
     public String toString() {
-        return "[Estado] : ["
+        return "[TipoDireccion] : ["
                 + " id =" + this.id
-                + " idPais =" + this.idPais
                 + " nombre =" + this.nombre
+                + " activo =" + this.activo
                 + "]";
     }
     
@@ -119,22 +119,22 @@ public class Estado implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Estado)) {
+        if (!(obj instanceof TipoDireccion)) {
             return false;
         }
-        Estado other = (Estado) obj;
+        TipoDireccion other = (TipoDireccion) obj;
         return
                id == other.id && 
-               idPais == other.idPais && 
-               nombre == other.nombre; 
+               nombre == other.nombre && 
+               activo == other.activo; 
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             id, 
-            idPais, 
-            nombre
+            nombre, 
+            activo
         );
     }
 

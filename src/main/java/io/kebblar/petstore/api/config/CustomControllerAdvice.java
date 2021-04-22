@@ -117,7 +117,8 @@ public class CustomControllerAdvice {
             map.put("tipo-error", ad.getLocalExceptionNumber());
             map.put("cve-exception", ad.getLocalExceptionKey());
             map.put("http-error", ad.getHttpStatus());
-            map.put("desc-exception", ad.getDetailedMessage());
+            map.put("desc-long-exception", ad.getDetailedMessage());
+            map.put("desc-short-exception", ad.getShortMessage());
         }
         return map;
     }

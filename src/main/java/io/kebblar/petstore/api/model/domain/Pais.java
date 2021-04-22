@@ -7,13 +7,13 @@
  *
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Estado
+ * Modulo:      Pais
  * Tipo:        clase 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad 'estado'. 
+ * POJO asociado a la entidad 'pais'. 
  *
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
@@ -28,38 +28,36 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'estado'. 
+ * POJO asociado a la entidad 'pais'. 
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
  */
-public class Estado implements Serializable {
+public class Pais implements Serializable {
 
-    private static final long serialVersionUID = -4082525936309639098L;
+    private static final long serialVersionUID = 4897377279463910357L;
 
     private Integer id;
-    private int idPais;
     private String nombre;
 
     /**
      * Constructor por default.
      */
-    public Estado() {
+    public Pais() {
     }
 
     /**
      * Constructor basado en llaves.
      */
-    public Estado(Integer id) {
+    public Pais(Integer id) {
         this.id = id;
     }
 
     /**
      * Constructor basado en atributos.
      */
-    public Estado(Integer id, int idPais, String nombre) {
+    public Pais(Integer id, String nombre) {
         this.id = id;
-        this.idPais = idPais;
         this.nombre = nombre;
     }
 
@@ -78,20 +76,6 @@ public class Estado implements Serializable {
     }
     
     /**
-     * Getter para idPais.
-     */
-    public int getIdPais() {
-        return idPais;
-    }
-    
-    /**
-     * Setter para idPais.
-     */
-    public void setIdPais(int idPais) {
-        this.idPais = idPais;
-    }
-    
-    /**
      * Getter para nombre.
      */
     public String getNombre() {
@@ -107,9 +91,8 @@ public class Estado implements Serializable {
     
     @Override
     public String toString() {
-        return "[Estado] : ["
+        return "[Pais] : ["
                 + " id =" + this.id
-                + " idPais =" + this.idPais
                 + " nombre =" + this.nombre
                 + "]";
     }
@@ -119,13 +102,12 @@ public class Estado implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Estado)) {
+        if (!(obj instanceof Pais)) {
             return false;
         }
-        Estado other = (Estado) obj;
+        Pais other = (Pais) obj;
         return
                id == other.id && 
-               idPais == other.idPais && 
                nombre == other.nombre; 
     }
     
@@ -133,7 +115,6 @@ public class Estado implements Serializable {
     public int hashCode() {
         return Objects.hash(
             id, 
-            idPais, 
             nombre
         );
     }

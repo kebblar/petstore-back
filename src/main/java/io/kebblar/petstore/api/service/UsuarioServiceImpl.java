@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.mapper.UsuarioMapper;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 
 @Service
@@ -21,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             usuarioMapper.insert(u);
         } catch (Exception e) {
-            throw new BusinessException("Error al insertar un usuario", e.getMessage());
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
         }
         return u;
     }
@@ -31,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             usuarioMapper.update(usuario);
         } catch (Exception e) {
-            throw new BusinessException("Error al actualizar un usuario", e.getMessage());
+            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
         }
         return usuario;
     }
@@ -41,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return usuarioMapper.getById(id);
         } catch (Exception e) {
-            throw new BusinessException("Error al obtener un usuario", e.getMessage());
+            throw new MapperCallException("Error al obtener un usuario", e.getMessage());
         }
     }
 
@@ -50,7 +51,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return usuarioMapper.getAll();
         } catch (Exception e) {
-            throw new BusinessException("Error al obtener la lista de usuarios", e.getMessage());
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
 
@@ -60,8 +61,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioMapper.delete(id);
             return usuarioMapper.getById(id);
         } catch (Exception e) {
-            throw new BusinessException("Error al obtener la lista de usuarios", e.getMessage());
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
-
+    
+    @Override
+    public Usuario getUsuarioByCorreo(String correo) throws BusinessException {
+        try {
+            return usuarioMapper.getByCorreo(correo);
+        } catch (Exception e) {
+            throw new MapperCallException("Error al obtener el usuario con base en su correo", e.getMessage());
+        }
+    }
 }

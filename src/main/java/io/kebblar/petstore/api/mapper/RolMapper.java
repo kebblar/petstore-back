@@ -47,6 +47,6 @@ public interface RolMapper {
     Rol getRol(int id) throws SQLException;
 
     @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
-    Rol getUserRoles(int idUser) throws SQLException;
+    List<Rol> getUserRoles(int idUser) throws SQLException;
 
 }

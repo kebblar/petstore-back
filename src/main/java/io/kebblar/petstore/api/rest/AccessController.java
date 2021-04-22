@@ -14,13 +14,13 @@ import io.kebblar.petstore.api.service.AccessService;
 @RequestMapping(value = "/api")
 public class AccessController {
 
-    private AccessService as;
+    private AccessService accessService;
     public AccessController(AccessService as) {
-        this.as = as;
+        this.accessService = as;
     }
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
     public LoginResponse login(@RequestBody CredencialesRequest cred) throws BusinessException {
-        return as.login(cred.getUsuario(), cred.getClave());
+        return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
 }

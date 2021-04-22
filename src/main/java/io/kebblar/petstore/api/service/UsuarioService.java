@@ -12,5 +12,5 @@ public interface UsuarioService {
     Usuario getUser(int id) throws BusinessException;
     List<Usuario> getAllUsers() throws BusinessException;
     Usuario eliminaUsuario(int id) throws BusinessException;
-
+    Usuario getUsuarioByCorreo(String correo) throws BusinessException;
 }

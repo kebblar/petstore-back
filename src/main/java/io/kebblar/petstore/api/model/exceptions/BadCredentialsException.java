@@ -12,5 +12,13 @@ public class BadCredentialsException extends BusinessException{
             "CVE_1003",
             HttpStatus.UNAUTHORIZED);
     }
+    public BadCredentialsException() {
+        super(
+            "Las credenciales proporcionadas son inválidas",
+            "Favor de capturar credenciales válidas",
+            1003,
+            "CVE_1003",
+            HttpStatus.UNAUTHORIZED);
+    }
 
 }

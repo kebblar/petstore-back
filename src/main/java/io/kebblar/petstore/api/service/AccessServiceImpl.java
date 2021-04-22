@@ -7,45 +7,116 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
+import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.response.LoginResponse;
+import io.kebblar.petstore.api.support.JwtManagerService;
+import io.kebblar.petstore.api.utils.DigestEncoder;
 
 @Service
 public class AccessServiceImpl implements AccessService {
-    @Value("${proyecto.message2}")
+    @Value("${proyecto.message}")
     private String message;
-
-    @Override
-    public LoginResponse login(String usuario, String clave) throws BusinessException {
-        System.out.println("**************************************>"+message);
-
-        if(clave.length()<3) throw new UserAlreadyExistsException();
-        UsuarioDetalle ud = new UsuarioDetalle(7,"Miguel", "Hidalgo");
-        List<Rol> roles = new ArrayList<>();
-        Rol r1 = new Rol(1, "abc1", true);
-        Rol r2 = new Rol(2, "abc2", true);
-        Rol r3 = new Rol(3, "abc3", true);
-        Rol r4 = new Rol(4, "abc4", true);
-        roles.add(r1);
-        roles.add(r2);
-        roles.add(r3);
-        roles.add(r4);
-
-
-        List<Direccion> direcciones = new ArrayList<>();
-        Direccion d1 = new Direccion(1, "calle 1", "col 1", 1, 1);
-        Direccion d2 = new Direccion(2, "calle 2", "col 2", 2, 2);
-        Direccion d3 = new Direccion(3, "calle 3", "col 3", 3, 3);
-        direcciones.add(d1);
-        direcciones.add(d2);
-        direcciones.add(d3);
-
-
-        return new LoginResponse(ud, new Date(), "gus@aol.com", "jwt-bchfjdbchfd", roles, direcciones);
+    
+    private UsuarioService usuarioService;
+    private JwtManagerService jwtManagerService;
+    private RolMapper rolMapper;
+    
+    public AccessServiceImpl(
+            UsuarioService usuarioService, 
+            JwtManagerService jwtManagerService, 
+            RolMapper rolMapper) {
+        this.usuarioService = usuarioService;
+        this.jwtManagerService = jwtManagerService;
+        this.rolMapper = rolMapper;
     }
 
+    @Override
+    public LoginResponse login(String usr, String clave) throws BusinessException {
+        this.valida(usr, clave);
+        int invalidLoginMax = 5; // 5 intentos
+        long delta = 1000*60*5L; // 5 minutos
+        long currentTime = System.currentTimeMillis()+0;
+        Usuario usuario = usuarioService.getUsuarioByCorreo(usr);
+        List<Direccion> direcciones = getDirecciones();
+        return login(usuario, clave, delta, invalidLoginMax, currentTime, direcciones);
+    }
+
+    public LoginResponse login(Usuario usuario, String pass, long delta, int invalidLoginMax, long currentTime, List<Direccion> direcciones) throws BusinessException {
+        // Notifica, si el usuario no pudo ser encontrado
+        if(usuario==null) throw new BadCredentialsException();
+        
+        // Si el usuario fue encontrado, pero está inactivo, Notifica
+        if(!usuario.isActivo()) throw new DisabledUserException();
+        
+        // Calcula cuanto tiempo lleva bloqueado el usuario. Si lleva menos de lo establecido, Notifica
+        long instanteDeBloqueo = usuario.getInstanteBloqueo();
+        long diff = currentTime - instanteDeBloqueo;
+        long restante = delta - diff;
+        if(instanteDeBloqueo>0 && restante>0) throw new WaitLoginException(restante/1000);
+        
+        // Password dado que debe ser validado contra el que está en la base de datos
+        String passwordToBeChecked = DigestEncoder.digest(pass, usuario.getCorreo());
+
+        if(!usuario.getClave().equals(passwordToBeChecked)) {// Credenciales INCORRECTAS
+            // Incrementa el contador de intentos erroneos de ingreso y actualiza:
+            int invalidLoginAttemps = usuario.getAccesoNegadoContador()+1;
+            usuario.setAccesoNegadoContador(invalidLoginAttemps);
+            this.update(usuario);
+            
+            // Si los intentos de ingreso inválidos superan un limite, actualiza y Notifica:
+            if(invalidLoginAttemps>=invalidLoginMax) {
+                usuario.setInstanteBloqueo(currentTime);
+                this.update(usuario);
+                throw new BlockedUserException(invalidLoginMax);
+            }
+
+            // Si no se disparó la Notificación anterior, de todas formas notifica un intento
+            // fallido de ingreso al sistema:
+            throw new BadCredentialsException(invalidLoginAttemps, invalidLoginMax);
+        } else { // Credenciales CORRECTAS
+            // Resetea todoas las banderas de advertencia y bloqueo. Luego, actualiza y retorna el usuario:
+            usuario.setAccesoNegadoContador(0);
+            usuario.setInstanteBloqueo(0);
+            usuario.setInstanteUltimoAcceso(currentTime);
+            this.update(usuario);
+
+            // Crea un token y regrésalo junto con el usuario y los roles:
+            String jwt = jwtManagerService.createToken(usuario.getCorreo());
+            List<Rol> roles = getRolesFromUserId(usuario.getId());
+            UsuarioDetalle usuarioDetalle = getUsuarioDetalles(usuario.getId());
+
+            // Esto va al front y se almacena en 'localStorage' (setItem)
+            // https://gitlab.ci.ultrasist.net/root/impi-chatbot-frontend/blob/develop/src/components/04-LogIn/login.vue
+            return new LoginResponse(usuarioDetalle, new Date(currentTime), usuario.getCorreo(), jwt, roles, direcciones);
+        }
+    }
+    
+    private List<Direccion> getDirecciones() {
+        List<Direccion> direcciones = new ArrayList<>();
+        return direcciones;
+    }
+
+    private UsuarioDetalle getUsuarioDetalles(int id) {
+        return new UsuarioDetalle(1, "gus", "arellano");
+    }
+
+    private void valida(String usr, String clave) throws BusinessException {
+        if(usr.trim().length()<1 || clave.trim().length()<1) throw new BadCredentialsException();
+    }
+    private void update(Usuario usuario) throws BusinessException {
+        usuarioService.updateUser(usuario);
+    }
+
+    private List<Rol> getRolesFromUserId(int id) throws BusinessException {
+        try {
+            return rolMapper.getUserRoles(id);
+        } catch (Exception e) {
+            throw new BusinessException("Error en el acceso a la base de datos",e.toString());
+        }
+    }
 }
