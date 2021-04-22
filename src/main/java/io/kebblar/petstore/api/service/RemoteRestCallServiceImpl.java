@@ -12,7 +12,7 @@ public class RemoteRestCallServiceImpl implements RemoteRestCallService {
     public RemoteRestCallServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-    
+
     @Override
     public TickerWrapper callTickerMicroservice() {
         String url = "https://api.binance.com/api/v1/ticker/24hr?symbol=ETHUSDT";

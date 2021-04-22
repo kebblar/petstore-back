@@ -1,7 +1,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ControllerException extends Exception {
     private static final long serialVersionUID = -5047974256813565913L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapperCallException.class);
 
     private String shortMessage;
     private String detailedMessage;
@@ -20,16 +24,14 @@ public class ControllerException extends Exception {
         this.localExceptionNumber = localExceptionNumber;
         this.localExceptionKey = localExceptionKey;
         this.httpStatus = httpStatus;
+        LOGGER.error(detailedMessage);
     }
     public ControllerException(
             String shortMessage,
             String detailedMessage,
             int localExceptionNumber,
             String localExceptionKey) {
-        this.shortMessage = shortMessage;
-        this.detailedMessage = detailedMessage;
-        this.localExceptionNumber = localExceptionNumber;
-        this.localExceptionKey = localExceptionKey;
+        this(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey, HttpStatus.ACCEPTED);
     }
     public String getShortMessage() {
         return shortMessage;
@@ -46,5 +48,4 @@ public class ControllerException extends Exception {
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
-
 }

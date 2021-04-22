@@ -119,7 +119,7 @@ public class DigestEncoder  {
         // Show me the result, baby
         return hexString.toString();
     }
-    
+
     /**
      * Retorna una cadena de 'len' caracteres aleatoria
      *

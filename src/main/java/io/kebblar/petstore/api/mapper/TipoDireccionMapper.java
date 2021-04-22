@@ -7,13 +7,13 @@
  *
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.mapper
- * Modulo:      Estado
+ * Modulo:      TipoDireccion
  * Tipo:        interface 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad TipoDireccion 
  *
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
@@ -27,39 +27,39 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import io.kebblar.petstore.api.model.domain.Estado;
+import io.kebblar.petstore.api.model.domain.TipoDireccion;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad TipoDireccion 
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
  */
 @Repository
-public interface EstadoMapper {
-    static final String CAMPOS = " id, id_pais, nombre ";
+public interface TipoDireccionMapper {
+    static final String CAMPOS = " id, nombre, activo ";
 
-    @Results(id="EstadoMap", value = {
+    @Results(id="TipoDireccionMap", value = {
         @Result(property = "id", column = "id"),
-        @Result(property = "idPais", column = "id_pais"),
-        @Result(property = "nombre", column = "nombre")    
+        @Result(property = "nombre", column = "nombre"),
+        @Result(property = "activo", column = "activo")    
     })
-    @Select("SELECT " + CAMPOS + " FROM estado WHERE id = #{id} ") 
-    Estado getById(Estado estado) throws SQLException;
+    @Select("SELECT " + CAMPOS + " FROM tipo_direccion WHERE id = #{id} ") 
+    TipoDireccion getById(TipoDireccion tipoDireccion) throws SQLException;
 
-    @ResultMap("EstadoMap")
-    @Select("SELECT " + CAMPOS + " FROM estado ") 
-    List<Estado> getAll() throws SQLException;
+    @ResultMap("TipoDireccionMap")
+    @Select("SELECT " + CAMPOS + " FROM tipo_direccion ") 
+    List<TipoDireccion> getAll() throws SQLException;
     
-    @Insert("INSERT INTO estado(id_pais, nombre) VALUES(#{idPais}, #{nombre} )")
+    @Insert("INSERT INTO tipo_direccion(nombre, activo) VALUES(#{nombre}, #{activo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Estado estado) throws SQLException;
+    int insert(TipoDireccion tipoDireccion) throws SQLException;
 
-    @Update("UPDATE estado SET id_pais = #{idPais}, nombre = #{nombre} WHERE id = #{id} ")
-    int update(Estado estado) throws SQLException;
+    @Update("UPDATE tipo_direccion SET nombre = #{nombre}, activo = #{activo} WHERE id = #{id} ")
+    int update(TipoDireccion tipoDireccion) throws SQLException;
 
-    @Delete("DELETE FROM estado WHERE id = #{id} ") 
+    @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
 }

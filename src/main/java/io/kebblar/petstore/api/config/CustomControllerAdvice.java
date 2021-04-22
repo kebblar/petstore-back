@@ -50,7 +50,7 @@ public class CustomControllerAdvice {
 
     /**
      * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
-     * 
+     *
      * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
      */
@@ -117,7 +117,8 @@ public class CustomControllerAdvice {
             map.put("tipo-error", ad.getLocalExceptionNumber());
             map.put("cve-exception", ad.getLocalExceptionKey());
             map.put("http-error", ad.getHttpStatus());
-            map.put("desc-exception", ad.getDetailedMessage());
+            map.put("desc-long-exception", ad.getDetailedMessage());
+            map.put("desc-short-exception", ad.getShortMessage());
         }
         return map;
     }

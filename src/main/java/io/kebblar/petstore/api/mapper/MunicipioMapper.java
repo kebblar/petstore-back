@@ -7,13 +7,13 @@
  *
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.mapper
- * Modulo:      Estado
+ * Modulo:      Municipio
  * Tipo:        interface 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad Municipio 
  *
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
@@ -27,39 +27,39 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import io.kebblar.petstore.api.model.domain.Estado;
+import io.kebblar.petstore.api.model.domain.Municipio;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Estado 
+ * Interface 'Mapper' MyBatis asociado a la entidad Municipio 
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
  */
 @Repository
-public interface EstadoMapper {
-    static final String CAMPOS = " id, id_pais, nombre ";
+public interface MunicipioMapper {
+    static final String CAMPOS = " id, id_estado, nombre ";
 
-    @Results(id="EstadoMap", value = {
+    @Results(id="MunicipioMap", value = {
         @Result(property = "id", column = "id"),
-        @Result(property = "idPais", column = "id_pais"),
+        @Result(property = "idEstado", column = "id_estado"),
         @Result(property = "nombre", column = "nombre")    
     })
-    @Select("SELECT " + CAMPOS + " FROM estado WHERE id = #{id} ") 
-    Estado getById(Estado estado) throws SQLException;
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id = #{id} ") 
+    Municipio getById(Municipio municipio) throws SQLException;
 
-    @ResultMap("EstadoMap")
-    @Select("SELECT " + CAMPOS + " FROM estado ") 
-    List<Estado> getAll() throws SQLException;
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio ") 
+    List<Municipio> getAll() throws SQLException;
     
-    @Insert("INSERT INTO estado(id_pais, nombre) VALUES(#{idPais}, #{nombre} )")
+    @Insert("INSERT INTO municipio(id_estado, nombre) VALUES(#{idEstado}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Estado estado) throws SQLException;
+    int insert(Municipio municipio) throws SQLException;
 
-    @Update("UPDATE estado SET id_pais = #{idPais}, nombre = #{nombre} WHERE id = #{id} ")
-    int update(Estado estado) throws SQLException;
+    @Update("UPDATE municipio SET id_estado = #{idEstado}, nombre = #{nombre} WHERE id = #{id} ")
+    int update(Municipio municipio) throws SQLException;
 
-    @Delete("DELETE FROM estado WHERE id = #{id} ") 
+    @Delete("DELETE FROM municipio WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
 }
