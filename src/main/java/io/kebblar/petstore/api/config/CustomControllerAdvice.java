@@ -118,7 +118,7 @@ public class CustomControllerAdvice {
             map.put("exceptionTypeKey", ad.getLocalExceptionKey());
             map.put("exceptionLongDescription", ad.getDetailedMessage());
             map.put("exceptionShortDescription", ad.getShortMessage());
-            map.put("httpCode", ad.getHttpStatus());
+            map.put("httpCode", ad.getHttpStatus().value() + " (" + ad.getHttpStatus() + ")");
         }
         return map;
     }

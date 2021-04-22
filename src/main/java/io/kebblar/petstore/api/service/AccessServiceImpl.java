@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
@@ -31,8 +30,7 @@ public class AccessServiceImpl implements AccessService {
     
     public AccessServiceImpl(
             UsuarioService usuarioService, 
-            JwtManagerService jwtManagerService, 
-            RolMapper rolMapper) {
+            JwtManagerService jwtManagerService) {
         this.usuarioService = usuarioService;
         this.jwtManagerService = jwtManagerService;
         logger.info("Iniciando servicio de AccessService. Message: %s", message);

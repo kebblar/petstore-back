@@ -21,7 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private RolMapper rolMapper;
     private DireccionMapper direccionMapper;
     private UsuarioDetalleMapper usuarioDetalleMapper;
-
+    
     public UsuarioServiceImpl(
             UsuarioMapper usuarioMapper, 
             RolMapper rolMapper, 

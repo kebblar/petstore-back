@@ -83,8 +83,8 @@ public class LoginResponse {
 
     @Override
     public String toString() {
-        return "LoginResponse [usuarioDetalle=" + usuarioDetalle + ", correo=" + correo + ", jwt=" + jwt + ", roles="
-                + roles + "]";
+        return "LoginResponse [usuarioDetalle=" + usuarioDetalle + ", correo=" + correo + ", jwt=" + jwt
+                + ", ultimoAcceso=" + ultimoAcceso + ", roles=" + roles + ", direcciones=" + direcciones + "]";
     }
 
     @Override
