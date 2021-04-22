@@ -114,11 +114,11 @@ public class CustomControllerAdvice {
         Map<String, Object> map = new HashMap<>();
         if (ex instanceof ControllerException) {
             ControllerException ad = (ControllerException) (ex);
-            map.put("tipo-error", ad.getLocalExceptionNumber());
-            map.put("cve-exception", ad.getLocalExceptionKey());
-            map.put("http-error", ad.getHttpStatus());
-            map.put("desc-long-exception", ad.getDetailedMessage());
-            map.put("desc-short-exception", ad.getShortMessage());
+            map.put("exceptionTypeNumber", ad.getLocalExceptionNumber());
+            map.put("exceptionTypeKey", ad.getLocalExceptionKey());
+            map.put("exceptionLongDescription", ad.getDetailedMessage());
+            map.put("exceptionShortDescription", ad.getShortMessage());
+            map.put("httpCode", ad.getHttpStatus());
         }
         return map;
     }
