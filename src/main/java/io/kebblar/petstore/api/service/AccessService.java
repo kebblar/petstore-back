@@ -1,5 +1,6 @@
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 
@@ -21,4 +22,7 @@ public interface AccessService {
      * @throws BusinessException
      */
     LoginResponse login(String usuario, String clave) throws BusinessException;
+
+    LoginResponse login(Usuario usuario, String claveProporcionada, long delta, int maximoNumeroIntentosConcedidos,
+            long instanteActual) throws BusinessException;
 }

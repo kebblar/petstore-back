@@ -7,8 +7,7 @@ public class UserFoundWrapper {
     private List<Direccion> direcciones;
     private UsuarioDetalle usuarioDetalle;
     private String jwt;
-    public UserFoundWrapper() {
-    }
+
     public UserFoundWrapper(List<Rol> roles, List<Direccion> direcciones, UsuarioDetalle usuarioDetalle, String jwt) {
         this.roles = roles;
         this.direcciones = direcciones;

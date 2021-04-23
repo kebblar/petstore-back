@@ -33,7 +33,7 @@ public class AccessServiceImpl implements AccessService {
             JwtManagerService jwtManagerService) {
         this.usuarioService = usuarioService;
         this.jwtManagerService = jwtManagerService;
-        logger.info("Iniciando servicio de AccessService. Message: %s", message);
+        logger.info(" ************************************   Iniciando servicio de AccessService. Message: {}", message);
     }
 
     @Override
@@ -41,11 +41,12 @@ public class AccessServiceImpl implements AccessService {
         this.valida(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
         long delta = 1000*60*5L; // 5 minutos
-        long instanteActual = System.currentTimeMillis()+0;
+        long instanteActual = System.currentTimeMillis();
         Usuario usuario = usuarioService.obtenUsuarioPorCorreo(usr);
         return login(usuario, clave, delta, maximoNumeroIntentosConcedidos, instanteActual);
     }
 
+    @Override
     public LoginResponse login(
             Usuario usuario, 
             String claveProporcionada, 

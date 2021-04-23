@@ -48,6 +48,10 @@ public class TestAccessService {
         }
     }
     
+    /**
+     * Con 2 intentos previos fallidos, se trata de ingresar 
+     * con un usuario existente pero con una clave incorrecta.
+     */
     @Test
     public void loginBadTest() {
         this.usuario.setAccesoNegadoContador(2);
@@ -62,6 +66,37 @@ public class TestAccessService {
         }
     }
     
+    /**
+     * Se trata de ingresar con un usuario NO 
+     * existente pero con una clave cualquiera.
+     */
+    @Test
+    public void loginBadUserTest() {
+        this.usuario.setAccesoNegadoContador(2);
+        try {
+            when(usuarioService.obtenUsuarioPorCorreo("xgustavo_arellano@gmail.com")).thenReturn(null);
+            this.accessService.login(
+                    "xgustavo_arellano@gmail.com", 
+                    "Kebblar2017_");
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+    
+    @Test
+    public void login2OkUserTest() {
+        this.usuario.setAccesoNegadoContador(5);
+        long tiempo = System.currentTimeMillis()-2*60*1000+ 1234;
+        this.usuario.setInstanteBloqueo(tiempo);
+        try {
+            this.accessService.login(usuario, "Kebblar2017", 5*60*1000, 4, System.currentTimeMillis());
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+
     @Test
     public void loginVeryBadTest() {
         this.usuario.setAccesoNegadoContador(5);

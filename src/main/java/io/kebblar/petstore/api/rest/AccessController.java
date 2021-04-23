@@ -15,8 +15,8 @@ import io.kebblar.petstore.api.service.AccessService;
 public class AccessController {
 
     private AccessService accessService;
-    public AccessController(AccessService as) {
-        this.accessService = as;
+    public AccessController(AccessService accessService) {
+        this.accessService = accessService;
     }
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
     public LoginResponse login(@RequestBody CredencialesRequest cred) throws ControllerException {
