@@ -24,6 +24,10 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 
 /**
  * <p>Descripción:</p>
@@ -37,13 +41,19 @@ public class Direccion implements Serializable {
     private static final long serialVersionUID = 147836237927646425L;
 
     private Integer id;
+    @NotEmpty(message = "El campo Calle y número debe ser no vacio")
+    @Size(max = 5, message = "La longitud máxima para el campo de Calle y número es 5")
     private String calleNumero;
+    @NotEmpty(message = "El campo Colonia debe ser no vacio")
+    @Size(max = 6, message = "La longitud máxima para el campo de Colonia es 6")
     private String colonia;
     private int idPais;
     private int idEstado;
     private int idMunicipio;
     private int idTipoDireccion;
+    @Pattern(regexp = "\\d{5}$", message = "El código postal debe ser 5 digitos exactamente")
     private String cp;
+    @Size(max = 7, message = "La longitud máxima para el campo de Referencias es 7")
     private String referencias;
     private boolean activo;
     

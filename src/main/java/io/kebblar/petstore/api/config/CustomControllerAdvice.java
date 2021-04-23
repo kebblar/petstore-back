@@ -93,13 +93,13 @@ public class CustomControllerAdvice {
                 String index = (arr.length>1)? arr[1]:"0";
             err.put("index", index);
             err.put("description", arr[0]);
-            err.put("validation-type", error.getCode());
-            err.put("object-name", error.getObjectName());
-            err.put("rejected-value", error.getRejectedValue()+"");
-            err.put("field-name", error.getField());
+            err.put("validationType", error.getCode());
+            err.put("objectName", error.getObjectName());
+            err.put("rejectedValue", error.getRejectedValue()+"");
+            err.put("fieldName", error.getField());
             lista.add(err);
         }
-        map.put("TipoError", "3001");
+        map.put("errorType", "3001");
         map.put("errors", lista);
         return map;
     }
@@ -118,7 +118,7 @@ public class CustomControllerAdvice {
             map.put("exceptionTypeKey", ad.getLocalExceptionKey());
             map.put("exceptionLongDescription", ad.getDetailedMessage());
             map.put("exceptionShortDescription", ad.getShortMessage());
-            map.put("httpCode", ad.getHttpStatus().value() + " (" + ad.getHttpStatus() + ")");
+            map.put("httpResponse",  ad.getHttpStatus());
         }
         return map;
     }

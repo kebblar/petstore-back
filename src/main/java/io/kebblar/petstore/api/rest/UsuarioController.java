@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.model.domain.Usuario;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -27,27 +27,27 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/usuarios/{id}.json", produces = "application/json; charset=utf-8")
-    public Usuario getUser(@RequestAttribute int id) throws BusinessException {
+    public Usuario getUser(@RequestAttribute int id) throws ControllerException {
         return this.usuarioService.obtenUsuarioPorId(id);
     }
 
     @GetMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
-    public List<Usuario> getAllUsers() throws BusinessException {
+    public List<Usuario> getAllUsers() throws ControllerException {
         return this.usuarioService.obtenTodosUsuarios();
     }
 
     @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
-    public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws BusinessException {
+    public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws ControllerException {
         return this.usuarioService.creaUsuario(credenciales);
     }
 
     @PutMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
-    public Usuario updateUsuario(@RequestBody Usuario usuario) throws BusinessException {
+    public Usuario updateUsuario(@RequestBody Usuario usuario) throws ControllerException {
          return this.usuarioService.actualizaUsuario(usuario);
     }
 
     @DeleteMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
-    public Usuario borraUsuario(@RequestParam int id) throws BusinessException {
+    public Usuario borraUsuario(@RequestParam int id) throws ControllerException {
          return this.usuarioService.eliminaUsuario(id);
     }
 

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +42,7 @@ public class MascotaController {
     }
 
     @GetMapping(path = "/prueba.json", produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba() throws ServletException {
+    public Map<String, String> prueba() throws ControllerException {
         String token = jwtManagerService.createToken("gus");
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", token);
@@ -53,7 +52,7 @@ public class MascotaController {
     }
 
     @GetMapping(path = "/prueba2.json", produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba2() throws ServletException {
+    public Map<String, String> prueba2() throws ControllerException {
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", "gus");
         mapa.put("dato-2", "tavo");

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
@@ -19,7 +19,7 @@ public class AccessController {
         this.accessService = as;
     }
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
-    public LoginResponse login(@RequestBody CredencialesRequest cred) throws BusinessException {
+    public LoginResponse login(@RequestBody CredencialesRequest cred) throws ControllerException {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
