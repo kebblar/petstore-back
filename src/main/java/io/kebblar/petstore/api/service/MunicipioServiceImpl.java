@@ -52,16 +52,6 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     @Override
-    public Municipio getById(Municipio municipio) throws BusinessException {
-        try {
-            return municipioMapper.getById(municipio);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de obtención de un Municipio", e.getMessage());
-        }
-    }
-
-    @Override
     public List<Municipio> getAll() throws BusinessException {
         try {
             return municipioMapper.getAll();
@@ -103,7 +93,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     @Override
     public int save(Municipio municipio) throws BusinessException {
         try {
-            if (getById(municipio) == null) {
+            if (getById(municipio.getId()) == null) {
                 return municipioMapper.insert(municipio);
             } else {
                 return municipioMapper.update(municipio);
@@ -111,6 +101,36 @@ public class MunicipioServiceImpl implements MunicipioService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new MapperCallException("Error de salvado de un Municipio", e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Municipio> getPaginatedMunicipios(int idEstado, int pageNumber, int pageSize) throws BusinessException {
+        try {
+            return municipioMapper.getPaginatedMunicipios(idEstado, (pageNumber-1)*pageSize, pageSize);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de los Municipios", e.getMessage());
+        }
+    }
+
+    @Override
+    public Municipio getById(int id) throws BusinessException {
+        try {
+            return municipioMapper.getById(id);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de un Municipio por su ID", e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Municipio> getAllByEstado(int idEstado) throws BusinessException {
+        try {
+            return municipioMapper.getByEstado(idEstado);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
         }
     }
 

@@ -46,12 +46,16 @@ public interface MunicipioMapper {
         @Result(property = "nombre", column = "nombre")    
     })
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id = #{id} ") 
-    Municipio getById(Municipio municipio) throws SQLException;
+    Municipio getById(int id) throws SQLException;
 
     @ResultMap("MunicipioMap")
     @Select("SELECT " + CAMPOS + " FROM municipio ") 
     List<Municipio> getAll() throws SQLException;
-    
+
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado = #{idEstado}")  
+    List<Municipio> getByEstado(int idEstado) throws SQLException;
+
     @Insert("INSERT INTO municipio(id_estado, nombre) VALUES(#{idEstado}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Municipio municipio) throws SQLException;
@@ -61,5 +65,9 @@ public interface MunicipioMapper {
 
     @Delete("DELETE FROM municipio WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
+
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}") 
+    List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
 
 }

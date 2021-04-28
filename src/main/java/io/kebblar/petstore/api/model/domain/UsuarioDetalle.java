@@ -1,11 +1,13 @@
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Date;
+
 public class UsuarioDetalle {
     private int id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private long fechaNacimiento;
+    private Date fechaNacimiento;
     private String nickName;
     private String telefonoCasa;
     private String telefonoCelular;
@@ -13,7 +15,7 @@ public class UsuarioDetalle {
     public UsuarioDetalle() {
     }
 
-    public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, long fechaNacimiento,
+    public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento,
             String nickName, String telefonoCasa, String telefonoCelular) {
         super();
         this.id = id;
@@ -58,11 +60,11 @@ public class UsuarioDetalle {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public long getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(long fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -107,7 +109,7 @@ public class UsuarioDetalle {
         int result = 1;
         result = prime * result + ((apellidoMaterno == null) ? 0 : apellidoMaterno.hashCode());
         result = prime * result + ((apellidoPaterno == null) ? 0 : apellidoPaterno.hashCode());
-        result = prime * result + (int) (fechaNacimiento ^ (fechaNacimiento >>> 32));
+        result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + id;
         result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
