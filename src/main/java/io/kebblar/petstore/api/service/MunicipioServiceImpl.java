@@ -109,7 +109,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getPaginatedMunicipios(idEstado, (pageNumber-1)*pageSize, pageSize);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new MapperCallException("Error de obtención de los Municipios", e.getMessage());
         }
     }
@@ -119,7 +118,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getById(id);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new MapperCallException("Error de obtención de un Municipio por su ID", e.getMessage());
         }
     }
@@ -129,7 +127,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getByEstado(idEstado);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
         }
     }

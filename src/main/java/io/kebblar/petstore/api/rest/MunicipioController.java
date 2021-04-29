@@ -4,16 +4,13 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Municipio;
-import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.MunicipioService;
-import io.kebblar.petstore.api.service.PaisService;
 
 @RestController
 @RequestMapping(value = "/api")
