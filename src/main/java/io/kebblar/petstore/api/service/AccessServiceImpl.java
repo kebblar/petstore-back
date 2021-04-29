@@ -33,11 +33,11 @@ public class AccessServiceImpl implements AccessService {
             JwtManagerService jwtManagerService) {
         this.usuarioService = usuarioService;
         this.jwtManagerService = jwtManagerService;
-        logger.info(" ************************************   Iniciando servicio de AccessService. Message: {}", message);
     }
 
     @Override
     public LoginResponse login(String usr, String clave) throws BusinessException {
+        logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
         this.valida(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
         long delta = 1000*60*5L; // 5 minutos
