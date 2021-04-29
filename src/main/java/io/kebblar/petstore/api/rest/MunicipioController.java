@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.service.ContadorService;
 import io.kebblar.petstore.api.service.MunicipioService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,9 +19,11 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class MunicipioController {
     private MunicipioService municipioService;
+    private ContadorService contadorService;
 
-    public MunicipioController(MunicipioService municipioService) {
+    public MunicipioController(MunicipioService municipioService, ContadorService contadorService) {
         this.municipioService = municipioService;
+        this.contadorService = contadorService;
     }
     
     @ApiOperation(
@@ -43,6 +46,12 @@ public class MunicipioController {
     @GetMapping(path = "/municipios.json", produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipios(@RequestParam int idEstado) throws ControllerException {
         return municipioService.getAllByEstado(idEstado);
+    }
+    @GetMapping(path = "/contador-municipios.json", produces = "application/json; charset=utf-8")
+    public String getMunicipioCounter() throws ControllerException {
+         int contador = contadorService.getMunicipioCounter();
+         String data = "{\"tabla\":\"municipio\", \"contador\": "+contador+"}";
+         return data;
     }
 
 }
