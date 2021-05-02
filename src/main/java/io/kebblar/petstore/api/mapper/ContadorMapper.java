@@ -36,7 +36,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ContadorMapper {
-    @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{tableScheme} AND table_name = #{tableName}") 
-    int getTableCount(String tableScheme, String tableName) throws SQLException;
+    @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{databaseName} AND table_name = #{tableName}") 
+    int getTableCount(String databaseName, String tableName) throws SQLException;
 
 }

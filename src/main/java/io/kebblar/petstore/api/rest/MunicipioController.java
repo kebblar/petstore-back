@@ -14,6 +14,7 @@ import io.kebblar.petstore.api.service.ContadorService;
 import io.kebblar.petstore.api.service.MunicipioService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.kebblar.petstore.api.model.domain.TablasContador;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -47,11 +48,30 @@ public class MunicipioController {
     public List<Municipio> getMunicipios(@RequestParam int idEstado) throws ControllerException {
         return municipioService.getAllByEstado(idEstado);
     }
+    
     @GetMapping(path = "/contador-municipios.json", produces = "application/json; charset=utf-8")
     public String getMunicipioCounter() throws ControllerException {
          int contador = contadorService.getMunicipioCounter();
-         String data = "{\"tabla\":\"municipio\", \"contador\": "+contador+"}";
+         //int contador = contadorService.getTableCounter("municipio");
+         String data = "{\"tabla\":\"municipio\", \"contadorx\": "+contador+"}";
          return data;
     }
-
+    
+    @GetMapping(path = "/contador/{tabla}.json", produces = "application/json; charset=utf-8")
+    public String getMunicipioCounter2(
+            @ApiParam(name = "tabla", value = "Cadena que representa el nombre de una tabla cualquiera", defaultValue = "pais")
+            @PathVariable String tabla) throws ControllerException {
+         //int contador = contadorService.getMunicipioCounter();
+         int contador = contadorService.getTableCounter(tabla);
+         String data = "{\"tabla\":\""+tabla+"\", \"contador\": "+contador+"}";
+         return data;
+    }
+    
+    @GetMapping(path = "/contador-enum.json", produces = "application/json; charset=utf-8")
+    public String getMunicipioCounter3(
+            @ApiParam(name = "contador", value = "Cadena que representa el nombre de una tabla cualquiera", defaultValue = "PAISES")
+            @RequestParam TablasContador contador) throws ControllerException {
+         return contadorService.getTableCounter2(contador);
+    }
+    
 }

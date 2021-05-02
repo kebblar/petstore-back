@@ -3,6 +3,7 @@ package io.kebblar.petstore.api.service;
 import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.ContadorMapper;
+import io.kebblar.petstore.api.model.domain.TablasContador;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
@@ -39,14 +40,21 @@ public class ContadorServiceImpl implements ContadorService {
         return this.getTableCounter("municipio");
     }
     
-    private int getTableCounter(String tabla) throws BusinessException {
+    @Override
+    public Integer getTableCounter(String tabla) throws BusinessException {
         String ESQUEMA = "petstore";
         // ********************************** Change previous var 'ESQUEMAS' Accordingly !!!
         try {
             return this.contadorMapper.getTableCount(ESQUEMA, tabla);
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener el número de tuplas de la tabla: "+ tabla, e.getMessage());
+            throw new MapperCallException("Error al obtener el número de tuplas de la tabla: "+ tabla + " (tabla posiblemente inexistente)", e.getMessage());
         }
+    }
+
+    @Override
+    public String getTableCounter2(TablasContador contador) throws BusinessException {
+        int response = getTableCounter(contador.getTabla());
+        return "{\"tabla\":\""+contador.getTabla()+"\", \"contador\": "+response+"}";
     }
 
 }
