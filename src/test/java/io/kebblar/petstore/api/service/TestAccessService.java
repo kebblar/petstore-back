@@ -2,6 +2,8 @@ package io.kebblar.petstore.api.service;
 
 import static org.mockito.Mockito.when;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,5 +112,22 @@ public class TestAccessService {
             assert(true);
         }
     }
-    
+    @Test
+    public void DateTest() {
+        long oneday = 1000*60*60*24;
+        long oneYear = oneday*365;
+        Date origen = new Date(0); //Wed Dec 31 18:00:00 CST 1969
+        long gus = -83495789067L+oneday*165; // Sun Oct 22 08:43:30 CST 1967 // -69239789067
+        Date cumple = new Date(gus);
+        long x = origen.getTime();
+        long now = System.currentTimeMillis();
+        long year1967 = now - oneYear*54;
+        Date d = new Date(year1967); // -83495789067 // Wed May 10 08:43:30 CST 1967
+        System.out.println(d);
+        System.out.println(cumple);
+
+        System.out.println(origen);
+        System.out.println(x);
+        assert(year1967!=0);
+    }
 }
