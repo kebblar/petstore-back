@@ -1,26 +1,21 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    proyecto
- * Paquete:     mx.qbits.unam.proyecto.api.mapper
- * Modulo:      Anuncio
+ *              ------------------------------------------------
+ * Artefacto:   UsuarioMapper.java
  * Tipo:        interface
- * Autor:       Gustavo A. Arellano
- * Fecha:       domingo 10 de octubre de 2020 (12_53)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (19_14)
  *
  * Historia:    .
- *              20201025_1253 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_1914 Creación de éste Mapper
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
@@ -39,14 +34,17 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Estado
+ * Interface 'Mapper' MyBatis asociado a la entidad 'Usuario'.
  *
- * @author Gustavo A. Arellano
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Repository
 public interface UsuarioMapper {
-    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
+    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, "
+            + "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
 
     /**
      * Obtiene una lista de objetos de tipo 'usuario'.
@@ -97,7 +95,10 @@ public interface UsuarioMapper {
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO usuario(correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante) VALUES(#{correo}, #{clave}, #{creado}, #{activo}, #{accesoNegadoContador}, #{instanteBloqueo}, #{instanteUltimoAcceso}, #{instanteUltimoCambioClave}, #{regeneraClaveToken}, #{regeneraClaveInstante} )")
+    @Insert("INSERT INTO usuario(correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, "
+            + "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante) "
+            + "VALUES(#{correo}, #{clave}, #{creado}, #{activo}, #{accesoNegadoContador}, #{instanteBloqueo}, "
+            + "#{instanteUltimoAcceso}, #{instanteUltimoCambioClave}, #{regeneraClaveToken}, #{regeneraClaveInstante} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Usuario usr) throws SQLException;
 
@@ -108,7 +109,11 @@ public interface UsuarioMapper {
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE usuario SET correo = #{correo}, clave = #{clave}, creado = #{creado}, activo = #{activo}, acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante} WHERE id = #{id} ")
+    @Update("UPDATE usuario SET correo = #{correo}, clave = #{clave}, creado = #{creado}, activo = #{activo}, "
+            + "acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, "
+            + "instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, "
+            + "regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante} "
+            + "WHERE id = #{id} ")
     int update(Usuario usr) throws SQLException;
 
     /**

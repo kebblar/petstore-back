@@ -1,6 +1,6 @@
 -- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: ejemplo4
+-- Host: localhost    Database: petstore
 -- ------------------------------------------------------
 -- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
@@ -130,7 +130,36 @@ CREATE TABLE `municipio` (
 
 LOCK TABLES `municipio` WRITE;
 /*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
-INSERT INTO `municipio` VALUES (1,1,'Aguascalientes'),(2,1,'Jesús Maria'),(3,1,'Pabellón'),(4,1,'Calvillo'),(11,1,'Asientos'),(12,1,'Cosio'),(13,1,'Pabellon de Arteaga'),(14,1,'Rincon de Romos'),(15,1,'San Jose de Gracia'),(16,1,'Tepezala'),(17,1,'San Pancho');
+INSERT INTO `municipio` VALUES 
+(1,1,'Aguascalientes'),
+(2,1,'Jesús Maria'),
+(3,1,'Pabellón'),
+(4,1,'Calvillo'),
+(5,1,'Asientos'),
+(6,1,'Cosio'),
+(7,1,'Pabellon de Arteaga'),
+(8,1,'Rincon de Romos'),
+(9,1,'San Jose de Gracia'),
+(10,1,'Tepezala'),
+(11,1,'San Pancho'),
+
+(12,2,'Mexicali'),
+(13,2,'Tijuana'),
+(14,2,'Ensenada'),
+
+(15,3,'Cabo San Lucas'),
+(16,3,'La Paz'),
+(17,3,'Todos los santos'),
+
+(18,4,'Tenabo'),
+
+(19,5,'m01'),
+(20,6,'m02'),
+(21,7,'m03'),
+(22,8,'m04'),
+(23,9,'m05'),
+(24,10,'m06'),
+(25,11,'m07');
 /*!40000 ALTER TABLE `municipio` ENABLE KEYS */;
 UNLOCK TABLES;
 
