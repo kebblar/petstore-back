@@ -38,7 +38,8 @@ public class UsuarioController {
 
     @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public Usuario createUser(@RequestBody CredencialesRequest credenciales) throws ControllerException {
-        return this.usuarioService.creaUsuario(credenciales);
+    	return new Usuario();
+        //return this.usuarioService.creaUsuario(credenciales);
     }
 
     @PutMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
