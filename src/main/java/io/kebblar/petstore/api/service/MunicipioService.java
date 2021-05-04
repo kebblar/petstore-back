@@ -34,24 +34,32 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
  */
+
 public interface MunicipioService {
 
-    /**
-     * Método utilizado para recuperar un elemento de la tabla 'municipio'. por medio de su llave primaria.
+	 /**
+     * <p>Método utilizado para recuperar un elemento de la tabla 'municipio'. por medio de su llave primaria.
      * 
      * @param municipio Instancia de Municipio con los datos de la llave.
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
+     * @throws BusinessException
      */
     Municipio getById(int  id) throws BusinessException;
 
     /**
-     * Método utilizado para obtener una lista con todos los elementos de la tabla 'municipio'.
+     * <p>Método utilizado para recuperar un elemento de la tabla 'municipio'. por medio de su llave primaria.
      * 
      * @return Lista con todos los elementos de la tabla 'municipio'.
+     * * @throws BusinessException
      */
     List<Municipio> getAll() throws BusinessException;
     
-    
+    /**
+     * <p>Método utilizado para recuperar una lista de municipios por medio de un id estado.
+     * 
+     * @return Lista con todos los elementos de la tabla 'municipio'.
+     * * @throws BusinessException
+     */
     List<Municipio> getAllByEstado(int idEstado) throws BusinessException;
 
     

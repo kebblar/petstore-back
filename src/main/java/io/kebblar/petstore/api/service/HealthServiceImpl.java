@@ -80,9 +80,6 @@ public class HealthServiceImpl implements HealthService {
         this.environment = environment;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Map<String, String> getInfo(String data) throws IOException {
         Map<String, String> info = new HashMap<>();
@@ -140,9 +137,6 @@ public class HealthServiceImpl implements HealthService {
         return info;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<String> getLog(int last) {
         List<String> lista = new ArrayList<>();

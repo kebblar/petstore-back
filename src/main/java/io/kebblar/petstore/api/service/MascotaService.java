@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   MascotaService.java
+ * Tipo:        interface
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (16_00)
+ *
+ * Historia:    .
+ *              20210503_1600 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -5,7 +23,7 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-
+//VERSIÒN, SINCES, LINKS, LÌNEAS EN BLANCO ELIMININAR(QUE NO SE NECESITEN)
 /**
  * Interfaz que define los métodos de negocio asociados a la entidad
  * de dominio "Mascota"

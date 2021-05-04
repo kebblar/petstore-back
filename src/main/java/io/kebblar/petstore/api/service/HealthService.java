@@ -25,12 +25,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface HealthService.
+ * <p>Definición de la interfaz de servicios para 'HealthService'.
+ * 
+ * @author  garellano
+
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 public interface HealthService {
 
     /**
-     * Retorna la resultante de la ejecición de un comando del sistema operativo.
+     * <P>Retorna la resultante de la ejecición de un comando del sistema operativo.
      *
      * @param data String Comando del sistema operativo
      * @return Map estructira de tipo diccionario con la resultante de la ejecución
@@ -39,7 +44,7 @@ public interface HealthService {
     Map<String, String> getInfo(String data) throws IOException;
 
     /**
-     * Retorna cierto numero de lineas del log especificado por el
+     * <P>Retorna cierto numero de lineas del log especificado por el
      * parámetro que recibe el método.
      *
      * @param last int numero de lineas del log a retornar

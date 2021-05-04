@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -32,6 +31,8 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * Interface para el servicio asociado a la entidad 'pais'. 
  *
  * @author Gustavo A. Arellano
+ * @see io.kebblar.petstore.api.model.domain.Pais
+ * @see io.kebblar.petstore.api.model.exceptions.BusinessException
  * @version 1.0-SNAPSHOT
  */
 public interface PaisService {
@@ -81,7 +82,7 @@ public interface PaisService {
     /**
      * Método utilizado para eliminar un registro en la tabla 'pais'.
      * 
-     * @param pais objeto de tipo 'Pais'.
+     * @param pais objeto de tipo {@link Pais}.
      * @return int numero de registros eliminados en la tabla'pais'.
      * @throws Exception es disparada por una regla de negocio
      */
