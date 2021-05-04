@@ -18,6 +18,7 @@
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
  *              archivos fuente de Gustavo Arellano
+ *              20210504_0932 Documentación de metodoss
  *
  */
 
@@ -34,8 +35,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'direccion'. 
+ * <p>
+ * Descripción:
+ * </p>
+ * Servicio asociado a la entidad 'direccion'.
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
@@ -43,75 +46,81 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
 
-    private DireccionMapper direccionMapper;
+	private DireccionMapper direccionMapper;
 
-    public DireccionServiceImpl(DireccionMapper direccionMapper) {
-        this.direccionMapper = direccionMapper;
-    }
+	/**
+	 * Constructor que realiza el setting de todos los Mappers y todos los servicios
+	 * adicionales a ser empleados en esta clase.
+	 * 
+	 * @param direccionMapper
+	 */
+	public DireccionServiceImpl(DireccionMapper direccionMapper) {
+		this.direccionMapper = direccionMapper;
+	}
 
-    @Override
-    public Direccion getById(Direccion direccion) throws BusinessException {
-        try {
-            return direccionMapper.getById(direccion);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de obtención de una Dirección", e.getMessage());
-        }
-    }
+	@Override
+	public Direccion getById(Direccion direccion) throws BusinessException {
+		try {
+			return direccionMapper.getById(direccion);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new MapperCallException("Error de obtención de una Dirección", e.getMessage());
+		}
+	}
 
-    @Override
-    public List<Direccion> getAll() throws BusinessException {
-        try {
-            return direccionMapper.getAll();
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de obtención de las Direcciones", e.getMessage());
-        }
-    }
+	@Override
+	public List<Direccion> getAll() throws BusinessException {
+		try {
+			return direccionMapper.getAll();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new MapperCallException("Error de obtención de las Direcciones", e.getMessage());
+		}
+	}
 
-    @Override
-    public int insert(Direccion direccion) throws BusinessException {
-        try {
-            return direccionMapper.insert(direccion);
-        } catch (Exception e) {
-            throw new MapperCallException("Error de inserción de la Dirección", e.getMessage());
-        }
-    }
+	@Override
+	public int insert(Direccion direccion) throws BusinessException {
+		try {
+			return direccionMapper.insert(direccion);
+		} catch (Exception e) {
+			throw new MapperCallException("Error de inserción de la Dirección", e.getMessage());
+		}
+	}
 
-    @Override
-    public int update(Direccion direccion) throws BusinessException {
-        try {
-            return direccionMapper.update(direccion);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de actualización de una Dirección", e.getMessage());
-        }
-    }
+	@Override
+	public int update(Direccion direccion) throws BusinessException {
+		try {
+			return direccionMapper.update(direccion);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new MapperCallException("Error de actualización de una Dirección", e.getMessage());
+		}
+	}
 
-    @Override
-    public int delete(Direccion direccion) throws BusinessException {
-        try {
-            return direccionMapper.delete(direccion.getId());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de borrado de una Dirección", e.getMessage());
-        }
-    }
+	@Override
+	public int delete(Direccion direccion) throws BusinessException {
+		try {
+			return direccionMapper.delete(direccion.getId());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new MapperCallException("Error de borrado de una Dirección", e.getMessage());
+		}
+	}
 
-    @Override
-    public int save(Direccion direccion) throws BusinessException {
-        try {
-            if (getById(direccion) == null) {
-                return direccionMapper.insert(direccion);
-            } else {
-                return direccionMapper.update(direccion);
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error de salvado de una Dirección", e.getMessage());
-        }
-    }
+	@Override
+	public int save(Direccion direccion) throws BusinessException {
+		try {
+			if (getById(direccion) == null) {
+				return direccionMapper.insert(direccion);
+			} else {
+				return direccionMapper.update(direccion);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new MapperCallException("Error de salvado de una Dirección", e.getMessage());
+		}
+	}
 
 }

@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   AdminController.java
+ * Tipo:        clase
+ * AUTOR:       Ulises A. Lopez (UAL)
+ * Fecha:       Martes 4 de Mayo de 2021 (0919)
+ *
+ * Historia:    .
+ *              20210503_2229 Creación de éste controlador REST
+ *              20210504_0921 Documentación de metodos 
+ */
 package io.kebblar.petstore.api.rest;
 
 import java.io.IOException;
@@ -26,83 +44,100 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * <p>
+ * Implementacion del controlador REST asociado a los endpoints de gestión del
+ * POJO Admin.
+ * 
+ * <p>
+ * Todos los métodos de esta clase disparan {@link ControllerException}
+ * 
+ * <p>
+ * NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
+ * debido a que la documentación Swagger API cumple con ese objetivo.
+ * 
+ * @author ulopezu
+ * @see io.kebblar.petstore.api.service.HealthService
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 @RestController
 @Api(value = "admin")
 @RequestMapping(value = "/api")
 public class AdminController {
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-    private HealthService healthService;
-    
-    @Value("${app.profile.identifier}")
-    private String appProfileIdentifier;
-    
-    @Value("${spring.datasource.url}")
-    private String springDatasourceUrl;
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	private HealthService healthService;
 
-    public AdminController(HealthService healthService) {
-        this.healthService = healthService;
-    }
-    
-    @PostMapping(path="/UploadPictures", produces = "application/json; charset=utf-8")
-    public String upload(
-        MultipartHttpServletRequest request,
-        HttpServletResponse response
-    ) throws IOException {
-        
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while(parameterNames.hasMoreElements()) {
-            String name = parameterNames.nextElement();
-            String value = request.getParameter(name);
-            System.out.println(name + ":"+ value);
-        }
-        
-        Map<String, MultipartFile> fileMap = request.getFileMap();
-        for (MultipartFile multipartFile : fileMap.values()) {
-            System.out.println(multipartFile.getOriginalFilename());
-        }
-        return "ok";
-    }
-  
-    @ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
-    @GetMapping(path = "/logout.json", produces = "application/json; charset=utf-8")
-    public String logout(HttpServletRequest request) throws ServletException {
-        String name = "tavo";
-        request.logout();
-        String res = "{-" + name + "-:-you have been loged out-}";
-        return res.replace('-', '"');
-    }
+	@Value("${app.profile.identifier}")
+	private String appProfileIdentifier;
 
-    @ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
-    @GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
-    public Map<String, String> health(
-            @ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls")
-            @RequestParam String inputData
-        ) throws IOException {
-        logger.info("*** Application Profile Identifier: "+appProfileIdentifier);
-        Map<String, String> result = healthService.getInfo(inputData);
-        result.put("app.profile.identifier", appProfileIdentifier);
-        result.put("spring.datasource.url", springDatasourceUrl);
-        return result;
-    }
+	@Value("${spring.datasource.url}")
+	private String springDatasourceUrl;
 
-    @ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
-    @GetMapping(path = "/log.json", produces = "application/json; charset=utf-8")
-    public List<String> getLog(@RequestParam Integer last) {
-        return healthService.getLog(last);
-    }
+	/**
+	 * Constructor que realiza el setting de los servicios que serán utilizados en
+	 * este controlador.
+	 * 
+	 * @param healthService Servicios de admin
+	 */
+	public AdminController(HealthService healthService) {
+		this.healthService = healthService;
+	}
 
-    @GetMapping(path = "/qa-stats.json", produces = "application/json; charset=utf-8")
-    public String getQualityStats(@RequestParam int page, @RequestParam int len) {
-        final String uri = "https://sonar.ci.ultrasist.net/api/issues/search?ps=" + len + "&p="
-                + page
-                + "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
-        try {
-            RestTemplate restTemplate = new RestTemplate();
-            return restTemplate.getForObject(uri, String.class);
-        } catch (RuntimeException e) {
-            return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
-        }
-    }
+	@PostMapping(path = "/UploadPictures", produces = "application/json; charset=utf-8")
+	public String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		Enumeration<String> parameterNames = request.getParameterNames();
+		while (parameterNames.hasMoreElements()) {
+			String name = parameterNames.nextElement();
+			String value = request.getParameter(name);
+			System.out.println(name + ":" + value);
+		}
+
+		Map<String, MultipartFile> fileMap = request.getFileMap();
+		for (MultipartFile multipartFile : fileMap.values()) {
+			System.out.println(multipartFile.getOriginalFilename());
+		}
+		return "ok";
+	}
+
+	@ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
+	@GetMapping(path = "/logout.json", produces = "application/json; charset=utf-8")
+	public String logout(HttpServletRequest request) throws ServletException {
+		String name = "tavo";
+		request.logout();
+		String res = "{-" + name + "-:-you have been loged out-}";
+		return res.replace('-', '"');
+	}
+
+	@ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
+	@GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
+	public Map<String, String> health(
+			@ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls") @RequestParam String inputData)
+			throws IOException {
+		logger.info("*** Application Profile Identifier: " + appProfileIdentifier);
+		Map<String, String> result = healthService.getInfo(inputData);
+		result.put("app.profile.identifier", appProfileIdentifier);
+		result.put("spring.datasource.url", springDatasourceUrl);
+		return result;
+	}
+
+	@ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
+	@GetMapping(path = "/log.json", produces = "application/json; charset=utf-8")
+	public List<String> getLog(@RequestParam Integer last) {
+		return healthService.getLog(last);
+	}
+
+	@GetMapping(path = "/qa-stats.json", produces = "application/json; charset=utf-8")
+	public String getQualityStats(@RequestParam int page, @RequestParam int len) {
+		final String uri = "https://sonar.ci.ultrasist.net/api/issues/search?ps=" + len + "&p=" + page
+				+ "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			return restTemplate.getForObject(uri, String.class);
+		} catch (RuntimeException e) {
+			return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
+		}
+	}
 
 }
-
