@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -71,7 +72,7 @@ public class UsuarioController {
     @GetMapping(path = "/usuarios/{id}.json", produces = "application/json; charset=utf-8")
     public Usuario getUser(
             @ApiParam(name = "id", value = "ID del Usuario", defaultValue = "1")
-            @RequestAttribute int id
+            @PathVariable int id
             ) throws ControllerException {
         return this.usuarioService.obtenUsuarioPorId(id);
     }
