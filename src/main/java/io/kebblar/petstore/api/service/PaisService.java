@@ -39,10 +39,10 @@ public interface PaisService {
     /**
      * Método utilizado para recuperar un elemento de la tabla 'pais'. por medio de su llave primaria.
      * 
-     * @param pais Instancia de Pais con los datos de la llave.
+     * @param id ID de Pais (la llave).
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
-    Pais getById(Pais pais) throws BusinessException;
+    Pais getById(int id) throws BusinessException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'pais'.

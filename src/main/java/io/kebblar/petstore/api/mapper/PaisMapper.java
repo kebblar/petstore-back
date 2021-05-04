@@ -45,7 +45,7 @@ public interface PaisMapper {
         @Result(property = "nombre", column = "nombre")    
     })
     @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ") 
-    Pais getById(Pais pais) throws SQLException;
+    Pais getById(int id) throws SQLException;
 
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS + " FROM pais ") 

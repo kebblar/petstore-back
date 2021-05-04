@@ -51,9 +51,9 @@ public class PaisServiceImpl implements PaisService {
     }
 
     @Override
-    public Pais getById(Pais pais) throws BusinessException {
+    public Pais getById(int id) throws BusinessException {
         try {
-            return paisMapper.getById(pais);
+            return paisMapper.getById(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new MapperCallException("Error de obtención de un Pais", e.getMessage());
@@ -103,7 +103,7 @@ public class PaisServiceImpl implements PaisService {
     @Override
     public int save(Pais pais) throws BusinessException {
         try {
-            if (getById(pais) == null) {
+            if (getById(pais.getId()) == null) {
                 return paisMapper.insert(pais);
             } else {
                 return paisMapper.update(pais);
