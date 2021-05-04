@@ -1,23 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.api.model
- * Modulo:      Registro
+ *              ------------------------------------------------
+ * Artefacto:   Registro.java
  * Tipo:        clase
- * Autor:       Gustavo A. Arellano
- * Fecha:       miércoles 08 de agosto de 2020 (00_58)
- * Version:     0.1.1-SNAPSHOT
- * .
- * POJO asociado a la entidad 'registro'.
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 4 de Mayo de 2021 (23_21)
  *
  * Historia:    .
- *              20200812_0058 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210504_2321 Creación de éste POJO
  *
  */
 
@@ -36,11 +32,11 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'registro'.
- *
- * @author Gustavo A. Arellano
- * @version 0.1.1-SNAPSHOT
+ * Implementacion del POJO de la entidad de 'Registro'.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public class Registro implements Serializable {
 

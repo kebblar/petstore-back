@@ -1,4 +1,30 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   ProcesaMascotaResponse.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 4 de Mayo de 2021 (23_21)
+ *
+ * Historia:    .
+ *              20210504_2321 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.response;
+
+/**
+ * Implementacion del POJO de la entidad de 'ProcesaMascotaResponse'.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 
 public class ProcesaMascotaResponse {
     private String mensaje;

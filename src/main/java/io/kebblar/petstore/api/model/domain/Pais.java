@@ -1,23 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Pais
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'pais'. 
+ *              ------------------------------------------------
+ * Artefacto:   Pais.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 4 de Mayo de 2021 (23_21)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210504_2321 Creación de éste POJO
  *
  */
 
@@ -27,11 +23,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'pais'. 
- *
- * @author Gustavo A. Arellano
+ * Implementacion del POJO de la entidad de 'Pais'.
+ * 
+ * @author  garellano
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public class Pais implements Serializable {
 

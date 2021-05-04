@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   LoginResponse.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 4 de Mayo de 2021 (23_21)
+ *
+ * Historia:    .
+ *              20210504_2321 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.response;
 
 import java.util.Date;
@@ -7,6 +25,13 @@ import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
+/**
+ * Implementacion del POJO de la entidad de 'LoginResponse'.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class LoginResponse {
     private UsuarioDetalle usuarioDetalle;
     private String correo;
