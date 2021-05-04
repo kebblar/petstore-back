@@ -34,11 +34,14 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'municipio'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementación de la interfaz {@link MunicipioService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.service.MunicipioService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("municipioService")
 public class MunicipioServiceImpl implements MunicipioService {
@@ -46,7 +49,14 @@ public class MunicipioServiceImpl implements MunicipioService {
     private static final Logger logger = LoggerFactory.getLogger(MunicipioServiceImpl.class);
 
     private MunicipioMapper municipioMapper;
-
+    
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param municipioMapper
+     */
     public MunicipioServiceImpl(MunicipioMapper municipioMapper) {
         this.municipioMapper = municipioMapper;
     }
