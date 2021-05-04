@@ -1,6 +1,32 @@
 package io.kebblar.petstore.api.model.domain;
-
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Criterio.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (23_21)
+ *
+ * Historia:    .
+ *              20210503_2321 Creación de éste POJO
+ *
+ */
 public class Criterio {
+	
+	/**
+	 * Implementacion del POJO de la entidad de 'Criterio'.
+	 * 
+	 * @author  garellano
+	 * @version 1.0-SNAPSHOT
+	 * @since   1.0-SNAPSHOT
+	 */
+	
     private int idCategoria;
     private int valor;
 
