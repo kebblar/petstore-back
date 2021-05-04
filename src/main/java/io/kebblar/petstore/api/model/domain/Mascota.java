@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Mascota.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_30)
+ *
+ * Historia:    .
+ *              20210503_0930 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.domain;
 
 import javax.validation.constraints.NotBlank;
@@ -5,6 +23,13 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+/**
+ * Implementacion del POJO de la entidad de 'Mascota'.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class Mascota {
     @Range(min = 1, max = 13, message = "El ID de la mascota debe ser mínimo {min} y máximo {max}")
     private int id;

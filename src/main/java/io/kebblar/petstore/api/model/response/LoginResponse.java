@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   LoginResponse.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_30)
+ *
+ * Historia:    .
+ *              20210504_0930 Creación de Response
+ *
+ */
 package io.kebblar.petstore.api.model.response;
 
 import java.util.Date;
@@ -7,6 +25,19 @@ import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
+/**
+ * <p>Response encargado de construir el JSON como respuesta a la 
+ * petición hecha por el usuario al realizar un Login en el sistema.
+ * 
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
+ * constructores con la definición necesaria, que incluye en algunos casos el
+ * código HTTP que será devuelto.
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class LoginResponse {
     private UsuarioDetalle usuarioDetalle;
     private String correo;
@@ -18,6 +49,17 @@ public class LoginResponse {
     public LoginResponse() {
     }
 
+    /**
+     * Constructor que realiza el setting de todos
+     * los datos de LoginResponse en esta clase.
+     * 
+     * @param usuarioDetalle
+     * @param ultimoAcceso
+     * @param correo
+     * @param jwt
+     * @param roles
+     * @param direcciones
+     */
     public LoginResponse(
             UsuarioDetalle usuarioDetalle,
             Date ultimoAcceso,
