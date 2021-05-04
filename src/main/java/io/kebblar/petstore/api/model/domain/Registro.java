@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import javax.validation.constraints.Email;

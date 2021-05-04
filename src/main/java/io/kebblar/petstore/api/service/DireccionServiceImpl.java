@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -34,11 +33,15 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'direccion'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementación de la interfaz {@link DireccionService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Direccion
+ * @see     io.kebblar.petstore.api.service.DireccionService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
@@ -47,6 +50,12 @@ public class DireccionServiceImpl implements DireccionService {
 
     private DireccionMapper direccionMapper;
 
+    /**
+     * Constructor que realiza el setting de todos los
+     * mapper y servicios adicionales a ser empleados en esta clase.
+     * 
+     * @param direccionMapper
+     */
     public DireccionServiceImpl(DireccionMapper direccionMapper) {
         this.direccionMapper = direccionMapper;
     }

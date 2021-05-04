@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -33,11 +32,15 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'pais'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementación de la interfaz {@link PaisService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Pais
+ * @see     io.kebblar.petstore.api.service.PaisService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("paisService")
 public class PaisServiceImpl implements PaisService {
@@ -46,6 +49,13 @@ public class PaisServiceImpl implements PaisService {
 
     private PaisMapper paisMapper;
 
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param paisMapper
+     */
     public PaisServiceImpl(PaisMapper paisMapper) {
         this.paisMapper = paisMapper;
     }

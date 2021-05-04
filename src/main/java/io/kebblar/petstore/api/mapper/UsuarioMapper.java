@@ -69,10 +69,23 @@ public interface UsuarioMapper {
     @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ")
     Usuario getById(int id) throws SQLException;
 
+    /**
+     * Obtiene la lista de todos los tipo 'Usuario'
+     * @return Lista de objetos de tipo 'Usuario'
+     * @throws SQLException Se dispara en caso de que se dispare 
+     * un error en esta operación desde la base de datos.
+     */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario ")
     List<Usuario> getAll() throws SQLException;
 
+    /**
+     * Obtiene la lista de todos los objetos de tipo 
+     * 'Usuario' ordenados por correo de manera ascendente.
+     * @return Lista de objetos de tipo 'Usuario'
+     * @throws SQLException Se dispara en caso de que se dispare 
+     * un error en esta operación desde la base de datos.
+     */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS + " FROM usuario order by correo asc")
     List<Usuario> getAllAscendingByCorreo() throws SQLException;
