@@ -1,6 +1,7 @@
 package io.kebblar.petstore.api.rest;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,8 @@ public class AccessController {
     @PostMapping(path = "/usuario-detalles.json", produces = "application/json; charset=utf-8")
     public LoginResponse insertaUsuarioDetalles(@RequestBody UsuarioDetalle dato) throws ControllerException {
         System.out.println(dato); // Esto va a evolucionar por código real. Por el momento es sólo una prueba.
-        return new LoginResponse(dato, new Date(), "abc@aol.com", "jwt-bcdhbcxhdsb", null, null);
+        String datos = UUID.randomUUID().toString();
+        return new LoginResponse(dato, new Date(), "abc@aol.com", "gus-jwt-"+datos, null, null);
     }
+
 }
