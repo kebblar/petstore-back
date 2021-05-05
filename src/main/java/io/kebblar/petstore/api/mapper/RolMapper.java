@@ -9,8 +9,8 @@
  * Paquete:     mx.qbits.unam.proyecto.api.mapper
  * Modulo:      Anuncio
  * Tipo:        interface
- * Autor:       Gustavo A. Arellano
- * Fecha:       domingo 10 de octubre de 2020 (12_53)
+ * Autor:       Diego González Sánchez
+ * Fecha:       Martes 4 de Mayo de 2021 (09_24)
  * Version:     1.0-SNAPSHOT
  * .
  * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
@@ -34,7 +34,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad Rol
  *
- * @author Gustavo A. Arellano
+ * @author Diego G. Sánchez
  * @version 1.0-SNAPSHOT
  */
 @Repository

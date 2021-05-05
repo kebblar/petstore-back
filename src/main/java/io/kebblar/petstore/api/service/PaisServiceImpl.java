@@ -9,11 +9,11 @@
  * Paquete:     io.kebblar.petstore.api.service
  * Modulo:      Pais
  * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Martes 4 de Mayo de 2021 (09_36)
  * Version:     1.0-SNAPSHOT
  * .
- * Servicio asociado a la entidad 'pais'. 
+ * Interfaz asociado a la entidad 'pais'. 
  *
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
@@ -33,11 +33,15 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'pais'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementación de la interfaz {@link PaiService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.model.domain.Pais
+ * @see     io.kebblar.petstore.api.service.PaisService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("paisService")
 public class PaisServiceImpl implements PaisService {
@@ -45,7 +49,12 @@ public class PaisServiceImpl implements PaisService {
     private static final Logger logger = LoggerFactory.getLogger(PaisServiceImpl.class);
 
     private PaisMapper paisMapper;
-
+    
+    /**
+     * Constructor que realiza el setting de paisMapper
+     * 
+     * @param paisMapper
+     */
     public PaisServiceImpl(PaisMapper paisMapper) {
         this.paisMapper = paisMapper;
     }

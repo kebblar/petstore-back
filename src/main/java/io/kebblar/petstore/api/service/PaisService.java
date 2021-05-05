@@ -9,15 +9,12 @@
  * Paquete:     io.kebblar.petstore.api.service
  * Modulo:      Pais
  * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Martes 4 de Mayo de 2021 (09_36)
  * Version:     1.0-SNAPSHOT
  * .
  * Interface para el servicio asociado a la entidad 'pais'. 
  *
- * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
  *
  */
 
@@ -31,7 +28,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'pais'. 
  *
- * @author Gustavo A. Arellano
+ * @author Diego G. Sánchez.
  * @version 1.0-SNAPSHOT
  */
 public interface PaisService {

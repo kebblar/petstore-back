@@ -1,3 +1,22 @@
+ /*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   ConfirmaRegistroRequest.java
+ * Tipo:        Interface
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Martes 4 de Mayo de 2021 (19_14)
+ *
+ * Historia:    .
+ *              20210503_1914 Creación de éste Request
+ *
+ */
+
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -7,6 +26,16 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+/**
+ * <p> Solicitud, su utilidad es la de acceder a los parametros y atributos,
+ *  para asi poder trabajar con ellos en nuestra página.
+ * 
+ * 
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 
 public class ConfirmaRegistroRequest {
 
