@@ -23,7 +23,7 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-//VERSIÒN, SINCES, LINKS, LÌNEAS EN BLANCO ELIMININAR(QUE NO SE NECESITEN)
+
 /**
  * Interfaz que define los métodos de negocio asociados a la entidad
  * de dominio "Mascota"
