@@ -24,8 +24,16 @@ public class ControllerException extends Exception {
         this.localExceptionNumber = localExceptionNumber;
         this.localExceptionKey = localExceptionKey;
         this.httpStatus = httpStatus;
-        LOGGER.error(detailedMessage);
+        LOGGER.error(toString());
     }
+    
+    @Override
+    public String toString() {
+        return "ControllerException [shortMessage=" + shortMessage + ", detailedMessage=" + detailedMessage
+                + ", localExceptionNumber=" + localExceptionNumber + ", localExceptionKey=" + localExceptionKey
+                + ", httpStatus=" + httpStatus + "]";
+    }
+
     public ControllerException(
             String shortMessage,
             String detailedMessage,

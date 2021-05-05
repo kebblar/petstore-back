@@ -91,6 +91,16 @@ public interface MunicipioService {
      */
     int delete(Municipio municipio) throws BusinessException;
 
-    List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize) throws BusinessException;
+    /**
+     * Retorna una lista paginada de objetos de tipo {@Code Municipio} asociados a un cierto estado
+     * 
+     * @param idEstado Estado del que retoraremos el conjunto de municipios paginados
+     * @param pageNumber Número de página (empieza en la 1)
+     * @param pageSize Tamaño de la página
+     * 
+     * @return  Lista paginada de objetos de tipo Municipio
+     * @throws Exception es disparada por una regla de negocio
+     */
+    List<Municipio> getPaginatedMunicipios(int idEstado, int pageNumber, int pageSize) throws BusinessException;
 
 }

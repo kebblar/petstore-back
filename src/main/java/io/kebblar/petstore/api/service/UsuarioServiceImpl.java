@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   UsuarioServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (16_02)
+ *
+ * Historia:    .
+ *              20210503_1602 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -15,13 +33,34 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 
+/**
+ * <p>Implementación de la interfaz {@link UsuarioService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Usuario
+ * @see     io.kebblar.petstore.api.service.UsuarioService
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
+ */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioMapper usuarioMapper;
     private RolMapper rolMapper;
     private DireccionMapper direccionMapper;
     private UsuarioDetalleMapper usuarioDetalleMapper;
-    
+
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param usuarioMapper
+     * @param rolMapper
+     * @param direccionMapper
+     * @param usuarioDetalleMapper
+     */
     public UsuarioServiceImpl(
             UsuarioMapper usuarioMapper, 
             RolMapper rolMapper, 
@@ -35,13 +74,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
-        Usuario u = new Usuario(-1, cred.getUsuario(), cred.getClave());
+        Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
         try {
-            usuarioMapper.insert(u);
+            usuarioMapper.insert(usuario);
         } catch (Exception e) {
             throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
         }
-        return u;
+        return usuario;
+    }
+
+    @Override
+    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
+        try {
+            usuarioMapper.insert(usuario);
+        } catch (Exception e) {
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
+        }
+        return usuario;
     }
 
     @Override
@@ -81,7 +130,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
-    
+
     @Override
     public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
         try {
@@ -90,7 +139,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error al obtener el usuario con base en su correo", e.getMessage());
         }
     }
-    
+
     @Override
     public List<Rol> obtenRolesDeUsuario(int id) throws BusinessException {
         try {
@@ -99,7 +148,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error al obtener los roles de un usuario", e.toString());
         }
     }
-    
+
     @Override
     public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {
         try {
@@ -108,7 +157,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
         }
     }
-    
+
     @Override
     public UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException {
         try {
