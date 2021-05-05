@@ -18,15 +18,13 @@
  */
 package io.kebblar.petstore.api.mapper;
 
-public interface ContadorMapper {
-
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Contador 
+ * Interface 'Mapper' MyBatis asociado a la entidad {@link Contador}
  *
  * @author Gustavo A. Arellano
  * @version 1.0-SNAPSHOT
@@ -35,5 +33,4 @@ import org.springframework.stereotype.Repository;
 public interface ContadorMapper {
     @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{databaseName} AND table_name = #{tableName}") 
     int getTableCount(String databaseName, String tableName) throws SQLException;
-
 }
