@@ -37,7 +37,10 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  * Servicio asociado a la entidad 'tipo_direccion'. 
  *
  * @author Gustavo A. Arellano
+ * @see     io.kebblar.petstore.api.model.domain.TipoDireccion
+ * @see     io.kebblar.petstore.api.service.TipoDireccion
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("tipoDireccionService")
 public class TipoDireccionServiceImpl implements TipoDireccionService {
@@ -46,6 +49,13 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
 
     private TipoDireccionMapper tipoDireccionMapper;
 
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param tipoDireccionMapper
+     */
     public TipoDireccionServiceImpl(TipoDireccionMapper tipoDireccionMapper) {
         this.tipoDireccionMapper = tipoDireccionMapper;
     }

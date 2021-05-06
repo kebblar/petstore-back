@@ -29,13 +29,23 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Contador 
+ * Interface 'ContadorMapper' MyBatis asociado a la entidad Contador 
  *
  * @author Gustavo A. Arellano
+ * @see     io.kebblar.petstore.api.mapper.ContadorMapper
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 @Repository
 public interface ContadorMapper {
+	
+	/**
+     * Obtiene una lista de registros para contador de registros en la tabla.
+     *
+     * @return Lista de total de registros en la tabla enviada como parametro.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{databaseName} AND table_name = #{tableName}") 
     int getTableCount(String databaseName, String tableName) throws SQLException;
 

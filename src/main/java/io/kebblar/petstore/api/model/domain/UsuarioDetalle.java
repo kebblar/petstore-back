@@ -1,7 +1,35 @@
+/*
+ * Licencia:    Usted puede utilizar libremente este código
+ *              para copiarlo, distribuirlo o modificarlo total
+ *              o parcialmente siempre y cuando mantenga este
+ *              aviso y reconozca la autoría del código al no
+ *              modificar los datos establecidos en la mencion de "AUTOR".
+ *
+ * Proyecto:    petstore
+ * Paquete:     io.kebblar.petstore.api.model
+ * Modulo:      Municipio
+ * Tipo:        clase 
+ * Autor:       Gustavo A. Arellano
+ * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * Version:     1.0-SNAPSHOT
+ * .
+ * POJO asociado a la entidad 'UsuarioDetalle'. 
+ *
+ * Historia:    .
+ *              20210421_0935 Generado por arq.gen, basado en los
+ *              archivos fuente de Gustavo Arellano
+ *
+ */
 package io.kebblar.petstore.api.model.domain;
 
 import java.util.Date;
-
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'UsuarioDetalle'. 
+ *
+ * @author Gustavo A. Arellano
+ * @version 1.0-SNAPSHOT
+ */
 public class UsuarioDetalle {
     private int id;
     private String nombre;
@@ -12,9 +40,15 @@ public class UsuarioDetalle {
     private String telefonoCasa;
     private String telefonoCelular;
 
+    /**
+     * Constructor por default.
+     */
     public UsuarioDetalle() {
     }
 
+    /**
+     * Constructor basado en atributos.
+     */
     public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento,
             String nickName, String telefonoCasa, String telefonoCelular) {
         super();
@@ -28,71 +62,119 @@ public class UsuarioDetalle {
         this.telefonoCelular = telefonoCelular;
     }
 
-    public int getId() {
-        return id;
-    }
+    /**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
+	/**
+	 * @return the apellidoPaterno
+	 */
+	public String getApellidoPaterno() {
+		return apellidoPaterno;
+	}
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
+	/**
+	 * @param apellidoPaterno the apellidoPaterno to set
+	 */
+	public void setApellidoPaterno(String apellidoPaterno) {
+		this.apellidoPaterno = apellidoPaterno;
+	}
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
+	/**
+	 * @return the apellidoMaterno
+	 */
+	public String getApellidoMaterno() {
+		return apellidoMaterno;
+	}
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
+	/**
+	 * @param apellidoMaterno the apellidoMaterno to set
+	 */
+	public void setApellidoMaterno(String apellidoMaterno) {
+		this.apellidoMaterno = apellidoMaterno;
+	}
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+	/**
+	 * @return the fechaNacimiento
+	 */
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+	/**
+	 * @param fechaNacimiento the fechaNacimiento to set
+	 */
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 
-    public String getNickName() {
-        return nickName;
-    }
+	/**
+	 * @return the nickName
+	 */
+	public String getNickName() {
+		return nickName;
+	}
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	/**
+	 * @param nickName the nickName to set
+	 */
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 
-    public String getTelefonoCasa() {
-        return telefonoCasa;
-    }
+	/**
+	 * @return the telefonoCasa
+	 */
+	public String getTelefonoCasa() {
+		return telefonoCasa;
+	}
 
-    public void setTelefonoCasa(String telefonoCasa) {
-        this.telefonoCasa = telefonoCasa;
-    }
+	/**
+	 * @param telefonoCasa the telefonoCasa to set
+	 */
+	public void setTelefonoCasa(String telefonoCasa) {
+		this.telefonoCasa = telefonoCasa;
+	}
 
-    public String getTelefonoCelular() {
-        return telefonoCelular;
-    }
+	/**
+	 * @return the telefonoCelular
+	 */
+	public String getTelefonoCelular() {
+		return telefonoCelular;
+	}
 
-    public void setTelefonoCelular(String telefonoCelular) {
-        this.telefonoCelular = telefonoCelular;
-    }
+	/**
+	 * @param telefonoCelular the telefonoCelular to set
+	 */
+	public void setTelefonoCelular(String telefonoCelular) {
+		this.telefonoCelular = telefonoCelular;
+	}
 
-    public long getHash() {
+	public long getHash() {
         return hashCode();
     }
 

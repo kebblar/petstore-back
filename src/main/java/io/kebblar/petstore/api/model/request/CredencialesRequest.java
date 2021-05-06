@@ -1,8 +1,25 @@
 package io.kebblar.petstore.api.model.request;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import io.swagger.annotations.ApiModelProperty;
+
 public class CredencialesRequest {
+	
+
+    @ApiModelProperty(example = "usuario")
+    @NotNull(message = "El usuario no puede ser nulo")
+    @Pattern(regexp="^\\p{Alpha}{2,30}$",
+            message = "Nombre inválido, solo se permiten de 2 a 30 caracteres alfabeticos")
     private String usuario;
+
+    @ApiModelProperty(example = "clave")
+    @NotNull(message = "La clave no puede ser nula")
+    @Pattern(regexp="^\\p{Alpha}{30}$",
+            message = "Clave inválida, solo se permiten de 2 a 30 caracteres alfabeticos")
     private String clave;
+    
     public CredencialesRequest() {
     }
     public CredencialesRequest(String usuario, String clave) {

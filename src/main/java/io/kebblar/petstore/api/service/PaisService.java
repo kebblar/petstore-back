@@ -32,7 +32,9 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * Interface para el servicio asociado a la entidad 'pais'. 
  *
  * @author Gustavo A. Arellano
+ * @see     io.kebblar.petstore.api.model.domain.Pais
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 public interface PaisService {
 
