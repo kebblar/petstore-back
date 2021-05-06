@@ -6,11 +6,20 @@
  *              modificar los datos establecidos en la mención de "AUTOR".
  *
  *              --------------------------------------------------
- * Modulo:      proyecto
- * Clase        FileUploadController
- * Autor:
- * Fecha:       4/30/20, 11:26 PM
+ * Proyecto:    petstore
+ * Paquete:     io.kebblar.petstore.api.rest
+ * Modulo:      Pais
+ * Tipo:        clase 
+ * Autor:       Gustavo A. Arellano
+ * Fecha:       Wednesday 04 de April de 2021 (09_35)
  * Version:     1.0-SNAPSHOT
+ * .
+ * Servicio asociado a la entidad 'usuario'. 
+ *
+ * Historia:    .
+ *              20210421_0935 Generado por arq.gen, basado en los
+ *              archivos fuente de Gustavo Arellano
+ *              20210506_0931 Se agrega documentacion swagger
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -29,6 +38,8 @@ import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  * Endpoint para subir archivos.
@@ -64,8 +75,11 @@ public class FileUploadController {
      * @return lista que contiene el modelo de donde se almaceno el archivo
      * @throws UploadException si hay algun error
      */
+    @ApiOperation(value = "Recibe un(os) archivo(s) del front que se guardaran")
     @PostMapping(path = "/upload.json", produces = "application/json; charset=utf-8")
-    public List<UploadModel> handleFileUploadWithKDMCopy(@RequestParam("files") MultipartFile[] files) throws UploadException {
+    public List<UploadModel> handleFileUploadWithKDMCopy(
+    		@ApiParam(name= "files", value = "Variable que contine el (los) archivo (s) a guardar")
+    		@RequestParam("files") MultipartFile[] files) throws UploadException {
         List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
         return listaUpload;
     }

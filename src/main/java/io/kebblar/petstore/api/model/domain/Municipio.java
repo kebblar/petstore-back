@@ -18,9 +18,8 @@
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
  *              archivos fuente de Gustavo Arellano
- *
+ *				20210506_1752  Se quitan espacios que estan demás
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -137,5 +136,4 @@ public class Municipio implements Serializable {
             nombre
         );
     }
-
 }

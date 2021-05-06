@@ -18,9 +18,9 @@
  * Historia:    .
  *              20200812_0058 Generado por arq.gen, basado en los
  *              archivos fuente de Gustavo Arellano
+ *              20210506 0553 Se quitan espacios que están demás.
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import javax.validation.constraints.Email;

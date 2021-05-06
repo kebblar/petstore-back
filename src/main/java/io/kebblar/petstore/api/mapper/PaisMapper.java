@@ -18,9 +18,8 @@
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
  *              archivos fuente de Gustavo Arellano
- *
+ *              20210506_1750 Se agrega la documentacion faltante en los metodos
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
@@ -40,24 +39,60 @@ import io.kebblar.petstore.api.model.domain.Pais;
 public interface PaisMapper {
     static final String CAMPOS = " id, nombre ";
 
+
+    /**
+     * Obtiene un objetos de tipo 'pais' con base al id.
+     *
+     * @return Obetos de tipo pais
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @Results(id="PaisMap", value = {
         @Result(property = "id", column = "id"),
         @Result(property = "nombre", column = "nombre")    
     })
     @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ") 
-    Pais getById(int id) throws SQLException;
+    Pais getById(Pais pais) throws SQLException;
 
+    /**
+     * Obtiene toda la lista de objetos de tipo 'pais'
+     *
+     * @return Lista de obetos de tipo pais
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS + " FROM pais ") 
     List<Pais> getAll() throws SQLException;
     
+    /**
+     * Permite guardar un objeto de tipo 'pais'.
+     *
+     * @return Id del objeto de tipo 'pais' que se ha guardado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @Insert("INSERT INTO pais(nombre) VALUES(#{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Pais pais) throws SQLException;
 
+    /**
+     * Permite actualizar un objeto de tipo 'pais' con base al Id.
+     *
+     * @return Id del objeto de tipo 'pais' que se ha actualizado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @Update("UPDATE pais SET nombre = #{nombre} WHERE id = #{id}")
     int update(Pais pais) throws SQLException;
 
+    /**
+     * Permite eliminar un objeto de tipo 'pais'con base al Id.
+     *
+     * @return Id del objeto de tipo 'pais' que se ha eliminado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
     @Delete("DELETE FROM pais WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
