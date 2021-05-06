@@ -1,11 +1,14 @@
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Date;
+import java.util.Objects;
+
 public class UsuarioDetalle {
     private int id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private long fechaNacimiento;
+    private Date fechaNacimiento;
     private String nickName;
     private String telefonoCasa;
     private String telefonoCelular;
@@ -13,7 +16,7 @@ public class UsuarioDetalle {
     public UsuarioDetalle() {
     }
 
-    public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, long fechaNacimiento,
+    public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento,
             String nickName, String telefonoCasa, String telefonoCelular) {
         super();
         this.id = id;
@@ -58,11 +61,11 @@ public class UsuarioDetalle {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public long getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(long fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -102,64 +105,15 @@ public class UsuarioDetalle {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((apellidoMaterno == null) ? 0 : apellidoMaterno.hashCode());
-        result = prime * result + ((apellidoPaterno == null) ? 0 : apellidoPaterno.hashCode());
-        result = prime * result + (int) (fechaNacimiento ^ (fechaNacimiento >>> 32));
-        result = prime * result + id;
-        result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((telefonoCasa == null) ? 0 : telefonoCasa.hashCode());
-        result = prime * result + ((telefonoCelular == null) ? 0 : telefonoCelular.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UsuarioDetalle)) return false;
+        UsuarioDetalle that = (UsuarioDetalle) o;
+        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(apellidoPaterno, that.apellidoPaterno) && Objects.equals(apellidoMaterno, that.apellidoMaterno) && Objects.equals(fechaNacimiento, that.fechaNacimiento) && Objects.equals(nickName, that.nickName) && Objects.equals(telefonoCasa, that.telefonoCasa) && Objects.equals(telefonoCelular, that.telefonoCelular);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        UsuarioDetalle other = (UsuarioDetalle) obj;
-        if (apellidoMaterno == null) {
-            if (other.apellidoMaterno != null)
-                return false;
-        } else if (!apellidoMaterno.equals(other.apellidoMaterno))
-            return false;
-        if (apellidoPaterno == null) {
-            if (other.apellidoPaterno != null)
-                return false;
-        } else if (!apellidoPaterno.equals(other.apellidoPaterno))
-            return false;
-        if (fechaNacimiento != other.fechaNacimiento)
-            return false;
-        if (id != other.id)
-            return false;
-        if (nickName == null) {
-            if (other.nickName != null)
-                return false;
-        } else if (!nickName.equals(other.nickName))
-            return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
-            return false;
-        if (telefonoCasa == null) {
-            if (other.telefonoCasa != null)
-                return false;
-        } else if (!telefonoCasa.equals(other.telefonoCasa))
-            return false;
-        if (telefonoCelular == null) {
-            if (other.telefonoCelular != null)
-                return false;
-        } else if (!telefonoCelular.equals(other.telefonoCelular))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, nickName, telefonoCasa, telefonoCelular);
     }
-    
 }

@@ -1,23 +1,23 @@
+
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
  *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   Pais .java
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Pais
  * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'pais'. 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * 
+ *              ------------------------------------------------
  *
- * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ * Historia:    20210504_1142 Implementación de clase 
  *
  */
 
@@ -30,31 +30,36 @@ import java.util.Objects;
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'pais'. 
  *
- * @author Gustavo A. Arellano
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
+
 public class Pais implements Serializable {
 
-    private static final long serialVersionUID = 4897377279463910357L;
+    private static final long serialVersionUID = -7587967386673055103L;
 
+    /**
+     * Atributos de la clase
+     */
     private Integer id;
     private String nombre;
 
     /**
-     * Constructor por default.
+     * Constructor por default (sin parámetros).
      */
     public Pais() {
     }
 
     /**
-     * Constructor basado en llaves.
+     * Constructor basado en la llave primaria.
      */
     public Pais(Integer id) {
         this.id = id;
     }
 
     /**
-     * Constructor basado en atributos.
+     * Constructor basado en todos los atributos de la clase.
      */
     public Pais(Integer id, String nombre) {
         this.id = id;
@@ -89,6 +94,10 @@ public class Pais implements Serializable {
         this.nombre = nombre;
     }
     
+
+    /**
+     * Método toString para el pojo, representa al objeto en forma de cadena
+     */
     @Override
     public String toString() {
         return "[Pais] : ["
@@ -97,6 +106,9 @@ public class Pais implements Serializable {
                 + "]";
     }
     
+    /**
+     * Compara si dos instancias de la clase Pais son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -111,6 +123,9 @@ public class Pais implements Serializable {
                nombre == other.nombre; 
     }
     
+    /**
+     * Genera un hash del objeto
+     */
     @Override
     public int hashCode() {
         return Objects.hash(
