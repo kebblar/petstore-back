@@ -13,7 +13,7 @@
  * Fecha:       Martes 4 de Mayo de 2021 (19_25)
  *
  * Historia:    .
- *              20210504_1925 DOcumentación de clase
+ *              20210504_1925 Documentación de clase
  *
  */
 package io.kebblar.petstore.api.service;
