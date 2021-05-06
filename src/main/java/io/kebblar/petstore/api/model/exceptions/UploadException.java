@@ -7,7 +7,7 @@ package io.kebblar.petstore.api.model.exceptions;
  * constructorescon la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  * 
- * @author  Euribe
+ * @author  edgarum
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT

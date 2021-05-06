@@ -9,7 +9,7 @@
  *              ------------------------------------------------
  * Artefacto:   Mascota.java
  * Tipo:        clase
- * AUTOR:       Edgar Uribe (EU)
+ * AUTOR:       Edgar Uribe (EUM)
  * Fecha:       Martes 04 de Mayo del 2021 (09 10)
  *
  * Historia:    .

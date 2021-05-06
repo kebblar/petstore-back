@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.TablasContador;
  * llevan  javadoc  debido a que la  documentación  Swagger  API 
  * cumple con ese objetivo.
  * 
- * @author  garellano
+ * @author  edgarum
  * @see     io.kebblar.petstore.api.model.domain.Municipio
  * @see     io.kebblar.petstore.api.service.MunicipioService
  * @version 1.0-SNAPSHOT

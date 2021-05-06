@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  * 
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
- * @author  garellano
+ * @author  edgarum
  * @see     io.kebblar.petstore.api.service.MunicipioService
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT 

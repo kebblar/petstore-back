@@ -25,7 +25,7 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 /**
  * <p>Definición de la interfaz de servicios para 'Contador'.
  * 
- * @author  euribe
+ * @author  edgarum
  * @see     
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT 
