@@ -1,26 +1,21 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Direccion
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'direccion'. 
+ *              ------------------------------------------------
+ * Artefacto:   Direccion.java
+ * Tipo:        clase
+ * AUTOR:       Fabiola Camilo Victoriano (FCV)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_03)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210506_0903 Creación de éste POJO
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -28,16 +23,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'direccion'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementacion del POJO de la entidad de {@link Direccion}.
+ * 
+ * @author  garellano
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public class Direccion implements Serializable {
-
     private static final long serialVersionUID = 147836237927646425L;
 
     private Integer id;
@@ -59,6 +52,7 @@ public class Direccion implements Serializable {
     
     public Direccion() {
     }
+    
     public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio,
             int idTipoDireccion, String cp, String referencias, boolean activo) {
         this.id = id;
