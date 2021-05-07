@@ -1,5 +1,34 @@
+ /*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ * Proyecto:    petstore-back
+ * Paquete:     io.kebblar.petstore.api.model.domain.Rol
+ * Modulo:      Rol
+ * Artefacto:   Rol.java
+ * Tipo:        Clase
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_14)
+ * Version:     1.0-SNAPSHOT
+ *
+ * Historia:    .
+ *              20210503_2321 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.domain;
 
+/**
+ * Implementacion del POJO de la entidad de 'Rol'.
+ * 
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.model.domain.Rol
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class Rol {
     private int id;
     private String nombre;

@@ -6,11 +6,11 @@
  *              modificar los datos establecidos en la mencion de "AUTOR".
  *
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
+ * Paquete:     io.kebblar.petstore.api.service.PaisServiceImpl
  * Modulo:      Pais
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * Tipo:        Clase 
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_24)
  * Version:     1.0-SNAPSHOT
  * .
  * Servicio asociado a la entidad 'pais'. 
@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -36,8 +35,10 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  * <p>Descripción:</p>
  * Servicio asociado a la entidad 'pais'. 
  *
- * @author Gustavo A. Arellano
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.service.PaisServiceImpl
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 @Service("paisService")
 public class PaisServiceImpl implements PaisService {
@@ -45,7 +46,12 @@ public class PaisServiceImpl implements PaisService {
     private static final Logger logger = LoggerFactory.getLogger(PaisServiceImpl.class);
 
     private PaisMapper paisMapper;
-
+    
+    /**
+     * Constructor que realiza el setting de paisMapper
+     * 
+     * @param paisMapper
+     */
     public PaisServiceImpl(PaisMapper paisMapper) {
         this.paisMapper = paisMapper;
     }

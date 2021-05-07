@@ -6,13 +6,13 @@
  *              modificar los datos establecidos en la mencion de "AUTOR".
  *
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
+ * Paquete:     io.kebblar.petstore.api.service.TipoDireccionService
  * Modulo:      TipoDireccion
- * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * Tipo:        Interface 
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_19)
  * Version:     1.0-SNAPSHOT
- * .
+ * 
  * Interface para el servicio asociado a la entidad 'tipo_direccion'. 
  *
  * Historia:    .
@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -31,12 +30,14 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'tipo_direccion'. 
  *
- * @author Gustavo A. Arellano
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.service.TipoDireccionService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public interface TipoDireccionService {
 
-    /**
+	/**
      * Método utilizado para recuperar un elemento de la tabla 'tipo_direccion'. por medio de su llave primaria.
      * 
      * @param tipoDireccion Instancia de TipoDireccion con los datos de la llave.

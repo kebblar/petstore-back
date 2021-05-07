@@ -5,14 +5,14 @@
  *              aviso y reconozca la autoría del código al no
  *              modificar los datos establecidos en la mencion de "AUTOR".
  *
- * Proyecto:    proyecto
- * Paquete:     mx.qbits.unam.proyecto.api.mapper
- * Modulo:      Anuncio
- * Tipo:        interface
- * Autor:       Gustavo A. Arellano
- * Fecha:       domingo 10 de octubre de 2020 (12_53)
+ * Proyecto:    petstore-back
+ * Paquete:     io.kebblar.petstore.api.mapper.RolMapper
+ * Modulo:      Rol
+ * Tipo:        Interface
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_08)
  * Version:     1.0-SNAPSHOT
- * .
+ * 
  * Interface 'Mapper' MyBatis asociado a la entidad Anuncio
  *
  * Historia:    .
@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
@@ -34,8 +33,10 @@ import io.kebblar.petstore.api.model.domain.Rol;
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad Rol
  *
- * @author Gustavo A. Arellano
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.mapper.RolMapper
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 @Repository
 public interface RolMapper {

@@ -1,3 +1,24 @@
+ /*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ * Proyecto:    petstore-back
+ * Paquete:     io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest
+ * Modulo:      Registro
+ * Artefacto:   ConfirmaRegistroRequest.java
+ * Tipo:        Clase
+ * AUTOR:       Diego González Sánchez
+ * Fecha:       Jueves 6 de Mayo de 2021 (9_10)
+ * Version:     1.0-SNAPSHOT
+ *
+ * Historia:    .
+ *              20210503_1914 Creación de éste Request
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -8,6 +29,16 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+/**
+ * <p> Solicitud, su utilidad es la de acceder a los parametros y atributos,
+ *  para asi poder trabajar con ellos en nuestra página.
+ * 
+ * 
+ * @author  Diego G. Sánchez.
+ * @see     io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class ConfirmaRegistroRequest {
 
     @ApiModelProperty(example = "xSw312")
