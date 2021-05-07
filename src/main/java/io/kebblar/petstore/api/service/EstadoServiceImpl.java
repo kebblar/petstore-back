@@ -27,7 +27,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -47,6 +46,12 @@ public class EstadoServiceImpl implements EstadoService {
 
     private EstadoMapper estadoMapper;
 
+    /**
+     * Constructor que realiza el setting del mapper que serán 
+     * utilizados en esta implementacion.
+     * 
+     * @param usuarioService Servicios de usuario
+     */
     public EstadoServiceImpl(EstadoMapper estadoMapper) {
         this.estadoMapper = estadoMapper;
     }

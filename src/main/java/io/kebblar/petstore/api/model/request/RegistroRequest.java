@@ -1,13 +1,39 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   RegistroRequest.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 4 de Mayo de 2021 (09_26)
+ *
+ * Historia:    .
+ *              20210503_0926 Creación de éste Request
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 
 import io.swagger.annotations.ApiModelProperty;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+/**
+ * <p>Descripción:</p>
+ * Clase que sirve para hacer validaciones a los campos que estan en una peticion de tipo registro
+ *
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.request
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
+ */
 public class RegistroRequest {
 
     @ApiModelProperty(example = "Bob")

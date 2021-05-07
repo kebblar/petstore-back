@@ -4,10 +4,7 @@
  *              o parcialmente siempre y cuando mantenga este
  *              aviso y reconozca la autoría del código al no
  *              modificar los datos establecidos en la mencion de "AUTOR".
- *
- * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Estado
  * Tipo:        interface 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
@@ -20,7 +17,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -32,6 +28,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * Interface para el servicio asociado a la entidad 'estado'. 
  *
  * @author Gustavo A. Arellano
+ * @since   1.0-SNAPSHOT
  * @version 1.0-SNAPSHOT
  */
 public interface EstadoService {
