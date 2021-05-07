@@ -14,6 +14,7 @@
  *
  * Historia:    .
  *              20210503_1409 Creación de esta Excepción
+ *              20210506_2015 Documentacion
  *
  */
 package io.kebblar.petstore.api.model.exceptions;

@@ -14,6 +14,7 @@
  *
  * Historia:    .
  *              20210503_2321 Creación de éste POJO
+ *              20210506_2015 Documentacion
  *
  */
 package io.kebblar.petstore.api.model.domain;
