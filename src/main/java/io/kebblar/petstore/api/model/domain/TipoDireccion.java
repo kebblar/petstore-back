@@ -26,15 +26,16 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'tipo_direccion'. 
- *
- * @author Gustavo A. Arellano
- * @version 1.0-SNAPSHOT
- */
 public class TipoDireccion implements Serializable {
-
+	
+	/**
+	 * <p>Descripción:</p>
+	 * POJO asociado a la entidad 'tipo_direccion'. 
+	 *
+	 * @author Gustavo A. Arellano
+	 * @version 1.0-SNAPSHOT
+	 */
+	
     private static final long serialVersionUID = 6627523800922208745L;
 
     private Integer id;

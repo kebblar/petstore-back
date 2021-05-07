@@ -7,7 +7,7 @@
  *
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Direccion
+ * Modulo:      DireccionServiceImpl
  * Tipo:        clase 
  * Autor:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
@@ -18,9 +18,29 @@
  * Historia:    .
  *              20210421_0935 Generado por arq.gen, basado en los
  *              archivos fuente de Gustavo Arellano
+ *              20210506_2000 Documentado por Luis Mtz
  *
  */
 
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   DireccionServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (16_02)
+ *
+ * Historia:    .
+ *              20210503_1602 Creación
+ *              20210506_2000 Documentacion
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -38,7 +58,9 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  * Servicio asociado a la entidad 'direccion'. 
  *
  * @author Gustavo A. Arellano
+ * @see     io.kebblar.petstore.api.model.domain.Direccion
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
@@ -47,6 +69,13 @@ public class DireccionServiceImpl implements DireccionService {
 
     private DireccionMapper direccionMapper;
 
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param direccionMapper
+     */
     public DireccionServiceImpl(DireccionMapper direccionMapper) {
         this.direccionMapper = direccionMapper;
     }
