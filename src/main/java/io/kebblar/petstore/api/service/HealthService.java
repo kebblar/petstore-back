@@ -1,21 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- *              --------------------------------------------------
- * Modulo:      HealthService
+ *              ------------------------------------------------
+ * Artefacto:   Usuario.java
  * Tipo:        clase
- * Autor:       Gustavo A. Arellano (GAA)
- * Fecha:       Jueves 2 de Abril de 2020 (22_29)
- * Version:     1.0-SNAPSHOT
- * .
- * Implementacion del Servicio de informe de salud
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_15)
  *
  * Historia:    .
- *              20200402_2229 Creación del tipo
+ *              20210504_0915 Creación
  *
  */
 package io.kebblar.petstore.api.service;
@@ -25,7 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface HealthService.
+ * <p>Definición de la interfaz HealthService.
+ * 
+ * @author  garellano
+ * @see     io.IOException
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 public interface HealthService {
 

@@ -1,14 +1,49 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Usuario.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_10)
+ *
+ * Historia:    .
+ *              20210504_0910 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
 
+/**
+ * <p>Implementación de la interfaz {@link RemoteRestCallService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.TickerWrapper
+ * @see     io.kebblar.petstore.api.service.RemoteRestCallService
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
+ */
 @Service
 public class RemoteRestCallServiceImpl implements RemoteRestCallService {
 
     private RestTemplate restTemplate;
-
+    
+    /**
+     * Constructor que asigna el template que será utilizado 
+     * como respuesta.
+     * 
+     * @param restTemplate
+     */
     public RemoteRestCallServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }

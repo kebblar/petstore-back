@@ -1,7 +1,35 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Usuario.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_35)
+ *
+ * Historia:    .
+ *              20210504_0935 Creación
+ *
+ */
 package io.kebblar.petstore.api.model.domain;
 
 import java.util.List;
 
+/**
+ * Implementacion del POJO de la entidad de 'UserFoundWrapper'.
+ * 
+ * <p>Clase que modela la estructura de datos que será empleada para
+ * buscar usuarios y sus direcciones asociadas.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class UserFoundWrapper {
     private List<Rol> roles;
     private List<Direccion> direcciones;

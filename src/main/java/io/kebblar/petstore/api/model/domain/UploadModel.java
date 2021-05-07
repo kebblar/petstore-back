@@ -1,29 +1,34 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.api.model
- * Modulo:      cinepolis
+ *              ------------------------------------------------
+ * Artefacto:   Usuario.java
  * Tipo:        clase
- * Autor:       Gustavo Adolfo Arellano Sandoval
- * Fecha:       24 de marzo del 2020
- * Version:     1.0-SNAPSHOT
- * .
- * Clase que contendr&aacute; las excepciones derivadas de errores de negocio como por ejemplo no existen salas disponibles para realizar la reservaci&oactute;n
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_10)
+ *
+ * Historia:    .
+ *              20210504_0910 Creación
+ *
  */
 package io.kebblar.petstore.api.model.domain;
 
 import java.util.Date;
 
 /**
- * Clase que modela la estructura de datos que será empleada para registrar una carga de un archivo
+ * Implementacion del POJO de la entidad de 'UploadModel'.
+ * 
+ * <p>Clase que modela la estructura de datos que será empleada para registrar una carga de un archivo
  * al sistema. La variable md5 representa el digest MD5 asociado a los bytes del archivo cargado.
- *
- * @author garellano
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public class UploadModel {
     private int id;
