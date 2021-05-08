@@ -9,8 +9,8 @@
  * Paquete:     mx.qbits.unam.proyecto.api.model
  * Modulo:      Registro
  * Tipo:        clase
- * Autor:       Gustavo A. Arellano
- * Fecha:       miércoles 08 de agosto de 2020 (00_58)
+ * Autor:       Francisco Javier Moreno Romero
+ * Fecha:       07/05/2021 08:34 pm
  * Version:     0.1.1-SNAPSHOT
  * .
  * POJO asociado a la entidad 'registro'.
@@ -39,7 +39,7 @@ import java.util.Objects;
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'registro'.
  *
- * @author Gustavo A. Arellano
+ * @author javier
  * @version 0.1.1-SNAPSHOT
  */
 public class Registro implements Serializable {

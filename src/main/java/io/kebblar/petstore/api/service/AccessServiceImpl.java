@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   AccessServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Francisco Javier Moreno Romero
+ * Fecha:       07/08/2021 08:38 pm
+ *
+ * Historia:    .
+ *              20210503_1602 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.Date;
@@ -18,6 +36,14 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 
+/**<p>Implementación de la interfaz {@link AccessService}
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author javier
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 @Service
 public class AccessServiceImpl implements AccessService {
     private static final Logger logger = LoggerFactory.getLogger(AccessServiceImpl.class);
@@ -28,6 +54,13 @@ public class AccessServiceImpl implements AccessService {
     private UsuarioService usuarioService;
     private JwtManagerService jwtManagerService;
     
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * @param usuarioService
+     * @param jwtManagerService
+     */
     public AccessServiceImpl(
             UsuarioService usuarioService, 
             JwtManagerService jwtManagerService) {

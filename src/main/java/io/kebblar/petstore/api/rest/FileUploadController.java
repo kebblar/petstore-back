@@ -8,8 +8,8 @@
  *              --------------------------------------------------
  * Modulo:      proyecto
  * Clase        FileUploadController
- * Autor:
- * Fecha:       4/30/20, 11:26 PM
+ * Autor:       Francisco Javier Moreno Romero
+ * Fecha:       07/05/2021 08:34 pm
  * Version:     1.0-SNAPSHOT
  *
  */
@@ -31,6 +31,18 @@ import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
 
 /**
+ * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * de gestión del POJO Usuario.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link FileUploadController}
+ * 
+ * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no 
+ * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ * cumple con ese objetivo.
+ * 
+ * 
+ * @author javier
+ * @version 1.0-SNAPSHOT
  * Endpoint para subir archivos.
  */
 @RestController

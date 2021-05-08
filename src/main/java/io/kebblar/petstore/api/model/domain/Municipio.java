@@ -9,8 +9,8 @@
  * Paquete:     io.kebblar.petstore.api.model
  * Modulo:      Municipio
  * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * Autor:       Francisco Javier Moreno Romero
+ * Fecha:       07/05/2021 08:34 pm
  * Version:     1.0-SNAPSHOT
  * .
  * POJO asociado a la entidad 'municipio'. 
@@ -30,7 +30,7 @@ import java.util.Objects;
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'municipio'. 
  *
- * @author Gustavo A. Arellano
+ * @author javier
  * @version 1.0-SNAPSHOT
  */
 public class Municipio implements Serializable {

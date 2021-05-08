@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   MascotaService.java
+ * Tipo:        interface
+ * AUTOR:       Francisco Javier Moreno Romero
+ * Fecha:       07/05/2021 8:50 pm
+ *
+ * Historia:    .
+ *              20210503_1600 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -17,9 +35,11 @@ public interface MascotaService {
     /**
      * Retorna un objeto de tipo mascota cuyo ID es igual al paraámetro dado.
      *
+     * @author javier
      * @param id Identificador (llave) del objeto de tipo "Mascota".
      * @return Objeto de tipo "Mascota"
      * @throws BusinessException
+     * @version 1.0-SNAPSHOT
      */
     Mascota getById(int id) throws BusinessException;
 
