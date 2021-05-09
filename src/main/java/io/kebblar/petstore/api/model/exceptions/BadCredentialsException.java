@@ -9,11 +9,11 @@
  *              ------------------------------------------------
  * Artefacto:   BadCredentialsException.java
  * Tipo:        clase
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 3 de Mayo de 2021 (14_09)
+ * AUTOR:       Luz Cuahonte (LC)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_29)
  *
  * Historia:    .
- *              20210503_1409 Creación de esta Excepción
+ *              20210506_0929 Creación de esta Excepción
  *
  */
 package io.kebblar.petstore.api.model.exceptions;
@@ -22,11 +22,11 @@ package io.kebblar.petstore.api.model.exceptions;
  * <p>Excepción que modela la respuesta a una petición de autenticación 
  * cuyas credenciales proporcionadas fueron incorrectas.
  * 
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  * 
- * @author  garellano
+ * @author  luz
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
