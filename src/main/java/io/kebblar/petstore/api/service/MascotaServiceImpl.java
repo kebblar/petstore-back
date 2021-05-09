@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   MascotaServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (16_02)
+ *
+ * Historia:    .
+ *              20210504_1602 Creación
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import java.util.ArrayList;
@@ -9,9 +27,21 @@ import io.kebblar.petstore.api.model.domain.Criterio;
 import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+/**
+ * <p>Implementación de la interfaz {@link MascotaService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Mascota
+ * @see     io.kebblar.petstore.api.service.MascotaService
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
+ */
 @Service
 public class MascotaServiceImpl implements MascotaService {
 
+    
     public MascotaServiceImpl() {
     }
 
