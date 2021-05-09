@@ -1,4 +1,36 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   ControllerException.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (08_59)
+ *
+ * Historia:    .
+ *              20210503_0859 Creación de esta Excepción
+ *
+ */
 package io.kebblar.petstore.api.model.exceptions;
+
+/**
+ * <p>Excepción que modela las propiedades que definen una excepción 
+ * y es utilizada por el {@link CustomControllerAdvice} para manipular la información
+ * en la excepción.
+ * 
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
+ * constructorescon la definición necesaria, que incluye en algunos caos el
+ * código HTTP que será devuelto.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

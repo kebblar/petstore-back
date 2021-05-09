@@ -1,23 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Municipio
+ *              ------------------------------------------------
+ * Artefacto:   MunicipioService.java
  * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface para el servicio asociado a la entidad 'municipio'. 
+ * AUTOR:       Gustavo A. Arellano
+ * Fecha:       Martes 04 de Mayo de 2021 (16_35) 
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210504_1635 Creación de la interfaz
  *
  */
 
@@ -29,18 +25,21 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Interface para el servicio asociado a la entidad 'municipio'. 
+ * Interface para el servicio asociado a la entidad {@link Municipio}. 
  *
- * @author Gustavo A. Arellano
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Municipio
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 public interface MunicipioService {
 
     /**
      * Método utilizado para recuperar un elemento de la tabla 'municipio'. por medio de su llave primaria.
      * 
-     * @param municipio Instancia de Municipio con los datos de la llave.
-     * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
+     * @param id Identificador de la Instancia de Municipio con los datos de la llave.
+     * @return Objeto de tipo  {@link Municipio} con la respuesta esperada por el fronted
+     * @throws BusinessException La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
     Municipio getById(int  id) throws BusinessException;
 
@@ -51,7 +50,12 @@ public interface MunicipioService {
      */
     List<Municipio> getAll() throws BusinessException;
     
-    
+    /**
+     * Método utilizado para recuperar una lista de municipios por medio del identificador del estado
+     * @param idEstado
+     * @return Lista de municipios que pertenezcan al estado solicitado
+     * @throws BusinessException
+     */
     List<Municipio> getAllByEstado(int idEstado) throws BusinessException;
 
     
@@ -59,7 +63,7 @@ public interface MunicipioService {
      * Método utilizado para insertar un registro en la tabla 'municipio'.
      * 
      * @param municipio objeto de tipo 'Municipio'.
-     * @return int numero de registros insertados en la tabla'municipio'.
+     * @return int numero de registros insertados en la tabla 'municipio'.
      * @throws Exception es disparada por una regla de negocio
      */
     int insert(Municipio municipio) throws BusinessException;
@@ -86,7 +90,7 @@ public interface MunicipioService {
      * Método utilizado para eliminar un registro en la tabla 'municipio'.
      * 
      * @param municipio objeto de tipo 'Municipio'.
-     * @return int numero de registros eliminados en la tabla'municipio'.
+     * @return int numero de registros eliminados en la tabla 'municipio'.
      * @throws Exception es disparada por una regla de negocio
      */
     int delete(Municipio municipio) throws BusinessException;
