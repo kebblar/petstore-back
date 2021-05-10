@@ -9,15 +9,15 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   PaisController .java
+ * Artefacto:   PaqueteriaController .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * Fecha:       Monday 05 de May de 2021 (15_02)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210504_1142 Implementación de clase 
+ * Historia:    20210510_1502 Implementación de clase 
  *
  */
 
@@ -27,8 +27,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import io.kebblar.petstore.api.model.domain.Pais;
-import io.kebblar.petstore.api.service.PaisService;
+import io.kebblar.petstore.api.model.domain.Paqueteria;
+import io.kebblar.petstore.api.service.PaqueteriaService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'paqueteria'. 
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
@@ -48,30 +48,30 @@ import io.swagger.annotations.ApiOperation;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Pais
- * @see io.kebblar.petstore.api.service.PaisService
+ * @see Paqueteria
+ * @see io.kebblar.petstore.api.service.PaqueteriaService
  */
 
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
-public class PaisController {
+public class PaqueteriaController {
 
-    private PaisService paisService;
+    private PaqueteriaService paqueteriaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
-     * @param paisService Servicios de usuario
+     * @param paqueteriaService Servicios de usuario
      */
-    public PaisController(PaisService paisService) {
-        this.paisService = paisService;
+    public PaqueteriaController(PaqueteriaService paqueteriaService) {
+        this.paqueteriaService = paqueteriaService;
     }
 
     @ApiOperation(
-        value = "PaisController::getAll",
-        notes = "Regresa una lista de todos los objetos Pais "
+        value = "PaqueteriaController::getAll",
+        notes = "Regresa una lista de todos los objetos Paqueteria "
             + "debidamente paginados con base en el payload de "
             + "request que determina el tamaño de la página, la "
             + "longitud de la página, el campo por el que se va a "
@@ -83,55 +83,55 @@ public class PaisController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/paises.json",
+        value = "/paqueterias.json",
         produces = "application/json; charset=utf-8")
-    public List<Pais> getAllPais() throws BusinessException {
-        return paisService.getAll();
+    public List<Paqueteria> getAllPaqueteria() throws BusinessException {
+        return paqueteriaService.getAll();
     }
     
     @ApiOperation(
-        value = "PaisController::get",
-        notes = "Regresa un objeto Pais cuyo id "
+        value = "PaqueteriaController::get",
+        notes = "Regresa un objeto Paqueteria cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/pais/{id}.json",
+        value = "/paqueteria/{id}.json",
         produces = "application/json; charset=utf-8")
-    public Pais getPais(@PathVariable int id) throws BusinessException {
-        return this.paisService.getById(id);
+    public Paqueteria getPaqueteria(@PathVariable int id) throws BusinessException {
+        return this.paqueteriaService.getById(id);
     }
     
     @ApiOperation(
-        value = "PaisController::insert",
-        notes = "Recibe un objeto Pais el cual debe de ser insertado "
+        value = "PaqueteriaController::insert",
+        notes = "Recibe un objeto Paqueteria el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/pais.json",
+            value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int insert(@RequestBody Pais pais) throws BusinessException {
-        return paisService.insert(pais);
+    public int insert(@RequestBody Paqueteria paqueteria) throws BusinessException {
+        return paqueteriaService.insert(paqueteria);
     }
 
     @ApiOperation(
-        value = "PaisController::update",
-        notes = "Recibe un objeto Pais, este objeto es buscado por "
+        value = "PaqueteriaController::update",
+        notes = "Recibe un objeto Paqueteria, este objeto es buscado por "
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/pais.json",
+            value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int update(@RequestBody Pais pais) throws BusinessException {
-        return paisService.update(pais);
+    public int update(@RequestBody Paqueteria paqueteria) throws BusinessException {
+        return paqueteriaService.update(paqueteria);
     }
     
     @ApiOperation(
-        value = "PaisController::delete",
-        notes = "Recibe un objeto Pais, el cual es buscado dentro de "
+        value = "PaqueteriaController::delete",
+        notes = "Recibe un objeto Paqueteria, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/pais.json",
+            value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int delete(@RequestBody Pais pais) throws BusinessException {
-        return paisService.delete(pais);
+    public int delete(@RequestBody Paqueteria paqueteria) throws BusinessException {
+        return paqueteriaService.delete(paqueteria);
     }
     
 }

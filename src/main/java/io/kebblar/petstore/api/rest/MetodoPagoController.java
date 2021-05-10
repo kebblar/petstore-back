@@ -9,15 +9,15 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   PaisController .java
+ * Artefacto:   MetodoPagoController .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * Fecha:       Monday 05 de May de 2021 (15_02)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210504_1142 Implementación de clase 
+ * Historia:    20210510_1502 Implementación de clase 
  *
  */
 
@@ -27,8 +27,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import io.kebblar.petstore.api.model.domain.Pais;
-import io.kebblar.petstore.api.service.PaisService;
+import io.kebblar.petstore.api.model.domain.MetodoPago;
+import io.kebblar.petstore.api.service.MetodoPagoService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'metodo_pago'. 
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
@@ -48,30 +48,30 @@ import io.swagger.annotations.ApiOperation;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Pais
- * @see io.kebblar.petstore.api.service.PaisService
+ * @see MetodoPago
+ * @see io.kebblar.petstore.api.service.MetodoPagoService
  */
 
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
-public class PaisController {
+public class MetodoPagoController {
 
-    private PaisService paisService;
+    private MetodoPagoService metodoPagoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
-     * @param paisService Servicios de usuario
+     * @param metodoPagoService Servicios de usuario
      */
-    public PaisController(PaisService paisService) {
-        this.paisService = paisService;
+    public MetodoPagoController(MetodoPagoService metodoPagoService) {
+        this.metodoPagoService = metodoPagoService;
     }
 
     @ApiOperation(
-        value = "PaisController::getAll",
-        notes = "Regresa una lista de todos los objetos Pais "
+        value = "MetodoPagoController::getAll",
+        notes = "Regresa una lista de todos los objetos MetodoPago "
             + "debidamente paginados con base en el payload de "
             + "request que determina el tamaño de la página, la "
             + "longitud de la página, el campo por el que se va a "
@@ -83,55 +83,65 @@ public class PaisController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/paises.json",
+        value = "/metodo-pagos.json",
         produces = "application/json; charset=utf-8")
-    public List<Pais> getAllPais() throws BusinessException {
-        return paisService.getAll();
+    public List<MetodoPago> getAllMetodoPago() throws BusinessException {
+        return metodoPagoService.getAll();
     }
     
     @ApiOperation(
-        value = "PaisController::get",
-        notes = "Regresa un objeto Pais cuyo id "
+        value = "MetodoPagoController::get",
+        notes = "Regresa un objeto MetodoPago cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/pais/{id}.json",
+        value = "/metodo-pago/{id}.json",
         produces = "application/json; charset=utf-8")
-    public Pais getPais(@PathVariable int id) throws BusinessException {
-        return this.paisService.getById(id);
-    }
-    
-    @ApiOperation(
-        value = "PaisController::insert",
-        notes = "Recibe un objeto Pais el cual debe de ser insertado "
-            + " como dato dentro de la base de datos del sistema.")
-    @PostMapping(
-            value = "/pais.json",
-            produces = "application/json; charset=utf-8")
-    public int insert(@RequestBody Pais pais) throws BusinessException {
-        return paisService.insert(pais);
+    public MetodoPago getMetodoPago(@PathVariable int id) throws BusinessException {
+        return this.metodoPagoService.getById(id);
     }
 
     @ApiOperation(
-        value = "PaisController::update",
-        notes = "Recibe un objeto Pais, este objeto es buscado por "
-            + "id dentro de la base de datos y es actualizado con el resto de "
-            + "datos proporcionados si es que el id en efecto existe. ")
-    @PutMapping(
-            value = "/pais.json",
+            value = "MetodoPagoController::getByUser",
+            notes = "Regresa la lista de métodos de pago asociados a detrerminado usuario conociendo su id")
+    @GetMapping(
+            value = "/metodo-pago-usuario/{id}.json",
             produces = "application/json; charset=utf-8")
-    public int update(@RequestBody Pais pais) throws BusinessException {
-        return paisService.update(pais);
+    public List<MetodoPago> getByUser(@PathVariable int id) throws BusinessException {
+        return this.metodoPagoService.getByUser(id);
     }
     
     @ApiOperation(
-        value = "PaisController::delete",
-        notes = "Recibe un objeto Pais, el cual es buscado dentro de "
+        value = "MetodoPagoController::insert",
+        notes = "Recibe un objeto MetodoPago el cual debe de ser insertado "
+            + " como dato dentro de la base de datos del sistema.")
+    @PostMapping(
+            value = "/metodo-pago.json",
+            produces = "application/json; charset=utf-8")
+    public int insert(@RequestBody MetodoPago metodoPago) throws BusinessException {
+        return metodoPagoService.insert(metodoPago);
+    }
+
+    @ApiOperation(
+        value = "MetodoPagoController::update",
+        notes = "Recibe un objeto MetodoPago, este objeto es buscado por "
+            + "id dentro de la base de datos y es actualizado con el resto de "
+            + "datos proporcionados si es que el id en efecto existe. ")
+    @PutMapping(
+            value = "/metodo-pago.json",
+            produces = "application/json; charset=utf-8")
+    public int update(@RequestBody MetodoPago metodoPago) throws BusinessException {
+        return metodoPagoService.update(metodoPago);
+    }
+    
+    @ApiOperation(
+        value = "MetodoPagoController::delete",
+        notes = "Recibe un objeto MetodoPago, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/pais.json",
+            value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
-    public int delete(@RequestBody Pais pais) throws BusinessException {
-        return paisService.delete(pais);
+    public int delete(@RequestBody MetodoPago metodoPago) throws BusinessException {
+        return metodoPagoService.delete(metodoPago);
     }
     
 }
