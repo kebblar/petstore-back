@@ -1,17 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
  *              --------------------------------------------------
- * Modulo:      proyecto
- * Clase        FileUploadController
- * Autor:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:34 pm
- * Version:     1.0-SNAPSHOT
+ * Artefacto:   FileUploadController.java
+ * Tipo:        clase
+ * Autor:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:34pm 
  *
+ * Historia:    .
+ *              20210507_0834 Creación de éste controlador REST
  */
 package io.kebblar.petstore.api.rest;
 

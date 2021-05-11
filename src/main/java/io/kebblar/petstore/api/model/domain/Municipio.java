@@ -1,23 +1,18 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Municipio
+ * Artefacto:   Municipio.java
  * Tipo:        clase 
- * Autor:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:34 pm
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'municipio'. 
+ * Autor:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:34pm 
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210421_0935 Creación de éste POJO
  *
  */
 

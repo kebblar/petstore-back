@@ -1,23 +1,18 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.api.model
- * Modulo:      Registro
+ * Artefacto:   Registro.java
  * Tipo:        clase
- * Autor:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:34 pm
- * Version:     0.1.1-SNAPSHOT
- * .
- * POJO asociado a la entidad 'registro'.
+ * Autor:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:34pm 
  *
  * Historia:    .
- *              20200812_0058 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20200812_0058 Creación de éste POJO
  *
  */
 

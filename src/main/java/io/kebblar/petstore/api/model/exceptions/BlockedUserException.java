@@ -9,16 +9,16 @@
  *              ------------------------------------------------
  * Artefacto:   BlockedUserException.java
  * Tipo:        clase
- * AUTOR:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:45 pm
+ * AUTOR:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:45pm 
  *
  * Historia:    .
- *              20210503_1409 Creación de esta Excepción
+ *              20210507_0845 Creación de esta Excepción
  *
  */
 package io.kebblar.petstore.api.model.exceptions;
 
-public class BlockedUserException extends BusinessException{
+public class BlockedUserException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
     private final static String mensaje = "El usuario ha sido bloqueado por exceder el número máximo de intentos %d de ingreso permitidos al sistema.";
 

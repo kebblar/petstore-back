@@ -9,8 +9,8 @@
  *              ------------------------------------------------
  * Artefacto:   AccessServiceImpl.java
  * Tipo:        clase
- * AUTOR:       Francisco Javier Moreno Romero
- * Fecha:       07/08/2021 08:38 pm
+ * Autor:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:38pm 
  *
  * Historia:    .
  *              20210503_1602 Creación
@@ -36,7 +36,8 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 
-/**<p>Implementación de la interfaz {@link AccessService}
+/**
+ * <p>Implementación de la interfaz {@link AccessService}
  * 
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
@@ -58,6 +59,7 @@ public class AccessServiceImpl implements AccessService {
      * Constructor que realiza el setting de todos
      * los Mappers y todos los servicios adicionales 
      * a ser empleados en esta clase.
+     * 
      * @param usuarioService
      * @param jwtManagerService
      */

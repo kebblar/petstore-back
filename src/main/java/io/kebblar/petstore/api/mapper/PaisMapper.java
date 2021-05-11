@@ -1,23 +1,18 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.mapper
- * Modulo:      Pais
+ * Artefacto:   PaisMapper.java
  * Tipo:        Interface 
- * Autor:       Francisco Javier Moreno Romero
+ * Autor:       Francisco Javier Moreno Romero (FJMR)
  * Fecha:       Viernes 7 de Mayo de 2021 08:34pm
- * Version:     1.0-SNAPSHOT
- * .
- * Interface 'Mapper' MyBatis asociado a la entidad Pais 
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210421_0935 Creación de éste Mapper.
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -26,6 +21,8 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Pais;
 
 /**
@@ -47,7 +44,7 @@ public interface PaisMapper {
     Pais getById(int id) throws SQLException;
     
     /**
-     * Obtiene la búsqueda con base en el 'pais'.
+     * Obtiene una lista de objetos {@link Pais}.
      * 
      * @return el pais encontrado con el criterio de búsqueda.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
@@ -57,7 +54,7 @@ public interface PaisMapper {
     List<Pais> getAll() throws SQLException;
     
     /**
-     * Inserta un objeto de tipo 'pais' con base en la información dada por el objeto de tipo 'usuario'.
+     * Inserta un objeto de tipo 'Pais' con base en la información dada por el objeto de tipo 'pais'.
      * 
      * @param pais a ser insertado.
      * @return el auto incremental asociado a esa inserción.
@@ -68,7 +65,7 @@ public interface PaisMapper {
     int insert(Pais pais) throws SQLException;
     
     /**
-     * Actualiza un objeto de tipo 'pais' con base en la infrmación dada por el objeto de tipo 'usuario'.
+     * Actualiza un objeto de tipo 'Pais' con base en la infrmación dada por el objeto de tipo 'pais'.
      * 
      * @param pais a ser actualizado.
      * @return el numero de registros actualizados.

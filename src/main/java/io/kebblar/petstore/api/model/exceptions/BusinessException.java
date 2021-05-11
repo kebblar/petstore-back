@@ -9,11 +9,11 @@
  *              ------------------------------------------------
  * Artefacto:   BusinessException.java
  * Tipo:        clase
- * AUTOR:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:55 pm
+ * AUTOR:       Francisco Javier Moreno Romero (FJMR)
+ * Fecha:       Viernes 7 de Mayo de 2021 08:55pm 
  *
  * Historia:    .
- *              20210503_1409 Creación de esta Excepción
+ *              20210507_0855 Creación de esta Excepción
  *
  */
 package io.kebblar.petstore.api.model.exceptions;
@@ -22,12 +22,11 @@ public class BusinessException extends ControllerException {
     private static final long serialVersionUID = -1218087669509474484L;
     
     /**
-     * <p>Excepción que modela la respuesta a una petición de autenticación 
-     * cuyas credenciales proporcionadas fueron incorrectas.
+     * <p>Excepción que modela la respuesta de un error de negocio
      * 
      * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
      * constructorescon la definición necesaria, que incluye en algunos caos el
-     * código HTTP que será devuelto.
+     * código HTTP que será devuelto
      * 
      * @author javier
      * @version 1.0-SNAPSHOT
