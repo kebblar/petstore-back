@@ -17,7 +17,6 @@
  *              20210511_0832 Actualización de licencia
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;

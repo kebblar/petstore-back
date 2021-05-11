@@ -83,7 +83,6 @@ public class AdminController {
 
     @PostMapping(path = "/UploadPictures", produces = "application/json; charset=utf-8")
     public String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
-
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String name = parameterNames.nextElement();
