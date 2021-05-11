@@ -13,7 +13,7 @@
  * Fecha:       Viernes 7 de Mayo de 2021 08:55pm 
  *
  * Historia:    .
- *              20210507_0855 Creación de esta Excepción
+ *              20210507_0855 Creación de esta Excepción.
  *
  */
 package io.kebblar.petstore.api.model.exceptions;

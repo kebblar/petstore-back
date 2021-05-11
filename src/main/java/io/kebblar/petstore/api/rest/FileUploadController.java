@@ -13,7 +13,7 @@
  * Fecha:       Viernes 7 de Mayo de 2021 08:34pm 
  *
  * Historia:    .
- *              20210507_0834 Creación de éste controlador REST
+ *              20210507_0834 Creación de éste controlador REST.
  */
 package io.kebblar.petstore.api.rest;
 

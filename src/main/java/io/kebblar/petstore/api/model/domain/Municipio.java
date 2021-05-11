@@ -12,10 +12,9 @@
  * Fecha:       Viernes 7 de Mayo de 2021 08:34pm 
  *
  * Historia:    .
- *              20210421_0935 Creación de éste POJO
+ *              20210507_0834 Creación de éste POJO
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
