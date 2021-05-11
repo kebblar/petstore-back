@@ -18,7 +18,6 @@
  */
 package io.kebblar.petstore.api.model.request;
 
-
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

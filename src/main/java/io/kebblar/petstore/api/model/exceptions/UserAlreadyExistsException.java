@@ -31,7 +31,7 @@ package io.kebblar.petstore.api.model.exceptions;
 * @version 1.0-SNAPSHOT
 * @since   1.0-SNAPSHOT
 */
-public class UserAlreadyExistsException extends BusinessException{
+public class UserAlreadyExistsException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
     /**

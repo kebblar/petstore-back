@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   RegistroRequest.java
+ * Artefacto:   TablasContador.java
  * Tipo:        enum
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Lunes 4 de Mayo de 2021 (09_31)
@@ -20,7 +20,7 @@ package io.kebblar.petstore.api.model.domain;
 
 /**
  * <p>Descripción:</p>
- * Clase que sirve para enumerar las tablas que pueden usar el contador
+ * Enum que sirve para enumerar las tablas que pueden usar el contador
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain
  * @version 1.0-SNAPSHOT
