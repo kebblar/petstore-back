@@ -20,7 +20,6 @@
  *              archivos fuente de Gustavo Arellano
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -45,9 +44,7 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  */
 @Service("municipioService")
 public class MunicipioServiceImpl implements MunicipioService {
-
     private static final Logger logger = LoggerFactory.getLogger(MunicipioServiceImpl.class);
-
     private MunicipioMapper municipioMapper;
     
     /**

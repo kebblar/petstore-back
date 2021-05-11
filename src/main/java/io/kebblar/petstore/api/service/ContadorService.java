@@ -19,14 +19,13 @@
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.TablasContador;
-import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 /**
  * <p>Definición de la interfaz de servicios para 'Contador'.
  * 
  * @author  edgarum
- * @see     
+ * @see     io.kebblar.petstore.api.model.domain.TablasContador
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT 
  */

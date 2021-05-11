@@ -86,7 +86,8 @@ public class MunicipioController {
     }
     
     @GetMapping(path = "/municipios.json", produces = "application/json; charset=utf-8")
-    public List<Municipio> getMunicipios(@RequestParam int idEstado) throws ControllerException {
+    public List<Municipio> getMunicipios(@ApiParam(name = "idEstado", value = "Entero que representa el id del estado", defaultValue = "estado")
+    									@RequestParam int idEstado) throws ControllerException {
         return municipioService.getAllByEstado(idEstado);
     }
     
