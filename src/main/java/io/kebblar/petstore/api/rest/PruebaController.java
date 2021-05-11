@@ -16,12 +16,16 @@ public class PruebaController {
 
     @Autowired
     private DireccionService servicio;
+    private TipoDireccionService servicio2;
     
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public String pba1() throws BusinessException {
-        List<Direccion> data = servicio.getAll();
-        System.out.println(data);
-        return res;
+    public List<Direccion> getAll() throws BusinessException {
+        return servicio.getAll();
+    }
+
+    @GetMapping(path = "/tipo-direccion.json", produces = "application/json; charset=utf-8")
+    public List<TipoDireccion> getAll2() throws BusinessException {
+        return servicio2.getAll();
     }
 
     @PostMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")

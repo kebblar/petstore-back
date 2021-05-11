@@ -93,8 +93,8 @@ public interface PaqueteriaMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE paqueteria" 
-    + "SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio}"
+    "UPDATE paqueteria "
+    + "SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio} "
     + "WHERE id = #{id} ")
     int update(Paqueteria paqueteria) throws SQLException;
 
