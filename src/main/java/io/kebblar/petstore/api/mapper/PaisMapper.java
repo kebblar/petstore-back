@@ -8,9 +8,9 @@
  * Proyecto:    petstore
  * Paquete:     io.kebblar.petstore.api.mapper
  * Modulo:      Pais
- * Tipo:        interface 
+ * Tipo:        Interface 
  * Autor:       Francisco Javier Moreno Romero
- * Fecha:       07/05/2021 08:34 pm
+ * Fecha:       Viernes 7 de Mayo de 2021 08:34pm
  * Version:     1.0-SNAPSHOT
  * .
  * Interface 'Mapper' MyBatis asociado a la entidad Pais 
