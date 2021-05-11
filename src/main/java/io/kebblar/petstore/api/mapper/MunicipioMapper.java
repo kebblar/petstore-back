@@ -34,90 +34,90 @@ import io.kebblar.petstore.api.model.domain.Municipio;
  */
 @Repository
 public interface MunicipioMapper {
-	static final String CAMPOS = " id, id_estado, nombre ";
+    static final String CAMPOS = " id, id_estado, nombre ";
 
-	/**
-	 * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
-	 * idEstado.
-	 *
-	 * @return Lista de obetos de tipo municipio
-	 * @throws SQLException Se dispara en caso de que ocurra un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@Results(id = "MunicipioMap", value = { @Result(property = "id", column = "id"),
-			@Result(property = "idEstado", column = "id_estado"), @Result(property = "nombre", column = "nombre") })
-	/**
-	 * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
-	 * id.
-	 *
-	 * @return Lista de obetos de tipo municipio
-	 * @throws SQLException Se dispara en caso de que ocurra un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@Select("SELECT " + CAMPOS + " FROM municipio WHERE id = #{id} ")
-	Municipio getById(int id) throws SQLException;
+    /**
+     * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
+     * idEstado.
+     *
+     * @return Lista de obetos de tipo municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     *                      operación desde la base de datos.
+     */
+    @Results(id = "MunicipioMap", value = { @Result(property = "id", column = "id"),
+            @Result(property = "idEstado", column = "id_estado"), @Result(property = "nombre", column = "nombre") })
+    /**
+     * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
+     * id.
+     *
+     * @return Lista de obetos de tipo municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     *                      operación desde la base de datos.
+     */
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id = #{id} ")
+    Municipio getById(int id) throws SQLException;
 
-	/**
-	 * Obtiene una lista de objetos de tipo 'municipio'.
-	 *
-	 * @return Lista de obetos de tipo municipio
-	 * @throws SQLException Se dispara en caso de que ocurra un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@ResultMap("MunicipioMap")
-	@Select("SELECT " + CAMPOS + " FROM municipio ")
-	List<Municipio> getAll() throws SQLException;
+    /**
+     * Obtiene una lista de objetos de tipo 'municipio'.
+     *
+     * @return Lista de obetos de tipo municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     *                      operación desde la base de datos.
+     */
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio ")
+    List<Municipio> getAll() throws SQLException;
 
-	/**
-	 * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
-	 * idEstado.
-	 *
-	 * @return Lista de obetos de tipo municipio
-	 * @throws SQLException Se dispara en caso de que ocurra un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@ResultMap("MunicipioMap")
-	@Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado = #{idEstado}")
-	List<Municipio> getByEstado(int idEstado) throws SQLException;
+    /**
+     * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
+     * idEstado.
+     *
+     * @return Lista de obetos de tipo municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     *                      operación desde la base de datos.
+     */
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado = #{idEstado}")
+    List<Municipio> getByEstado(int idEstado) throws SQLException;
 
-	/**
-	 * Inserta un objeto de tipo 'municipio' con base en la información dada por el
-	 * objeto de tipo 'municipio'.
-	 *
-	 * @param Municipio a ser insertado.
-	 * @return el auto incremental asociado a esa inserción.
-	 * @throws SQLException Se dispara en caso de que se dispare un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@Insert("INSERT INTO municipio(id_estado, nombre) VALUES(#{idEstado}, #{nombre} )")
-	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-	int insert(Municipio municipio) throws SQLException;
+    /**
+     * Inserta un objeto de tipo 'municipio' con base en la información dada por el
+     * objeto de tipo 'municipio'.
+     *
+     * @param Municipio a ser insertado.
+     * @return el auto incremental asociado a esa inserción.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta
+     *                      operación desde la base de datos.
+     */
+    @Insert("INSERT INTO municipio(id_estado, nombre) VALUES(#{idEstado}, #{nombre} )")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    int insert(Municipio municipio) throws SQLException;
 
-	/**
-	 * Actualiza un objeto de tipo 'municipio' con base en la infrmación dada por el
-	 * objeto de tipo 'municipio'.
-	 *
-	 * @param Municipio a ser actualizado.
-	 * @return el numero de registros actualizados.
-	 * @throws SQLException Se dispara en caso de que se dispare un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@Update("UPDATE municipio SET id_estado = #{idEstado}, nombre = #{nombre} WHERE id = #{id} ")
-	int update(Municipio municipio) throws SQLException;
+    /**
+     * Actualiza un objeto de tipo 'municipio' con base en la infrmación dada por el
+     * objeto de tipo 'municipio'.
+     *
+     * @param Municipio a ser actualizado.
+     * @return el numero de registros actualizados.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta
+     *                      operación desde la base de datos.
+     */
+    @Update("UPDATE municipio SET id_estado = #{idEstado}, nombre = #{nombre} WHERE id = #{id} ")
+    int update(Municipio municipio) throws SQLException;
 
-	/**
-	 * Borra (de manera física) el registro de municipio.
-	 *
-	 * @param id id del municipio a ser borrado
-	 * @return id del municipio borrado
-	 * @throws SQLException Se dispara en caso de que se dispare un error en esta
-	 *                      operación desde la base de datos.
-	 */
-	@Delete("DELETE FROM municipio WHERE id = #{id} ")
-	int delete(int id) throws SQLException;
+    /**
+     * Borra (de manera física) el registro de municipio.
+     *
+     * @param id id del municipio a ser borrado
+     * @return id del municipio borrado
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta
+     *                      operación desde la base de datos.
+     */
+    @Delete("DELETE FROM municipio WHERE id = #{id} ")
+    int delete(int id) throws SQLException;
 
-	@ResultMap("MunicipioMap")
-	@Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}")
-	List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}")
+    List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
 
 }

@@ -18,7 +18,6 @@
  *
  */
 
-
 package io.kebblar.petstore.api.model.domain;
 
 /**
@@ -29,79 +28,79 @@ package io.kebblar.petstore.api.model.domain;
  * @since 1.0-SNAPSHOT
  */
 public class Criterio {
-	private int idCategoria;
-	private int valor;
+    private int idCategoria;
+    private int valor;
 
-	/**
-	 * Constructor por default.
-	 */
-	public Criterio() {
-	}
+    /**
+     * Constructor por default.
+     */
+    public Criterio() {
+    }
 
-	/**
-	 * Constructor basado en atributos.
-	 */
-	public Criterio(int idCategoria, int valor) {
-		this.idCategoria = idCategoria;
-		this.valor = valor;
-	}
+    /**
+     * Constructor basado en atributos.
+     */
+    public Criterio(int idCategoria, int valor) {
+        this.idCategoria = idCategoria;
+        this.valor = valor;
+    }
 
-	/**
-	 * Getter para idCategoria.
-	 */
-	public int getIdCategoria() {
-		return idCategoria;
-	}
+    /**
+     * Getter para idCategoria.
+     */
+    public int getIdCategoria() {
+        return idCategoria;
+    }
 
-	/**
-	 * Setter para idCategoria.
-	 */
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
-	}
+    /**
+     * Setter para idCategoria.
+     */
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
-	/**
-	 * Getter para valor.
-	 */
-	public int getValor() {
-		return valor;
-	}
+    /**
+     * Getter para valor.
+     */
+    public int getValor() {
+        return valor;
+    }
 
-	/**
-	 * Setter para valor.
-	 */
-	public void setValor(int valor) {
-		this.valor = valor;
-	}
+    /**
+     * Setter para valor.
+     */
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idCategoria;
-		result = prime * result + valor;
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + idCategoria;
+        result = prime * result + valor;
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Criterio other = (Criterio) obj;
-		if (idCategoria != other.idCategoria)
-			return false;
-		if (valor != other.valor)
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Criterio other = (Criterio) obj;
+        if (idCategoria != other.idCategoria)
+            return false;
+        if (valor != other.valor)
+            return false;
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "Criterio [idCategoria=" + idCategoria + ", valor=" + valor + "]";
-	}
+    @Override
+    public String toString() {
+        return "Criterio [idCategoria=" + idCategoria + ", valor=" + valor + "]";
+    }
 
 }

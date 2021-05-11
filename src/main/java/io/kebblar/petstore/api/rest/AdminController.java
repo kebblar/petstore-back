@@ -45,15 +45,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>
- * Implementacion del controlador REST asociado a los endpoints de gestión del
+ * <p> Implementacion del controlador REST asociado a los endpoints de gestión del
  * POJO Admin.
  * 
- * <p>
- * Todos los métodos de esta clase disparan {@link ControllerException}
+ * <p> Todos los métodos de esta clase disparan {@link ControllerException}
  * 
- * <p>
- * NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
+ * <p> NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
  * debido a que la documentación Swagger API cumple con ese objetivo.
  * 
  * @author ulopezu
