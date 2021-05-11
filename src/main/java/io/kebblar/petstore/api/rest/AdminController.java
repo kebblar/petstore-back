@@ -65,79 +65,79 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "admin")
 @RequestMapping(value = "/api")
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	private HealthService healthService;
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    private HealthService healthService;
 
-	@Value("${app.profile.identifier}")
-	private String appProfileIdentifier;
+    @Value("${app.profile.identifier}")
+    private String appProfileIdentifier;
 
-	@Value("${spring.datasource.url}")
-	private String springDatasourceUrl;
+    @Value("${spring.datasource.url}")
+    private String springDatasourceUrl;
 
-	/**
-	 * Constructor que realiza el setting de los servicios que serán utilizados en
-	 * este controlador.
-	 * 
-	 * @param healthService Servicios de admin
-	 */
-	public AdminController(HealthService healthService) {
-		this.healthService = healthService;
-	}
+    /**
+     * Constructor que realiza el setting de los servicios que serán utilizados en
+     * este controlador.
+     * 
+     * @param healthService Servicios de admin
+     */
+    public AdminController(HealthService healthService) {
+        this.healthService = healthService;
+    }
 
-	@PostMapping(path = "/UploadPictures", produces = "application/json; charset=utf-8")
-	public String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
+    @PostMapping(path = "/UploadPictures", produces = "application/json; charset=utf-8")
+    public String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		Enumeration<String> parameterNames = request.getParameterNames();
-		while (parameterNames.hasMoreElements()) {
-			String name = parameterNames.nextElement();
-			String value = request.getParameter(name);
-			System.out.println(name + ":" + value);
-		}
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String name = parameterNames.nextElement();
+            String value = request.getParameter(name);
+            System.out.println(name + ":" + value);
+        }
 
-		Map<String, MultipartFile> fileMap = request.getFileMap();
-		for (MultipartFile multipartFile : fileMap.values()) {
-			System.out.println(multipartFile.getOriginalFilename());
-		}
-		return "ok";
-	}
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+        for (MultipartFile multipartFile : fileMap.values()) {
+            System.out.println(multipartFile.getOriginalFilename());
+        }
+        return "ok";
+    }
 
-	@ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
-	@GetMapping(path = "/logout.json", produces = "application/json; charset=utf-8")
-	public String logout(HttpServletRequest request) throws ServletException {
-		String name = "tavo";
-		request.logout();
-		String res = "{-" + name + "-:-you have been loged out-}";
-		return res.replace('-', '"');
-	}
+    @ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
+    @GetMapping(path = "/logout.json", produces = "application/json; charset=utf-8")
+    public String logout(HttpServletRequest request) throws ServletException {
+        String name = "tavo";
+        request.logout();
+        String res = "{-" + name + "-:-you have been loged out-}";
+        return res.replace('-', '"');
+    }
 
-	@ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
-	@GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
-	public Map<String, String> health(
-			@ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls") @RequestParam String inputData)
-			throws IOException {
-		logger.info("*** Application Profile Identifier: " + appProfileIdentifier);
-		Map<String, String> result = healthService.getInfo(inputData);
-		result.put("app.profile.identifier", appProfileIdentifier);
-		result.put("spring.datasource.url", springDatasourceUrl);
-		return result;
-	}
+    @ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
+    @GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
+    public Map<String, String> health(
+            @ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls") @RequestParam String inputData)
+            throws IOException {
+        logger.info("*** Application Profile Identifier: " + appProfileIdentifier);
+        Map<String, String> result = healthService.getInfo(inputData);
+        result.put("app.profile.identifier", appProfileIdentifier);
+        result.put("spring.datasource.url", springDatasourceUrl);
+        return result;
+    }
 
-	@ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
-	@GetMapping(path = "/log.json", produces = "application/json; charset=utf-8")
-	public List<String> getLog(@RequestParam Integer last) {
-		return healthService.getLog(last);
-	}
+    @ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
+    @GetMapping(path = "/log.json", produces = "application/json; charset=utf-8")
+    public List<String> getLog(@RequestParam Integer last) {
+        return healthService.getLog(last);
+    }
 
-	@GetMapping(path = "/qa-stats.json", produces = "application/json; charset=utf-8")
-	public String getQualityStats(@RequestParam int page, @RequestParam int len) {
-		final String uri = "https://sonar.ci.ultrasist.net/api/issues/search?ps=" + len + "&p=" + page
-				+ "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
-		try {
-			RestTemplate restTemplate = new RestTemplate();
-			return restTemplate.getForObject(uri, String.class);
-		} catch (RuntimeException e) {
-			return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
-		}
-	}
+    @GetMapping(path = "/qa-stats.json", produces = "application/json; charset=utf-8")
+    public String getQualityStats(@RequestParam int page, @RequestParam int len) {
+        final String uri = "https://sonar.ci.ultrasist.net/api/issues/search?ps=" + len + "&p=" + page
+                + "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            return restTemplate.getForObject(uri, String.class);
+        } catch (RuntimeException e) {
+            return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
+        }
+    }
 
 }

@@ -31,9 +31,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Servicio asociado a la entidad 'direccion'.
  *
  * @author Gustavo A. Arellano

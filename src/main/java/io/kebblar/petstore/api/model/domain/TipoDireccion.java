@@ -24,9 +24,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * POJO asociado a la entidad 'tipo_direccion'.
  *
  * @author Gustavo A. Arellano

@@ -27,9 +27,6 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Municipio;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Interface 'Mapper' MyBatis asociado a la entidad Municipio
  *
  * @author Gustavo A. Arellano
