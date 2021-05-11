@@ -1,26 +1,21 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      TipoDireccion
- * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface para el servicio asociado a la entidad 'tipo_direccion'. 
+ *              ------------------------------------------------
+ * Artefacto:   TipoDireccionService.java
+ * Tipo:        interface
+ * AUTOR:       Marco Antonio Santiago Garcia
+ * Fecha:       Martes 11 de Mayo de 2021 (09_00)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_1600 Creación
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -28,11 +23,12 @@ import io.kebblar.petstore.api.model.domain.TipoDireccion;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'tipo_direccion'. 
  *
- * @author Gustavo A. Arellano
+ * @author  Marco Antonio Santiago Garcia
+ * @see     io.kebblar.petstore.api.service.TipoDireccionService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public interface TipoDireccionService {
 

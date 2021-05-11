@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   PaisController.java
+ * Tipo:        clase
+ * AUTOR:       Marco Antonio Santiago Garcia
+ * Fecha:       Martes 11 de Mayo de 2021 (09_00)
+ *
+ * Historia:    .
+ *              20210503_2229 Creación de éste controlador REST
+ *
+ */
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
@@ -12,6 +30,14 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.PaisService;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * Controldaor asociado a la entidad 'pais'. 
+ *
+ * @author  Marco Antonio Santiago Garcia
+ * @see     io.kebblar.petstore.api.rest.PaisController
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 @RestController
 @RequestMapping(value = "/api")
 public class PaisController {

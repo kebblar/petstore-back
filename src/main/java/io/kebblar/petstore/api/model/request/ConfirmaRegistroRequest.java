@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   ConfirmaRegistroRequest.java
+ * Tipo:        clase
+ * AUTOR:       Marco Antonio Santiago Garcia
+ * Fecha:       Martes 11 de Mayo de 2021 (09_00)
+ *
+ * Historia:    .
+ *              20210503_1602 Creación
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -8,6 +26,15 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+/**
+ * Solicitud, para acceder a los parametros y atributos,
+ * 
+ * 
+ * @author  Marco Antonio Santiago Garcia.
+ * @see     io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class ConfirmaRegistroRequest {
 
     @ApiModelProperty(example = "xSw312")
