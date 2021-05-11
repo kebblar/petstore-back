@@ -27,7 +27,9 @@ import java.util.Objects;
  * POJO asociado a la entidad 'tipo_direccion'.
  *
  * @author Gustavo A. Arellano
+ * @see io.kebblar.petstore.api.modeldomain.TipoDireccion
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
 public class TipoDireccion implements Serializable {
 

@@ -30,7 +30,9 @@ import io.kebblar.petstore.api.model.domain.Municipio;
  * Interface 'Mapper' MyBatis asociado a la entidad Municipio
  *
  * @author Gustavo A. Arellano
+ * @see io.kebblar.petstore.api.mapper.MunicipioMapper
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
 @Repository
 public interface MunicipioMapper {
@@ -46,6 +48,7 @@ public interface MunicipioMapper {
      */
     @Results(id = "MunicipioMap", value = { @Result(property = "id", column = "id"),
             @Result(property = "idEstado", column = "id_estado"), @Result(property = "nombre", column = "nombre") })
+    
     /**
      * Obtiene una lista de objetos de tipo 'municipio' realizando la busqueda por
      * id.
