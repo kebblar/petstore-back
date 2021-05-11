@@ -25,9 +25,10 @@ package io.kebblar.petstore.api.model.exceptions;
  * constructorescon la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  * 
-
+ * @author  Isabel Contreras
+ * @see     io.kebblar.petstore.api.model.exceptions.ControllerException
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 public class BusinessException extends ControllerException {
     private static final long serialVersionUID = -1218087669509474484L;

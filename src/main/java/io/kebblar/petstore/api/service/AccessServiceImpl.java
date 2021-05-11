@@ -45,6 +45,8 @@ import io.kebblar.petstore.api.utils.DigestEncoder;
  * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @see 	io.kebblar.petstore.api.model.response.LoginResponse
  * @see     io.kebblar.petstore.api.service.AccessService
+ * @see     io.kebblar.petstore.api.service.UsuarioService
+ * @see		io.kebblar.petstore.api.support.JwtManagerService
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT 
  */

@@ -27,14 +27,14 @@ import io.kebblar.petstore.api.model.domain.Pais;
 /**
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad Pais 
- *
- * @author Gustavo A. Arellano
+ * @author  Isabel Contreras
+ * @see     io.kebblar.petstore.api.mapper.Pais
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Repository
 public interface PaisMapper {
     static final String CAMPOS = " id, nombre ";
-
 
     /**
      * Obtiene un objetos de tipo 'pais' con base al id.
@@ -48,7 +48,7 @@ public interface PaisMapper {
         @Result(property = "nombre", column = "nombre")    
     })
     @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ") 
-    Pais getById(Pais pais) throws SQLException;
+    Pais getById(int id) throws SQLException;
 
     /**
      * Obtiene toda la lista de objetos de tipo 'pais'

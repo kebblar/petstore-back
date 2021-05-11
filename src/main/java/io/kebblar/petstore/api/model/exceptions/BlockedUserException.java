@@ -30,7 +30,7 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class BlockedUserException extends BusinessException{
+public class BlockedUserException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
     private final static String mensaje = "El usuario ha sido bloqueado por exceder el número máximo de intentos %d de ingreso permitidos al sistema.";
 

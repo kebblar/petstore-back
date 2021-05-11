@@ -36,7 +36,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * Endpoint para subir archivos.
+ * <p>Implementacion del controlador REST asociado a los endpoints
+ * de gestion de Archivos
+ * 
+ * @author  Isabel Contreras
+ * @see     io.kebblar.petstore.api.support.UploadService
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 @RestController
 @Api(value = "negocio")

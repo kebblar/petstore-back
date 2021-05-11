@@ -28,7 +28,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * Interfaz que define los métodos de negocio asociados a la entidad
  * de dominio "Mascota"
  *
- * @author garellano
+ * @author  Isabel Contreras
+ * @see     io.kebblar.petstore.api.model.Mascota
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public interface MascotaService {
 
@@ -79,7 +82,6 @@ public interface MascotaService {
     /**
      * Elimina en la base un objeto de tipo "Mascota".
      * @param id Identificador de la mascota a ser eliminada de la base de datos.
-     *
      * @return Retorna el ID de la mascota que fué eliminada.
      */
     int delete(int id);
