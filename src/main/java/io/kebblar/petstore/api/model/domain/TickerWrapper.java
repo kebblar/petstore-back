@@ -7,15 +7,14 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
  * Artefacto:   TickerWrapper.java
  * Tipo:        clase
  * AUTOR:       Ulises A. Lopez (UAL)
- * Fecha:       Martes 4 de Mayo de 2021
+ * Fecha:       Martes 4 de Mayo de 2021 (08_59)
  *
  * Historia:    .
  *              20210504_0859 Actualización de éste POJO
+ *              20210511_0837 Actualización de licencia
  *
  */
 package io.kebblar.petstore.api.model.domain;

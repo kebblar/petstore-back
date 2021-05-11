@@ -1,23 +1,20 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      TipoDireccion
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'tipo_direccion'. 
+ *              ------------------------------------------------
+ * Artefacto:   TipoDireccion.java
+ * Tipo:        clase
+ * AUTOR:       Ulises A. Lopez (UAL)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_01)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210504_0901 Actualización de éste POJO
+ *              20210511_0839 Actualización de licencia
  *
  */
 

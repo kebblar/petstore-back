@@ -10,7 +10,7 @@
  * Artefacto:   DisabledUserException.java
  * Tipo:        clase
  * AUTOR:       Ulises A. López (UAL)
- * Fecha:       Martes 4 de Mayo de 2021 (0929)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_29)
  *
  * Historia:    .
  *              20210504_0929 Creación de esta Excepción

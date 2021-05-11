@@ -1,23 +1,20 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.mapper
- * Modulo:      Municipio
- * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface 'Mapper' MyBatis asociado a la entidad Municipio 
+ *              ------------------------------------------------
+ * Artefacto:   MunicipioMapper.java
+ * Tipo:        interface
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (19_14)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_1914 Creación de éste Mapper
+ *              20210511_0832 Actualización de licencia
  *
  */
 

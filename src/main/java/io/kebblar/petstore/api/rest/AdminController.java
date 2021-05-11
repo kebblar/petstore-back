@@ -10,7 +10,7 @@
  * Artefacto:   AdminController.java
  * Tipo:        clase
  * AUTOR:       Ulises A. Lopez (UAL)
- * Fecha:       Martes 4 de Mayo de 2021 (0919)
+ * Fecha:       Martes 4 de Mayo de 2021 (22_29)
  *
  * Historia:    .
  *              20210503_2229 Creación de éste controlador REST
