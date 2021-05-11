@@ -1,24 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.api.model
- * Modulo:      Registro
- * Tipo:        clase
- * Autor:       Gustavo A. Arellano
- * Fecha:       miércoles 08 de agosto de 2020 (00_58)
- * Version:     0.1.1-SNAPSHOT
- * .
- * POJO asociado a la entidad 'registro'.
+ *              ------------------------------------------------
+ * Artefacto:   Registro.java
+ * Tipo:        Clase
+ * AUTOR:       Isabel Contreras
+ * Fecha:       Martes 11 de Mayo de 2021 (09_02)
  *
  * Historia:    .
- *              20200812_0058 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
- *              20210506 0553 Se quitan espacios que están demás.
+ *              20210511_0902 Se agrega la documentacion de la clase
  *
  */
 package io.kebblar.petstore.api.model.domain;

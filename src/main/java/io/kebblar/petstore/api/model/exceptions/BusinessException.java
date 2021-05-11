@@ -3,18 +3,17 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
  * Artefacto:   BusinessException.java
- * Tipo:        clase
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 3 de Mayo de 2021 (14_09)
+ * Tipo:        Clase
+ * AUTOR:       Isabel Contreras
+ * Fecha:       Martes 11 de Mayo de 2021 (09_04)
  *
  * Historia:    .
- *              20210503_1409 Creación de esta Excepción
- *              20210506_1801 Se agrega la documentacion faltante a la clase
+ *              20210511_0904 Se agrega la documentacion de la excepcion
  *
  */
 package io.kebblar.petstore.api.model.exceptions;

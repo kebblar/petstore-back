@@ -1,24 +1,19 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Mascota
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_50)
- * Version:     1.0-SNAPSHOT
- * .
- * Servicio asociado a la entidad 'mascota'. 
+ *              ------------------------------------------------
+ * Artefacto:   MascotaService.java
+ * Tipo:        Interface 
+ * AUTOR:       Isabel Contreras
+ * Fecha:       Martes 11 de Mayo de 2021 (09_07)
  *
  * Historia:    .
- *              20210521_0950 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
- *              20210506_0937 Se agrega la documentación faltante de la clase
+ *              20210511_0907 Se agrega la documentacion de la interface
  *
  */
 package io.kebblar.petstore.api.service;
@@ -38,7 +33,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public interface MascotaService {
 
     /**
-     * <p>Retorna un objeto de tipo mascota cuyo ID es igual al paraámetro dado.
+     * Retorna un objeto de tipo mascota cuyo ID es igual al paraámetro dado.
      *
      * @param id Identificador (llave) del objeto de tipo "Mascota".
      * @return Objeto de tipo "Mascota"
@@ -47,7 +42,7 @@ public interface MascotaService {
     Mascota getById(int id) throws BusinessException;
 
     /**
-     * <p>Retorna una lista de objetos de tipo "Mascota" que contiene
+     * Retorna una lista de objetos de tipo "Mascota" que contiene
      * la totalidad de objetos existentes en la base de datos.
      *
      * @return Lista de objetos de tipo "Mascota".
@@ -66,7 +61,7 @@ public interface MascotaService {
     List<Integer> getByCriteria(List<Criterio> criterios);
 
     /**
-     * <p>Inserta en la base un objeto de tipo "Mascota".
+     * Inserta en la base un objeto de tipo "Mascota".
      *
      * @param mascota Objeto de tipo Mascota en donde el ID no es envado.
      * @return Retorna el ID de la mascota insertada.
@@ -74,7 +69,7 @@ public interface MascotaService {
     int insert(Mascota mascota);
 
     /**
-     * <p>Actualiza en la base un objeto de tipo "Mascota".
+     * Actualiza en la base un objeto de tipo "Mascota".
      *
      * @param mascota Objeto de tipo Mascota en donde el ID es la llave en la base de datos.
      * @return Retorna el ID de la mascota a ser actualizada.
@@ -82,7 +77,7 @@ public interface MascotaService {
     int update(Mascota mascota);
 
     /**
-     * <p>Elimina en la base un objeto de tipo "Mascota".
+     * Elimina en la base un objeto de tipo "Mascota".
      * @param id Identificador de la mascota a ser eliminada de la base de datos.
      *
      * @return Retorna el ID de la mascota que fué eliminada.
@@ -90,7 +85,7 @@ public interface MascotaService {
     int delete(int id);
 
     /**
-     * <p>Retorna la suma de dos enteros
+     * Retorna la suma de dos enteros
      *
      * @param a primer entero
      * @param b segundo entero
