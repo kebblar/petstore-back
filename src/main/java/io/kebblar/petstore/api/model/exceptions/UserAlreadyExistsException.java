@@ -10,10 +10,11 @@
  * Artefacto:   UserAlreadyExistsException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (09_05)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_05)
  *
  * Historia:    .
  *              20210504_0905 Creación de esta Excepción
+ *              20210511_0855 Se modifica la fecha en la licencia
  *
  */
 package io.kebblar.petstore.api.model.exceptions;

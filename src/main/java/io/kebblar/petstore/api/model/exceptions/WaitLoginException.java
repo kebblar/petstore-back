@@ -10,10 +10,11 @@
  * Artefacto:   WaitLoginException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (08_59)
+ * Fecha:       Martes 4 de Mayo de 2021 (08_59)
  *
  * Historia:    .
  *              20210504_0859 Creación de esta Excepción
+ *              20210511_0855 Se modifica la fecha en la licencia
  *
  */
 package io.kebblar.petstore.api.model.exceptions;

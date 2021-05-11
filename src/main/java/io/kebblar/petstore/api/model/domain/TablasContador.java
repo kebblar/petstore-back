@@ -10,10 +10,11 @@
  * Artefacto:   TablasContador.java
  * Tipo:        enum
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (09_31)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_31)
  *
  * Historia:    .
  *              20210503_0931 Creación de éste enum
+ *              20210511_0859 Se modifica la fecha en la licencia
  *
  */
 package io.kebblar.petstore.api.model.domain;

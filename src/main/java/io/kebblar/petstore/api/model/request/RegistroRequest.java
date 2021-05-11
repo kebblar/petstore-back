@@ -10,11 +10,12 @@
  * Artefacto:   RegistroRequest.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (09_26)
+ * Fecha:       Martes 4 de Mayo de 2021 (09_26)
  *
  * Historia:    .
  *              20210503_0926 Creación de éste Request
- *
+ *              20210511_0855 Se modifica la fecha en la licencia
+ *              
  */
 package io.kebblar.petstore.api.model.request;
 

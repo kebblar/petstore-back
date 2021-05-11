@@ -10,12 +10,13 @@
  * Artefacto:   EstadoServiceImpl.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (08_59)
+ * Fecha:       Martes 4 de Mayo de 2021 (08_59)
  * 
  * Clase para la logica del servicio asociado a la entidad 'estado'. 
  * 
  * Historia:    .
  *              20210504_0859 Creación de está implementacion del servicio
+ *              20210511_09:01 Se modifica la fecha en la licencia
  *
  */
 package io.kebblar.petstore.api.service;
