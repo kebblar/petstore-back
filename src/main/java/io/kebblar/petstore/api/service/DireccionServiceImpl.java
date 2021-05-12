@@ -25,6 +25,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -111,6 +112,19 @@ public class DireccionServiceImpl implements DireccionService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new MapperCallException("Error de salvado de una Dirección", e.getMessage());
+        }
+    }
+
+    /*
+     * Implementación del método getById
+     */
+    @Override
+    public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
+        try {
+            return direccionMapper.getDireccionesNombre(idUser);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
         }
     }
 

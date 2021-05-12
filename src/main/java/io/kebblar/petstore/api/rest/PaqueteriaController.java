@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 
@@ -25,7 +25,15 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Paqueteria;
 import io.kebblar.petstore.api.service.PaqueteriaService;
@@ -33,6 +41,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -49,7 +58,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 1.0-SNAPSHOT
  *
  * @see Paqueteria
- * @see io.kebblar.petstore.api.service.PaqueteriaService
+ * @see PaqueteriaService
  */
 
 @RestController
@@ -96,7 +105,10 @@ public class PaqueteriaController {
     @GetMapping(
         value = "/paqueteria/{id}.json",
         produces = "application/json; charset=utf-8")
-    public Paqueteria getPaqueteria(@PathVariable int id) throws BusinessException {
+    public Paqueteria getPaqueteria(
+    @ApiParam(name="id", value="Representa el id del paqueteria buscado.")
+    @PathVariable int id
+    ) throws BusinessException {
         return this.paqueteriaService.getById(id);
     }
     
@@ -107,7 +119,10 @@ public class PaqueteriaController {
     @PostMapping(
             value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int insert(@RequestBody Paqueteria paqueteria) throws BusinessException {
+    public int insert(
+    @ApiParam(name="paqueteria", value="Paqueteria que será insertado en el sistema.")
+    @RequestBody Paqueteria paqueteria
+    ) throws BusinessException {
         return paqueteriaService.insert(paqueteria);
     }
 
@@ -119,7 +134,10 @@ public class PaqueteriaController {
     @PutMapping(
             value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int update(@RequestBody Paqueteria paqueteria) throws BusinessException {
+    public int update(
+    @ApiParam(name="paqueteria", value="Paqueteria que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+    @RequestBody Paqueteria paqueteria
+    ) throws BusinessException {
         return paqueteriaService.update(paqueteria);
     }
     
@@ -130,7 +148,10 @@ public class PaqueteriaController {
     @DeleteMapping(
             value = "/paqueteria.json",
             produces = "application/json; charset=utf-8")
-    public int delete(@RequestBody Paqueteria paqueteria) throws BusinessException {
+    public int delete(
+    @ApiParam(name="paqueteria", value="Paqueteria que será removido del sistema.")
+    @RequestBody Paqueteria paqueteria
+    ) throws BusinessException {
         return paqueteriaService.delete(paqueteria);
     }
     

@@ -1,23 +1,23 @@
+
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
  *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   EstadoService .java
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Estado
  * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface para el servicio asociado a la entidad 'estado'. 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
+ * 
+ *              ------------------------------------------------
  *
- * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
@@ -31,18 +31,21 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'estado'. 
  *
- * @author Gustavo A. Arellano
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
+
 public interface EstadoService {
 
     /**
      * Método utilizado para recuperar un elemento de la tabla 'estado'. por medio de su llave primaria.
      * 
-     * @param estado Instancia de Estado con los datos de la llave.
-     * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
+     * @param id Id del objeto buscado
+     * @return La información del elemento recuperado en una instacia de la clase Estado 
+     * o nulo si no se encuentra ese elemento en la tabla.
      */
-    Estado getById(Estado estado) throws BusinessException;
+    Estado getById(int id) throws BusinessException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
@@ -63,7 +66,7 @@ public interface EstadoService {
     /**
      * Método utilizado para actualizar un registro en la tabla 'estado'.
      * 
-     * @param estado objeto de tipo 'Estado'.
+     * @param  estado objeto de tipo 'Estado'.
      * @return int numero de registros actualizados en la tabla'estado'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -87,4 +90,11 @@ public interface EstadoService {
      */
     int delete(Estado estado) throws BusinessException;
 
+    /**
+     * Método que regresa la lista de estados pertenecientes a determinado país.
+     * @param id Id del pais que contiene a los estados retornados.
+     * @return Lista de Estados del pais 'íd'.
+     * @throws BusinessException En caso que ocurra un problema con la recuperación de la información.
+     */
+    List<Estado> getByPais(int id) throws BusinessException;
 }

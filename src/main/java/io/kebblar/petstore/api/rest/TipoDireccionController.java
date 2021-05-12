@@ -9,7 +9,7 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   PaisController .java
+ * Artefacto:   TipoDireccionController .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Pais;
-import io.kebblar.petstore.api.service.PaisService;
+import io.kebblar.petstore.api.model.domain.TipoDireccion;
+import io.kebblar.petstore.api.service.TipoDireccionService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
@@ -46,7 +46,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'tipo_direccion'. 
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
@@ -57,30 +57,30 @@ import io.swagger.annotations.ApiOperation;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Pais
- * @see PaisService
+ * @see TipoDireccion
+ * @see TipoDireccionService
  */
 
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
-public class PaisController {
+public class TipoDireccionController {
 
-    private PaisService paisService;
+    private TipoDireccionService tipoDireccionService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
-     * @param paisService Servicios de usuario
+     * @param tipoDireccionService Servicios de usuario
      */
-    public PaisController(PaisService paisService) {
-        this.paisService = paisService;
+    public TipoDireccionController(TipoDireccionService tipoDireccionService) {
+        this.tipoDireccionService = tipoDireccionService;
     }
 
     @ApiOperation(
-        value = "PaisController::getAll",
-        notes = "Regresa una lista de todos los objetos Pais "
+        value = "TipoDireccionController::getAll",
+        notes = "Regresa una lista de todos los objetos TipoDireccion "
             + "debidamente paginados con base en el payload de "
             + "request que determina el tamaño de la página, la "
             + "longitud de la página, el campo por el que se va a "
@@ -92,67 +92,67 @@ public class PaisController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/paises.json",
+        value = "/tipo-direcciones.json",
         produces = "application/json; charset=utf-8")
-    public List<Pais> getAllPais() throws BusinessException {
-        return paisService.getAll();
+    public List<TipoDireccion> getAllTipoDireccion() throws BusinessException {
+        return tipoDireccionService.getAll();
     }
     
     @ApiOperation(
-        value = "PaisController::get",
-        notes = "Regresa un objeto Pais cuyo id "
+        value = "TipoDireccionController::get",
+        notes = "Regresa un objeto TipoDireccion cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/pais/{id}.json",
+        value = "/tipo-direccion/{id}.json",
         produces = "application/json; charset=utf-8")
-    public Pais getPais(
-    @ApiParam(name="id", value="Representa el id del pais buscado.")
+    public TipoDireccion getTipoDireccion(
+    @ApiParam(name="id", value="Representa el id del tipoDireccion buscado.")
     @PathVariable int id
     ) throws BusinessException {
-        return this.paisService.getById(id);
+        return this.tipoDireccionService.getById(id);
     }
     
     @ApiOperation(
-        value = "PaisController::insert",
-        notes = "Recibe un objeto Pais el cual debe de ser insertado "
+        value = "TipoDireccionController::insert",
+        notes = "Recibe un objeto TipoDireccion el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/pais.json",
+            value = "/tipo-direccion.json",
             produces = "application/json; charset=utf-8")
     public int insert(
-    @ApiParam(name="pais", value="Pais que será insertado en el sistema.")
-    @RequestBody Pais pais
+    @ApiParam(name="tipoDireccion", value="TipoDireccion que será insertado en el sistema.")
+    @RequestBody TipoDireccion tipoDireccion
     ) throws BusinessException {
-        return paisService.insert(pais);
+        return tipoDireccionService.insert(tipoDireccion);
     }
 
     @ApiOperation(
-        value = "PaisController::update",
-        notes = "Recibe un objeto Pais, este objeto es buscado por "
+        value = "TipoDireccionController::update",
+        notes = "Recibe un objeto TipoDireccion, este objeto es buscado por "
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/pais.json",
+            value = "/tipo-direccion.json",
             produces = "application/json; charset=utf-8")
     public int update(
-    @ApiParam(name="pais", value="Pais que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Pais pais
+    @ApiParam(name="tipoDireccion", value="TipoDireccion que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+    @RequestBody TipoDireccion tipoDireccion
     ) throws BusinessException {
-        return paisService.update(pais);
+        return tipoDireccionService.update(tipoDireccion);
     }
     
     @ApiOperation(
-        value = "PaisController::delete",
-        notes = "Recibe un objeto Pais, el cual es buscado dentro de "
+        value = "TipoDireccionController::delete",
+        notes = "Recibe un objeto TipoDireccion, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/pais.json",
+            value = "/tipo-direccion.json",
             produces = "application/json; charset=utf-8")
     public int delete(
-    @ApiParam(name="pais", value="Pais que será removido del sistema.")
-    @RequestBody Pais pais
+    @ApiParam(name="tipoDireccion", value="TipoDireccion que será removido del sistema.")
+    @RequestBody TipoDireccion tipoDireccion
     ) throws BusinessException {
-        return paisService.delete(pais);
+        return tipoDireccionService.delete(tipoDireccion);
     }
     
 }

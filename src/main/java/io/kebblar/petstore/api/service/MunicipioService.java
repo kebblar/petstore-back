@@ -1,23 +1,23 @@
+
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
  *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   MunicipioService .java
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Municipio
  * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface para el servicio asociado a la entidad 'municipio'. 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
+ * 
+ *              ------------------------------------------------
  *
- * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
@@ -31,18 +31,21 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'municipio'. 
  *
- * @author Gustavo A. Arellano
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
+
 public interface MunicipioService {
 
     /**
      * Método utilizado para recuperar un elemento de la tabla 'municipio'. por medio de su llave primaria.
      * 
-     * @param municipio Instancia de Municipio con los datos de la llave.
-     * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
+     * @param id Id del objeto buscado
+     * @return La información del elemento recuperado en una instacia de la clase Municipio 
+     * o nulo si no se encuentra ese elemento en la tabla.
      */
-    Municipio getById(Municipio municipio) throws BusinessException;
+    Municipio getById(int id) throws BusinessException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'municipio'.
@@ -63,7 +66,7 @@ public interface MunicipioService {
     /**
      * Método utilizado para actualizar un registro en la tabla 'municipio'.
      * 
-     * @param municipio objeto de tipo 'Municipio'.
+     * @param  municipio objeto de tipo 'Municipio'.
      * @return int numero de registros actualizados en la tabla'municipio'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -87,4 +90,11 @@ public interface MunicipioService {
      */
     int delete(Municipio municipio) throws BusinessException;
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     */
+    List<Municipio> getByEstado(int id) throws BusinessException;
 }

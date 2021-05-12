@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210504_1142 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 
@@ -37,7 +37,7 @@ import java.util.Objects;
 
 public class Pais implements Serializable {
 
-    private static final long serialVersionUID = -7587967386673055103L;
+    private static final long serialVersionUID = -5276098491645107636L;
 
     /**
      * Atributos de la clase

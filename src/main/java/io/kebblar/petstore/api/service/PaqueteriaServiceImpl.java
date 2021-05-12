@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 

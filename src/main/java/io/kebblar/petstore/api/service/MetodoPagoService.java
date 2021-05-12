@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        interface 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
@@ -90,5 +90,4 @@ public interface MetodoPagoService {
      */
     int delete(MetodoPago metodoPago) throws BusinessException;
 
-    List<MetodoPago> getByUser(int idUser) throws BusinessException;
 }

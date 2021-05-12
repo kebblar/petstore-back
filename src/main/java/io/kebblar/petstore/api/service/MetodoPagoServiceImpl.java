@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 
@@ -124,16 +124,6 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
             return metodoPagoMapper.delete(metodoPago.getId());
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
-        }
-    }
-
-    @Override
-    public List<MetodoPago> getByUser(int idUser) throws BusinessException{
-        try {
-            return metodoPagoMapper.getByUser(idUser);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();

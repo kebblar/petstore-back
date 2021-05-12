@@ -1,23 +1,23 @@
+
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
  *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   Municipio .java
  * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Municipio
  * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'municipio'. 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
+ * 
+ *              ------------------------------------------------
  *
- * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 
@@ -30,32 +30,37 @@ import java.util.Objects;
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'municipio'. 
  *
- * @author Gustavo A. Arellano
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
+
 public class Municipio implements Serializable {
 
-    private static final long serialVersionUID = 4029696770607420120L;
+    private static final long serialVersionUID = 5007490559310553080L;
 
+    /**
+     * Atributos de la clase
+     */
     private Integer id;
     private int idEstado;
     private String nombre;
 
     /**
-     * Constructor por default.
+     * Constructor por default (sin parámetros).
      */
     public Municipio() {
     }
 
     /**
-     * Constructor basado en llaves.
+     * Constructor basado en la llave primaria.
      */
     public Municipio(Integer id) {
         this.id = id;
     }
 
     /**
-     * Constructor basado en atributos.
+     * Constructor basado en todos los atributos de la clase.
      */
     public Municipio(Integer id, int idEstado, String nombre) {
         this.id = id;
@@ -105,6 +110,10 @@ public class Municipio implements Serializable {
         this.nombre = nombre;
     }
     
+
+    /**
+     * Método toString para el pojo, representa al objeto en forma de cadena
+     */
     @Override
     public String toString() {
         return "[Municipio] : ["
@@ -114,6 +123,9 @@ public class Municipio implements Serializable {
                 + "]";
     }
     
+    /**
+     * Compara si dos instancias de la clase Municipio son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -129,6 +141,9 @@ public class Municipio implements Serializable {
                nombre == other.nombre; 
     }
     
+    /**
+     * Genera un hash del objeto
+     */
     @Override
     public int hashCode() {
         return Objects.hash(

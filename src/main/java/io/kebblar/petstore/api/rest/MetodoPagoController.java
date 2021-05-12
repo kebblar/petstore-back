@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase 
  *
  */
 
@@ -25,7 +25,15 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.MetodoPago;
 import io.kebblar.petstore.api.service.MetodoPagoService;
@@ -33,6 +41,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -49,7 +58,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 1.0-SNAPSHOT
  *
  * @see MetodoPago
- * @see io.kebblar.petstore.api.service.MetodoPagoService
+ * @see MetodoPagoService
  */
 
 @RestController
@@ -96,18 +105,11 @@ public class MetodoPagoController {
     @GetMapping(
         value = "/metodo-pago/{id}.json",
         produces = "application/json; charset=utf-8")
-    public MetodoPago getMetodoPago(@PathVariable int id) throws BusinessException {
+    public MetodoPago getMetodoPago(
+    @ApiParam(name="id", value="Representa el id del metodoPago buscado.")
+    @PathVariable int id
+    ) throws BusinessException {
         return this.metodoPagoService.getById(id);
-    }
-
-    @ApiOperation(
-            value = "MetodoPagoController::getByUser",
-            notes = "Regresa la lista de métodos de pago asociados a detrerminado usuario conociendo su id")
-    @GetMapping(
-            value = "/metodo-pago-usuario/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public List<MetodoPago> getByUser(@PathVariable int id) throws BusinessException {
-        return this.metodoPagoService.getByUser(id);
     }
     
     @ApiOperation(
@@ -117,7 +119,10 @@ public class MetodoPagoController {
     @PostMapping(
             value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
-    public int insert(@RequestBody MetodoPago metodoPago) throws BusinessException {
+    public int insert(
+    @ApiParam(name="metodoPago", value="MetodoPago que será insertado en el sistema.")
+    @RequestBody MetodoPago metodoPago
+    ) throws BusinessException {
         return metodoPagoService.insert(metodoPago);
     }
 
@@ -129,7 +134,10 @@ public class MetodoPagoController {
     @PutMapping(
             value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
-    public int update(@RequestBody MetodoPago metodoPago) throws BusinessException {
+    public int update(
+    @ApiParam(name="metodoPago", value="MetodoPago que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+    @RequestBody MetodoPago metodoPago
+    ) throws BusinessException {
         return metodoPagoService.update(metodoPago);
     }
     
@@ -140,7 +148,10 @@ public class MetodoPagoController {
     @DeleteMapping(
             value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
-    public int delete(@RequestBody MetodoPago metodoPago) throws BusinessException {
+    public int delete(
+    @ApiParam(name="metodoPago", value="MetodoPago que será removido del sistema.")
+    @RequestBody MetodoPago metodoPago
+    ) throws BusinessException {
         return metodoPagoService.delete(metodoPago);
     }
     

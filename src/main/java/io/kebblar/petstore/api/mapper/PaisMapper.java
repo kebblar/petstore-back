@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        interface 
  * AUTOR:       Fhernanda Romo
- * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210504_1142 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
@@ -37,7 +37,7 @@ import io.kebblar.petstore.api.model.domain.Pais;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see io.kebblar.petstore.api.model.domain.Pais
+ * @see Pais
  */
 
 @Repository
@@ -55,7 +55,7 @@ public interface PaisMapper {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre")    
     })
-    @Select("SELECT * FROM pais WHERE id = #{id}")
+    @Select("SELECT " + CAMPOS + " FROM pais WHERE     id = #{id}     ") 
     Pais getById(int id) throws SQLException;
 
     /**
@@ -91,8 +91,8 @@ public interface PaisMapper {
      */
     @Update(
     "UPDATE pais" 
-    + "SET nombre = #{nombre}"
-    + "WHERE id = #{id} ")
+    + " SET nombre = #{nombre}"
+    + " WHERE id = #{id} ")
     int update(Pais pais) throws SQLException;
 
     /**

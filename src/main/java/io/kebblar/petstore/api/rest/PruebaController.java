@@ -2,7 +2,9 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.model.response.GoogleCaptcha;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -49,5 +51,10 @@ public class PruebaController {
     @PostMapping(path = "/captchaPba.json", produces = "application/json; charset=utf-8")
     public String captchaPba(@RequestBody GoogleCaptcha googleCaptcha) throws  BusinessException {
         return "{ \"todo\" : \"ok\" }";
+    }
+
+    @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")
+    public List<DireccionConNombre> getDireccionesUsuario(@PathVariable int userId) throws BusinessException {
+        return servicio.getDireccionesNombre(userId);
     }
 }

@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        interface 
  * AUTOR:       Fhernanda Romo
- * Fecha:       Monday 05 de May de 2021 (15_02)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210510_1502 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
@@ -93,9 +93,9 @@ public interface PaqueteriaMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE paqueteria "
-    + "SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio} "
-    + "WHERE id = #{id} ")
+    "UPDATE paqueteria" 
+    + " SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio}"
+    + " WHERE id = #{id} ")
     int update(Paqueteria paqueteria) throws SQLException;
 
     /**

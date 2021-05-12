@@ -13,11 +13,11 @@
  * Proyecto:    petstore
  * Tipo:        interface 
  * AUTOR:       Fhernanda Romo
- * Fecha:       mardi 05 de mai de 2021 (11_42)
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
  *
- * Historia:    20210504_1142 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface 
  *
  */
 
