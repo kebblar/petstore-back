@@ -26,6 +26,7 @@ package io.kebblar.petstore.api.service;
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 
 /**
@@ -98,5 +99,13 @@ public interface DireccionService {
      */
     List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException;
 
+    /**
+     * Metodo que recibe los datos de una direccion agregada durante el proceso de compra y distribuye su
+     * contenido para almacenarlo de forma correcta en el sistema.
+     * @param nuevaDireccion
+     * @return
+     * @throws BusinessException
+     */
+    int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
 }
 

@@ -2,6 +2,7 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.model.response.GoogleCaptcha;
 import org.apache.ibatis.annotations.Select;
@@ -23,11 +24,6 @@ public class PruebaController {
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
     public List<Direccion> getAll() throws BusinessException {
         return servicio.getAll();
-    }
-
-    @GetMapping(path = "/tipo-direccion.json", produces = "application/json; charset=utf-8")
-    public List<TipoDireccion> getAll2() throws BusinessException {
-        return servicio2.getAll();
     }
 
     @PostMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
@@ -56,5 +52,10 @@ public class PruebaController {
     @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")
     public List<DireccionConNombre> getDireccionesUsuario(@PathVariable int userId) throws BusinessException {
         return servicio.getDireccionesNombre(userId);
+    }
+
+    @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
+    public int nuevaDireccion(@RequestBody NuevaDireccion nuevaDireccion) throws BusinessException{
+        return servicio.agregaDireccion(nuevaDireccion);
     }
 }

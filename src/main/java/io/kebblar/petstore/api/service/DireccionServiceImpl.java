@@ -23,8 +23,11 @@
 
 package io.kebblar.petstore.api.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
+import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -123,6 +126,32 @@ public class DireccionServiceImpl implements DireccionService {
         try {
             return direccionMapper.getDireccionesNombre(idUser);
         } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
+        int idDireccion;
+        UsuarioDireccion ud;
+        Direccion d = new Direccion(nuevaDireccion.getId(),
+                nuevaDireccion.getCalleNumero(),
+                nuevaDireccion.getColonia(),
+                nuevaDireccion.getIdPais(),
+                nuevaDireccion.getIdEstado(),
+                nuevaDireccion.getIdMunicipio(),
+                nuevaDireccion.getTipo(),
+                nuevaDireccion.getCp(),
+                nuevaDireccion.getReferencias(),
+                true);
+        try{
+            direccionMapper.insert(d);
+            idDireccion = d.getId();
+            System.out.println(idDireccion);
+            ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
+            return direccionMapper.insertUsuarioDireccion(ud);
+        }catch(SQLException e){
             logger.error(e.getMessage());
             throw new BusinessException();
         }

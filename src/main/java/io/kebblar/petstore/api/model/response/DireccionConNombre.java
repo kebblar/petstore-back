@@ -50,7 +50,6 @@ public class DireccionConNombre implements Serializable {
     private String estadoNombre;
     private String paisNombre;
 
-    private String destinatario;
 
     /**
      * Constructor por default (sin parámetros).
@@ -62,7 +61,7 @@ public class DireccionConNombre implements Serializable {
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public DireccionConNombre(int id, String calleNumero, String colonia, String cp, String municipioNombre, String estadoNombre, String paisNombre, String destinatario) {
+    public DireccionConNombre(int id, String calleNumero, String colonia, String cp, String municipioNombre, String estadoNombre, String paisNombre) {
         this.id = id;
         this.calleNumero = calleNumero;
         this.colonia = colonia;
@@ -70,7 +69,6 @@ public class DireccionConNombre implements Serializable {
         this.municipioNombre = municipioNombre;
         this.estadoNombre = estadoNombre;
         this.paisNombre = paisNombre;
-        this.destinatario = destinatario;
     }
 
     /**
@@ -85,20 +83,6 @@ public class DireccionConNombre implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * Getter para destinatario.
-     */
-    public String getDestinatario() {
-        return destinatario;
-    }
-
-    /**
-     * Setter para destinatario.
-     */
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
     }
 
     /**
@@ -199,27 +183,19 @@ public class DireccionConNombre implements Serializable {
                 ", municipioNombre='" + municipioNombre + '\'' +
                 ", estadoNombre='" + estadoNombre + '\'' +
                 ", paisNombre='" + paisNombre + '\'' +
-                ", destinatario='" + destinatario + '\'' +
                 '}';
     }
 
-    /**
-     * Compara si dos instancias de la clase DireccionConNombre son iguales
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DireccionConNombre)) return false;
         DireccionConNombre that = (DireccionConNombre) o;
-        return id == that.id && Objects.equals(calleNumero, that.calleNumero) && Objects.equals(colonia, that.colonia) && Objects.equals(cp, that.cp) && Objects.equals(municipioNombre, that.municipioNombre) && Objects.equals(estadoNombre, that.estadoNombre) && Objects.equals(paisNombre, that.paisNombre) && Objects.equals(destinatario, that.destinatario);
+        return id == that.id && Objects.equals(calleNumero, that.calleNumero) && Objects.equals(colonia, that.colonia) && Objects.equals(cp, that.cp) && Objects.equals(municipioNombre, that.municipioNombre) && Objects.equals(estadoNombre, that.estadoNombre) && Objects.equals(paisNombre, that.paisNombre);
     }
 
-    /**
-     * Genera un hash del objeto
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(id, calleNumero, colonia, cp, municipioNombre, estadoNombre, paisNombre, destinatario);
+        return Objects.hash(id, calleNumero, colonia, cp, municipioNombre, estadoNombre, paisNombre);
     }
-
 }
