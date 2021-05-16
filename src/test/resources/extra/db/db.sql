@@ -442,6 +442,7 @@ CREATE TABLE `usuario_detalle` (
 
 LOCK TABLES `usuario_detalle` WRITE;
 /*!40000 ALTER TABLE `usuario_detalle` DISABLE KEYS */;
+INSERT INTO `usuario_detalle` VALUES (1,'Gustavo','Arellano','Sandoval',NULL,'Goose','5516913071'),(2,'nom2','ap2','am2',NULL,'nick2','5516913072'),(3,'nom3','ap3','am3',NULL,'nick3','5516913073'),(4,'nom4','ap4','am4',NULL,'nick4','5516913074'),(6,'nom6','ap6','am6',NULL,'nick6','5516913076');
 /*!40000 ALTER TABLE `usuario_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
