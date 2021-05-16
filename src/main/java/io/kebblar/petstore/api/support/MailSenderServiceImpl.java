@@ -104,7 +104,7 @@ public class MailSenderServiceImpl implements MailSenderService {
             helper.setSubject(subject);
             helper.setText(body, true);
             javaMailSender.send(mail);
-            return "";
+            return "succeed";
         } catch (MessagingException me) {
             logger.error(ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD, me.getMessage());
             return ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD;

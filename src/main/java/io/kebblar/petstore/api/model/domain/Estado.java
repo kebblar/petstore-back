@@ -1,19 +1,43 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
+<<<<<<< HEAD
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
+=======
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
  *              modificar los  datos  establecidos en la mención 
  *              de: "AUTOR".
+>>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
+<<<<<<< HEAD
+ * 
+ * Artefacto:   Estado .java
+ * Proyecto:    petstore
+ * Tipo:        clase 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
+ * 
+ *              ------------------------------------------------
+=======
  * Artefacto:   Estado.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Lunes 4 de Mayo de 2021 (17_35)
+>>>>>>> refs/heads/develop
  *
+<<<<<<< HEAD
+ * Historia:    20210511_1444 Implementación de clase 
+=======
  * Historia:    .
  *              20210504_1735 Creación de éste POJO
+>>>>>>> refs/heads/develop
  *
  */
 
@@ -29,28 +53,32 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
+
 public class Estado implements Serializable {
     private static final long serialVersionUID = -4082525936309639098L;
 
+    /**
+     * Atributos de la clase
+     */
     private Integer id;
     private int idPais;
     private String nombre;
 
     /**
-     * Constructor por default.
+     * Constructor por default (sin parámetros).
      */
     public Estado() {
     }
 
     /**
-     * Constructor basado en llaves.
+     * Constructor basado en la llave primaria.
      */
     public Estado(Integer id) {
         this.id = id;
     }
 
     /**
-     * Constructor basado en atributos.
+     * Constructor basado en todos los atributos de la clase.
      */
     public Estado(Integer id, int idPais, String nombre) {
         this.id = id;
@@ -100,6 +128,10 @@ public class Estado implements Serializable {
         this.nombre = nombre;
     }
     
+
+    /**
+     * Método toString para el pojo, representa al objeto en forma de cadena
+     */
     @Override
     public String toString() {
         return "[Estado] : ["
@@ -109,6 +141,9 @@ public class Estado implements Serializable {
                 + "]";
     }
     
+    /**
+     * Compara si dos instancias de la clase Estado son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -124,6 +159,9 @@ public class Estado implements Serializable {
                nombre == other.nombre; 
     }
     
+    /**
+     * Genera un hash del objeto
+     */
     @Override
     public int hashCode() {
         return Objects.hash(

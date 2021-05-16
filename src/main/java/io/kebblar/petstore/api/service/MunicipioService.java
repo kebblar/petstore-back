@@ -9,14 +9,15 @@
  *              ------------------------------------------------
  * Artefacto:   MunicipioService.java
  * Tipo:        interface 
- * AUTOR:       Gustavo A. Arellano
- * Fecha:       Martes 04 de Mayo de 2021 (16_35) 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 05 de May de 2021 (14_44)
+ * 
+ *              ------------------------------------------------
  *
  * Historia:    .
  *              20210504_1635 Creación de la interfaz
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public interface MunicipioService {
      * @return Objeto de tipo  {@link Municipio} con la respuesta esperada por el fronted
      * @throws BusinessException La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
-    Municipio getById(int  id) throws BusinessException;
+    Municipio getById(int id) throws BusinessException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'municipio'.
@@ -57,7 +58,6 @@ public interface MunicipioService {
      * @throws BusinessException
      */
     List<Municipio> getAllByEstado(int idEstado) throws BusinessException;
-
     
     /**
      * Método utilizado para insertar un registro en la tabla 'municipio'.
@@ -71,7 +71,7 @@ public interface MunicipioService {
     /**
      * Método utilizado para actualizar un registro en la tabla 'municipio'.
      * 
-     * @param municipio objeto de tipo 'Municipio'.
+     * @param  municipio objeto de tipo 'Municipio'.
      * @return int numero de registros actualizados en la tabla'municipio'.
      * @throws Exception es disparada por una regla de negocio
      */

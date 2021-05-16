@@ -1,3 +1,4 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para  copiarlo, distribuirlo o modificarlo total
@@ -29,6 +30,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  *
  * @author Luz
  * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
 public interface PaisService {
 
@@ -59,7 +61,7 @@ public interface PaisService {
     /**
      * Método utilizado para actualizar un registro en la tabla 'pais'.
      * 
-     * @param pais objeto de tipo 'Pais'.
+     * @param  pais objeto de tipo 'Pais'.
      * @return int numero de registros actualizados en la tabla'pais'.
      * @throws Exception es disparada por una regla de negocio
      */

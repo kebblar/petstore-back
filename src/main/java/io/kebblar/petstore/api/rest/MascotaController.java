@@ -42,7 +42,6 @@ import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.kebblar.petstore.api.support.JwtManagerService;
-import io.kebblar.petstore.api.support.MailSenderService;
 
 /**
  * <p>Implementacion  del controlador REST asociado a los endpoints 
@@ -67,7 +66,6 @@ public class MascotaController {
     private MascotaService mascotaService;
     private RemoteRestCallService remoteRestCallService;
     private JwtManagerService jwtManagerService;
-    private MailSenderService mailSenderService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán 
@@ -78,10 +76,9 @@ public class MascotaController {
      * @param mailSenderService Serivico de mailSender
      * @param remoteRestCallService Servicio de remoteRestCall
      */
-    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, MailSenderService mailSenderService, RemoteRestCallService remoteRestCallService) {
+    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, RemoteRestCallService remoteRestCallService) {
         this.mascotaService = mascotaService;
         this.jwtManagerService=jwtManagerService;
-        this.mailSenderService=mailSenderService;
         this.remoteRestCallService=remoteRestCallService;
     }
 
@@ -91,7 +88,6 @@ public class MascotaController {
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", token);
         mapa.put("dato-2", "tavo_bad");
-        mailSenderService.sendHtmlMail("garellanos@ultrasist.com.mx", "Pba", "<h1>Hello World</h1>");
         return mapa;
     }
 

@@ -1,86 +1,75 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
-<<<<<<< HEAD
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
  *              modificar  los datos establecidos en  la mencion 
  *              de "AUTOR".
-=======
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
- *              de: "AUTOR".
->>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
-<<<<<<< HEAD
  * 
- * Artefacto:   Pais .java
+ * Artefacto:   Paqueteria .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
-=======
- * Artefacto:   Pais.java
- * Tipo:        clase
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 3 de Mayo de 2021 (23_21)
->>>>>>> refs/heads/develop
  *
-<<<<<<< HEAD
  * Historia:    20210511_1444 Implementación de clase 
-=======
- * Historia:    .
- *              20210503_2321 Creación de éste POJO
->>>>>>> refs/heads/develop
  *
  */
+
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link Pais}.
- * 
- * @author  garellano
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'paqueteria'. 
+ *
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
  */
 
-public class Pais implements Serializable {
-    private static final long serialVersionUID = 4897377279463910357L;
+public class Paqueteria implements Serializable {
+
+    private static final long serialVersionUID = 4781082860740788585L;
 
     /**
      * Atributos de la clase
      */
     private Integer id;
     private String nombre;
+    private String breveDescripcion;
+    private String htmlDescripcion;
+    private int precio;
 
     /**
      * Constructor por default (sin parámetros).
      */
-    public Pais() {
+    public Paqueteria() {
     }
 
     /**
      * Constructor basado en la llave primaria.
      */
-    public Pais(Integer id) {
+    public Paqueteria(Integer id) {
         this.id = id;
     }
 
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public Pais(Integer id, String nombre) {
+    public Paqueteria(Integer id, String nombre, String breveDescripcion, String htmlDescripcion, int precio) {
         this.id = id;
         this.nombre = nombre;
+        this.breveDescripcion = breveDescripcion;
+        this.htmlDescripcion = htmlDescripcion;
+        this.precio = precio;
     }
 
     /**
@@ -111,33 +100,81 @@ public class Pais implements Serializable {
         this.nombre = nombre;
     }
     
+    /**
+     * Getter para breveDescripcion.
+     */
+    public String getBreveDescripcion() {
+        return breveDescripcion;
+    }
+    
+    /**
+     * Setter para breveDescripcion.
+     */
+    public void setBreveDescripcion(String breveDescripcion) {
+        this.breveDescripcion = breveDescripcion;
+    }
+    
+    /**
+     * Getter para htmlDescripcion.
+     */
+    public String getHtmlDescripcion() {
+        return htmlDescripcion;
+    }
+    
+    /**
+     * Setter para htmlDescripcion.
+     */
+    public void setHtmlDescripcion(String htmlDescripcion) {
+        this.htmlDescripcion = htmlDescripcion;
+    }
+    
+    /**
+     * Getter para precio.
+     */
+    public int getPrecio() {
+        return precio;
+    }
+    
+    /**
+     * Setter para precio.
+     */
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+    
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override
     public String toString() {
-        return "[Pais] : ["
+        return "[Paqueteria] : ["
                 + " id =" + this.id
                 + " nombre =" + this.nombre
+                + " breveDescripcion =" + this.breveDescripcion
+                + " htmlDescripcion =" + this.htmlDescripcion
+                + " precio =" + this.precio
                 + "]";
     }
     
     /**
-     * Compara si dos instancias de la clase Pais son iguales
+     * Compara si dos instancias de la clase Paqueteria son iguales
      */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Pais)) {
+        if (!(obj instanceof Paqueteria)) {
             return false;
         }
-        Pais other = (Pais) obj;
+        Paqueteria other = (Paqueteria) obj;
         return
                id == other.id && 
-               nombre == other.nombre; 
+               nombre == other.nombre && 
+               breveDescripcion == other.breveDescripcion && 
+               htmlDescripcion == other.htmlDescripcion && 
+               precio == other.precio; 
     }
     
     /**
@@ -147,7 +184,10 @@ public class Pais implements Serializable {
     public int hashCode() {
         return Objects.hash(
             id, 
-            nombre
+            nombre, 
+            breveDescripcion, 
+            htmlDescripcion, 
+            precio
         );
     }
 

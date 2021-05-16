@@ -9,7 +9,7 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   TipoDireccionMapper .java
+ * Artefacto:   PaqueteriaMapper .java
  * Proyecto:    petstore
  * Tipo:        interface 
  * AUTOR:       Fhernanda Romo
@@ -27,83 +27,85 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import io.kebblar.petstore.api.model.domain.TipoDireccion;
+import io.kebblar.petstore.api.model.domain.Paqueteria;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria 
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see TipoDireccion
+ * @see Paqueteria
  */
 
 @Repository
-public interface TipoDireccionMapper {
-    static final String CAMPOS = " id, nombre, activo ";
+public interface PaqueteriaMapper {
+    static final String CAMPOS = " id, nombre, breve_descripcion, html_descripcion, precio ";
 
     /**
-     * Obtiene un objeto de tipo 'TipoDireccion' dado su id.
+     * Obtiene un objeto de tipo 'Paqueteria' dado su id.
      *
-     * @return TipoDireccion que tiene asignado el id pasado como parametro
+     * @return Paqueteria que tiene asignado el id pasado como parametro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
-    @Results(id="TipoDireccionMap", value = {
+    @Results(id="PaqueteriaMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "breveDescripcion",   column = "breve_descripcion"),
+            @Result(property = "htmlDescripcion",   column = "html_descripcion"),
+            @Result(property = "precio",   column = "precio")    
     })
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion WHERE     id = #{id}     ") 
-    TipoDireccion getById(int id) throws SQLException;
+    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE     id = #{id}     ") 
+    Paqueteria getById(int id) throws SQLException;
 
     /**
-     * Obtiene una lista de objetos de tipo 'TipoDireccion'.
+     * Obtiene una lista de objetos de tipo 'Paqueteria'.
      *
-     * @return Lista de obetos de tipo TipoDireccion
+     * @return Lista de obetos de tipo Paqueteria
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
-    @ResultMap("TipoDireccionMap")
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion ") 
-    List<TipoDireccion> getAll() throws SQLException;
+    @ResultMap("PaqueteriaMap")
+    @Select("SELECT " + CAMPOS + " FROM paqueteria ") 
+    List<Paqueteria> getAll() throws SQLException;
     
     /**
-     * Inserta un objeto de tipo 'TipoDireccion' con base en la información dada por el objeto de tipo 'TipoDireccion'.
+     * Inserta un objeto de tipo 'Paqueteria' con base en la información dada por el objeto de tipo 'Paqueteria'.
      *
-     * @param tipoDireccion a ser insertado.
+     * @param paqueteria a ser insertado.
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO tipo_direccion(id, nombre, activo) "
-   + "VALUES(#{id}, #{nombre}, #{activo} )")
+    "INSERT INTO paqueteria(id, nombre, breve_descripcion, html_descripcion, precio) "
+   + "VALUES(#{id}, #{nombre}, #{breveDescripcion}, #{htmlDescripcion}, #{precio} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(TipoDireccion tipoDireccion) throws SQLException;
+    int insert(Paqueteria paqueteria) throws SQLException;
 
 /**
-     * Actualiza un objeto de tipo 'TipoDireccion' con base en la infrmación dada por el objeto de tipo 'TipoDireccion'.
+     * Actualiza un objeto de tipo 'Paqueteria' con base en la infrmación dada por el objeto de tipo 'Paqueteria'.
      *
-     * @param tipoDireccion a ser actualizado.
+     * @param paqueteria a ser actualizado.
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE tipo_direccion" 
-    + " SET nombre = #{nombre}, activo = #{activo}"
+    "UPDATE paqueteria" 
+    + " SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio}"
     + " WHERE id = #{id} ")
-    int update(TipoDireccion tipoDireccion) throws SQLException;
+    int update(Paqueteria paqueteria) throws SQLException;
 
     /**
-     * Borra (de manera lógica y no física) el registro de TipoDireccion.
+     * Borra (de manera lógica y no física) el registro de Paqueteria.
      *
-     * @param id id del TipoDireccion a ser borrado
-     * @return id del TipoDireccion borrado
+     * @param id id del Paqueteria a ser borrado
+     * @return id del Paqueteria borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ") 
+    @Delete("DELETE FROM paqueteria WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
 }

@@ -18,8 +18,12 @@
  */
 package io.kebblar.petstore.api.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
+import io.kebblar.petstore.api.model.request.NuevaDireccion;
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -116,6 +120,45 @@ public class DireccionServiceImpl implements DireccionService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new MapperCallException("Error de salvado de una Dirección", e.getMessage());
+        }
+    }
+
+    /*
+     * Implementación del método getById
+     */
+    @Override
+    public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
+        try {
+            return direccionMapper.getDireccionesNombre(idUser);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
+        int idDireccion;
+        UsuarioDireccion ud;
+        Direccion d = new Direccion(nuevaDireccion.getId(),
+                nuevaDireccion.getCalleNumero(),
+                nuevaDireccion.getColonia(),
+                nuevaDireccion.getIdPais(),
+                nuevaDireccion.getIdEstado(),
+                nuevaDireccion.getIdMunicipio(),
+                nuevaDireccion.getTipo(),
+                nuevaDireccion.getCp(),
+                nuevaDireccion.getReferencias(),
+                true);
+        try{
+            direccionMapper.insert(d);
+            idDireccion = d.getId();
+            System.out.println(idDireccion);
+            ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
+            return direccionMapper.insertUsuarioDireccion(ud);
+        }catch(SQLException e){
+            logger.error(e.getMessage());
+            throw new BusinessException();
         }
     }
 

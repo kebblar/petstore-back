@@ -18,22 +18,18 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Rol;
-import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
+import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
+import io.kebblar.petstore.api.service.UsuarioService;
 import io.swagger.annotations.ApiParam;
 
 /**
@@ -57,6 +53,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class AccessController {
     private AccessService accessService;
+    private UsuarioService usuarioService;
     
     /**
      * Constructor que realiza el setting de los servicios que serán 
@@ -64,8 +61,9 @@ public class AccessController {
      * 
      * @param accessService Servicios de AccessService
      */
-    public AccessController(AccessService accessService) {
+    public AccessController(AccessService accessService, UsuarioService usuarioService) {
         this.accessService = accessService;
+        this.usuarioService = usuarioService;
     }
 
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
@@ -73,16 +71,11 @@ public class AccessController {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
-    @PostMapping(path = "/usuario-detalles.json", produces = "application/json; charset=utf-8")
-    public LoginResponse insertaUsuarioDetalles(
+    @PostMapping(path = "/usuario-preregistro.json", produces = "application/json; charset=utf-8")
+    public String insertaUsuarioDetalles(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
-    		@RequestBody UsuarioDetalle dato) throws ControllerException {
-        System.out.println(dato); // Esto va a evolucionar por código real. Por el momento es sólo una prueba.
-        String datos = UUID.randomUUID().toString();
-        List<Rol> roles = new ArrayList<>();
-        roles.add(new Rol(1,"r1",true));
-        roles.add(new Rol(2,"r2",true));
-        roles.add(new Rol(3,"r3",true));
-        return new LoginResponse(dato, new Date(), "abc@aol.com", "gus-jwt-"+datos, roles, null);
+            @RequestBody Preregistro preRegistroRequest) throws BusinessException {
+        int i = this.usuarioService.preRegistro(preRegistroRequest);
+        return "ok:"+i;
     }
 }

@@ -19,11 +19,14 @@
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import io.kebblar.petstore.api.model.request.NuevaDireccion;
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
+import io.kebblar.petstore.api.model.response.GoogleCaptcha;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.domain.*;
 import io.kebblar.petstore.api.service.*;
@@ -52,10 +55,8 @@ public class PruebaController {
     private DireccionService servicio;
     
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public String pba1() throws ControllerException {
-        List<Direccion> data = servicio.getAll();
-        System.out.println(data);
-        return res;
+    public List<Direccion> getAll() throws ControllerException {
+        return servicio.getAll();
     }
 
     @PostMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
@@ -70,4 +71,24 @@ public class PruebaController {
         return res;
     }
 
+    @PostMapping(path = "/pba1.json", produces = "application/json; charset=utf-8")
+    public String prueba(@RequestBody UsuarioDetalle usuarioDetalle) throws  ControllerException {
+        System.out.println(usuarioDetalle.toString());
+        return "{ \"todo\" : \"ok\" }";
+    }
+
+    @PostMapping(path = "/captchaPba.json", produces = "application/json; charset=utf-8")
+    public String captchaPba(@RequestBody GoogleCaptcha googleCaptcha) throws  ControllerException {
+        return "{ \"todo\" : \"ok\" }";
+    }
+
+    @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")
+    public List<DireccionConNombre> getDireccionesUsuario(@PathVariable int userId) throws ControllerException {
+        return servicio.getDireccionesNombre(userId);
+    }
+
+    @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
+    public int nuevaDireccion(@RequestBody NuevaDireccion nuevaDireccion) throws ControllerException {
+        return servicio.agregaDireccion(nuevaDireccion);
+    }
 }

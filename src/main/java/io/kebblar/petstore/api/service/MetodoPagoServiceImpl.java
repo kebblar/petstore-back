@@ -1,45 +1,26 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
-<<<<<<< HEAD
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
  *              modificar  los datos establecidos en  la mencion 
  *              de "AUTOR".
-=======
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
- *              de: "AUTOR".
->>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
-<<<<<<< HEAD
  * 
- * Artefacto:   TipoDireccionServiceImpl .java
+ * Artefacto:   MetodoPagoServiceImpl .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
-=======
- * Artefacto:   TipoDireccionServiceImpl.java
- * Tipo:        clase
- * AUTOR:       Luz Cuahonte (LC)
- * Fecha:       Jueves 6 de Mayo de 2021 (09_44)
->>>>>>> refs/heads/develop
  *
-<<<<<<< HEAD
  * Historia:    20210511_1444 Implementación de clase 
-=======
- * Historia:    .
- *              20210506_0944 Creación
->>>>>>> refs/heads/develop
  *
  */
+
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -47,58 +28,50 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import io.kebblar.petstore.api.model.domain.TipoDireccion;
-import io.kebblar.petstore.api.mapper.TipoDireccionMapper;
+import io.kebblar.petstore.api.model.domain.MetodoPago;
+import io.kebblar.petstore.api.mapper.MetodoPagoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'tipo_direccion'. 
+ * Servicio asociado a la entidad 'metodo_pago'. 
  *
-<<<<<<< HEAD
- * <p>Implementación de la interfaz {@link TipoDireccionService}.
+ * <p>Implementación de la interfaz {@link MetodoPagoService}.
  * 
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
-=======
- * @author luz
->>>>>>> refs/heads/develop
  * @version 1.0-SNAPSHOT
-<<<<<<< HEAD
  * @since 1.0-SNAPSHOT
  *
- * @see  TipoDireccion
- * @see  TipoDireccionService
-=======
- * @since   1.0-SNAPSHOT
->>>>>>> refs/heads/develop
+ * @see  MetodoPago
+ * @see  MetodoPagoService
  */
 
-@Service("tipoDireccionService")
-public class TipoDireccionServiceImpl implements TipoDireccionService {
+@Service("metodoPagoService")
+public class MetodoPagoServiceImpl implements MetodoPagoService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TipoDireccionServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MetodoPagoServiceImpl.class);
 
-    private TipoDireccionMapper tipoDireccionMapper;
+    private MetodoPagoMapper metodoPagoMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
      * 
-     * @param tipoDireccionMapper mapper utilizado para llamar a metodos de persistencia
+     * @param metodoPagoMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public TipoDireccionServiceImpl(TipoDireccionMapper tipoDireccionMapper) {
-        this.tipoDireccionMapper = tipoDireccionMapper;
+    public MetodoPagoServiceImpl(MetodoPagoMapper metodoPagoMapper) {
+        this.metodoPagoMapper = metodoPagoMapper;
     }
 
     /*
     * Implementación del método getById
     */
     @Override
-    public TipoDireccion getById(int id) throws BusinessException {
+    public MetodoPago getById(int id) throws BusinessException {
         try {
-            return tipoDireccionMapper.getById(id);
+            return metodoPagoMapper.getById(id);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -109,9 +82,9 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
     * Implementación del método getAll
     */
     @Override
-    public List<TipoDireccion> getAll() throws BusinessException {
+    public List<MetodoPago> getAll() throws BusinessException {
         try {
-            return tipoDireccionMapper.getAll();
+            return metodoPagoMapper.getAll();
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -122,9 +95,9 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
     * Implementación del método insert
     */
     @Override
-    public int insert(TipoDireccion tipoDireccion) throws BusinessException {
+    public int insert(MetodoPago metodoPago) throws BusinessException {
         try {
-            return tipoDireccionMapper.insert(tipoDireccion);
+            return metodoPagoMapper.insert(metodoPago);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -135,9 +108,9 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
     * Implementación del método update
     */
     @Override
-    public int update(TipoDireccion tipoDireccion) throws BusinessException {
+    public int update(MetodoPago metodoPago) throws BusinessException {
         try {
-            return tipoDireccionMapper.update(tipoDireccion);
+            return metodoPagoMapper.update(metodoPago);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -148,9 +121,9 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
     * Implementación del método delete
     */
     @Override
-    public int delete(TipoDireccion tipoDireccion) throws BusinessException {
+    public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
-            return tipoDireccionMapper.delete(tipoDireccion.getId());
+            return metodoPagoMapper.delete(metodoPago.getId());
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -161,12 +134,12 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
     * Implementación del método save
     */
     @Override
-    public int save(TipoDireccion tipoDireccion) throws BusinessException {
+    public int save(MetodoPago metodoPago) throws BusinessException {
         try {
-            if (getById(tipoDireccion.getId()) == null) {
-                return tipoDireccionMapper.insert(tipoDireccion);
+            if (getById(metodoPago.getId()) == null) {
+                return metodoPagoMapper.insert(metodoPago);
             } else {
-                return tipoDireccionMapper.update(tipoDireccion);
+                return metodoPagoMapper.update(metodoPago);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

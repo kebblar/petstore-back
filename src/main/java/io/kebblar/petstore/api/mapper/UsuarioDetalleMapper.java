@@ -36,7 +36,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
  */
 @Repository
 public interface UsuarioDetalleMapper {
-    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_casa, telefono_celular ";
+    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular ";
 
     /**
      * Obtiene un objeto de tipo '{@link UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
@@ -50,9 +50,8 @@ public interface UsuarioDetalleMapper {
         @Result(property = "nombre", column = "nombre"),
         @Result(property = "apellidoPaterno", column = "apellido_paterno"),
         @Result(property = "apellidoMaterno", column = "apellido_materno"),
-        @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
         @Result(property = "nickName", column = "nick_name"),
-        @Result(property = "telefonoCasa", column = "telefono_casa"),
+        @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
         @Result(property = "telefonoCelular", column = "telefono_celular")    
     })
     @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
@@ -76,7 +75,7 @@ public interface UsuarioDetalleMapper {
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_casa, telefono_celular) VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{fechaNacimiento}, #{nickName}, #{telefonoCasa}, #{telefonoCelular} )")
+    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular) VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
@@ -87,7 +86,7 @@ public interface UsuarioDetalleMapper {
      * @return el número de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_casa = #{telefonoCasa}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{idUsuario} ")
+    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{idUsuario} ")
     int update(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**

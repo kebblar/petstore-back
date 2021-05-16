@@ -1,3 +1,4 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -8,7 +9,7 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   MunicipioController .java
+ * Artefacto:   MetodoPagoController .java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
@@ -34,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Municipio;
-import io.kebblar.petstore.api.service.MunicipioService;
+import io.kebblar.petstore.api.model.domain.MetodoPago;
+import io.kebblar.petstore.api.service.MetodoPagoService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 
@@ -45,7 +46,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'municipio'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'metodo_pago'. 
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  * 
@@ -56,29 +57,30 @@ import io.swagger.annotations.ApiOperation;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Municipio
- * @see MunicipioService
+ * @see MetodoPago
+ * @see MetodoPagoService
  */
 
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
-public class MunicipioController {
-    private MunicipioService municipioService;
+public class MetodoPagoController {
+
+    private MetodoPagoService metodoPagoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
-     * @param municipioService Servicios de usuario
+     * @param metodoPagoService Servicios de usuario
      */
-    public MunicipioController(MunicipioService municipioService) {
-        this.municipioService = municipioService;
+    public MetodoPagoController(MetodoPagoService metodoPagoService) {
+        this.metodoPagoService = metodoPagoService;
     }
 
     @ApiOperation(
-        value = "MunicipioController::getAll",
-        notes = "Regresa una lista de todos los objetos Municipio "
+        value = "MetodoPagoController::getAll",
+        notes = "Regresa una lista de todos los objetos MetodoPago "
             + "debidamente paginados con base en el payload de "
             + "request que determina el tamaño de la página, la "
             + "longitud de la página, el campo por el que se va a "
@@ -90,74 +92,67 @@ public class MunicipioController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/municipios.json",
+        value = "/metodo-pagos.json",
         produces = "application/json; charset=utf-8")
-    public List<Municipio> getAllMunicipio() throws BusinessException {
-        return municipioService.getAll();
+    public List<MetodoPago> getAllMetodoPago() throws BusinessException {
+        return metodoPagoService.getAll();
     }
     
     @ApiOperation(
-        value = "MunicipioController::get",
-        notes = "Regresa un objeto Municipio cuyo id "
+        value = "MetodoPagoController::get",
+        notes = "Regresa un objeto MetodoPago cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/municipio/{id}.json",
+        value = "/metodo-pago/{id}.json",
         produces = "application/json; charset=utf-8")
-    public Municipio getMunicipio(
-    @ApiParam(name="id", value="Representa el id del municipio buscado.")
+    public MetodoPago getMetodoPago(
+    @ApiParam(name="id", value="Representa el id del metodoPago buscado.")
     @PathVariable int id
     ) throws BusinessException {
-        return this.municipioService.getById(id);
+        return this.metodoPagoService.getById(id);
     }
     
     @ApiOperation(
-        value = "MunicipioController::insert",
-        notes = "Recibe un objeto Municipio el cual debe de ser insertado "
+        value = "MetodoPagoController::insert",
+        notes = "Recibe un objeto MetodoPago el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/municipio.json",
+            value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
     public int insert(
-    @ApiParam(name="municipio", value="Municipio que será insertado en el sistema.")
-    @RequestBody Municipio municipio
+    @ApiParam(name="metodoPago", value="MetodoPago que será insertado en el sistema.")
+    @RequestBody MetodoPago metodoPago
     ) throws BusinessException {
-        return municipioService.insert(municipio);
+        return metodoPagoService.insert(metodoPago);
     }
 
     @ApiOperation(
-        value = "MunicipioController::update",
-        notes = "Recibe un objeto Municipio, este objeto es buscado por "
+        value = "MetodoPagoController::update",
+        notes = "Recibe un objeto MetodoPago, este objeto es buscado por "
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/municipio.json",
+            value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
     public int update(
-    @ApiParam(name="municipio", value="Municipio que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Municipio municipio
+    @ApiParam(name="metodoPago", value="MetodoPago que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+    @RequestBody MetodoPago metodoPago
     ) throws BusinessException {
-        return municipioService.update(municipio);
+        return metodoPagoService.update(metodoPago);
     }
     
     @ApiOperation(
-        value = "MunicipioController::delete",
-        notes = "Recibe un objeto Municipio, el cual es buscado dentro de "
+        value = "MetodoPagoController::delete",
+        notes = "Recibe un objeto MetodoPago, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/municipio.json",
+            value = "/metodo-pago.json",
             produces = "application/json; charset=utf-8")
     public int delete(
-    @ApiParam(name="municipio", value="Municipio que será removido del sistema.")
-    @RequestBody Municipio municipio
+    @ApiParam(name="metodoPago", value="MetodoPago que será removido del sistema.")
+    @RequestBody MetodoPago metodoPago
     ) throws BusinessException {
-        return municipioService.delete(municipio);
+        return metodoPagoService.delete(metodoPago);
     }
-
-    @GetMapping(
-            value= "/municipio-por-estado/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
-        return municipioService.getAllByEstado(id);
-    }
-
+    
 }

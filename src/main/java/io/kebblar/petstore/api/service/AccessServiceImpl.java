@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
 import io.kebblar.petstore.api.model.domain.Usuario;
@@ -101,8 +100,7 @@ public class AccessServiceImpl implements AccessService {
                     new Date(ultimoIngresoExitoso), 
                     usuario.getCorreo(), 
                     wrapper.getJwt(), 
-                    wrapper.getRoles(), 
-                    wrapper.getDirecciones());
+                    wrapper.getRoles());
         }
     }
     
@@ -116,10 +114,10 @@ public class AccessServiceImpl implements AccessService {
 
     private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
         List<Rol> roles               = usuarioService.obtenRolesDeUsuario(idUsuario);
-        List<Direccion> direcciones   = usuarioService.obtenDireccionesDeUsuario(idUsuario);
+        //List<Direccion> direcciones   = usuarioService.obtenDireccionesDeUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = usuarioService.obtenDetallesDeUsuario(idUsuario);
         String jwt                    = jwtManagerService.createToken(correo);
-        return new UserFoundWrapper(roles, direcciones, usuarioDetalle, jwt);
+        return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 
 }

@@ -20,12 +20,13 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
+import io.kebblar.petstore.api.model.request.Preregistro;
 /**
  * <p>Definición de la interfaz de servicios para 'Usuario'.
  * 
@@ -125,7 +126,7 @@ public interface UsuarioService {
      * @return Lista de objetos de tipo {@link Direccion}.
      * @throws BusinessException
      */
-    List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
+    //List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
     
     /**
      * <p>Retorna los detalles de un usuario cuyo ID es dado como parámetro formal.
@@ -137,4 +138,22 @@ public interface UsuarioService {
      * @throws BusinessException
      */
     UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException;
+
+    /**
+     * Realiza el preregistro de un potencial usuario al sistema
+     * 
+     * @param preRegistroRequest
+     * @return
+     * @throws BusinessException
+     */
+    int preRegistro(Preregistro preRegistroRequest) throws BusinessException;
+
+    /**
+     * Confirma el registro de un usuario al sistema
+     * 
+     * @param confirmaRegistro Objeto con el token de confirmación del registro
+     * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
+     * @throws BusinessException
+     */
+    int confirmaReg(ConfirmaRegistroRequest confirmaRegistro) throws BusinessException;
 }
