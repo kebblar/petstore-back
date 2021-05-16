@@ -30,16 +30,16 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class WrongTokenException extends BusinessException {
+public class DatabaseException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
-    public WrongTokenException(String msg) {
+    public DatabaseException(String msg) {
         super(
             msg,
-            "El token que ha proporcionado es incorrecto.",
-            2008,
-            "CVE_2008",
-            HttpStatus.FORBIDDEN);
+            "Error en el proceso de datos hacia o desde la Base de datos",
+            50011,
+            "CVE_50011",
+            HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

@@ -34,14 +34,19 @@ public class UsuarioDetalle {
     private String apellidoMaterno;
     private Date fechaNacimiento;
     private String nickName;
-    private String telefonoCasa;
     private String telefonoCelular;
 
     public UsuarioDetalle() {
     }
 
-    public UsuarioDetalle(int id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento,
-            String nickName, String telefonoCasa, String telefonoCelular) {
+    public UsuarioDetalle(
+            int id, 
+            String nombre, 
+            String apellidoPaterno, 
+            String apellidoMaterno, 
+            String nickName,
+            Date fechaNacimiento,
+            String telefonoCelular) {
         super();
         this.id = id;
         this.nombre = nombre;
@@ -49,7 +54,6 @@ public class UsuarioDetalle {
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.nickName = nickName;
-        this.telefonoCasa = telefonoCasa;
         this.telefonoCelular = telefonoCelular;
     }
 
@@ -101,14 +105,6 @@ public class UsuarioDetalle {
         this.nickName = nickName;
     }
 
-    public String getTelefonoCasa() {
-        return telefonoCasa;
-    }
-
-    public void setTelefonoCasa(String telefonoCasa) {
-        this.telefonoCasa = telefonoCasa;
-    }
-
     public String getTelefonoCelular() {
         return telefonoCelular;
     }
@@ -125,7 +121,7 @@ public class UsuarioDetalle {
     public String toString() {
         return "UsuarioDetalle [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
                 + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", nickName="
-                + nickName + ", telefonoCasa=" + telefonoCasa + ", telefonoCelular=" + telefonoCelular + "]";
+                + nickName + ", telefonoCelular=" + telefonoCelular + "]";
     }
 
     @Override
@@ -138,7 +134,6 @@ public class UsuarioDetalle {
         result = prime * result + id;
         result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((telefonoCasa == null) ? 0 : telefonoCasa.hashCode());
         result = prime * result + ((telefonoCelular == null) ? 0 : telefonoCelular.hashCode());
         return result;
     }
@@ -175,11 +170,6 @@ public class UsuarioDetalle {
             if (other.nombre != null)
                 return false;
         } else if (!nombre.equals(other.nombre))
-            return false;
-        if (telefonoCasa == null) {
-            if (other.telefonoCasa != null)
-                return false;
-        } else if (!telefonoCasa.equals(other.telefonoCasa))
             return false;
         if (telefonoCelular == null) {
             if (other.telefonoCelular != null)

@@ -111,5 +111,7 @@ public class UsuarioController {
             @RequestParam int id) throws ControllerException {
          return this.usuarioService.eliminaUsuario(id);
     }
+    
+    
 
 }

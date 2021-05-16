@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class ConfirmaRegistroRequest {
 
@@ -26,12 +26,12 @@ public class ConfirmaRegistroRequest {
     @ApiModelProperty(example = "2000-07-24")
     @Past(message = "La fecha de nacimiendo no valida, debe de ser una fecha en el pasado")
     @NotNull(message = "La fecha de nacimiendo no puede ser null")
-    private LocalDate fNacimiento;
+    private Date fNacimiento;
 
     public ConfirmaRegistroRequest() {
     }
 
-    public ConfirmaRegistroRequest(String token, String calleNumero, int idMunicipio, LocalDate fNacimiento) {
+    public ConfirmaRegistroRequest(String token, String calleNumero, int idMunicipio, Date fNacimiento) {
         this.token = token;
         this.calleNumero = calleNumero;
         this.idMunicipio = idMunicipio;
@@ -62,11 +62,11 @@ public class ConfirmaRegistroRequest {
         this.idMunicipio = idMunicipio;
     }
 
-    public LocalDate getfNacimiento() {
+    public Date getfNacimiento() {
         return fNacimiento;
     }
 
-    public void setfNacimiento(LocalDate fNacimiento) {
+    public void setfNacimiento(Date fNacimiento) {
         this.fNacimiento = fNacimiento;
     }
 
