@@ -130,6 +130,16 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    @Override
+    public List<MetodoPago> getByIdUser(int id) throws BusinessException {
+        try {
+            return metodoPagoMapper.getByIdUser(id);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
     /*
     * Implementación del método save
     */

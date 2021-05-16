@@ -47,6 +47,7 @@ public class MetodoPago implements Serializable {
     private int tipopago;
     private String numTarjetaCartera;
     private String expiracion;
+    private boolean activo;
 
     /**
      * Constructor por default (sin parámetros).
@@ -64,12 +65,27 @@ public class MetodoPago implements Serializable {
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public MetodoPago(Integer id, int idUsuario, int tipopago, String numTarjetaCartera, String expiracion) {
+    public MetodoPago(Integer id, int idUsuario, int tipopago, String numTarjetaCartera, String expiracion, boolean activo) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.tipopago = tipopago;
         this.numTarjetaCartera = numTarjetaCartera;
         this.expiracion = expiracion;
+        this.activo=activo;
+    }
+
+    /**
+     * Getter para activo.
+     */
+    public boolean isActivo() {
+        return activo;
+    }
+
+    /**
+     * Setter para activo.
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     /**
@@ -154,6 +170,7 @@ public class MetodoPago implements Serializable {
                 + " tipopago =" + this.tipopago
                 + " numTarjetaCartera =" + this.numTarjetaCartera
                 + " expiracion =" + this.expiracion
+                + " activo =" + this.activo
                 + "]";
     }
     
@@ -161,34 +178,20 @@ public class MetodoPago implements Serializable {
      * Compara si dos instancias de la clase MetodoPago son iguales
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof MetodoPago)) {
-            return false;
-        }
-        MetodoPago other = (MetodoPago) obj;
-        return
-               id == other.id && 
-               idUsuario == other.idUsuario && 
-               tipopago == other.tipopago && 
-               numTarjetaCartera == other.numTarjetaCartera && 
-               expiracion == other.expiracion; 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MetodoPago)) return false;
+        MetodoPago that = (MetodoPago) o;
+        return idUsuario == that.idUsuario && tipopago == that.tipopago && activo == that.activo && Objects.equals(id, that.id) && Objects.equals(numTarjetaCartera, that.numTarjetaCartera) && Objects.equals(expiracion, that.expiracion);
     }
-    
+
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id, 
-            idUsuario, 
-            tipopago, 
-            numTarjetaCartera, 
-            expiracion
-        );
+        return Objects.hash(id, idUsuario, tipopago, numTarjetaCartera, expiracion, activo);
     }
 
 }
