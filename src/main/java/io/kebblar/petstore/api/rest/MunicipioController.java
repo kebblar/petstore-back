@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -65,7 +64,6 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class MunicipioController {
-
     private MunicipioService municipioService;
 
     /**
@@ -159,6 +157,7 @@ public class MunicipioController {
             value= "/municipio-por-estado/{id}.json",
             produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
-        return municipioService.getByEstado(id);
+        return municipioService.getAllByEstado(id);
     }
+
 }

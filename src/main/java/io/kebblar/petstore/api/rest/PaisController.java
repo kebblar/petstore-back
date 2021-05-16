@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -38,8 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.service.PaisService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-
-
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
@@ -94,10 +92,10 @@ public class PaisController {
     @GetMapping(
         value = "/paises.json",
         produces = "application/json; charset=utf-8")
-    public List<Pais> getAllPais() throws BusinessException {
+    public List<Pais> getAllPais() throws ControllerException {
         return paisService.getAll();
     }
-    
+
     @ApiOperation(
         value = "PaisController::get",
         notes = "Regresa un objeto Pais cuyo id "
@@ -106,9 +104,9 @@ public class PaisController {
         value = "/pais/{id}.json",
         produces = "application/json; charset=utf-8")
     public Pais getPais(
-    @ApiParam(name="id", value="Representa el id del pais buscado.")
-    @PathVariable int id
-    ) throws BusinessException {
+            @ApiParam(name="id", value="Representa el id del pais buscado.")
+            @PathVariable int id
+    ) throws ControllerException {
         return this.paisService.getById(id);
     }
     
@@ -120,9 +118,9 @@ public class PaisController {
             value = "/pais.json",
             produces = "application/json; charset=utf-8")
     public int insert(
-    @ApiParam(name="pais", value="Pais que será insertado en el sistema.")
-    @RequestBody Pais pais
-    ) throws BusinessException {
+            @ApiParam(name="pais", value="Pais que será insertado en el sistema.")
+            @RequestBody Pais pais
+    ) throws ControllerException {
         return paisService.insert(pais);
     }
 
@@ -135,9 +133,9 @@ public class PaisController {
             value = "/pais.json",
             produces = "application/json; charset=utf-8")
     public int update(
-    @ApiParam(name="pais", value="Pais que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Pais pais
-    ) throws BusinessException {
+            @ApiParam(name="pais", value="Pais que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+            @RequestBody Pais pais
+    ) throws ControllerException {
         return paisService.update(pais);
     }
     
@@ -149,9 +147,9 @@ public class PaisController {
             value = "/pais.json",
             produces = "application/json; charset=utf-8")
     public int delete(
-    @ApiParam(name="pais", value="Pais que será removido del sistema.")
-    @RequestBody Pais pais
-    ) throws BusinessException {
+            @ApiParam(name="pais", value="Pais que será removido del sistema.")
+            @RequestBody Pais pais
+    ) throws ControllerException {
         return paisService.delete(pais);
     }
     

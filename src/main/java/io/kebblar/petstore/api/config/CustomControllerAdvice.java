@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -47,6 +48,13 @@ public class CustomControllerAdvice {
     // Take a look at:
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
     private Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
+
+    @ResponseBody
+    @ExceptionHandler(value = StrengthPasswordValidatorException.class)
+    public ResponseEntity<Map<String, Object>> userErrorHandler(StrengthPasswordValidatorException geEx) {
+        logger.error(getStackTraceExStr(geEx));
+        return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.BAD_REQUEST);
+    }
 
     /**
      * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
@@ -74,6 +82,19 @@ public class CustomControllerAdvice {
         int value = geEx.getHttpStatus().value();
         return new ResponseEntity<>(crearMapaRetorno(geEx), HttpStatus.valueOf(value));
     }
+    
+    /**
+     * Construye una respuesta que contiene el consolidado de violaciones en una clave dada.
+     * 
+     * @param spve
+     * @return Mapa con la lista de errores detectados
+     */
+    private Map<String, Object> buildValidationErrorResponse(StrengthPasswordValidatorException spve) {
+        List<String> messages = spve.getMessages();
+        Map<String, Object> result = crearMapaRetorno(spve);
+        result.put("strengthViolations", messages);
+        return result;
+    }
 
     /**
      * Mapa de retorno para errores de tipo MethodArgumentNotValidException.
@@ -93,13 +114,13 @@ public class CustomControllerAdvice {
                 String index = (arr.length>1)? arr[1]:"0";
             err.put("index", index);
             err.put("description", arr[0]);
-            err.put("validation-type", error.getCode());
-            err.put("object-name", error.getObjectName());
-            err.put("rejected-value", error.getRejectedValue()+"");
-            err.put("field-name", error.getField());
+            err.put("validationType", error.getCode());
+            err.put("objectName", error.getObjectName());
+            err.put("rejectedValue", error.getRejectedValue()+"");
+            err.put("fieldName", error.getField());
             lista.add(err);
         }
-        map.put("TipoError", "3001");
+        map.put("errorType", "3001");
         map.put("errors", lista);
         return map;
     }
@@ -118,7 +139,7 @@ public class CustomControllerAdvice {
             map.put("exceptionTypeKey", ad.getLocalExceptionKey());
             map.put("exceptionLongDescription", ad.getDetailedMessage());
             map.put("exceptionShortDescription", ad.getShortMessage());
-            map.put("httpCode", ad.getHttpStatus().value() + " (" + ad.getHttpStatus() + ")");
+            map.put("httpResponse",  ad.getHttpStatus());
         }
         return map;
     }

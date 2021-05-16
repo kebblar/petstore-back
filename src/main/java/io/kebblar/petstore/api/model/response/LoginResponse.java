@@ -3,7 +3,6 @@ package io.kebblar.petstore.api.model.response;
 import java.util.Date;
 import java.util.List;
 
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
@@ -13,7 +12,6 @@ public class LoginResponse {
     private String jwt;
     private Date ultimoAcceso;
     private List<Rol> roles;
-    private List<Direccion> direcciones;
 
     public LoginResponse() {
     }
@@ -23,14 +21,12 @@ public class LoginResponse {
             Date ultimoAcceso,
             String correo,
             String jwt,
-            List<Rol> roles,
-            List<Direccion> direcciones) {
+            List<Rol> roles) {
         this.usuarioDetalle = usuarioDetalle;
         this.ultimoAcceso = ultimoAcceso;
         this.correo = correo;
         this.jwt = jwt;
         this.roles = roles;
-        this.direcciones = direcciones;
     }
 
     public UsuarioDetalle getUsuarioDetalle() {
@@ -73,18 +69,10 @@ public class LoginResponse {
         this.roles = roles;
     }
 
-    public List<Direccion> getDirecciones() {
-        return direcciones;
-    }
-
-    public void setDirecciones(List<Direccion> direcciones) {
-        this.direcciones = direcciones;
-    }
-
     @Override
     public String toString() {
         return "LoginResponse [usuarioDetalle=" + usuarioDetalle + ", correo=" + correo + ", jwt=" + jwt
-                + ", ultimoAcceso=" + ultimoAcceso + ", roles=" + roles + ", direcciones=" + direcciones + "]";
+                + ", ultimoAcceso=" + ultimoAcceso + ", roles=" + roles + "]";
     }
 
     @Override
@@ -94,7 +82,6 @@ public class LoginResponse {
         result = prime * result + ((correo == null) ? 0 : correo.hashCode());
         result = prime * result + ((roles == null) ? 0 : roles.hashCode());
         result = prime * result + ((usuarioDetalle == null) ? 0 : usuarioDetalle.hashCode());
-        result = prime * result + ((direcciones == null) ? 0 : direcciones.hashCode());
         return result;
     }
 
@@ -121,11 +108,6 @@ public class LoginResponse {
             if (other.usuarioDetalle != null)
                 return false;
         } else if (!usuarioDetalle.equals(other.usuarioDetalle))
-            return false;
-        if (direcciones == null) {
-            if (other.direcciones != null)
-                return false;
-        } else if (!direcciones.equals(other.direcciones))
             return false;
         return true;
     }

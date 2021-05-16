@@ -1,13 +1,22 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
+<<<<<<< HEAD
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
  *              modificar  los datos establecidos en  la mencion 
  *              de "AUTOR".
+=======
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+>>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
+<<<<<<< HEAD
  * 
  * Artefacto:   TipoDireccion .java
  * Proyecto:    petstore
@@ -16,28 +25,36 @@
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
+=======
+ * Artefacto:   TipoDireccion.java
+ * Tipo:        Clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_25)
+>>>>>>> refs/heads/develop
  *
+<<<<<<< HEAD
  * Historia:    20210511_1444 Implementación de clase 
+=======
+ * Historia:    .
+ *              0210506_0925 Creación de éste POJO
+>>>>>>> refs/heads/develop
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'tipo_direccion'. 
- *
- * @author Fhernanda Romo
+ * Implementacion del POJO de la entidad de 'TipoDireccion'.
+ * 
+ * @author  garellano
  * @version 1.0-SNAPSHOT
- * @since 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 
 public class TipoDireccion implements Serializable {
-
-    private static final long serialVersionUID = -8970154599119538366L;
+	private static final long serialVersionUID = 6627523800922208745L;
 
     /**
      * Atributos de la clase
@@ -68,44 +85,26 @@ public class TipoDireccion implements Serializable {
         this.activo = activo;
     }
 
-    /**
-     * Getter para id.
-     */
     public Integer getId() {
         return id;
     }
     
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
     
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
     
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
-    /**
-     * Getter para activo.
-     */
     public boolean getActivo() {
         return activo;
     }
     
-    /**
-     * Setter para activo.
-     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
@@ -152,5 +151,4 @@ public class TipoDireccion implements Serializable {
             activo
         );
     }
-
 }

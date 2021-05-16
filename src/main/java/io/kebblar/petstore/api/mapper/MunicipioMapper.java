@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -113,5 +112,19 @@ public interface MunicipioMapper {
      * @throws SQLException
      */
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{id}" )
-    List<Municipio> getByPais(int id) throws SQLException;
+    List<Municipio> getAllByEstado(int id) throws SQLException;
+
+    /**
+     * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.
+     *
+     * @param int idEstado identificador del estado
+     * @param int starRow Inicio de la fila
+     * @param int pageSize Número de registros por pagina
+     * @return una lista de municipios encontrados con los criterios de búsqueda.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @ResultMap("MunicipioMap")
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}") 
+    List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
+
 }

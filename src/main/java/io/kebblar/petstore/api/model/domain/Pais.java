@@ -1,13 +1,22 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
+<<<<<<< HEAD
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
  *              modificar  los datos establecidos en  la mencion 
  *              de "AUTOR".
+=======
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+>>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
+<<<<<<< HEAD
  * 
  * Artefacto:   Pais .java
  * Proyecto:    petstore
@@ -16,28 +25,36 @@
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
+=======
+ * Artefacto:   Pais.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (23_21)
+>>>>>>> refs/heads/develop
  *
+<<<<<<< HEAD
  * Historia:    20210511_1444 Implementación de clase 
+=======
+ * Historia:    .
+ *              20210503_2321 Creación de éste POJO
+>>>>>>> refs/heads/develop
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'pais'. 
- *
- * @author Fhernanda Romo
+ * Implementacion del POJO de la entidad de {@link Pais}.
+ * 
+ * @author  garellano
  * @version 1.0-SNAPSHOT
- * @since 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 
 public class Pais implements Serializable {
-
-    private static final long serialVersionUID = -5276098491645107636L;
+    private static final long serialVersionUID = 4897377279463910357L;
 
     /**
      * Atributos de la clase

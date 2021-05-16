@@ -1,6 +1,6 @@
 -- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: ejemplo4
+-- Host: localhost    Database: petstore
 -- ------------------------------------------------------
 -- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
@@ -14,6 +14,31 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `data`
+--
+
+DROP TABLE IF EXISTS `data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mascota` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `valor` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data`
+--
+
+LOCK TABLES `data` WRITE;
+/*!40000 ALTER TABLE `data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `data` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `direccion`
@@ -42,7 +67,7 @@ CREATE TABLE `direccion` (
   CONSTRAINT `fk_direccion_municipio` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`),
   CONSTRAINT `fk_direccion_pais` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id`),
   CONSTRAINT `fk_direccion_tipo_direccion` FOREIGN KEY (`id_tipo_direccion`) REFERENCES `tipo_direccion` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +121,7 @@ CREATE TABLE `municipio` (
   PRIMARY KEY (`id`),
   KEY `fk_municipio_estado` (`id_estado`),
   CONSTRAINT `fk_municipio_estado` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +130,36 @@ CREATE TABLE `municipio` (
 
 LOCK TABLES `municipio` WRITE;
 /*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
-INSERT INTO `municipio` VALUES (1,1,'Aguascalientes'),(2,1,'Jesús Maria'),(3,1,'Pabellón'),(4,1,'Calvillo');
+INSERT INTO `municipio` VALUES 
+(1,1,'Aguascalientes'),
+(2,1,'Jesús Maria'),
+(3,1,'Pabellón'),
+(4,1,'Calvillo'),
+(5,1,'Asientos'),
+(6,1,'Cosio'),
+(7,1,'Pabellon de Arteaga'),
+(8,1,'Rincon de Romos'),
+(9,1,'San Jose de Gracia'),
+(10,1,'Tepezala'),
+(11,1,'San Pancho'),
+
+(12,2,'Mexicali'),
+(13,2,'Tijuana'),
+(14,2,'Ensenada'),
+
+(15,3,'Cabo San Lucas'),
+(16,3,'La Paz'),
+(17,3,'Todos los santos'),
+
+(18,4,'Tenabo'),
+
+(19,5,'m01'),
+(20,6,'m02'),
+(21,7,'m03'),
+(22,8,'m04'),
+(23,9,'m05'),
+(24,10,'m06'),
+(25,11,'m07');
 /*!40000 ALTER TABLE `municipio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +268,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1619118742154,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,0,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
+INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1619184349779,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,1619184503388,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +284,7 @@ CREATE TABLE `usuario_detalle` (
   `nombre` varchar(32) NOT NULL,
   `apellido_paterno` varchar(32) NOT NULL,
   `apellido_materno` varchar(32) NOT NULL,
-  `fecha_nacimiento` bigint(20) NOT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
   `nick_name` varchar(128) NOT NULL,
   `telefono_casa` varchar(128) NOT NULL,
   `telefono_celular` varchar(128) NOT NULL,
@@ -245,7 +299,7 @@ CREATE TABLE `usuario_detalle` (
 
 LOCK TABLES `usuario_detalle` WRITE;
 /*!40000 ALTER TABLE `usuario_detalle` DISABLE KEYS */;
-INSERT INTO `usuario_detalle` VALUES (1,'Miguel','Cervantes','Saavedra',123456,'Micke','55 9876 5432','55 1234 5678');
+INSERT INTO `usuario_detalle` VALUES (1,'Miguel','Cervantes','Saavedra',NULL,'Micke','55 9876 5432','55 1234 5678'),(2,'gustavo','arellano','sandoval',NULL,'goose','55 9876 5432','55 5678 8765'),(3,'carlos','salinas','de gortari',NULL,'charlie','55 9876 1111','55 5678 2222');
 /*!40000 ALTER TABLE `usuario_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-22 19:14:16
+-- Dump completed on 2021-04-28 23:32:18

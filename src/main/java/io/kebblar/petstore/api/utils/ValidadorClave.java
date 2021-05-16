@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import org.passay.*;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 
@@ -16,7 +15,7 @@ public class ValidadorClave {
 
     private ValidadorClave() {}
 
-    public static boolean validate(String clave) throws BusinessException {
+    public static boolean validate(String clave) throws StrengthPasswordValidatorException, InternalServerException {
         List<Rule> rules = new ArrayList<>();
         //Rule 1: Password length should be in between
         //8 and 16 characters

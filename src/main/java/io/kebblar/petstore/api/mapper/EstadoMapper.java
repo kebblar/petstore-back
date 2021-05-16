@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,13 +19,11 @@
  * Historia:    20210511_1444 Implementación de interface 
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Estado;
 
@@ -79,22 +76,18 @@ public interface EstadoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO estado(id, id_pais, nombre) "
-   + "VALUES(#{id}, #{idPais}, #{nombre} )")
+    "INSERT INTO estado(id, id_pais, nombre) VALUES(#{id}, #{idPais}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Estado estado) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'Estado' con base en la infrmación dada por el objeto de tipo 'Estado'.
      *
      * @param estado a ser actualizado.
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update(
-    "UPDATE estado" 
-    + " SET id_pais = #{idPais}, nombre = #{nombre}"
-    + " WHERE id = #{id} ")
+    @Update("UPDATE estado SET id_pais = #{idPais}, nombre = #{nombre} WHERE id = #{id} ")
     int update(Estado estado) throws SQLException;
 
     /**

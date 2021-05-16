@@ -7,23 +7,22 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   DisabledUserException.java
- * Tipo:        Clase
- * AUTOR:       Javier Chávez Barrios (JCHB)
- * Fecha:       Jueves 6 de Mayo de 2021 (09_25)
+ * Artefacto:   WrongTokenException.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (17_57)
  *
  * Historia:    .
- *              0210506_0925 Creación de esta Excepción
+ *              20210504_1757 Creación de esta Excepción
  *
  */
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación 
- * cuyo usuario fue deshabilitado.
+ * <p>Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
  * 
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructores con la definición necesaria, que incluye en algunos casos el
+ * constructorescon la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  * 
  * @author  garellano
@@ -31,15 +30,16 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class DisabledUserException extends BusinessException {
-	private static final long serialVersionUID = -7083159020205284484L;
+public class DatabaseException extends BusinessException {
+    private static final long serialVersionUID = -7083159020205284484L;
 
-    public DisabledUserException() {
+    public DatabaseException(String msg) {
         super(
-            "Error de ingreso",
-            "El usuario ha sido deshabilitado.",
-            2004,
-            "CVE_2004",
-            HttpStatus.BAD_REQUEST);
+            msg,
+            "Error en el proceso de datos hacia o desde la Base de datos",
+            50011,
+            "CVE_50011",
+            HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

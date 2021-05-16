@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,11 +19,9 @@
  * Historia:    20210511_1444 Implementación de clase 
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -72,7 +69,7 @@ public class PaisServiceImpl implements PaisService {
     public Pais getById(int id) throws BusinessException {
         try {
             return paisMapper.getById(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
@@ -85,7 +82,7 @@ public class PaisServiceImpl implements PaisService {
     public List<Pais> getAll() throws BusinessException {
         try {
             return paisMapper.getAll();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
@@ -98,7 +95,7 @@ public class PaisServiceImpl implements PaisService {
     public int insert(Pais pais) throws BusinessException {
         try {
             return paisMapper.insert(pais);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
@@ -111,7 +108,7 @@ public class PaisServiceImpl implements PaisService {
     public int update(Pais pais) throws BusinessException {
         try {
             return paisMapper.update(pais);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
@@ -124,7 +121,7 @@ public class PaisServiceImpl implements PaisService {
     public int delete(Pais pais) throws BusinessException {
         try {
             return paisMapper.delete(pais.getId());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
@@ -141,7 +138,7 @@ public class PaisServiceImpl implements PaisService {
             } else {
                 return paisMapper.update(pais);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }

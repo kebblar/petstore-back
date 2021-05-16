@@ -1,23 +1,20 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
- *              de "AUTOR".
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * 
- * Artefacto:   PaisService .java
- * Proyecto:    petstore
- * Tipo:        interface 
- * AUTOR:       Fhernanda Romo
- * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
- *              ------------------------------------------------
+ * Artefacto:   PaisService.java
+ * Tipo:        interface
+ * AUTOR:       Luz Cuahonte (LC)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_38)
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    .
+ *              20210506_0938 Creación
  *
  */
 
@@ -31,19 +28,17 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'pais'. 
  *
- * @author Fhernanda Romo
+ * @author Luz
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface PaisService {
 
     /**
      * Método utilizado para recuperar un elemento de la tabla 'pais'. por medio de su llave primaria.
      * 
-     * @param id Id del objeto buscado
-     * @return La información del elemento recuperado en una instacia de la clase Pais 
-     * o nulo si no se encuentra ese elemento en la tabla.
+     * @param id ID de Pais (la llave).
+     * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
     Pais getById(int id) throws BusinessException;
 

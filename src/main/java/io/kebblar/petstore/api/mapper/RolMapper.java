@@ -25,6 +25,8 @@ package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -49,4 +51,6 @@ public interface RolMapper {
     @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
     List<Rol> getUserRoles(int idUser) throws SQLException;
 
+    @Insert("INSERT INTO usuario_rol VALUES(#{idUsuario}, #{idRol})")
+    int insertUserRol(int idUsuario, int idRol) throws SQLException;
 }

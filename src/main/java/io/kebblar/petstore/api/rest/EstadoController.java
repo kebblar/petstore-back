@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Estado;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.EstadoService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
@@ -94,7 +95,7 @@ public class EstadoController {
     @GetMapping(
         value = "/estados.json",
         produces = "application/json; charset=utf-8")
-    public List<Estado> getAllEstado() throws BusinessException {
+    public List<Estado> getAllEstados() throws ControllerException {
         return estadoService.getAll();
     }
     

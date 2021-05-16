@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
 import io.kebblar.petstore.api.model.domain.Usuario;
@@ -33,19 +32,20 @@ public class AccessServiceImpl implements AccessService {
             JwtManagerService jwtManagerService) {
         this.usuarioService = usuarioService;
         this.jwtManagerService = jwtManagerService;
-        logger.info("Iniciando servicio de AccessService. Message: %s", message);
     }
 
     @Override
     public LoginResponse login(String usr, String clave) throws BusinessException {
+        logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
         this.valida(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
         long delta = 1000*60*5L; // 5 minutos
-        long instanteActual = System.currentTimeMillis()+0;
+        long instanteActual = System.currentTimeMillis();
         Usuario usuario = usuarioService.obtenUsuarioPorCorreo(usr);
         return login(usuario, clave, delta, maximoNumeroIntentosConcedidos, instanteActual);
     }
 
+    @Override
     public LoginResponse login(
             Usuario usuario, 
             String claveProporcionada, 
@@ -100,8 +100,7 @@ public class AccessServiceImpl implements AccessService {
                     new Date(ultimoIngresoExitoso), 
                     usuario.getCorreo(), 
                     wrapper.getJwt(), 
-                    wrapper.getRoles(), 
-                    wrapper.getDirecciones());
+                    wrapper.getRoles());
         }
     }
     
@@ -115,10 +114,10 @@ public class AccessServiceImpl implements AccessService {
 
     private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
         List<Rol> roles               = usuarioService.obtenRolesDeUsuario(idUsuario);
-        List<Direccion> direcciones   = usuarioService.obtenDireccionesDeUsuario(idUsuario);
+        //List<Direccion> direcciones   = usuarioService.obtenDireccionesDeUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = usuarioService.obtenDetallesDeUsuario(idUsuario);
         String jwt                    = jwtManagerService.createToken(correo);
-        return new UserFoundWrapper(roles, direcciones, usuarioDetalle, jwt);
+        return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 
 }

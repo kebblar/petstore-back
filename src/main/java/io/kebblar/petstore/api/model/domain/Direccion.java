@@ -1,54 +1,58 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Direccion
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'direccion'. 
+ *              ------------------------------------------------
+ * Artefacto:   Direccion.java
+ * Tipo:        clase
+ * AUTOR:       Fabiola Camilo Victoriano (FCV)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_03)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210506_0903 Creación de éste POJO
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'direccion'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementacion del POJO de la entidad de {@link Direccion}.
+ * 
+ * @author  garellano
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
  */
 public class Direccion implements Serializable {
-
     private static final long serialVersionUID = 147836237927646425L;
 
     private Integer id;
+    @NotEmpty(message = "El campo Calle y número debe ser no vacio")
+    @Size(max = 5, message = "La longitud máxima para el campo de Calle y número es 5")
     private String calleNumero;
+    @NotEmpty(message = "El campo Colonia debe ser no vacio")
+    @Size(max = 6, message = "La longitud máxima para el campo de Colonia es 6")
     private String colonia;
     private int idPais;
     private int idEstado;
     private int idMunicipio;
     private int idTipoDireccion;
+    @Pattern(regexp = "\\d{5}$", message = "El código postal debe ser 5 digitos exactamente")
     private String cp;
+    @Size(max = 7, message = "La longitud máxima para el campo de Referencias es 7")
     private String referencias;
     private boolean activo;
     
     public Direccion() {
     }
+    
     public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio,
             int idTipoDireccion, String cp, String referencias, boolean activo) {
         this.id = id;

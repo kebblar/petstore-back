@@ -1,10 +1,27 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   MascotaController.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Martes 4 de Mayo de 2021 (17_50)
+ *
+ * Historia:    .
+ *              20210504_1950 Creación de éste controlador REST
+ *
+ */
 package io.kebblar.petstore.api.rest;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,35 +42,57 @@ import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.kebblar.petstore.api.support.JwtManagerService;
-import io.kebblar.petstore.api.support.MailSenderService;
 
+/**
+ * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * de gestión del POJO {@link Mascota}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}
+ * 
+ * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no 
+ * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ * cumple con ese objetivo.
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Mascota
+ * @see     io.kebblar.petstore.api.model.response.ProcesaMascotaResponse
+ * @see     io.kebblar.petstore.api.service.MascotaService
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 @RestController
 @RequestMapping(value = "/api")
 public class MascotaController {
     private MascotaService mascotaService;
     private RemoteRestCallService remoteRestCallService;
     private JwtManagerService jwtManagerService;
-    private MailSenderService mailSenderService;
 
-    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, MailSenderService mailSenderService, RemoteRestCallService remoteRestCallService) {
+    /**
+     * Constructor que realiza el setting de los servicios que serán 
+     * utilizados en este controlador.
+     * 
+     * @param mascotaService Servicio de Mascota
+     * @param jwtManagerService Servicio de jswManager
+     * @param mailSenderService Serivico de mailSender
+     * @param remoteRestCallService Servicio de remoteRestCall
+     */
+    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, RemoteRestCallService remoteRestCallService) {
         this.mascotaService = mascotaService;
         this.jwtManagerService=jwtManagerService;
-        this.mailSenderService=mailSenderService;
         this.remoteRestCallService=remoteRestCallService;
     }
 
     @GetMapping(path = "/prueba.json", produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba() throws ServletException {
+    public Map<String, String> prueba() throws ControllerException {
         String token = jwtManagerService.createToken("gus");
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", token);
         mapa.put("dato-2", "tavo_bad");
-        mailSenderService.sendHtmlMail("garellanos@ultrasist.com.mx", "Pba", "<h1>Hello World</h1>");
         return mapa;
     }
 
     @GetMapping(path = "/prueba2.json", produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba2() throws ServletException {
+    public Map<String, String> prueba2() throws ControllerException {
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", "gus");
         mapa.put("dato-2", "tavo");

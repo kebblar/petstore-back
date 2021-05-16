@@ -16,7 +16,7 @@ public class StrengthPasswordValidatorException extends BusinessException {
         this.messages = messages;
     }
 
-    public  List<String> getessages() {
+    public  List<String> getMessages() {
         return this.messages;
     }
 }

@@ -1,13 +1,22 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
+<<<<<<< HEAD
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
  *              modificar  los datos establecidos en  la mencion 
  *              de "AUTOR".
+=======
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+>>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
+<<<<<<< HEAD
  * 
  * Artefacto:   TipoDireccionServiceImpl .java
  * Proyecto:    petstore
@@ -16,11 +25,21 @@
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  * 
  *              ------------------------------------------------
+=======
+ * Artefacto:   TipoDireccionServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Luz Cuahonte (LC)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_44)
+>>>>>>> refs/heads/develop
  *
+<<<<<<< HEAD
  * Historia:    20210511_1444 Implementación de clase 
+=======
+ * Historia:    .
+ *              20210506_0944 Creación
+>>>>>>> refs/heads/develop
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -36,16 +55,24 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * <p>Descripción:</p>
  * Servicio asociado a la entidad 'tipo_direccion'. 
  *
+<<<<<<< HEAD
  * <p>Implementación de la interfaz {@link TipoDireccionService}.
  * 
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
+=======
+ * @author luz
+>>>>>>> refs/heads/develop
  * @version 1.0-SNAPSHOT
+<<<<<<< HEAD
  * @since 1.0-SNAPSHOT
  *
  * @see  TipoDireccion
  * @see  TipoDireccionService
+=======
+ * @since   1.0-SNAPSHOT
+>>>>>>> refs/heads/develop
  */
 
 @Service("tipoDireccionService")

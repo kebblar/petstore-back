@@ -4,14 +4,11 @@ import java.util.List;
 
 public class UserFoundWrapper {
     private List<Rol> roles;
-    private List<Direccion> direcciones;
     private UsuarioDetalle usuarioDetalle;
     private String jwt;
-    public UserFoundWrapper() {
-    }
-    public UserFoundWrapper(List<Rol> roles, List<Direccion> direcciones, UsuarioDetalle usuarioDetalle, String jwt) {
+
+    public UserFoundWrapper(List<Rol> roles, UsuarioDetalle usuarioDetalle, String jwt) {
         this.roles = roles;
-        this.direcciones = direcciones;
         this.usuarioDetalle = usuarioDetalle;
         this.jwt = jwt;
     }
@@ -20,12 +17,6 @@ public class UserFoundWrapper {
     }
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
-    }
-    public List<Direccion> getDirecciones() {
-        return direcciones;
-    }
-    public void setDirecciones(List<Direccion> direcciones) {
-        this.direcciones = direcciones;
     }
     public UsuarioDetalle getUsuarioDetalle() {
         return usuarioDetalle;
@@ -41,14 +32,13 @@ public class UserFoundWrapper {
     }
     @Override
     public String toString() {
-        return "UserFoundWrapper [roles=" + roles + ", direcciones=" + direcciones + ", usuarioDetalle="
+        return "UserFoundWrapper [roles=" + roles +  ", usuarioDetalle="
                 + usuarioDetalle + ", jwt=" + jwt + "]";
     }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((direcciones == null) ? 0 : direcciones.hashCode());
         result = prime * result + ((jwt == null) ? 0 : jwt.hashCode());
         result = prime * result + ((roles == null) ? 0 : roles.hashCode());
         result = prime * result + ((usuarioDetalle == null) ? 0 : usuarioDetalle.hashCode());
@@ -63,11 +53,6 @@ public class UserFoundWrapper {
         if (getClass() != obj.getClass())
             return false;
         UserFoundWrapper other = (UserFoundWrapper) obj;
-        if (direcciones == null) {
-            if (other.direcciones != null)
-                return false;
-        } else if (!direcciones.equals(other.direcciones))
-            return false;
         if (jwt == null) {
             if (other.jwt != null)
                 return false;

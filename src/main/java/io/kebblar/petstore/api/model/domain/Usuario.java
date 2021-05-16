@@ -1,5 +1,30 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Usuario.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (23_21)
+ *
+ * Historia:    .
+ *              20210503_2321 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.domain;
 
+/**
+ * Implementacion del POJO de la entidad de 'Usuario'.
+ * 
+ * @author  garellano
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class Usuario {
     private int id;
     private String correo;
@@ -17,22 +42,32 @@ public class Usuario {
     }
 
     public Usuario(int id, String correo, String clave) {
-        this.setId(id);
-        this.setCorreo(correo);
+        this.id = id;
+        this.correo = correo;
         this.setClave(clave);
+        this.clave = clave;
         // Default values
-        this.setActivo(true);
-        this.setAccesoNegadoContador(0);
-        this.setCreado(System.currentTimeMillis());
-        this.setInstanteBloqueo(0);
-        this.setInstanteUltimoAcceso(0);
-        this.setInstanteUltimoCambioClave(0);
-        this.setRegeneraClaveInstante(0);
-        this.setRegeneraClaveToken("NA");
+        this.activo = true;
+        this.accesoNegadoContador = 0;
+        this.creado = System.currentTimeMillis();
+        this.instanteBloqueo = 0;
+        this.instanteUltimoAcceso = 0;
+        this.instanteUltimoCambioClave = 0;
+        this.regeneraClaveInstante = 0;
+        this.regeneraClaveToken = "NA";
     }
 
-    public Usuario(int id, String correo, String clave, long creado, boolean activo, int accesoNegadoContador,
-            long instanteBloqueo, long instanteUltimoAcceso, long instanteUltimoCambioClave, String regeneraClaveToken,
+    public Usuario(
+            int id,
+            String correo,
+            String clave,
+            long creado,
+            boolean activo,
+            int accesoNegadoContador,
+            long instanteBloqueo,
+            long instanteUltimoAcceso,
+            long instanteUltimoCambioClave,
+            String regeneraClaveToken,
             long regeneraClaveInstante) {
         this.id = id;
         this.correo = correo;
@@ -134,6 +169,10 @@ public class Usuario {
     public void setRegeneraClaveInstante(long regeneraClaveInstante) {
         this.regeneraClaveInstante = regeneraClaveInstante;
     }
+    
+    /**
+     * Método especial (y adicional) de soporte al proceso de pruebas de regresión
+     */
     public long getHash() {
         return this.hashCode();
     }

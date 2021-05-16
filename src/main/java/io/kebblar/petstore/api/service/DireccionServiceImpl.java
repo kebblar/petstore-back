@@ -1,26 +1,21 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Direccion
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Servicio asociado a la entidad 'direccion'. 
+ *              ------------------------------------------------
+ * Artefacto:   DireccionServiceImpl.java
+ * Tipo:        Clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Jueves 6 de Mayo de 2021 (09_25)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              0210506_0925 Creación de éste servicio de implementación
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
@@ -38,19 +33,29 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Descripción:</p>
- * Servicio asociado a la entidad 'direccion'. 
- *
- * @author Gustavo A. Arellano
+ * <p>Implementación de la interfaz {@link DireccionService}.
+ * 
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * 
+ * @author  garellano
+ * @see     io.kebblar.petstore.api.model.domain.Direccion
+ * @see     io.kebblar.petstore.api.service.DireccionService
  * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT 
  */
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
-
-    private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
 
     private DireccionMapper direccionMapper;
 
+    /**
+     * Constructor que realiza el setting de todos
+     * los Mappers y todos los servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param direccionMapper
+     */
     public DireccionServiceImpl(DireccionMapper direccionMapper) {
         this.direccionMapper = direccionMapper;
     }
