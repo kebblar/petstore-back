@@ -105,6 +105,7 @@ public class AccessController {
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token) throws ControllerException {
+        if(token.contains("gus")) throw new ControllerException("short", "detailed", 99, token);
         return new Usuario(99, "xxx", "yyy");
     }
 
