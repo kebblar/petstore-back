@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
@@ -103,7 +104,7 @@ public class AccessController {
     @GetMapping(path = "/confirma-preregistro.json", produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
-            @RequestBody String token) throws ControllerException {
+            @RequestParam String token) throws ControllerException {
         return new Usuario(99, "xxx", "yyy");
     }
 
