@@ -18,11 +18,13 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
@@ -96,6 +98,13 @@ public class AccessController {
             @ApiParam(name = "googleCaptcha", value = "Google Captcha V2.0")
             @RequestBody GoogleCaptcha googleCaptcha) throws ControllerException {
         return invokeRestService.checkCaptcha(googleCaptcha);
+    }
+
+    @GetMapping(path = "/confirma-preregistro.json", produces = "application/json; charset=utf-8")
+    public Usuario confirmaPreregistro(
+            @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
+            @RequestBody String token) throws ControllerException {
+        return new Usuario(99, "xxx", "yyy");
     }
 
 }
