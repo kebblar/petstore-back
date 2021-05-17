@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
-import io.kebblar.petstore.api.model.response.GoogleCaptcha;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.domain.*;
 import io.kebblar.petstore.api.service.*;
@@ -69,17 +68,6 @@ public class PruebaController {
     public String pba2(@Valid @RequestBody Direccion dato) throws ControllerException {
         servicio.update(dato);
         return res;
-    }
-
-    @PostMapping(path = "/pba1.json", produces = "application/json; charset=utf-8")
-    public String prueba(@RequestBody UsuarioDetalle usuarioDetalle) throws  ControllerException {
-        System.out.println(usuarioDetalle.toString());
-        return "{ \"todo\" : \"ok\" }";
-    }
-
-    @PostMapping(path = "/captchaPba.json", produces = "application/json; charset=utf-8")
-    public String captchaPba(@RequestBody GoogleCaptcha googleCaptcha) throws  ControllerException {
-        return "{ \"todo\" : \"ok\" }";
     }
 
     @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")

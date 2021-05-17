@@ -23,13 +23,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
+import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
 import io.kebblar.petstore.api.service.UsuarioService;
+import io.kebblar.petstore.api.support.InvokeRestService;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
@@ -54,6 +56,7 @@ import io.swagger.annotations.ApiParam;
 public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
+    private InvokeRestService invokeRestService;
     
     /**
      * Constructor que realiza el setting de los servicios que serán 
@@ -61,9 +64,13 @@ public class AccessController {
      * 
      * @param accessService Servicios de AccessService
      */
-    public AccessController(AccessService accessService, UsuarioService usuarioService) {
+    public AccessController(
+            AccessService accessService, 
+            UsuarioService usuarioService,
+            InvokeRestService invokeRestService) {
         this.accessService = accessService;
         this.usuarioService = usuarioService;
+        this.invokeRestService = invokeRestService;
     }
 
     @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
@@ -74,8 +81,21 @@ public class AccessController {
     @PostMapping(path = "/usuario-preregistro.json", produces = "application/json; charset=utf-8")
     public String insertaUsuarioDetalles(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
-            @RequestBody Preregistro preRegistroRequest) throws BusinessException {
+            @RequestBody Preregistro preRegistroRequest) throws ControllerException {
         int i = this.usuarioService.preRegistro(preRegistroRequest);
         return "ok:"+i;
     }
+    
+    @ApiOperation(
+            value = "RegistroController::verificarCaptcha",
+            notes = "Verifica que el Google captcha V 2.0 sea correcto")
+    @PostMapping(
+            value = "/check-captcha.json",
+            produces = "application/json; charset=utf-8")
+    public String checkCaptcha(
+            @ApiParam(name = "googleCaptcha", value = "Google Captcha V2.0")
+            @RequestBody GoogleCaptcha googleCaptcha) throws ControllerException {
+        return invokeRestService.checkCaptcha(googleCaptcha);
+    }
+
 }

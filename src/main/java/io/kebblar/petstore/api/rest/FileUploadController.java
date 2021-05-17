@@ -68,9 +68,9 @@ public class FileUploadController {
     public List<UploadModel> handleFileUploadWithKDMCopy(@RequestParam("files") MultipartFile[] files) throws UploadException {
         List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
         return listaUpload;
-    }
-
-
+    } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
+    // https://github.com/ozkanpakdil/spring-examples/tree/master/demoMultiFileUpload
+    // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \
