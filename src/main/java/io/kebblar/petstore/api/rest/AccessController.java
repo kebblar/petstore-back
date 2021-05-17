@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -106,8 +105,7 @@ public class AccessController {
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token) throws ControllerException {
-        if(token.contains("gus")) throw new ControllerException("short", "detailed", 99, token, HttpStatus.INTERNAL_SERVER_ERROR );
-        return new Usuario(99, "xxx", "yyy");
+        return usuarioService.confirmaReg(token);
     }
 
 }

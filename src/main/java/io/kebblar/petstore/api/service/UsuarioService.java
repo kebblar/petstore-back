@@ -24,7 +24,6 @@ import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 /**
@@ -151,9 +150,9 @@ public interface UsuarioService {
     /**
      * Confirma el registro de un usuario al sistema
      * 
-     * @param confirmaRegistro Objeto con el token de confirmación del registro
+     * @param token Cadena con la clave de confirmación del registro
      * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
      * @throws BusinessException
      */
-    int confirmaReg(ConfirmaRegistroRequest confirmaRegistro) throws BusinessException;
+    Usuario confirmaReg(String token) throws BusinessException;
 }

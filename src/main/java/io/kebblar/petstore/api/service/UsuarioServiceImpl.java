@@ -52,7 +52,6 @@ import io.kebblar.petstore.api.model.exceptions.TokenNotExistException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
-import io.kebblar.petstore.api.model.request.ConfirmaRegistroRequest;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.support.MailSenderService;
@@ -261,17 +260,14 @@ public class UsuarioServiceImpl implements UsuarioService {
             isolation = Isolation.DEFAULT,
             timeout = 36000, 
             rollbackFor = TransactionException.class)
-    public int confirmaReg(ConfirmaRegistroRequest confirmaRegistro) throws BusinessException {
+    public Usuario confirmaReg(String token) throws BusinessException {
         int idUsuario = 0;
         
         // the sent token wil survive 10 minutes:
         long TEN_MINUTES = 1000*60*10;
         
-        // Obtén el token que dice ser el bueno:
-        String randomString = confirmaRegistro.getToken();
-        
         // Obtén la túpla asociada al token de confirmación
-        Preregistro preregistro = getRegistroByRandomString(randomString);
+        Preregistro preregistro = getRegistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
         if(preregistro==null) throw new TokenNotExistException();
@@ -283,23 +279,24 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         
         // Si la clave no es la misma, notifica el error:
-        if(!randomString.equals(preregistro.getRandomString())) {
+        if(!token.equals(preregistro.getRandomString())) {
             throw new WrongTokenException("Error al comparar el token registrado con el token proporcionado");
         }
         
         // Si todito lo anterior salió bien, actualiza los datos, guarda los datos y elimina el registro:
+        Usuario usuario = null;
         try {
-            idUsuario = doTransaction(preregistro, randomString);
+            usuario = doTransaction(preregistro, token);
             logger.info("Nevo Usuario Creado con ID: " + idUsuario);
         } catch (SQLException e) {
             throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");
         }
         
         // Sólo llego a este punto si absolutamente todo salió bien !!!
-        return idUsuario;
+        return usuario;
     }
 
-    private int doTransaction(Preregistro preregistro, String randomString) throws SQLException {
+    private Usuario doTransaction(Preregistro preregistro, String randomString) throws SQLException {
         // Crea un usuario e insertalo en la base:
         Usuario usuario = new Usuario(
             0, //id (que va a ser autogenerado)
@@ -333,7 +330,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         );
         this.usuarioDetalleMapper.insert(usuarioDetalle);
         
-        
+
         // asociar el usuario recién creado con el rol 2:
         this.rolMapper.insertUserRol(idUsuario, 2);
         
@@ -341,16 +338,24 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.registroMapper.deleteByRandomString(randomString);
         
         // retorna el id del usuario recién creado:
-        return idUsuario;
+        return usuario;
     }
     
     private void sendMail(String nick, String correo, String randomString) throws InternalServerException {
         String body = getTemplate(nick, randomString);
         this.mailSenderService.sendHtmlMail(correo, "Confirmación de registro", body);
     }
-    private Preregistro getRegistroByRandomString(String randomString) throws BusinessException {
+    /**
+     * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado 
+     * por correo al momento del registro.
+     * 
+     * @param token proporcionado por correo al momento del registro.
+     * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
+     * @throws BusinessException
+     */
+    private Preregistro getRegistroByRandomString(String token) throws BusinessException {
         try {
-            return this.registroMapper.getByRandomString(randomString);
+            return this.registroMapper.getByRandomString(token);
         } catch (SQLException e) {
             throw new BusinessException("getRegistroByRandomString", e.toString()); 
         }
