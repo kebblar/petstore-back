@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+//import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -76,17 +77,20 @@ public class AccessController {
         this.invokeRestService = invokeRestService;
     }
 
-    @PostMapping(path = "/login.json", produces = "application/json; charset=utf-8")
+    @PostMapping(
+            path = "/login.json", 
+            produces = "application/json; charset=utf-8")
     public LoginResponse login(@RequestBody CredencialesRequest cred) throws ControllerException {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
-    @PostMapping(path = "/usuario-preregistro.json", produces = "application/json; charset=utf-8")
-    public String insertaUsuarioDetalles(
+    @PostMapping(
+            path = "/usuario-preregistro.json", 
+            produces = "application/json; charset=utf-8")
+    public Preregistro insertaUsuarioDetalles(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
             @RequestBody Preregistro preRegistroRequest) throws ControllerException {
-        int i = this.usuarioService.preRegistro(preRegistroRequest);
-        return "ok:"+i;
+        return this.usuarioService.preRegistro(preRegistroRequest);
     }
     
     @ApiOperation(
@@ -101,11 +105,34 @@ public class AccessController {
         return invokeRestService.checkCaptcha(googleCaptcha);
     }
 
-    @GetMapping(path = "/confirma-preregistro.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+            path = "/confirma-preregistro.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token) throws ControllerException {
-        return usuarioService.confirmaReg(token);
+        return usuarioService.confirmaPreregistro(token);
+    }
+    
+    @GetMapping(
+            path = "/regenera-clave.json", 
+            produces = "application/json; charset=utf-8")
+    public Usuario regeneraClave(
+            @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
+            @RequestParam String correo) throws ControllerException {
+        // pase lo que pase esté endpoint siempre regresa algo "bueno", para no alentar el "enumeration atack"
+        return usuarioService.solicitaRegeneracionClave(correo);
+    }
+    
+    @GetMapping(
+            path = "/confirma-regenera-clave.json", 
+            produces = "application/json; charset=utf-8")
+    public Usuario confirmaRegeneraClave(
+            @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
+            @RequestParam String token,
+            @ApiParam(name = "clave", value = "Nueva clave a actualizar")
+            @RequestParam String clave) throws ControllerException {
+        return usuarioService.confirmaRegeneraClave(token, clave);
     }
 
 }

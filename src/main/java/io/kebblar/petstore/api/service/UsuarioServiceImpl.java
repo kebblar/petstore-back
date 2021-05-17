@@ -76,7 +76,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioMapper usuarioMapper;
     private RolMapper rolMapper;
     private RegistroMapper registroMapper;
-    //private DireccionMapper direccionMapper;
     private UsuarioDetalleMapper usuarioDetalleMapper;
     private MailSenderService mailSenderService;
     
@@ -202,15 +201,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
     
     @Override
-    public int preRegistro(Preregistro preRegistroRequest) throws BusinessException {
+    public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
-            return preReg(preRegistroRequest);
+            return preRegistroHelper(preRegistroRequest);
         } catch (SQLException e) {
             throw new DatabaseException(e.toString());
         }
     }
 
-    private int preReg(Preregistro preRegistroRequest) throws 
+    private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws 
             StrengthPasswordValidatorException, 
             InternalServerException, 
             UserAlreadyExistsException,
@@ -251,7 +250,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Envia correo de notificación:
         sendMail(preRegistroRequest.getNick(), preRegistroRequest.getCorreo(), randomString);
         logger.info("Se ha enviado un correo para confirmación a: " + preRegistroRequest.getCorreo());
-        return preRegistroRequest.getId();
+        return preRegistroRequest;
     }
     
     @Override
@@ -260,14 +259,14 @@ public class UsuarioServiceImpl implements UsuarioService {
             isolation = Isolation.DEFAULT,
             timeout = 36000, 
             rollbackFor = TransactionException.class)
-    public Usuario confirmaReg(String token) throws BusinessException {
+    public Usuario confirmaPreregistro(String token) throws BusinessException {
         int idUsuario = 0;
         
         // the sent token wil survive 10 minutes:
         long TEN_MINUTES = 1000*60*10;
         
         // Obtén la túpla asociada al token de confirmación
-        Preregistro preregistro = getRegistroByRandomString(token);
+        Preregistro preregistro = getPreregistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
         if(preregistro==null) throw new TokenNotExistException();
@@ -345,6 +344,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         String body = getTemplate(nick, randomString);
         this.mailSenderService.sendHtmlMail(correo, "Confirmación de registro", body);
     }
+    
     /**
      * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado 
      * por correo al momento del registro.
@@ -353,7 +353,7 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
      * @throws BusinessException
      */
-    private Preregistro getRegistroByRandomString(String token) throws BusinessException {
+    private Preregistro getPreregistroByRandomString(String token) throws BusinessException {
         try {
             return this.registroMapper.getByRandomString(token);
         } catch (SQLException e) {
@@ -376,5 +376,38 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new InternalServerException("IO Error", "No se ha podido leer el archivo " + archivo);
         }
 
+    }
+
+    @Override
+    public Usuario solicitaRegeneracionClave(String correo) {
+        Usuario dummyUser = new Usuario(0, "err","err");
+        String token = DigestEncoder.getRandomString(6);
+        try {
+            Usuario usuario = usuarioMapper.getByCorreo(correo);
+            if(usuario==null) return dummyUser;
+            usuario.setRegeneraClaveInstante(System.currentTimeMillis());
+            usuario.setRegeneraClaveToken(token);
+            usuarioMapper.update(usuario);
+            //sendMail("Estimado Usuario", correo, token);
+            return usuario;
+        } catch (SQLException e) {
+            logger.error(e.toString());
+            return dummyUser;
+        }
+    }
+    
+    @Override
+    public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
+        long UNA_HORA = 1000*60*60;
+        Usuario usuario = usuarioMapper.getByToken(token);
+        if(usuario==null) throw new TokenNotExistException();
+        long remaining = System.currentTimeMillis()-usuario.getRegeneraClaveInstante();
+        if(remaining<UNA_HORA) {
+            String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
+            usuarioMapper.confirmaRegeneraClave(token, claveHash);
+            return usuarioMapper.getByToken(token);
+        } else {
+            throw new TokenExpiredException();
+        }
     }
 }

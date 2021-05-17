@@ -126,4 +126,11 @@ public interface UsuarioMapper {
     @Update("Update usuario SET actvo=false where id=#{id}")
     int delete(int id) throws SQLException;
 
+    @Update("Update usuario SET clave=#{clave} where regenera_clave_token=#{token}")
+    int confirmaRegeneraClave(String token, String clave);
+    
+    @ResultMap("UsuarioMap")
+    @Select("SELECT " + CAMPOS + " FROM usuario WHERE regenera_clave_token=#{token} ")
+    Usuario getByToken(String token);
+
 }

@@ -142,10 +142,10 @@ public interface UsuarioService {
      * Realiza el preregistro de un potencial usuario al sistema
      * 
      * @param preRegistroRequest
-     * @return
+     * @return Preregistro mismo objeto recibido
      * @throws BusinessException
      */
-    int preRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException;
 
     /**
      * Confirma el registro de un usuario al sistema
@@ -154,5 +154,25 @@ public interface UsuarioService {
      * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
      * @throws BusinessException
      */
-    Usuario confirmaReg(String token) throws BusinessException;
+    Usuario confirmaPreregistro(String token) throws BusinessException;
+
+    /**
+     * Solicita la regeneración de una clave perdida u olvidada
+     * 
+     * @param correo String asociado a la clave olvidada
+     * @return
+     * @throws BusinessException
+     */
+    Usuario solicitaRegeneracionClave(String correo);
+    
+    /**
+     * Asigna una nueva clave a un usuario
+     * 
+     * @param token String asociado a un usuario
+     * @param clave Nueva clave
+     * 
+     * @return Usuario asignado
+     * @throws BusinessException
+     */
+    Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException;
 }
