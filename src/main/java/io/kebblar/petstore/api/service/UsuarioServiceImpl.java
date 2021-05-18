@@ -259,11 +259,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             isolation = Isolation.DEFAULT,
             timeout = 36000, 
             rollbackFor = TransactionException.class)
-    public Usuario confirmaPreregistro(String token) throws BusinessException {
-        int idUsuario = 0;
-        
-        // the sent token wil survive 10 minutes:
-        long TEN_MINUTES = 1000*60*10;
+    public Usuario confirmaPreregistro(String token) throws BusinessException {        
+        // El token sirve sólo 10 minutes:
+        long DELTA = 1000*60*10;
         
         // Obtén la túpla asociada al token de confirmación
         Preregistro preregistro = getPreregistroByRandomString(token);
@@ -272,8 +270,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(preregistro==null) throw new TokenNotExistException();
         
         // Si ya expiró el token, notifica el error:
-        long last = System.currentTimeMillis()-preregistro.getInstanteRegistro();
-        if(last>TEN_MINUTES) { // token expired
+        long age = System.currentTimeMillis()-preregistro.getInstanteRegistro();
+        if(age>DELTA) { // token expirado
             throw new TokenExpiredException();
         }
         
@@ -282,17 +280,13 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new WrongTokenException("Error al comparar el token registrado con el token proporcionado");
         }
         
-        // Si todito lo anterior salió bien, actualiza los datos, guarda los datos y elimina el registro:
-        Usuario usuario = null;
+        // Si todito lo anterior salió bien, actualiza los
+        // datos, guárdalos y elimina el preregistro auxiliar:
         try {
-            usuario = doTransaction(preregistro, token);
-            logger.info("Nevo Usuario Creado con ID: " + idUsuario);
+            return doTransaction(preregistro, token);
         } catch (SQLException e) {
             throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");
         }
-        
-        // Sólo llego a este punto si absolutamente todo salió bien !!!
-        return usuario;
     }
 
     private Usuario doTransaction(Preregistro preregistro, String randomString) throws SQLException {
@@ -336,12 +330,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Borra lo que tengas en la tabla registro
         this.registroMapper.deleteByRandomString(randomString);
         
-        // retorna el id del usuario recién creado:
+        // Notifica al log y retorna el id del usuario recién creado:
+        logger.info("Nevo Usuario Creado con ID: " + idUsuario);
         return usuario;
     }
     
-    private void sendMail(String nick, String correo, String randomString) throws InternalServerException {
-        String body = getTemplate(nick, randomString);
+    private void sendMail(String nick, String correo, String randomString) {
+        String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
+        try {
+            body = getTemplate(nick, randomString);
+        } catch (InternalServerException e) {
+            logger.error(e.toString());
+        }
         this.mailSenderService.sendHtmlMail(correo, "Confirmación de registro", body);
     }
     
@@ -388,7 +388,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setRegeneraClaveInstante(System.currentTimeMillis());
             usuario.setRegeneraClaveToken(token);
             usuarioMapper.update(usuario);
-            //sendMail("Estimado Usuario", correo, token);
+            sendMail("Estimado Usuario", correo, token);
             return usuario;
         } catch (SQLException e) {
             logger.error(e.toString());
