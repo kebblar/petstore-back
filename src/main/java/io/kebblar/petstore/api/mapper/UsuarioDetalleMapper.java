@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
  */
 @Repository
 public interface UsuarioDetalleMapper {
-    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_casa, telefono_celular ";
+    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
 
     @Results(id="UsuarioDetalleMap", value = {
         @Result(property = "id", column = "id_usuario"),
@@ -47,7 +47,6 @@ public interface UsuarioDetalleMapper {
         @Result(property = "apellidoMaterno", column = "apellido_materno"),
         @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
         @Result(property = "nickName", column = "nick_name"),
-        @Result(property = "telefonoCasa", column = "telefono_casa"),
         @Result(property = "telefonoCelular", column = "telefono_celular")    
     })
     @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
@@ -57,11 +56,11 @@ public interface UsuarioDetalleMapper {
     @Select("SELECT " + CAMPOS + " FROM usuario_detalle ") 
     List<UsuarioDetalle> getAll() throws SQLException;
     
-    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_casa, telefono_celular) VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{fechaNacimiento}, #{nickName}, #{telefonoCasa}, #{telefonoCelular} )")
+    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular) VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{fechaNacimiento}, #{nickName}, #{telefonoCasa}, #{telefonoCelular} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
-    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_casa = #{telefonoCasa}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{idUsuario} ")
+    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{idUsuario} ")
     int update(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
