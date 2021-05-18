@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api("value = pagos")
-@RequestMapping(value="/pago")
+@RequestMapping(value="/api")
 public class PagosController {
 
-    @PostMapping( value = "/pago-paypal.json",
+    @PostMapping( value = "/procesa-orden.json",
             produces = "application/json; charset=utf-8")
     public String procesaOrden(@RequestBody DatosOrden datosCompra) throws BusinessException{
         return datosCompra.toString();
