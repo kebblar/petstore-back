@@ -76,7 +76,6 @@ public interface UsuarioDetalleMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular) VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular} )")
-    @Options(useGeneratedKeys=true, keyProperty="id_usuario", keyColumn = "id_usuario")
     int insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
