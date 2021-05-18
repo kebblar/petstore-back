@@ -248,7 +248,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         
         // Envia correo de notificación:
-        sendMail(preRegistroRequest.getNick(), preRegistroRequest.getCorreo(), randomString);
+        sendMail(
+                preRegistroRequest.getNick(), 
+                preRegistroRequest.getCorreo(), 
+                randomString, 
+                "Clave de confirmación de registro");
         logger.info("Se ha enviado un correo para confirmación a: " + preRegistroRequest.getCorreo());
         return preRegistroRequest;
     }
@@ -335,14 +339,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
     
-    private void sendMail(String nick, String correo, String randomString) {
+    private void sendMail(String nick, String correo, String randomString, String titulo) {
         String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
         try {
             body = getTemplate(nick, randomString);
         } catch (InternalServerException e) {
             logger.error(e.toString());
         }
-        this.mailSenderService.sendHtmlMail(correo, "Confirmación de registro", body);
+        this.mailSenderService.sendHtmlMail(correo, titulo, body);
     }
     
     /**
@@ -388,7 +392,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setRegeneraClaveInstante(System.currentTimeMillis());
             usuario.setRegeneraClaveToken(token);
             usuarioMapper.update(usuario);
-            sendMail("Estimado Usuario", correo, token);
+            sendMail("Estimado Usuario", correo, token, "Clave de recuperación");
             return usuario;
         } catch (SQLException e) {
             logger.error(e.toString());
