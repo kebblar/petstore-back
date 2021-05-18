@@ -166,7 +166,7 @@ public interface UsuarioService {
     Usuario solicitaRegeneracionClave(String correo);
     
     /**
-     * Asigna una nueva clave a un usuario
+     * Confirma la regeneracion de una nueva clave a un usuario
      * 
      * @param token String asociado a un usuario
      * @param clave Nueva clave
