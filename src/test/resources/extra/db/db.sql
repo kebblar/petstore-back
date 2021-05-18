@@ -332,7 +332,7 @@ INSERT INTO `paqueteria` VALUES (1,'Aeroméxico Cargo','Entrega que va de unas h
 UNLOCK TABLES;
 
 --
--- Table structure para table `preregistro`
+-- Table structure para2 table `preregistro`
 --
 
 DROP TABLE IF EXISTS `preregistro`;
