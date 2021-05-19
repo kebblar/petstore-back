@@ -21,7 +21,6 @@ public class AnuncioRequest {
 	private Date fechaFinVigencia;
 	@Min(value = 1, message = "{min.anuncio.idcategoria}")
 	private int idCategoria;
-	@NotBlank(message = "{notblank.anuncio.precio}")
 	@NotNull(message = "{notnull.anuncio.precio}")
 	private BigDecimal precio;
 	private List <AtributoRequest> atributos;
