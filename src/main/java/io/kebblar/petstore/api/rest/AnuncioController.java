@@ -20,11 +20,13 @@ package io.kebblar.petstore.api.rest;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Anuncio;
@@ -91,7 +93,18 @@ public class AnuncioController {
 		return new AnuncioResponse(anuncio.getId(),"18052122090001");
     }
 
-	
+	@ApiOperation(
+        value = "AnuncioController::eliminar",
+        notes = "Recibe un identificador del anuncio a eliminar en el sistema.")
+    @DeleteMapping(
+            value = "/anuncio.json",
+            produces = "application/json; charset=utf-8")
+    public void eliminar(
+    		@ApiParam(name="id", value="Identificador del anunacio que será removido del sistema.")
+    		@RequestParam int id ) throws BusinessException {
+		System.out.println("Eliminar idAnuncio: "+id);
+		//Llamada al servicio
+    }
 	
 	
 }
