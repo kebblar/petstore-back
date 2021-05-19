@@ -105,14 +105,7 @@ public interface MunicipioMapper {
     @Delete("DELETE FROM municipio WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
-    /**
-     * Dado determinado estado, el método retorna los municipios pertenecientes a este.
-     * @param id id del estado que contiene a los municipios.
-     * @return Lista con los municipios de determinado estado.
-     * @throws SQLException en caso de un error en el servidor o en la consulta.
-     */
-    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{id}" )
-    List<Municipio> getAllByEstado(int id) throws SQLException;
+
 
     /**
      * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.
