@@ -91,10 +91,11 @@ public interface MunicipioService {
     int delete(Municipio municipio) throws BusinessException;
 
     /**
-     *
-     * @param id
-     * @return
-     * @throws BusinessException
+     * Retorna la lista de municipios de determinado estado. Dado el id del estado, los
+     * municipios contenidos dentro de este serán devueltos.
+     * @param id id del estado
+     * @return Lista de municipios pertenecientes al estado ingresado
+     * @throws BusinessException En caso de cualquier error lógico o físico.
      */
     List<Municipio> getByEstado(int id) throws BusinessException;
 }

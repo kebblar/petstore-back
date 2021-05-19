@@ -130,6 +130,9 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /*
+    Devuelve la lista de municipios de un estado
+     */
     @Override
     public List<Municipio> getByEstado(int id) throws BusinessException {
         try{

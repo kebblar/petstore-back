@@ -127,14 +127,17 @@ public class DireccionServiceImpl implements DireccionService {
             return direccionMapper.getDireccionesNombre(idUser);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
-
+    /*
+    Insert de una dirección ya asociada con el usuario
+     */
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
         int idDireccion;
         UsuarioDireccion ud;
+        //Se crea primero una dirección
         Direccion d = new Direccion(nuevaDireccion.getId(),
                 nuevaDireccion.getCalleNumero(),
                 nuevaDireccion.getColonia(),
@@ -146,14 +149,14 @@ public class DireccionServiceImpl implements DireccionService {
                 nuevaDireccion.getReferencias(),
                 true);
         try{
+            //Se inserta recuperando su id
             direccionMapper.insert(d);
             idDireccion = d.getId();
-            System.out.println(idDireccion);
+            //El id de esa dirección se asocia al id del usuario que la ingresó
             ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
             return direccionMapper.insertUsuarioDireccion(ud);
-        }catch(SQLException e){
-            logger.error(e.getMessage());
-            throw new BusinessException();
+        }catch(Exception e){
+            throw new MapperCallException("Error al insertar la nueva dirección y asociarla con el usuario", e.getMessage());
         }
     }
 

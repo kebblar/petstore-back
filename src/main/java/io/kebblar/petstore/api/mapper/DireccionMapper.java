@@ -98,8 +98,9 @@ public interface DireccionMapper {
     List<DireccionConNombre> getDireccionesNombre(int id) throws SQLException;
 
     /**
-     * Agrega
-     * @return
+     * Agrega a la tabla de intersección de usuarios y direcciones un nuevo elemento.
+     * @param ud Elemento que corresponde al id del usuario y el id de la dirección relacionados.
+     * @return Un entero si es que todo salió bien.
      */
 
     @Insert("INSERT INTO usuario_direccion(id_usuario, id_direccion) VALUES( #{idUsuario} , #{idDireccion} )")

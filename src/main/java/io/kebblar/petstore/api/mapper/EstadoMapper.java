@@ -108,10 +108,10 @@ public interface EstadoMapper {
     int delete(int id) throws SQLException;
 
     /**
-     *
-     * @param id
-     * @return Esta
-     * @throws SQLException
+     * Dado el id de un pais, se retornan todos los estados que pertenecen a este.
+     * @param id id del país que contiene a los estados retornados.
+     * @return Lista de estados pertenecientes al país recibido.
+     * @throws SQLException Si ocurre un error en la consulta o en el sistema.
      */
     @Select("SELECT " + CAMPOS + " FROM estado WHERE id_pais=#{id}" )
     List<Estado> getByPais(int id) throws SQLException;

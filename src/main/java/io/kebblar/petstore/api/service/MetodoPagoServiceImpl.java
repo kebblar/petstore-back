@@ -129,7 +129,9 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
             throw new BusinessException();
         }
     }
-
+    /*
+    Retorna los pagor por usuario
+     */
     @Override
     public List<MetodoPago> getByIdUser(int id) throws BusinessException {
         try {

@@ -107,10 +107,10 @@ public interface MunicipioMapper {
     int delete(int id) throws SQLException;
 
     /**
-     *
-     * @param id
-     * @return Esta
-     * @throws SQLException
+     * Dado determinado estado, el método retorna los municipios pertenecientes a este.
+     * @param id id del estado que contiene a los municipios.
+     * @return Lista con los municipios de determinado estado.
+     * @throws SQLException en caso de un error en el servidor o en la consulta.
      */
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{id}" )
     List<Municipio> getByPais(int id) throws SQLException;

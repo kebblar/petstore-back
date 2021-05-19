@@ -111,6 +111,18 @@ public class MunicipioController {
     ) throws BusinessException {
         return this.municipioService.getById(id);
     }
+
+    @ApiOperation(
+            value = "MunicipioController::municipioByEstado",
+            notes = "Recibe el id del estado y retorna los municipios que pertenecen a este")
+    @GetMapping(
+            value= "/municipio-por-estado/{id}.json",
+            produces = "application/json; charset=utf-8")
+    public List<Municipio> getByEstado(
+            @ApiParam(name = "id", value = "id del estado")
+            @PathVariable int id) throws BusinessException{
+        return municipioService.getByEstado(id);
+    }
     
     @ApiOperation(
         value = "MunicipioController::insert",
@@ -153,12 +165,5 @@ public class MunicipioController {
     @RequestBody Municipio municipio
     ) throws BusinessException {
         return municipioService.delete(municipio);
-    }
-
-    @GetMapping(
-            value= "/municipio-por-estado/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
-        return municipioService.getByEstado(id);
     }
 }
