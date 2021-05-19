@@ -78,6 +78,18 @@ public class AnuncioController {
     		@PathVariable int id) throws BusinessException {
 		System.out.println(id);
     }
+	
+	@ApiOperation(value = "AnuncioController::actualiza",
+	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
+	        		+ "actualizar un anuncio.")
+	@PutMapping(value = "/anuncio.json",
+            produces = "application/json; charset=utf-8")
+    public AnuncioResponse actualizar(
+    		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
+    		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
+		System.out.println(anuncio);
+		return new AnuncioResponse(anuncio.getId(),"18052122090001");
+    }
 
 	
 	
