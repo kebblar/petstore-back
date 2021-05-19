@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.swagger.annotations.Api;
@@ -59,10 +60,10 @@ public class AnuncioController {
 	@ApiOperation(value = "AnuncioController::registro",
 	        notes = "Recibe un objeto <strong>AnuncioRequest</strong> que contiene la información para el "
 	        		+ "registro de un anuncio.")
-	@PostMapping(value = "/registro.json",
+	@PostMapping(value = "/anuncio.json",
             produces = "application/json; charset=utf-8")
     public AnuncioResponse registro(
-    		@ApiParam(name="anuncio", value="Anuncio que será insertado en el sistema.")
+    		@ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
     		@RequestBody @Valid AnuncioRequest anuncio) throws BusinessException {
 		System.out.println(anuncio);
 		return new AnuncioResponse(1,"18052122090001");
@@ -70,7 +71,7 @@ public class AnuncioController {
 	
 	@ApiOperation(value = "AnuncioController::publicar",
 	        notes = "Recibe el identificador del anuncio que sera publicado.")
-	@PutMapping(value = "/publicar/{id}.json",
+	@PutMapping(value = "/anuncio/publicar/{id}.json",
             produces = "application/json; charset=utf-8")
     public void publicar(
     		@ApiParam(name="id", value="Identificador del anuncio.")
@@ -78,6 +79,7 @@ public class AnuncioController {
 		System.out.println(id);
     }
 
+	
 	
 	
 }
