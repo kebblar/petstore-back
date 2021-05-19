@@ -25,6 +25,8 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import java.sql.SQLException;
+
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
