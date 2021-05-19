@@ -1,3 +1,4 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -8,7 +9,8 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   MunicipioServiceImpl.java
+ * Artefacto:   MunicipioServiceImpl .java
+ * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
@@ -18,6 +20,7 @@
  * Historia:    20210511_1444 Implementación de clase 
  *
  */
+
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -28,7 +31,6 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Descripción:</p>
@@ -66,15 +68,15 @@ public class MunicipioServiceImpl implements MunicipioService {
     /*
     * Implementación del método getById
     */
-    //@Override
-//    public Municipio getById(int id) throws BusinessException {
-//        try {
-//            return municipioMapper.getById(id);
-//        } catch (SQLException e) {
-//            logger.error(e.getMessage());
-//            throw new BusinessException();
-//        }
-//    }
+    @Override
+    public Municipio getById(int id) throws BusinessException {
+        try {
+            return municipioMapper.getById(id);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
 
     /*
     * Implementación del método getAll
@@ -129,6 +131,19 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
+    Devuelve la lista de municipios de un estado
+     */
+    @Override
+    public List<Municipio> getByEstado(int id) throws BusinessException {
+        try{
+            return municipioMapper.getByPais(id);
+        }catch (SQLException e){
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    /*
     * Implementación del método save
     */
     @Override
@@ -151,24 +166,6 @@ public class MunicipioServiceImpl implements MunicipioService {
             return municipioMapper.getPaginatedMunicipios(idEstado, (pageNumber-1)*pageSize, pageSize);
         } catch (Exception e) {
             throw new MapperCallException("Error de obtención de los Municipios", e.getMessage());
-        }
-    }
-
-    @Override
-    public Municipio getById(int id) throws BusinessException {
-        try {
-            return municipioMapper.getById(id);
-        } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de un Municipio por su ID", e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Municipio> getAllByEstado(int idEstado) throws BusinessException {
-        try {
-            return municipioMapper.getAllByEstado(idEstado);
-        } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
         }
     }
 

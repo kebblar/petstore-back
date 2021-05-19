@@ -90,4 +90,12 @@ public interface MetodoPagoService {
      */
     int delete(MetodoPago metodoPago) throws BusinessException;
 
+    /**
+     * Método utilizado para recuperar una lista elemento de la tabla 'metodo_pago'. por medio del usuario al que pertenecen.
+     *
+     * @param id Id del usuario
+     * @return La información del elemento recuperado en un listado de objetos de la clase MetodoPago
+     * o la lista vacia si no hay elementos.
+     */
+    List<MetodoPago> getByIdUser(int id) throws BusinessException;
 }
