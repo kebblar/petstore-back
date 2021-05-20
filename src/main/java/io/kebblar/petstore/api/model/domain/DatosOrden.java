@@ -4,30 +4,31 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   DatosOrden .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo, Daniel Alvarez
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'orden_compra'. 
+ * POJO asociado a la entidad 'orden_compra'.
  *
  * @author Fhernanda Romo, Daniel Alvarez
  * @version 1.0-SNAPSHOT
@@ -36,36 +37,32 @@ import java.util.Date;
 public class DatosOrden implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6032711964621903590L;
 	/**
-     * Atributos de la clase
-     */
+	 * Atributos de la clase
+	 */
 	private int id;
-    private int idUsuario;
-    private int idDireccion;
-    private int idPaqueteria;
-    private int idMetodoPago;
-    private int idMoneda;
-    private int idAnuncio;
-    private String cveOrdenCompra;
-    private long importeTotal;
-    private Date fecha;
-    private boolean estadoEnvio;
-    private String recibo;
-    
-    
-    private long precio;
-    private int total;
-    private String descripcion;
-    private String idOrden;
+	private int idUsuario;
+	private int idDireccion;
+	private int idPaqueteria;
+	private int idMetodoPago;
+	private int idMoneda;
+	private int idAnuncio;
+	private String cveOrdenCompra;
+	private Date fecha;
+	private boolean estadoEnvio;
+	private long precio;
+	private int total;
+	private String descripcion;
+	private String recibo;
 
-    /**
-     * Constructor por default (sin parámetros).
-     */
-    public DatosOrden() {
-    }
+	/**
+	 * Constructor por default (sin parámetros).
+	 */
+	public DatosOrden() {
+	}
 
 
 
@@ -112,6 +109,13 @@ public class DatosOrden implements Serializable {
 	}
 
 
+	public boolean isEstadoEnvio() {
+		return estadoEnvio;
+	}
+
+	public void setEstadoEnvio(boolean estadoEnvio) {
+		this.estadoEnvio = estadoEnvio;
+	}
 
 	/**
 	 * @return the descripcion
@@ -216,7 +220,7 @@ public class DatosOrden implements Serializable {
 	}
 
 
-	
+
 	/**
 	 * @return the recibo
 	 */
@@ -252,23 +256,6 @@ public class DatosOrden implements Serializable {
 	}
 
 
-	/**
-	 * @return the idOrden
-	 */
-	public String getIdOrden() {
-		return idOrden;
-	}
-
-
-
-	/**
-	 * @param idOrden the idOrden to set
-	 */
-	public void setIdOrden(String idOrden) {
-		this.idOrden = idOrden;
-	}
-
-
 
 	/**
 	 * @return the id
@@ -287,121 +274,36 @@ public class DatosOrden implements Serializable {
 	}
 
 
-
-	/**
-	 * @return the importeTotal
-	 */
-	public long getImporteTotal() {
-		return importeTotal;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof DatosOrden)) return false;
+		DatosOrden that = (DatosOrden) o;
+		return id == that.id && idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && idAnuncio == that.idAnuncio && estadoEnvio == that.estadoEnvio && precio == that.precio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
 	}
-
-
-
-	/**
-	 * @param importeTotal the importeTotal to set
-	 */
-	public void setImporteTotal(long importeTotal) {
-		this.importeTotal = importeTotal;
-	}
-
-
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cveOrdenCompra == null) ? 0 : cveOrdenCompra.hashCode());
-		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-		result = prime * result + (estadoEnvio ? 1231 : 1237);
-		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-		result = prime * result + id;
-		result = prime * result + idAnuncio;
-		result = prime * result + idDireccion;
-		result = prime * result + idMetodoPago;
-		result = prime * result + idMoneda;
-		result = prime * result + ((idOrden == null) ? 0 : idOrden.hashCode());
-		result = prime * result + idPaqueteria;
-		result = prime * result + idUsuario;
-		result = prime * result + (int) (importeTotal ^ (importeTotal >>> 32));
-		result = prime * result + (int) (precio ^ (precio >>> 32));
-		result = prime * result + ((recibo == null) ? 0 : recibo.hashCode());
-		result = prime * result + total;
-		return result;
+		return Objects.hash(id, idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, idAnuncio, cveOrdenCompra, fecha, estadoEnvio, precio, total, descripcion, recibo);
 	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DatosOrden other = (DatosOrden) obj;
-		if (cveOrdenCompra == null) {
-			if (other.cveOrdenCompra != null)
-				return false;
-		} else if (!cveOrdenCompra.equals(other.cveOrdenCompra))
-			return false;
-		if (descripcion == null) {
-			if (other.descripcion != null)
-				return false;
-		} else if (!descripcion.equals(other.descripcion))
-			return false;
-		if (estadoEnvio != other.estadoEnvio)
-			return false;
-		if (fecha == null) {
-			if (other.fecha != null)
-				return false;
-		} else if (!fecha.equals(other.fecha))
-			return false;
-		if (id != other.id)
-			return false;
-		if (idAnuncio != other.idAnuncio)
-			return false;
-		if (idDireccion != other.idDireccion)
-			return false;
-		if (idMetodoPago != other.idMetodoPago)
-			return false;
-		if (idMoneda != other.idMoneda)
-			return false;
-		if (idOrden == null) {
-			if (other.idOrden != null)
-				return false;
-		} else if (!idOrden.equals(other.idOrden))
-			return false;
-		if (idPaqueteria != other.idPaqueteria)
-			return false;
-		if (idUsuario != other.idUsuario)
-			return false;
-		if (importeTotal != other.importeTotal)
-			return false;
-		if (precio != other.precio)
-			return false;
-		if (recibo == null) {
-			if (other.recibo != null)
-				return false;
-		} else if (!recibo.equals(other.recibo))
-			return false;
-		if (total != other.total)
-			return false;
-		return true;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "DatosOrden [id=" + id + ", idUsuario=" + idUsuario + ", idDireccion=" + idDireccion + ", idPaqueteria="
-				+ idPaqueteria + ", idMetodoPago=" + idMetodoPago + ", idMoneda=" + idMoneda + ", idAnuncio="
-				+ idAnuncio + ", cveOrdenCompra=" + cveOrdenCompra + ", importeTotal=" + importeTotal + ", fecha="
-				+ fecha + ", estadoEnvio=" + estadoEnvio + ", recibo=" + recibo + ", precio=" + precio + ", total="
-				+ total + ", descripcion=" + descripcion + ", idOrden=" + idOrden + "]";
+		return "DatosOrden{" +
+				"id=" + id +
+				", idUsuario=" + idUsuario +
+				", idDireccion=" + idDireccion +
+				", idPaqueteria=" + idPaqueteria +
+				", idMetodoPago=" + idMetodoPago +
+				", idMoneda=" + idMoneda +
+				", idAnuncio=" + idAnuncio +
+				", cveOrdenCompra='" + cveOrdenCompra + '\'' +
+				", fecha=" + fecha +
+				", estadoEnvio=" + estadoEnvio +
+				", precio=" + precio +
+				", total=" + total +
+				", descripcion='" + descripcion + '\'' +
+				", recibo='" + recibo + '\'' +
+				'}';
 	}
-
-	
-
-    
 }
