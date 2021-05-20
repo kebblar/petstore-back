@@ -21,10 +21,10 @@
  */
 package io.kebblar.petstore.api.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
+import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
@@ -39,10 +39,10 @@ public interface HistorialComprasService {
     /**
      * Método utilizado para obtener todas las compras hechas por un usuario.
      * 
-     * @param id objeto de tipo entero que es el id del usuario a buscar.
+     * @param correo objeto de tipo Mail que contiene el correo del usuario a buscar.
      * @return Lista de compras hechas por el usuario pasado como parametro.
      * @throws BusinessException es disparada por una regla de negocio
      */
-	List<HistorialCompras> getAll(int id) throws BusinessException;
+	List<HistorialCompras> getAll(Mail correo) throws BusinessException;
 
 }

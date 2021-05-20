@@ -21,12 +21,12 @@ package io.kebblar.petstore.api.mapper;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
+import io.kebblar.petstore.api.model.domain.Mail;
 
 /**
  * <p>Descripción:</p>
@@ -42,7 +42,7 @@ public interface HistorialComprasMapper {
     /**
      * Obtiene todas las compras hechas por un usuario.
      *
-     * @param id el id del usuario del cual queremos las compras.
+     * @param Mail el correo del usuario del cual queremos las compras.
      * @return Una lista de las compras hechas por un usuario.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -56,6 +56,6 @@ public interface HistorialComprasMapper {
             @Result(property = "urlPdf", column = "recibo"),
             @Result(property = "urlImagen", column = "imagen"),
         })
-    @Select("SELECT id,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen FROM historial_compras WHERE id_usuario = #{id}; ") 
-    List<HistorialCompras> getAll(@Param("id") int id) throws SQLException;
+    @Select("SELECT id,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen FROM historial_compras WHERE correo = #{mail}; ") 
+    List<HistorialCompras> getAll(Mail correo) throws SQLException;
 }

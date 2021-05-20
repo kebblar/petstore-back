@@ -1,6 +1,5 @@
 package io.kebblar.petstore.api.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
@@ -11,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
+import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,8 +35,9 @@ public class TestHistorialComprasService {
     	HistorialCompras compra = new HistorialCompras(1,"2020-10-10",0,1,"foo","paypal","gus@aol.com",
     			"foo.com","goo.com");
     	getLista.add(compra);
-    	when(historialMapper.getAll(1)).thenReturn(getLista);
-    	assert(historialService.getAll(1).get(0).getId() == 1);
+    	Mail correo = new Mail("gus@aol.com");
+    	when(historialMapper.getAll(correo)).thenReturn(getLista);
+    	assert(historialService.getAll(correo).get(0).getId() == 1);
     }
     
 }
