@@ -21,7 +21,6 @@
  */
 package io.kebblar.petstore.api.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
+import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 /**
@@ -50,9 +50,9 @@ public class HistorialComprasServiceImpl implements HistorialComprasService{
 	}
     
 	@Override
-	public List<HistorialCompras> getAll(int id) throws BusinessException {
+	public List<HistorialCompras> getAll(Mail correo) throws BusinessException {
 		try {
-			return historialMapper.getAll(id);
+			return historialMapper.getAll(correo);
 		}catch(Exception sql) {
 			logger.error(sql.getMessage());
 			throw new BusinessException("id no encontrado",
