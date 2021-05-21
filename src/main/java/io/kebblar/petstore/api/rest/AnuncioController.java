@@ -14,24 +14,29 @@
  *
  * Historia:    .
  *              20210518_2028 Creación de éste controlador REST
+ *              20210520_2028 Se agrega el llamado a los servicios 
+ *              para el registro
  *
  */
 package io.kebblar.petstore.api.rest;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
+//import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.service.AnuncioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -57,29 +62,39 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class AnuncioController {
 
-	@ApiOperation(value = "AnuncioController::registro",
+	 private AnuncioService anuncioService;
+	 
+	 /**
+     * Constructor que realiza el setting de los servicios que serán 
+     * utilizados en este controlador.
+     * 
+     * @param anuncioService Servicios de AnuncioService
+     */
+    public AnuncioController(AnuncioService anuncioService) {
+        this.anuncioService = anuncioService;
+    }
+	    
+	@ApiOperation(value = "AnuncioController::Registro",
 	        notes = "Recibe un objeto <strong>AnuncioRequest</strong> que contiene la información para el "
 	        		+ "registro de un anuncio.")
-	@PostMapping(value = "/anuncio.json",
+	@PostMapping(value = "/anuncios.json",
             produces = "application/json; charset=utf-8")
+	@ResponseStatus(HttpStatus.CREATED)
     public AnuncioResponse registro(
     		@ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
     		@RequestBody @Valid AnuncioRequest anuncio) throws BusinessException {
-		System.out.println(anuncio);
-		return new AnuncioResponse(1,"18052122090001");
+		return anuncioService.guardar(anuncio);
     }
 	
-	@ApiOperation(value = "AnuncioController::publicar",
-	        notes = "Recibe el identificador del anuncio que sera publicado.")
-	@PutMapping(value = "/anuncio/publicar/{id}.json",
+	@ApiOperation(value = "AnuncioController::Confirmar",
+	        notes = "Recibe el identificador del anuncio que confirma el guardado del anuncio")
+	@PutMapping(value = "/anuncios/confirmar/{id}.json",
             produces = "application/json; charset=utf-8")
-    public void publicar(
+    public AnuncioResponse confirmarAnuncio(
     		@ApiParam(name="id", value="Identificador del anuncio.")
     		@PathVariable int id) throws BusinessException {
-		System.out.println(id);
-    }
+			return anuncioService.confirmarAnuncio(id);
 
-	
-	
+    }
 	
 }

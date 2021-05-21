@@ -1,6 +1,6 @@
 package io.kebblar.petstore.api.model.request;
 
-class AtributoRequest {
+public class AtributoRequest {
 	
 	private int id;
 	private String valor;
