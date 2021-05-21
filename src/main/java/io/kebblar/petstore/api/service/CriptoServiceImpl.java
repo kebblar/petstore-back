@@ -44,21 +44,31 @@ public class CriptoServiceImpl implements CriptoService {
     }
 
     @Override
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 3600000)
     public void schedulerBlockchain() throws BusinessException {
+        System.out.println("--------------------\n");
         System.out.println("Llamando servicio de verificacion de blockchain");
-            String wallet = "1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd";
-            int id = 1;
+        List<TransaccionBtc> transactions;
+        try{
+            transactions = criptoMapper.getAll();
+        }catch(SQLException e){
+            throw new BusinessException();
+        }
+        for(TransaccionBtc transaction : transactions){
+            String wallet = transaction.getWallet();
             System.out.println(wallet);
             BlockCyperChecker blockChecker = remoteRestCallService.verifyBalance(wallet);
+            System.out.println(blockChecker.toString());
             if(blockChecker.getTotalReceived()!=0){
                 System.out.println("Enviamos correo al usuario");
                 System.out.println("El balance es: "+ blockChecker.getBalance());
                 try{
-                    criptoMapper.delete(id);
+                    criptoMapper.delete(transaction.getId());
                 }catch(SQLException e){
                     throw new BusinessException();
                 }
+
             }
+        }
     }
 }
