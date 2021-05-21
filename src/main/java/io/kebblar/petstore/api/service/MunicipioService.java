@@ -14,12 +14,15 @@
  *
  * Historia:    .
  *              20210504_1635 Creación de la interfaz
+ *              20210516_1635 Creación del métodos getMunicipiosDescripcion
+ *              20210516_1645 Creación del métodos getMunicipiosDescripcionByNombre
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
+
+import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
@@ -107,4 +110,18 @@ public interface MunicipioService {
      */
     List<Municipio> getPaginatedMunicipios(int idEstado, int pageNumber, int pageSize) throws BusinessException;
 
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
+     * 
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+	List<Municipio> getMunicipiosDescripcion() throws BusinessException;
+	
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado filtrado por nombre del municipio.
+     * 
+     * @param nombre Nombre del que retoraremos el conjunto de municipios paginados
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+	List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException;
 }

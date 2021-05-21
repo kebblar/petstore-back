@@ -1,26 +1,24 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      Municipio
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'municipio'. 
+ *              ------------------------------------------------
+ * Artefacto:   Municipio.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (23_21)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_2321 Creación de éste POJO
+ *              20210516_0215 Inclusion de atributo nombrePais
+ *              20210516_0215 Inclusion de atributo nombreEstado
+ *              20210516_0235 Inclusion de un nuevo constructor que caepta el parameto nombrePais y nombreEstado
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -40,6 +38,8 @@ public class Municipio implements Serializable {
     private Integer id;
     private int idEstado;
     private String nombre;
+    private String nombrePais;
+    private String nombreEstado;
 
     /**
      * Constructor por default.
@@ -54,6 +54,17 @@ public class Municipio implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Constructor basado en atributos temporales para el nombre del Estado.
+     */
+    public Municipio(Integer id, int idEstado, String nombre, String nombrePais, String nombreEstado) {
+        this.id = id;
+        this.idEstado = idEstado;
+        this.nombre = nombre;
+        this.nombrePais = nombrePais;
+        this.nombreEstado = nombreEstado;
+    }
+    
     /**
      * Constructor basado en atributos.
      */
@@ -105,12 +116,42 @@ public class Municipio implements Serializable {
         this.nombre = nombre;
     }
     
-    @Override
+    /**
+     * Getter para nombrePais.
+     */
+    public String getNombrePais() {
+		return nombrePais;
+	}
+
+    /**
+     * Setter para nombrePais.
+     */
+	public void setNombrePais(String nombrePais) {
+		this.nombrePais = nombrePais;
+	}
+
+    /**
+     * Getter para nombreEstado.
+     */
+	public String getNombreEstado() {
+		return nombreEstado;
+	}
+
+    /**
+     * Setter para nombreEstado.
+     */
+	public void setNombreEstado(String nombreEstado) {
+		this.nombreEstado = nombreEstado;
+	}
+
+	@Override
     public String toString() {
         return "[Municipio] : ["
                 + " id =" + this.id
                 + " idEstado =" + this.idEstado
                 + " nombre =" + this.nombre
+                + " nombrePais =" + this.nombrePais
+                + " nombreEstado =" + this.nombreEstado
                 + "]";
     }
     
