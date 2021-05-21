@@ -7,7 +7,7 @@ gen.NOMBRE_PROYECTO=petstore
 
 gen.PACKAGE_BASE=io.kebblar.petstore.api
 
-gen.DEFINITION_FOLDER=/home/fher/Desktop/generator-workspace/definitions/
-       gen.TARGET_DIR=/home/fher/Desktop/generator-workspace/out2/
-    gen.TEMPLATES_DIR=/home/fher/Desktop/generator-workspace/
+gen.DEFINITION_FOLDER=/Users/garellano/Desktop/generator-workspace/definitions/
+       gen.TARGET_DIR=/Users/garellano/Desktop/generator-workspace/out2/
+    gen.TEMPLATES_DIR=/Users/garellano/Desktop/generator-workspace/
 

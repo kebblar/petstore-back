@@ -98,6 +98,10 @@ public class MascotaController {
         mapa.put("dato-2", "tavo");
         return mapa;
     }
+    @GetMapping(path = "/prueba3.json", produces = "application/json; charset=utf-8")
+    public String prueba3() throws ControllerException {
+        return remoteRestCallService.verifyBalance();
+    }
 
     /* Procesamiento de entidades de tipo "Mascota" */
 
