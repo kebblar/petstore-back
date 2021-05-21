@@ -1,30 +1,28 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Estado
- * Tipo:        interface 
- * Autor:       Gustavo A. Arellano
+ *              ------------------------------------------------
+ * Artefacto:   PaisService.java
+ * Tipo:        interface
+ * AUTOR:       Gustavo A. Arellano
  * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Interface para el servicio asociado a la entidad 'estado'. 
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210506_0938 Creación
+ *              20210516_0938 Creación del método getByNombre 
+ *              20210516_0948 Creación del método getEstadosByPais
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Estado;
+import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
@@ -86,5 +84,21 @@ public interface EstadoService {
      * @throws Exception es disparada por una regla de negocio
      */
     int delete(Estado estado) throws BusinessException;
+
+	/**
+     * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su nombre.
+     * 
+     * @param nombre Nombre de Estado.
+     * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Estado> getByNombre(String nombre) throws BusinessException;
+
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su pais.
+     * 
+     * @param id Id de Pais.
+     * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
+     */
+	List<Estado> getEstadosByPais(int id) throws BusinessException;
 
 }

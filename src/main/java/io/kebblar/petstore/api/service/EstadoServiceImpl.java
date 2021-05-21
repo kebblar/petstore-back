@@ -1,26 +1,23 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Estado
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Servicio asociado a la entidad 'estado'. 
+ *              ------------------------------------------------
+ * Artefacto:   EstadoServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (16_02)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_1602 Creación
+ *              20210517_1615 Creación del método getByNombre
+ *              20210517_1625 Creación del método getEstadosByPais
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -30,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.domain.Estado;
+import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
@@ -114,5 +112,26 @@ public class EstadoServiceImpl implements EstadoService {
             throw new MapperCallException("Error de salvado de un Estado", e.getMessage());
         }
     }
+    
+
+	@Override
+	public List<Estado> getByNombre(String nombre) throws BusinessException {
+        try {
+            return estadoMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de un Estado", e.getMessage());
+        }
+	}
+
+	@Override
+	public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
+        try {
+            return estadoMapper.getEstadosByPais(idPais);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de un Estado", e.getMessage());
+        }
+	}
 
 }

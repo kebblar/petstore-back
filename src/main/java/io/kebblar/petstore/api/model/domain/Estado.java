@@ -13,10 +13,12 @@
  * Fecha:       Lunes 4 de Mayo de 2021 (17_35)
  *
  * Historia:    .
- *              20210504_1735 Creación de éste POJO
+ *              20210504_1735 Creación de éste POJO.
+ *              20210516_0215 Inclusion de atributo nombrePais.
+ *              20210516_0235 Inclusion de un nuevo constructor
+ *                            que capta el parameto nombrePais.
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -35,6 +37,7 @@ public class Estado implements Serializable {
     private Integer id;
     private int idPais;
     private String nombre;
+    private String nombrePais;
 
     /**
      * Constructor por default.
@@ -49,6 +52,16 @@ public class Estado implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Constructor basado en atributos temporales para el nombre del Pais.
+     */
+    public Estado(Integer id, int idPais, String nombre, String nombrePais) {
+        this.id = id;
+        this.idPais = idPais;
+        this.nombre = nombre;
+        this.nombrePais = nombrePais;
+    }
+    
     /**
      * Constructor basado en atributos.
      */
@@ -100,12 +113,27 @@ public class Estado implements Serializable {
         this.nombre = nombre;
     }
     
-    @Override
+    /**
+     * Getter para nombrePais.
+     */
+    public String getNombrePais() {
+		return nombrePais;
+	}
+    
+    /**
+     * Setter para nombrePais.
+     */
+	public void setNombrePais(String nombrePais) {
+		this.nombrePais = nombrePais;
+	}
+
+	@Override
     public String toString() {
         return "[Estado] : ["
                 + " id =" + this.id
                 + " idPais =" + this.idPais
                 + " nombre =" + this.nombre
+                + " nombrePais =" + this.nombrePais
                 + "]";
     }
     
@@ -121,6 +149,7 @@ public class Estado implements Serializable {
         return
                id == other.id && 
                idPais == other.idPais && 
+               nombrePais == other.nombrePais && 
                nombre == other.nombre; 
     }
     
@@ -129,7 +158,8 @@ public class Estado implements Serializable {
         return Objects.hash(
             id, 
             idPais, 
-            nombre
+            nombre,
+            nombrePais
         );
     }
 
