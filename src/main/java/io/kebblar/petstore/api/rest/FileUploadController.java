@@ -15,7 +15,6 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,17 +76,6 @@ public class FileUploadController {
     // https://github.com/ozkanpakdil/spring-examples/tree/master/demoMultiFileUpload
     // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @PutMapping(
             path = "/upload.json", 
             produces = "application/json; charset=utf-8",

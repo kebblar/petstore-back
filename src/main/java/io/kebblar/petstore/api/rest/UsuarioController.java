@@ -18,7 +18,6 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.text.DateFormat;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;

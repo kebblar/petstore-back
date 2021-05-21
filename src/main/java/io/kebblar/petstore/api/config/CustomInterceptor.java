@@ -20,7 +20,6 @@ package io.kebblar.petstore.api.config;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,11 +42,6 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
-        String files = request.getParameter("files");
-        String met = request.getMethod();
-        //String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        Enumeration<String> nombres = request.getParameterNames();
-        ArrayList<String> lista2 = Collections.list(nombres);
         if (uri.startsWith("/api/")) {
             Enumeration<String> headerNames = request.getHeaderNames();
             ArrayList<String> lista = Collections.list(headerNames);

@@ -18,9 +18,5 @@ public class RemoteRestCallServiceImpl implements RemoteRestCallService {
         String url = "https://api.binance.com/api/v1/ticker/24hr?symbol=ETHUSDT";
         return restTemplate.getForObject(url, TickerWrapper.class);
     }
-    public String verifyBalance() {
-        String address ="1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd";
-        String url =  "https://api.blockcypher.com/v1/btc/main/addrs/"+address+"/balance";
-        return restTemplate.getForObject(url,String.class);
-    }
+
 }

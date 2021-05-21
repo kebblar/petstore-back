@@ -9,6 +9,4 @@ public interface RemoteRestCallService {
      * @return Clase de modelo que contiene la información de una cripto.
      */
     TickerWrapper callTickerMicroservice();
-    
-    String verifyBalance();
 }
