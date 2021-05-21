@@ -18,11 +18,11 @@ import java.util.List;
 public class CriptoServiceImpl implements CriptoService {
 
     private CriptoMapper criptoMapper;
-    private RestTemplate restTemplate = new RestTemplate();
-    private RemoteRestCallService remoteRestCallService = new RemoteRestCallServiceImpl(restTemplate);
-
-    public CriptoServiceImpl(CriptoMapper criptoMapper){
+    private RemoteRestCallService remoteRestCallService;
+    
+    public CriptoServiceImpl(CriptoMapper criptoMapper, RemoteRestCallService remoteRestCallService){
         this.criptoMapper=criptoMapper;
+        this.remoteRestCallService=remoteRestCallService;
     }
 
     @Override
@@ -44,19 +44,11 @@ public class CriptoServiceImpl implements CriptoService {
     }
 
     @Override
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 5000)
     public void schedulerBlockchain() throws BusinessException {
         System.out.println("Llamando servicio de verificacion de blockchain");
-        List<TransaccionBtc> transactions;
-        try{
-            transactions = criptoMapper.getAll();
-        }catch(SQLException e){
-            throw new BusinessException();
-        }
-        Iterator<TransaccionBtc> transaccionBtcIterator = transactions.iterator();
-        while(transaccionBtcIterator.hasNext()){
-            String wallet = transaccionBtcIterator.next().getWallet();
-            int id = transaccionBtcIterator.next().getId();
+            String wallet = "1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd";
+            int id = 1;
             System.out.println(wallet);
             BlockCyperChecker blockChecker = remoteRestCallService.verifyBalance(wallet);
             if(blockChecker.getTotalReceived()!=0){
@@ -67,8 +59,6 @@ public class CriptoServiceImpl implements CriptoService {
                 }catch(SQLException e){
                     throw new BusinessException();
                 }
-
             }
-        }
     }
 }
