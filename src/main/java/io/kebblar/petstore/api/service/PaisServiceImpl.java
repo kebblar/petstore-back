@@ -1,26 +1,22 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.service
- * Modulo:      Pais
- * Tipo:        clase 
- * Autor:       Gustavo A. Arellano
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * Servicio asociado a la entidad 'pais'. 
+ *              ------------------------------------------------
+ * Artefacto:   PaisServiceImpl.java
+ * Tipo:        clase
+ * AUTOR:       Gustavo A. Arellano (GAA)
+ * Fecha:       Lunes 3 de Mayo de 2021 (16_02)
  *
  * Historia:    .
- *              20210421_0935 Generado por arq.gen, basado en los
- *              archivos fuente de Gustavo Arellano
+ *              20210503_1602 Creación
+ *              20210517_1602 Creación del método getByNombre
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -45,7 +41,13 @@ public class PaisServiceImpl implements PaisService {
     private static final Logger logger = LoggerFactory.getLogger(PaisServiceImpl.class);
 
     private PaisMapper paisMapper;
-
+    
+    /**
+     * Constructor que realiza el setting del Mappers y servicios adicionales 
+     * a ser empleados en esta clase.
+     * 
+     * @param paisMapper mapper de pais
+     */
     public PaisServiceImpl(PaisMapper paisMapper) {
         this.paisMapper = paisMapper;
     }
@@ -113,5 +115,15 @@ public class PaisServiceImpl implements PaisService {
             throw new MapperCallException("Error de salvado de un Pais", e.getMessage());
         }
     }
+
+	@Override
+	public List<Pais> getByNombre(String nombre) throws BusinessException {
+        try {
+            return paisMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("Error de obtención de un Pais", e.getMessage());
+        }
+	}
 
 }

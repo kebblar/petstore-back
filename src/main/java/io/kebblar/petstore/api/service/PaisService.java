@@ -14,9 +14,9 @@
  *
  * Historia:    .
  *              20210506_0938 Creación
+ *              20210516_0938 Creación del metodo getByNombre
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -82,5 +82,13 @@ public interface PaisService {
      * @throws Exception es disparada por una regla de negocio
      */
     int delete(Pais pais) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'pais'. por medio de su nombre.
+     * 
+     * @param nombre Nombre de Pais.
+     * @return La información del elemento recuperado en una instacia de la clase País o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Pais> getByNombre(String nombre) throws BusinessException;
 
 }
