@@ -45,7 +45,7 @@ public class CodeGeneratorTest {
         logger.info("Calculando la lista total de Entidades a procesar...");
         long start = System.currentTimeMillis();
         List<Entidad> lista =  GenCode.pop(
-                "jdbc:mariadb://localhost:3306/ejemplo4",//"jdbc:mysql://100.24.41.125:3306/cinepolis?zeroDateTimeBehavior=convertToNull",
+                "jdbc:mariadb://localhost:3306/petstore",//"jdbc:mysql://100.24.41.125:3306/cinepolis?zeroDateTimeBehavior=convertToNull",
                 "garellano",
                 "garellano",
                 "org.mariadb.jdbc.Driver");
@@ -69,7 +69,7 @@ public class CodeGeneratorTest {
 
         // *************************************************************
         logger.info("Seleccionando algunas de las tablas de la DB");
-        String[] tablas = {"pais"};
+        String[] tablas = {"perro", "preregistro"};
         // *************************************************************
 
         List<Entidad> seleccion = GenCode.filter(obj, tablas);
