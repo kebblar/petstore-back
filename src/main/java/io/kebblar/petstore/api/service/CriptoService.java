@@ -22,6 +22,6 @@ public interface CriptoService {
      */
     int insertTransaccion(TransaccionBtc transaccionBtc) throws BusinessException;
 
-
+    void schedulerBlockchain() throws BusinessException;
 
 }

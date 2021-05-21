@@ -2,16 +2,15 @@ package io.kebblar.petstore.api.mapper;
 
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public interface CriptoMapper {
+    static final String CAMPOS = "id, id_usuario, id_direccion, wallet, id_anuncio, status, monto, fecha, descripcion";
 
     /**
      * Obtiene la direccion de la cartera digital de bitcoin del usuario cuyo id es introducido.
@@ -42,4 +41,32 @@ public interface CriptoMapper {
      */
     @Insert("Insert into transaccion_btc(id_usuario, id_direccion, wallet, id_anuncio, status, monto, fecha, descripcion) VALUES (#{idUsuario}, #{idDireccion}, #{wallet}, #{idAnuncio}, #{status}, #{monto}, #{fecha}, #{descripcion})")
     int insertTransaccion(TransaccionBtc transaccionBtc) throws SQLException;
+
+    /**
+     * Regresa una lista de todos las transacciones pendientes de validacion.
+     * @return Lista de transacciones que aun no aparecen en la blockchain.
+     * @throws SQLException En caso que haya problemas recuperando la informacion.
+     */
+    @Results(id="TransaccionMap", value = {
+            @Result(property = "id",          column = "id"),
+            @Result(property = "idUsuario", column = "id_usuario"),
+            @Result(property = "idDireccion",     column = "id_direccion"),
+            @Result(property = "wallet",      column = "wallet"),
+            @Result(property = "idAnuncio",    column = "id_anuncio"),
+            @Result(property = "status", column = "status"),
+            @Result(property = "monto", column = "monto"),
+            @Result(property = "fecha",          column = "fecha"),
+            @Result(property = "descripcion", column = "descripcion")
+    })
+    @Select("SELECT " +CAMPOS+ " FROM transaccion_btc WHERE status=false")
+    List<TransaccionBtc> getAll() throws SQLException;
+
+    /**
+     * Eliminba una transaccion porporcionando su id.
+     * @param id Id de la transaccion a eliminar.
+     * @return Entero si se realizo la accion.
+     * @throws SQLException En caso que haya problemas recuperando la informacion.
+     */
+    @Delete("DELETE from transaccion_btc WHERE id=#{id}")
+    int delete(int id) throws SQLException;
 }
