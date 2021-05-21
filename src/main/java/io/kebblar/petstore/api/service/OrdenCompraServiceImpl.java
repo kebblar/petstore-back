@@ -18,14 +18,18 @@
  */
 package io.kebblar.petstore.api.service;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.OrdenCompraMapper;
@@ -36,6 +40,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.CreatePDF;
 
 /**
@@ -55,21 +60,30 @@ import io.kebblar.petstore.api.utils.CreatePDF;
 public class OrdenCompraServiceImpl implements OrdenCompraService {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrdenCompraServiceImpl.class);
+	
+	@Inject
+	private Environment environment;
 
 	private OrdenCompraMapper ordenCompraMapper;
 	
 	private UsuarioDetalleMapper usuarioDetalleMapper;
 	
 	private UsuarioMapper usuarioMapper;
+	
+	private MailSenderService mailSenderService;
 
 
 	/*
 	 * Constructor con atributos mapper
 	 */
-	public OrdenCompraServiceImpl(OrdenCompraMapper ordenCompraMapper, UsuarioDetalleMapper usuarioDetalleMapper,UsuarioMapper usuarioMapper) {
+	public OrdenCompraServiceImpl(OrdenCompraMapper ordenCompraMapper, 
+									UsuarioDetalleMapper usuarioDetalleMapper,
+									UsuarioMapper usuarioMapper,
+									MailSenderService mailSenderService) {
 		this.ordenCompraMapper = ordenCompraMapper;
 		this.usuarioDetalleMapper=usuarioDetalleMapper;
 		this.usuarioMapper=usuarioMapper;
+		this.mailSenderService=mailSenderService;
 	}
 
 	/*
@@ -103,19 +117,25 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 	@Override
 	public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
 		try {
+			Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
+			
+			UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
+			
+			String dest= environment.getProperty( "app.destination-folder" );
+			
+			String pdf= CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest);
 			
 			String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
 			ordenCompra.setFecha(fecha);
 			
+			String url= environment.getProperty( "app.destination.url" );
+			
+			ordenCompra.setRecibo(url+pdf);
+			
 			ordenCompraMapper.insert(ordenCompra);
 			
-			Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
-			
-			UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
-			
-			CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra);
-			
+			mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", "Recibo de compra PETSTORE", new File(dest+pdf));
 			
 		} catch (SQLException e) {
 			System.out.println("Error SQL: "+e);

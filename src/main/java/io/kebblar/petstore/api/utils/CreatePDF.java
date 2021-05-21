@@ -62,12 +62,14 @@ public class CreatePDF {
 
 	private static final Logger logger = LoggerFactory.getLogger(CreatePDF.class);
 	
-	public static void createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra) throws ProcessPDFException {
+	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest) throws ProcessPDFException {
+		String pdf="";
 		try {
-			String dest = "upload/";
+			//String dest = "upload/";
 			String IMAGE = "src/main/resources/Factura.png";
-			String namePDF= getNamePDF(usuarioDetalle.getId());
-			PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+namePDF));
+			 pdf= getNamePDF(usuarioDetalle.getId());
+			
+			PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
 			PageSize pageSize = PageSize.A4.rotate();
 			Document doc = new Document(pdfDoc, pageSize);
 
@@ -134,6 +136,7 @@ public class CreatePDF {
 			doc.add(tableTotal);
 			doc.close();
 
+			return pdf;
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 			throw new ProcessPDFException("Error al generar Factura PDF", e.getMessage());
