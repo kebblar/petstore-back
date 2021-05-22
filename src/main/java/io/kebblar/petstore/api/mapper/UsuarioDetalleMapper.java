@@ -1,19 +1,24 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
- *              de: "AUTOR".
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   UsuarioDetalleMapper.java
+ * 
+ * Artefacto:   UsuarioDetalleMapper .java
+ * Proyecto:    petstore
  * Tipo:        interface 
- * AUTOR:       Gustavo A. Arellano
- * Fecha:       Martes 04 de Mayo de 2021 (14_01)
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       viernes 05 de mayo de 2021 (21_01)
+ * 
+ *              ------------------------------------------------
  *
- * Historia:    .
- *              20210504_1401 Creación de éste Mapper
+ * Historia:    20210521_2101 Implementación de interface 
+ *
  */
 
 package io.kebblar.petstore.api.mapper;
@@ -26,41 +31,42 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle} 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad UsuarioDetalle 
  *
- * @author  garellano
- * @see     io.kebblar.petstore.api.model.domain.UsuarioDetalle
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
- * 
+ * @since 1.0-SNAPSHOT
+ *
+ * @see io.kebblar.petstore.api.model.domain.UsuarioDetalle
  */
+
 @Repository
 public interface UsuarioDetalleMapper {
-    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular ";
+    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
 
     /**
-     * Obtiene un objeto de tipo '{@link UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
+     * Obtiene un objeto de tipo 'UsuarioDetalle' dado su id.
      *
-     * @param idUsuario representa el identificador de un objeto {@link UsuarioDetalle} .
-     * @return el {@link UsuarioDetalle}  encontrado con el criterio de búsqueda.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @return UsuarioDetalle que tiene asignado el id pasado como parametro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
      */
     @Results(id="UsuarioDetalleMap", value = {
-        @Result(property = "id", column = "id_usuario"),
-        @Result(property = "nombre", column = "nombre"),
-        @Result(property = "apellidoPaterno", column = "apellido_paterno"),
-        @Result(property = "apellidoMaterno", column = "apellido_materno"),
-        @Result(property = "nickName", column = "nick_name"),
-        @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
-        @Result(property = "telefonoCelular", column = "telefono_celular")    
+            @Result(property = "idUsuario",   column = "id_usuario"),
+            @Result(property = "nombre",   column = "nombre"),
+            @Result(property = "apellidoPaterno",   column = "apellido_paterno"),
+            @Result(property = "apellidoMaterno",   column = "apellido_materno"),
+            @Result(property = "fechaNacimiento",   column = "fecha_nacimiento"),
+            @Result(property = "nickName",   column = "nick_name"),
+            @Result(property = "telefonoCelular",   column = "telefono_celular")    
     })
-    @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
-    UsuarioDetalle getById(int idUsuario) throws SQLException;
-    
+    @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE     id_usuario = #{idUsuario}     ") 
+    UsuarioDetalle getById(int id) throws SQLException;
+
     /**
-     * Obtiene una lista de objetos de tipo {@link UsuarioDetalle} .
+     * Obtiene una lista de objetos de tipo 'UsuarioDetalle'.
      *
-     * @return Lista de objetos de tipo {@link UsuarioDetalle} 
+     * @return Lista de obetos de tipo UsuarioDetalle
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
@@ -69,33 +75,39 @@ public interface UsuarioDetalleMapper {
     List<UsuarioDetalle> getAll() throws SQLException;
     
     /**
-     * Inserta un objeto de tipo {@link UsuarioDetalle}  con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
+     * Inserta un objeto de tipo 'UsuarioDetalle' con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
      *
-     * @param usuarioDetalle objeto de tipo {@link UsuarioDetalle} a ser insertado.
+     * @param usuarioDetalle a ser insertado.
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular) VALUES(#{id}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular} )")
-    Integer insert(UsuarioDetalle usuarioDetalle) throws SQLException;
+    @Insert(
+    "INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular) "
+   + "VALUES(#{idUsuario}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{fechaNacimiento}, #{nickName}, #{telefonoCelular} )")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
+    int insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
-    /**
-     * Actualiza un objeto de tipo {@link UsuarioDetalle} con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
+/**
+     * Actualiza un objeto de tipo 'UsuarioDetalle' con base en la infrmación dada por el objeto de tipo 'UsuarioDetalle'.
      *
-     * @param usuarioDetalle objeto de tipo {@link UsuarioDetalle} a ser actualizado.
-     * @return el número de registros actualizados.
+     * @param usuarioDetalle a ser actualizado.
+     * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{id} ")
-    Integer update(UsuarioDetalle usuarioDetalle) throws SQLException;
+    @Update(
+    "UPDATE usuario_detalle" 
+    + " SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular}"
+    + " WHERE id_usuario = #{idUsuario} ")
+    int update(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
-     * Borra (de manera lógica y no física) el registro de {@link UsuarioDetalle}.
-     * 
-     * @param id que representa el identificador del usuario a borrar
-     * @return id del usuario borrado
-     * @throws SQLException dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * Borra (de manera lógica y no física) el registro de UsuarioDetalle.
+     *
+     * @param id id del UsuarioDetalle a ser borrado
+     * @return id del UsuarioDetalle borrado
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{id} ") 
-    Integer delete(int id) throws SQLException;
+    @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
+    int delete(int id) throws SQLException;
 
 }

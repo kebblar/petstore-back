@@ -321,8 +321,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             "",     // nombre
             "",     // apellidoPaterno
             "",     // apellidoMaterno
-            preregistro.getNick(),     // nickName
             preregistro.getFechaNacimiento(),   // fechaNacimiento
+            preregistro.getNick(),     // nickName
             preregistro.getTelefono()    // telefonoCelular
         );
         this.usuarioDetalleMapper.insert(usuarioDetalle);
