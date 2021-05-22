@@ -1,7 +1,7 @@
 package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.Min;
@@ -15,10 +15,9 @@ public class AnuncioRequest {
 	private String titulo;
 	@NotBlank(message = "{notblank.anuncio.descripcion}")
 	@NotNull(message = "{notnull.anuncio.descripcion}")
-	@NotBlank(message = "La descripción no puede ser vacio")
 	private String descripcion;
-	private Date fechaInicioVigencia;
-	private Date fechaFinVigencia;
+	private LocalDate fechaInicioVigencia;
+	private LocalDate fechaFinVigencia;
 	@Min(value = 1, message = "{min.anuncio.idcategoria}")
 	private int idCategoria;
 	@NotNull(message = "{notnull.anuncio.precio}")
@@ -28,7 +27,7 @@ public class AnuncioRequest {
 	public AnuncioRequest() {
 	}
 
-	public AnuncioRequest(String titulo, String descripcion, Date fechaInicioVigencia, Date fechaFinVigencia,
+	public AnuncioRequest(String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
 			int idCategoria, BigDecimal precio, List<AtributoRequest> atributos) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -55,19 +54,19 @@ public class AnuncioRequest {
 		this.descripcion = descripcion;
 	}
 
-	public Date getFechaInicioVigencia() {
+	public LocalDate getFechaInicioVigencia() {
 		return fechaInicioVigencia;
 	}
 
-	public void setFechaInicioVigencia(Date fechaInicioVigencia) {
+	public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
 		this.fechaInicioVigencia = fechaInicioVigencia;
 	}
 
-	public Date getFechaFinVigencia() {
+	public LocalDate getFechaFinVigencia() {
 		return fechaFinVigencia;
 	}
 
-	public void setFechaFinVigencia(Date fechaFinVigencia) {
+	public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
 		this.fechaFinVigencia = fechaFinVigencia;
 	}
 
