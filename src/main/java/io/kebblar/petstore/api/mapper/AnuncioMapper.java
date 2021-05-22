@@ -21,6 +21,7 @@ package io.kebblar.petstore.api.mapper;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
@@ -130,6 +131,27 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error
      */
     @Update("UPDATE anuncio SET estatus = #{estatus} WHERE id = #{id} ")
-    int actualizaEstatus(int id, short estatus) throws SQLException;    
+    int actualizaEstatus(int id, short estatus) throws SQLException;   
+    
+    /**
+     * Actualiza un objeto de tipo 'anuncio' con base en la información dada por el objeto de tipo 'anuncio'.
+     *
+     * @param anuncio a ser actualizado.
+     * @return el numero de registros actualizados.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @Update("UPDATE anuncio SET id_categoria = #{idCategoria}, titulo = #{titulo}, descripcion = #{descripcion}, "
+    		+ " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
+    		+ " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
+    int update(Anuncio anuncio) throws SQLException;
+
+	/**
+	 * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio
+	 * @param id Identificador del anuncio del cual se eliminaran los atributos
+	 * @return el numero de registros actualizados.
+	 * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+	 */
+    @Delete("DELETE FROM anuncio_atributo WHERE id_anuncio = #{id} ")
+	int deleteAtributos(int id) throws SQLException;
 	    
 }

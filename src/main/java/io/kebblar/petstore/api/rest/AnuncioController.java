@@ -96,7 +96,7 @@ public class AnuncioController {
 		return anuncioService.confirmarAnuncio(id);
     }
 	
-	@ApiOperation(value = "AnuncioController::actualiza",
+	@ApiOperation(value = "AnuncioController::Actualiza",
 	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
 	        		+ "actualizar un anuncio.")
 	@PutMapping(value = "/anuncio.json",
@@ -104,9 +104,8 @@ public class AnuncioController {
     public AnuncioResponse actualizar(
     		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
     		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
-		System.out.println(anuncio);
-		return new AnuncioResponse(anuncio.getId(),"18052122090001");
+		return anuncioService.guardar(anuncio);
     }
 
-	
+
 }

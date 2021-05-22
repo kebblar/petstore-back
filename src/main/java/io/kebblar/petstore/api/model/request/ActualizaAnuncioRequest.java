@@ -2,7 +2,6 @@ package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.Min;

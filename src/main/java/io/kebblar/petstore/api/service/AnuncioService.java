@@ -19,6 +19,7 @@
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
@@ -38,7 +39,7 @@ public interface AnuncioService {
      * <p>Se guardan los datos generales y atributos del producto,
      * en este punto el anuncio tendrá un estatus de 1= En edicion {@link AnuncioEstatusEnum}</p>
      * @param request Clase que contiene la informacion del {@link Anuncio} que se dara de alta
-     * @return Objeto {@link AnuncioResponse} 
+     * @return Objeto que puede ser del tipo {@link ActualizaAnuncioRequest} o {@link AnuncioRequest} 
      * @throws BusinessException
      */
 	AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
