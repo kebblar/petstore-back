@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,7 +70,15 @@ public class FileUploadController {
             path = "/upload.json", 
             produces = "application/json; charset=utf-8"
             )
-    public UploadModel handleFileUploadWithKDMCopy(@RequestParam("file") MultipartFile file) throws UploadException {
+    public UploadModel handleFileUploadWithKDMCopy(
+            @RequestHeader("jwt") String jwt,
+            @RequestParam("uno") int uno,
+            @RequestParam("dos") String dos,
+            @RequestParam("file") MultipartFile file
+            ) throws UploadException {
+        System.out.println(jwt);
+        System.out.println(uno);
+        System.out.println(dos);
         UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
         return upload;
     } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring

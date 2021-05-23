@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for debian-linux-gnu (x86_64)
+-- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: petstore
 -- ------------------------------------------------------
--- Server version	10.5.9-MariaDB-1:10.5.9+maria~focal
+-- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -401,7 +401,7 @@ INSERT INTO `paqueteria` VALUES (1,'Aeroméxico Cargo','Entrega que va de unas h
 UNLOCK TABLES;
 
 --
--- Table structure para2 table `preregistro`
+-- Table structure for table `preregistro`
 --
 
 DROP TABLE IF EXISTS `preregistro`;
@@ -512,7 +512,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1621529104471,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,0,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
+INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1621809436736,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,1621809448232,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,6 +542,7 @@ CREATE TABLE `usuario_detalle` (
 
 LOCK TABLES `usuario_detalle` WRITE;
 /*!40000 ALTER TABLE `usuario_detalle` DISABLE KEYS */;
+INSERT INTO `usuario_detalle` VALUES (1,'n1','ap1','ap1',NULL,'nick1','tel1'),(2,'n2','ap2','ap2',NULL,'nick2','tel2'),(3,'n3','ap3','ap3',NULL,'nick3','tel3'),(4,'n1','ap1','ap1',NULL,'nick1','tel1'),(6,'n6','ap6','ap6',NULL,'nick6','tel6');
 /*!40000 ALTER TABLE `usuario_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -666,4 +667,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20 18:09:07
+-- Dump completed on 2021-05-23 22:42:31
