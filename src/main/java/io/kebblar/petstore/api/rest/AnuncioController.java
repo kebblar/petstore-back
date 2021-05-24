@@ -16,13 +16,13 @@
  *              20210518_2028 Creación de éste controlador REST
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
+ *              20210523_2020 Se  agrega  el  metodo  de  elimado 
+ *              logico
  *
  */
 package io.kebblar.petstore.api.rest;
 
 import javax.validation.Valid;
-
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -113,13 +113,12 @@ public class AnuncioController {
         value = "AnuncioController::eliminar",
         notes = "Recibe un identificador del anuncio a eliminar en el sistema.")
     @DeleteMapping(
-            value = "/anuncio.json",
+            value = "/anuncios.json",
             produces = "application/json; charset=utf-8")
-    public void eliminar(
-    		@ApiParam(name="id", value="Identificador del anunacio que será removido del sistema.")
+    public AnuncioResponse eliminar(
+    		@ApiParam(name="id", value="Identificador del anuncio que será removido del sistema.")
     		@RequestParam int id ) throws BusinessException {
-		System.out.println("Eliminar idAnuncio: "+id);
-		//Llamada al servicio
+		return anuncioService.eliminarAnuncio(id);
     }
 
 }

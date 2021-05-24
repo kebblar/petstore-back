@@ -14,11 +14,14 @@
  *
  * Historia:    .
  *              20210510_0105 Creación de ésta interfaz
+ *              20210523_2034 Se  agrega  el  metodo  de  elimado 
+ *              logico
  *
  */
 package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -153,5 +156,15 @@ public interface AnuncioMapper {
 	 */
     @Delete("DELETE FROM anuncio_atributo WHERE id_anuncio = #{id} ")
 	int deleteAtributos(int id) throws SQLException;
-	    
+	   
+    
+    /**
+     * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
+     * @param id Identificador del anuncio a actualizar
+     * @param estatus Estatus al cual se actualizara el anuncio
+     * @return numero de registros actualizados
+     * @throws SQLException Excepcion lanzada en caso de error
+     */
+    @Update("UPDATE anuncio SET estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
+    int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;   
 }

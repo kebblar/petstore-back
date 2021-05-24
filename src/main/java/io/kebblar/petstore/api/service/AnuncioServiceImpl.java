@@ -14,6 +14,8 @@
  *
  * Historia:    .
  *              20210510_0050 Creación de éste servicio
+ *              20210523_2030 Se  agrega  el  metodo  de  elimado 
+ *              logico
  *
  */
 package io.kebblar.petstore.api.service;
@@ -158,6 +160,29 @@ public class AnuncioServiceImpl implements AnuncioService{
 		}
 		return response;	
 	}
+	
+	@Override
+	public AnuncioResponse eliminarAnuncio(int id) throws BusinessException {
+		AnuncioResponse response = new AnuncioResponse();
+		try {
+			//Se consulta la informacion del anuncio, para validar estatus
+			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
+			if(anuncio == null) {
+				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+				throw new BusinessException("Error de datos","El anuncio ha sido eliminado previamente",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}		
+			//Se procede a realizar el eliminado del registro
+			anuncioMapper.eliminaAnuncio(id, AnuncioEstatusEnum.ELIMINADO.getId(), new Date());
+			response.setId(anuncio.getId());
+			response.setSku(anuncio.getSku());	
+		} catch (SQLException e) {
+			throw new BusinessException();
+		}
+		return response;	
+	}
+	
 	
 	/**
 	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado

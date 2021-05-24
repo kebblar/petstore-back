@@ -14,6 +14,8 @@
  *
  * Historia:    .
  *              20210510_2339 Creación de ésta interfaz
+ *              20210523_2025 Se  agrega  el  metodo  de  elimado 
+ *              logico
  *
  */
 package io.kebblar.petstore.api.service;
@@ -59,5 +61,14 @@ public interface AnuncioService {
 	 * @throws BusinessException
 	 */
 	AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
+	
+	/**
+	 * Metodo que permite eliminar logicamente un producto con base al identificador proporcionado
+	 * <p>El servicio validara que el producto no haya sido eliminado previamente y que exista</p>
+	 * @param id Identificador del anuncio que será removido del sistema.
+	 * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
+	 * @throws BusinessException
+	 */
+	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
 	
 }
