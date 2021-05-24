@@ -142,7 +142,7 @@ public class AnuncioController {
             value = "/anuncios/{id}.json",
             produces = "application/json; charset=utf-8")
     public DetalleAnuncioResponse anuncios(
-    		@ApiParam(name="id", value="Identificador del anuncio qdel cual se consultara el detalle.")
+    		@ApiParam(name="id", value="Identificador del anuncio del cual se consultara el detalle.")
     		@PathVariable int id ) throws BusinessException {
 		List<AtributoResponse> atributos = new ArrayList<>();
 		atributos.add(new AtributoResponse(1,"1"));
