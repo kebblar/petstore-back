@@ -53,9 +53,9 @@ public interface MunicipioMapper {
     @Results(id="MunicipioMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "idEstado",   column = "id_estado"),
-            @Result(property = "nombre",   column = "nombre")    
+            @Result(property = "nombre",   column = "nombre")
     })
-    @Select("SELECT " + CAMPOS + " FROM municipio WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE     id = #{id}     ")
     Municipio getById(int id) throws SQLException;
 
     /**
@@ -66,9 +66,9 @@ public interface MunicipioMapper {
      * operación desde la base de datos.
      */
     @ResultMap("MunicipioMap")
-    @Select("SELECT " + CAMPOS + " FROM municipio ") 
+    @Select("SELECT " + CAMPOS + " FROM municipio ")
     List<Municipio> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Municipio' con base en la información dada por el objeto de tipo 'Municipio'.
      *
@@ -77,12 +77,12 @@ public interface MunicipioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO municipio(id, id_estado, nombre) "
-   + "VALUES(#{id}, #{idEstado}, #{nombre} )")
+            "INSERT INTO municipio(id, id_estado, nombre) "
+                    + "VALUES(#{id}, #{idEstado}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Municipio municipio) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'Municipio' con base en la infrmación dada por el objeto de tipo 'Municipio'.
      *
      * @param municipio a ser actualizado.
@@ -90,9 +90,9 @@ public interface MunicipioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE municipio" 
-    + " SET id_estado = #{idEstado}, nombre = #{nombre}"
-    + " WHERE id = #{id} ")
+            "UPDATE municipio"
+                    + " SET id_estado = #{idEstado}, nombre = #{nombre}"
+                    + " WHERE id = #{id} ")
     int update(Municipio municipio) throws SQLException;
 
     /**
@@ -102,17 +102,17 @@ public interface MunicipioMapper {
      * @return id del Municipio borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM municipio WHERE id = #{id} ") 
+    @Delete("DELETE FROM municipio WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
-     *
-     * @param id
-     * @return Esta
-     * @throws SQLException
+     * Dado determinado estado, el método retorna los municipios pertenecientes a este.
+     * @param id id del estado que contiene a los municipios.
+     * @return Lista con los municipios de determinado estado.
+     * @throws SQLException en caso de un error en el servidor o en la consulta.
      */
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{id}" )
-    List<Municipio> getAllByEstado(int id) throws SQLException;
+    List<Municipio> getByPais(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.

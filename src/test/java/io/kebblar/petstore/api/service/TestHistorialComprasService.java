@@ -1,0 +1,43 @@
+package io.kebblar.petstore.api.service;
+
+import static org.mockito.Mockito.when;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
+import io.kebblar.petstore.api.model.domain.HistorialCompras;
+import io.kebblar.petstore.api.model.domain.Mail;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
+
+@RunWith(MockitoJUnitRunner.class)
+public class TestHistorialComprasService {
+    @Mock
+    private HistorialComprasMapper historialMapper;
+    
+    private HistorialComprasService historialService;
+    
+    @Before
+    public void prepara() {
+        this.historialService = new HistorialComprasServiceImpl(historialMapper);
+    }
+    
+    @Test
+    public void Test() throws SQLException, BusinessException{
+    	List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();
+    	HistorialCompras compra = new HistorialCompras(1,"2020-10-10",0,1,"foo","paypal","gus@aol.com",
+    			"foo.com","goo.com");
+    	getLista.add(compra);
+    	Mail correo = new Mail("gus@aol.com");
+    	when(historialMapper.getAll(correo)).thenReturn(getLista);
+    	assert(historialService.getAll(correo).get(0).getId() == 1);
+    }
+    
+}
