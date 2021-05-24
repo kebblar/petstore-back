@@ -16,6 +16,8 @@
  *              20210510_2339 Creación de ésta interfaz
  *              20210523_2025 Se  agrega  el  metodo  de  elimado 
  *              logico
+ *              20210525_1806 Se  agrega  el  metodo  de consulta 
+ *              detalle de un anuncio
  *
  */
 package io.kebblar.petstore.api.service;
@@ -23,6 +25,7 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**
@@ -70,5 +73,13 @@ public interface AnuncioService {
 	 * @throws BusinessException
 	 */
 	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
+	
+	/**
+	 * Metodo que permite obtener el detalle de un anuncio con base al identificador
+	 * @param id Identificador del anuncio del cual se regresara el detalle
+	 * @return {@link DetalleAnuncioResponse} Clase que contiene el detalle de un anuncio
+	 * @throws BusinessException Excepcion lanzada en caso de error
+	 */
+	DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException;
 	
 }

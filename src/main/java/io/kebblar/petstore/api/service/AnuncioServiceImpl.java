@@ -22,7 +22,9 @@ package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,8 @@ import org.springframework.transaction.annotation.Transactional;
 import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
+import io.kebblar.petstore.api.model.domain.AnuncioImagen;
+import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
@@ -41,6 +45,10 @@ import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.AtributoRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.AtributoResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+import io.kebblar.petstore.api.model.response.ImagenResponse;
+import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
 
@@ -183,6 +191,55 @@ public class AnuncioServiceImpl implements AnuncioService{
 		return response;	
 	}
 	
+	@Override
+	public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
+		try {
+			//Se consulta la informacion del anuncio, para validar estatus
+			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
+			if(anuncio == null) {
+				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}	
+			//Se consulta la informacion de los atributos del anuncio
+			List<Atributo> atributos = anuncioMapper.atributosPorAnuncio(id);
+			List<AtributoResponse> atributosResponse = null;
+			if(atributos!=null && !atributos.isEmpty()) {
+				atributosResponse = new ArrayList<>();
+				for(Atributo atr : atributos) {
+					atributosResponse.add(new AtributoResponse(atr.getId(), atr.getAtributo()));
+				}
+			}
+			//Se consulta la informacion de las imagenes del anuncio
+			List<AnuncioImagen> imagenes = anuncioMapper.getImagenes(id);
+			List<ImagenResponse> imagenesResponse = null;
+			if(imagenes!=null && !imagenes.isEmpty()) {
+				imagenesResponse = new ArrayList<>();
+				for(AnuncioImagen img : imagenes) {
+					imagenesResponse.add(new ImagenResponse(img.getImagen(), img.getUuid()));
+				}
+			}
+			//Se envía solo lo necesario del detalle del anunio
+			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
+			detalleResponse.setId(anuncio.getId());
+			detalleResponse.setSku(anuncio.getSku());
+			detalleResponse.setTitulo(anuncio.getTitulo());
+			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
+			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			detalleResponse.setPrecio(anuncio.getPrecio());
+			detalleResponse.setDescripcion(anuncio.getDescripcion());
+			detalleResponse.setEstatus(anuncio.getEstatus());
+			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getEstatus()));
+			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
+			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
+			detalleResponse.setAtributos(atributosResponse);
+			detalleResponse.setImagenes(imagenesResponse);
+			return detalleResponse;	
+		} catch (SQLException e) {
+			throw new BusinessException();
+		}
+	}
 	
 	/**
 	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado
@@ -209,5 +266,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			throw new BusinessException("Error de datos","Fechas de vigencia no validas");
 		}	
 	}
+
+
 
 }

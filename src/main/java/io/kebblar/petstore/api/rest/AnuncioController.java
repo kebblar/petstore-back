@@ -16,30 +16,20 @@
  *              20210518_2028 Creación de éste controlador REST
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
-<<<<<<< HEAD
  *              20210524_1142 Creacion de endpoint para Busqueda 
  *              Producto
-=======
  *              20210523_2020 Se  agrega  el  metodo  de  elimado 
  *              logico
-<<<<<<< HEAD
- *              
  *				20210523_2232 Se agrega  el rest del detalle del 
  *				producto
- *
-=======
->>>>>>> refs/remotes/origin/feature/eliminar-producto
->>>>>>> refs/remotes/origin/feature/busqueda-administracion-productos
+
  *
  */
 package io.kebblar.petstore.api.rest;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,12 +48,9 @@ import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
-import io.kebblar.petstore.api.model.response.AtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.model.response.ImagenResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
-import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -155,16 +142,7 @@ public class AnuncioController {
     public DetalleAnuncioResponse anuncios(
     		@ApiParam(name="id", value="Identificador del anuncio del cual se consultara el detalle.")
     		@PathVariable int id ) throws BusinessException {
-		List<AtributoResponse> atributos = new ArrayList<>();
-		atributos.add(new AtributoResponse(1,"1"));
-		atributos.add(new AtributoResponse(2,"2"));
-		List<ImagenResponse> imagenes = new ArrayList<>();
-		imagenes.add(new ImagenResponse("imagenLabrado1.jpg","uuidabcdefgh1"));
-		imagenes.add(new ImagenResponse("imagenLabrado2.jpg","uuidabcdefgh2"));
-		DetalleAnuncioResponse detalle = new DetalleAnuncioResponse(1,1,"CANINOS","00000000000000","Lindo cachorro Labrador",
-				"Detalle descriptivo del anuncio de la mascota", new BigDecimal(1500.00),new Date(),new Date(), AnuncioEstatusEnum.ACTIVO.getId(),
-				AnuncioEstatusEnum.ACTIVO.getDesEstatus(),atributos,imagenes);
-		return detalle;
+		return anuncioService.detalleAnuncio(id);
     }
 
 	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",

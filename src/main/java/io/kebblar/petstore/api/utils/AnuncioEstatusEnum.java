@@ -51,6 +51,13 @@ public enum AnuncioEstatusEnum {
 	public String getDesEstatus() {
 		return desEstatus;
 	}
-	//Metodo que regrese la descripcion con base al id
+	public static String getDescripcion(short idEnum){
+		for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
+			if(eu.getId() == idEnum){
+				return eu.getDesEstatus();
+			}
+		}
+		return "";
+	}
 
 }

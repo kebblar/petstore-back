@@ -16,6 +16,8 @@
  *              20210510_0105 Creación de ésta interfaz
  *              20210523_2034 Se  agrega  el  metodo  de  elimado 
  *              logico
+ *              20210524_1800 Se  agrega  el  metodo  de consulta 
+ *              de atributos del anunio
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -35,6 +37,7 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
 import io.kebblar.petstore.api.model.domain.AnuncioImagen;
+import io.kebblar.petstore.api.model.domain.Atributo;
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
@@ -166,5 +169,20 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error
      */
     @Update("UPDATE anuncio SET estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
-    int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;   
+    int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
+
+    /**
+     * Consulta el objeto de tipo 'Atributo' con base al id del anuncio proporcionado
+     * 
+     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'Atributo' con la informacion de los atributos de un anuncio
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
+    @Results(id="AnuncioAtributoMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "atributo",   column = "atributo")
+    })
+    @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
+	List<Atributo> atributosPorAnuncio(int id);
+
 }
