@@ -16,14 +16,21 @@
  *              20210518_2028 Creación de éste controlador REST
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
+ *              20210524_1142 Creacion de endpoint para Busqueda 
+ *              Producto
  *
  */
 package io.kebblar.petstore.api.rest;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +44,9 @@ import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -122,4 +131,20 @@ public class AnuncioController {
 		//Llamada al servicio
     }
 
+	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",
+	        notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para "
+	        		+ "realizar la busqueda de productos.")
+	@GetMapping(value = "/busquedaAdministracion.json",
+            produces = "application/json; charset=utf-8")
+	public List<BusquedaAdministracionResponse> busquedaAdministracion( 
+					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda")
+					@RequestBody BusquedaAdministracionRequest busqueda){
+		
+		List<BusquedaAdministracionResponse> response = new ArrayList<BusquedaAdministracionResponse>();
+		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
+		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
+		response.add(mock);
+		response.add(mockito);
+		return response;
+	}
 }
