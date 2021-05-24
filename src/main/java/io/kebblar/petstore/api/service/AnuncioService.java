@@ -14,12 +14,13 @@
  *
  * Historia:    .
  *              20210510_2339 Creación de ésta interfaz
+ *              20210523_2025 Se  agrega  el  metodo  de  elimado 
+ *              logico
  *
  */
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
@@ -38,8 +39,8 @@ public interface AnuncioService {
      * Metodo que permite realizar el registro de un producto.
      * <p>Se guardan los datos generales y atributos del producto,
      * en este punto el anuncio tendrá un estatus de 1= En edicion {@link AnuncioEstatusEnum}</p>
-     * @param request Clase que contiene la informacion del {@link Anuncio} que se dara de alta
-     * @return Objeto que puede ser del tipo {@link ActualizaAnuncioRequest} o {@link AnuncioRequest} 
+     * @param {@link AnuncioRequest}  Clase que contiene la informacion del {@link Anuncio} que se dara de alta
+     * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException
      */
 	AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
@@ -55,9 +56,19 @@ public interface AnuncioService {
 	 *  el anuncio pasa directamente a estatus PUBLICADO</p>
 	 * <p>4. Si solo se proporciona la fecha inicial y es posterior al día de hoy,
 	 *  el anuncio pasa a estatus ACTIVO</p>
-	 * @param id
+	 * @param id Identificador del anuncio que confirma su registro
+	 * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' que confirma su registro
 	 * @throws BusinessException
 	 */
 	AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
+	
+	/**
+	 * Metodo que permite eliminar logicamente un producto con base al identificador proporcionado
+	 * <p>El servicio validara que el producto no haya sido eliminado previamente y que exista</p>
+	 * @param id Identificador del anuncio que será removido del sistema.
+	 * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
+	 * @throws BusinessException
+	 */
+	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
 	
 }
