@@ -16,12 +16,20 @@
  *              20210518_2028 Creación de éste controlador REST
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
+<<<<<<< HEAD
+ *              20210524_1142 Creacion de endpoint para Busqueda 
+ *              Producto
+=======
  *              20210523_2020 Se  agrega  el  metodo  de  elimado 
  *              logico
+<<<<<<< HEAD
  *              
  *				20210523_2232 Se agrega  el rest del detalle del 
  *				producto
  *
+=======
+>>>>>>> refs/remotes/origin/feature/eliminar-producto
+>>>>>>> refs/remotes/origin/feature/busqueda-administracion-productos
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -29,6 +37,7 @@ package io.kebblar.petstore.api.rest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -47,10 +56,12 @@ import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.AtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.ImagenResponse;
+import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.swagger.annotations.Api;
@@ -156,4 +167,20 @@ public class AnuncioController {
 		return detalle;
     }
 
+	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",
+	        notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para "
+	        		+ "realizar la busqueda de productos.")
+	@GetMapping(value = "/busquedaAdministracion.json",
+            produces = "application/json; charset=utf-8")
+	public List<BusquedaAdministracionResponse> busquedaAdministracion( 
+					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda")
+					@RequestBody BusquedaAdministracionRequest busqueda){
+		
+		List<BusquedaAdministracionResponse> response = new ArrayList<BusquedaAdministracionResponse>();
+		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
+		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
+		response.add(mock);
+		response.add(mockito);
+		return response;
+	}
 }
