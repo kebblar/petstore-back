@@ -22,6 +22,12 @@ public interface CriptoService {
      */
     int insertTransaccion(TransaccionBtc transaccionBtc) throws BusinessException;
 
+    /**
+     * Método que agenda una llamada a determinada api con acceso a la información de la blockchain
+     * para poder determinar si un pago hecho con criptomonedas al negocio ya ha sido agregado a la
+     * blockchain. de ser así se podrá comenzar a procesar la compra del usuario.
+     * @throws BusinessException En caso de algun error.
+     */
     void schedulerBlockchain() throws BusinessException;
 
 }
