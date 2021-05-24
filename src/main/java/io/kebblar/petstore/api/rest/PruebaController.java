@@ -18,10 +18,15 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
@@ -29,6 +34,7 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.domain.*;
 import io.kebblar.petstore.api.service.*;
+import io.kebblar.petstore.api.support.QRService;
 
 /**
  * <p>Implementacion  del controlador REST asociado a los endpoints 
@@ -52,6 +58,9 @@ public class PruebaController {
 
     @Autowired
     private DireccionService servicio;
+    
+    @Autowired
+    private QRService qrService;
     
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
     public List<Direccion> getAll() throws ControllerException {
@@ -78,5 +87,21 @@ public class PruebaController {
     @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
     public int nuevaDireccion(@RequestBody NuevaDireccion nuevaDireccion) throws ControllerException {
         return servicio.agregaDireccion(nuevaDireccion);
+    }
+    
+    @ResponseBody
+    @GetMapping(
+            value = "/qrImage/{data}.json", 
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] testphoto(@PathVariable String data) throws ControllerException {
+        return qrService.getQRBytes(data);
+    }
+    
+    @GetMapping(value = "/qr/{barcode}",  produces = "image/jpg")
+    public @ResponseBody byte[] generateQRCodeImage(@PathVariable("barcode") String barcode) throws Exception  {
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        BufferedImage img = qrService.generateQRCodeImage(barcode);
+        ImageIO.write(img, "jpg", bao);
+        return bao.toByteArray();
     }
 }
