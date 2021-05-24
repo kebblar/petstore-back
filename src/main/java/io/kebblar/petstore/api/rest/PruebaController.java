@@ -18,22 +18,26 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.model.domain.Direccion;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.domain.*;
-import io.kebblar.petstore.api.service.*;
+import io.kebblar.petstore.api.service.DireccionService;
 import io.kebblar.petstore.api.support.QRService;
 
 /**
@@ -91,17 +95,17 @@ public class PruebaController {
     
     @ResponseBody
     @GetMapping(
-            value = "/qrImage/{data}.json", 
+            value = "/qr/{data}", 
             produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] testphoto(@PathVariable String data) throws ControllerException {
         return qrService.getQRBytes(data);
     }
-    
-    @GetMapping(value = "/qr/{barcode}",  produces = "image/jpg")
-    public @ResponseBody byte[] generateQRCodeImage(@PathVariable("barcode") String barcode) throws Exception  {
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        BufferedImage img = qrService.generateQRCodeImage(barcode);
-        ImageIO.write(img, "jpg", bao);
-        return bao.toByteArray();
+
+    @GetMapping(
+            value = "/qr-base64/{data}",  
+            produces = "image/jpg")
+    public @ResponseBody String generateQRCodeImageBase64(@PathVariable("barcode") String data) throws Exception  {
+        return qrService.getQRBytesBase64(data);
     }
+
 }

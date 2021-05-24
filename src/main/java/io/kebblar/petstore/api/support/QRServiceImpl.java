@@ -3,6 +3,7 @@ package io.kebblar.petstore.api.support;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
@@ -42,10 +43,19 @@ public class QRServiceImpl implements QRService {
         }
     }
     
+    @Override
+    public String getQRBytesBase64(String textToEncode) throws BusinessException {
+        try {
+            BufferedImage data = this.generateQRCodeImage(textToEncode);
+            return Base64.getEncoder().encodeToString(toByteArray(data, "jpg"));
+        } catch(Exception e) {
+            throw new BusinessException(e.toString(), e.toString());            
+        }
+    }
+    
     private byte[] toByteArray(BufferedImage bi, String format) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, format, baos);
-        byte[] bytes = baos.toByteArray();
-        return bytes;
+        return baos.toByteArray();
     }
 }
