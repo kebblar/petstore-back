@@ -1,7 +1,7 @@
 package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.Min;
@@ -17,7 +17,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest{
 	public ActualizaAnuncioRequest(int id) {
 		this.id = id;
 	}
-	public ActualizaAnuncioRequest(int id,String titulo, String descripcion, Date fechaInicioVigencia, Date fechaFinVigencia,
+	public ActualizaAnuncioRequest(int id,String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
 			int idCategoria, BigDecimal precio, List<AtributoRequest> atributos) {
 		super(titulo, descripcion, fechaInicioVigencia, fechaFinVigencia, idCategoria, precio, atributos);
 		this.id = id;
