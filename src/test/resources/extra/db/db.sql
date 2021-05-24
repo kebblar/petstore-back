@@ -238,7 +238,7 @@ CREATE TABLE `metodo_pago` (
   `tipo` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el tipo de pago, por ejemplo, tarjeta de crdito, dbito, PayPal, etc.',
   `activo` tinyint(1) DEFAULT NULL COMMENT 'Atributo que representa si el registro se encuentra activo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
-INSERT INTO `metodo_pago` VALUES (1,'paypal',1);
+INSERT INTO `metodo_pago` VALUES (1,'paypal',1),(2,'bitcoin',1);
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +263,7 @@ CREATE TABLE `moneda` (
   `nombre` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el nombre de de la moneda, por ejemplo dlllar, pesos, euros, etc',
   `activo` tinyint(1) DEFAULT NULL COMMENT 'Atributo que representa si el registro se encuentra activo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `moneda` (
 
 LOCK TABLES `moneda` WRITE;
 /*!40000 ALTER TABLE `moneda` DISABLE KEYS */;
-INSERT INTO `moneda` VALUES (1,'pesos',1);
+INSERT INTO `moneda` VALUES (1,'pesos',1),(2,'dolar',1),(3,'bitcoin',1);
 /*!40000 ALTER TABLE `moneda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -675,4 +675,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-21 14:42:59
+-- Dump completed on 2021-05-24 20:45:17
