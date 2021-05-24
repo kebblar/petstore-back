@@ -1,6 +1,7 @@
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
+import io.kebblar.petstore.api.model.exceptions.BitcoinTransactionException;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
@@ -20,7 +21,7 @@ public interface CriptoService {
      * @return entero que indica si la inserci'on fue exitosa.
      * @throws BusinessException Si ocurre un problema.
      */
-    int insertTransaccion(TransaccionBtc transaccionBtc) throws BusinessException;
+    int insertTransaccion(TransaccionBtc transaccionBtc) throws MapperCallException;
 
     /**
      * Método que agenda una llamada a determinada api con acceso a la información de la blockchain
@@ -28,6 +29,6 @@ public interface CriptoService {
      * blockchain. de ser así se podrá comenzar a procesar la compra del usuario.
      * @throws BusinessException En caso de algun error.
      */
-    void schedulerBlockchain() throws BusinessException;
+    void schedulerBlockchain() throws BitcoinTransactionException;
 
 }
