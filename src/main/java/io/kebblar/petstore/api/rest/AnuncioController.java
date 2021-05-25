@@ -114,7 +114,7 @@ public class AnuncioController {
 	
 	@ApiOperation(value = "AnuncioController::EliminarImagen", 
 			notes = "Elimina la imagen asociada a un anuncio con base al identificador")
-	@DeleteMapping(path = "/guardarImagen.json", produces = "application/json; charset=utf-8")
+	@DeleteMapping(path = "/eliminarImagen.json", produces = "application/json; charset=utf-8")
 	public AnuncioImagenResponse eliminarImagen(
 			@ApiParam(name = "idImagen", value = "Identificador de la imagen de un anuncio a eliminar.") 
 			@RequestHeader("idImagen") int idImagen)
