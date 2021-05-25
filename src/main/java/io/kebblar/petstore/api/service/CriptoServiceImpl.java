@@ -76,7 +76,6 @@ public class CriptoServiceImpl implements CriptoService {
                         throw new BitcoinTransactionException("No puede procesarse la orden de compra o eliminarse");
                     }
                 }
-
             }
         }
     }

@@ -61,39 +61,8 @@ public class PruebaController {
     private static final String res = "{'result':'ok'}".replace('\'', '\"');
 
     @Autowired
-    private DireccionService servicio;
-    
-    @Autowired
     private QRService qrService;
-    
-    @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public List<Direccion> getAll() throws ControllerException {
-        return servicio.getAll();
-    }
 
-    @PostMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public String pba1(@Valid @RequestBody Direccion dato) throws ControllerException {
-        servicio.insert(dato);
-        return res;
-    }
-    
-    @PutMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public String pba2(@Valid @RequestBody Direccion dato) throws ControllerException {
-        servicio.update(dato);
-        return res;
-    }
-
-    @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")
-    public List<DireccionConNombre> getDireccionesUsuario(@PathVariable int userId) throws ControllerException {
-        return servicio.getDireccionesNombre(userId);
-    }
-
-    @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
-    public int nuevaDireccion(@RequestBody NuevaDireccion nuevaDireccion) throws ControllerException {
-        return servicio.agregaDireccion(nuevaDireccion);
-    }
-    
-    @ResponseBody
     @GetMapping(
             value = "/qr/{data}", 
             produces = MediaType.IMAGE_JPEG_VALUE)
@@ -104,7 +73,7 @@ public class PruebaController {
     @GetMapping(
             value = "/qr-base64/{data}",  
             produces = "image/jpg")
-    public @ResponseBody String generateQRCodeImageBase64(@PathVariable("barcode") String data) throws Exception  {
+    public @ResponseBody String generateQRBytesBase64(@PathVariable("barcode") String data) throws Exception  {
         return qrService.getQRBytesBase64(data);
     }
 
