@@ -25,6 +25,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -111,6 +112,17 @@ public interface AnuncioMapper {
     })
     @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE id_anuncio = #{id} ") 
 	List<AnuncioImagen> getImagenes(int id);
+    
+    /**
+     * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado
+     * 
+     * @param id Identificador de la imagen por medio del cual se realizara la busqueda de sus imagen
+     * @return Clase de tipo 'AnuncioImagen' con la informacion de las imagen solicitada
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
+    @ResultMap("AnuncioImagenMap")
+    @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE id = #{idImagen} ") 
+	AnuncioImagen getImagen(int idImagen);
 	    
     /**
      * Inserta un objeto de tipo 'AnuncioImagen' con base en la información dada por el objeto de tipo 'AnuncioImagen'.
@@ -122,6 +134,16 @@ public interface AnuncioMapper {
     @Insert("INSERT INTO anuncio_imagen("+CAMPOS_ANUNCIO_IMAGEN+") VALUES(#{idAnuncio}, #{uuid}, #{imagen} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insertImagen(AnuncioImagen anuncioImagen) throws SQLException;
+    
+    /**
+     * Elimina un objeto de tipo 'AnuncioImagen' con base al identificador proporcionado.
+     *
+     * @param idImagen identificador del anuncio a ser eliminado
+     * @return identificador en base de datos del registro eliminado
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @Delete("DELETE FROM anuncio_imagen WHERE id = #{idImagen} ") 
+    int eliminarImagen(int idImagen) throws SQLException;
 	 
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
