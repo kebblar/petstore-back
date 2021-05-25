@@ -41,7 +41,7 @@ public interface AnuncioService {
      * <p>Se guardan los datos generales y atributos del producto,
      * en este punto el anuncio tendrá un estatus de 1= En edicion {@link AnuncioEstatusEnum}</p>
      * @param {@link AnuncioRequest}  Clase que contiene la informacion del {@link Anuncio} que se dara de alta
-     * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' registrado
+     * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException
      */
 	AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;

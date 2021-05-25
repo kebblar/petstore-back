@@ -39,6 +39,7 @@ import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
+import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.AtributoRequest;
@@ -107,8 +108,14 @@ public class AnuncioServiceImpl implements AnuncioService{
 				java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
 				:null);
 		try {
-			//Si los datos son correctos, se procede con el guardado
-			anuncioMapper.insert(anuncioAlta);
+			//Si los datos son correctos, se procede con el guardado o actualizacion
+			if(request instanceof ActualizaAnuncioRequest) {
+				anuncioAlta.setId(((ActualizaAnuncioRequest)request).getId());
+				anuncioMapper.update(anuncioAlta);
+				anuncioMapper.deleteAtributos(anuncioAlta.getId());
+			}else {
+				anuncioMapper.insert(anuncioAlta);
+			}
 			for(AtributoRequest ar : request.getAtributos()) {
 				AnuncioAtributo aa =  new AnuncioAtributo();
 				aa.setIdAnuncio(anuncioAlta.getId());
@@ -116,7 +123,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				aa.setValor(Integer.parseInt(ar.getValor()));
 				anuncioMapper.insertAtributo(aa);
 			}
-			logger.info("Anuncio creado correctamente. SKU asociado: "+anuncioAlta.getSku());
+			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
 			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getSku());
 		} catch (SQLException e) {
 			  throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");

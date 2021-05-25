@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
@@ -97,10 +98,21 @@ public class AnuncioController {
     public AnuncioResponse confirmarAnuncio(
     		@ApiParam(name="id", value="Identificador del anuncio.")
     		@PathVariable int id) throws BusinessException {
-			return anuncioService.confirmarAnuncio(id);
-
+		return anuncioService.confirmarAnuncio(id);
     }
 	
+	@ApiOperation(value = "AnuncioController::Actualiza",
+	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
+	        		+ "actualizar un anuncio.")
+	@PutMapping(value = "/anuncio.json",
+            produces = "application/json; charset=utf-8")
+    public AnuncioResponse actualizar(
+    		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
+    		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
+		return anuncioService.guardar(anuncio);
+    }
+
+
 	@ApiOperation(value = "AnuncioController::RegistroImagen", 
 			notes = "Recibe una imagen que sera asociada a un anuncio")
 	@PostMapping(path = "/guardarImagen.json", produces = "application/json; charset=utf-8")
@@ -121,5 +133,5 @@ public class AnuncioController {
 			throws BusinessException {
 		return anuncioService.eliminarImagen(idImagen);
 	}
-	
+
 }
