@@ -22,12 +22,15 @@
  *              logico
  *				20210523_2232 Se agrega  el rest del detalle del 
  *				producto
-
+ *				20210524_2028 Se  agrega  el rest de la  busqueda 
+ *				del producto con base a atributos
  *
  */
 package io.kebblar.petstore.api.rest;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
@@ -47,10 +50,14 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.request.BusquedaProductoRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.AtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+import io.kebblar.petstore.api.model.response.ImagenResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
+import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -159,6 +166,34 @@ public class AnuncioController {
 		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
 		response.add(mock);
 		response.add(mockito);
+		return response;
+	}
+	
+	@ApiOperation(value = "AnuncioController::BusquedaProducto",
+	        notes = "Recibe un objeto <strong>BusquedaProductoRequest</strong> que contiene la información para "
+	        		+ "realizar la busqueda de productos con base a atributos selecionados por el cliente.")
+	@PostMapping(value = "/busqueda.json",
+            produces = "application/json; charset=utf-8")
+	public List<DetalleAnuncioResponse> busqueda( 
+					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda de los productos")
+					@RequestBody BusquedaProductoRequest busqueda){
+		
+		List<AtributoResponse> atributos = new ArrayList<>();
+		atributos.add(new AtributoResponse(1,"1"));
+		atributos.add(new AtributoResponse(2,"2"));
+		List<ImagenResponse> imagenes = new ArrayList<>();
+		imagenes.add(new ImagenResponse("imagenLabrado1.jpg","uuidabcdefgh1"));
+		imagenes.add(new ImagenResponse("imagenLabrado2.jpg","uuidabcdefgh2"));
+		
+		List<DetalleAnuncioResponse> response= new ArrayList<>();
+		DetalleAnuncioResponse detalle1 = new DetalleAnuncioResponse(1,1,"CANINOS","00000000000001","Lindo cachorro Labrador 1",
+				"Detalle descriptivo del anuncio de la mascota 1", new BigDecimal(1500.00),new Date(),new Date(), AnuncioEstatusEnum.ACTIVO.getId(),
+				AnuncioEstatusEnum.ACTIVO.getDesEstatus(),atributos,imagenes);
+		response.add(detalle1);
+		DetalleAnuncioResponse detalle2 = new DetalleAnuncioResponse(1,1,"CANINOS","00000000000002","Lindo cachorro Labrador 2",
+				"Detalle descriptivo del anuncio de la mascota 2", new BigDecimal(1200.00),new Date(),new Date(), AnuncioEstatusEnum.ACTIVO.getId(),
+				AnuncioEstatusEnum.ACTIVO.getDesEstatus(),atributos,imagenes);
+		response.add(detalle2);
 		return response;
 	}
 }
