@@ -148,7 +148,7 @@ public class AnuncioController {
 	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",
 	        notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para "
 	        		+ "realizar la busqueda de productos.")
-	@GetMapping(value = "/busquedaAdministracion.json",
+	@PostMapping(value = "/busquedaAdministracion.json",
             produces = "application/json; charset=utf-8")
 	public List<BusquedaAdministracionResponse> busquedaAdministracion( 
 					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda")
