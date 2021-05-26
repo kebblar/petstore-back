@@ -20,8 +20,11 @@
  */
 package io.kebblar.petstore.api.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
@@ -71,4 +74,20 @@ public interface AnuncioService {
 	 */
 	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
 	
+
+	/** Metodo que permite el guardado de las imagenes de un anuncio
+	 * @param idAnuncio Identificador del anuncio con el cual se va a asociar la imagen
+	 * @param file Imagen a guardar
+	 * @return {@link AnuncioImagenResponse} Clase que contiene la informacion de la imagen guardada
+	 * @throws BusinessException
+	 */
+	 AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;
+	 
+	 /**
+	 * Metodo que permite el eliminado de las imagenes de un anuncio
+	 * @param idImagen Identificador de la imagen que sera eliminada
+	 * @return {@link AnuncioImagenResponse} Clase que contiene la informacion de la imagen eliminada
+	 * @throws BusinessException
+	 */
+	 void eliminarImagen(String uuid) throws BusinessException;
 }
