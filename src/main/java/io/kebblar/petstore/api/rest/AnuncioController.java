@@ -27,6 +27,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.awt.PageAttributes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
+import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -138,15 +140,15 @@ public class AnuncioController {
 	        		+ "realizar la busqueda de productos.")
 	@PostMapping(value = "/busquedaAdministracion.json",
             produces = "application/json; charset=utf-8")
-	public List<BusquedaAdministracionResponse> busquedaAdministracion( 
-					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda")
+	public PaginacionAnunciosResponse busquedaAdministracion( 
+					@ApiParam(name="busqueda", value="Objeto que se usara para realizar la busqueda con paginacion")
 					@RequestBody BusquedaAdministracionRequest busqueda){
 		
-		List<BusquedaAdministracionResponse> response = new ArrayList<BusquedaAdministracionResponse>();
+		List<BusquedaAdministracionResponse> listaAnuncios = new ArrayList<BusquedaAdministracionResponse>();
 		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(1,123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
 		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(2,123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
-		response.add(mock);
-		response.add(mockito);
+		PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(2, listaAnuncios);
+
 		return response;
 	}
 }

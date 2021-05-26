@@ -10,13 +10,10 @@ public class BusquedaAdministracionResponse {
 
 	private int id;
 	private int sku;
-	@NotBlank(message = "{notblank.anuncio.titulo}")
-	@NotNull(message = "{notnull.anuncio.titulo}")
 	private String titulo;
 	private LocalDate fechaInicioVigencia;
 	private LocalDate fechaFinVigencia;
 	private String estatus;
-	@Min(value = 1, message = "{min.anuncio.idcategoria}")
 	private int idCategoria;
 	private String descripcion;
 	
