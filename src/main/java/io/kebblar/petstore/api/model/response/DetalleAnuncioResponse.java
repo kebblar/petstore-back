@@ -18,14 +18,14 @@ public class DetalleAnuncioResponse {
 	private short estatus;
 	private String descEstatus;
 	private List<AtributoResponse> atributos;
-	private List<ImagenResponse> imagenes;
+	private List<AnuncioImagenResponse> imagenes;
 	
 	public DetalleAnuncioResponse() {
 
 	}
 	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String sku, String titulo,
 			String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short estatus,
-			String descEstatus, List<AtributoResponse> atributos, List<ImagenResponse> imagenes) {
+			String descEstatus, List<AtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
 		this.id = id;
 		this.idCategoria = idCategoria;
 		this.descCategoria = descCategoria;
@@ -112,10 +112,10 @@ public class DetalleAnuncioResponse {
 	public void setAtributos(List<AtributoResponse> atributos) {
 		this.atributos = atributos;
 	}
-	public List<ImagenResponse> getImagenes() {
+	public List<AnuncioImagenResponse> getImagenes() {
 		return imagenes;
 	}
-	public void setImagenes(List<ImagenResponse> imagenes) {
+	public void setImagenes(List<AnuncioImagenResponse> imagenes) {
 		this.imagenes = imagenes;
 	}
 	@Override

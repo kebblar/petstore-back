@@ -52,7 +52,6 @@ import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.AtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.model.response.ImagenResponse;
 import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
@@ -267,11 +266,11 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			//Se consulta la informacion de las imagenes del anuncio
 			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
-			List<ImagenResponse> imagenesResponse = null;
+			List<AnuncioImagenResponse> imagenesResponse = null;
 			if(imagenes!=null && !imagenes.isEmpty()) {
 				imagenesResponse = new ArrayList<>();
 				for(AnuncioImagen img : imagenes) {
-					imagenesResponse.add(new ImagenResponse(img.getImagen(), img.getUuid()));
+					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
 				}
 			}
 			//Se envía solo lo necesario del detalle del anunio
