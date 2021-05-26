@@ -36,7 +36,6 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
-import io.kebblar.petstore.api.model.domain.Atributo;
 
 /**
  * <p>Descripción:</p>

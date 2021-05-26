@@ -40,7 +40,6 @@ import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
 import io.kebblar.petstore.api.model.domain.AnuncioImagen;
-import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
@@ -120,6 +119,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Si los datos son correctos, se procede con el guardado o actualizacion
 			if(request instanceof ActualizaAnuncioRequest) {
 				anuncioAlta.setId(((ActualizaAnuncioRequest)request).getId());
+				anuncioAlta.setFechaModificacion(new Date());
 				anuncioMapper.update(anuncioAlta);
 				anuncioMapper.deleteAtributos(anuncioAlta.getId());
 			}else {
@@ -155,6 +155,10 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
 				throw new BusinessException("Error de datos","Fechas de vigencia no validas");
+			}
+			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
+			if(imagenes==null || imagenes.isEmpty()) {
+				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro");
 			}
 			response.setId(anuncio.getId());
 			response.setSku(anuncio.getSku());
