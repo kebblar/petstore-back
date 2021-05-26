@@ -47,7 +47,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             ArrayList<String> lista = Collections.list(headerNames);
             for (String headerName : lista) {
                 String valor = request.getHeader(headerName);
-                if(headerName.contains("csrftoken")) {
+                if(headerName.contains("jwt")) {
                     logger.info("App current uri detected: "+uri);
                     logger.info("El header "+headerName+" tiene el valor: " + valor);
                 }
