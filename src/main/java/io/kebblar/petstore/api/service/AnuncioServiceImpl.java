@@ -180,7 +180,6 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
 		try {
-			
 			String contentType = file.getContentType();
 			if(!contentType.equals("image/jpeg") && !contentType.equals("image/png") && !contentType.equals("application/jpg")) {
 				throw new BusinessException("Error de datos","Formato de imagen no valido",4091,"CVE_4091",HttpStatus.CONFLICT);
