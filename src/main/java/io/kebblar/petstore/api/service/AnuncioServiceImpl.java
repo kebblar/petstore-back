@@ -149,7 +149,8 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Si los datos son correctos, se procede con el guardado
 			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
 			if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getEstatus() 
-					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()) {
+					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()
+					&& AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getEstatus()) {
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
