@@ -132,7 +132,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				AnuncioAtributo aa =  new AnuncioAtributo();
 				aa.setIdAnuncio(anuncioAlta.getId());
 				aa.setIdAtributo(ar.getId());
-				aa.setValor(Integer.parseInt(ar.getValor()));
+				aa.setValor(ar.getValor());
 				anuncioMapper.insertAtributo(aa);
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
@@ -258,7 +258,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(atributos!=null && !atributos.isEmpty()) {
 				atributosResponse = new ArrayList<>();
 				for(AnuncioAtributo atr : atributos) {
-					atributosResponse.add(new AtributoResponse(atr.getIdAtributo(), String.valueOf(atr.getValor())));
+					atributosResponse.add(new AtributoResponse(atr.getIdAtributo(), atr.getValor()));
 				}
 			}
 			//Se consulta la informacion de las imagenes del anuncio

@@ -3,12 +3,12 @@ package io.kebblar.petstore.api.model.response;
 public class AtributoResponse {
 	
 	private int id;
-	private String valor;
+	private int valor;
 	
 	public AtributoResponse() {
 	}
 
-	public AtributoResponse(int id, String valor) {
+	public AtributoResponse(int id, int valor) {
 		this.id = id;
 		this.valor = valor;
 	}
@@ -21,11 +21,11 @@ public class AtributoResponse {
 		this.id = id;
 	}
 
-	public String getValor() {
+	public int getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(int valor) {
 		this.valor = valor;
 	}
 
@@ -34,7 +34,7 @@ public class AtributoResponse {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + valor;
 		return result;
 	}
 
@@ -49,11 +49,9 @@ public class AtributoResponse {
 		AtributoResponse other = (AtributoResponse) obj;
 		if (id != other.id)
 			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
+		if (valor != other.valor)
 			return false;
+
 		return true;
 	}
 
