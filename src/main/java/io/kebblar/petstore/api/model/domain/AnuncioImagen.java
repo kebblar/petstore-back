@@ -42,7 +42,11 @@ public class AnuncioImagen implements Serializable {
 	public AnuncioImagen(Integer id) {
 		this.id = id;
 	}
-
+	public AnuncioImagen(Integer idAnuncio, String uuid, String imagen) {
+		this.idAnuncio = idAnuncio;
+		this.uuid = uuid;
+		this.imagen = imagen;
+	}
 	public AnuncioImagen(Integer id, Integer idAnuncio, String uuid, String imagen) {
 		this.id = id;
 		this.idAnuncio = idAnuncio;

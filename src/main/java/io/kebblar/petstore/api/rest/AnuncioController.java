@@ -13,16 +13,26 @@
  * Fecha:       Martes 18 de Mayo de 2021 (20_08)
  *
  * Historia:    .
- *              20210518_2028 Creación de éste controlador REST
+ *              20210518_2028 Creación de  éste  controlador  REST
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
+<<<<<<< HEAD
  *              20210524_1142 Creacion de endpoint para Busqueda 
  *              Producto
  *              20210523_2020 Se  agrega  el  metodo  de  elimado 
+=======
+ *              20210523_2020 Se  agrega  el  metodo  de  eliminado 
+>>>>>>> refs/remotes/origin/feature/eliminar-producto
  *              logico
+<<<<<<< HEAD
  *				20210523_2232 Se agrega  el rest del detalle del 
  *				producto
 
+=======
+ *              20210525_1532 Se agrega el llamado a los servicios 
+ *              para  el  registro  y  eliminado  de  imagenes  de 
+ *              anuncios
+>>>>>>> refs/remotes/origin/feature/eliminar-producto
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -38,15 +48,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
@@ -75,9 +88,9 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class AnuncioController {
-
-	 private AnuncioService anuncioService;
 	 
+	 private AnuncioService anuncioService;
+	   
 	 /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
@@ -100,6 +113,17 @@ public class AnuncioController {
 		return anuncioService.guardar(anuncio);
     }
 	
+	@ApiOperation(value = "AnuncioController::Actualiza",
+	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
+	        		+ "actualizar un anuncio.")
+	@PutMapping(value = "/anuncios.json",
+            produces = "application/json; charset=utf-8")
+    public AnuncioResponse actualizar(
+    		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
+    		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
+		return anuncioService.guardar(anuncio);
+    }
+	
 	@ApiOperation(value = "AnuncioController::Confirmar",
 	        notes = "Recibe el identificador del anuncio que confirma el guardado del anuncio")
 	@PutMapping(value = "/anuncios/confirmar/{id}.json",
@@ -108,17 +132,6 @@ public class AnuncioController {
     		@ApiParam(name="id", value="Identificador del anuncio.")
     		@PathVariable int id) throws BusinessException {
 		return anuncioService.confirmarAnuncio(id);
-    }
-	
-	@ApiOperation(value = "AnuncioController::Actualiza",
-	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
-	        		+ "actualizar un anuncio.")
-	@PutMapping(value = "/anuncio.json",
-            produces = "application/json; charset=utf-8")
-    public AnuncioResponse actualizar(
-    		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
-    		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
-		return anuncioService.guardar(anuncio);
     }
 
 	@ApiOperation(
@@ -161,4 +174,26 @@ public class AnuncioController {
 		response.add(mockito);
 		return response;
 	}
+
+	@ApiOperation(value = "AnuncioController::Registro", 
+			notes = "Recibe una imagen que sera asociada a un anuncio")
+	@PostMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+	public AnuncioImagenResponse guardarImagen(
+			@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
+			@RequestHeader("idAnuncio") int idAnuncio,
+			@ApiParam(name = "file", value = "Imagen a guardar.") 
+			@RequestParam("file") MultipartFile file) throws BusinessException {
+		return anuncioService.guardarImagen(idAnuncio, file);
+	}
+	
+	@ApiOperation(value = "AnuncioController::Eliminar", 
+			notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
+	@DeleteMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+	public void eliminarImagen(
+			@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a eliminar.") 
+			@RequestHeader("uuid") String uuid)
+			throws BusinessException {
+		 anuncioService.eliminarImagen(uuid);
+	}
+
 }

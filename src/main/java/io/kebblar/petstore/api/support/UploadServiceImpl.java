@@ -93,7 +93,7 @@ public class UploadServiceImpl implements UploadService {
      * @return the upload model
      * @throws UploadException the upload exception
      */
-    private UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException {
+    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException {
         UUID uuid = UUID.randomUUID();
         String newName = uuid.toString() + ".png";
         int autoIncremental = 0;

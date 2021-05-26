@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AccessService.java
+ * Artefacto:   AnuncioMapper.java
  * Tipo:        Interface
  * AUTOR:       Maria Isabel Contreras Garcia (MICG)
  * Fecha:       Jueves 20 de Mayo de 2021 (01_05)
@@ -36,8 +36,8 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
-import io.kebblar.petstore.api.model.domain.AnuncioImagen;
 import io.kebblar.petstore.api.model.domain.Atributo;
+
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
@@ -101,33 +101,16 @@ public interface AnuncioMapper {
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ") 
     Anuncio getAnuncioById(int id) throws SQLException;
-
+	  
     /**
-     * Consulta el objeto de tipo 'AnuncioImagen' con base al id del anuncio proporcionado
-     * 
-     * @param id Identificador del anunciocpor medio del cual se realizara la busqueda de sus imagenes asociadas
-     * @return Listado de clases de tipo 'AnuncioImagen' con la informacion de las imagenes
-     * @throws SQLException Excepcion lanzada en caso de error de base de datos
-     */
-    @Results(id="AnuncioImagenMap", value = {
-            @Result(property = "id",   column = "id"),
-            @Result(property = "idAnuncio",   column = "id_anuncio"),
-            @Result(property = "uuid",   column = "uuid"),
-            @Result(property = "imagen",   column = "imagen")
-    })
-    @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE id_anuncio = #{id} ") 
-	List<AnuncioImagen> getImagenes(int id);
-	    
-    /**
-     * Inserta un objeto de tipo 'AnuncioImagen' con base en la información dada por el objeto de tipo 'AnuncioImagen'.
+     * Elimina un objeto de tipo 'AnuncioImagen' con base al identificador proporcionado.
      *
-     * @param AnuncioImagen a ser insertado.
-     * @return identificador en base de datos del registro dado de alta.
+     * @param idImagen identificador del anuncio a ser eliminado
+     * @return identificador en base de datos del registro eliminado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio_imagen("+CAMPOS_ANUNCIO_IMAGEN+") VALUES(#{idAnuncio}, #{uuid}, #{imagen} )")
-    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insertImagen(AnuncioImagen anuncioImagen) throws SQLException;
+    @Delete("DELETE FROM anuncio_imagen WHERE uuid = #{uuid} ") 
+    int eliminarImagen(String uuid) throws SQLException;
 	 
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
