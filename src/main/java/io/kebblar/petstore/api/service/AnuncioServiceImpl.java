@@ -128,8 +128,8 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
 			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getSku());
-		} catch (SQLException e) {
-			  throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");
+		}catch (Exception e) { // SQLException no hizo caso
+			  throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
 		}
 	}
 	
