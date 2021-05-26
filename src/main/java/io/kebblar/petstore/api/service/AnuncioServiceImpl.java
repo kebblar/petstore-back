@@ -44,8 +44,8 @@ import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.AtributoRequest;
+import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
-import io.kebblar.petstore.api.rest.AnuncioImagenResponse;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
@@ -101,9 +101,6 @@ public class AnuncioServiceImpl implements AnuncioService{
 		anuncioAlta.setIdCategoria(request.getIdCategoria());
 		anuncioAlta.setDescripcion(request.getDescripcion());
 		anuncioAlta.setEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
-		anuncioAlta.setSku(AnuncioUtil.generaSku());
-		anuncioAlta.setFechaAlta(new Date());
-		anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
 		anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
 				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
 				:null);
@@ -117,6 +114,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioMapper.update(anuncioAlta);
 				anuncioMapper.deleteAtributos(anuncioAlta.getId());
 			}else {
+				anuncioAlta.setSku(AnuncioUtil.generaSku());
+				anuncioAlta.setFechaAlta(new Date());
+				anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
 				anuncioMapper.insert(anuncioAlta);
 			}
 			for(AtributoRequest ar : request.getAtributos()) {

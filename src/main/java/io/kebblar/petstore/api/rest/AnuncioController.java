@@ -40,6 +40,7 @@ import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
 import io.swagger.annotations.Api;
@@ -91,16 +92,6 @@ public class AnuncioController {
 		return anuncioService.guardar(anuncio);
     }
 	
-	@ApiOperation(value = "AnuncioController::Confirmar",
-	        notes = "Recibe el identificador del anuncio que confirma el guardado del anuncio")
-	@PutMapping(value = "/anuncios/confirmar/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public AnuncioResponse confirmarAnuncio(
-    		@ApiParam(name="id", value="Identificador del anuncio.")
-    		@PathVariable int id) throws BusinessException {
-		return anuncioService.confirmarAnuncio(id);
-    }
-	
 	@ApiOperation(value = "AnuncioController::Actualiza",
 	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
 	        		+ "actualizar un anuncio.")
@@ -111,7 +102,17 @@ public class AnuncioController {
     		@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
 		return anuncioService.guardar(anuncio);
     }
-
+	
+	@ApiOperation(value = "AnuncioController::Confirmar",
+	        notes = "Recibe el identificador del anuncio que confirma el guardado del anuncio")
+	@PutMapping(value = "/anuncios/confirmar/{id}.json",
+            produces = "application/json; charset=utf-8")
+    public AnuncioResponse confirmarAnuncio(
+    		@ApiParam(name="id", value="Identificador del anuncio.")
+    		@PathVariable int id) throws BusinessException {
+		return anuncioService.confirmarAnuncio(id);
+    }
+	
 	@ApiOperation(value = "AnuncioController::Registro", 
 			notes = "Recibe una imagen que sera asociada a un anuncio")
 	@PostMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")

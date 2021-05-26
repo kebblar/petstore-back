@@ -22,8 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
-import io.kebblar.petstore.api.rest.AnuncioImagenResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**

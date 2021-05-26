@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.rest;
+package io.kebblar.petstore.api.model.response;
 
 public class AnuncioImagenResponse {
 	
