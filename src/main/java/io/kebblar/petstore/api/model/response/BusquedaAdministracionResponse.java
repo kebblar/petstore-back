@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 public class BusquedaAdministracionResponse {
 
+	private int id;
 	private int sku;
 	@NotBlank(message = "{notblank.anuncio.titulo}")
 	@NotNull(message = "{notnull.anuncio.titulo}")
@@ -21,11 +22,13 @@ public class BusquedaAdministracionResponse {
 	
 	
 	
-	public BusquedaAdministracionResponse(int sku,
+
+	public BusquedaAdministracionResponse(int id, int sku,
 			@NotBlank(message = "{notblank.anuncio.titulo}") @NotNull(message = "{notnull.anuncio.titulo}") String titulo,
 			LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, String estatus,
 			@Min(value = 1, message = "{min.anuncio.idcategoria}") int idCategoria, String descripcion) {
 		super();
+		this.id = id;
 		this.sku = sku;
 		this.titulo = titulo;
 		this.fechaInicioVigencia = fechaInicioVigencia;
@@ -34,12 +37,11 @@ public class BusquedaAdministracionResponse {
 		this.idCategoria = idCategoria;
 		this.descripcion = descripcion;
 	}
-	
 	@Override
 	public String toString() {
-		return "BusquedaAdministracionResponse [sku=" + sku + ", titulo=" + titulo + ", fechaInicioVigencia="
-				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", estatus=" + estatus
-				+ ", idCategoria=" + idCategoria + ", descripcion=" + descripcion + "]";
+		return "BusquedaAdministracionResponse [id=" + id + ", sku=" + sku + ", titulo=" + titulo
+				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
+				+ ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -49,6 +51,7 @@ public class BusquedaAdministracionResponse {
 		result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+		result = prime * result + id;
 		result = prime * result + idCategoria;
 		result = prime * result + sku;
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
@@ -82,6 +85,8 @@ public class BusquedaAdministracionResponse {
 			if (other.fechaInicioVigencia != null)
 				return false;
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
+			return false;
+		if (id != other.id)
 			return false;
 		if (idCategoria != other.idCategoria)
 			return false;
@@ -135,6 +140,13 @@ public class BusquedaAdministracionResponse {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

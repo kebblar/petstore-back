@@ -143,8 +143,8 @@ public class AnuncioController {
 					@RequestBody BusquedaAdministracionRequest busqueda){
 		
 		List<BusquedaAdministracionResponse> response = new ArrayList<BusquedaAdministracionResponse>();
-		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
-		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
+		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(1,123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
+		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(2,123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
 		response.add(mock);
 		response.add(mockito);
 		return response;
