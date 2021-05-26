@@ -73,7 +73,7 @@ public class PruebaController {
     @GetMapping(
             value = "/qr-base64/{data}",  
             produces = "image/jpg")
-    public @ResponseBody String generateQRBytesBase64(@PathVariable("barcode") String data) throws Exception  {
+    public @ResponseBody String generateQRBytesBase64(@PathVariable("data") String data) throws Exception  {
         return qrService.getQRBytesBase64(data);
     }
 
