@@ -78,5 +78,5 @@ public interface AnuncioService {
 	 * @return {@link AnuncioImagenResponse} Clase que contiene la informacion de la imagen eliminada
 	 * @throws BusinessException
 	 */
-	 AnuncioImagenResponse eliminarImagen(int idImagen) throws BusinessException;
+	 void eliminarImagen(String uuid) throws BusinessException;
 }

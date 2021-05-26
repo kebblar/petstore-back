@@ -104,7 +104,7 @@ public class AnuncioController {
 	@ApiOperation(value = "AnuncioController::Actualiza",
 	        notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
 	        		+ "actualizar un anuncio.")
-	@PutMapping(value = "/anuncio.json",
+	@PutMapping(value = "/anuncios.json",
             produces = "application/json; charset=utf-8")
     public AnuncioResponse actualizar(
     		@ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
@@ -112,10 +112,9 @@ public class AnuncioController {
 		return anuncioService.guardar(anuncio);
     }
 
-
-	@ApiOperation(value = "AnuncioController::RegistroImagen", 
+	@ApiOperation(value = "AnuncioController::Registro", 
 			notes = "Recibe una imagen que sera asociada a un anuncio")
-	@PostMapping(path = "/guardarImagen.json", produces = "application/json; charset=utf-8")
+	@PostMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
 	public AnuncioImagenResponse guardarImagen(
 			@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
 			@RequestHeader("idAnuncio") int idAnuncio,
@@ -124,14 +123,14 @@ public class AnuncioController {
 		return anuncioService.guardarImagen(idAnuncio, file);
 	}
 	
-	@ApiOperation(value = "AnuncioController::EliminarImagen", 
-			notes = "Elimina la imagen asociada a un anuncio con base al identificador")
-	@DeleteMapping(path = "/eliminarImagen.json", produces = "application/json; charset=utf-8")
-	public AnuncioImagenResponse eliminarImagen(
-			@ApiParam(name = "idImagen", value = "Identificador de la imagen de un anuncio a eliminar.") 
-			@RequestHeader("idImagen") int idImagen)
+	@ApiOperation(value = "AnuncioController::Eliminar", 
+			notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
+	@DeleteMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+	public void eliminarImagen(
+			@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a eliminar.") 
+			@RequestHeader("uuid") String uuid)
 			throws BusinessException {
-		return anuncioService.eliminarImagen(idImagen);
+		 anuncioService.eliminarImagen(uuid);
 	}
 
 }

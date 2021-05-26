@@ -31,6 +31,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.kebblar.petstore.api.mapper.AnuncioImagenMapper;
 import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
@@ -69,8 +70,8 @@ public class AnuncioServiceImpl implements AnuncioService{
     private long max;
 
     private final UploadService uploadService;
-    
     private AnuncioMapper anuncioMapper;
+    private AnuncioImagenMapper anuncioImagenMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -78,9 +79,11 @@ public class AnuncioServiceImpl implements AnuncioService{
      * 
      * @param anuncioMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService) {
+    public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService,
+    		AnuncioImagenMapper anuncioImagenMapper) {
         this.anuncioMapper = anuncioMapper;
         this.uploadService = uploadService;
+        this.anuncioImagenMapper = anuncioImagenMapper;
     }
     
 	@Override
@@ -137,7 +140,6 @@ public class AnuncioServiceImpl implements AnuncioService{
 		try {
 			//Si los datos son correctos, se procede con el guardado
 			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
-			
 			if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getEstatus() 
 					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()) {
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
@@ -178,35 +180,35 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
 		try {
+			
+			String contentType = file.getContentType();
+			if(!contentType.equals("image/jpeg") && !contentType.equals("image/png") && !contentType.equals("application/jpg")) {
+				throw new BusinessException("Error de datos","Formato de imagen no valido",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
 			Anuncio anuncio=anuncioMapper.getAnuncioById(idAnuncio);
-			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()!=anuncio.getEstatus()) {
+			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
 				throw new BusinessException("Error de datos","No existe el  anuncio para asociar la imagen",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
 			AnuncioImagen imagenEnt= new AnuncioImagen(anuncio.getId(),upload.getNuevoNombre(),upload.getNombreOriginal());
-			anuncioMapper.insertImagen(imagenEnt);
-			AnuncioImagenResponse response= new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getImagen());
-			return response;
+			anuncioImagenMapper.insertImagen(imagenEnt);
+			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getImagen());
 		}catch (UploadException | SQLException e) {
 			throw new BusinessException("Error de sistema","Error al guardar la imagen.");
 		}
-
 	}
 
 	@Override
-	public AnuncioImagenResponse eliminarImagen(int idImagen) throws BusinessException {		
+	public void eliminarImagen(String idImagen) throws BusinessException {		
 		try {
-			AnuncioImagen entidad=anuncioMapper.getImagen(idImagen);
+			AnuncioImagen entidad=anuncioImagenMapper.getImagen(idImagen);
 			if(entidad==null) {
 				throw new BusinessException("Error de datos","No se encuentra la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			anuncioMapper.eliminarImagen(idImagen);
-			AnuncioImagenResponse response= new AnuncioImagenResponse(idImagen, entidad.getIdAnuncio(), entidad.getUuid(),entidad.getImagen());
-			return response;
 		}catch(SQLException e) {
 			throw new BusinessException("Error de datos","Error al tratar de eliminar la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
-		
 	}
 	
 	/**
