@@ -155,17 +155,18 @@ public interface AnuncioMapper {
     int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
 
     /**
-     * Consulta el objeto de tipo 'Atributo' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'AnuncioAtributo' con base al id del anuncio proporcionado
      * 
      * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
-     * @return Listado de clases de tipo 'Atributo' con la informacion de los atributos de un anuncio
+     * @return Listado de clases de tipo 'AnuncioAtributo' con la informacion de los atributos de un anuncio
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @Results(id="AnuncioAtributoMap", value = {
             @Result(property = "id",   column = "id"),
-            @Result(property = "atributo",   column = "atributo")
+            @Result(property = "idAtributo",   column = "id_atributo"),
+            @Result(property = "valor",   column = "valor")
     })
     @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
-	List<Atributo> atributosPorAnuncio(int id);
+	List<AnuncioAtributo> atributosPorAnuncio(int id);
 
 }

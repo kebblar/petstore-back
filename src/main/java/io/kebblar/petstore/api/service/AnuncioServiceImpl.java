@@ -253,12 +253,12 @@ public class AnuncioServiceImpl implements AnuncioService{
 				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}	
 			//Se consulta la informacion de los atributos del anuncio
-			List<Atributo> atributos = anuncioMapper.atributosPorAnuncio(id);
+			List<AnuncioAtributo> atributos = anuncioMapper.atributosPorAnuncio(id);
 			List<AtributoResponse> atributosResponse = null;
 			if(atributos!=null && !atributos.isEmpty()) {
 				atributosResponse = new ArrayList<>();
-				for(Atributo atr : atributos) {
-					atributosResponse.add(new AtributoResponse(atr.getId(), atr.getAtributo()));
+				for(AnuncioAtributo atr : atributos) {
+					atributosResponse.add(new AtributoResponse(atr.getIdAtributo(), String.valueOf(atr.getValor())));
 				}
 			}
 			//Se consulta la informacion de las imagenes del anuncio
