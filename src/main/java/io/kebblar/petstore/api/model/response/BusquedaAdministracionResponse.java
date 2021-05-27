@@ -9,97 +9,26 @@ import javax.validation.constraints.NotNull;
 public class BusquedaAdministracionResponse {
 
 	private int id;
-	private int sku;
+	private long sku;
 	private String titulo;
 	private LocalDate fechaInicioVigencia;
 	private LocalDate fechaFinVigencia;
 	private String estatus;
 	private int idCategoria;
 	private String descripcion;
-	
-	
-	
-
-	public BusquedaAdministracionResponse(int id, int sku,
-			@NotBlank(message = "{notblank.anuncio.titulo}") @NotNull(message = "{notnull.anuncio.titulo}") String titulo,
-			LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, String estatus,
-			@Min(value = 1, message = "{min.anuncio.idcategoria}") int idCategoria, String descripcion) {
-		super();
+	private int idEstatus;
+	private String descripcionEstatus;
+	private String descripcionCategoria;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
 		this.id = id;
-		this.sku = sku;
-		this.titulo = titulo;
-		this.fechaInicioVigencia = fechaInicioVigencia;
-		this.fechaFinVigencia = fechaFinVigencia;
-		this.estatus = estatus;
-		this.idCategoria = idCategoria;
-		this.descripcion = descripcion;
 	}
-	@Override
-	public String toString() {
-		return "BusquedaAdministracionResponse [id=" + id + ", sku=" + sku + ", titulo=" + titulo
-				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
-				+ ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-		result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
-		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
-		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-		result = prime * result + id;
-		result = prime * result + idCategoria;
-		result = prime * result + sku;
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BusquedaAdministracionResponse other = (BusquedaAdministracionResponse) obj;
-		if (descripcion == null) {
-			if (other.descripcion != null)
-				return false;
-		} else if (!descripcion.equals(other.descripcion))
-			return false;
-		if (estatus == null) {
-			if (other.estatus != null)
-				return false;
-		} else if (!estatus.equals(other.estatus))
-			return false;
-		if (fechaFinVigencia == null) {
-			if (other.fechaFinVigencia != null)
-				return false;
-		} else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-			return false;
-		if (fechaInicioVigencia == null) {
-			if (other.fechaInicioVigencia != null)
-				return false;
-		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-			return false;
-		if (id != other.id)
-			return false;
-		if (idCategoria != other.idCategoria)
-			return false;
-		if (sku != other.sku)
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
-	}
-	public int getSku() {
+	public long getSku() {
 		return sku;
 	}
-	public void setSku(int sku) {
+	public void setSku(long sku) {
 		this.sku = sku;
 	}
 	public String getTitulo() {
@@ -138,12 +67,126 @@ public class BusquedaAdministracionResponse {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getId() {
-		return id;
+	public int getIdEstatus() {
+		return idEstatus;
 	}
-
-	public void setId(int id) {
+	public void setIdEstatus(int idEstatus) {
+		this.idEstatus = idEstatus;
+	}
+	public String getDescripcionEstatus() {
+		return descripcionEstatus;
+	}
+	public void setDescripcionEstatus(String descripcionEstatus) {
+		this.descripcionEstatus = descripcionEstatus;
+	}
+	public String getDescripcionCategoria() {
+		return descripcionCategoria;
+	}
+	public void setDescripcionCategoria(String descripcionCategoria) {
+		this.descripcionCategoria = descripcionCategoria;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((descripcionCategoria == null) ? 0 : descripcionCategoria.hashCode());
+		result = prime * result + ((descripcionEstatus == null) ? 0 : descripcionEstatus.hashCode());
+		result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
+		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
+		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+		result = prime * result + id;
+		result = prime * result + idCategoria;
+		result = prime * result + idEstatus;
+		result = prime * result + (int) (sku ^ (sku >>> 32));
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusquedaAdministracionResponse other = (BusquedaAdministracionResponse) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (descripcionCategoria == null) {
+			if (other.descripcionCategoria != null)
+				return false;
+		} else if (!descripcionCategoria.equals(other.descripcionCategoria))
+			return false;
+		if (descripcionEstatus == null) {
+			if (other.descripcionEstatus != null)
+				return false;
+		} else if (!descripcionEstatus.equals(other.descripcionEstatus))
+			return false;
+		if (estatus == null) {
+			if (other.estatus != null)
+				return false;
+		} else if (!estatus.equals(other.estatus))
+			return false;
+		if (fechaFinVigencia == null) {
+			if (other.fechaFinVigencia != null)
+				return false;
+		} else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
+			return false;
+		if (fechaInicioVigencia == null) {
+			if (other.fechaInicioVigencia != null)
+				return false;
+		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
+			return false;
+		if (id != other.id)
+			return false;
+		if (idCategoria != other.idCategoria)
+			return false;
+		if (idEstatus != other.idEstatus)
+			return false;
+		if (sku != other.sku)
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "BusquedaAdministracionResponse [id=" + id + ", sku=" + sku + ", titulo=" + titulo
+				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
+				+ ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion
+				+ ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
+				+ descripcionCategoria + "]";
+	}
+	public BusquedaAdministracionResponse(int id, long sku, String titulo, LocalDate fechaInicioVigencia,
+			LocalDate fechaFinVigencia, String estatus, int idCategoria, String descripcion, int idEstatus,
+			String descripcionEstatus, String descripcionCategoria) {
+		super();
 		this.id = id;
+		this.sku = sku;
+		this.titulo = titulo;
+		this.fechaInicioVigencia = fechaInicioVigencia;
+		this.fechaFinVigencia = fechaFinVigencia;
+		this.estatus = estatus;
+		this.idCategoria = idCategoria;
+		this.descripcion = descripcion;
+		this.idEstatus = idEstatus;
+		this.descripcionEstatus = descripcionEstatus;
+		this.descripcionCategoria = descripcionCategoria;
 	}
+	public BusquedaAdministracionResponse() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+
 	
 }

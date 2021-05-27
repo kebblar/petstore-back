@@ -20,9 +20,13 @@
  */
 package io.kebblar.petstore.api.service;
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +50,11 @@ import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.AtributoRequest;
+import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
+import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
@@ -259,6 +266,26 @@ public class AnuncioServiceImpl implements AnuncioService{
 		if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
 			throw new BusinessException("Error de datos","Fechas de vigencia no validas");
 		}	
+	}
+
+	/**
+	 * Metodo que permite realizar la busqueda de productos por medio de filtros, asi como tambien devuelve la paginacion
+	 * @param filtros permite utilizar los campos como filtros en la sentencia SQL
+	 * @throws BusinessException, SQLException
+	 */
+	@Override
+	public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros)
+			throws BusinessException, SQLException {
+		AnuncioUtil au = new AnuncioUtil();
+		
+		String cadenaMapper = au.busquedaFiltros(filtros);
+		Map<String, String> mapSql = new HashMap<>();
+		mapSql.put("sql", cadenaMapper);
+
+			List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
+			PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(anuncios.size(), anuncios);
+
+		return response;
 	}
 
 }

@@ -24,6 +24,8 @@ import java.util.Random;
 
 import com.ibm.icu.text.SimpleDateFormat;
 
+import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+
 /**
  * <p>Descripción:</p>
  * Utileria de apoyo para los servicios asociados a la entidad'anuncio'. 
@@ -109,6 +111,44 @@ public class AnuncioUtil {
 		
 		}
 		return 0;
+	}
+	
+	/**
+	 * Metodo que concatena las condiciones de consulta a la cadena SQL
+	 * @param filtros
+	 * @return String que contiene toda la cadena para la sentencia SQL
+	 */
+	public static String busquedaFiltros(BusquedaAdministracionRequest filtros) {
+		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id IS NOT NULL");
+		int getPageSize = filtros.getTamPaginas();
+		int getPageNumber = filtros.getNumPaginas();
+		
+		String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
+		String pageSize = Integer.toString(getPageSize);
+		if (filtros.getIdCategoria() != 0) {
+			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
+		}
+		if (filtros.getSku() != 0) {
+			consultaBase.append(" AND sku = ").append(filtros.getSku());
+		}
+		if (filtros.getEstatus() != 0) {
+			consultaBase.append(" AND estatus = ").append(filtros.getEstatus());
+		}
+		if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
+			consultaBase.append(" AND titulo = ").append("'").append(filtros.getTitulo()).append("'");
+		}
+		if (filtros.getFechaFinVigencia() != null) {
+			consultaBase.append(" AND fecha_fin_vigencia = ").append("'").append(filtros.getFechaFinVigencia()).append("'");
+		}
+		if (filtros.getFechaInicioVigencia() != null) {
+			consultaBase.append(" AND fecha_inicio_vigencia = ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
+		}
+		
+		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
+		
+		
+		return consultaBase.toString();
+		
 	}
 
 }

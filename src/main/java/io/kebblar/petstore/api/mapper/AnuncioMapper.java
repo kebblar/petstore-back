@@ -22,6 +22,9 @@ package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
@@ -42,6 +45,7 @@ import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
  *
  * @see Anuncio
  */
+import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 @Repository
 public interface AnuncioMapper {
 
@@ -146,5 +150,14 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error
      */
     @Update("UPDATE anuncio SET estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
-    int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;   
+    int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
+    
+    /**
+     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara
+     * @param map
+     * @return Lista de BusquedaAdministracionResponse
+     * @throws SQLException
+     */
+    @Select("${sql}")
+    List<BusquedaAdministracionResponse> busquedaAnuncio(Map<String,String> map) throws SQLException;
 }

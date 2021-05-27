@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 public class BusquedaAdministracionRequest {
 
-	private int sku;
+	private long sku;
 	private String titulo;
 	private LocalDate fechaInicioVigencia;
 	private LocalDate fechaFinVigencia;
@@ -16,10 +16,10 @@ public class BusquedaAdministracionRequest {
 	private int idCategoria;
 	private int numPaginas;
 	private int tamPaginas;
-	public int getSku() {
+	public long getSku() {
 		return sku;
 	}
-	public void setSku(int sku) {
+	public void setSku(long sku) {
 		this.sku = sku;
 	}
 	public String getTitulo() {
@@ -73,7 +73,7 @@ public class BusquedaAdministracionRequest {
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
 		result = prime * result + idCategoria;
 		result = prime * result + numPaginas;
-		result = prime * result + sku;
+		result = prime * result + (int) (sku ^ (sku >>> 32));
 		result = prime * result + tamPaginas;
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
@@ -120,10 +120,8 @@ public class BusquedaAdministracionRequest {
 				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", estatus=" + estatus
 				+ ", idCategoria=" + idCategoria + ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
 	}
-	public BusquedaAdministracionRequest(int sku,
-			@NotBlank(message = "{notblank.anuncio.titulo}") @NotNull(message = "{notnull.anuncio.titulo}") String titulo,
-			LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, int estatus,
-			@Min(value = 1, message = "{min.anuncio.idcategoria}") int idCategoria, int numPaginas, int tamPaginas) {
+	public BusquedaAdministracionRequest(long sku, String titulo, LocalDate fechaInicioVigencia,
+			LocalDate fechaFinVigencia, int estatus, int idCategoria, int numPaginas, int tamPaginas) {
 		super();
 		this.sku = sku;
 		this.titulo = titulo;
@@ -134,6 +132,8 @@ public class BusquedaAdministracionRequest {
 		this.numPaginas = numPaginas;
 		this.tamPaginas = tamPaginas;
 	}
+	
+	
 	
 	
 	

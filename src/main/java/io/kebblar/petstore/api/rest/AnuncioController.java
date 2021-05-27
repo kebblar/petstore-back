@@ -27,6 +27,7 @@
 package io.kebblar.petstore.api.rest;
 
 import java.awt.PageAttributes;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,14 +145,9 @@ public class AnuncioController {
             produces = "application/json; charset=utf-8")
 	public PaginacionAnunciosResponse busquedaAdministracion( 
 					@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
-					@RequestBody BusquedaAdministracionRequest filtros){
+					@RequestBody BusquedaAdministracionRequest filtros) throws BusinessException, SQLException{
 		
-		List<BusquedaAdministracionResponse> listaAnuncios = new ArrayList<BusquedaAdministracionResponse>();
-		BusquedaAdministracionResponse mock = new BusquedaAdministracionResponse(1,123, "French Poddle", LocalDate.now(), LocalDate.now(), "Activo", 1, "Pelo chino");
-		BusquedaAdministracionResponse mockito = new BusquedaAdministracionResponse(2,123, "Cocker", LocalDate.now(), LocalDate.now(), "Activo", 1, "Oreja Grandes");
-		PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(2, listaAnuncios);
-
-		return response;
+		return anuncioService.busquedaAdministracion(filtros);
 	}
 	
 }

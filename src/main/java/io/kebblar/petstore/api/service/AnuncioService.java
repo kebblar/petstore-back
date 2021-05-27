@@ -20,12 +20,16 @@
  */
 package io.kebblar.petstore.api.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 
+import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
+import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**
@@ -90,4 +94,13 @@ public interface AnuncioService {
 	 * @throws BusinessException
 	 */
 	 void eliminarImagen(String uuid) throws BusinessException;
+	 
+	 /**
+	 * Metodo que permite la busqueda de productos para sua dministracion (ABC)
+	 * @param {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
+	 * @return {@link PaginacionAnunciosResponse} 
+	 * @throws BusinessException, SQLException
+	 */
+	 PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException;
+	 
 }
