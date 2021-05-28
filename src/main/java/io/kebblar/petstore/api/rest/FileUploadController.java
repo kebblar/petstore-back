@@ -20,6 +20,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,13 +66,43 @@ public class FileUploadController {
      * @return lista que contiene el modelo de donde se almaceno el archivo
      * @throws UploadException si hay algun error
      */
-    @PostMapping(path = "/upload.json", produces = "application/json; charset=utf-8")
-    public List<UploadModel> handleFileUploadWithKDMCopy(@RequestParam("files") MultipartFile[] files) throws UploadException {
-        List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
-        return listaUpload;
+    @PostMapping(
+            path = "/upload.json", 
+            produces = "application/json; charset=utf-8"
+            )
+    public UploadModel handleFileUploadWithKDMCopy(
+            @RequestHeader("jwt") String jwt,
+            @RequestParam("uno") int uno,
+            @RequestParam("dos") String dos,
+            @RequestParam("file") MultipartFile file
+            ) throws UploadException {
+        System.out.println(jwt);
+        System.out.println(uno);
+        System.out.println(dos);
+        UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
+        return upload;
     } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
     // https://github.com/ozkanpakdil/spring-examples/tree/master/demoMultiFileUpload
     // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
+
+    @PutMapping(
+            path = "/upload.json", 
+            produces = "application/json; charset=utf-8",
+            consumes = { "multipart/*" }
+            )
+    public List<UploadModel> handleFileUploadWithKDMCopyPut(@RequestParam("files") MultipartFile[] files) throws UploadException {
+        List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
+        return listaUpload;
+    } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
+    @PutMapping(
+            path = "/upload2.json", 
+            produces = "application/json; charset=utf-8",
+            consumes = { "multipart/*" }
+            )
+    public UploadModel upload2(@RequestParam("files") MultipartFile files) throws UploadException {
+        UploadModel upload = uploadService.storeOne(files, destinationFolder, max);
+        return upload;
+    }
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \

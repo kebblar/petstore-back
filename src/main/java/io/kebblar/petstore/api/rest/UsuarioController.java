@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -113,5 +114,17 @@ public class UsuarioController {
     }
     
     
-
+    @PutMapping(
+            path = "/cambia-clave.json", 
+            produces = "application/json; charset=utf-8")
+    public Usuario cambiaClave(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(name = "credenciales", value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
+            @RequestBody CredencialesRequest credenciales
+            ) throws ControllerException {
+        System.out.println(jwt+"<----------------------------");
+         return this.usuarioService.cambiaClave(
+                 credenciales.getUsuario(), 
+                 credenciales.getClave());
+    }
 }

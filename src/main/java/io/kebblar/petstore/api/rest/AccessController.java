@@ -87,7 +87,7 @@ public class AccessController {
     @PostMapping(
             path = "/usuario-preregistro.json", 
             produces = "application/json; charset=utf-8")
-    public Preregistro insertaUsuarioDetalles(
+    public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
             @RequestBody Preregistro preRegistroRequest) throws ControllerException {
         return this.usuarioService.preRegistro(preRegistroRequest);

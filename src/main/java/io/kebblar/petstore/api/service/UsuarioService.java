@@ -175,4 +175,15 @@ public interface UsuarioService {
      * @throws BusinessException
      */
     Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException;
+    
+    /**
+     * Cambia la clave de un usuario por la que de proporciona
+     * 
+     * @param correo Correo asociado al usuario
+     * @param clave Nueva clave entexto plano
+     * @return el objeto de tipo Usuario con la clave cambiada
+     * @throws BusinessException
+     */
+    Usuario cambiaClave(String correo, String clave) throws BusinessException;
+    
 }

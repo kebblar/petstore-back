@@ -19,16 +19,26 @@
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.model.domain.Direccion;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.domain.*;
-import io.kebblar.petstore.api.service.*;
+import io.kebblar.petstore.api.service.DireccionService;
+import io.kebblar.petstore.api.support.QRService;
 
 /**
  * <p>Implementacion  del controlador REST asociado a los endpoints 
@@ -52,6 +62,9 @@ public class PruebaController {
 
     @Autowired
     private DireccionService servicio;
+    
+    @Autowired
+    private QRService qrService;
     
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
     public List<Direccion> getAll() throws ControllerException {
@@ -79,4 +92,20 @@ public class PruebaController {
     public int nuevaDireccion(@RequestBody NuevaDireccion nuevaDireccion) throws ControllerException {
         return servicio.agregaDireccion(nuevaDireccion);
     }
+    
+    @ResponseBody
+    @GetMapping(
+            value = "/qr/{data}", 
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] testphoto(@PathVariable String data) throws ControllerException {
+        return qrService.getQRBytes(data);
+    }
+
+    @GetMapping(
+            value = "/qr-base64/{data}",  
+            produces = "image/jpg")
+    public @ResponseBody String generateQRCodeImageBase64(@PathVariable("data") String data) throws Exception  {
+        return qrService.getQRBytesBase64(data);
+    }
+
 }

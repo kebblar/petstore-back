@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Municipio;
@@ -159,5 +160,15 @@ public class MunicipioController {
     public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
         return municipioService.getAllByEstado(id);
     }
-
+    
+    @GetMapping(
+            value= "/municipios-por-estado-paginados.json",
+            produces = "application/json; charset=utf-8")
+    public List<Municipio> getByEstadoPaginados(
+            @RequestParam int idEstado,
+            @RequestParam int pageNumber,
+            @RequestParam int pageSize
+            ) throws BusinessException {
+        return municipioService.getPaginatedMunicipios(idEstado, pageNumber, pageSize);
+    }
 }
