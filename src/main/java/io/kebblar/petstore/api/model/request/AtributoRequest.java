@@ -3,13 +3,13 @@ package io.kebblar.petstore.api.model.request;
 public class AtributoRequest {
 	
 	private int id;
-	private String valor;
+	private int valor;
 	private String unidad;
 	
 	public AtributoRequest() {
 	}
 
-	public AtributoRequest(int id, String valor, String unidad) {
+	public AtributoRequest(int id, int valor, String unidad) {
 		this.id = id;
 		this.valor = valor;
 		this.unidad = unidad;
@@ -23,11 +23,11 @@ public class AtributoRequest {
 		this.id = id;
 	}
 
-	public String getValor() {
+	public int getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(int valor) {
 		this.valor = valor;
 	}
 
@@ -45,7 +45,7 @@ public class AtributoRequest {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((unidad == null) ? 0 : unidad.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + valor;
 		return result;
 	}
 
@@ -65,10 +65,7 @@ public class AtributoRequest {
 				return false;
 		} else if (!unidad.equals(other.unidad))
 			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
+		if (valor != other.valor)
 			return false;
 		return true;
 	}

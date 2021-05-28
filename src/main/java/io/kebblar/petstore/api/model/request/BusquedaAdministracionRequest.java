@@ -2,10 +2,6 @@ package io.kebblar.petstore.api.model.request;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class BusquedaAdministracionRequest {
 
 	private long sku;

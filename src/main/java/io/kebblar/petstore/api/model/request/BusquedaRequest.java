@@ -3,11 +3,17 @@ package io.kebblar.petstore.api.model.request;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.validation.constraints.Min;
+
 public class BusquedaRequest {
 
 	private BigDecimal precio;
 	private Long idCategoria;
 	private List<AtributoRequest> atributos;
+	@Min(value = 1, message = "{min.paginado}")
+	private int numPaginas;
+	@Min(value = 1, message = "{min.tamano.paginas}")
+	private int tamPaginas;
 	public BigDecimal getPrecio() {
 		return precio;
 	}
@@ -26,13 +32,27 @@ public class BusquedaRequest {
 	public void setAtributos(List<AtributoRequest> atributos) {
 		this.atributos = atributos;
 	}
+	public int getNumPaginas() {
+		return numPaginas;
+	}
+	public void setNumPaginas(int numPaginas) {
+		this.numPaginas = numPaginas;
+	}
+	public int getTamPaginas() {
+		return tamPaginas;
+	}
+	public void setTamPaginas(int tamPaginas) {
+		this.tamPaginas = tamPaginas;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((atributos == null) ? 0 : atributos.hashCode());
 		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
+		result = prime * result + numPaginas;
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+		result = prime * result + tamPaginas;
 		return result;
 	}
 	@Override
@@ -54,22 +74,30 @@ public class BusquedaRequest {
 				return false;
 		} else if (!idCategoria.equals(other.idCategoria))
 			return false;
+		if (numPaginas != other.numPaginas)
+			return false;
 		if (precio == null) {
 			if (other.precio != null)
 				return false;
 		} else if (!precio.equals(other.precio))
 			return false;
+		if (tamPaginas != other.tamPaginas)
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "BusquedaRequest [precio=" + precio + ", idCategoria=" + idCategoria + ", atributos=" + atributos + "]";
+		return "BusquedaRequest [precio=" + precio + ", idCategoria=" + idCategoria + ", atributos=" + atributos
+				+ ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
 	}
-	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<AtributoRequest> atributos) {
+	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<AtributoRequest> atributos, int numPaginas,
+			int tamPaginas) {
 		super();
 		this.precio = precio;
 		this.idCategoria = idCategoria;
 		this.atributos = atributos;
+		this.numPaginas = numPaginas;
+		this.tamPaginas = tamPaginas;
 	}
 	public BusquedaRequest() {
 		super();

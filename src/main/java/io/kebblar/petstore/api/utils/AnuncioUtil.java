@@ -18,6 +18,7 @@
  */
 package io.kebblar.petstore.api.utils;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +27,9 @@ import java.util.Random;
 
 import com.ibm.icu.text.SimpleDateFormat;
 
+import io.kebblar.petstore.api.model.request.AtributoRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
 /**
  * <p>Descripción:</p>
@@ -37,6 +40,7 @@ import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
+	private static final String TEMPLATE = "SELECT id_anuncio FROM anuncio_atributo WHERE id_atributo = %d AND valor = %d ";
 
 	/**
 	 * <p>Metodo que permite genera un SKU para la entidad de 'anuncio'.</p>
@@ -146,6 +150,49 @@ public class AnuncioUtil {
 		if (filtros.getFechaInicioVigencia() != null) {
 			consultaBase.append(" AND fecha_inicio_vigencia = ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
 		}
+		response.add(consultaBase.toString());
+		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
+		response.add(consultaBase.toString());
+		return response;
+		
+	}
+	/**
+	 * Filtra las busqeuda de usuario final
+	 * @param filtros
+	 * @return Lista de strings
+	 */
+	public static List<String> busqueda(BusquedaRequest filtros) {
+		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
+		List<String> response = new ArrayList<>();
+		int getPageSize = filtros.getTamPaginas();
+		int getPageNumber = filtros.getNumPaginas();
+		
+		String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
+		String pageSize = Integer.toString(getPageSize);
+		if (filtros.getIdCategoria() != 0) {
+			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
+		}
+		if (filtros.getPrecio() != null && filtros.getPrecio() != BigDecimal.ZERO) {
+			consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
+		}
+		if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
+			consultaBase.append(" AND id IN (");
+			int i=1;
+	        StringBuilder sb = new StringBuilder();
+	        int size = filtros.getAtributos().size();
+	        
+			for (AtributoRequest atributo : filtros.getAtributos()) {
+	            sb.append("(");
+	            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
+	            sb.append(")");
+	            sb.append((i++<size)?" INTERSECT ":"");
+			}
+			
+			consultaBase.append(sb).append(")");
+			
+		}
+
+		
 		response.add(consultaBase.toString());
 		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
 		response.add(consultaBase.toString());

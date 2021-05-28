@@ -16,18 +16,19 @@
  *              20210510_0050 Creación de éste servicio
  *              20210523_2030 Se  agrega  el  metodo  de  elimado 
  *              logico
+ *              20210528_1159 Se agrega el metodo de busqueda
+ *              administracion
  *
  */
 package io.kebblar.petstore.api.service;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import io.kebblar.petstore.api.mapper.AnuncioImagenMapper;
 import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
@@ -52,13 +52,20 @@ import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.AtributoRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.request.BusquedaRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
+import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
+import io.kebblar.petstore.api.model.response.AtributoResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+import io.kebblar.petstore.api.utils.AnuncioAtributosEnum;
+import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
+import io.kebblar.petstore.api.utils.AnuncioValAtributosEnum;
 
 /**
  * <p>Implementación de la interfaz de servicios para 'Anuncio'.
@@ -121,6 +128,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Si los datos son correctos, se procede con el guardado o actualizacion
 			if(request instanceof ActualizaAnuncioRequest) {
 				anuncioAlta.setId(((ActualizaAnuncioRequest)request).getId());
+				anuncioAlta.setFechaModificacion(new Date());
 				anuncioMapper.update(anuncioAlta);
 				anuncioMapper.deleteAtributos(anuncioAlta.getId());
 			}else {
@@ -133,7 +141,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				AnuncioAtributo aa =  new AnuncioAtributo();
 				aa.setIdAnuncio(anuncioAlta.getId());
 				aa.setIdAtributo(ar.getId());
-				aa.setValor(Integer.parseInt(ar.getValor()));
+				aa.setValor(ar.getValor());
 				anuncioMapper.insertAtributo(aa);
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
@@ -143,7 +151,6 @@ public class AnuncioServiceImpl implements AnuncioService{
 		}
 	}
 	
-
 	@Override
 	public AnuncioResponse confirmarAnuncio(int id) throws BusinessException {
 		AnuncioResponse response = new AnuncioResponse();
@@ -151,11 +158,16 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Si los datos son correctos, se procede con el guardado
 			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
 			if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getEstatus() 
-					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()) {
+					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()
+					&& AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getEstatus()) {
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
 				throw new BusinessException("Error de datos","Fechas de vigencia no validas");
+			}
+			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
+			if(imagenes==null || imagenes.isEmpty()) {
+				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro");
 			}
 			response.setId(anuncio.getId());
 			response.setSku(anuncio.getSku());
@@ -242,6 +254,60 @@ public class AnuncioServiceImpl implements AnuncioService{
 		}
 	}
 
+	@Override
+	public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
+		try {
+			//Se consulta la informacion del anuncio, para validar estatus
+			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
+			if(anuncio == null) {
+				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}	
+			//Se consulta la informacion de los atributos del anuncio
+			List<AnuncioAtributo> atributos = anuncioMapper.atributosPorAnuncio(id);
+			List<AtributoResponse> atributosResponse = null;
+			if(atributos!=null && !atributos.isEmpty()) {
+				atributosResponse = new ArrayList<>();
+				for(AnuncioAtributo atr : atributos) {
+					AtributoResponse atrRes=new AtributoResponse();
+					atrRes.setId(atr.getIdAtributo());
+					atrRes.setDescAtributo(AnuncioAtributosEnum.getDescripcion(atr.getIdAtributo()));
+					atrRes.setValor(atr.getValor());
+					atrRes.setDescValor(AnuncioValAtributosEnum.getDescValor(atr.getIdAtributo(), atr.getValor()));
+					atributosResponse.add(atrRes);
+				}
+			}
+			//Se consulta la informacion de las imagenes del anuncio
+			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
+			List<AnuncioImagenResponse> imagenesResponse = null;
+			if(imagenes!=null && !imagenes.isEmpty()) {
+				imagenesResponse = new ArrayList<>();
+				for(AnuncioImagen img : imagenes) {
+					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
+				}
+			}
+			//Se envía solo lo necesario del detalle del anunio
+			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
+			detalleResponse.setId(anuncio.getId());
+			detalleResponse.setSku(anuncio.getSku());
+			detalleResponse.setTitulo(anuncio.getTitulo());
+			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
+			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			detalleResponse.setPrecio(anuncio.getPrecio());
+			detalleResponse.setDescripcion(anuncio.getDescripcion());
+			detalleResponse.setEstatus(anuncio.getEstatus());
+			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getEstatus()));
+			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
+			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
+			detalleResponse.setAtributos(atributosResponse);
+			detalleResponse.setImagenes(imagenesResponse);
+			return detalleResponse;	
+		} catch (SQLException e) {
+			throw new BusinessException();
+		}
+	}
 	
 	/**
 	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado
@@ -277,41 +343,51 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros)
 			throws BusinessException, SQLException {
-		AnuncioUtil au = new AnuncioUtil();
-		List<String> cadenasMapper = au.busquedaFiltros(filtros);
+		
+		List<String> cadenasMapper = AnuncioUtil.busquedaFiltros(filtros);
 		Map<String, String> mapSql = new HashMap<>();
 		mapSql.put("sql", cadenasMapper.get(1));
 		mapSql.put("total", cadenasMapper.get(0));
 
-			List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
-			List<BusquedaAdministracionResponse> totalAnuncios = anuncioMapper.obtieneCantidad(mapSql);
-			PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(totalAnuncios.size(), anuncios);
+		List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
+		List<BusquedaAdministracionResponse> totalAnuncios = anuncioMapper.obtieneCantidad(mapSql);
+		PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(totalAnuncios != null ? totalAnuncios.size() : 0, anuncios);
 			
-			for (BusquedaAdministracionResponse anuncio:anuncios) {
-				Categoria objetoCategoria = new Categoria();
-				if (anuncio.getEstatus().equals("1")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.EN_EDICION.getDesEstatus());
-				}
-				if (anuncio.getEstatus().equals("2")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.ACTIVO.getDesEstatus());
-				}
-				if (anuncio.getEstatus().equals("3")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.PUBLICADO.getDesEstatus());
-				}
-				if (anuncio.getEstatus().equals("4")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.VENCIDO.getDesEstatus());
-				}
-				if (anuncio.getEstatus().equals("5")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.ELIMINADO.getDesEstatus());
-				}
-				if (anuncio.getEstatus().equals("6")) {
-					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.CANCELADO.getDesEstatus());
-				}
+		for (BusquedaAdministracionResponse anuncio:anuncios) {
+			Categoria objetoCategoria = new Categoria();			
+			anuncio.setDescripcionEstatus(AnuncioEstatusEnum.getDescripcion(Short.valueOf(anuncio.getEstatus())));
+			objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
+			anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
+		}
+		return response;
+	}
 
-				objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
-				anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
-				
+	@Override
+	public BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException {
+		BusquedaResponse  response = new BusquedaResponse();
+		List<String> cadenasMapper  = AnuncioUtil.busqueda(filtros);
+		Map<String, String> mapSql = new HashMap<>();
+		mapSql.put("sql", cadenasMapper.get(1));
+		mapSql.put("total", cadenasMapper.get(0));
+		List<DetalleAnuncioResponse> anuncios = anuncioMapper.busquedaFiltro(mapSql);
+		List<DetalleAnuncioResponse> totalAnuncios = anuncioMapper.totalAnuncioFiltro(mapSql);
+		
+		for (DetalleAnuncioResponse anuncio : anuncios) {
+			anuncio.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(anuncio.getId());
+			List<AnuncioImagenResponse> imagenesResponse = null;
+			if(imagenes!=null && !imagenes.isEmpty()) {
+				imagenesResponse = new ArrayList<>();
+				for(AnuncioImagen img : imagenes) {
+					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
+				}
+				anuncio.setImagenes(imagenesResponse);
 			}
+		}
+
+		response.setListaAnuncios(anuncios);
+		response.setTotalAnuncios(totalAnuncios != null ? totalAnuncios.size() : 0);
+		
 		return response;
 	}
 

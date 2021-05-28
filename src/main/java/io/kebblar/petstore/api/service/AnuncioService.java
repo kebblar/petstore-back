@@ -16,20 +16,24 @@
  *              20210510_2339 Creación de ésta interfaz
  *              20210523_2025 Se  agrega  el  metodo  de  elimado 
  *              logico
+ *              20210525_1806 Se  agrega  el  metodo  de consulta 
+ *              detalle de un anuncio
+ *              20210528_1157 Se agrega el metodo BusquedaAdministracion
  *
  */
 package io.kebblar.petstore.api.service;
 
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
-
 import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.request.BusquedaRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
+import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**
@@ -78,6 +82,14 @@ public interface AnuncioService {
 	 */
 	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
 	
+	/**
+	 * Metodo que permite obtener el detalle de un anuncio con base al identificador
+	 * @param id Identificador del anuncio del cual se regresara el detalle
+	 * @return {@link DetalleAnuncioResponse} Clase que contiene el detalle de un anuncio
+	 * @throws BusinessException Excepcion lanzada en caso de error
+	 */
+	DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException;
+	
 
 	/** Metodo que permite el guardado de las imagenes de un anuncio
 	 * @param idAnuncio Identificador del anuncio con el cual se va a asociar la imagen
@@ -96,11 +108,19 @@ public interface AnuncioService {
 	 void eliminarImagen(String uuid) throws BusinessException;
 	 
 	 /**
-	 * Metodo que permite la busqueda de productos para sua dministracion (ABC)
+	 * Metodo que permite la busqueda de productos para busqueda de aministracion (ABC)
 	 * @param {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
 	 * @return {@link PaginacionAnunciosResponse} 
 	 * @throws BusinessException, SQLException
 	 */
 	 PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException;
 	 
+	 /**
+	 * Metodo que permite la busqueda de productos para busqueda de usuario final
+	 * @param {@link BusquedaRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
+	 * @return {@link BusquedaResponse} 
+	 * @throws BusinessException, SQLException
+	 */
+	 BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException;
+
 }

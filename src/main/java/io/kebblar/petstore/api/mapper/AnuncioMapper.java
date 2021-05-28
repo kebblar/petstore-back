@@ -16,6 +16,8 @@
  *              20210510_0105 Creación de ésta interfaz
  *              20210523_2034 Se  agrega  el  metodo  de  elimado 
  *              logico
+ *              20210524_1800 Se  agrega  el  metodo  de consulta 
+ *              de atributos del anunio
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -24,7 +26,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
@@ -32,11 +33,13 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
 import io.kebblar.petstore.api.model.domain.Categoria;
+import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
@@ -47,7 +50,6 @@ import io.kebblar.petstore.api.model.domain.Categoria;
  *
  * @see Anuncio
  */
-import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 @Repository
 public interface AnuncioMapper {
 
@@ -191,4 +193,45 @@ public interface AnuncioMapper {
      */
     @Select("${total}")
     List<BusquedaAdministracionResponse> obtieneCantidad(Map<String,String> map) throws SQLException;
+
+    /**
+     * Consulta el objeto de tipo 'AnuncioAtributo' con base al id del anuncio proporcionado
+     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'AnuncioAtributo' con la informacion de los atributos de un anuncio
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
+    @Results(id="AnuncioAtributoMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "idAtributo",   column = "id_atributo"),
+            @Result(property = "valor",   column = "valor")
+    })
+    @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
+	List<AnuncioAtributo> atributosPorAnuncio(int id);
+    
+    /**
+     * Consulta por filtros para la busqueda de usuario final
+     * @param map
+     * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
+     * @throws SQLException
+     */
+    @Results(id="FiltroMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "idCategoria",   column = "id_categoria"),
+            @Result(property = "sku",   column = "sku"),
+            @Result(property = "titulo",   column = "titulo"),
+            @Result(property = "descripcion",   column = "descripcion"),
+            @Result(property = "precio",   column = "precio")
+    })
+    @Select("${sql}")
+    List<DetalleAnuncioResponse> busquedaFiltro(Map<String,String> map) throws SQLException;
+    
+    /**
+     * Consulta por filtros para la busqueda de usuario final para obtener total de registros
+     * @param map
+     * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
+     * @throws SQLException
+     */
+    @Select("${total}")
+    List<DetalleAnuncioResponse> totalAnuncioFiltro(Map<String,String> map) throws SQLException;
+
 }

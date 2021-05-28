@@ -17,21 +17,24 @@
  *              20210520_2028 Se agrega el llamado a los servicios 
  *              para el registro
  *              20210523_2020 Se  agrega  el  metodo  de  eliminado 
+ *              20210524_1142 Creacion de endpoint para Busqueda 
+ *              Producto
+ *              20210523_2020 Se  agrega  el  metodo  de  eliminado 
  *              logico
+ *				20210523_2232 Se agrega  el rest del detalle del 
+ *				producto
  *              20210525_1532 Se agrega el llamado a los servicios 
  *              para  el  registro  y  eliminado  de  imagenes  de 
  *              anuncios
  *              20210524_1142 Creacion de endpoint para Busqueda 
  *              Producto
+ *              20210528_1142 Creacion de endpoint para Busqueda
+ *              de usuario final
+ *
  */
 package io.kebblar.petstore.api.rest;
 
-import java.awt.PageAttributes;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,9 +54,11 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
+import io.kebblar.petstore.api.model.request.BusquedaRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
-import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
+import io.kebblar.petstore.api.model.response.BusquedaResponse;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
 import io.swagger.annotations.Api;
@@ -137,6 +142,39 @@ public class AnuncioController {
     		@RequestParam int id ) throws BusinessException {
 		return anuncioService.eliminarAnuncio(id);
     }
+	
+	@ApiOperation(
+        value = "AnuncioController::Detalle",
+        notes = "Recibe un identificador del anuncio del cual se consultara el detalle.")
+    @GetMapping(
+            value = "/anuncios/{id}.json",
+            produces = "application/json; charset=utf-8")
+    public DetalleAnuncioResponse anuncios(
+    		@ApiParam(name="id", value="Identificador del anuncio del cual se consultara el detalle.")
+    		@PathVariable int id ) throws BusinessException {
+		return anuncioService.detalleAnuncio(id);
+    }
+
+	@ApiOperation(value = "AnuncioController::Registro", 
+			notes = "Recibe una imagen que sera asociada a un anuncio")
+	@PostMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+	public AnuncioImagenResponse guardarImagen(
+			@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
+			@RequestHeader("idAnuncio") int idAnuncio,
+			@ApiParam(name = "file", value = "Imagen a guardar.") 
+			@RequestParam("file") MultipartFile file) throws BusinessException {
+		return anuncioService.guardarImagen(idAnuncio, file);
+	}
+	
+	@ApiOperation(value = "AnuncioController::Eliminar", 
+			notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
+	@DeleteMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+	public void eliminarImagen(
+			@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a eliminar.") 
+			@RequestHeader("uuid") String uuid)
+			throws BusinessException {
+		 anuncioService.eliminarImagen(uuid);
+	}
 
 	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",
 	        notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para "
@@ -150,6 +188,15 @@ public class AnuncioController {
 		return anuncioService.busquedaAdministracion(filtros);
 	}
 	
-	
-	
+	@ApiOperation(value = "AnuncioController::BusquedaUsuarioFinal",
+	        notes = "Recibe un objeto <strong>BusquedaRequest</strong> que contiene la información para "
+	        		+ "realizar la busqueda de productos.")
+	@PostMapping(value = "anuncio/filter.json",
+            produces = "application/json; charset=utf-8")
+	public BusquedaResponse busquedaUsuarioFinal( 
+					@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
+					@RequestBody BusquedaRequest filtros) throws BusinessException, SQLException{
+		
+		return anuncioService.busqueda(filtros);
+	}
 }

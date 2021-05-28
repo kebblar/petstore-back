@@ -20,41 +20,42 @@ package io.kebblar.petstore.api.utils;
 
 /**
  * <p>Descripción:</p>
- * ENUM asociado a los estatud de la entidad 'anuncio'. 
+ * ENUM asociado a los atributos de la entidad 'anuncio'. 
  *
  * @author Maria Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public enum AnuncioEstatusEnum {
+public enum AnuncioAtributosEnum {
 
-	EN_EDICION ((short)1, "En edición"),
-	ACTIVO ((short)2, "Activo"),
-	PUBLICADO ((short)3, "Publicado"),
-	VENCIDO ((short)4, "Vencido"),
-	ELIMINADO ((short)5, "Eliminado"),
-	CANCELADO ((short)5, "Cancelado");
+	PESO (1, "PESO"),
+	RAZA (2, "RAZA"),
+	COLOR (3, "COLOR"),
+	TAMANIO (4, "TAMAÑO"),
+	EDAD (5, "EDAD"),
+	LONGEVIDAD (6, "LONGEVIDAD"),
+	TIPO_AGUA (7, "TIPO DE AGUA");
 	
+	private int idAtributo;
+	private String descAtributo;
 	
-	private short id;
-	private String desEstatus;
-	
-	AnuncioEstatusEnum(short id, String desEstatus) {
-		this.id = id;
-		this.desEstatus = desEstatus;
+	AnuncioAtributosEnum(int idAtributo, String descAtributo) {
+		this.idAtributo = idAtributo;
+		this.descAtributo = descAtributo;
 	}
 
-	public short getId() {
-		return id;
+	public int getIdAtributo() {
+		return idAtributo;
 	}
 
-	public String getDesEstatus() {
-		return desEstatus;
+	public String getDescAtributo() {
+		return descAtributo;
 	}
-	public static String getDescripcion(short idEnum){
-		for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
-			if(eu.getId() == idEnum){
-				return eu.getDesEstatus();
+
+	public static String getDescripcion(int idEnum){
+		for(AnuncioAtributosEnum eu:AnuncioAtributosEnum.values()){
+			if(eu.getIdAtributo() == idEnum){
+				return eu.getDescAtributo();
 			}
 		}
 		return "";
