@@ -52,10 +52,12 @@ import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.AtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+import io.kebblar.petstore.api.utils.AnuncioAtributosEnum;
 import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
+import io.kebblar.petstore.api.utils.AnuncioValAtributosEnum;
 
 /**
  * <p>Implementación de la interfaz de servicios para 'Anuncio'.
@@ -262,7 +264,12 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(atributos!=null && !atributos.isEmpty()) {
 				atributosResponse = new ArrayList<>();
 				for(AnuncioAtributo atr : atributos) {
-					atributosResponse.add(new AtributoResponse(atr.getIdAtributo(), atr.getValor()));
+					AtributoResponse atrRes=new AtributoResponse();
+					atrRes.setId(atr.getIdAtributo());
+					atrRes.setDescAtributo(AnuncioAtributosEnum.getDescripcion(atr.getIdAtributo()));
+					atrRes.setValor(atr.getValor());
+					atrRes.setDescValor(AnuncioValAtributosEnum.getDescValor(atr.getIdAtributo(), atr.getValor()));
+					atributosResponse.add(atrRes);
 				}
 			}
 			//Se consulta la informacion de las imagenes del anuncio
