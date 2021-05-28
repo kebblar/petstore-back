@@ -19,7 +19,9 @@
 package io.kebblar.petstore.api.utils;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import com.ibm.icu.text.SimpleDateFormat;
@@ -118,8 +120,9 @@ public class AnuncioUtil {
 	 * @param filtros
 	 * @return String que contiene toda la cadena para la sentencia SQL
 	 */
-	public static String busquedaFiltros(BusquedaAdministracionRequest filtros) {
+	public static List<String> busquedaFiltros(BusquedaAdministracionRequest filtros) {
 		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id IS NOT NULL");
+		List<String> response = new ArrayList<>();
 		int getPageSize = filtros.getTamPaginas();
 		int getPageNumber = filtros.getNumPaginas();
 		
@@ -143,11 +146,10 @@ public class AnuncioUtil {
 		if (filtros.getFechaInicioVigencia() != null) {
 			consultaBase.append(" AND fecha_inicio_vigencia = ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
 		}
-		
+		response.add(consultaBase.toString());
 		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
-		
-		
-		return consultaBase.toString();
+		response.add(consultaBase.toString());
+		return response;
 		
 	}
 

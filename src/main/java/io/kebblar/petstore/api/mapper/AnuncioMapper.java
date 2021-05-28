@@ -182,4 +182,13 @@ public interface AnuncioMapper {
     
     @Select("SELECT id, categoria FROM categoria WHERE id = #{idCategoria} ")
     Categoria obtieneCategoria(int idCategoria) throws SQLException;
+    
+    /**
+     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara
+     * @param map
+     * @return Lista de BusquedaAdministracionResponse
+     * @throws SQLException
+     */
+    @Select("${total}")
+    List<BusquedaAdministracionResponse> obtieneCantidad(Map<String,String> map) throws SQLException;
 }

@@ -278,12 +278,14 @@ public class AnuncioServiceImpl implements AnuncioService{
 	public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros)
 			throws BusinessException, SQLException {
 		AnuncioUtil au = new AnuncioUtil();
-		String cadenaMapper = au.busquedaFiltros(filtros);
+		List<String> cadenasMapper = au.busquedaFiltros(filtros);
 		Map<String, String> mapSql = new HashMap<>();
-		mapSql.put("sql", cadenaMapper);
+		mapSql.put("sql", cadenasMapper.get(1));
+		mapSql.put("total", cadenasMapper.get(0));
 
 			List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
-			PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(anuncios.size(), anuncios);
+			List<BusquedaAdministracionResponse> totalAnuncios = anuncioMapper.obtieneCantidad(mapSql);
+			PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(totalAnuncios.size(), anuncios);
 			
 			for (BusquedaAdministracionResponse anuncio:anuncios) {
 				Categoria objetoCategoria = new Categoria();
