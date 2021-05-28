@@ -1,6 +1,7 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -11,10 +12,10 @@ public class BusquedaAdministracionResponse {
 	private int id;
 	private long sku;
 	private String titulo;
-	private LocalDate fechaInicioVigencia;
-	private LocalDate fechaFinVigencia;
+	private Date fechaInicioVigencia;
+	private Date fechaFinVigencia;
 	private String estatus;
-	private int idCategoria;
+	private Integer idCategoria;
 	private String descripcion;
 	private int idEstatus;
 	private String descripcionEstatus;
@@ -37,16 +38,16 @@ public class BusquedaAdministracionResponse {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public LocalDate getFechaInicioVigencia() {
+	public Date getFechaInicioVigencia() {
 		return fechaInicioVigencia;
 	}
-	public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
+	public void setFechaInicioVigencia(Date fechaInicioVigencia) {
 		this.fechaInicioVigencia = fechaInicioVigencia;
 	}
-	public LocalDate getFechaFinVigencia() {
+	public Date getFechaFinVigencia() {
 		return fechaFinVigencia;
 	}
-	public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
+	public void setFechaFinVigencia(Date fechaFinVigencia) {
 		this.fechaFinVigencia = fechaFinVigencia;
 	}
 	public String getEstatus() {
@@ -55,10 +56,10 @@ public class BusquedaAdministracionResponse {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-	public int getIdCategoria() {
+	public Integer getIdCategoria() {
 		return idCategoria;
 	}
-	public void setIdCategoria(int idCategoria) {
+	public void setIdCategoria(Integer idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 	public String getDescripcion() {
@@ -96,7 +97,7 @@ public class BusquedaAdministracionResponse {
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
 		result = prime * result + id;
-		result = prime * result + idCategoria;
+		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
 		result = prime * result + idEstatus;
 		result = prime * result + (int) (sku ^ (sku >>> 32));
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
@@ -143,7 +144,10 @@ public class BusquedaAdministracionResponse {
 			return false;
 		if (id != other.id)
 			return false;
-		if (idCategoria != other.idCategoria)
+		if (idCategoria == null) {
+			if (other.idCategoria != null)
+				return false;
+		} else if (!idCategoria.equals(other.idCategoria))
 			return false;
 		if (idEstatus != other.idEstatus)
 			return false;
@@ -164,8 +168,8 @@ public class BusquedaAdministracionResponse {
 				+ ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
 				+ descripcionCategoria + "]";
 	}
-	public BusquedaAdministracionResponse(int id, long sku, String titulo, LocalDate fechaInicioVigencia,
-			LocalDate fechaFinVigencia, String estatus, int idCategoria, String descripcion, int idEstatus,
+	public BusquedaAdministracionResponse(int id, long sku, String titulo, Date fechaInicioVigencia,
+			Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
 			String descripcionEstatus, String descripcionCategoria) {
 		super();
 		this.id = id;
@@ -186,7 +190,5 @@ public class BusquedaAdministracionResponse {
 	}
 	
 	
-	
-
 	
 }

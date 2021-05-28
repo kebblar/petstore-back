@@ -42,6 +42,7 @@ import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
 import io.kebblar.petstore.api.model.domain.AnuncioImagen;
+import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
@@ -277,14 +278,38 @@ public class AnuncioServiceImpl implements AnuncioService{
 	public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros)
 			throws BusinessException, SQLException {
 		AnuncioUtil au = new AnuncioUtil();
-		
 		String cadenaMapper = au.busquedaFiltros(filtros);
 		Map<String, String> mapSql = new HashMap<>();
 		mapSql.put("sql", cadenaMapper);
 
 			List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
 			PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(anuncios.size(), anuncios);
+			
+			for (BusquedaAdministracionResponse anuncio:anuncios) {
+				Categoria objetoCategoria = new Categoria();
+				if (anuncio.getEstatus().equals("1")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.EN_EDICION.getDesEstatus());
+				}
+				if (anuncio.getEstatus().equals("2")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.ACTIVO.getDesEstatus());
+				}
+				if (anuncio.getEstatus().equals("3")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.PUBLICADO.getDesEstatus());
+				}
+				if (anuncio.getEstatus().equals("4")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.VENCIDO.getDesEstatus());
+				}
+				if (anuncio.getEstatus().equals("5")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.ELIMINADO.getDesEstatus());
+				}
+				if (anuncio.getEstatus().equals("6")) {
+					anuncio.setDescripcionEstatus(AnuncioEstatusEnum.CANCELADO.getDesEstatus());
+				}
 
+				objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
+				anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
+				
+			}
 		return response;
 	}
 

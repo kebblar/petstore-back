@@ -32,9 +32,11 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
+import io.kebblar.petstore.api.model.domain.Categoria;
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
@@ -158,6 +160,26 @@ public interface AnuncioMapper {
      * @return Lista de BusquedaAdministracionResponse
      * @throws SQLException
      */
+    @Results(id="BusquedaMap", value = {
+             @Result(property = "id",   column = "id"),
+             @Result(property = "sku",   column = "sku"),
+             @Result(property = "titulo",   column = "titulo"),
+             @Result(property = "fechaInicioVigencia",   column = "fecha_inicio_vigencia"),
+             @Result(property = "fechaFinVigencia",   column = "fecha_fin_vigencia"),
+             @Result(property = "estatus",   column = "estatus"),
+             @Result(property = "idCategoria",   column = "id_categoria"),
+             @Result(property = "descripcion",   column = "descripcion")
+     })
     @Select("${sql}")
     List<BusquedaAdministracionResponse> busquedaAnuncio(Map<String,String> map) throws SQLException;
+    
+    /**
+     * Obtiene la categoria mediante el id
+     * @param idCategoria
+     * @return Modelo Categoria
+     * @throws SQLException
+     */
+    
+    @Select("SELECT id, categoria FROM categoria WHERE id = #{idCategoria} ")
+    Categoria obtieneCategoria(int idCategoria) throws SQLException;
 }
