@@ -142,13 +142,13 @@ public class AnuncioUtil {
 			consultaBase.append(" AND estatus = ").append(filtros.getEstatus());
 		}
 		if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
-			consultaBase.append(" AND titulo = ").append("'").append(filtros.getTitulo()).append("'");
+			consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
 		}
 		if (filtros.getFechaFinVigencia() != null) {
-			consultaBase.append(" AND fecha_fin_vigencia = ").append("'").append(filtros.getFechaFinVigencia()).append("'");
+			consultaBase.append(" AND fecha_fin_vigencia <= ").append("'").append(filtros.getFechaFinVigencia()).append("'");
 		}
 		if (filtros.getFechaInicioVigencia() != null) {
-			consultaBase.append(" AND fecha_inicio_vigencia = ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
+			consultaBase.append(" AND fecha_inicio_vigencia >= ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
 		}
 		response.add(consultaBase.toString());
 		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
