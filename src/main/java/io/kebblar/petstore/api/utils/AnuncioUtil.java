@@ -176,10 +176,11 @@ public class AnuncioUtil {
 			consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
 		}
 		if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
-
+			consultaBase.append(" AND id IN (");
 			int i=1;
 	        StringBuilder sb = new StringBuilder();
 	        int size = filtros.getAtributos().size();
+	        
 			for (AtributoRequest atributo : filtros.getAtributos()) {
 				if (atributo.getId() != 0 && atributo.getValor() != 0) {
 					sb.append("(");
@@ -188,10 +189,11 @@ public class AnuncioUtil {
 		            sb.append((i++<size)?" INTERSECT ":"");
 				}
 			}
-			if (sb != null && sb.length() > 0) {
-				consultaBase.append(" AND id IN (").append(sb).append(")");
-			}
+			
+			consultaBase.append(sb).append(")");
+			
 		}
+
 		
 		response.add(consultaBase.toString());
 		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
