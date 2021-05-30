@@ -167,7 +167,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
 			if(imagenes==null || imagenes.isEmpty()) {
-				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro");
+				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro", 4092,"CVE_4092",HttpStatus.CONFLICT);
 			}
 			response.setId(anuncio.getId());
 			response.setSku(anuncio.getSku());
