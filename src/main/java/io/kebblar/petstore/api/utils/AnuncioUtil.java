@@ -167,7 +167,7 @@ public class AnuncioUtil {
 		int getPageSize = filtros.getTamPaginas();
 		int getPageNumber = filtros.getNumPaginas();
 		
-		String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
+		String startRow = getPageNumber > 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageSize);
 		String pageSize = Integer.toString(getPageSize);
 		if (filtros.getIdCategoria() != 0) {
 			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
@@ -176,11 +176,10 @@ public class AnuncioUtil {
 			consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
 		}
 		if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
-			consultaBase.append(" AND id IN (");
+
 			int i=1;
 	        StringBuilder sb = new StringBuilder();
 	        int size = filtros.getAtributos().size();
-	        
 			for (AtributoRequest atributo : filtros.getAtributos()) {
 				if (atributo.getId() != 0 && atributo.getValor() != 0) {
 					sb.append("(");
@@ -189,11 +188,10 @@ public class AnuncioUtil {
 		            sb.append((i++<size)?" INTERSECT ":"");
 				}
 			}
-			
-			consultaBase.append(sb).append(")");
-			
+			if (!sb.isEmpty()) {
+				consultaBase.append(" AND id IN (").append(sb).append(")");
+			}
 		}
-
 		
 		response.add(consultaBase.toString());
 		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);

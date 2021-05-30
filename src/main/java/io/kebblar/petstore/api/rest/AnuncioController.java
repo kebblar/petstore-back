@@ -195,7 +195,7 @@ public class AnuncioController {
             produces = "application/json; charset=utf-8")
 	public BusquedaResponse busquedaUsuarioFinal( 
 					@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
-					@RequestBody BusquedaRequest filtros) throws BusinessException, SQLException{
+					@RequestBody @Valid BusquedaRequest filtros) throws BusinessException, SQLException{
 		
 		return anuncioService.busqueda(filtros);
 	}
