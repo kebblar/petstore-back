@@ -182,10 +182,12 @@ public class AnuncioUtil {
 	        int size = filtros.getAtributos().size();
 	        
 			for (AtributoRequest atributo : filtros.getAtributos()) {
-	            sb.append("(");
-	            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
-	            sb.append(")");
-	            sb.append((i++<size)?" INTERSECT ":"");
+				if (atributo.getId() != 0 && atributo.getValor() != 0) {
+					sb.append("(");
+		            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
+		            sb.append(")");
+		            sb.append((i++<size)?" INTERSECT ":"");
+				}
 			}
 			
 			consultaBase.append(sb).append(")");
