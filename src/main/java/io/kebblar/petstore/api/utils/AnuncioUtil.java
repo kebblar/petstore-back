@@ -188,7 +188,7 @@ public class AnuncioUtil {
 		            sb.append((i++<size)?" INTERSECT ":"");
 				}
 			}
-			if (!sb.isEmpty()) {
+			if (sb != null && sb.length() > 0) {
 				consultaBase.append(" AND id IN (").append(sb).append(")");
 			}
 		}
