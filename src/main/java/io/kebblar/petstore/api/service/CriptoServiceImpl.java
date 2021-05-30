@@ -68,6 +68,7 @@ public class CriptoServiceImpl implements CriptoService {
                 logger.info(blockChecker.toString());
                 if(blockChecker.getTotalReceived()!=0) {
                     logger.info("Nuevo deposito encontrado de la direccion: " + wallet);
+                    if(blockChecker.getBalance() < transaction.getMonto()) throw new BitcoinTransactionException("El monto depositado no es correcto");
                     DatosOrden datos = setNuevaOrden(transaction);
                     try {
                         ordenCompraService.procesarOrdenCompra(datos); //La compra comienza a procesarse cuando el pago es acreditado
