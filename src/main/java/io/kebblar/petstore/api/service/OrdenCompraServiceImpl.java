@@ -117,20 +117,19 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 	@Override
 	public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
 		try {
+			CreatePDF crearPdf = new CreatePDF();
 			Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
 			
 			UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
 			
 			String dest= environment.getProperty( "app.destination-folder" );
+			String url= environment.getProperty( "app.destination.url" );
 			
-			String pdf= CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest);
+			String pdf= crearPdf.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url);
 			
 			String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
 			ordenCompra.setFecha(fecha);
-			
-			String url= environment.getProperty( "app.destination.url" );
-			
 			ordenCompra.setRecibo(url+pdf);
 			
 			ordenCompraMapper.insert(ordenCompra);

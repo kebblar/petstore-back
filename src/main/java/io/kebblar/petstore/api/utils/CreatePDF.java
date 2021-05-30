@@ -25,11 +25,15 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itextpdf.barcodes.Barcode128;
+import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.element.Cell;
@@ -43,6 +47,7 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.support.QRService;
 
 /**
  * <p>
@@ -62,13 +67,14 @@ public class CreatePDF {
 
 	private static final Logger logger = LoggerFactory.getLogger(CreatePDF.class);
 	
-	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest) throws ProcessPDFException {
+	
+	public  String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest, String url) throws ProcessPDFException {
 		String pdf="";
 		try {
-			//String dest = "upload/";
-			String IMAGE = "src/main/resources/Factura.png";
-			 pdf= getNamePDF(usuarioDetalle.getId());
 			
+			String IMAGE = "src/main/resources/Factura.png";
+			String nombrePdf= getNamePDF(usuarioDetalle.getId());
+			pdf= nombrePdf + ".pdf";
 			PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
 			PageSize pageSize = PageSize.A4.rotate();
 			Document doc = new Document(pdfDoc, pageSize);
@@ -134,7 +140,13 @@ public class CreatePDF {
 			tableTotal.addCell(createTextCell(String.valueOf(ordenCompra.getPrecio())));
 
 			doc.add(tableTotal);
+			
+			generateBarcode(pdfDoc,nombrePdf,canvas);
+			
+			generateBarcodeQR(pdfDoc,url+pdf,canvas);
+			
 			doc.close();
+			pdfDoc.close();
 
 			return pdf;
 		} catch (Exception e) {
@@ -143,7 +155,7 @@ public class CreatePDF {
 		}
 	}
 
-	private static Cell createTextCell(int col1, int col2, String text, TextAlignment alight) {
+	private  Cell createTextCell(int col1, int col2, String text, TextAlignment alight) {
 		Cell cell = new Cell(col1, col2);
 		cell.setBorder(Border.NO_BORDER);
 		Paragraph p = new Paragraph(text);
@@ -152,21 +164,21 @@ public class CreatePDF {
 		return cell;
 	}
 
-	private static Cell createTextCell(int col1, int col2, String text) {
+	private  Cell createTextCell(int col1, int col2, String text) {
 		Cell cell = new Cell(col1, col2);
 		cell.setBorder(Border.NO_BORDER);
 		cell.add(new Paragraph(text));
 		return cell;
 	}
 
-	private static Cell createTextCell(String text) {
+	private  Cell createTextCell(String text) {
 		Cell cell = new Cell();
 		cell.setBorder(Border.NO_BORDER);
 		cell.add(new Paragraph(text));
 		return cell;
 	}
 
-	private static Cell createTextCell(int height, String text) {
+	private  Cell createTextCell(int height, String text) {
 		Cell cell = new Cell();
 		cell.setBorder(Border.NO_BORDER);
 		cell.setMinHeight(height);
@@ -175,7 +187,7 @@ public class CreatePDF {
 		return cell;
 	}
 
-	private static Cell createTextCellBold(String text) {
+	private  Cell createTextCellBold(String text) {
 		Cell cell = new Cell();
 		cell.setBorder(Border.NO_BORDER);
 		Paragraph p = new Paragraph(text);
@@ -185,22 +197,60 @@ public class CreatePDF {
 	}
 	
 	
-	private static String getNamePDF(int id) {
-		String nombre= String.valueOf(id)+UUID.randomUUID().toString()+".pdf";
+	private  String getNamePDF(int id) {
+		String nombre= String.valueOf(id)+UUID.randomUUID().toString();
 		//String uid = UUID.randomUUID().toString();
-	     logger.error("Nombre generado: " + nombre);
 	    return nombre;
 	}
 	
-	private static String getFecha(){
+	private  String getFecha(){
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		 LocalDateTime now = LocalDateTime.now();  
 		System.out.println(dtf.format(now)); 
 		return dtf.format(now);
 	}
 	
+	 
+    private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
+		Barcode128 code128 = new Barcode128(pdfDoc);
+
+		code128.setCode(code);
+		code128.setCodeType(Barcode128.CODE128);
+		PdfFormXObject xObject = code128.createFormXObject(ColorConstants.BLACK, ColorConstants.BLACK, pdfDoc);
+
+		float x = 80;
+		float y = 50;
+		float width = xObject.getWidth();
+		float height = xObject.getHeight();
+
+		canvas.saveState();
+		canvas.setFillColor(ColorConstants.LIGHT_GRAY);
+		canvas.rectangle(x, y, width, height);
+		canvas.fill();
+		canvas.restoreState();
+		canvas.addXObjectAt(xObject, 80, 50);
+
+	}
 	
-	private static String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
+    private void generateBarcodeQR(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
+		
+		BarcodeQRCode qrCode = new BarcodeQRCode(code);
+		PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
+
+		float xqr = 30;
+		float yqr = 50;
+		float widthqr = barcodeObject.getWidth();
+		float heightqr = barcodeObject.getHeight();
+		canvas.saveState();
+		canvas.setFillColor(ColorConstants.WHITE);
+		canvas.rectangle(xqr, yqr, widthqr, heightqr);
+		canvas.fill();
+		canvas.restoreState();
+		canvas.addXObjectAt(barcodeObject,30, 50);
+	}
+	
+	
+	private  String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
 		return usuarioDetalle.getNombre()+ " "+usuarioDetalle.getApellidoPaterno()+ " " +usuarioDetalle.getApellidoMaterno();
 	}
 
