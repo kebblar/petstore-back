@@ -167,7 +167,7 @@ public class AnuncioUtil {
 		int getPageSize = filtros.getTamPaginas();
 		int getPageNumber = filtros.getNumPaginas();
 		
-		String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageSize);
+		String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
 		String pageSize = Integer.toString(getPageSize);
 		if (filtros.getIdCategoria() != 0) {
 			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
