@@ -34,9 +34,6 @@ package io.kebblar.petstore.api.model.exceptions;
  */
 public class ProcessPDFException extends BusinessException {
 
-	 /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ProcessPDFException(String shortMessage, String technicalDescription) {
