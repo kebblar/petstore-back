@@ -37,7 +37,7 @@ public class BitcoinTransactionException extends BusinessException {
         super(msg,
               "Error al procesar bitcoin como metodo de pago",
               2009,
-              "CVE-600",
+              "CVE-2009",
               HttpStatus.BAD_REQUEST);
     }
 }

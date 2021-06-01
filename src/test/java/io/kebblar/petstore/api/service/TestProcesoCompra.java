@@ -3,7 +3,6 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.mapper.DireccionMapper;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
@@ -14,25 +13,27 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestProcesoCompra {
+    private static final Logger logger = LoggerFactory.getLogger(TestProcesoCompra.class);
 
     @Mock
     private DireccionService direccionService;
 
     @Mock
     private EstadoService estadoService;
-
-    @Mock
-    private MetodoPagoService metodoPagoService;
 
     @Mock
     private MunicipioService municipioService;
@@ -65,7 +66,7 @@ public class TestProcesoCompra {
         when(direccionMapper.insert(Mockito.any())).thenReturn(1);
         when(direccionMapper.insertUsuarioDireccion(Mockito.any())).thenReturn(1);
         when(estadoMapper.getByPais(1)).thenReturn(edos);
-        when(municipioMapper.getByPais(1)).thenReturn(muns);
+        when(municipioMapper.getByEstado(1)).thenReturn(muns);
 
         edos.add(new Estado(1,2,"MiEdo"));
         muns.add(new Municipio(1,2, "Mun 2"));
@@ -75,42 +76,52 @@ public class TestProcesoCompra {
     public void direccionesConNombreTest() {
         List<DireccionConNombre> dir;
         //Verifica que la lista recuperada por el metodo es la misma que fue creada
-        try{
+        try {
             dir = direccionService.getDireccionesNombre(1);
             assertEquals(dir,lista);
-        }catch(Exception e) { }
+        } catch(Exception e) {
+            logger.info("No existe el usuario 1");
+        }
         //Lanza excepcion si no existe el usuario
-        try{
+        try {
             dir = direccionService.getDireccionesNombre(3);
-        }catch (Exception e){
+        } catch (Exception e) {
+            logger.info("No existe el usuario 3");
             assertTrue(true);
       }
     }
 
     @Test
     public void agregaDireccionTest(){
-        try{
+        try {
             assertTrue(direccionService.agregaDireccion(nuevaDireccion)==1);
-        }catch(Exception e){ }
-        try{
+        } catch(Exception e){
+            logger.info("No se puede agregar la dirección");
+        }
+        try {
             int i = direccionService.agregaDireccion(null);
-        }catch (Exception e){
+        } catch (Exception e) {
+            logger.info("No puede agregarse un nulo como dirección");
             assertTrue(true);
         }
     }
 
     @Test
     public void getByPaisTest() {
-        try{
+        try {
             assertEquals(edos, estadoService.getByPais(1));
-        }catch (Exception e){ }
+        } catch (Exception e) {
+            logger.info("Ocurre problema con el id del país buscado");
+        }
     }
 
     @Test
     public void getByEstadoTest() {
-        try{
+        try {
             assertEquals(muns, municipioService.getByEstado(1));
-        }catch (Exception e){ }
+        } catch (Exception e) {
+            logger.info("Problema con el estado");
+        }
     }
 
 }
