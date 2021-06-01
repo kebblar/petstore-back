@@ -332,6 +332,37 @@ INSERT INTO `paqueteria` VALUES (1,'Aeroméxico Cargo','Entrega que va de unas h
 UNLOCK TABLES;
 
 --
+-- Table structure para2 table `preregistro`
+--
+
+DROP TABLE IF EXISTS `preregistro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `preregistro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nick` varchar(32) NOT NULL,
+  `correo` varchar(92) NOT NULL,
+  `clave_hash` varchar(128) NOT NULL,
+  `telefono` varchar(32) NOT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `random_string` varchar(32) NOT NULL,
+  `instante_registro` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_preregistro_random_string` (`random_string`),
+  UNIQUE KEY `idx_preregistro_correo` (`correo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `preregistro`
+--
+
+LOCK TABLES `preregistro` WRITE;
+/*!40000 ALTER TABLE `preregistro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `preregistro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `rol`
 --
 
@@ -527,4 +558,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-17 22:46:48
+-- Dump completed on 2021-05-18 22:24:23

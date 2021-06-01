@@ -23,6 +23,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
@@ -62,7 +63,7 @@ public interface RegistroMapper {
     Preregistro getByRandomString(String randomString) throws SQLException;
 
     @Insert("INSERT into usuario_rol(id_usuario, id_rol) values(#{idUsuario}, #{idRol})")
-    int asociateRol(int idUsuario, int idRol) throws SQLException;
+    Integer asociateRol(int idUsuario, int idRol) throws SQLException;
     
     /**
      * Inserta un objeto de tipo 'usuario_detalle' con base en la información dada por el objeto de tipo 'usuarioDetalle'.
@@ -72,7 +73,7 @@ public interface RegistroMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, telefono, calle_y_numero, fecha_nacimiento, id_estado, id_municipio) VALUES(#{idUsuario}, #{nombre}, #{telefono},#{calleNumero}, #{fechaNacimiento}, #{idEstado}, #{idMunicipio} )")
-    int insertUsuarioDetalles(UsuarioDetalle usuarioDetalle) throws SQLException;
+    Integer insertUsuarioDetalles(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
      * Actualiza un objeto de tipo 'usuario_detalle' con base en la información dada por el objeto de tipo 'usuarioDetalle'.
@@ -82,15 +83,16 @@ public interface RegistroMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE usuario_detalle SET nombre=#{nombre}, telefono=#{telefono}, calle_y_numero=#{calleNumero}, fecha_nacimiento=#{fechaNacimiento}, id_estado=#{idEstado}, id_municipio=#{idMunicipio} WHERE id_usuario=#{idUsuario}")
-    int updateUsuarioDetalles(UsuarioDetalle usuarioDetalle) throws SQLException;
+    Integer updateUsuarioDetalles(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     @Insert("INSERT INTO preregistro(nick, clave_hash, correo, telefono, fecha_nacimiento, random_string, instante_registro) VALUES(#{nick}, #{claveHash}, #{correo}, #{telefono}, #{fechaNacimiento}, #{randomString}, #{instanteRegistro} ) ON DUPLICATE KEY UPDATE nick=#{nick}, telefono=#{telefono}, fecha_nacimiento=#{fechaNacimiento}, clave_hash=#{claveHash}, random_string=#{randomString}, instante_registro=#{instanteRegistro}")
-    int insertRegistro(Preregistro preregistro) throws SQLException;
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
+    Integer insertRegistro(Preregistro preregistro) throws SQLException;
 
     @Update("UPDATE preregistro SET nick = #{nick}, telefono = #{telefono}, fecha_nacimiento = #{fechaNacimiento}, clave_hash = #{claveHash}, random_string = #{randomString}, instante_registro = #{instanteRegistro} WHERE correo = #{correo} ")
-    int update(Preregistro registro) throws SQLException;
+    Integer update(Preregistro registro) throws SQLException;
 
-    @Select("DELETE FROM registro WHERE random_string = #{randomString} ") 
-    int deleteByRandomString(String randomString) throws SQLException;
+    @Select("DELETE FROM preregistro WHERE random_string = #{randomString} ") 
+    Integer deleteByRandomString(String randomString) throws SQLException;
 
 }
