@@ -35,10 +35,6 @@ import java.util.Objects;
  * @since 1.0-SNAPSHOT
  */
 public class DatosOrden implements Serializable {
-
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -6032711964621903590L;
 	/**
 	 * Atributos de la clase
@@ -215,17 +211,13 @@ public class DatosOrden implements Serializable {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
-
-
+	
 	/**
 	 * @return the idMetodoPago
 	 */
 	public int getIdMetodoPago() {
 		return idMetodoPago;
 	}
-
-
 
 	/**
 	 * @param idMetodoPago the idMetodoPago to set
@@ -234,16 +226,12 @@ public class DatosOrden implements Serializable {
 		this.idMetodoPago = idMetodoPago;
 	}
 
-
-
 	/**
 	 * @return the recibo
 	 */
 	public String getRecibo() {
 		return recibo;
 	}
-
-
 
 	/**
 	 * @param recibo the recibo to set
@@ -252,16 +240,12 @@ public class DatosOrden implements Serializable {
 		this.recibo = recibo;
 	}
 
-
-
 	/**
 	 * @return the cveOrdenCompra
 	 */
 	public String getCveOrdenCompra() {
 		return cveOrdenCompra;
 	}
-
-
 
 	/**
 	 * @param cveOrdenCompra the cveOrdenCompra to set
@@ -270,8 +254,6 @@ public class DatosOrden implements Serializable {
 		this.cveOrdenCompra = cveOrdenCompra;
 	}
 
-
-
 	/**
 	 * @return the id
 	 */
@@ -279,15 +261,12 @@ public class DatosOrden implements Serializable {
 		return id;
 	}
 
-
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {

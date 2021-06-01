@@ -47,7 +47,6 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
-import io.kebblar.petstore.api.support.QRService;
 
 /**
  * <p>
@@ -67,11 +66,9 @@ public class CreatePDF {
 
 	private static final Logger logger = LoggerFactory.getLogger(CreatePDF.class);
 	
-	
 	public  String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest, String url) throws ProcessPDFException {
 		String pdf="";
 		try {
-			
 			String IMAGE = "src/main/resources/Factura.png";
 			String nombrePdf= getNamePDF(usuarioDetalle.getId());
 			pdf= nombrePdf + ".pdf";
@@ -92,9 +89,7 @@ public class CreatePDF {
 			tablePetstore.addCell(createTextCell(1, 3, "5555555555"));
 			tablePetstore.addCell(createTextCell(1, 4, newLine));
 
-			
 			doc.add(tablePetstore);
-
 
 			Table table3 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
 			table3.addCell(createTextCell(1,4,newLine));
@@ -196,10 +191,8 @@ public class CreatePDF {
 		return cell;
 	}
 	
-	
 	private  String getNamePDF(int id) {
 		String nombre= String.valueOf(id)+UUID.randomUUID().toString();
-		//String uid = UUID.randomUUID().toString();
 	    return nombre;
 	}
 	
@@ -210,7 +203,6 @@ public class CreatePDF {
 		return dtf.format(now);
 	}
 	
-	 
     private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
 		Barcode128 code128 = new Barcode128(pdfDoc);
 
@@ -248,7 +240,6 @@ public class CreatePDF {
 		canvas.restoreState();
 		canvas.addXObjectAt(barcodeObject,30, 50);
 	}
-	
 	
 	private  String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
 		return usuarioDetalle.getNombre()+ " "+usuarioDetalle.getApellidoPaterno()+ " " +usuarioDetalle.getApellidoMaterno();

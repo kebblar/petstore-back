@@ -21,8 +21,6 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
-import java.util.Date;
-
 /**
  * Implementacion del POJO de la entidad de {@link HistorialCompras}.
  * 
@@ -31,15 +29,16 @@ import java.util.Date;
  * @since   1.0-SNAPSHOT
  */
 public class HistorialCompras {
+    /**
+     * Atributos de la clase
+     */
 	private int id;
-	
 	private String fechaHoraCompra;
 	private int estadoEnvio;
 	private int idUsuario;
 	private String nombreAnuncio;
 	private String metodoPago;
 	private String correo;
-	
 	private String urlPdf;
 	private String urlImagen;
 	
@@ -47,10 +46,6 @@ public class HistorialCompras {
      * Constructor por default.
      */
 	public HistorialCompras() {}
-
-
-
-
 
 	public HistorialCompras(int id, String fechaHoraCompra, int estadoEnvio, int idUsuario, String nombreAnuncio,
 			String metodoPago, String correo, String urlPdf, String urlImagen) {
@@ -65,10 +60,6 @@ public class HistorialCompras {
 		this.urlPdf = urlPdf;
 		this.urlImagen = urlImagen;
 	}
-
-
-
-
 
 	public String getFechaHoraCompra() {
 		return fechaHoraCompra;
@@ -95,20 +86,12 @@ public class HistorialCompras {
 		this.urlPdf = urlPdf;
 	}
 
-
-
-
-
 	@Override
 	public String toString() {
 		return "HistorialCompras [id=" + id + ", fechaHoraCompra=" + fechaHoraCompra + ", estadoEnvio=" + estadoEnvio
 				+ ", idUsuario=" + idUsuario + ", nombreAnuncio=" + nombreAnuncio + ", metodoPago=" + metodoPago
 				+ ", correo=" + correo + ", urlPdf=" + urlPdf + ", urlImagen=" + urlImagen + "]";
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -125,10 +108,6 @@ public class HistorialCompras {
 		result = prime * result + ((urlPdf == null) ? 0 : urlPdf.hashCode());
 		return result;
 	}
-
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -178,69 +157,44 @@ public class HistorialCompras {
 		return true;
 	}
 
-
-
-
-
 	public String getNombreAnuncio() {
 		return nombreAnuncio;
 	}
-
-
 
 	public void setNombreAnuncio(String nombreAnuncio) {
 		this.nombreAnuncio = nombreAnuncio;
 	}
 
-
-
 	public String getMetodoPago() {
 		return metodoPago;
 	}
-
-
 
 	public void setMetodoPago(String metodoPago) {
 		this.metodoPago = metodoPago;
 	}
 
-
-
 	public String getCorreo() {
 		return correo;
 	}
-
-
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 
-
-
 	public String getUrlImagen() {
 		return urlImagen;
 	}
-
-
 
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
 
-
-
-
 	public int getEstadoEnvio() {
 		return estadoEnvio;
 	}
 
-
-
-
 	public void setEstadoEnvio(int estadoEnvio) {
 		this.estadoEnvio = estadoEnvio;
 	}
-
 	
 }

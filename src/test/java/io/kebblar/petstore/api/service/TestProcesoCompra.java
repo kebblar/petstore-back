@@ -3,7 +3,6 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.mapper.DireccionMapper;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
@@ -91,10 +90,10 @@ public class TestProcesoCompra {
     public void agregaDireccionTest(){
         try{
             assertTrue(direccionService.agregaDireccion(nuevaDireccion)==1);
-        }catch(Exception e){ }
+        }catch(Exception e) { }
         try{
             int i = direccionService.agregaDireccion(null);
-        }catch (Exception e){
+        }catch (Exception e) {
             assertTrue(true);
         }
     }
@@ -103,14 +102,14 @@ public class TestProcesoCompra {
     public void getByPaisTest() {
         try{
             assertEquals(edos, estadoService.getByPais(1));
-        }catch (Exception e){ }
+        }catch (Exception e) { }
     }
 
     @Test
     public void getByEstadoTest() {
         try{
             assertEquals(muns, municipioService.getByEstado(1));
-        }catch (Exception e){ }
+        }catch (Exception e) { }
     }
 
 }

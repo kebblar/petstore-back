@@ -78,9 +78,7 @@ public class OrdenCompraController {
     public String procesaOrden(
     		@ApiParam(name="datosOrden", value="DatosOrden que será insertado en el sistema en DatosOrden.")
     		@RequestBody DatosOrden datosCompra) throws BusinessException{
-		
 		ordenCompraService.procesarOrdenCompra(datosCompra);
-		
         return datosCompra.toString();
     }
 

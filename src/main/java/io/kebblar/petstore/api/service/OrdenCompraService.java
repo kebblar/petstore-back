@@ -35,7 +35,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public interface OrdenCompraService {
 
 	/**
-     * <p>Mètodo utilizado para procesar, crear y almacenar PDF con la factura de la compra
+     * <p>Método utilizado para procesar, crear y almacenar PDF con la factura de la compra
      * 
      * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
      * @throws BusinessException
@@ -43,7 +43,7 @@ public interface OrdenCompraService {
 	DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException;
 
 	/**
-     * <p>Mètodo utilizado para consultar todas las ordenes de compra
+     * <p>Método utilizado para consultar todas las ordenes de compra
      * 
      * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
      * @throws BusinessException
@@ -51,7 +51,7 @@ public interface OrdenCompraService {
 	List<DatosOrden> getAll() throws BusinessException;
 
 	/**
-     * <p>Mètodo utilizado para agregar una orden de compra en BD
+     * <p>Método utilizado para agregar una orden de compra en BD
      * 
      * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
      * @throws BusinessException
