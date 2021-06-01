@@ -66,8 +66,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método getById
-    */
+     * Implementación del método getById.
+     */
     @Override
     public MetodoPago getById(int id) throws BusinessException {
         try {
@@ -79,8 +79,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método getAll
-    */
+     * Implementación del método getAll.
+     */
     @Override
     public List<MetodoPago> getAll() throws BusinessException {
         try {
@@ -92,8 +92,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método insert
-    */
+     * Implementación del método insert.
+     */
     @Override
     public int insert(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -105,8 +105,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método update
-    */
+     * Implementación del método update.
+     */
     @Override
     public int update(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -118,8 +118,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método delete
-    */
+     * Implementación del método delete.
+     */
     @Override
     public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -130,7 +130,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
     /*
-    Retorna los pagor por usuario
+     *Retorna los pagor por usuario.
      */
     @Override
     public List<MetodoPago> getByIdUser(int id) throws BusinessException {
@@ -143,8 +143,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método save
-    */
+     * Implementación del método save.
+     */
     @Override
     public int save(MetodoPago metodoPago) throws BusinessException {
         try {

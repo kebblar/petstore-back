@@ -21,6 +21,7 @@ import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.swagger.annotations.Api;
 import io.kebblar.petstore.api.utils.JWTUtil;
 
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,9 @@ public class RouterController {
     }
 
     @GetMapping("/info-cripto/{add}.json")
-    public BlockCyperChecker getInfo(@PathVariable String add){
+    public BlockCyperChecker getInfo(
+            @ApiParam(name="add", value ="Direccion wallet buscada." )
+            @PathVariable String add){
         return remoteRestCallService.verifyBalance(add);
     }
 
