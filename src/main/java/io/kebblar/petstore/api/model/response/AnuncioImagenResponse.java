@@ -1,5 +1,31 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   AnuncioImagenResponse.java
+ * Tipo:        clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_35)
+ *
+ * Historia:    .
+ *              20210518_2035 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.response;
 
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen. 
+ *
+ * @author Javier Chávez Barrios
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class AnuncioImagenResponse {
 	
 	private Integer idImagen;

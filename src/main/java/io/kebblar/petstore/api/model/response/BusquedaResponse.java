@@ -1,7 +1,33 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   AnuncioImagenResponse.java
+ * Tipo:        clase
+ * AUTOR:       Edgar Uribe Mendez (EUM)
+ * Fecha:       Martes 29 de Mayo de 2021 (22_30)
+ *
+ * Historia:    .
+ *              20210529_2230 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.response;
 
 import java.util.List;
 
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'anuncio' para realizar la busqueda. 
+ *
+ * @author Edgar Uribe Mendez
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class BusquedaResponse {
 
 	private int totalAnuncios;
