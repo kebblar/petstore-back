@@ -36,9 +36,6 @@ import java.util.Objects;
  */
 public class DatosOrden implements Serializable {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -6032711964621903590L;
 	/**
 	 * Atributos de la clase
@@ -64,6 +61,9 @@ public class DatosOrden implements Serializable {
 	public DatosOrden() {
 	}
 
+	/**
+	 * Constructor por con parámetros.
+	 */
 	public DatosOrden(int id, int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, int idAnuncio, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long precio, int total, String descripcion, String recibo) {
 		this.id = id;
 		this.idUsuario = idUsuario;
@@ -122,7 +122,6 @@ public class DatosOrden implements Serializable {
 	public void setIdPaqueteria(int idPaqueteria) {
 		this.idPaqueteria = idPaqueteria;
 	}
-
 
 	public boolean isEstadoEnvio() {
 		return estadoEnvio;
@@ -216,16 +215,12 @@ public class DatosOrden implements Serializable {
 		this.fecha = fecha;
 	}
 
-
-
 	/**
 	 * @return the idMetodoPago
 	 */
 	public int getIdMetodoPago() {
 		return idMetodoPago;
 	}
-
-
 
 	/**
 	 * @param idMetodoPago the idMetodoPago to set
@@ -234,16 +229,12 @@ public class DatosOrden implements Serializable {
 		this.idMetodoPago = idMetodoPago;
 	}
 
-
-
 	/**
 	 * @return the recibo
 	 */
 	public String getRecibo() {
 		return recibo;
 	}
-
-
 
 	/**
 	 * @param recibo the recibo to set
@@ -252,16 +243,12 @@ public class DatosOrden implements Serializable {
 		this.recibo = recibo;
 	}
 
-
-
 	/**
 	 * @return the cveOrdenCompra
 	 */
 	public String getCveOrdenCompra() {
 		return cveOrdenCompra;
 	}
-
-
 
 	/**
 	 * @param cveOrdenCompra the cveOrdenCompra to set
@@ -270,8 +257,6 @@ public class DatosOrden implements Serializable {
 		this.cveOrdenCompra = cveOrdenCompra;
 	}
 
-
-
 	/**
 	 * @return the id
 	 */
@@ -279,15 +264,12 @@ public class DatosOrden implements Serializable {
 		return id;
 	}
 
-
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {

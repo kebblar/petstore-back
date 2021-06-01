@@ -22,7 +22,6 @@
  */
 package io.kebblar.petstore.api.rest;
 
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +62,7 @@ public class OrdenCompraController {
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
-     * @param municipioService Servicios de usuario
+     * @param OrdenCompraService Servicios de orden de compra
      */
 	public OrdenCompraController(OrdenCompraService ordenCompraService) {
 		this.ordenCompraService=ordenCompraService;
@@ -77,7 +76,7 @@ public class OrdenCompraController {
             produces = "application/json; charset=utf-8")
     public String procesaOrden(
     		@ApiParam(name="datosOrden", value="DatosOrden que será insertado en el sistema en DatosOrden.")
-    		@RequestBody DatosOrden datosCompra) throws BusinessException{
+    		@RequestBody DatosOrden datosCompra) throws BusinessException {
 		
 		ordenCompraService.procesarOrdenCompra(datosCompra);
 		
