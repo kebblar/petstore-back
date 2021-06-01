@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
-import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @RunWith(MockitoJUnitRunner.class)
