@@ -194,7 +194,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			
 		} catch (SQLException e) {
-			throw new BusinessException();
+			throw new BusinessException("Error de sistema","Ocurrio un error al confirmar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
 		return response;	
 	}
@@ -216,7 +216,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			response.setId(anuncio.getId());
 			response.setSku(anuncio.getSku());	
 		} catch (SQLException e) {
-			throw new BusinessException();
+			throw new BusinessException("Error de sistema","Ocurrio un error al tratar de eliminar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
 		return response;	
 	}
@@ -250,7 +250,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			}
 			anuncioMapper.eliminarImagen(idImagen);
 		}catch(SQLException e) {
-			throw new BusinessException("Error de datos","Error al tratar de eliminar la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
+			throw new BusinessException("Error de sistema","Error al tratar de eliminar la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 	}
 
@@ -305,7 +305,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			detalleResponse.setImagenes(imagenesResponse);
 			return detalleResponse;	
 		} catch (SQLException e) {
-			throw new BusinessException();
+			throw new BusinessException("Error de sistema","Ocurrio un error al consultar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
 	}
 	
