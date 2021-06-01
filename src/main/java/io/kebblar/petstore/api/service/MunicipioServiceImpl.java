@@ -68,7 +68,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método getById
+    * Implementación del método getById.
     */
     @Override
     public Municipio getById(int id) throws BusinessException {
@@ -81,7 +81,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método getAll
+    * Implementación del método getAll.
     */
     @Override
     public List<Municipio> getAll() throws BusinessException {
@@ -94,7 +94,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método insert
+    * Implementación del método insert.
     */
     @Override
     public int insert(Municipio municipio) throws BusinessException {
@@ -107,7 +107,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método update
+    * Implementación del método update.
     */
     @Override
     public int update(Municipio municipio) throws BusinessException {
@@ -120,7 +120,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método delete
+    * Implementación del método delete.
     */
     @Override
     public int delete(Municipio municipio) throws BusinessException {
@@ -133,12 +133,12 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    Devuelve la lista de municipios de un estado
+    Devuelve la lista de municipios de un estado.
      */
     @Override
     public List<Municipio> getByEstado(int id) throws BusinessException {
         try{
-            return municipioMapper.getByPais(id);
+            return municipioMapper.getByEstado(id);
         }catch (SQLException e){
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -146,7 +146,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método save
+    * Implementación del método save.
     */
     @Override
     public int save(Municipio municipio) throws BusinessException {

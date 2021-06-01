@@ -60,6 +60,9 @@ public class DatosOrden implements Serializable {
 	public DatosOrden() {
 	}
 
+	/**
+	 * Constructor por con parámetros.
+	 */
 	public DatosOrden(int id, int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, int idAnuncio, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long precio, int total, String descripcion, String recibo) {
 		this.id = id;
 		this.idUsuario = idUsuario;
@@ -118,7 +121,6 @@ public class DatosOrden implements Serializable {
 	public void setIdPaqueteria(int idPaqueteria) {
 		this.idPaqueteria = idPaqueteria;
 	}
-
 
 	public boolean isEstadoEnvio() {
 		return estadoEnvio;
@@ -211,7 +213,7 @@ public class DatosOrden implements Serializable {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+
 	/**
 	 * @return the idMetodoPago
 	 */

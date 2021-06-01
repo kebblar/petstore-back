@@ -29,7 +29,6 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
-import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 /**
@@ -42,22 +41,21 @@ import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 @Service
 public class HistorialComprasServiceImpl implements HistorialComprasService{
 	private static final Logger logger = LoggerFactory.getLogger(HistorialComprasServiceImpl.class);
-
-    private HistorialComprasMapper historialMapper;
+	private HistorialComprasMapper historialMapper;
     
 	public HistorialComprasServiceImpl(HistorialComprasMapper historialMapper) {
 		this.historialMapper = historialMapper;
 	}
     
 	@Override
-	public List<HistorialCompras> getAll(Mail correo) throws BusinessException {
+	public List<HistorialCompras> getAll(int idUsuario) throws BusinessException {
 		try {
-			return historialMapper.getAll(correo);
+			return historialMapper.getAll(idUsuario);
 		}catch(Exception sql) {
 			logger.error(sql.getMessage());
 			throw new BusinessException("id no encontrado",
 		            "ocurrio un error al buscar el id en la base de datos",500,"500",
-		            HttpStatus.NOT_FOUND);
+		            HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

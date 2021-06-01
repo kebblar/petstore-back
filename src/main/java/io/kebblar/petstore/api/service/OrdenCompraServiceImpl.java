@@ -61,7 +61,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrdenCompraServiceImpl.class);
 	
-	@Inject
+	
 	private Environment environment;
 
 	private OrdenCompraMapper ordenCompraMapper;
@@ -79,11 +79,13 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 	public OrdenCompraServiceImpl(OrdenCompraMapper ordenCompraMapper, 
 									UsuarioDetalleMapper usuarioDetalleMapper,
 									UsuarioMapper usuarioMapper,
-									MailSenderService mailSenderService) {
+									MailSenderService mailSenderService,
+									Environment environment) {
 		this.ordenCompraMapper = ordenCompraMapper;
 		this.usuarioDetalleMapper=usuarioDetalleMapper;
 		this.usuarioMapper=usuarioMapper;
 		this.mailSenderService=mailSenderService;
+		this.environment=environment;
 	}
 
 	/*
@@ -94,8 +96,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 		try {
 			return ordenCompraMapper.getAll();
 		} catch (SQLException e) {
-			logger.error(e.getMessage());
-			throw new BusinessException();
+			throw new BusinessException("Error en obtener todos los elementos Orden de compra",e.getMessage());
 		}
 	}
 	
@@ -108,8 +109,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 		try {
 			return ordenCompraMapper.insert(datosOrden);
 		} catch (SQLException e) {
-			logger.error(e.getMessage());
-			throw new BusinessException();
+			throw new BusinessException("Error al insertar Orden de compra",e.getMessage());
 		}
 	}
 
@@ -137,17 +137,11 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 			mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", "Recibo de compra PETSTORE", new File(dest+pdf));
 			
 		} catch (SQLException e) {
-			System.out.println("Error SQL: "+e);
-			logger.error(e.getMessage());
-			throw new BusinessException();
+			throw new BusinessException("Error SQL: ",e.getMessage());
 		} catch (ParseException e) {
-			System.out.println("Error SQL: "+e);
-			logger.error(e.getMessage());
-			throw new BusinessException();
+			throw new BusinessException("Error ParseException: ",e.getMessage());
 		} catch(ProcessPDFException p) {
-			System.out.println("Error SQL: "+p);
-			logger.error(p.getMessage());
-			throw new BusinessException();
+			throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
 		}
 		return ordenCompra;
 	}

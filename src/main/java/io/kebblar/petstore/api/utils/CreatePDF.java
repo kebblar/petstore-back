@@ -96,10 +96,10 @@ public class CreatePDF {
 			table3.addCell(createTextCell("001"));
 			table3.addCell(createTextCell(getFecha()));
 			table3.addCell(createTextCell(1,6,newLine).setMinHeight(30));
+			
 			doc.add(table3);
 
 			Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
-
 			table4.addCell(createTextCell(1, 3, getNombreCompleto(usuarioDetalle)));
 			table4.addCell(createTextCell(newLine));
 			table4.addCell(createTextCell(1, 2, String.valueOf(usuarioDetalle.getId())));
@@ -107,10 +107,9 @@ public class CreatePDF {
 			table4.addCell(createTextCell(1, 6, usuarioDetalle.getTelefonoCelular()));
 			table4.addCell(createTextCell(1, 6, usuario.getCorreo()));
 			table4.addCell(createTextCell(1,6,newLine).setMinHeight(30));
+			
 			doc.add(table4);
-
-			//doc.add(new Paragraph(newLine));
-
+			
 			Table tableDetalle = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
 			tableDetalle.addCell(createTextCell(newLine));
 			tableDetalle.addCell(createTextCell(1, 4, ordenCompra.getDescripcion()));
@@ -118,10 +117,12 @@ public class CreatePDF {
 			tableDetalle.addCell(createTextCell(1, 1, String.valueOf(ordenCompra.getPrecio()), TextAlignment.CENTER));
 			tableDetalle.addCell(createTextCell(newLine));
 			tableDetalle.addCell(createTextCell(String.valueOf(ordenCompra.getPrecio())));
+			
 			doc.add(tableDetalle);
 
 			Table tableEspacio = new Table(UnitValue.createPercentArray(1)).useAllAvailableWidth();
 			tableEspacio.addCell(createTextCell(150, newLine));
+			
 			doc.add(tableEspacio);
 
 			Table tableTotal = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
@@ -192,8 +193,7 @@ public class CreatePDF {
 	}
 	
 	private  String getNamePDF(int id) {
-		String nombre= String.valueOf(id)+UUID.randomUUID().toString();
-	    return nombre;
+	    return String.valueOf(id)+UUID.randomUUID().toString();
 	}
 	
 	private  String getFecha(){
@@ -202,19 +202,16 @@ public class CreatePDF {
 		System.out.println(dtf.format(now)); 
 		return dtf.format(now);
 	}
-	
-    private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
-		Barcode128 code128 = new Barcode128(pdfDoc);
 
+  private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
+		Barcode128 code128 = new Barcode128(pdfDoc);
 		code128.setCode(code);
 		code128.setCodeType(Barcode128.CODE128);
 		PdfFormXObject xObject = code128.createFormXObject(ColorConstants.BLACK, ColorConstants.BLACK, pdfDoc);
-
 		float x = 80;
 		float y = 50;
 		float width = xObject.getWidth();
 		float height = xObject.getHeight();
-
 		canvas.saveState();
 		canvas.setFillColor(ColorConstants.LIGHT_GRAY);
 		canvas.rectangle(x, y, width, height);
@@ -225,10 +222,8 @@ public class CreatePDF {
 	}
 	
     private void generateBarcodeQR(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
-		
 		BarcodeQRCode qrCode = new BarcodeQRCode(code);
 		PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
-
 		float xqr = 30;
 		float yqr = 50;
 		float widthqr = barcodeObject.getWidth();

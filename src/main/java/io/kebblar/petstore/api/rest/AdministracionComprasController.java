@@ -18,14 +18,12 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.kebblar.petstore.api.model.domain.AdministracionCompras;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.service.AdministracionComprasService;
@@ -67,7 +65,11 @@ public class AdministracionComprasController {
     }
     
     @GetMapping(path = "/administracion-compras-update.json/{estado}/{idCompra}", produces = "application/json; charset=utf-8")
-    public String updateEstado( @PathVariable int estado,  @PathVariable int idCompra) throws BusinessException {
+    public String updateEstado(
+    		@ApiParam(name = "estado", value = "el nuevo estado de la compra.")
+    		@PathVariable int estado,
+    		@ApiParam(name = "idCompra", value = "el id de la compra.")
+    		@PathVariable int idCompra) throws BusinessException {
         return admini.sent(estado,idCompra);
     }
 }

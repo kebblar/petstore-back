@@ -30,6 +30,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 /**
  * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad {@link Municipio}. 
+
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -85,7 +86,7 @@ public interface MunicipioService {
      * Método utilizado para eliminar un registro en la tabla 'municipio'.
      * 
      * @param municipio objeto de tipo 'Municipio'.
-     * @return int numero de registros eliminados en la tabla'municipio'.
+     * @return int numero de registros eliminados en la tabla 'municipio'.
      * @throws Exception es disparada por una regla de negocio
      */
     int delete(Municipio municipio) throws BusinessException;
