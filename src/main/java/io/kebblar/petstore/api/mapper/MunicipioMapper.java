@@ -112,7 +112,7 @@ public interface MunicipioMapper {
      * @throws SQLException en caso de un error en el servidor o en la consulta.
      */
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{id}" )
-    List<Municipio> getByPais(int id) throws SQLException;
+    List<Municipio> getByEstado(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.

@@ -45,7 +45,6 @@ public class AdministracionComprasServiceImpl implements AdministracionComprasSe
 	
 	private AdministracionComprasMapper mapper;
 	
-	
 	public AdministracionComprasServiceImpl(AdministracionComprasMapper mapper) {
 		this.mapper = mapper;
 	}

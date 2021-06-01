@@ -57,8 +57,7 @@ import io.kebblar.petstore.api.support.QRService;
  */
 @RestController
 @RequestMapping(value = "/api")
-public class PruebaController {
-    private static final String res = "{'result':'ok'}".replace('\'', '\"');
+public class QRController {
 
     @Autowired
     private QRService qrService;
