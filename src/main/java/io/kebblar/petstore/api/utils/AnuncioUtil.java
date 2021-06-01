@@ -169,7 +169,7 @@ public class AnuncioUtil {
 		
 		String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
 		String pageSize = Integer.toString(getPageSize);
-		if (filtros.getIdCategoria() != 0) {
+		if (filtros.getIdCategoria() != 0 && filtros.getIdCategoria() != null) {
 			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
 		}
 		if (filtros.getPrecio() != null && filtros.getPrecio() != BigDecimal.ZERO) {
