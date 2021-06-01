@@ -49,9 +49,9 @@ public interface AnuncioService {
 	/**
      * Método que permite realizar el registro de un producto.
      * <p>Se guardan los datos generales y atributos del producto,
-     * en este punto el anuncio tendrá un estatus de 1= En edicion {@link AnuncioEstatusEnum}</p>
+     * en este punto el anuncio tendrá un estatus de 1= En edición {@link AnuncioEstatusEnum}</p>
      * @param {@link AnuncioRequest}  Clase que contiene la información del {@link Anuncio} que se dara de alta
-     * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' registrado o actualizado
+     * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException
      */
 	AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
@@ -59,7 +59,7 @@ public interface AnuncioService {
 	/**
 	 * Método que permite confirmar el registro de un producto {@link AnuncioEstatusEnum}
 	 * con base al identificador proporcionado, cumpliendo las siguientes reglas para su publicación:
-	 * <p>1. El anuncio debe estar en estatus En edicion o activo</p>
+	 * <p>1. El anuncio debe estar en estatus En edición o activo</p>
 	 * <p>2. Si no se proporcionan fechas, el anuncio pasa directamente a estatus PUBLICADO</p>
 	 * <p>2. Si solo se proporciona la fecha final y es igual o posterior al día de hoy,
 	 *  el anuncio pasa directamente a estatus PUBLICADO</p>
@@ -68,14 +68,14 @@ public interface AnuncioService {
 	 * <p>4. Si solo se proporciona la fecha inicial y es posterior al día de hoy,
 	 *  el anuncio pasa a estatus ACTIVO</p>
 	 * @param id Identificador del anuncio que confirma su registro
-	 * @return Objeto {@link AnuncioResponse} retornara el id y sku del objeto 'anuncio' que confirma su registro
+	 * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' que confirma su registro
 	 * @throws BusinessException
 	 */
 	AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
 	
 	/**
 	 * Método que permite eliminar logicamente un producto con base al identificador proporcionado
-	 * <p>El servicio validara que el producto no haya sido eliminado previamente y que exista</p>
+	 * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
 	 * @param id Identificador del anuncio que será removido del sistema.
 	 * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
 	 * @throws BusinessException
@@ -84,7 +84,7 @@ public interface AnuncioService {
 	
 	/**
 	 * Método que permite obtener el detalle de un anuncio con base al identificador
-	 * @param id Identificador del anuncio del cual se regresara el detalle
+	 * @param id Identificador del anuncio del cual se regresará el detalle
 	 * @return {@link DetalleAnuncioResponse} Clase que contiene el detalle de un anuncio
 	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
@@ -94,7 +94,7 @@ public interface AnuncioService {
 	/** Método que permite el guardado de las imagenes de un anuncio
 	 * @param idAnuncio Identificador del anuncio con el cual se va a asociar la imagen
 	 * @param file Imagen a guardar
-	 * @return {@link AnuncioImagenResponse} Clase que contiene la informacion de la imagen guardada
+	 * @return {@link AnuncioImagenResponse} Clase que contiene la información de la imagen guardada
 	 * @throws BusinessException
 	 */
 	 AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;

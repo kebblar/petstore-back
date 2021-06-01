@@ -14,9 +14,9 @@
  *
  * Historia:    .
  *              20210510_0105 Creación de ésta interfaz
- *              20210523_2034 Se  agrega  el  metodo  de  elimado 
+ *              20210523_2034 Se  agrega  el  método  de  elimado 
  *              logico
- *              20210524_1800 Se  agrega  el  metodo  de consulta 
+ *              20210524_1800 Se  agrega  el  método  de consulta 
  *              de atributos del anunio
  *
  */

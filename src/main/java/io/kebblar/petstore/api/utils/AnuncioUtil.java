@@ -33,7 +33,7 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
 /**
  * <p>Descripción:</p>
- * Utileria de apoyo para los servicios asociados a la entidad'anuncio'. 
+ * Utilería de apoyo para los servicios asociados a la entidad'anuncio'. 
  *
  * @author Maria Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -43,7 +43,7 @@ public class AnuncioUtil {
 	private static final String TEMPLATE = "SELECT id_anuncio FROM anuncio_atributo WHERE id_atributo = %d AND valor = %d ";
 
 	/**
-	 * <p>Metodo que permite genera un SKU para la entidad de 'anuncio'.</p>
+	 * <p>Método que permite genera un SKU para la entidad de 'anuncio'.</p>
 	 * <p>El SKU se conformara por 
 	 * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
 	 * teniendo un total de 14 posiciones. </p>
@@ -57,7 +57,7 @@ public class AnuncioUtil {
 	}
 
 	/**
-	 * Metodo que permite validar las fechas de periodo enviadas.
+	 * Método que permite validar las fechas de periodo enviadas.
 	 * <p>1. Valida que el periodo inicial sea posterior o igual a la fecha actual</p>
 	 * <p>2. Valida que la fecha de inicio no sea posterior a la fecha final</p>
 	 * @param fechaInicioVigencia
@@ -120,7 +120,7 @@ public class AnuncioUtil {
 	}
 	
 	/**
-	 * Metodo que concatena las condiciones de consulta a la cadena SQL
+	 * Método que concatena las condiciones de consulta a la cadena SQL
 	 * @param filtros
 	 * @return String que contiene toda la cadena para la sentencia SQL
 	 */
@@ -157,7 +157,7 @@ public class AnuncioUtil {
 		
 	}
 	/**
-	 * Filtra las busqeuda de usuario final
+	 * Filtra la búsqueda de usuario final
 	 * @param filtros
 	 * @return Lista de strings
 	 */
