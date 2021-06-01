@@ -70,7 +70,6 @@ public class CreatePDF {
 	public  String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest, String url) throws ProcessPDFException {
 		String pdf="";
 		try {
-			
 			String IMAGE = "src/main/resources/Factura.png";
 			String nombrePdf= getNamePDF(usuarioDetalle.getId());
 			pdf= nombrePdf + ".pdf";

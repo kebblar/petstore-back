@@ -35,25 +35,26 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public interface OrdenCompraService {
 
 	/**
-     * <p>Mètodo utilizado para procesar, crear y almacenar PDF con la factura de la compra
+     * Método utilizado para procesar, crear y almacenar PDF con la factura de compra
      * 
-     * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
+     * @param Objeto de tipo DatosOrden con la información de la factura.
+     * @return DatosOrden que contiene la información de la factura.
      * @throws BusinessException
      */
-	DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException;
+	DatosOrden procesarOrdenCompra(DatosOrden datosOrden) throws BusinessException;
 
 	/**
-     * <p>Mètodo utilizado para consultar todas las ordenes de compra
-     * 
-     * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
+     * Método utilizado para consultar todas las ordenes de compra
+     * @return Lista DatosOrden que contiene la información de las orden de compra.
      * @throws BusinessException
      */
 	List<DatosOrden> getAll() throws BusinessException;
 
 	/**
-     * <p>Mètodo utilizado para agregar una orden de compra en BD
+     * Método utilizado para agregar una orden de compra en BD
      * 
-     * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
+     * @param Objeto de tipo datosOrden con la información de la factura.
+     * @return id con el valor de número de la transacción insertada en bd.
      * @throws BusinessException
      */
 	int insert(DatosOrden datosOrden) throws BusinessException;
