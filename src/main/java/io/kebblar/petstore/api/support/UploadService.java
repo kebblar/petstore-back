@@ -43,7 +43,7 @@ public interface UploadService {
      * @throws UploadException Se dispara en caso de que el proceso de upload falle
      */
     public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws UploadException;
-    
+
     /**
      * Procesa un archivos que le es enviado desde el front.
      *

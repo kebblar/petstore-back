@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Temporary table structure for view `administracion_compras`
+--
+
+DROP TABLE IF EXISTS `administracion_compras`;
+/*!50001 DROP VIEW IF EXISTS `administracion_compras`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `administracion_compras` (
+  `estado_envio` tinyint NOT NULL,
+  `calle_numero` tinyint NOT NULL,
+  `colonia` tinyint NOT NULL,
+  `cp` tinyint NOT NULL,
+  `id_direccion` tinyint NOT NULL,
+  `cve_orden_compra` tinyint NOT NULL,
+  `id_mascota` tinyint NOT NULL,
+  `nombre_anuncio` tinyint NOT NULL,
+  `recibo` tinyint NOT NULL,
+  `id_compra` tinyint NOT NULL,
+  `fecha_hora_comprar` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `anuncio`
 --
 
@@ -32,7 +55,7 @@ CREATE TABLE `anuncio` (
   PRIMARY KEY (`id`),
   KEY `fk_anuncio_mascota` (`id_mascota`),
   CONSTRAINT `fk_anuncio_mascota` FOREIGN KEY (`id_mascota`) REFERENCES `mascota` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +64,32 @@ CREATE TABLE `anuncio` (
 
 LOCK TABLES `anuncio` WRITE;
 /*!40000 ALTER TABLE `anuncio` DISABLE KEYS */;
+INSERT INTO `anuncio` VALUES (2,1,'perrito','imagen','anuncio',10.00);
 /*!40000 ALTER TABLE `anuncio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `btc_wallet`
+--
+
+DROP TABLE IF EXISTS `btc_wallet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `btc_wallet` (
+  `id_usuario` int(11) NOT NULL,
+  `wallet_number` varchar(60) NOT NULL,
+  `p_key` varchar(60) NOT NULL,
+  PRIMARY KEY (`wallet_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `btc_wallet`
+--
+
+LOCK TABLES `btc_wallet` WRITE;
+/*!40000 ALTER TABLE `btc_wallet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `btc_wallet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -71,7 +119,7 @@ CREATE TABLE `direccion` (
   CONSTRAINT `fk_direccion_municipio` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`),
   CONSTRAINT `fk_direccion_pais` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id`),
   CONSTRAINT `fk_direccion_tipo_direccion` FOREIGN KEY (`id_tipo_direccion`) REFERENCES `tipo_direccion` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,6 +128,7 @@ CREATE TABLE `direccion` (
 
 LOCK TABLES `direccion` WRITE;
 /*!40000 ALTER TABLE `direccion` DISABLE KEYS */;
+INSERT INTO `direccion` VALUES (35,'calle 3','col 6',1,15,676,1,'25869','casa verde',1),(36,'srwaer 23','col 5',1,15,693,1,'05265','casa verde',1),(37,'Calle 4`','Col 5',1,12,383,1,'00256','casa verde',1);
 /*!40000 ALTER TABLE `direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,6 +180,27 @@ INSERT INTO `estado` VALUES (1,1,'Aguascalientes'),(2,1,'Baja California'),(3,1,
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `historial_compras`
+--
+
+DROP TABLE IF EXISTS `historial_compras`;
+/*!50001 DROP VIEW IF EXISTS `historial_compras`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `historial_compras` (
+  `id` tinyint NOT NULL,
+  `fecha_hora_comprar` tinyint NOT NULL,
+  `estado_envio` tinyint NOT NULL,
+  `nombre_anuncio` tinyint NOT NULL,
+  `tipo` tinyint NOT NULL,
+  `correo` tinyint NOT NULL,
+  `recibo` tinyint NOT NULL,
+  `imagen` tinyint NOT NULL,
+  `id_usuario` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `mascota`
 --
 
@@ -142,7 +212,7 @@ CREATE TABLE `mascota` (
   `nombre` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el nombre de una mascota',
   `descuento` tinyint(3) DEFAULT NULL COMMENT 'Atributo que representa el descuento que podria tener una mascota',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +221,7 @@ CREATE TABLE `mascota` (
 
 LOCK TABLES `mascota` WRITE;
 /*!40000 ALTER TABLE `mascota` DISABLE KEYS */;
+INSERT INTO `mascota` VALUES (1,'perro',1);
 /*!40000 ALTER TABLE `mascota` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,16 +233,11 @@ DROP TABLE IF EXISTS `metodo_pago`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `metodo_pago` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
-  `tipoPago` int(11) NOT NULL,
-  `num_tarjeta_cartera` varchar(50) DEFAULT NULL,
-  `expiracion` varchar(5) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_usuario` (`id_usuario`),
-  CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de metodo de pago',
+  `tipo` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el tipo de pago, por ejemplo, tarjeta de crdito, dbito, PayPal, etc.',
+  `activo` tinyint(1) DEFAULT NULL COMMENT 'Atributo que representa si el registro se encuentra activo',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,6 +246,7 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
+INSERT INTO `metodo_pago` VALUES (1,'paypal',1);
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +262,7 @@ CREATE TABLE `moneda` (
   `nombre` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el nombre de de la moneda, por ejemplo dlllar, pesos, euros, etc',
   `activo` tinyint(1) DEFAULT NULL COMMENT 'Atributo que representa si el registro se encuentra activo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,6 +271,7 @@ CREATE TABLE `moneda` (
 
 LOCK TABLES `moneda` WRITE;
 /*!40000 ALTER TABLE `moneda` DISABLE KEYS */;
+INSERT INTO `moneda` VALUES (1,'pesos',1);
 /*!40000 ALTER TABLE `moneda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +318,7 @@ CREATE TABLE `orden_compra` (
   `id_metodo_pago` int(11) NOT NULL COMMENT 'Atributo que representa el identificador del mtodo de pago asociada a la compra',
   `id_moneda` int(11) NOT NULL COMMENT 'Atributo que representa el tipo de moneda involucrada en la compra, por ejemplo, pesos, dlllares, etc.',
   `id_anuncio` int(11) NOT NULL COMMENT 'Atributo que representa el identificador del anuncio asociada a la orden de compra',
-  `cve_orden_compra` varchar(8) NOT NULL COMMENT 'Atributo que representa la clave alfanumrica que identifica de manera univoca a la orden de compra',
+  `cve_orden_compra` varchar(20) NOT NULL COMMENT 'Atributo que representa la clave alfanumrica que identifica de manera univoca a la orden de compra',
   `importe_total` decimal(10,2) NOT NULL COMMENT 'Atributo que representa el importe total, es decir, costo de la mascota + costo de paqueteria',
   `fecha_hora_comprar` date NOT NULL COMMENT 'Atributo que representa la fecha y hora en que se realiza la comprar',
   `estado_envio` tinyint(1) NOT NULL COMMENT 'Atributo que representa el estado del envio, los valores validos son 1-En preparacion, 2-En camino, 3-Entregado',
@@ -268,7 +336,7 @@ CREATE TABLE `orden_compra` (
   CONSTRAINT `fk_orden_compra_moneda` FOREIGN KEY (`id_moneda`) REFERENCES `moneda` (`id`),
   CONSTRAINT `fk_orden_compra_paqueteria` FOREIGN KEY (`id_paqueteria`) REFERENCES `paqueteria` (`id`),
   CONSTRAINT `fk_orden_compra_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,6 +345,7 @@ CREATE TABLE `orden_compra` (
 
 LOCK TABLES `orden_compra` WRITE;
 /*!40000 ALTER TABLE `orden_compra` DISABLE KEYS */;
+INSERT INTO `orden_compra` VALUES (2,1,37,3,1,1,2,'88R74085XM9110610',60.00,'2021-05-20',0,'');
 /*!40000 ALTER TABLE `orden_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +401,7 @@ INSERT INTO `paqueteria` VALUES (1,'Aeroméxico Cargo','Entrega que va de unas h
 UNLOCK TABLES;
 
 --
--- Table structure para2 table `preregistro`
+-- Table structure for table `preregistro`
 --
 
 DROP TABLE IF EXISTS `preregistro`;
@@ -443,7 +512,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1620936161606,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,0,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'v9Jo8e',1621289420800),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
+INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1621809436736,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,1621809448232,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -473,6 +542,7 @@ CREATE TABLE `usuario_detalle` (
 
 LOCK TABLES `usuario_detalle` WRITE;
 /*!40000 ALTER TABLE `usuario_detalle` DISABLE KEYS */;
+INSERT INTO `usuario_detalle` VALUES (1,'n1','ap1','ap1',NULL,'nick1','tel1'),(2,'n2','ap2','ap2',NULL,'nick2','tel2'),(3,'n3','ap3','ap3',NULL,'nick3','tel3'),(4,'n1','ap1','ap1',NULL,'nick1','tel1'),(6,'n6','ap6','ap6',NULL,'nick6','tel6');
 /*!40000 ALTER TABLE `usuario_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,6 +570,7 @@ CREATE TABLE `usuario_direccion` (
 
 LOCK TABLES `usuario_direccion` WRITE;
 /*!40000 ALTER TABLE `usuario_direccion` DISABLE KEYS */;
+INSERT INTO `usuario_direccion` VALUES (1,35),(1,36),(1,37);
 /*!40000 ALTER TABLE `usuario_direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -531,6 +602,25 @@ INSERT INTO `usuario_rol` VALUES (1,1),(1,2),(1,3),(2,2),(3,2),(3,3),(4,3),(6,2)
 UNLOCK TABLES;
 
 --
+-- Final view structure for view `administracion_compras`
+--
+
+/*!50001 DROP TABLE IF EXISTS `administracion_compras`*/;
+/*!50001 DROP VIEW IF EXISTS `administracion_compras`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `administracion_compras` AS (select `s1`.`estado_envio` AS `estado_envio`,`petstore`.`direccion`.`calle_numero` AS `calle_numero`,`petstore`.`direccion`.`colonia` AS `colonia`,`petstore`.`direccion`.`cp` AS `cp`,`petstore`.`direccion`.`id` AS `id_direccion`,`s1`.`cve_orden_compra` AS `cve_orden_compra`,`s1`.`id_mascota` AS `id_mascota`,`s1`.`nombre_anuncio` AS `nombre_anuncio`,`s1`.`recibo` AS `recibo`,`s1`.`id_compra` AS `id_compra`,`s1`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`direccion` join (select `petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`orden_compra`.`id_direccion_envio` AS `id_direccion_envio`,`petstore`.`orden_compra`.`cve_orden_compra` AS `cve_orden_compra`,`petstore`.`anuncio`.`id_mascota` AS `id_mascota`,`petstore`.`anuncio`.`nombre_anuncio` AS `nombre_anuncio`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id` AS `id_compra`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`orden_compra` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `petstore`.`orden_compra`.`id_anuncio`))) `s1` on(`s1`.`id_direccion_envio` = `petstore`.`direccion`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `direccion_con_nombre`
 --
 
@@ -548,6 +638,25 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `historial_compras`
+--
+
+/*!50001 DROP TABLE IF EXISTS `historial_compras`*/;
+/*!50001 DROP VIEW IF EXISTS `historial_compras`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `historial_compras` AS (select `sb2`.`id` AS `id`,`sb2`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb2`.`estado_envio` AS `estado_envio`,`sb2`.`nombre_anuncio` AS `nombre_anuncio`,`sb2`.`tipo` AS `tipo`,`petstore`.`usuario`.`correo` AS `correo`,`sb2`.`recibo` AS `recibo`,`sb2`.`imagen` AS `imagen`,`sb2`.`id_usuario` AS `id_usuario` from ((select `sb1`.`id` AS `id`,`sb1`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb1`.`estado_envio` AS `estado_envio`,`petstore`.`anuncio`.`nombre_anuncio` AS `nombre_anuncio`,`sb1`.`tipo` AS `tipo`,`sb1`.`recibo` AS `recibo`,`petstore`.`anuncio`.`imagen` AS `imagen`,`sb1`.`id_usuario` AS `id_usuario` from ((select `petstore`.`orden_compra`.`id` AS `id`,`petstore`.`orden_compra`.`id_anuncio` AS `id_anuncio`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`metodo_pago`.`tipo` AS `tipo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id_usuario` AS `id_usuario` from (`petstore`.`orden_compra` join `petstore`.`metodo_pago` on(`petstore`.`metodo_pago`.`id` = `petstore`.`orden_compra`.`id_metodo_pago`))) `sb1` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `sb1`.`id_anuncio`))) `sb2` join `petstore`.`usuario` on(`petstore`.`usuario`.`id` = `sb2`.`id_usuario`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -558,4 +667,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 22:24:23
+-- Dump completed on 2021-05-23 22:42:31

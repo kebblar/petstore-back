@@ -51,6 +51,7 @@ import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
 import io.kebblar.petstore.api.model.exceptions.TokenNotExistException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
+import io.kebblar.petstore.api.model.exceptions.UserNotExistsException;
 import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -412,6 +413,23 @@ public class UsuarioServiceImpl implements UsuarioService {
             return usuarioMapper.getByToken(token);
         } else {
             throw new TokenExpiredException();
+        }
+    }
+    
+    @Override
+    public Usuario cambiaClave(String correo, String clave) throws BusinessException {
+        try {
+            Usuario usuario = usuarioMapper.getByCorreo(correo);
+            if(usuario==null) {
+                throw new UserNotExistsException(correo);
+            }
+            ValidadorClave.validate(clave);
+            String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
+            usuario.setClave(claveHash);
+            usuarioMapper.update(usuario);
+            return usuario;
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
         }
     }
 }
