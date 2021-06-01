@@ -83,7 +83,7 @@ public interface AnuncioMapper {
     /**
      * Consulta el objeto de tipo 'Anuncio' con base al id proporcionado
      * 
-     * @param id Identificador por medio del cual se realizara la busqueda del objeto 'anuncio'
+     * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
      * @return Clase de tipo 'Anuncio' con la informacion asociada
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
@@ -209,7 +209,7 @@ public interface AnuncioMapper {
 	List<AnuncioAtributo> atributosPorAnuncio(int id);
     
     /**
-     * Consulta por filtros para la busqueda de usuario final
+     * Consulta por filtros para la búsqueda de usuario final
      * @param map
      * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
@@ -226,7 +226,7 @@ public interface AnuncioMapper {
     List<DetalleAnuncioResponse> busquedaFiltro(Map<String,String> map) throws SQLException;
     
     /**
-     * Consulta por filtros para la busqueda de usuario final para obtener total de registros
+     * Consulta por filtros para la búsqueda de usuario final para obtener total de registros
      * @param map
      * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
