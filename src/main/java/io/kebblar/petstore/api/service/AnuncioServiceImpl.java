@@ -163,7 +163,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
-				throw new BusinessException("Error de datos","Fechas de vigencia no validas");
+				throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
 			if(imagenes==null || imagenes.isEmpty()) {
@@ -237,7 +237,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			anuncioImagenMapper.insertImagen(imagenEnt);
 			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getImagen());
 		}catch (UploadException | SQLException e) {
-			throw new BusinessException("Error de sistema","Error al guardar la imagen.");
+			throw new BusinessException("Error de sistema","Error al guardar la imagen.",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 	}
 
@@ -317,11 +317,11 @@ public class AnuncioServiceImpl implements AnuncioService{
 	private void validaCampos(AnuncioRequest request) throws BusinessException {
 		//Validacion de campos obligatorios
 		if(request.getAtributos()==null || request.getAtributos().isEmpty()) {
-			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado");
+			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
 		if(request.getIdCategoria()>7) {
-			throw new BusinessException("Error de datos","Categoria no valida");
+			throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 		//Validacion de fechas de vigencia
 		Date fechaInicio = request.getFechaInicioVigencia() != null ? 
@@ -331,7 +331,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
 				:null;
 		if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
-			throw new BusinessException("Error de datos","Fechas de vigencia no validas");
+			throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}	
 	}
 
