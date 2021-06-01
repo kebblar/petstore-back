@@ -1,3 +1,20 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   BusquedaRequest.java
+ * Tipo:        clase
+ * AUTOR:       Edgar Uribe (EU)
+ * Fecha:       Sabado 8 de Mayo de 2021 (11_22)
+ *
+ * Historia:    20210508_1122 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
@@ -5,6 +22,13 @@ import java.util.List;
 
 import javax.validation.constraints.Min;
 
+/**
+ * Implementacion del POJO de la entidad de 'BusquedaRequest'.
+ * 
+ * @author  Edgar Uribe
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class BusquedaRequest {
 
 	private BigDecimal precio;

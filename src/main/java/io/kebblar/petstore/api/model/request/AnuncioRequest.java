@@ -1,3 +1,20 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   AnuncioRequest.java
+ * Tipo:        clase
+ * AUTOR:       Edgar Uribe (EU)
+ * Fecha:       Sabado 8 de Mayo de 2021 (09_38)
+ *
+ * Historia:    20210508_0938 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
@@ -8,6 +25,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Implementacion del POJO de la entidad de 'AnuncioRequest'.
+ * 
+ * @author  Edgar Uribe
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class AnuncioRequest {
 
 	@NotBlank(message = "{notblank.anuncio.titulo}")

@@ -1,3 +1,20 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención 
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   ActualizaAnuncioRequest.java
+ * Tipo:        clase
+ * AUTOR:       Isabel Contreras (IS)
+ * Fecha:       viernes 7 de Mayo de 2021 (09_38)
+ *
+ * Historia:    20210507_0938 Creación de éste POJO
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
@@ -6,6 +23,13 @@ import java.util.List;
 
 import javax.validation.constraints.Min;
 
+/**
+ * Implementacion del POJO de la entidad de 'ActualizaAnuncioRequest'.
+ * 
+ * @author  Isabel Contreras
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class ActualizaAnuncioRequest extends AnuncioRequest{
 
 	@Min(value = 1, message = "{min.anuncio.id}")
