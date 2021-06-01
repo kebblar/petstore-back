@@ -4,7 +4,7 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mención
+ *              modificar  los datos establecidos en  la mención 
  *              de "AUTOR".
  *
  *              ------------------------------------------------
@@ -29,7 +29,8 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Interface para el servicio asociado a la entidad {@link Municipio}.
+ * Interface para el servicio asociado a la entidad {@link Municipio}. 
+
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT

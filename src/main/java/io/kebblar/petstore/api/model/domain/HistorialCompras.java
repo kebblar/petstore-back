@@ -21,8 +21,6 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
-import java.util.Date;
-
 /**
  * Implementacion del POJO de la entidad de {@link HistorialCompras}.
  * 
@@ -31,6 +29,9 @@ import java.util.Date;
  * @since   1.0-SNAPSHOT
  */
 public class HistorialCompras {
+    /**
+     * Atributos de la clase
+     */
 	private int id;
 	private String fechaHoraCompra;
 	private int estadoEnvio;

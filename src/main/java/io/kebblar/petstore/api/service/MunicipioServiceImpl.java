@@ -9,7 +9,7 @@
  *
  *              ------------------------------------------------
  * 
- * Artefacto:   MunicipioServiceImpl .java
+ * Artefacto:   MunicipioServiceImpl.java
  * Proyecto:    petstore
  * Tipo:        clase 
  * AUTOR:       Fhernanda Romo

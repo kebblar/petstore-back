@@ -35,7 +35,6 @@ import java.util.Objects;
  * @since 1.0-SNAPSHOT
  */
 public class DatosOrden implements Serializable {
-
 	private static final long serialVersionUID = -6032711964621903590L;
 	/**
 	 * Atributos de la clase

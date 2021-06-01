@@ -47,7 +47,6 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
-import io.kebblar.petstore.api.support.QRService;
 
 /**
  * <p>
@@ -89,7 +88,7 @@ public class CreatePDF {
 			tablePetstore.addCell(createTextCellBold("Teléfono:"));
 			tablePetstore.addCell(createTextCell(1, 3, "5555555555"));
 			tablePetstore.addCell(createTextCell(1, 4, newLine));
-			
+
 			doc.add(tablePetstore);
 
 			Table table3 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
@@ -203,8 +202,8 @@ public class CreatePDF {
 		System.out.println(dtf.format(now)); 
 		return dtf.format(now);
 	}
-	 
-    private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
+
+  private void generateBarcode(PdfDocument pdfDoc, String code, PdfCanvas canvas) throws ProcessPDFException {
 		Barcode128 code128 = new Barcode128(pdfDoc);
 		code128.setCode(code);
 		code128.setCodeType(Barcode128.CODE128);
