@@ -20,12 +20,11 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
-import io.kebblar.petstore.api.model.domain.Mail;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.service.HistorialComprasService;
 import io.swagger.annotations.ApiParam;
@@ -60,9 +59,11 @@ public class HistorialComprasController {
         this.historialComprasService = historialComprasService;
     }
     
-    @PostMapping(path = "/historial-compras.json/", produces = "application/json; charset=utf-8")
-    public List<HistorialCompras> getCompras(@ApiParam(name = "mail", value = "correo del usuario que queremos saber sus compras") @RequestBody Mail correo) throws BusinessException {
-        return historialComprasService.getAll(correo);
+    @GetMapping(path = "/historial-compras.json/{idUsuario}", produces = "application/json; charset=utf-8")
+    public List<HistorialCompras> getCompras(
+    		@ApiParam(name = "idUsuario", value = "id del usuario que queremos saber sus compras") 
+    		@PathVariable int idUsuario) throws BusinessException {
+        return historialComprasService.getAll(idUsuario);
     }
     
 }
