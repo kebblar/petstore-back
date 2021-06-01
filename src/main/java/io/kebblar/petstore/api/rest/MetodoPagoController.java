@@ -111,6 +111,20 @@ public class MetodoPagoController {
     ) throws BusinessException {
         return this.metodoPagoService.getById(id);
     }
+
+    @ApiOperation(
+        value = "MetodoPagoController::getByUser",
+        notes = "Regresa un listado de objetos MetodoPago pertenecientes "
+            + "al usuario con el entero recibido como parametro.")
+    @GetMapping(
+        value = "/user-metodo-pago/{id}.json",
+        produces = "application/json; charset=utf-8")
+    public List<MetodoPago> getMetodoByUser(
+    @ApiParam(name="id", value="Representa el id del usuario buscado.")
+    @PathVariable int id
+    ) throws BusinessException {
+        return this.metodoPagoService.getByIdUser(id);
+    }
     
     @ApiOperation(
         value = "MetodoPagoController::insert",

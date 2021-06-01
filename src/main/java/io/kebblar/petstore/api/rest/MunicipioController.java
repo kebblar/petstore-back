@@ -158,7 +158,7 @@ public class MunicipioController {
             value= "/municipio-por-estado/{id}.json",
             produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
-        return municipioService.getAllByEstado(id);
+        return municipioService.getByEstado(id);
     }
     
     @GetMapping(
