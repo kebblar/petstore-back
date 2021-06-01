@@ -1,6 +1,6 @@
 -- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: petstore
+-- Host: localhost    Database: petstore ok
 -- ------------------------------------------------------
 -- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
