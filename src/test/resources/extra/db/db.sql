@@ -82,9 +82,7 @@ DROP TABLE IF EXISTS `anuncio_mascota`;
 CREATE TABLE `anuncio_mascota` (
   `id_atributo` int(11) DEFAULT NULL,
   `id_anuncio` int(11) NOT NULL,
-  KEY `idx_mascota_id_atributo` (`id_atributo`),
-  CONSTRAINT `fk_mascota_anuncio` FOREIGN KEY (`id_atributo`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mascota_mascota_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `mascota_atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `idx_mascota_id_atributo` (`id_atributo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -111,9 +109,7 @@ CREATE TABLE `anuncio_media` (
   `id_tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_anuncio_imagen_anuncio` (`id_anuncio`) USING BTREE,
-  KEY `idx_anuncio_media_id_tipo` (`id_tipo`),
-  CONSTRAINT `fk_anuncio_imagen_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`),
-  CONSTRAINT `fk_anuncio_media_media_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `media_tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `idx_anuncio_media_id_tipo` (`id_tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -894,4 +890,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-02 22:20:50
+-- Dump completed on 2021-06-02 22:39:34
