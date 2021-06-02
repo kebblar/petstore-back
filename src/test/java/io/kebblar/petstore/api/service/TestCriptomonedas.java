@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.sql.SQLException;
 
@@ -18,6 +20,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestCriptomonedas {
+    private static final Logger logger = LoggerFactory.getLogger(TestCriptomonedas.class);
 
     @Mock
     private CriptoMapper criptoMapper;
@@ -45,7 +48,9 @@ public class TestCriptomonedas {
     public void getByUserTest() {
         try {
             assertEquals(criptoService.getByUser(1),"cadenaWallet");
-        } catch (MapperCallException  e) {}
+        } catch (MapperCallException  e) {
+            logger.info("Problema recuperando el wallet del usuario");
+        }
         try {
             String s = criptoService.getByUser(2);
         } catch (MapperCallException m) {
@@ -57,7 +62,9 @@ public class TestCriptomonedas {
     public void insertTransactionTest() {
         try {
             assertEquals(criptoService.insertTransaccion(t1),1);
-        } catch (MapperCallException e) { }
+        } catch (MapperCallException e) {
+            logger.info("Problema insertando una nueva transacción");
+        }
         try {
             int i = criptoService.insertTransaccion(t2);
         } catch (MapperCallException b) {
