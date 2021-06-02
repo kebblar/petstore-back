@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -22,7 +22,7 @@ import java.util.Date;
 
 /**
  * Implementacion del POJO de la entidad de 'UsuarioDetalle'.
- * 
+ *
  * @author  luz
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -40,10 +40,10 @@ public class UsuarioDetalle {
     }
 
     public UsuarioDetalle(
-            int id, 
-            String nombre, 
-            String apellidoPaterno, 
-            String apellidoMaterno, 
+            int id,
+            String nombre,
+            String apellidoPaterno,
+            String apellidoMaterno,
             String nickName,
             Date fechaNacimiento,
             String telefonoCelular) {

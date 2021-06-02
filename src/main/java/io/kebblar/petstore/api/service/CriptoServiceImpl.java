@@ -23,7 +23,7 @@ public class CriptoServiceImpl implements CriptoService {
     private CriptoMapper criptoMapper;
     private RemoteRestCallService remoteRestCallService;
     private OrdenCompraService ordenCompraService;
-    
+
     public CriptoServiceImpl(CriptoMapper criptoMapper, RemoteRestCallService remoteRestCallService, OrdenCompraService ordenCompraService){
         this.criptoMapper=criptoMapper;
         this.remoteRestCallService=remoteRestCallService;

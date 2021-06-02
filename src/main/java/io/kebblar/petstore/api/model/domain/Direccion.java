@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 
 /**
  * <p>Implementacion del POJO de la entidad de {@link Direccion}.
- * 
+ *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -49,10 +49,10 @@ public class Direccion implements Serializable {
     @Size(max = 7, message = "La longitud máxima para el campo de Referencias es 7")
     private String referencias;
     private boolean activo;
-    
+
     public Direccion() {
     }
-    
+
     public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio,
             int idTipoDireccion, String cp, String referencias, boolean activo) {
         this.id = id;

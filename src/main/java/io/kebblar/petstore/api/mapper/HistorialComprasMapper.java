@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -35,10 +35,10 @@ import io.kebblar.petstore.api.model.domain.HistorialCompras;
  * @author  LMtz
  * @see     io.kebblar.petstore.api.model.domain.AdministracionCompras
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface HistorialComprasMapper {
-	
+
     /**
      * Obtiene todas las compras hechas por un usuario.
      *
@@ -56,6 +56,6 @@ public interface HistorialComprasMapper {
             @Result(property = "urlPdf", column = "recibo"),
             @Result(property = "urlImagen", column = "imagen"),
         })
-    @Select("SELECT id,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen,id_usuario FROM historial_compras WHERE id_usuario = #{idUsuario}; ") 
+    @Select("SELECT id,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen,id_usuario FROM historial_compras WHERE id_usuario = #{idUsuario}; ")
     List<HistorialCompras> getAll(@Param("idUsuario") int idUsuario) throws SQLException;
 }

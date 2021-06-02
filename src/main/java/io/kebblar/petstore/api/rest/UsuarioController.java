@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -38,15 +38,15 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * <p>Implementacion  del controlador REST asociado a los endpoints
  * de gestión del POJO Usuario.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}
- * 
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no 
- * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ *
+ * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @see     io.kebblar.petstore.api.model.request.CredencialesRequest
@@ -60,9 +60,9 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param usuarioService Servicios de usuario
      */
     public UsuarioController(UsuarioService usuarioService) {
@@ -89,7 +89,7 @@ public class UsuarioController {
             ) throws ControllerException {
         return this.usuarioService.creaUsuario(credenciales);
     }
-    
+
     @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
     public Usuario createUser(
             @ApiParam(name = "usuario", value = "Crea un Usuario empleando todos sus atributos")
@@ -112,10 +112,10 @@ public class UsuarioController {
             @RequestParam int id) throws ControllerException {
          return this.usuarioService.eliminaUsuario(id);
     }
-    
-    
+
+
     @PutMapping(
-            path = "/cambia-clave.json", 
+            path = "/cambia-clave.json",
             produces = "application/json; charset=utf-8")
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
@@ -124,7 +124,7 @@ public class UsuarioController {
             ) throws ControllerException {
         System.out.println(jwt+"<----------------------------");
          return this.usuarioService.cambiaClave(
-                 credenciales.getUsuario(), 
+                 credenciales.getUsuario(),
                  credenciales.getClave());
     }
 }

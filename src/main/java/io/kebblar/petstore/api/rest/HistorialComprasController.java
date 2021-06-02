@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -30,15 +30,15 @@ import io.kebblar.petstore.api.service.HistorialComprasService;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * <p>Implementacion  del controlador REST asociado a los endpoints
  * de gestión de las compras hechas por un usuario.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no 
- * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ *
+ * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
- * 
+ *
  * @author  LMtz
  * @see     io.kebblar.petstore.api.service.historialComprasService
  * @version 1.0-SNAPSHOT
@@ -48,22 +48,22 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class HistorialComprasController {
     private HistorialComprasService historialComprasService;
-    
+
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param historialComprasService Servicios de historial de compras
      */
     public HistorialComprasController(HistorialComprasService historialComprasService) {
         this.historialComprasService = historialComprasService;
     }
-    
+
     @GetMapping(path = "/historial-compras.json/{idUsuario}", produces = "application/json; charset=utf-8")
     public List<HistorialCompras> getCompras(
-    		@ApiParam(name = "idUsuario", value = "id del usuario que queremos saber sus compras") 
-    		@PathVariable int idUsuario) throws BusinessException {
+            @ApiParam(name = "idUsuario", value = "id del usuario que queremos saber sus compras")
+            @PathVariable int idUsuario) throws BusinessException {
         return historialComprasService.getAll(idUsuario);
     }
-    
+
 }

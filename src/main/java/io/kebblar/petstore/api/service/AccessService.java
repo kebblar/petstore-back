@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -24,15 +24,15 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 
 /**
  * <p>Definición de la interfaz de servicios para 'Usuario'.
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface AccessService {
-    
-	/**
+
+    /**
      * Valida si las credencials proporcionadas son correctas o no.
      * En caso de éxito, retorna un objeto LoginResponse cargado con
      * la información requerida por su cliente.

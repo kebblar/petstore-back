@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   TipoDireccionController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'tipo_direccion'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'tipo_direccion'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -69,9 +69,9 @@ public class TipoDireccionController {
     private TipoDireccionService tipoDireccionService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param tipoDireccionService Servicios de usuario
      */
     public TipoDireccionController(TipoDireccionService tipoDireccionService) {
@@ -97,7 +97,7 @@ public class TipoDireccionController {
     public List<TipoDireccion> getAllTipoDireccion() throws BusinessException {
         return tipoDireccionService.getAll();
     }
-    
+
     @ApiOperation(
         value = "TipoDireccionController::get",
         notes = "Regresa un objeto TipoDireccion cuyo id "
@@ -111,7 +111,7 @@ public class TipoDireccionController {
     ) throws BusinessException {
         return this.tipoDireccionService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "TipoDireccionController::insert",
         notes = "Recibe un objeto TipoDireccion el cual debe de ser insertado "
@@ -140,7 +140,7 @@ public class TipoDireccionController {
     ) throws BusinessException {
         return tipoDireccionService.update(tipoDireccion);
     }
-    
+
     @ApiOperation(
         value = "TipoDireccionController::delete",
         notes = "Recibe un objeto TipoDireccion, el cual es buscado dentro de "
@@ -154,5 +154,5 @@ public class TipoDireccionController {
     ) throws BusinessException {
         return tipoDireccionService.delete(tipoDireccion);
     }
-    
+
 }

@@ -1,6 +1,5 @@
 package io.kebblar.petstore.api.mapper;
 
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

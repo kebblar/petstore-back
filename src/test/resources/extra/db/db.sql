@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: petstore ok
 -- ------------------------------------------------------
--- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
+-- Server version    10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

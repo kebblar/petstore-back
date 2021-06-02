@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MetodoPagoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -34,10 +34,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'metodo_pago'. 
+ * Servicio asociado a la entidad 'metodo_pago'.
  *
  * <p>Implementación de la interfaz {@link MetodoPagoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -58,7 +58,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param metodoPagoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MetodoPagoServiceImpl(MetodoPagoMapper metodoPagoMapper) {

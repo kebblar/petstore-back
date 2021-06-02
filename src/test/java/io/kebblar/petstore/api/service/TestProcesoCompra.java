@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static org.mockito.Mockito.when;
 
@@ -99,7 +98,7 @@ public class TestProcesoCompra {
             logger.info("No se puede agregar la dirección");
         }
         try {
-            int i = direccionService.agregaDireccion(null);
+            direccionService.agregaDireccion(null);
         } catch (Exception e) {
             logger.info("No puede agregarse un nulo como dirección");
             assertTrue(true);

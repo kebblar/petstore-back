@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   Municipio .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'municipio'. 
+ * POJO asociado a la entidad 'municipio'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -74,42 +74,42 @@ public class Municipio implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para idEstado.
      */
     public int getIdEstado() {
         return idEstado;
     }
-    
+
     /**
      * Setter para idEstado.
      */
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
-    
+
     /**
      * Getter para nombre.
      */
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Setter para nombre.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -122,7 +122,7 @@ public class Municipio implements Serializable {
                 + " nombre =" + this.nombre
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Municipio son iguales
      */
@@ -136,19 +136,19 @@ public class Municipio implements Serializable {
         }
         Municipio other = (Municipio) obj;
         return
-               id == other.id && 
-               idEstado == other.idEstado && 
-               nombre == other.nombre; 
+               id == other.id &&
+               idEstado == other.idEstado &&
+               nombre == other.nombre;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            idEstado, 
+            id,
+            idEstado,
             nombre
         );
     }

@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MunicipioMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 
@@ -30,7 +30,7 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Municipio 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Municipio
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -124,7 +124,7 @@ public interface MunicipioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @ResultMap("MunicipioMap")
-    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}") 
+    @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}")
     List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
 
 }

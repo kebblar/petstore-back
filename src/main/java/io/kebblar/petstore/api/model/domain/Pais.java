@@ -5,25 +5,25 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
 =======
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
 >>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
 <<<<<<< HEAD
- * 
+ *
  * Artefacto:   Pais .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
 =======
  * Artefacto:   Pais.java
@@ -33,7 +33,7 @@
 >>>>>>> refs/heads/develop
  *
 <<<<<<< HEAD
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
 =======
  * Historia:    .
  *              20210503_2321 Creación de éste POJO
@@ -47,7 +47,7 @@ import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de {@link Pais}.
- * 
+ *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -89,28 +89,28 @@ public class Pais implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para nombre.
      */
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Setter para nombre.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -122,7 +122,7 @@ public class Pais implements Serializable {
                 + " nombre =" + this.nombre
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Pais son iguales
      */
@@ -136,17 +136,17 @@ public class Pais implements Serializable {
         }
         Pais other = (Pais) obj;
         return
-               id == other.id && 
-               nombre == other.nombre; 
+               id == other.id &&
+               nombre == other.nombre;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
+            id,
             nombre
         );
     }

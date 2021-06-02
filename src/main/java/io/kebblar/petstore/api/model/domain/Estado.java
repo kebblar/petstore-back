@@ -5,25 +5,25 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
 =======
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
 >>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
 <<<<<<< HEAD
- * 
+ *
  * Artefacto:   Estado .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
 =======
  * Artefacto:   Estado.java
@@ -33,7 +33,7 @@
 >>>>>>> refs/heads/develop
  *
 <<<<<<< HEAD
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
 =======
  * Historia:    .
  *              20210504_1735 Creación de éste POJO
@@ -48,7 +48,7 @@ import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de {@link Estado}.
- * 
+ *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -92,42 +92,42 @@ public class Estado implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para idPais.
      */
     public int getIdPais() {
         return idPais;
     }
-    
+
     /**
      * Setter para idPais.
      */
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
-    
+
     /**
      * Getter para nombre.
      */
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Setter para nombre.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -140,7 +140,7 @@ public class Estado implements Serializable {
                 + " nombre =" + this.nombre
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Estado son iguales
      */
@@ -154,19 +154,19 @@ public class Estado implements Serializable {
         }
         Estado other = (Estado) obj;
         return
-               id == other.id && 
-               idPais == other.idPais && 
-               nombre == other.nombre; 
+               id == other.id &&
+               idPais == other.idPais &&
+               nombre == other.nombre;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            idPais, 
+            id,
+            idPais,
             nombre
         );
     }

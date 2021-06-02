@@ -6,8 +6,6 @@ import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.domain.*;
@@ -16,14 +14,11 @@ import io.kebblar.petstore.api.service.*;
 @RestController
 @RequestMapping(value = "/api")
 public class DireccionController {
-    private static final String res = "{'result':'ok'}".replace('\'', '\"');
 
     private DireccionService servicio;
-    private TipoDireccionService servicio2;
 
-    public DireccionController(DireccionService direccionService, TipoDireccionService tipoDireccionService){
+    public DireccionController(DireccionService direccionService){
         this.servicio=direccionService;
-        this.servicio2=tipoDireccionService;
     }
 
     @ApiOperation(

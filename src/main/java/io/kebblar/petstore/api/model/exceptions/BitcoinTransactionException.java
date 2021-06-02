@@ -32,6 +32,7 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class BitcoinTransactionException extends BusinessException {
+    private static final long serialVersionUID = -4440655023335060611L;
 
     public BitcoinTransactionException(String msg) {
         super(msg,

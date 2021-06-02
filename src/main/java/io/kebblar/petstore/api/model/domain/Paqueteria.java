@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   Paqueteria .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'paqueteria'. 
+ * POJO asociado a la entidad 'paqueteria'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -78,70 +78,70 @@ public class Paqueteria implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para nombre.
      */
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Setter para nombre.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     /**
      * Getter para breveDescripcion.
      */
     public String getBreveDescripcion() {
         return breveDescripcion;
     }
-    
+
     /**
      * Setter para breveDescripcion.
      */
     public void setBreveDescripcion(String breveDescripcion) {
         this.breveDescripcion = breveDescripcion;
     }
-    
+
     /**
      * Getter para htmlDescripcion.
      */
     public String getHtmlDescripcion() {
         return htmlDescripcion;
     }
-    
+
     /**
      * Setter para htmlDescripcion.
      */
     public void setHtmlDescripcion(String htmlDescripcion) {
         this.htmlDescripcion = htmlDescripcion;
     }
-    
+
     /**
      * Getter para precio.
      */
     public int getPrecio() {
         return precio;
     }
-    
+
     /**
      * Setter para precio.
      */
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -156,7 +156,7 @@ public class Paqueteria implements Serializable {
                 + " precio =" + this.precio
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Paqueteria son iguales
      */
@@ -170,23 +170,23 @@ public class Paqueteria implements Serializable {
         }
         Paqueteria other = (Paqueteria) obj;
         return
-               id == other.id && 
-               nombre == other.nombre && 
-               breveDescripcion == other.breveDescripcion && 
-               htmlDescripcion == other.htmlDescripcion && 
-               precio == other.precio; 
+               id == other.id &&
+               nombre == other.nombre &&
+               breveDescripcion == other.breveDescripcion &&
+               htmlDescripcion == other.htmlDescripcion &&
+               precio == other.precio;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            nombre, 
-            breveDescripcion, 
-            htmlDescripcion, 
+            id,
+            nombre,
+            breveDescripcion,
+            htmlDescripcion,
             precio
         );
     }

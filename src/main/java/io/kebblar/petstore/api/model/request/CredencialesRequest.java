@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -20,7 +20,7 @@ package io.kebblar.petstore.api.model.request;
 
 /**
  * Implementacion del POJO de la entidad de 'CredencialesRequest'.
- * 
+ *
  * @author  luz
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT

@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -44,15 +44,15 @@ import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.kebblar.petstore.api.support.JwtManagerService;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * <p>Implementacion  del controlador REST asociado a los endpoints
  * de gestión del POJO {@link Mascota}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}
- * 
- * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no 
- * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ *
+ * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no
+ * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Mascota
  * @see     io.kebblar.petstore.api.model.response.ProcesaMascotaResponse
@@ -68,9 +68,9 @@ public class MascotaController {
     private JwtManagerService jwtManagerService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param mascotaService Servicio de Mascota
      * @param jwtManagerService Servicio de jswManager
      * @param mailSenderService Serivico de mailSender

@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -34,10 +34,10 @@ import io.kebblar.petstore.api.model.domain.AdministracionCompras;
  * @author  LMtz
  * @see     io.kebblar.petstore.api.model.domain.AdministracionCompras
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface AdministracionComprasMapper {
-	
+
     /**
      * Obtiene todas las compras hechas por los usuarios.
      *
@@ -45,7 +45,7 @@ public interface AdministracionComprasMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="AministracionComprasMap", value = {
-    		@Result(property = "estadoEnvio", column = "estado_envio"),
+            @Result(property = "estadoEnvio", column = "estado_envio"),
             @Result(property = "calleNumero", column = "calle_numero"),
             @Result(property = "colonia", column = "colonia"),
             @Result(property = "cp", column = "cp"),
@@ -56,9 +56,9 @@ public interface AdministracionComprasMapper {
             @Result(property = "idCompra", column = "id_compra"),
             @Result(property = "fechaCompra", column = "fecha_hora_comprar"),
         })
-    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,id_mascota,nombre_anuncio,recibo,id_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;") 
+    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,id_mascota,nombre_anuncio,recibo,id_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;")
     List<AdministracionCompras> getAll() throws SQLException;
-    
+
     /**
      * Actualiza el estado de una compra de en camino a enviado.
      *
@@ -67,7 +67,7 @@ public interface AdministracionComprasMapper {
      * @return un entero en caso de que la operacion fue exitosa.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE orden_compra SET estado_envio = ${estadoEnvio} WHERE id = #{idCompra};") 
+    @Update("UPDATE orden_compra SET estado_envio = ${estadoEnvio} WHERE id = #{idCompra};")
     int sent(int estadoEnvio, int idCompra) throws SQLException;
-	
+
 }

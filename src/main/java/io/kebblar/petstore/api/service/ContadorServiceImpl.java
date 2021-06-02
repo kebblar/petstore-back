@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -27,24 +27,24 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Implementación de la interfaz {@link ContadorService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Contador
  * @see     io.kebblar.petstore.api.service.ContadorService
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 @Service
 public class ContadorServiceImpl implements ContadorService {
     private ContadorMapper contadorMapper;
-    
+
     /**
      * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales 
+     * los Mappers y todos los servicios adicionales
      * a ser empleados en esta clase.
-     * 
+     *
      * @param contadorMapper
      */
     public ContadorServiceImpl(ContadorMapper contadorMapper) {
@@ -55,7 +55,7 @@ public class ContadorServiceImpl implements ContadorService {
     public int getUsuarioDetalleCounter() throws BusinessException {
         return this.getTableCounter("usuario_detalle");
     }
-    
+
     @Override
     public int getUsuarioCounter() throws BusinessException {
         return this.getTableCounter("usuario");
@@ -75,7 +75,7 @@ public class ContadorServiceImpl implements ContadorService {
     public int getMunicipioCounter() throws BusinessException {
         return this.getTableCounter("municipio");
     }
-    
+
     @Override
     public Integer getTableCounter(String tabla) throws BusinessException {
         String ESQUEMA = "petstore";

@@ -32,27 +32,27 @@ public class QRServiceImpl implements QRService {
             throw new BusinessException(e.toString(), e.toString());
         }
     }
-    
+
     @Override
     public byte[] getQRBytes(String text) throws BusinessException {
         try {
             BufferedImage data = this.generateQRCodeImage(text);
             return toByteArray(data, "png");
         } catch(Exception e) {
-            throw new BusinessException(e.toString(), e.toString());            
+            throw new BusinessException(e.toString(), e.toString());
         }
     }
-    
+
     @Override
     public String getQRBytesBase64(String textToEncode) throws BusinessException {
         try {
             BufferedImage data = this.generateQRCodeImage(textToEncode);
             return Base64.getEncoder().encodeToString(toByteArray(data, "jpg"));
         } catch(Exception e) {
-            throw new BusinessException(e.toString(), e.toString());            
+            throw new BusinessException(e.toString(), e.toString());
         }
     }
-    
+
     private byte[] toByteArray(BufferedImage bi, String format) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, format, baos);

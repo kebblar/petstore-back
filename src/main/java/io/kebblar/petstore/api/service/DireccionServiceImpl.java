@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -18,7 +18,6 @@
  */
 package io.kebblar.petstore.api.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
@@ -34,26 +33,26 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Implementación de la interfaz {@link DireccionService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Direccion
  * @see     io.kebblar.petstore.api.service.DireccionService
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
-	private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
 
     private DireccionMapper direccionMapper;
 
     /**
      * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales 
+     * los Mappers y todos los servicios adicionales
      * a ser empleados en esta clase.
-     * 
+     *
      * @param direccionMapper
      */
     public DireccionServiceImpl(DireccionMapper direccionMapper) {

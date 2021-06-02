@@ -3,12 +3,12 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
  * Artefacto:   UsuarioDetalleMapper.java
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Gustavo A. Arellano
  * Fecha:       Martes 04 de Mayo de 2021 (14_01)
  *
@@ -26,13 +26,13 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle} 
+ * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.UsuarioDetalle
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
- * 
+ * @since   1.0-SNAPSHOT
+ *
  */
 @Repository
 public interface UsuarioDetalleMapper {
@@ -52,22 +52,22 @@ public interface UsuarioDetalleMapper {
         @Result(property = "apellidoMaterno", column = "apellido_materno"),
         @Result(property = "nickName", column = "nick_name"),
         @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
-        @Result(property = "telefonoCelular", column = "telefono_celular")    
+        @Result(property = "telefonoCelular", column = "telefono_celular")
     })
-    @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ") 
+    @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ")
     UsuarioDetalle getById(int idUsuario) throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo {@link UsuarioDetalle} .
      *
-     * @return Lista de objetos de tipo {@link UsuarioDetalle} 
+     * @return Lista de objetos de tipo {@link UsuarioDetalle}
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @ResultMap("UsuarioDetalleMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario_detalle ") 
+    @Select("SELECT " + CAMPOS + " FROM usuario_detalle ")
     List<UsuarioDetalle> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo {@link UsuarioDetalle}  con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
      *
@@ -90,12 +90,12 @@ public interface UsuarioDetalleMapper {
 
     /**
      * Borra (de manera lógica y no física) el registro de {@link UsuarioDetalle}.
-     * 
+     *
      * @param id que representa el identificador del usuario a borrar
      * @return id del usuario borrado
      * @throws SQLException dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{id} ") 
+    @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{id} ")
     Integer delete(int id) throws SQLException;
 
 }

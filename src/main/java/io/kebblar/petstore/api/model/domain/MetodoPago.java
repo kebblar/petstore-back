@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MetodoPago .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'metodo_pago'. 
+ * POJO asociado a la entidad 'metodo_pago'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -94,70 +94,70 @@ public class MetodoPago implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para idUsuario.
      */
     public int getIdUsuario() {
         return idUsuario;
     }
-    
+
     /**
      * Setter para idUsuario.
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
     /**
      * Getter para tipopago.
      */
     public int getTipopago() {
         return tipopago;
     }
-    
+
     /**
      * Setter para tipopago.
      */
     public void setTipopago(int tipopago) {
         this.tipopago = tipopago;
     }
-    
+
     /**
      * Getter para numTarjetaCartera.
      */
     public String getNumTarjetaCartera() {
         return numTarjetaCartera;
     }
-    
+
     /**
      * Setter para numTarjetaCartera.
      */
     public void setNumTarjetaCartera(String numTarjetaCartera) {
         this.numTarjetaCartera = numTarjetaCartera;
     }
-    
+
     /**
      * Getter para expiracion.
      */
     public String getExpiracion() {
         return expiracion;
     }
-    
+
     /**
      * Setter para expiracion.
      */
     public void setExpiracion(String expiracion) {
         this.expiracion = expiracion;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -173,7 +173,7 @@ public class MetodoPago implements Serializable {
                 + " activo =" + this.activo
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase MetodoPago son iguales
      */

@@ -14,7 +14,7 @@ import mx.com.ultrasist.ci.generator.model.Entidad;
 
 public class CodeGeneratorTest {
     private static Log logger = LogFactory.getLog(CodeGeneratorTest.class);
-    
+
     public static void main(String... args) throws IOException {
         new CodeGeneratorTest();
     }
@@ -56,7 +56,7 @@ public class CodeGeneratorTest {
 
         String all = mapper.writeValueAsString(lista);
         logger.info(all);
-        
+
         List<Entidad> obj = mapper.readValue(all, new TypeReference<List<Entidad>>(){});
         List<Entidad> seleccion = GenCode.filter(obj, tablas);
 

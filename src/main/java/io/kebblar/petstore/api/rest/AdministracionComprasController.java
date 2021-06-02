@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -30,15 +30,15 @@ import io.kebblar.petstore.api.service.AdministracionComprasService;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * <p>Implementacion  del controlador REST asociado a los endpoints
  * de gestión de todas las compras hechas por los usuario.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no 
- * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ *
+ * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
- * 
+ *
  * @author  LMtz
  * @see     io.kebblar.petstore.api.service.AdministracionComprasController
  * @version 1.0-SNAPSHOT
@@ -47,29 +47,29 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class AdministracionComprasController {
-	private AdministracionComprasService admini;
+    private AdministracionComprasService admini;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param AdministracionComprasService Servicios de administracion de compras
      */
-	public AdministracionComprasController(AdministracionComprasService admini) {
-		this.admini = admini;
-	}
-	
+    public AdministracionComprasController(AdministracionComprasService admini) {
+        this.admini = admini;
+    }
+
     @GetMapping(path = "/administracion-compras.json", produces = "application/json; charset=utf-8")
     public List<AdministracionCompras> getCompras() throws BusinessException {
         return admini.getAll();
     }
-    
+
     @GetMapping(path = "/administracion-compras-update.json/{estado}/{idCompra}", produces = "application/json; charset=utf-8")
     public String updateEstado(
-    		@ApiParam(name = "estado", value = "el nuevo estado de la compra.")
-    		@PathVariable int estado,
-    		@ApiParam(name = "idCompra", value = "el id de la compra.")
-    		@PathVariable int idCompra) throws BusinessException {
+            @ApiParam(name = "estado", value = "el nuevo estado de la compra.")
+            @PathVariable int estado,
+            @ApiParam(name = "idCompra", value = "el id de la compra.")
+            @PathVariable int idCompra) throws BusinessException {
         return admini.sent(estado,idCompra);
     }
 }

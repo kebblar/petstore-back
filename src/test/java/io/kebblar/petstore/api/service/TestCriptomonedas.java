@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -52,7 +51,7 @@ public class TestCriptomonedas {
             logger.info("Problema recuperando el wallet del usuario");
         }
         try {
-            String s = criptoService.getByUser(2);
+            criptoService.getByUser(2);
         } catch (MapperCallException m) {
             assertTrue(true);
         }
@@ -66,7 +65,7 @@ public class TestCriptomonedas {
             logger.info("Problema insertando una nueva transacción");
         }
         try {
-            int i = criptoService.insertTransaccion(t2);
+            criptoService.insertTransaccion(t2);
         } catch (MapperCallException b) {
             assertTrue(true);
         }

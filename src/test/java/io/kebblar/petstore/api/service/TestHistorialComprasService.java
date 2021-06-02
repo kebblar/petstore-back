@@ -20,22 +20,22 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public class TestHistorialComprasService {
     @Mock
     private HistorialComprasMapper historialMapper;
-    
+
     private HistorialComprasService historialService;
-    
+
     @Before
     public void prepara() {
         this.historialService = new HistorialComprasServiceImpl(historialMapper);
     }
-    
+
     @Test
     public void Test() throws SQLException, BusinessException{
-    	List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();
-    	HistorialCompras compra = new HistorialCompras(1,"2020-10-10",0,1,"foo","paypal","gus@aol.com",
-    			"foo.com","goo.com");
-    	getLista.add(compra);
-    	when(historialMapper.getAll(1)).thenReturn(getLista);
-    	assert(historialService.getAll(1).get(0).getId() == 1);
+        List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();
+        HistorialCompras compra = new HistorialCompras(1,"2020-10-10",0,1,"foo","paypal","gus@aol.com",
+                "foo.com","goo.com");
+        getLista.add(compra);
+        when(historialMapper.getAll(1)).thenReturn(getLista);
+        assert(historialService.getAll(1).get(0).getId() == 1);
     }
-    
+
 }

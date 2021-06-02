@@ -4,7 +4,7 @@ public class Convert {
     private static final String[] UNIDADES = {"", "UN ", "DOS ", "TRES ", "CUATRO ", "CINCO ", "SEIS ", "SIETE ", "OCHO ", "NUEVE ", "DIEZ ", "ONCE ", "DOCE ", "TRECE ", "CATORCE ", "QUINCE ", "DIECISEIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE", "VEINTE"};
     private static final String[] DECENAS  = {"VENTI", "TREINTA ", "CUARENTA ", "CINCUENTA ", "SESENTA ", "SETENTA ", "OCHENTA ", "NOVENTA ", "CIEN "};
     private static final String[] CENTENAS = {"CIENTO ", "DOSCIENTOS ", "TRESCIENTOS ", "CUATROCIENTOS ", "QUINIENTOS ", "SEISCIENTOS ", "SETECIENTOS ", "OCHOCIENTOS ", "NOVECIENTOS "};
-       
+
     public static String ok(int n) {
         if (n<0) return "MENOS "+ok(-n);
         if (n>=0 && n<21) return UNIDADES[n];
@@ -19,5 +19,5 @@ public class Convert {
     public static void main(String args[]) {
        System.out.println(ok(10021));
     }
-   
+
 }

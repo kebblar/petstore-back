@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   OrdenCompraMapper.java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Daniel Alvarez
  * Fecha:       17 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -36,7 +36,7 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad OrdenCompra 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad OrdenCompra
  *
  * @author Daniel Alvarez
  * @version 1.0-SNAPSHOT
@@ -46,8 +46,8 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
  */
 @Repository
 public interface OrdenCompraMapper {
-	
-	static final String CAMPOS = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
+
+    static final String CAMPOS = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**
      * Obtiene un objeto de tipo 'OrdenCompra' dado su id.
@@ -70,7 +70,7 @@ public interface OrdenCompraMapper {
             @Result(property = "estadoEnvio",   column = "estado_envio"),
             @Result(property = "recibo",   column = "recibo")
     })
-    @Select("SELECT " + CAMPOS + " FROM orden_compra WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM orden_compra WHERE     id = #{id}     ")
     DatosOrden getById(int id) throws SQLException ;
 
     /**
@@ -81,10 +81,10 @@ public interface OrdenCompraMapper {
      * operación desde la base de datos.
      */
     @ResultMap("OrdenCompraMap")
-    @Select("SELECT " + CAMPOS + " FROM orden_compra ") 
+    @Select("SELECT " + CAMPOS + " FROM orden_compra ")
     List<DatosOrden> getAll() throws SQLException;
-    
-    
+
+
     /**
      * Inserta un objeto de tipo 'DatosOrden' con base en la información dada por el objeto de tipo 'DatosOrden'.
      *
@@ -98,5 +98,5 @@ public interface OrdenCompraMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(DatosOrden datosOrden) throws SQLException;
 
-    
+
 }

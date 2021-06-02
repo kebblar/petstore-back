@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MetodoPagoMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 
@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.model.domain.MetodoPago;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad MetodoPago 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad MetodoPago
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -59,7 +59,7 @@ public interface MetodoPagoMapper {
             @Result(property = "expiracion",   column = "expiracion")    ,
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM metodo_pago WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM metodo_pago WHERE     id = #{id}     ")
     MetodoPago getById(int id) throws SQLException;
 
     /**
@@ -70,9 +70,9 @@ public interface MetodoPagoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("MetodoPagoMap")
-    @Select("SELECT " + CAMPOS + " FROM metodo_pago ") 
+    @Select("SELECT " + CAMPOS + " FROM metodo_pago ")
     List<MetodoPago> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'MetodoPago' con base en la información dada por el objeto de tipo 'MetodoPago'.
      *
@@ -94,7 +94,7 @@ public interface MetodoPagoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE metodo_pago" 
+    "UPDATE metodo_pago"
     + " SET id_usuario = #{idUsuario}, tipopago = #{tipopago}, activo = #{activo}, num_tarjeta_cartera = #{numTarjetaCartera}, expiracion = #{expiracion}"
     + " WHERE id = #{id} ")
     int update(MetodoPago metodoPago) throws SQLException;
