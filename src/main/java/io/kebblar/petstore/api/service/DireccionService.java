@@ -118,9 +118,9 @@ public interface DireccionService {
     /**
      * Metodo que recibe los datos de una direccion agregada durante el proceso de compra y distribuye su
      * contenido para almacenarlo de forma correcta en el sistema.
-     * @param nuevaDireccion
-     * @return
-     * @throws BusinessException
+     * @param nuevaDireccion objeto con los datos de la nueva dirección a insertar.
+     * @return entero si todo sale bien.
+     * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
     int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
 }

@@ -16,11 +16,16 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
+import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.swagger.annotations.Api;
 import io.kebblar.petstore.api.utils.JWTUtil;
 
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +38,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/")
 public class RouterController {
 
+    @Autowired
+    private RemoteRestCallService remoteRestCallService;
+
     @GetMapping(value = "/ui/**")
     public ModelAndView redirectWithUsingForwardPrefix(ModelMap model) {
         model.addAttribute("attribute", "forwardWithForwardPrefix");
@@ -42,6 +50,13 @@ public class RouterController {
     @GetMapping("/token.json")
     public String getToken(){
         return JWTUtil.getJWTToken();
+    }
+
+    @GetMapping("/info-cripto/{add}.json")
+    public BlockCyperChecker getInfo(
+            @ApiParam(name="add", value ="Direccion wallet buscada." )
+            @PathVariable String add){
+        return remoteRestCallService.verifyBalance(add);
     }
 
 }

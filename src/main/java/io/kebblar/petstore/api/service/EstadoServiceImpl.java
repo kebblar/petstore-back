@@ -129,7 +129,9 @@ public class EstadoServiceImpl implements EstadoService {
             throw new BusinessException();
         }
     }
-
+    /*
+    Se recuperan los estados por país
+     */
     @Override
     public List<Estado> getByPais(int id) throws BusinessException {
         try{

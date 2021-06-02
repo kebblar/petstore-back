@@ -112,6 +112,19 @@ public class EstadoController {
     ) throws BusinessException {
         return this.estadoService.getById(id);
     }
+
+    @ApiOperation(
+            value = "EstadoController::getByPais",
+            notes = "Regresa los estados de determinado país"
+    )
+    @GetMapping(
+            value = "/estado-por-pais/{id}.json",
+            produces = "application/json; charset=utf-8")
+    public List<Estado> getByPais(
+            @ApiParam(name = "id", value = "Representa el id del pais")
+            @PathVariable int id) throws BusinessException {
+        return estadoService.getByPais(id);
+    }
     
     @ApiOperation(
         value = "EstadoController::insert",
@@ -154,13 +167,6 @@ public class EstadoController {
     @RequestBody Estado estado
     ) throws BusinessException {
         return estadoService.delete(estado);
-    }
-
-    @GetMapping(
-            value = "/estado-por-pais/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public List<Estado> getByPais(@PathVariable int id) throws BusinessException {
-        return estadoService.getByPais(id);
     }
     
 }
