@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for debian-linux-gnu (x86_64)
+-- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: petstore
 -- ------------------------------------------------------
--- Server version   10.5.9-MariaDB-1:10.5.9+maria~focal
+-- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -47,8 +47,7 @@ DROP TABLE IF EXISTS `anuncio`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `anuncio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_categoria` int(11) NOT NULL,
-  `sku` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `folio` varchar(14) NOT NULL,
   `titulo` varchar(50) CHARACTER SET utf8 NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 NOT NULL,
   `precio` decimal(10,2) NOT NULL,
@@ -57,9 +56,10 @@ CREATE TABLE `anuncio` (
   `fecha_alta` datetime NOT NULL,
   `fecha_modificacion` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
   `fecha_eliminacion` datetime DEFAULT NULL,
-  `estatus` smallint(2) NOT NULL,
+  `id_estatus` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_anuncio_categoria` (`id_categoria`)
+  KEY `idx_anuncio_id_estatus` (`id_estatus`),
+  CONSTRAINT `fk_anuncio_estatus_anuncio` FOREIGN KEY (`id_estatus`) REFERENCES `estatus_anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,67 +67,63 @@ CREATE TABLE `anuncio` (
 -- Dumping data for table `anuncio`
 --
 
-
 LOCK TABLES `anuncio` WRITE;
 /*!40000 ALTER TABLE `anuncio` DISABLE KEYS */;
 /*!40000 ALTER TABLE `anuncio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `anuncio_atributo`
+-- Table structure for table `anuncio_mascota`
 --
 
-DROP TABLE IF EXISTS `anuncio_atributo`;
+DROP TABLE IF EXISTS `anuncio_mascota`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `anuncio_atributo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `anuncio_mascota` (
+  `id_atributo` int(11) DEFAULT NULL,
   `id_anuncio` int(11) NOT NULL,
-  `id_atributo` int(11) NOT NULL,
-  `valor` int(11) NOT NULL,
-  `unidad` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_anuncio_atributo` (`id_atributo`),
-  KEY `fk_anuncio_atributo_anuncio` (`id_anuncio`),
-  CONSTRAINT `fk_anunacio_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_anuncio_atributo_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `idx_mascota_id_atributo` (`id_atributo`),
+  CONSTRAINT `fk_mascota_anuncio` FOREIGN KEY (`id_atributo`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mascota_mascota_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `mascota_atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `anuncio_atributo`
+-- Dumping data for table `anuncio_mascota`
 --
 
-LOCK TABLES `anuncio_atributo` WRITE;
-/*!40000 ALTER TABLE `anuncio_atributo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `anuncio_atributo` ENABLE KEYS */;
+LOCK TABLES `anuncio_mascota` WRITE;
+/*!40000 ALTER TABLE `anuncio_mascota` DISABLE KEYS */;
+/*!40000 ALTER TABLE `anuncio_mascota` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `anuncio_imagen`
+-- Table structure for table `anuncio_media`
 --
 
-DROP TABLE IF EXISTS `anuncio_imagen`;
+DROP TABLE IF EXISTS `anuncio_media`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `anuncio_imagen` (
+CREATE TABLE `anuncio_media` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_anuncio` int(11) NOT NULL,
   `uuid` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `imagen` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `id_tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_anuncio_imagen_anuncio` (`id_anuncio`) USING BTREE,
-  CONSTRAINT `fk_anuncio_imagen_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`)
+  KEY `idx_anuncio_media_id_tipo` (`id_tipo`),
+  CONSTRAINT `fk_anuncio_imagen_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`),
+  CONSTRAINT `fk_anuncio_media_media_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `media_tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `anuncio_imagen`
+-- Dumping data for table `anuncio_media`
 --
 
-LOCK TABLES `anuncio_imagen` WRITE;
-/*!40000 ALTER TABLE `anuncio_imagen` DISABLE KEYS */;
-/*!40000 ALTER TABLE `anuncio_imagen` ENABLE KEYS */;
+LOCK TABLES `anuncio_media` WRITE;
+/*!40000 ALTER TABLE `anuncio_media` DISABLE KEYS */;
+/*!40000 ALTER TABLE `anuncio_media` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -327,8 +323,9 @@ DROP TABLE IF EXISTS `estatus_anuncio`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estatus_anuncio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(100) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
+  `descripcion` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unq_estatus_anuncio_status` (`descripcion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -338,7 +335,7 @@ CREATE TABLE `estatus_anuncio` (
 
 LOCK TABLES `estatus_anuncio` WRITE;
 /*!40000 ALTER TABLE `estatus_anuncio` DISABLE KEYS */;
-INSERT INTO `estatus_anuncio` VALUES (1,'EN EDICION'),(2,'ACTIVO'),(3,'PUBLICADO'),(4,'VENCIDO'),(5,'ELIMINADO'),(6,'CANCELADO');
+INSERT INTO `estatus_anuncio` VALUES (2,'ACTIVO'),(6,'CANCELADO'),(5,'ELIMINADO'),(1,'EN EDICION'),(3,'PUBLICADO'),(4,'VENCIDO');
 /*!40000 ALTER TABLE `estatus_anuncio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,27 +361,56 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Table structure for table `mascota`
+-- Table structure for table `mascota_atributo`
 --
 
-DROP TABLE IF EXISTS `mascota`;
+DROP TABLE IF EXISTS `mascota_atributo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mascota` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de mascota',
-  `nombre` varchar(128) DEFAULT NULL COMMENT 'Atributo que representa el nombre de una mascota',
-  `descuento` tinyint(3) DEFAULT NULL COMMENT 'Atributo que representa el descuento que podria tener una mascota',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `mascota_atributo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anuncio` int(11) NOT NULL,
+  `id_atributo` int(11) NOT NULL,
+  `valor` int(11) NOT NULL,
+  `unidad` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_anuncio_atributo` (`id_atributo`),
+  KEY `fk_anuncio_atributo_anuncio` (`id_anuncio`),
+  CONSTRAINT `fk_anunacio_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mascota`
+-- Dumping data for table `mascota_atributo`
 --
 
-LOCK TABLES `mascota` WRITE;
-/*!40000 ALTER TABLE `mascota` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mascota` ENABLE KEYS */;
+LOCK TABLES `mascota_atributo` WRITE;
+/*!40000 ALTER TABLE `mascota_atributo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mascota_atributo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `media_tipo`
+--
+
+DROP TABLE IF EXISTS `media_tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `media_tipo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `media_tipo`
+--
+
+LOCK TABLES `media_tipo` WRITE;
+/*!40000 ALTER TABLE `media_tipo` DISABLE KEYS */;
+INSERT INTO `media_tipo` VALUES (1,'JPG'),(2,'PNG'),(3,'GIF'),(4,'MP4'),(5,'AVI');
+/*!40000 ALTER TABLE `media_tipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -814,6 +840,9 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = latin1 */;
 /*!50001 SET character_set_results     = latin1 */;
 /*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `administracion_compras` AS (select `s1`.`estado_envio` AS `estado_envio`,`petstore`.`direccion`.`calle_numero` AS `calle_numero`,`petstore`.`direccion`.`colonia` AS `colonia`,`petstore`.`direccion`.`cp` AS `cp`,`petstore`.`direccion`.`id` AS `id_direccion`,`s1`.`cve_orden_compra` AS `cve_orden_compra`,'1' AS `id_mascota`,`s1`.`titulo` AS `nombre_anuncio`,`s1`.`recibo` AS `recibo`,`s1`.`id_compra` AS `id_compra`,`s1`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`direccion` join (select `petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`orden_compra`.`id_direccion_envio` AS `id_direccion_envio`,`petstore`.`orden_compra`.`cve_orden_compra` AS `cve_orden_compra`,`petstore`.`anuncio`.`titulo` AS `titulo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id` AS `id_compra`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`orden_compra` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `petstore`.`orden_compra`.`id_anuncio`))) `s1` on(`s1`.`id_direccion_envio` = `petstore`.`direccion`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -849,6 +878,9 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = latin1 */;
 /*!50001 SET character_set_results     = latin1 */;
 /*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `historial_compras` AS (select `sb2`.`id` AS `id`,`sb2`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb2`.`estado_envio` AS `estado_envio`,`sb2`.`titulo` AS `nombre_anuncio`,`sb2`.`tipo` AS `tipo`,`petstore`.`usuario`.`correo` AS `correo`,`sb2`.`recibo` AS `recibo`,'http://photos.ci.ultrasist.net/img.png' AS `imagen`,`sb2`.`id_usuario` AS `id_usuario` from ((select `sb1`.`id` AS `id`,`sb1`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb1`.`estado_envio` AS `estado_envio`,`petstore`.`anuncio`.`titulo` AS `titulo`,`sb1`.`tipo` AS `tipo`,`sb1`.`recibo` AS `recibo`,`sb1`.`id_usuario` AS `id_usuario` from ((select `petstore`.`orden_compra`.`id` AS `id`,`petstore`.`orden_compra`.`id_anuncio` AS `id_anuncio`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`metodo_pago`.`tipo` AS `tipo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id_usuario` AS `id_usuario` from (`petstore`.`orden_compra` join `petstore`.`metodo_pago` on(`petstore`.`metodo_pago`.`id` = `petstore`.`orden_compra`.`id_metodo_pago`))) `sb1` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `sb1`.`id_anuncio`))) `sb2` join `petstore`.`usuario` on(`petstore`.`usuario`.`id` = `sb2`.`id_usuario`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -862,4 +894,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-02 14:16:20
+-- Dump completed on 2021-06-02 22:20:50
