@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for debian-linux-gnu (x86_64)
+-- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: petstore
 -- ------------------------------------------------------
--- Server version	10.5.9-MariaDB-1:10.5.9+maria~focal
+-- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,10 +57,13 @@ CREATE TABLE `anuncio` (
   `fecha_modificacion` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
   `fecha_eliminacion` datetime DEFAULT NULL,
   `id_estatus` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_anuncio_id_estatus` (`id_estatus`),
+  KEY `idx_anuncio_id_categoria` (`id_categoria`),
+  CONSTRAINT `fk_anuncio_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_anuncio_estatus_anuncio` FOREIGN KEY (`id_estatus`) REFERENCES `estatus_anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,34 +72,7 @@ CREATE TABLE `anuncio` (
 
 LOCK TABLES `anuncio` WRITE;
 /*!40000 ALTER TABLE `anuncio` DISABLE KEYS */;
-INSERT INTO `anuncio` VALUES (1,'1234','mi anuncio','foo',123.15,NULL,NULL,'2021-05-01 00:00:00','2021-05-01 00:00:00',NULL,1),(2,'1234','mi anuncio','foo',123.15,NULL,NULL,'2021-05-01 00:00:00','2021-05-01 00:00:00',NULL,1),(4,'asdad','camaleon','bebe',100.00,NULL,NULL,'2021-06-10 00:00:00','2021-09-08 00:00:00',NULL,1);
 /*!40000 ALTER TABLE `anuncio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `anuncio_mascota`
---
-
-DROP TABLE IF EXISTS `anuncio_mascota`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `anuncio_mascota` (
-  `id_atributo` int(11) DEFAULT NULL,
-  `id_anuncio` int(11) NOT NULL,
-  KEY `idx_mascota_id_atributo` (`id_atributo`),
-  KEY `idx_anuncio_mascota_id_anuncio` (`id_anuncio`),
-  CONSTRAINT `fk_anuncio_mascota_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_anuncio_mascota_mascota_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `mascota_atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `anuncio_mascota`
---
-
-LOCK TABLES `anuncio_mascota` WRITE;
-/*!40000 ALTER TABLE `anuncio_mascota` DISABLE KEYS */;
-/*!40000 ALTER TABLE `anuncio_mascota` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,7 +86,8 @@ CREATE TABLE `anuncio_media` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_anuncio` int(11) NOT NULL,
   `uuid` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `id_tipo` int(11) NOT NULL,
+  `id_tipo` int(11) NOT NULL COMMENT '1:JPG, 2:PNG, 3:GIF, 4:MP4, 5:AVI',
+  `principal` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_anuncio_imagen_anuncio` (`id_anuncio`) USING BTREE,
   KEY `idx_anuncio_media_id_tipo` (`id_tipo`),
@@ -137,7 +114,7 @@ DROP TABLE IF EXISTS `atributo`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atributo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `atributo` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -372,13 +349,12 @@ DROP TABLE IF EXISTS `mascota_atributo`;
 CREATE TABLE `mascota_atributo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_anuncio` int(11) NOT NULL,
-  `id_atributo` int(11) NOT NULL,
-  `valor` int(11) NOT NULL,
-  `unidad` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `id_valor_atributo` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_anuncio_atributo` (`id_atributo`),
+  KEY `fk_anuncio_atributo` (`id_valor_atributo`),
   KEY `fk_anuncio_atributo_anuncio` (`id_anuncio`),
-  CONSTRAINT `fk_anunacio_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_mascota_atributo_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mascota_atributo_valor_atributo` FOREIGN KEY (`id_valor_atributo`) REFERENCES `valor_atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -400,7 +376,7 @@ DROP TABLE IF EXISTS `media_tipo`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `media_tipo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -741,7 +717,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1622678476764,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,1621809448232,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
+INSERT INTO `usuario` VALUES (1,'gustavo_arellano@gmail.com','399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4',1618526083301,1,0,0,1621809436736,0,'Kebblar2017',0),(2,'gustavo-arellano@gmail.com','3290a9ceb7ea40b7bfcd82298e02a828a08640d7744f9dd193493c0a15eca7c8',1618526122665,1,0,0,1621809448232,0,'Kebblar2017',0),(3,'gustavo.arellano@gmail.com','704f4f853f903b20c57aba43798d6966b4b5a141bb26fe47d6186473c085c6b6',1618526267651,1,0,0,1618541768297,0,'NA',0),(4,'arellano@gmail.com','13021c93c6bae8e351321ddb6f9d1280cf5bc42fb5205b3c7ee463e1ef3ebb45',1618526343588,1,0,0,0,0,'NA',0),(6,'gustavo@gmail.com','fe8c2458a4a18094721990a4c3e46a5b70d126533c3a0aa1a85d2ebb2b3a3ccc',1618526363060,1,0,0,0,0,'NA',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -831,6 +807,32 @@ INSERT INTO `usuario_rol` VALUES (1,1),(1,2),(1,3),(2,2),(3,2),(3,3),(4,3),(6,2)
 UNLOCK TABLES;
 
 --
+-- Table structure for table `valor_atributo`
+--
+
+DROP TABLE IF EXISTS `valor_atributo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `valor_atributo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_atributo` int(11) NOT NULL,
+  `rango` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_valor_atributo_id_atributo` (`id_atributo`),
+  CONSTRAINT `fk_valor_atributo_atributo` FOREIGN KEY (`id_atributo`) REFERENCES `atributo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `valor_atributo`
+--
+
+LOCK TABLES `valor_atributo` WRITE;
+/*!40000 ALTER TABLE `valor_atributo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `valor_atributo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Final view structure for view `administracion_compras`
 --
 
@@ -839,12 +841,12 @@ UNLOCK TABLES;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`garellano`@`%` SQL SECURITY DEFINER */
-/*!50001 VIEW `administracion_compras` AS (select `s1`.`estado_envio` AS `estado_envio`,`petstore`.`direccion`.`calle_numero` AS `calle_numero`,`petstore`.`direccion`.`colonia` AS `colonia`,`petstore`.`direccion`.`cp` AS `cp`,`petstore`.`direccion`.`id` AS `id_direccion`,`s1`.`cve_orden_compra` AS `cve_orden_compra`,1 AS `id_mascota`,`s1`.`titulo` AS `nombre_anuncio`,`s1`.`recibo` AS `recibo`,`s1`.`id_compra` AS `id_compra`,`s1`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`direccion` join (select `petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`orden_compra`.`id_direccion_envio` AS `id_direccion_envio`,`petstore`.`orden_compra`.`cve_orden_compra` AS `cve_orden_compra`,`petstore`.`anuncio`.`titulo` AS `titulo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id` AS `id_compra`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`orden_compra` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `petstore`.`orden_compra`.`id_anuncio`))) `s1` on(`s1`.`id_direccion_envio` = `petstore`.`direccion`.`id`))) */;
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `administracion_compras` AS (select `s1`.`estado_envio` AS `estado_envio`,`petstore`.`direccion`.`calle_numero` AS `calle_numero`,`petstore`.`direccion`.`colonia` AS `colonia`,`petstore`.`direccion`.`cp` AS `cp`,`petstore`.`direccion`.`id` AS `id_direccion`,`s1`.`cve_orden_compra` AS `cve_orden_compra`,'1' AS `id_mascota`,`s1`.`titulo` AS `nombre_anuncio`,`s1`.`recibo` AS `recibo`,`s1`.`id_compra` AS `id_compra`,`s1`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`direccion` join (select `petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`orden_compra`.`id_direccion_envio` AS `id_direccion_envio`,`petstore`.`orden_compra`.`cve_orden_compra` AS `cve_orden_compra`,`petstore`.`anuncio`.`titulo` AS `titulo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id` AS `id_compra`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`orden_compra` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `petstore`.`orden_compra`.`id_anuncio`))) `s1` on(`s1`.`id_direccion_envio` = `petstore`.`direccion`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -896,4 +898,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-03  0:13:37
+-- Dump completed on 2021-06-03 17:34:28
