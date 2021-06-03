@@ -17,7 +17,9 @@
  *              20210523_2034 Se  agrega  el  método  de  elimado 
  *              logico
  *              20210524_1800 Se  agrega  el  método  de consulta 
- *              de atributos del anunio
+ *              de atributos del anuncio
+ *              20210602_1849 Se modifica el servicio de guardado
+ *              para contemplar el campo de mascota
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -53,7 +55,7 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 @Repository
 public interface AnuncioMapper {
 
-	 static final String CAMPOS_ANUNCIO = " id_categoria, sku, titulo, descripcion, precio, fecha_inicio_vigencia,"
+	 static final String CAMPOS_ANUNCIO = " id_mascota, folio, titulo, descripcion, precio, fecha_inicio_vigencia,"
 	 		+ " fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, estatus ";
 	 static final String CAMPOS_ANUNCIO_ATRIBUTOS = " id_anuncio, id_atributo, valor ";
 	 static final String CAMPOS_ANUNCIO_IMAGEN = " id_anuncio, uuid, imagen ";
@@ -65,7 +67,7 @@ public interface AnuncioMapper {
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{sku},  #{titulo},  #{descripcion},  #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion},  #{fechaEliminacion}, #{estatus} )")
+    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idMascota}, #{folio},  #{titulo},  #{descripcion},  #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion},  #{fechaEliminacion}, #{estatus} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
     

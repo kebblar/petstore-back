@@ -14,6 +14,8 @@
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
+ *              20210602_1851 Se agrega el campo de relacion con 
+ *              la tabla mascotas
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -34,8 +36,8 @@ public class Anuncio implements Serializable {
 	private static final long serialVersionUID = -143592035892511227L;
 
 	private Integer id;
-	private Integer idCategoria;
-	private String sku;
+	private Integer idMascota;
+	private String folio;
 	private String titulo;
 	private String descripcion;
 	private BigDecimal precio;
@@ -53,12 +55,12 @@ public class Anuncio implements Serializable {
 		this.id = id;
 	}
 
-	public Anuncio(Integer id, Integer idCategoria, String sku, String titulo, String descripcion, BigDecimal precio,
+	public Anuncio(Integer id, Integer idMascota, String folio, String titulo, String descripcion, BigDecimal precio,
 			Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
 			Date fechaEliminacion, short estatus) {
 		this.id = id;
-		this.idCategoria = idCategoria;
-		this.sku = sku;
+		this.idMascota = idMascota;
+		this.folio = folio;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -78,20 +80,20 @@ public class Anuncio implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getIdCategoria() {
-		return idCategoria;
+	public Integer getIdMascota() {
+		return idMascota;
 	}
 
-	public void setIdCategoria(Integer idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setIdMascota(Integer idMascota) {
+		this.idMascota = idMascota;
 	}
 
-	public String getSku() {
-		return sku;
+	public String getFolio() {
+		return folio;
 	}
 
-	public void setSku(String sku) {
-		this.sku = sku;
+	public void setFolio(String folio) {
+		this.folio = folio;
 	}
 
 	public String getTitulo() {
@@ -178,9 +180,9 @@ public class Anuncio implements Serializable {
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
 		result = prime * result + ((fechaModificacion == null) ? 0 : fechaModificacion.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
+		result = prime * result + ((idMascota == null) ? 0 : idMascota.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((sku == null) ? 0 : sku.hashCode());
+		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -231,20 +233,20 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (idCategoria == null) {
-			if (other.idCategoria != null)
+		if (idMascota == null) {
+			if (other.idMascota != null)
 				return false;
-		} else if (!idCategoria.equals(other.idCategoria))
+		} else if (!idMascota.equals(other.idMascota))
 			return false;
 		if (precio == null) {
 			if (other.precio != null)
 				return false;
 		} else if (!precio.equals(other.precio))
 			return false;
-		if (sku == null) {
-			if (other.sku != null)
+		if (folio == null) {
+			if (other.folio != null)
 				return false;
-		} else if (!sku.equals(other.sku))
+		} else if (!folio.equals(other.folio))
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -256,7 +258,7 @@ public class Anuncio implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", sku=" + sku + ", titulo=" + titulo
+		return "Anuncio [id=" + id + ", idMascota=" + idMascota + ", folio=" + folio + ", titulo=" + titulo
 				+ ", descripcion=" + descripcion + ", precio=" + precio + ", fechaInicioVigencia=" + fechaInicioVigencia
 				+ ", fechaFinVigencia=" + fechaFinVigencia + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
 				+ fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", estatus=" + estatus + "]";
