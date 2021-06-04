@@ -115,7 +115,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 		Anuncio anuncioAlta= new Anuncio();
 		anuncioAlta.setTitulo(request.getTitulo());
 		anuncioAlta.setPrecio(request.getPrecio());
-		anuncioAlta.setIdMascota(request.getIdMascota());
+		anuncioAlta.setIdCategoria(request.getIdCategoria());
 		anuncioAlta.setDescripcion(request.getDescripcion());
 		anuncioAlta.setEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
 		anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
@@ -132,7 +132,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioMapper.update(anuncioAlta);
 				anuncioMapper.deleteAtributos(anuncioAlta.getId());
 			}else {
-				anuncioAlta.setFolio(AnuncioUtil.generaSku());
+				anuncioAlta.setSku(AnuncioUtil.generaSku());
 				anuncioAlta.setFechaAlta(new Date());
 				anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
 				anuncioMapper.insert(anuncioAlta);
@@ -145,7 +145,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioMapper.insertAtributo(aa);
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
-			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
+			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getSku());
 		}catch (Exception e) { // SQLException no hizo caso
 			  throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
 		}
@@ -170,7 +170,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro", 4092,"CVE_4092",HttpStatus.CONFLICT);
 			}
 			response.setId(anuncio.getId());
-			response.setFolio(anuncio.getFolio());
+			response.setSku(anuncio.getSku());
 			//Si el anuncio no tiene fechas de vigencia, o solo fecha de fin de vigencia valido pasa a esatus PUBLICADO
 			if((anuncio.getFechaInicioVigencia()==null && anuncio.getFechaFinVigencia()==null)
 					|| (anuncio.getFechaInicioVigencia()==null && anuncio.getFechaFinVigencia()!=null)) {
@@ -214,7 +214,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Se procede a realizar el eliminado del registro
 			anuncioMapper.eliminaAnuncio(id, AnuncioEstatusEnum.ELIMINADO.getId(), new Date());
 			response.setId(anuncio.getId());
-			response.setFolio(anuncio.getFolio());	
+			response.setSku(anuncio.getSku());	
 		} catch (SQLException e) {
 			throw new BusinessException("Error de sistema","Ocurrio un error al tratar de eliminar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
@@ -291,14 +291,15 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Se envía solo lo necesario del detalle del anunio
 			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
 			detalleResponse.setId(anuncio.getId());
-//			detalleResponse.setSku(anuncio.getSku());
+			detalleResponse.setSku(anuncio.getSku());
 			detalleResponse.setTitulo(anuncio.getTitulo());
-//			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
-//			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
+			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
 			detalleResponse.setPrecio(anuncio.getPrecio());
 			detalleResponse.setDescripcion(anuncio.getDescripcion());
 			detalleResponse.setEstatus(anuncio.getEstatus());
-			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getEstatus())); 
+			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getEstatus()));
+			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
 			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
 			detalleResponse.setAtributos(atributosResponse);
 			detalleResponse.setImagenes(imagenesResponse);
@@ -319,9 +320,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
-//		if(request.getIdMascota()>7) {
-//			throw new BusinessException("Error de datos","Mascota no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
-//		}
+		if(request.getIdCategoria()>7) {
+			throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
+		}
 		//Validacion de fechas de vigencia
 		Date fechaInicio = request.getFechaInicioVigencia() != null ? 
 				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())

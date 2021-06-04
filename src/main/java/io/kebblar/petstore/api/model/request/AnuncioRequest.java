@@ -42,8 +42,8 @@ public class AnuncioRequest {
 	private String descripcion;
 	private LocalDate fechaInicioVigencia;
 	private LocalDate fechaFinVigencia;
-	@Min(value = 1, message = "{min.anuncio.idmascota}")
-	private int idMascota;
+	@Min(value = 1, message = "{min.anuncio.idcategoria}")
+	private int idCategoria;
 	@NotNull(message = "{notnull.anuncio.precio}")
 	private BigDecimal precio;
 	private List <AtributoRequest> atributos;
@@ -52,12 +52,12 @@ public class AnuncioRequest {
 	}
 
 	public AnuncioRequest(String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
-			int idMascota, BigDecimal precio, List<AtributoRequest> atributos) {
+			int idCategoria, BigDecimal precio, List<AtributoRequest> atributos) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaInicioVigencia = fechaInicioVigencia;
 		this.fechaFinVigencia = fechaFinVigencia;
-		this.idMascota = idMascota;
+		this.idCategoria = idCategoria;
 		this.precio = precio;
 		this.atributos = atributos;
 	}
@@ -94,12 +94,12 @@ public class AnuncioRequest {
 		this.fechaFinVigencia = fechaFinVigencia;
 	}
 
-	public int getIdMascota() {
-		return idMascota;
+	public int getIdCategoria() {
+		return idCategoria;
 	}
 
-	public void setIdMascota(int idMascota) {
-		this.idMascota = idMascota;
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public BigDecimal getPrecio() {
@@ -126,7 +126,7 @@ public class AnuncioRequest {
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-		result = prime * result + idMascota;
+		result = prime * result + idCategoria;
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
@@ -161,7 +161,7 @@ public class AnuncioRequest {
 				return false;
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
 			return false;
-		if (idMascota != other.idMascota)
+		if (idCategoria != other.idCategoria)
 			return false;
 		if (precio == null) {
 			if (other.precio != null)
@@ -179,7 +179,7 @@ public class AnuncioRequest {
 	@Override
 	public String toString() {
 		return "AnuncioRequest [titulo=" + titulo + ", descripcion=" + descripcion + ", fechaInicioVigencia="
-				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", idMascota=" + idMascota
+				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", idCategoria=" + idCategoria
 				+ ", precio=" + precio + ", atributos=" + atributos + "]";
 	}
 }
