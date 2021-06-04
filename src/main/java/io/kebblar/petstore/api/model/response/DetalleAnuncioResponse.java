@@ -35,7 +35,7 @@ public class DetalleAnuncioResponse {
 	private Integer id;
 	private Integer idCategoria;
 	private String descCategoria;
-	private String sku;
+	private String folio;
 	private String titulo;
 	private String descripcion;
 	private BigDecimal precio;
@@ -49,13 +49,13 @@ public class DetalleAnuncioResponse {
 	public DetalleAnuncioResponse() {
 
 	}
-	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String sku, String titulo,
+	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
 			String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short estatus,
 			String descEstatus, List<AtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
 		this.id = id;
 		this.idCategoria = idCategoria;
 		this.descCategoria = descCategoria;
-		this.sku = sku;
+		this.folio = folio;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -84,11 +84,11 @@ public class DetalleAnuncioResponse {
 	public void setDescCategoria(String descCategoria) {
 		this.descCategoria = descCategoria;
 	}
-	public String getSku() {
-		return sku;
+	public String getFolio() {
+		return folio;
 	}
-	public void setSku(String sku) {
-		this.sku = sku;
+	public void setFolio(String folio) {
+		this.folio = folio;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -159,7 +159,7 @@ public class DetalleAnuncioResponse {
 		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
 		result = prime * result + ((imagenes == null) ? 0 : imagenes.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((sku == null) ? 0 : sku.hashCode());
+		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -224,10 +224,10 @@ public class DetalleAnuncioResponse {
 				return false;
 		} else if (!precio.equals(other.precio))
 			return false;
-		if (sku == null) {
-			if (other.sku != null)
+		if (folio == null) {
+			if (other.folio != null)
 				return false;
-		} else if (!sku.equals(other.sku))
+		} else if (!folio.equals(other.folio))
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -239,7 +239,7 @@ public class DetalleAnuncioResponse {
 	@Override
 	public String toString() {
 		return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
-				+ ", sku=" + sku + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
+				+ ", folio=" + folio + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
 				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
 				+ ", estatus=" + estatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos + ", imagenes="
 				+ imagenes + "]";

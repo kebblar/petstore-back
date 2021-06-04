@@ -29,19 +29,19 @@ package io.kebblar.petstore.api.model.response;
 public class AnuncioResponse {
 
 	private int id;
-	private String sku;
+	private String folio;
 	private String info;
 	
 	public AnuncioResponse() {
 	}
 	
-	public AnuncioResponse(int id, String sku) {
+	public AnuncioResponse(int id, String folio) {
 		this.id = id;
-		this.sku = sku;
+		this.folio = folio;
 	}
-	public AnuncioResponse(int id, String sku, String info) {
+	public AnuncioResponse(int id, String folio, String info) {
 		this.id = id;
-		this.sku = sku;
+		this.folio = folio;
 		this.info = info;
 	}
 	
@@ -51,11 +51,11 @@ public class AnuncioResponse {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSku() {
-		return sku;
+	public String getFolio() {
+		return folio;
 	}
-	public void setSku(String sku) {
-		this.sku = sku;
+	public void setFolio(String folio) {
+		this.folio = folio;
 	}
 	public String getInfo() {
 		return info;
@@ -71,7 +71,7 @@ public class AnuncioResponse {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((info == null) ? 0 : info.hashCode());
-		result = prime * result + ((sku == null) ? 0 : sku.hashCode());
+		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		return result;
 	}
 
@@ -91,10 +91,10 @@ public class AnuncioResponse {
 				return false;
 		} else if (!info.equals(other.info))
 			return false;
-		if (sku == null) {
-			if (other.sku != null)
+		if (folio == null) {
+			if (other.folio != null)
 				return false;
-		} else if (!sku.equals(other.sku))
+		} else if (!folio.equals(other.folio))
 			return false;
 		return true;
 	}
@@ -105,7 +105,7 @@ public class AnuncioResponse {
 
 	@Override
 	public String toString() {
-		return "AnuncioResponse [id=" + id + ", sku=" + sku + ", info=" + info + "]";
+		return "AnuncioResponse [id=" + id + ", folio=" + folio + ", info=" + info + "]";
 	}
 	
 	

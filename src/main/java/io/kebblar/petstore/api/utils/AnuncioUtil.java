@@ -43,17 +43,17 @@ public class AnuncioUtil {
 	private static final String TEMPLATE = "SELECT id_anuncio FROM anuncio_atributo WHERE id_atributo = %d AND valor = %d ";
 
 	/**
-	 * <p>Método que permite genera un SKU para la entidad de 'anuncio'.</p>
-	 * <p>El SKU se conformara por 
+	 * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
+	 * <p>El folio se conformara por 
 	 * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
 	 * teniendo un total de 14 posiciones. </p>
 	 * @return String de 14 posiciones.
 	 */
-	public static String generaSku() {
+	public static String generaFolio() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
 		Random random = new Random();
-		String sku=dateFormat.format(new Date());
-		return sku+String.format("%04d", random.nextInt(10000));
+		String folio=dateFormat.format(new Date());
+		return folio+String.format("%04d", random.nextInt(10000));
 	}
 
 	/**

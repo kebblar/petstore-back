@@ -132,7 +132,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioMapper.update(anuncioAlta);
 				anuncioMapper.deleteAtributos(anuncioAlta.getId());
 			}else {
-				anuncioAlta.setSku(AnuncioUtil.generaSku());
+				anuncioAlta.setFolio(AnuncioUtil.generaFolio());
 				anuncioAlta.setFechaAlta(new Date());
 				anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
 				anuncioMapper.insert(anuncioAlta);
@@ -145,7 +145,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioMapper.insertAtributo(aa);
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
-			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getSku());
+			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
 		}catch (Exception e) { // SQLException no hizo caso
 			  throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
 		}
@@ -170,7 +170,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro", 4092,"CVE_4092",HttpStatus.CONFLICT);
 			}
 			response.setId(anuncio.getId());
-			response.setSku(anuncio.getSku());
+			response.setFolio(anuncio.getFolio());
 			//Si el anuncio no tiene fechas de vigencia, o solo fecha de fin de vigencia valido pasa a esatus PUBLICADO
 			if((anuncio.getFechaInicioVigencia()==null && anuncio.getFechaFinVigencia()==null)
 					|| (anuncio.getFechaInicioVigencia()==null && anuncio.getFechaFinVigencia()!=null)) {
@@ -214,7 +214,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Se procede a realizar el eliminado del registro
 			anuncioMapper.eliminaAnuncio(id, AnuncioEstatusEnum.ELIMINADO.getId(), new Date());
 			response.setId(anuncio.getId());
-			response.setSku(anuncio.getSku());	
+			response.setFolio(anuncio.getFolio());	
 		} catch (SQLException e) {
 			throw new BusinessException("Error de sistema","Ocurrio un error al tratar de eliminar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
@@ -291,7 +291,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			//Se envía solo lo necesario del detalle del anunio
 			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
 			detalleResponse.setId(anuncio.getId());
-			detalleResponse.setSku(anuncio.getSku());
+			detalleResponse.setFolio(anuncio.getFolio());
 			detalleResponse.setTitulo(anuncio.getTitulo());
 			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
 			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));

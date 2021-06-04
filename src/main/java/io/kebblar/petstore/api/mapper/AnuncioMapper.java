@@ -53,7 +53,7 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 @Repository
 public interface AnuncioMapper {
 
-	 static final String CAMPOS_ANUNCIO = " id_categoria, sku, titulo, descripcion, precio, fecha_inicio_vigencia,"
+	 static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia,"
 	 		+ " fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, estatus ";
 	 static final String CAMPOS_ANUNCIO_ATRIBUTOS = " id_anuncio, id_atributo, valor ";
 	 static final String CAMPOS_ANUNCIO_IMAGEN = " id_anuncio, uuid, imagen ";
@@ -65,7 +65,7 @@ public interface AnuncioMapper {
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{sku},  #{titulo},  #{descripcion},  #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion},  #{fechaEliminacion}, #{estatus} )")
+    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion},  #{fechaEliminacion}, #{estatus} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
     
@@ -90,7 +90,7 @@ public interface AnuncioMapper {
     @Results(id="AnuncioMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "idCategoria",   column = "id_categoria"),
-            @Result(property = "sku",   column = "sku"),
+            @Result(property = "folio",   column = "folio"),
             @Result(property = "titulo",   column = "titulo"),
             @Result(property = "descripcion",   column = "descripcion"),
             @Result(property = "precio",   column = "precio"),
