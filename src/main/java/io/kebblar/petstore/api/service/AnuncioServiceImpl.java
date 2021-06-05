@@ -374,7 +374,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 		List<DetalleAnuncioResponse> totalAnuncios = anuncioMapper.totalAnuncioFiltro(mapSql);
 		
 		for (DetalleAnuncioResponse anuncio : anuncios) {
-			anuncio.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			Categoria objetoCategoria = new Categoria();
+			objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
+			anuncio.setDescCategoria(objetoCategoria.getCategoria());
 			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(anuncio.getId());
 			List<AnuncioImagenResponse> imagenesResponse = null;
 			if(imagenes!=null && !imagenes.isEmpty()) {

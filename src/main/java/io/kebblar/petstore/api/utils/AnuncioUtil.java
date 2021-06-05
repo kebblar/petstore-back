@@ -182,7 +182,7 @@ public class AnuncioUtil {
 	        int size = filtros.getAtributos().size();
 	        
 			for (MascotaValorAtributoRequest atributo : filtros.getAtributos()) {
-//				if (atributo.getId() != 0 && atributo.getValor() != 0) {
+//				if (atributo.getId() != 0 && atributo.getRango() != 0) {
 //					sb.append("(");
 //		            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
 //		            sb.append(")");
