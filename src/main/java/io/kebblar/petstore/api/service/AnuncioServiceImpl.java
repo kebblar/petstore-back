@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -281,11 +283,11 @@ public class AnuncioServiceImpl implements AnuncioService{
 	public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
 		try {
 			//Se consulta la informacion del anuncio, para validar estatus
-			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
-			if(anuncio == null) {
+			DetalleAnuncioResponse detalleResponse= anuncioMapper.getAnuncioDetalle(id);
+			if(detalleResponse == null) {
 				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==detalleResponse.getIdEstatus()) {
 				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}	
 			//Se consulta la informacion de los atributos del anuncio
@@ -299,21 +301,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getIdTipo(),img.getPrincipal()));
 				}
 			}
-			//Se obtendria la categoria en cuanto este el servicio
-			Categoria categoria=anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
 			//Se envía solo lo necesario del detalle del anunio
-			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
-			detalleResponse.setId(anuncio.getId());
-			detalleResponse.setFolio(anuncio.getFolio());
-			detalleResponse.setTitulo(anuncio.getTitulo());
-			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
-			detalleResponse.setDescCategoria(categoria.getCategoria());
-			detalleResponse.setPrecio(anuncio.getPrecio());
-			detalleResponse.setDescripcion(anuncio.getDescripcion());
-			detalleResponse.setIdEstatus(anuncio.getIdEstatus());
-			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getIdEstatus()));
-			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
-			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
 			detalleResponse.setAtributos(atributosResponse);
 			detalleResponse.setImagenes(imagenesResponse);
 			return detalleResponse;	
@@ -402,6 +390,33 @@ public class AnuncioServiceImpl implements AnuncioService{
 		response.setTotalAnuncios(totalAnuncios != null ? totalAnuncios.size() : 0);
 		
 		return response;
+	}
+
+	@Override
+	public void imagenPrincipal(int idAnuncio, String uuid) throws BusinessException {
+		try {
+			Anuncio anuncioBase = anuncioMapper.getAnuncioById(idAnuncio);
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
+					|| AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()
+					|| AnuncioEstatusEnum.CANCELADO.getId()==anuncioBase.getIdEstatus()) {
+				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido para ser modificado",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
+			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(idAnuncio);
+			if(imagenes==null || imagenes.isEmpty()) {
+				throw new BusinessException("Error de datos","El anuncio no cuenta con imagenenes asociadas",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
+			for(AnuncioMedia img:imagenes) {
+				if(uuid.equals(img.getUuid())) {
+					anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.TRUE);
+				}else {
+					anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.FALSE);
+				}	
+			}
+		} catch (SQLException e) {
+			logger.info("Error: "+e.getMessage());
+			throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
+
+		}
 	}
 
 }

@@ -256,4 +256,34 @@ public interface AnuncioMapper {
      */
     @Select("SELECT descripcion FROM estatus_anuncio WHERE id = #{id}")
     String obtieneDescPorId(int id) throws SQLException;
+    
+    /**
+     * Consulta el objeto de tipo 'DetalleAnuncioResponse' con base al id proporcionado
+     * 
+     * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
+     * @return Clase de tipo 'DetalleAnuncioResponse' con la informacion asociada
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
+    @Results(id="AnuncioDetalleMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "idCategoria",   column = "id_categoria"),
+            @Result(property = "descCategoria",   column = "categoria"),
+            @Result(property = "folio",   column = "folio"),
+            @Result(property = "titulo",   column = "titulo"),
+            @Result(property = "descripcion",   column = "descripcion_anuncio"),
+            @Result(property = "precio",   column = "precio"),
+            @Result(property = "fechaInicioVigencia",   column = "fecha_inicio_vigencia"),
+            @Result(property = "fechaFinVigencia",   column = "fecha_fin_vigencia"),
+            @Result(property = "idEstatus",   column = "id_estatus"),
+            @Result(property = "descEstatus",   column = "descripcion_estatus") 
+    })
+    @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
+    		+ " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
+    		+ " a.id_estatus, a.id_categoria, ea.descripcion as descripcion_estatus, "
+    		+ " cat.categoria FROM anuncio a "
+    		+ " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "
+    		+ " JOIN categoria cat ON a.id_categoria=cat.id "
+    		+ " WHERE a.id = #{id} ") 
+    DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
+    
 }

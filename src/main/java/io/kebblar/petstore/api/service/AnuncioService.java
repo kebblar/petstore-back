@@ -69,7 +69,7 @@ public interface AnuncioService {
 	 *  el anuncio pasa a estatus ACTIVO</p>
 	 * @param id Identificador del anuncio que confirma su registro
 	 * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' que confirma su registro
-	 * @throws BusinessException
+	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
 	AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
 	
@@ -78,7 +78,7 @@ public interface AnuncioService {
 	 * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
 	 * @param id Identificador del anuncio que será removido del sistema.
 	 * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
-	 * @throws BusinessException
+	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
 	AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
 	
@@ -95,15 +95,14 @@ public interface AnuncioService {
 	 * @param idAnuncio Identificador del anuncio con el cual se va a asociar la imagen
 	 * @param file Imagen a guardar
 	 * @return {@link AnuncioImagenResponse} Clase que contiene la información de la imagen guardada
-	 * @throws BusinessException
+	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
 	 AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;
 	 
 	 /**
 	 * Método que permite el eliminado de las imagenes de un anuncio
 	 * @param idImagen Identificador de la imagen que sera eliminada
-	 * @return {@link AnuncioImagenResponse} Clase que contiene la información de la imagen eliminada
-	 * @throws BusinessException
+	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
 	 void eliminarImagen(String uuid) throws BusinessException;
 	 
@@ -122,5 +121,14 @@ public interface AnuncioService {
 	 * @throws BusinessException, SQLException
 	 */
 	 BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException;
+	 
+	 /**
+	 * Método que permite asignar como principal la imagen del anuncio proporcionado
+	 * <p>El servicio validará que la imagen no haya sido eliminado previamente y que exista</p>
+	 * @param uuid Identificador de la imagen que será principal
+	 * @param idAnuncio Identificador del anuncio al que se le asignara una imagen como principal
+	 * @throws BusinessException Excepcion lanzada en caso de error
+	 */
+	void imagenPrincipal(int idAnuncio, String uuid) throws BusinessException;
 
 }
