@@ -32,7 +32,8 @@ public class Atributo implements Serializable {
 	private static final long serialVersionUID = 6512580095034514100L;
 
 	private Integer id;
-	private String atributo;
+	private String nombre;
+	private Boolean activo;
 	
 	public Atributo() {
 	}
@@ -41,9 +42,17 @@ public class Atributo implements Serializable {
 		this.id = id;
 	}
 
-	public Atributo(Integer id, String atributo) {
+	public Atributo(Integer id, String nombre, Boolean activo) {
+		super();
 		this.id = id;
-		this.atributo = atributo;
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+
+	public Atributo(Integer id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
 	}
 
 	public Integer getId() {
@@ -54,20 +63,29 @@ public class Atributo implements Serializable {
 		this.id = id;
 	}
 
-	public String getAtributo() {
-		return atributo;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setAtributo(String atributo) {
-		this.atributo = atributo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((atributo == null) ? 0 : atributo.hashCode());
+		result = prime * result + ((activo == null) ? 0 : activo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -80,21 +98,27 @@ public class Atributo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Atributo other = (Atributo) obj;
-		if (atributo == null) {
-			if (other.atributo != null)
+		if (activo == null) {
+			if (other.activo != null)
 				return false;
-		} else if (!atributo.equals(other.atributo))
+		} else if (!activo.equals(other.activo))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Atributo [id=" + id + ", atributo=" + atributo + "]";
+		return "Atributo [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
 	}
+
 }

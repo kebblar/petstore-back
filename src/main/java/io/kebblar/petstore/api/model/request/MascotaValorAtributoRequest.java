@@ -13,6 +13,7 @@
  * Fecha:       Jueves 6 de Mayo de 2021 (10_40)
  *
  * Historia:    20210506_1040 Creación de éste POJO
+ * 				20210604_1540 Se renombran las propiedades.
  *
  */
 package io.kebblar.petstore.api.model.request;
@@ -24,19 +25,19 @@ package io.kebblar.petstore.api.model.request;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class AtributoRequest {
+public class MascotaValorAtributoRequest {
 	
 	private int id;
-	private int valor;
-	private String unidad;
+	private int idValorAtributo;
+	private String rango;
 	
-	public AtributoRequest() {
+	public MascotaValorAtributoRequest() {
 	}
 
-	public AtributoRequest(int id, int valor, String unidad) {
+	public MascotaValorAtributoRequest(int id, int idValorAtributo, String rango) {
 		this.id = id;
-		this.valor = valor;
-		this.unidad = unidad;
+		this.idValorAtributo = idValorAtributo;
+		this.rango=rango;
 	}
 
 	public int getId() {
@@ -47,20 +48,20 @@ public class AtributoRequest {
 		this.id = id;
 	}
 
-	public int getValor() {
-		return valor;
+	public int getIdValorAtributo() {
+		return idValorAtributo;
 	}
 
-	public void setValor(int valor) {
-		this.valor = valor;
+	public void setIdValorAtributo(int idValorAtributo) {
+		this.idValorAtributo = idValorAtributo;
 	}
 
-	public String getUnidad() {
-		return unidad;
+	public String getRango() {
+		return rango;
 	}
 
-	public void setUnidad(String unidad) {
-		this.unidad = unidad;
+	public void setRango(String rango) {
+		this.rango = rango;
 	}
 
 	@Override
@@ -68,8 +69,8 @@ public class AtributoRequest {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((unidad == null) ? 0 : unidad.hashCode());
-		result = prime * result + valor;
+		result = prime * result + idValorAtributo;
+		result = prime * result + ((rango == null) ? 0 : rango.hashCode());
 		return result;
 	}
 
@@ -81,21 +82,22 @@ public class AtributoRequest {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AtributoRequest other = (AtributoRequest) obj;
+		MascotaValorAtributoRequest other = (MascotaValorAtributoRequest) obj;
 		if (id != other.id)
 			return false;
-		if (unidad == null) {
-			if (other.unidad != null)
-				return false;
-		} else if (!unidad.equals(other.unidad))
+		if (idValorAtributo != other.idValorAtributo)
 			return false;
-		if (valor != other.valor)
+		if (rango == null) {
+			if (other.rango != null)
+				return false;
+		} else if (!rango.equals(other.rango))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AtributoRequest [id=" + id + ", valor=" + valor + ", unidad=" + unidad + "]";
+		return "AtributoRequest [id=" + id + ", idValorAtributo=" + idValorAtributo + ", rango=" + rango + "]";
 	}
+
 }

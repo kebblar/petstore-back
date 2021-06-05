@@ -7,13 +7,17 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagen.java
+ * Artefacto:   AnuncioAtributo.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_28)
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
+ *              20210604_2028 Se  modificar  para  agregar  los 
+ *              nuevos campos
+ *              202106041315 Se renombra de la clase y se quitan
+ *              campos que ya no son necesarios
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -22,36 +26,31 @@ import java.io.Serializable;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'anuncio_imagen'. 
+ * POJO asociado a la entidad 'mascota_valor_atributo'. 
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class AnuncioImagen implements Serializable {
-	private static final long serialVersionUID = -4759453261602831311L;
+public class MascotaValorAtributo implements Serializable {
+	private static final long serialVersionUID = 8636526037194157358L;
 	
 	private Integer id;
 	private Integer idAnuncio;
-	private String uuid;
-	private String imagen;
+	private Integer idValorAtributo;
 	
-	public AnuncioImagen() {
+	public MascotaValorAtributo() {
 	}
 
-	public AnuncioImagen(Integer id) {
+	public MascotaValorAtributo(Integer id) {
 		this.id = id;
 	}
-	public AnuncioImagen(Integer idAnuncio, String uuid, String imagen) {
-		this.idAnuncio = idAnuncio;
-		this.uuid = uuid;
-		this.imagen = imagen;
-	}
-	public AnuncioImagen(Integer id, Integer idAnuncio, String uuid, String imagen) {
+
+	public MascotaValorAtributo(Integer id, Integer idAnuncio, Integer idValorAtributo) {
+		super();
 		this.id = id;
 		this.idAnuncio = idAnuncio;
-		this.uuid = uuid;
-		this.imagen = imagen;
+		this.idValorAtributo = idValorAtributo;
 	}
 
 	public Integer getId() {
@@ -70,20 +69,12 @@ public class AnuncioImagen implements Serializable {
 		this.idAnuncio = idAnuncio;
 	}
 
-	public String getUuid() {
-		return uuid;
+	public Integer getIdValorAtributo() {
+		return idValorAtributo;
 	}
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setIdValorAtributo(Integer idValorAtributo) {
+		this.idValorAtributo = idValorAtributo;
 	}
 
 	@Override
@@ -92,8 +83,7 @@ public class AnuncioImagen implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idAnuncio == null) ? 0 : idAnuncio.hashCode());
-		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((idValorAtributo == null) ? 0 : idValorAtributo.hashCode());
 		return result;
 	}
 
@@ -105,7 +95,7 @@ public class AnuncioImagen implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AnuncioImagen other = (AnuncioImagen) obj;
+		MascotaValorAtributo other = (MascotaValorAtributo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -116,21 +106,18 @@ public class AnuncioImagen implements Serializable {
 				return false;
 		} else if (!idAnuncio.equals(other.idAnuncio))
 			return false;
-		if (imagen == null) {
-			if (other.imagen != null)
+		if (idValorAtributo == null) {
+			if (other.idValorAtributo != null)
 				return false;
-		} else if (!imagen.equals(other.imagen))
-			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
+		} else if (!idValorAtributo.equals(other.idValorAtributo))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AnuncioImagen [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", imagen=" + imagen + "]";
+		return "MascotaValorAtributo [id=" + id + ", idAnuncio=" + idAnuncio + ", idValorAtributo=" + idValorAtributo
+				+ "]";
 	}
+
 }

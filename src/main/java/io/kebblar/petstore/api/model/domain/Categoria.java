@@ -14,6 +14,7 @@
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
+ *              20210604_1320 Se agrega el campo de 'activo'
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -33,6 +34,7 @@ public class Categoria implements Serializable {
 	
 	private Integer id;
 	private String categoria;
+	private Boolean activo;
 	
 	public Categoria() {
 	}
@@ -46,6 +48,13 @@ public class Categoria implements Serializable {
 		this.categoria = categoria;
 	}
 	
+	public Categoria(Integer id, String categoria, Boolean activo) {
+		super();
+		this.id = id;
+		this.categoria = categoria;
+		this.activo = activo;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -62,15 +71,24 @@ public class Categoria implements Serializable {
 		this.categoria = categoria;
 	}
 	
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((activo == null) ? 0 : activo.hashCode());
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,6 +98,11 @@ public class Categoria implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Categoria other = (Categoria) obj;
+		if (activo == null) {
+			if (other.activo != null)
+				return false;
+		} else if (!activo.equals(other.activo))
+			return false;
 		if (categoria == null) {
 			if (other.categoria != null)
 				return false;
@@ -92,9 +115,11 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", categoria=" + categoria + "]";
+		return "Categoria [id=" + id + ", categoria=" + categoria + ", activo=" + activo + "]";
 	}
+
+	
 }

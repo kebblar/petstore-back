@@ -40,8 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.mapper.AnuncioImagenMapper;
 import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
-import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
-import io.kebblar.petstore.api.model.domain.AnuncioImagen;
+import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
+import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -50,7 +50,7 @@ import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
-import io.kebblar.petstore.api.model.request.AtributoRequest;
+import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
 import io.kebblar.petstore.api.model.response.AnuncioImagenResponse;
@@ -58,14 +58,12 @@ import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
-import io.kebblar.petstore.api.model.response.AtributoResponse;
+import io.kebblar.petstore.api.model.response.ValorAtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.utils.AnuncioAtributosEnum;
 import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
-import io.kebblar.petstore.api.utils.AnuncioValAtributosEnum;
 
 /**
  * <p>Implementación de la interfaz de servicios para 'Anuncio'.
@@ -117,7 +115,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 		anuncioAlta.setPrecio(request.getPrecio());
 		anuncioAlta.setIdCategoria(request.getIdCategoria());
 		anuncioAlta.setDescripcion(request.getDescripcion());
-		anuncioAlta.setEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
+		anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
 		anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
 				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
 				:null);
@@ -137,16 +135,16 @@ public class AnuncioServiceImpl implements AnuncioService{
 				anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
 				anuncioMapper.insert(anuncioAlta);
 			}
-			for(AtributoRequest ar : request.getAtributos()) {
-				AnuncioAtributo aa =  new AnuncioAtributo();
+			for(MascotaValorAtributoRequest ar : request.getMascotaValorAtributo()) {
+				MascotaValorAtributo aa =  new MascotaValorAtributo();
 				aa.setIdAnuncio(anuncioAlta.getId());
-				aa.setIdAtributo(ar.getId());
-				aa.setValor(ar.getValor());
+				aa.setIdValorAtributo(ar.getIdValorAtributo());
 				anuncioMapper.insertAtributo(aa);
 			}
 			logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
 			return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
-		}catch (Exception e) { // SQLException no hizo caso
+		}catch (Exception e) { 
+			e.printStackTrace();
 			  throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
 		}
 	}
@@ -157,15 +155,15 @@ public class AnuncioServiceImpl implements AnuncioService{
 		try {
 			//Si los datos son correctos, se procede con el guardado
 			Anuncio anuncio = anuncioMapper.getAnuncioById(id);
-			if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getEstatus() 
-					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getEstatus()
-					&& AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getEstatus()) {
+			if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getIdEstatus() 
+					&& AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getIdEstatus()
+					&& AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getIdEstatus()) {
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
 				throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
+			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(id);
 			if(imagenes==null || imagenes.isEmpty()) {
 				throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro", 4092,"CVE_4092",HttpStatus.CONFLICT);
 			}
@@ -208,7 +206,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(anuncio == null) {
 				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
 				throw new BusinessException("Error de datos","El anuncio ha sido eliminado previamente",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}		
 			//Se procede a realizar el eliminado del registro
@@ -225,17 +223,28 @@ public class AnuncioServiceImpl implements AnuncioService{
 	public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
 		try {
 			String contentType = file.getContentType();
-			if(!contentType.equals("image/jpeg") && !contentType.equals("image/png") && !contentType.equals("application/jpg")) {
+			int tipoMedia=0;
+			if(contentType.equals("image/jpg")) {
+				tipoMedia=1;
+			}else if(contentType.equals("image/png") ) {
+				tipoMedia=2;
+			}else if(contentType.equals("image/gif")) {
+				tipoMedia=3;
+			}else if(contentType.equals("video/mp4")) {
+				tipoMedia=4;
+			}else if(contentType.equals("video/avi")) {
+				tipoMedia=5;
+			}else {
 				throw new BusinessException("Error de datos","Formato de imagen no valido",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			Anuncio anuncio=anuncioMapper.getAnuncioById(idAnuncio);
-			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
 				throw new BusinessException("Error de datos","No existe el  anuncio para asociar la imagen",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
-			AnuncioImagen imagenEnt= new AnuncioImagen(anuncio.getId(),upload.getNuevoNombre(),upload.getNombreOriginal());
+			AnuncioMedia imagenEnt= new AnuncioMedia(anuncio.getId(),upload.getNuevoNombre(),tipoMedia, Boolean.FALSE);
 			anuncioImagenMapper.insertImagen(imagenEnt);
-			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getImagen());
+			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getIdTipo(),imagenEnt.getPrincipal());
 		}catch (UploadException | SQLException e) {
 			throw new BusinessException("Error de sistema","Error al guardar la imagen.",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
@@ -244,7 +253,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public void eliminarImagen(String idImagen) throws BusinessException {		
 		try {
-			AnuncioImagen entidad=anuncioImagenMapper.getImagen(idImagen);
+			AnuncioMedia entidad=anuncioImagenMapper.getImagen(idImagen);
 			if(entidad==null) {
 				throw new BusinessException("Error de datos","No se encuentra la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
@@ -262,43 +271,33 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(anuncio == null) {
 				throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getEstatus()) {
+			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
 				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}	
 			//Se consulta la informacion de los atributos del anuncio
-			List<AnuncioAtributo> atributos = anuncioMapper.atributosPorAnuncio(id);
-			List<AtributoResponse> atributosResponse = null;
-			if(atributos!=null && !atributos.isEmpty()) {
-				atributosResponse = new ArrayList<>();
-				for(AnuncioAtributo atr : atributos) {
-					AtributoResponse atrRes=new AtributoResponse();
-					atrRes.setId(atr.getIdAtributo());
-					atrRes.setDescAtributo(AnuncioAtributosEnum.getDescripcion(atr.getIdAtributo()));
-					atrRes.setValor(atr.getValor());
-					atrRes.setDescValor(AnuncioValAtributosEnum.getDescValor(atr.getIdAtributo(), atr.getValor()));
-					atributosResponse.add(atrRes);
-				}
-			}
+			List<ValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
 			//Se consulta la informacion de las imagenes del anuncio
-			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(id);
+			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(id);
 			List<AnuncioImagenResponse> imagenesResponse = null;
 			if(imagenes!=null && !imagenes.isEmpty()) {
 				imagenesResponse = new ArrayList<>();
-				for(AnuncioImagen img : imagenes) {
-					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
+				for(AnuncioMedia img : imagenes) {
+					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getIdTipo(),img.getPrincipal()));
 				}
 			}
+			//Se obtendria la categoria en cuanto este el servicio
+			Categoria categoria=anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
 			//Se envía solo lo necesario del detalle del anunio
 			DetalleAnuncioResponse detalleResponse= new DetalleAnuncioResponse();
 			detalleResponse.setId(anuncio.getId());
 			detalleResponse.setFolio(anuncio.getFolio());
 			detalleResponse.setTitulo(anuncio.getTitulo());
 			detalleResponse.setIdCategoria(anuncio.getIdCategoria());
-			detalleResponse.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
+			detalleResponse.setDescCategoria(categoria.getCategoria());
 			detalleResponse.setPrecio(anuncio.getPrecio());
 			detalleResponse.setDescripcion(anuncio.getDescripcion());
-			detalleResponse.setEstatus(anuncio.getEstatus());
-			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getEstatus()));
+			detalleResponse.setEstatus(anuncio.getIdEstatus());
+			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getIdEstatus()));
 			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
 			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
 			detalleResponse.setAtributos(atributosResponse);
@@ -316,7 +315,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 	 */
 	private void validaCampos(AnuncioRequest request) throws BusinessException {
 		//Validacion de campos obligatorios
-		if(request.getAtributos()==null || request.getAtributos().isEmpty()) {
+		if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
 			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
 		}
 		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
@@ -374,12 +373,12 @@ public class AnuncioServiceImpl implements AnuncioService{
 		
 		for (DetalleAnuncioResponse anuncio : anuncios) {
 			anuncio.setDescCategoria(AnuncioCategoriaEnum.getDescripcion(anuncio.getIdCategoria()));
-			List<AnuncioImagen> imagenes = anuncioImagenMapper.getImagenes(anuncio.getId());
+			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(anuncio.getId());
 			List<AnuncioImagenResponse> imagenesResponse = null;
 			if(imagenes!=null && !imagenes.isEmpty()) {
 				imagenesResponse = new ArrayList<>();
-				for(AnuncioImagen img : imagenes) {
-					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
+				for(AnuncioMedia img : imagenes) {
+//					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
 				}
 				anuncio.setImagenes(imagenesResponse);
 			}

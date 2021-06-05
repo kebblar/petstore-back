@@ -43,7 +43,7 @@ public class DetalleAnuncioResponse {
 	private Date fechaFinVigencia;
 	private short estatus;
 	private String descEstatus;
-	private List<AtributoResponse> atributos;
+	private List<ValorAtributoResponse> atributos;
 	private List<AnuncioImagenResponse> imagenes;
 	
 	public DetalleAnuncioResponse() {
@@ -51,7 +51,7 @@ public class DetalleAnuncioResponse {
 	}
 	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
 			String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short estatus,
-			String descEstatus, List<AtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
+			String descEstatus, List<ValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
 		this.id = id;
 		this.idCategoria = idCategoria;
 		this.descCategoria = descCategoria;
@@ -132,10 +132,10 @@ public class DetalleAnuncioResponse {
 	public void setDescEstatus(String descEstatus) {
 		this.descEstatus = descEstatus;
 	}
-	public List<AtributoResponse> getAtributos() {
+	public List<ValorAtributoResponse> getAtributos() {
 		return atributos;
 	}
-	public void setAtributos(List<AtributoResponse> atributos) {
+	public void setAtributos(List<ValorAtributoResponse> atributos) {
 		this.atributos = atributos;
 	}
 	public List<AnuncioImagenResponse> getImagenes() {

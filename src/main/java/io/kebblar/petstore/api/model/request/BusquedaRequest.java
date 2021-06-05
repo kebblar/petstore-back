@@ -33,7 +33,7 @@ public class BusquedaRequest {
 
 	private BigDecimal precio;
 	private Long idCategoria;
-	private List<AtributoRequest> atributos;
+	private List<MascotaValorAtributoRequest> atributos;
 	@Min(value = 1, message = "{min.paginado}")
 	private int numPaginas;
 	@Min(value = 1, message = "{min.tamano.paginas}")
@@ -50,10 +50,10 @@ public class BusquedaRequest {
 	public void setIdCategoria(Long idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-	public List<AtributoRequest> getAtributos() {
+	public List<MascotaValorAtributoRequest> getAtributos() {
 		return atributos;
 	}
-	public void setAtributos(List<AtributoRequest> atributos) {
+	public void setAtributos(List<MascotaValorAtributoRequest> atributos) {
 		this.atributos = atributos;
 	}
 	public int getNumPaginas() {
@@ -114,7 +114,7 @@ public class BusquedaRequest {
 		return "BusquedaRequest [precio=" + precio + ", idCategoria=" + idCategoria + ", atributos=" + atributos
 				+ ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
 	}
-	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<AtributoRequest> atributos, int numPaginas,
+	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<MascotaValorAtributoRequest> atributos, int numPaginas,
 			int tamPaginas) {
 		super();
 		this.precio = precio;

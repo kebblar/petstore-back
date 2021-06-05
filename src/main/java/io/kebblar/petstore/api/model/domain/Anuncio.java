@@ -14,6 +14,7 @@
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
+ *              20210604_1314 Modificacion de 'sku' por 'folio'
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -44,7 +45,7 @@ public class Anuncio implements Serializable {
 	private Date fechaAlta;
 	private Date fechaModificacion;
 	private Date fechaEliminacion;
-	private short estatus;
+	private short idEstatus;
 	
 	public Anuncio() {
 	}
@@ -55,7 +56,7 @@ public class Anuncio implements Serializable {
 
 	public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
 			Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
-			Date fechaEliminacion, short estatus) {
+			Date fechaEliminacion, short idEstatus) {
 		this.id = id;
 		this.idCategoria = idCategoria;
 		this.folio = folio;
@@ -67,7 +68,7 @@ public class Anuncio implements Serializable {
 		this.fechaAlta = fechaAlta;
 		this.fechaModificacion = fechaModificacion;
 		this.fechaEliminacion = fechaEliminacion;
-		this.estatus = estatus;
+		this.idEstatus = idEstatus;
 	}
 
 	public Integer getId() {
@@ -158,12 +159,12 @@ public class Anuncio implements Serializable {
 		this.fechaEliminacion = fechaEliminacion;
 	}
 
-	public short getEstatus() {
-		return estatus;
+	public short getIdEstatus() {
+		return idEstatus;
 	}
 
-	public void setEstatus(short estatus) {
-		this.estatus = estatus;
+	public void setIdEstatus(short idEstatus) {
+		this.idEstatus = idEstatus;
 	}
 
 	@Override
@@ -171,16 +172,16 @@ public class Anuncio implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-		result = prime * result + estatus;
 		result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
 		result = prime * result + ((fechaEliminacion == null) ? 0 : fechaEliminacion.hashCode());
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
 		result = prime * result + ((fechaModificacion == null) ? 0 : fechaModificacion.hashCode());
+		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
+		result = prime * result + idEstatus;
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -198,8 +199,6 @@ public class Anuncio implements Serializable {
 			if (other.descripcion != null)
 				return false;
 		} else if (!descripcion.equals(other.descripcion))
-			return false;
-		if (estatus != other.estatus)
 			return false;
 		if (fechaAlta == null) {
 			if (other.fechaAlta != null)
@@ -226,6 +225,11 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!fechaModificacion.equals(other.fechaModificacion))
 			return false;
+		if (folio == null) {
+			if (other.folio != null)
+				return false;
+		} else if (!folio.equals(other.folio))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -236,15 +240,12 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!idCategoria.equals(other.idCategoria))
 			return false;
+		if (idEstatus != other.idEstatus)
+			return false;
 		if (precio == null) {
 			if (other.precio != null)
 				return false;
 		} else if (!precio.equals(other.precio))
-			return false;
-		if (folio == null) {
-			if (other.folio != null)
-				return false;
-		} else if (!folio.equals(other.folio))
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -259,6 +260,6 @@ public class Anuncio implements Serializable {
 		return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
 				+ ", descripcion=" + descripcion + ", precio=" + precio + ", fechaInicioVigencia=" + fechaInicioVigencia
 				+ ", fechaFinVigencia=" + fechaFinVigencia + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
-				+ fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", estatus=" + estatus + "]";
+				+ fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", idEstatus=" + idEstatus + "]";
 	}
 }

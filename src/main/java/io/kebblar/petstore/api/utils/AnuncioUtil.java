@@ -27,7 +27,7 @@ import java.util.Random;
 
 import com.ibm.icu.text.SimpleDateFormat;
 
-import io.kebblar.petstore.api.model.request.AtributoRequest;
+import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
@@ -181,13 +181,13 @@ public class AnuncioUtil {
 	        StringBuilder sb = new StringBuilder();
 	        int size = filtros.getAtributos().size();
 	        
-			for (AtributoRequest atributo : filtros.getAtributos()) {
-				if (atributo.getId() != 0 && atributo.getValor() != 0) {
-					sb.append("(");
-		            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
-		            sb.append(")");
-		            sb.append((i++<size)?" INTERSECT ":"");
-				}
+			for (MascotaValorAtributoRequest atributo : filtros.getAtributos()) {
+//				if (atributo.getId() != 0 && atributo.getValor() != 0) {
+//					sb.append("(");
+//		            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
+//		            sb.append(")");
+//		            sb.append((i++<size)?" INTERSECT ":"");
+//				}
 			}
 			
 			consultaBase.append(sb).append(")");

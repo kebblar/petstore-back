@@ -7,13 +7,15 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioAtributo.java
+ * Artefacto:   AnuncioImagen.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_28)
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
+ *              20210604_1325 Se agregan los campos de 'idTipo' y
+ *              'principal'
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -22,34 +24,41 @@ import java.io.Serializable;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'anuncio_atributo'. 
+ * POJO asociado a la entidad 'anuncio_imagen'. 
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class AnuncioAtributo implements Serializable {
-	private static final long serialVersionUID = 8636526037194157358L;
+public class AnuncioMedia implements Serializable {
+	private static final long serialVersionUID = -4759453261602831311L;
 	
 	private Integer id;
 	private Integer idAnuncio;
-	private Integer idAtributo;
-	private int valor;
-	private String unidad;
+	private String uuid;
+	private Integer idTipo;
+	private Boolean principal;
 	
-	public AnuncioAtributo() {
+	public AnuncioMedia() {
 	}
 
-	public AnuncioAtributo(Integer id) {
+	public AnuncioMedia(Integer id) {
 		this.id = id;
 	}
 
-	public AnuncioAtributo(Integer id, Integer idAnuncio, Integer idAtributo, int valor, String unidad) {
+	public AnuncioMedia(Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
+		this.idAnuncio = idAnuncio;
+		this.uuid = uuid;
+		this.idTipo = idTipo;
+		this.principal = principal;
+	}
+	public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
+		super();
 		this.id = id;
 		this.idAnuncio = idAnuncio;
-		this.idAtributo = idAtributo;
-		this.valor = valor;
-		this.unidad = unidad;
+		this.uuid = uuid;
+		this.idTipo = idTipo;
+		this.principal = principal;
 	}
 
 	public Integer getId() {
@@ -68,28 +77,28 @@ public class AnuncioAtributo implements Serializable {
 		this.idAnuncio = idAnuncio;
 	}
 
-	public Integer getIdAtributo() {
-		return idAtributo;
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setIdAtributo(Integer idAtributo) {
-		this.idAtributo = idAtributo;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
-	public int getValor() {
-		return valor;
+	public Integer getIdTipo() {
+		return idTipo;
 	}
 
-	public void setValor(int valor) {
-		this.valor = valor;
+	public void setIdTipo(Integer idTipo) {
+		this.idTipo = idTipo;
 	}
 
-	public String getUnidad() {
-		return unidad;
+	public Boolean getPrincipal() {
+		return principal;
 	}
 
-	public void setUnidad(String unidad) {
-		this.unidad = unidad;
+	public void setPrincipal(Boolean principal) {
+		this.principal = principal;
 	}
 
 	@Override
@@ -98,9 +107,9 @@ public class AnuncioAtributo implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idAnuncio == null) ? 0 : idAnuncio.hashCode());
-		result = prime * result + ((idAtributo == null) ? 0 : idAtributo.hashCode());
-		result = prime * result + ((unidad == null) ? 0 : unidad.hashCode());
-		result = prime * result + valor;
+		result = prime * result + ((idTipo == null) ? 0 : idTipo.hashCode());
+		result = prime * result + ((principal == null) ? 0 : principal.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -112,7 +121,7 @@ public class AnuncioAtributo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AnuncioAtributo other = (AnuncioAtributo) obj;
+		AnuncioMedia other = (AnuncioMedia) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -123,24 +132,29 @@ public class AnuncioAtributo implements Serializable {
 				return false;
 		} else if (!idAnuncio.equals(other.idAnuncio))
 			return false;
-		if (idAtributo == null) {
-			if (other.idAtributo != null)
+		if (idTipo == null) {
+			if (other.idTipo != null)
 				return false;
-		} else if (!idAtributo.equals(other.idAtributo))
+		} else if (!idTipo.equals(other.idTipo))
 			return false;
-		if (unidad == null) {
-			if (other.unidad != null)
+		if (principal == null) {
+			if (other.principal != null)
 				return false;
-		} else if (!unidad.equals(other.unidad))
+		} else if (!principal.equals(other.principal))
 			return false;
-		if (valor != other.valor)
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AnuncioAtributo [id=" + id + ", idAnuncio=" + idAnuncio + ", idAtributo=" + idAtributo + ", valor="
-				+ valor + ", unidad=" + unidad + "]";
+		return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo
+				+ ", principal=" + principal + "]";
 	}
+	
+	
 }

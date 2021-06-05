@@ -42,7 +42,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest{
 		this.id = id;
 	}
 	public ActualizaAnuncioRequest(int id,String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
-			int idCategoria, BigDecimal precio, List<AtributoRequest> atributos) {
+			int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> atributos) {
 		super(titulo, descripcion, fechaInicioVigencia, fechaFinVigencia, idCategoria, precio, atributos);
 		this.id = id;
 	}

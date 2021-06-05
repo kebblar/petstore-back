@@ -35,10 +35,11 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Anuncio;
-import io.kebblar.petstore.api.model.domain.AnuncioAtributo;
+import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
+import io.kebblar.petstore.api.model.response.ValorAtributoResponse;
 
 /**
  * <p>Descripción:</p>
@@ -54,9 +55,8 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 public interface AnuncioMapper {
 
 	 static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia,"
-	 		+ " fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, estatus ";
-	 static final String CAMPOS_ANUNCIO_ATRIBUTOS = " id_anuncio, id_atributo, valor ";
-	 static final String CAMPOS_ANUNCIO_IMAGEN = " id_anuncio, uuid, imagen ";
+	 		+ " fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
+	 static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
 	 
 	 /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
@@ -65,20 +65,22 @@ public interface AnuncioMapper {
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion},  #{fechaEliminacion}, #{estatus} )")
+    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  "
+    		+ " #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion}, "
+    		+ " #{fechaEliminacion}, #{idEstatus} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
     
     /**
      * Inserta un objeto de tipo 'AnuncioAtributo' con base en la información dada por el objeto de tipo 'AnuncioAtributo'.
      *
-     * @param AnuncioAtributo a ser insertado.
+     * @param MascotaValorAtributo a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio_atributo("+CAMPOS_ANUNCIO_ATRIBUTOS+") VALUES(#{idAnuncio}, #{idAtributo}, #{valor} )")
+    @Insert("INSERT INTO mascota_valor_atributo("+CAMPOS_MASCOTA_VALOR_ATRIBUTOS+") VALUES(#{idAnuncio}, #{idValorAtributo})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insertAtributo(AnuncioAtributo anuncioAtributo) throws SQLException;
+    int insertAtributo(MascotaValorAtributo anuncioAtributo) throws SQLException;
     
     /**
      * Consulta el objeto de tipo 'Anuncio' con base al id proporcionado
@@ -99,7 +101,7 @@ public interface AnuncioMapper {
             @Result(property = "fechaAlta",   column = "fecha_alta"),
             @Result(property = "fechaModificacion",   column = "fecha_modificacion"),
             @Result(property = "fechaEliminacion",   column = "fecha_eliminacion"),
-            @Result(property = "estatus",   column = "estatus") 
+            @Result(property = "idEstatus",   column = "id_estatus") 
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ") 
     Anuncio getAnuncioById(int id) throws SQLException;
@@ -121,8 +123,8 @@ public interface AnuncioMapper {
      * @return numero de registyros actualizados
      * @throws SQLException Excepcion lanzada en caso de error
      */
-    @Update("UPDATE anuncio SET estatus = #{estatus} WHERE id = #{id} ")
-    int actualizaEstatus(int id, short estatus) throws SQLException;   
+    @Update("UPDATE anuncio SET idEstatus = #{idEstatus} WHERE id = #{id} ")
+    int actualizaEstatus(int id, short idEstatus) throws SQLException;   
     
     /**
      * Actualiza un objeto de tipo 'anuncio' con base en la información dada por el objeto de tipo 'anuncio'.
@@ -133,8 +135,9 @@ public interface AnuncioMapper {
      */
     @Update("UPDATE anuncio SET id_categoria = #{idCategoria}, titulo = #{titulo}, descripcion = #{descripcion}, "
     		+ " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
-    		+ " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
-    int update(Anuncio anuncio) throws SQLException;
+    		+ " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus} "
+    		+ " WHERE id = #{id} ")
+    int update(Anuncio anuncio) throws SQLException; 
 
 	/**
 	 * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio
@@ -142,7 +145,7 @@ public interface AnuncioMapper {
 	 * @return el numero de registros actualizados.
 	 * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
 	 */
-    @Delete("DELETE FROM anuncio_atributo WHERE id_anuncio = #{id} ")
+    @Delete("DELETE FROM mascota_valor_atributo WHERE id_anuncio = #{id} ")
 	int deleteAtributos(int id) throws SQLException;
 	   
     
@@ -206,7 +209,7 @@ public interface AnuncioMapper {
             @Result(property = "valor",   column = "valor")
     })
     @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
-	List<AnuncioAtributo> atributosPorAnuncio(int id);
+	List<MascotaValorAtributo> atributosPorAnuncio(int id);
     
     /**
      * Consulta por filtros para la búsqueda de usuario final
@@ -233,5 +236,26 @@ public interface AnuncioMapper {
      */
     @Select("${total}")
     List<DetalleAnuncioResponse> totalAnuncioFiltro(Map<String,String> map) throws SQLException;
+    
+
+    /**
+     * Consulta el objeto de tipo 'MascotaValorAtributo' con base al id del anuncio proporcionado
+     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'ValorAtributoResponse' con la informacion de los atributos de un anuncio
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
+    @Results(id="MascotaDetalleAtributoMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "idValorAtributo",   column = "id_valor_atributo"),
+            @Result(property = "idAtributo",   column = "id_atributo"),
+            @Result(property = "nombreAtributo",   column = "nombre_atributo"),
+            @Result(property = "descRango",   column = "rango")
+    })
+    @Select("SELECT mva.id, mva.id_valor_atributo, va.id_atributo AS id_atributo, a.nombre AS nombre_atributo, va.rango"
+    		+ " FROM mascota_valor_atributo mva "
+    		+ " JOIN atributo a ON va.id_atributo=a.id "
+    		+ " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
+    		+ " WHERE mva.id_anuncio = #{id}")
+	List<ValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
 
 }

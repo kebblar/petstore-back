@@ -31,17 +31,18 @@ public class AnuncioImagenResponse {
 	private Integer idImagen;
 	private Integer idAnuncio;
 	private String uuid;
-	private String imagen;
+	private Integer idTipo;
+	private Boolean principal;
 	
 	public AnuncioImagenResponse() {
-
 	}
 	
-	public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, String imagen) {
+	public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
 		this.idImagen = idImagen;
 		this.idAnuncio = idAnuncio;
 		this.uuid = uuid;
-		this.imagen = imagen;
+		this.idTipo = idTipo;
+		this.principal = principal;
 	}
 
 	public Integer getIdAnuncio() {
@@ -62,20 +63,15 @@ public class AnuncioImagenResponse {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	public String getImagen() {
-		return imagen;
-	}
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idImagen == null) ? 0 : idImagen.hashCode());
 		result = prime * result + ((idAnuncio == null) ? 0 : idAnuncio.hashCode());
-		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
+		result = prime * result + ((idImagen == null) ? 0 : idImagen.hashCode());
+		result = prime * result + ((idTipo == null) ? 0 : idTipo.hashCode());
+		result = prime * result + ((principal == null) ? 0 : principal.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
@@ -99,10 +95,15 @@ public class AnuncioImagenResponse {
 				return false;
 		} else if (!idImagen.equals(other.idImagen))
 			return false;
-		if (imagen == null) {
-			if (other.imagen != null)
+		if (idTipo == null) {
+			if (other.idTipo != null)
 				return false;
-		} else if (!imagen.equals(other.imagen))
+		} else if (!idTipo.equals(other.idTipo))
+			return false;
+		if (principal == null) {
+			if (other.principal != null)
+				return false;
+		} else if (!principal.equals(other.principal))
 			return false;
 		if (uuid == null) {
 			if (other.uuid != null)
@@ -114,9 +115,8 @@ public class AnuncioImagenResponse {
 
 	@Override
 	public String toString() {
-		return "AnuncioImagenResponse [idAnuncio=" + idAnuncio + ", idImagen=" + idImagen + ", uuid=" + uuid
-				+ ", imagen=" + imagen + "]";
+		return "AnuncioImagenResponse [idImagen=" + idImagen + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid
+				+ ", idTipo=" + idTipo + ", principal=" + principal + "]";
 	}
-	
 	
 }

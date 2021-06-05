@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-import io.kebblar.petstore.api.model.domain.AnuncioImagen;
+import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen 
@@ -60,7 +60,7 @@ public interface AnuncioImagenMapper {
             @Result(property = "imagen",   column = "imagen")
     })
     @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE id_anuncio = #{id} ") 
-	List<AnuncioImagen> getImagenes(int id);
+	List<AnuncioMedia> getImagenes(int id);
     
     /**
      * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado
@@ -71,18 +71,18 @@ public interface AnuncioImagenMapper {
      */
     @ResultMap("AnuncioImagenMap")
     @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE uuid = #{uuid} ") 
-	AnuncioImagen getImagen(String uuid);
+	AnuncioMedia getImagen(String uuid);
 	    
     /**
      * Inserta un objeto de tipo 'AnuncioImagen' con base en la información dada por el objeto de tipo 'AnuncioImagen'.
      *
-     * @param AnuncioImagen a ser insertado.
+     * @param AnuncioMedia a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO anuncio_imagen("+CAMPOS_ANUNCIO_IMAGEN+") VALUES(#{idAnuncio}, #{uuid}, #{imagen} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insertImagen(AnuncioImagen anuncioImagen) throws SQLException;
+    int insertImagen(AnuncioMedia anuncioImagen) throws SQLException;
     
     /**
      * Elimina un objeto de tipo 'AnuncioImagen' con base al identificador proporcionado.

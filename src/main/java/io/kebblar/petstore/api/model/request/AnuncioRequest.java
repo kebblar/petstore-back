@@ -46,20 +46,20 @@ public class AnuncioRequest {
 	private int idCategoria;
 	@NotNull(message = "{notnull.anuncio.precio}")
 	private BigDecimal precio;
-	private List <AtributoRequest> atributos;
+	private List <MascotaValorAtributoRequest> mascotaValorAtributo;
 	
 	public AnuncioRequest() {
 	}
 
 	public AnuncioRequest(String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
-			int idCategoria, BigDecimal precio, List<AtributoRequest> atributos) {
+			int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> mascotaValorAtributo) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaInicioVigencia = fechaInicioVigencia;
 		this.fechaFinVigencia = fechaFinVigencia;
 		this.idCategoria = idCategoria;
 		this.precio = precio;
-		this.atributos = atributos;
+		this.mascotaValorAtributo = mascotaValorAtributo;
 	}
 
 	public String getTitulo() {
@@ -110,23 +110,24 @@ public class AnuncioRequest {
 		this.precio = precio;
 	}
 
-	public List<AtributoRequest> getAtributos() {
-		return atributos;
+	public List<MascotaValorAtributoRequest> getMascotaValorAtributo() {
+		return mascotaValorAtributo;
 	}
 
-	public void setAtributos(List<AtributoRequest> atributos) {
-		this.atributos = atributos;
+	public void setMascotaValorAtributo(List<MascotaValorAtributoRequest> mascotaValorAtributo) {
+		this.mascotaValorAtributo = mascotaValorAtributo;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((atributos == null) ? 0 : atributos.hashCode());
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
 		result = prime * result + idCategoria;
+		result = prime * result + ((mascotaValorAtributo == null) ? 0 : mascotaValorAtributo.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
@@ -141,11 +142,6 @@ public class AnuncioRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		AnuncioRequest other = (AnuncioRequest) obj;
-		if (atributos == null) {
-			if (other.atributos != null)
-				return false;
-		} else if (!atributos.equals(other.atributos))
-			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
 				return false;
@@ -162,6 +158,11 @@ public class AnuncioRequest {
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
 			return false;
 		if (idCategoria != other.idCategoria)
+			return false;
+		if (mascotaValorAtributo == null) {
+			if (other.mascotaValorAtributo != null)
+				return false;
+		} else if (!mascotaValorAtributo.equals(other.mascotaValorAtributo))
 			return false;
 		if (precio == null) {
 			if (other.precio != null)
@@ -180,6 +181,7 @@ public class AnuncioRequest {
 	public String toString() {
 		return "AnuncioRequest [titulo=" + titulo + ", descripcion=" + descripcion + ", fechaInicioVigencia="
 				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", idCategoria=" + idCategoria
-				+ ", precio=" + precio + ", atributos=" + atributos + "]";
+				+ ", precio=" + precio + ", mascotaValorAtributo=" + mascotaValorAtributo + "]";
 	}
+
 }
