@@ -31,7 +31,7 @@ import java.util.Date;
 public class BusquedaAdministracionResponse {
 
 	private int id;
-	private long sku;
+	private long folio;
 	private String titulo;
 	private Date fechaInicioVigencia;
 	private Date fechaFinVigencia;
@@ -47,11 +47,11 @@ public class BusquedaAdministracionResponse {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public long getSku() {
-		return sku;
+	public long getFolio() {
+		return folio;
 	}
-	public void setSku(long sku) {
-		this.sku = sku;
+	public void setFolio(long folio) {
+		this.folio = folio;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -117,10 +117,10 @@ public class BusquedaAdministracionResponse {
 		result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+		result = prime * result + (int) (folio ^ (folio >>> 32));
 		result = prime * result + id;
 		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
 		result = prime * result + idEstatus;
-		result = prime * result + (int) (sku ^ (sku >>> 32));
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -163,6 +163,8 @@ public class BusquedaAdministracionResponse {
 				return false;
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
 			return false;
+		if (folio != other.folio)
+			return false;
 		if (id != other.id)
 			return false;
 		if (idCategoria == null) {
@@ -171,8 +173,6 @@ public class BusquedaAdministracionResponse {
 		} else if (!idCategoria.equals(other.idCategoria))
 			return false;
 		if (idEstatus != other.idEstatus)
-			return false;
-		if (sku != other.sku)
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -183,18 +183,18 @@ public class BusquedaAdministracionResponse {
 	}
 	@Override
 	public String toString() {
-		return "BusquedaAdministracionResponse [id=" + id + ", sku=" + sku + ", titulo=" + titulo
+		return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
 				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
 				+ ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion
 				+ ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
 				+ descripcionCategoria + "]";
 	}
-	public BusquedaAdministracionResponse(int id, long sku, String titulo, Date fechaInicioVigencia,
+	public BusquedaAdministracionResponse(int id, long folio, String titulo, Date fechaInicioVigencia,
 			Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
 			String descripcionEstatus, String descripcionCategoria) {
 		super();
 		this.id = id;
-		this.sku = sku;
+		this.folio = folio;
 		this.titulo = titulo;
 		this.fechaInicioVigencia = fechaInicioVigencia;
 		this.fechaFinVigencia = fechaFinVigencia;
@@ -209,7 +209,6 @@ public class BusquedaAdministracionResponse {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	
 }

@@ -27,7 +27,7 @@ import java.time.LocalDate;
  */
 public class BusquedaAdministracionRequest {
 
-	private long sku;
+	private long folio;
 	private String titulo;
 	private LocalDate fechaInicioVigencia;
 	private LocalDate fechaFinVigencia;
@@ -35,11 +35,11 @@ public class BusquedaAdministracionRequest {
 	private int idCategoria;
 	private int numPaginas;
 	private int tamPaginas;
-	public long getSku() {
-		return sku;
+	public long getFolio() {
+		return folio;
 	}
-	public void setSku(long sku) {
-		this.sku = sku;
+	public void setFolio(long folio) {
+		this.folio = folio;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -90,9 +90,9 @@ public class BusquedaAdministracionRequest {
 		result = prime * result + estatus;
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+		result = prime * result + (int) (folio ^ (folio >>> 32));
 		result = prime * result + idCategoria;
 		result = prime * result + numPaginas;
-		result = prime * result + (int) (sku ^ (sku >>> 32));
 		result = prime * result + tamPaginas;
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
@@ -118,11 +118,11 @@ public class BusquedaAdministracionRequest {
 				return false;
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
 			return false;
+		if (folio != other.folio)
+			return false;
 		if (idCategoria != other.idCategoria)
 			return false;
 		if (numPaginas != other.numPaginas)
-			return false;
-		if (sku != other.sku)
 			return false;
 		if (tamPaginas != other.tamPaginas)
 			return false;
@@ -135,14 +135,14 @@ public class BusquedaAdministracionRequest {
 	}
 	@Override
 	public String toString() {
-		return "BusquedaAdministracionRequest [sku=" + sku + ", titulo=" + titulo + ", fechaInicioVigencia="
+		return "BusquedaAdministracionRequest [folio=" + folio + ", titulo=" + titulo + ", fechaInicioVigencia="
 				+ fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", estatus=" + estatus
 				+ ", idCategoria=" + idCategoria + ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
 	}
-	public BusquedaAdministracionRequest(long sku, String titulo, LocalDate fechaInicioVigencia,
+	public BusquedaAdministracionRequest(long folio, String titulo, LocalDate fechaInicioVigencia,
 			LocalDate fechaFinVigencia, int estatus, int idCategoria, int numPaginas, int tamPaginas) {
 		super();
-		this.sku = sku;
+		this.folio = folio;
 		this.titulo = titulo;
 		this.fechaInicioVigencia = fechaInicioVigencia;
 		this.fechaFinVigencia = fechaFinVigencia;
@@ -151,9 +151,10 @@ public class BusquedaAdministracionRequest {
 		this.numPaginas = numPaginas;
 		this.tamPaginas = tamPaginas;
 	}
-	
-	
-	
+	public BusquedaAdministracionRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

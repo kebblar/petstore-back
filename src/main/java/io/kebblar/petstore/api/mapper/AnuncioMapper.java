@@ -157,11 +157,11 @@ public interface AnuncioMapper {
      */
     @Results(id="BusquedaMap", value = {
              @Result(property = "id",   column = "id"),
-             @Result(property = "sku",   column = "sku"),
+             @Result(property = "folio",   column = "folio"),
              @Result(property = "titulo",   column = "titulo"),
              @Result(property = "fechaInicioVigencia",   column = "fecha_inicio_vigencia"),
              @Result(property = "fechaFinVigencia",   column = "fecha_fin_vigencia"),
-             @Result(property = "estatus",   column = "estatus"),
+             @Result(property = "idEstatus",   column = "id_estatus"),
              @Result(property = "idCategoria",   column = "id_categoria"),
              @Result(property = "descripcion",   column = "descripcion")
      })
@@ -210,10 +210,11 @@ public interface AnuncioMapper {
     @Results(id="FiltroMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "idCategoria",   column = "id_categoria"),
-            @Result(property = "sku",   column = "sku"),
+            @Result(property = "folio",   column = "folio"),
             @Result(property = "titulo",   column = "titulo"),
             @Result(property = "descripcion",   column = "descripcion"),
-            @Result(property = "precio",   column = "precio")
+            @Result(property = "precio",   column = "precio"),
+            @Result(property = "idEstatus",   column = "id_estatus")
     })
     @Select("${sql}")
     List<DetalleAnuncioResponse> busquedaFiltro(Map<String,String> map) throws SQLException;
@@ -247,5 +248,12 @@ public interface AnuncioMapper {
     		+ " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
     		+ " WHERE mva.id_anuncio = #{id}")
 	List<ValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
-
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    @Select("SELECT descripcion FROM estatus_anuncio WHERE id = #{id}")
+    String obtieneDescPorId(int id) throws SQLException;
 }

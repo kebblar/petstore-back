@@ -310,7 +310,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			detalleResponse.setDescCategoria(categoria.getCategoria());
 			detalleResponse.setPrecio(anuncio.getPrecio());
 			detalleResponse.setDescripcion(anuncio.getDescripcion());
-			detalleResponse.setEstatus(anuncio.getIdEstatus());
+			detalleResponse.setIdEstatus(anuncio.getIdEstatus());
 			detalleResponse.setDescEstatus(AnuncioEstatusEnum.getDescripcion(anuncio.getIdEstatus()));
 			detalleResponse.setFechaInicioVigencia(anuncio.getFechaInicioVigencia());
 			detalleResponse.setFechaFinVigencia(anuncio.getFechaFinVigencia());
@@ -368,7 +368,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			
 		for (BusquedaAdministracionResponse anuncio:anuncios) {
 			Categoria objetoCategoria = new Categoria();			
-			anuncio.setDescripcionEstatus(AnuncioEstatusEnum.getDescripcion(Short.valueOf(anuncio.getEstatus())));
+			anuncio.setDescripcionEstatus(anuncioMapper.obtieneDescPorId(anuncio.getIdEstatus()));
 			objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
 			anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
 		}

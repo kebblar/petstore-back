@@ -135,11 +135,11 @@ public class AnuncioUtil {
 		if (filtros.getIdCategoria() != 0) {
 			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
 		}
-		if (filtros.getSku() != 0) {
-			consultaBase.append(" AND sku = ").append(filtros.getSku());
+		if (filtros.getFolio() != 0) {
+			consultaBase.append(" AND folio = ").append(filtros.getFolio());
 		}
 		if (filtros.getEstatus() != 0) {
-			consultaBase.append(" AND estatus = ").append(filtros.getEstatus());
+			consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
 		}
 		if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
 			consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
@@ -162,7 +162,7 @@ public class AnuncioUtil {
 	 * @return Lista de strings
 	 */
 	public static List<String> busqueda(BusquedaRequest filtros) {
-		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
+		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id_estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
 		List<String> response = new ArrayList<>();
 		int getPageSize = filtros.getTamPaginas();
 		int getPageNumber = filtros.getNumPaginas();

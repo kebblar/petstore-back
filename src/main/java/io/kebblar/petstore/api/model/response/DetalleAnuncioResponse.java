@@ -41,31 +41,10 @@ public class DetalleAnuncioResponse {
 	private BigDecimal precio;
 	private Date fechaInicioVigencia;
 	private Date fechaFinVigencia;
-	private short estatus;
+	private short idEstatus;
 	private String descEstatus;
 	private List<ValorAtributoResponse> atributos;
 	private List<AnuncioImagenResponse> imagenes;
-	
-	public DetalleAnuncioResponse() {
-
-	}
-	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
-			String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short estatus,
-			String descEstatus, List<ValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
-		this.id = id;
-		this.idCategoria = idCategoria;
-		this.descCategoria = descCategoria;
-		this.folio = folio;
-		this.titulo = titulo;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.fechaInicioVigencia = fechaInicioVigencia;
-		this.fechaFinVigencia = fechaFinVigencia;
-		this.estatus = estatus;
-		this.descEstatus = descEstatus;
-		this.atributos = atributos;
-		this.imagenes = imagenes;
-	}
 	public Integer getId() {
 		return id;
 	}
@@ -120,11 +99,11 @@ public class DetalleAnuncioResponse {
 	public void setFechaFinVigencia(Date fechaFinVigencia) {
 		this.fechaFinVigencia = fechaFinVigencia;
 	}
-	public short getEstatus() {
-		return estatus;
+	public short getIdEstatus() {
+		return idEstatus;
 	}
-	public void setEstatus(short estatus) {
-		this.estatus = estatus;
+	public void setIdEstatus(short idEstatus) {
+		this.idEstatus = idEstatus;
 	}
 	public String getDescEstatus() {
 		return descEstatus;
@@ -152,14 +131,14 @@ public class DetalleAnuncioResponse {
 		result = prime * result + ((descCategoria == null) ? 0 : descCategoria.hashCode());
 		result = prime * result + ((descEstatus == null) ? 0 : descEstatus.hashCode());
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-		result = prime * result + estatus;
 		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
 		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
+		result = prime * result + idEstatus;
 		result = prime * result + ((imagenes == null) ? 0 : imagenes.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -192,8 +171,6 @@ public class DetalleAnuncioResponse {
 				return false;
 		} else if (!descripcion.equals(other.descripcion))
 			return false;
-		if (estatus != other.estatus)
-			return false;
 		if (fechaFinVigencia == null) {
 			if (other.fechaFinVigencia != null)
 				return false;
@@ -203,6 +180,11 @@ public class DetalleAnuncioResponse {
 			if (other.fechaInicioVigencia != null)
 				return false;
 		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
+			return false;
+		if (folio == null) {
+			if (other.folio != null)
+				return false;
+		} else if (!folio.equals(other.folio))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -214,6 +196,8 @@ public class DetalleAnuncioResponse {
 				return false;
 		} else if (!idCategoria.equals(other.idCategoria))
 			return false;
+		if (idEstatus != other.idEstatus)
+			return false;
 		if (imagenes == null) {
 			if (other.imagenes != null)
 				return false;
@@ -223,11 +207,6 @@ public class DetalleAnuncioResponse {
 			if (other.precio != null)
 				return false;
 		} else if (!precio.equals(other.precio))
-			return false;
-		if (folio == null) {
-			if (other.folio != null)
-				return false;
-		} else if (!folio.equals(other.folio))
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -241,8 +220,30 @@ public class DetalleAnuncioResponse {
 		return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
 				+ ", folio=" + folio + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
 				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
-				+ ", estatus=" + estatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos + ", imagenes="
-				+ imagenes + "]";
+				+ ", idEstatus=" + idEstatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos
+				+ ", imagenes=" + imagenes + "]";
+	}
+	public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
+			String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
+			String descEstatus, List<ValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
+		super();
+		this.id = id;
+		this.idCategoria = idCategoria;
+		this.descCategoria = descCategoria;
+		this.folio = folio;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.fechaInicioVigencia = fechaInicioVigencia;
+		this.fechaFinVigencia = fechaFinVigencia;
+		this.idEstatus = idEstatus;
+		this.descEstatus = descEstatus;
+		this.atributos = atributos;
+		this.imagenes = imagenes;
+	}
+	public DetalleAnuncioResponse() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	
