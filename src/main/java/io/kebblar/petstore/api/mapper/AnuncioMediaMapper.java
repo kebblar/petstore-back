@@ -28,6 +28,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 /**
@@ -41,25 +42,26 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
  * @see AnuncioMapper
  */
 @Repository
-public interface AnuncioImagenMapper {
+public interface AnuncioMediaMapper {
 
-	 static final String CAMPOS_ANUNCIO_IMAGEN = " id_anuncio, uuid, imagen ";
+	 static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 	 
   
     /**
-     * Consulta el objeto de tipo 'AnuncioImagen' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado
      * 
-     * @param id Identificador del anunciocpor medio del cual se realizara la busqueda de sus imagenes asociadas
-     * @return Listado de clases de tipo 'AnuncioImagen' con la informacion de las imagenes
+     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'AnuncioMedia' con la informacion de las imagenes
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @Results(id="AnuncioImagenMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "idAnuncio",   column = "id_anuncio"),
             @Result(property = "uuid",   column = "uuid"),
-            @Result(property = "imagen",   column = "imagen")
+            @Result(property = "idTipo",   column = "id_tipo"),
+            @Result(property = "principal",   column = "principal")
     })
-    @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE id_anuncio = #{id} ") 
+    @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE id_anuncio = #{id} ") 
 	List<AnuncioMedia> getImagenes(int id);
     
     /**
@@ -70,7 +72,7 @@ public interface AnuncioImagenMapper {
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioImagenMap")
-    @Select("SELECT id," + CAMPOS_ANUNCIO_IMAGEN + " FROM anuncio_imagen WHERE uuid = #{uuid} ") 
+    @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE uuid = #{uuid} ") 
 	AnuncioMedia getImagen(String uuid);
 	    
     /**
@@ -80,18 +82,27 @@ public interface AnuncioImagenMapper {
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio_imagen("+CAMPOS_ANUNCIO_IMAGEN+") VALUES(#{idAnuncio}, #{uuid}, #{imagen} )")
+    @Insert("INSERT INTO anuncio_media("+CAMPOS_ANUNCIO_MEDIA+") VALUES(#{idAnuncio}, #{uuid}, #{idTipo}, #{principal} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insertImagen(AnuncioMedia anuncioImagen) throws SQLException;
     
     /**
      * Elimina un objeto de tipo 'AnuncioImagen' con base al identificador proporcionado.
      *
-     * @param idImagen identificador del anuncio a ser eliminado
+     * @param uuid identificador del anuncio a ser eliminado
      * @return identificador en base de datos del registro eliminado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM anuncio_imagen WHERE uuid = #{uuid} ") 
+    @Delete("DELETE FROM anuncio_media WHERE uuid = #{uuid} ") 
     int eliminarImagen(String uuid) throws SQLException;
     
+    /**
+     * Metodo que permite actualizar si una imagen es principal o no,con base al uuid de la imagen
+     * @param uuid Identificador del anuncio a actualizar
+     * @param principal Indica si la imagen sera o no principal
+     * @return numero de registros actualizados
+     * @throws SQLException Excepcion lanzada en caso de error
+     */
+    @Update("UPDATE anuncio_media SET principal = #{principal} WHERE uuid = #{uuid} ")
+    int actualizaPrincipal(String uuid, Boolean principal) throws SQLException;
 }

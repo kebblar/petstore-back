@@ -105,16 +105,6 @@ public interface AnuncioMapper {
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ") 
     Anuncio getAnuncioById(int id) throws SQLException;
-	  
-    /**
-     * Elimina un objeto de tipo 'AnuncioImagen' con base al identificador proporcionado.
-     *
-     * @param idImagen identificador del anuncio a ser eliminado
-     * @return identificador en base de datos del registro eliminado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
-     */
-    @Delete("DELETE FROM anuncio_imagen WHERE uuid = #{uuid} ") 
-    int eliminarImagen(String uuid) throws SQLException;
 	 
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
@@ -123,7 +113,7 @@ public interface AnuncioMapper {
      * @return numero de registyros actualizados
      * @throws SQLException Excepcion lanzada en caso de error
      */
-    @Update("UPDATE anuncio SET idEstatus = #{idEstatus} WHERE id = #{id} ")
+    @Update("UPDATE anuncio SET id_estatus = #{idEstatus} WHERE id = #{id} ")
     int actualizaEstatus(int id, short idEstatus) throws SQLException;   
     
     /**
@@ -156,7 +146,7 @@ public interface AnuncioMapper {
      * @return numero de registros actualizados
      * @throws SQLException Excepcion lanzada en caso de error
      */
-    @Update("UPDATE anuncio SET estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
+    @Update("UPDATE anuncio SET id_estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
     int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
     
     /**
