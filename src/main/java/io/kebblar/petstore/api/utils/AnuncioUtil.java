@@ -28,6 +28,7 @@ import java.util.Random;
 import com.ibm.icu.text.SimpleDateFormat;
 
 import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
+import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
@@ -40,7 +41,7 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
-	private static final String TEMPLATE = "SELECT id_anuncio FROM anuncio_atributo WHERE id_atributo = %d AND valor = %d ";
+	private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
 
 	/**
 	 * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
@@ -181,13 +182,13 @@ public class AnuncioUtil {
 	        StringBuilder sb = new StringBuilder();
 	        int size = filtros.getAtributos().size();
 	        
-			for (MascotaValorAtributoRequest atributo : filtros.getAtributos()) {
-//				if (atributo.getId() != 0 && atributo.getRango() != 0) {
-//					sb.append("(");
-//		            sb.append(String.format(TEMPLATE, atributo.getId(), atributo.getValor()));
-//		            sb.append(")");
-//		            sb.append((i++<size)?" INTERSECT ":"");
-//				}
+			for (Integer atributo : filtros.getAtributos()) {
+				if (atributo != 0 ) {
+					sb.append("(");
+		            sb.append(String.format(TEMPLATE, atributo));
+		            sb.append(")");
+		            sb.append((i++<size)?" INTERSECT ":"");
+				}
 			}
 			
 			consultaBase.append(sb).append(")");

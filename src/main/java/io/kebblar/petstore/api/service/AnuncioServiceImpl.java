@@ -380,7 +380,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(imagenes!=null && !imagenes.isEmpty()) {
 				imagenesResponse = new ArrayList<>();
 				for(AnuncioMedia img : imagenes) {
-//					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getImagen()));
+					imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getIdTipo(),img.getPrincipal()));
 				}
 				anuncio.setImagenes(imagenesResponse);
 			}

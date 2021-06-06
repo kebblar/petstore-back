@@ -22,6 +22,8 @@ import java.util.List;
 
 import javax.validation.constraints.Min;
 
+import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
+
 /**
  * Implementacion del POJO de la entidad de 'BusquedaRequest'.
  * 
@@ -33,7 +35,7 @@ public class BusquedaRequest {
 
 	private BigDecimal precio;
 	private Long idCategoria;
-	private List<MascotaValorAtributoRequest> atributos;
+	private List<Integer> atributos;
 	@Min(value = 1, message = "{min.paginado}")
 	private int numPaginas;
 	@Min(value = 1, message = "{min.tamano.paginas}")
@@ -50,10 +52,10 @@ public class BusquedaRequest {
 	public void setIdCategoria(Long idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-	public List<MascotaValorAtributoRequest> getAtributos() {
+	public List<Integer> getAtributos() {
 		return atributos;
 	}
-	public void setAtributos(List<MascotaValorAtributoRequest> atributos) {
+	public void setAtributos(List<Integer> atributos) {
 		this.atributos = atributos;
 	}
 	public int getNumPaginas() {
@@ -114,8 +116,9 @@ public class BusquedaRequest {
 		return "BusquedaRequest [precio=" + precio + ", idCategoria=" + idCategoria + ", atributos=" + atributos
 				+ ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
 	}
-	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<MascotaValorAtributoRequest> atributos, int numPaginas,
-			int tamPaginas) {
+	public BusquedaRequest(BigDecimal precio, Long idCategoria, List<Integer> atributos,
+			@Min(value = 1, message = "{min.paginado}") int numPaginas,
+			@Min(value = 1, message = "{min.tamano.paginas}") int tamPaginas) {
 		super();
 		this.precio = precio;
 		this.idCategoria = idCategoria;
