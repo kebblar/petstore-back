@@ -39,7 +39,7 @@ import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.model.response.ValorAtributoResponse;
+import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 
 /**
  * <p>Descripción:</p>
@@ -238,16 +238,16 @@ public interface AnuncioMapper {
     @Results(id="MascotaDetalleAtributoMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "idValorAtributo",   column = "id_valor_atributo"),
+            @Result(property = "rango",   column = "rango"),
             @Result(property = "idAtributo",   column = "id_atributo"),
-            @Result(property = "nombreAtributo",   column = "nombre_atributo"),
-            @Result(property = "descRango",   column = "rango")
+            @Result(property = "nombreAtributo",   column = "nombre_atributo")
     })
-    @Select("SELECT mva.id, mva.id_valor_atributo, va.id_atributo AS id_atributo, a.nombre AS nombre_atributo, va.rango"
+    @Select("SELECT mva.id, mva.id_valor_atributo, va.id_atributo AS id_atributo, a.nombre AS nombre_atributo, va.rango "
     		+ " FROM mascota_valor_atributo mva "
-    		+ " JOIN atributo a ON va.id_atributo=a.id "
     		+ " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
-    		+ " WHERE mva.id_anuncio = #{id}")
-	List<ValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
+    		+ " JOIN atributo a ON va.id_atributo=a.id "
+    		+ " WHERE mva.id_anuncio = #{idAnuncio}")
+	List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
     /**
      * 
      * @param id

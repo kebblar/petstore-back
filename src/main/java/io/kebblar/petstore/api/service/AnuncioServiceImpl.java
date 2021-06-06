@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,9 +59,8 @@ import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
-import io.kebblar.petstore.api.model.response.ValorAtributoResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.utils.AnuncioCategoriaEnum;
+import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
@@ -291,7 +289,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 				throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}	
 			//Se consulta la informacion de los atributos del anuncio
-			List<ValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
+			List<MascotaValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
 			//Se consulta la informacion de las imagenes del anuncio
 			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(id);
 			List<AnuncioImagenResponse> imagenesResponse = null;
