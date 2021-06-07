@@ -40,6 +40,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.CreatePDF;
+import io.kebblar.petstore.api.utils.Signer;
 
 /**
  * <p>
@@ -131,7 +132,19 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             ordenCompraMapper.insert(ordenCompra);
             
-            mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", "Recibo de compra PETSTORE", new File(dest+pdf));
+    		Signer firmador =  new Signer("/home/luis/Desktop/petstore-back/src/main/resources/keys/ok.key","/home/luis/Desktop/petstore-back/src/main/resources/keys/ok.cer","/home/luis/Desktop/petstore-back/upload/128832413a-ec71-491e-b59f-4845f2397bf4.pdf");
+			String signedPdf = firmador.signPdf();
+            
+            mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
+            		"<h1 style='text-align:center;'>Gracias por tu compra!</h1>" +
+            		"<hr> <br>" + 
+                    "<h2 style='text-align:center;'>A continuacion encontraras el recibo de tu compra</h2> " +
+            		"<img style='display: block;\r\n"
+            		+ "  margin-left: auto;\r\n"
+            		+ "  margin-right: auto;\r\n"
+            		+ "  width: 293px;height: 172px;' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPPYqewTwvHD5CYGqIngd8ENFVmEgf-M_ig&usqp=CAU'> <br>"+
+            		"<small>Por propositos de seguridad te enviamos el pdf firmado: " + signedPdf  + "</small> <br>" + 
+            		"<hr>", new File(dest+pdf));
             
         } catch (SQLException e) {
             throw new BusinessException("Error SQL: ",e.getMessage());
@@ -139,7 +152,9 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             throw new BusinessException("Error ParseException: ",e.getMessage());
         } catch(ProcessPDFException p) {
             throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
-        }
+        } catch (Exception e) {
+        	 throw new BusinessException("Error ProcessPDFException: ",e.getMessage());
+		}
         return ordenCompra;
     }
     
