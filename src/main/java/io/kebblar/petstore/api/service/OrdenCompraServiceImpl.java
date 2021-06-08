@@ -132,7 +132,10 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             ordenCompraMapper.insert(ordenCompra);
             
-    		Signer firmador =  new Signer("/home/luis/Desktop/petstore-back/src/main/resources/keys/ok.key","/home/luis/Desktop/petstore-back/src/main/resources/keys/ok.cer","/home/luis/Desktop/petstore-back/upload/128832413a-ec71-491e-b59f-4845f2397bf4.pdf");
+            
+            
+    		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
+    				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
 			String signedPdf = firmador.signPdf();
             
             mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
@@ -153,7 +156,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         } catch(ProcessPDFException p) {
             throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
         } catch (Exception e) {
-        	 throw new BusinessException("Error ProcessPDFException: ",e.getMessage());
+        	 throw new BusinessException("Error Signer: ",e.getMessage());
 		}
         return ordenCompra;
     }
