@@ -45,7 +45,6 @@ public class DatosOrden implements Serializable {
     private int idPaqueteria;
     private int idMetodoPago;
     private int idMoneda;
-    private int idAnuncio;
     private String cveOrdenCompra;
     private Date fecha;
     private boolean estadoEnvio;
@@ -63,14 +62,13 @@ public class DatosOrden implements Serializable {
     /**
      * Constructor por con parámetros.
      */
-    public DatosOrden(int id, int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, int idAnuncio, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long precio, int total, String descripcion, String recibo) {
+    public DatosOrden(int id, int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long precio, int total, String descripcion, String recibo) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idDireccion = idDireccion;
         this.idPaqueteria = idPaqueteria;
         this.idMetodoPago = idMetodoPago;
         this.idMoneda = idMoneda;
-        this.idAnuncio = idAnuncio;
         this.cveOrdenCompra = cveOrdenCompra;
         this.fecha = fecha;
         this.estadoEnvio = estadoEnvio;
@@ -156,20 +154,6 @@ public class DatosOrden implements Serializable {
      */
     public void setIdMoneda(int idMoneda) {
         this.idMoneda = idMoneda;
-    }
-
-    /**
-     * @return the idAnuncio
-     */
-    public int getIdAnuncio() {
-        return idAnuncio;
-    }
-
-    /**
-     * @param idAnuncio the idAnuncio to set
-     */
-    public void setIdAnuncio(int idAnuncio) {
-        this.idAnuncio = idAnuncio;
     }
 
     /**
@@ -275,12 +259,12 @@ public class DatosOrden implements Serializable {
         if (this == o) return true;
         if (!(o instanceof DatosOrden)) return false;
         DatosOrden that = (DatosOrden) o;
-        return id == that.id && idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && idAnuncio == that.idAnuncio && estadoEnvio == that.estadoEnvio && precio == that.precio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
+        return id == that.id && idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && estadoEnvio == that.estadoEnvio && precio == that.precio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, idAnuncio, cveOrdenCompra, fecha, estadoEnvio, precio, total, descripcion, recibo);
+        return Objects.hash(id, idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, cveOrdenCompra, fecha, estadoEnvio, precio, total, descripcion, recibo);
     }
 
     @Override
@@ -292,7 +276,6 @@ public class DatosOrden implements Serializable {
                 ", idPaqueteria=" + idPaqueteria +
                 ", idMetodoPago=" + idMetodoPago +
                 ", idMoneda=" + idMoneda +
-                ", idAnuncio=" + idAnuncio +
                 ", cveOrdenCompra='" + cveOrdenCompra + '\'' +
                 ", fecha=" + fecha +
                 ", estadoEnvio=" + estadoEnvio +

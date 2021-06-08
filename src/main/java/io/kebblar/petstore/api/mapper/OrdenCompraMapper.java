@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 @Repository
 public interface OrdenCompraMapper {
 
-    static final String CAMPOS = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
+    static final String CAMPOS = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**
      * Obtiene un objeto de tipo 'OrdenCompra' dado su id.
@@ -63,7 +63,6 @@ public interface OrdenCompraMapper {
             @Result(property = "idPaqueteria",   column = "id_paqueteria"),
             @Result(property = "idMetodoPago",   column = "id_metodo_pago"),
             @Result(property = "idMoneda",   column = "id_moneda"),
-            @Result(property = "idAnuncio",   column = "id_anuncio"),
             @Result(property = "cveOrdenCompra",   column = "cve_orden_compra"),
             @Result(property = "importeTotal",   column = "importe_total"),
             @Result(property = "fecha",   column = "fecha_hora_comprar"),
@@ -93,8 +92,8 @@ public interface OrdenCompraMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO orden_compra(id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo) "
-   + "VALUES(#{idUsuario}, #{idDireccion}, #{idPaqueteria}, #{idMetodoPago}, #{idMoneda}, #{idAnuncio}, #{cveOrdenCompra}, #{precio}, #{fecha}, #{estadoEnvio}, #{recibo} )")
+    "INSERT INTO orden_compra(id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo) "
+   + "VALUES(#{idUsuario}, #{idDireccion}, #{idPaqueteria}, #{idMetodoPago}, #{idMoneda}, #{cveOrdenCompra}, #{precio}, #{fecha}, #{estadoEnvio}, #{recibo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(DatosOrden datosOrden) throws SQLException;
 

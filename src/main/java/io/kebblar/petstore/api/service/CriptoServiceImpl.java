@@ -89,7 +89,6 @@ public class CriptoServiceImpl implements CriptoService {
                 1,
                 2,
                 3,
-                transaction.getIdAnuncio(),
                 uniqueID.substring(18),
                 transaction.getFecha(),
                 false,
