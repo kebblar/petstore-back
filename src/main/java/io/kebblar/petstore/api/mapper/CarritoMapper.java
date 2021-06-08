@@ -1,0 +1,111 @@
+
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
+ *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   CarritoMapper .java
+ * Proyecto:    petstore
+ * Tipo:        interface 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Tuesday 06 de June de 2021 (13_15)
+ * 
+ *              ------------------------------------------------
+ *
+ * Historia:    20210608_1315 Implementación de interface 
+ *
+ */
+
+package io.kebblar.petstore.api.mapper;
+
+import java.util.List;
+import java.sql.SQLException;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
+import io.kebblar.petstore.api.model.domain.Carrito;
+
+/**
+ * <p>Descripción:</p>
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito 
+ *
+ * @author Fhernanda Romo
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ *
+ * @see Carrito
+ */
+
+@Repository
+public interface CarritoMapper {
+    static final String CAMPOS = " id, id_usuario, id_anuncio, id_orden_compra ";
+
+    /**
+     * Obtiene un objeto de tipo 'Carrito' dado su id.
+     *
+     * @return Carrito que tiene asignado el id pasado como parametro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @Results(id="CarritoMap", value = {
+            @Result(property = "id",   column = "id"),
+            @Result(property = "idUsuario",   column = "id_usuario"),
+            @Result(property = "idAnuncio",   column = "id_anuncio"),
+            @Result(property = "idOrdenCompra",   column = "id_orden_compra")    
+    })
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE     id = #{id}     ") 
+    Carrito getById(int id) throws SQLException;
+
+    /**
+     * Obtiene una lista de objetos de tipo 'Carrito'.
+     *
+     * @param id Id del usuario que posee determinado carrito.
+     * @return Lista de obetos de tipo Carrito
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("CarritoMap")
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id}")
+    List<Carrito> getAll(int id) throws SQLException;
+    
+    /**
+     * Inserta un objeto de tipo 'Carrito' con base en la información dada por el objeto de tipo 'Carrito'.
+     *
+     * @param carrito a ser insertado.
+     * @return el auto incremental asociado a esa inserción.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @Insert(
+    "INSERT INTO carrito(id_usuario, id_anuncio, id_orden_compra) "
+   + "VALUES(#{idUsuario}, #{idAnuncio}, NULL )")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
+    int insert(Carrito carrito) throws SQLException;
+
+/**
+     * Actualiza un objeto de tipo 'Carrito' con base en la infrmación dada por el objeto de tipo 'Carrito'.
+     *
+     * @param carrito a ser actualizado.
+     * @return el numero de registros actualizados.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @Update(
+    "UPDATE carrito" 
+    + " SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, id_orden_compra = #{idOrdenCompra}"
+    + " WHERE id = #{id} ")
+    int update(Carrito carrito) throws SQLException;
+
+    /**
+     * Borra (de manera lógica y no física) el registro de Carrito.
+     *
+     * @param id id del Carrito a ser borrado
+     * @return id del Carrito borrado
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
+    @Delete("DELETE FROM carrito WHERE id = #{id} ") 
+    int delete(int id) throws SQLException;
+
+}
