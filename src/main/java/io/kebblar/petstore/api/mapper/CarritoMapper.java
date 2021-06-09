@@ -69,7 +69,7 @@ public interface CarritoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id}")
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id} AND id_orden_compra is NULL")
     List<Carrito> getAll(int id) throws SQLException;
     
     /**

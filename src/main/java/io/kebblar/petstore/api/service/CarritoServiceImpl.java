@@ -23,8 +23,13 @@
 
 package io.kebblar.petstore.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
+
+import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
+import io.kebblar.petstore.api.model.response.CarritoVista;
+import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -54,6 +59,7 @@ public class CarritoServiceImpl implements CarritoService {
     private static final Logger logger = LoggerFactory.getLogger(CarritoServiceImpl.class);
 
     private CarritoMapper carritoMapper;
+    private AnuncioService anuncioService;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -61,8 +67,9 @@ public class CarritoServiceImpl implements CarritoService {
      * 
      * @param carritoMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public CarritoServiceImpl(CarritoMapper carritoMapper) {
+    public CarritoServiceImpl(CarritoMapper carritoMapper, AnuncioService anuncioService) {
         this.carritoMapper = carritoMapper;
+        this.anuncioService = anuncioService;
     }
 
     /*
@@ -121,13 +128,30 @@ public class CarritoServiceImpl implements CarritoService {
     * Implementación del método delete
     */
     @Override
-    public int delete(Carrito carrito) throws BusinessException {
+    public int delete(int id) throws BusinessException {
         try {
-            return carritoMapper.delete(carrito.getId());
+            return carritoMapper.delete(id);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
+    }
+
+    @Override
+    public List<CarritoVista> getCarritoView(int id) throws VistaCarritoException {
+        List<CarritoVista> lista = new ArrayList<>();
+        try {
+            List<Carrito> carrito = getAll(id);
+            for(Carrito elem : carrito) {
+                DetalleAnuncioResponse d = anuncioService.detalleAnuncio(elem.getIdAnuncio());
+                String imagen = d.getImagenes().get(0).getUuid();
+                lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
+            }
+        } catch (BusinessException e) {
+            logger.error(e.getMessage());
+            throw new VistaCarritoException("No pudo obtenerse el carrito del usuario" );
+        }
+        return lista;
     }
 
     /*

@@ -26,6 +26,8 @@ package io.kebblar.petstore.api.service;
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
+import io.kebblar.petstore.api.model.response.CarritoVista;
 
 /**
  * <p>Descripción:</p>
@@ -85,10 +87,19 @@ public interface CarritoService {
     /**
      * Método utilizado para eliminar un registro en la tabla 'carrito'.
      * 
-     * @param carrito objeto de tipo 'Carrito'.
+     * @param id id del objeto de tipo 'Carrito'.
      * @return int numero de registros eliminados en la tabla'carrito'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int delete(Carrito carrito) throws BusinessException;
+    int delete(int id) throws BusinessException;
 
+    /**
+     * Regresa os elementos necesarios para pintar un carrito de compras en la
+     * interfaz grafica. Es un filtro que solamente retorna lo que se le muestra
+     * vistalmente al usuario.
+     * @param id id del usuario del que se recupera el carrito.
+     * @return lista de los elementos del carrito del usuario, solamente conteniendo
+     * la informaci'on necesaria para pintarlos.
+     */
+    List<CarritoVista> getCarritoView(int id) throws VistaCarritoException;
 }
