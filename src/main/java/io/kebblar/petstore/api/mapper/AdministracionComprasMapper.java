@@ -50,13 +50,12 @@ public interface AdministracionComprasMapper {
             @Result(property = "colonia", column = "colonia"),
             @Result(property = "cp", column = "cp"),
             @Result(property = "cveOrden", column = "cve_orden_compra"),
-            @Result(property = "idMascota", column = "id_mascota"),
             @Result(property = "nombreAnuncio", column = "nombre_anuncio"),
             @Result(property = "urlFactura", column = "recibo"),
             @Result(property = "idCompra", column = "id_compra"),
             @Result(property = "fechaCompra", column = "fecha_hora_comprar"),
         })
-    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,id_mascota,nombre_anuncio,recibo,id_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;")
+    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,nombre_anuncio,recibo,id_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;")
     List<AdministracionCompras> getAll() throws SQLException;
 
     /**

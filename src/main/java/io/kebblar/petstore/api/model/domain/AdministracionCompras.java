@@ -31,7 +31,6 @@ package io.kebblar.petstore.api.model.domain;
 public class AdministracionCompras {
     private Boolean estadoEnvio;
     private String cveOrden;
-    private int idMascota;
     private String nombreAnuncio;
     private String urlFactura;
     private int idCompra;
@@ -40,12 +39,11 @@ public class AdministracionCompras {
     private String colonia;
     private String cp;
 
-    public AdministracionCompras(Boolean estadoEnvio, String calleNumero, String colonia, String cp, String cveOrden, int idMascota, String nombreAnuncio,
+    public AdministracionCompras(Boolean estadoEnvio, String calleNumero, String colonia, String cp, String cveOrden, String nombreAnuncio,
             String urlFactura, int idCompra, String fechaCompra) {
         super();
         this.estadoEnvio = estadoEnvio;
         this.cveOrden = cveOrden;
-        this.idMascota = idMascota;
         this.nombreAnuncio = nombreAnuncio;
         this.urlFactura = urlFactura;
         this.idCompra = idCompra;
@@ -59,12 +57,6 @@ public class AdministracionCompras {
     }
     public void setCve_orden(String cveOrden) {
         this.cveOrden = cveOrden;
-    }
-    public int getIdMascota() {
-        return idMascota;
-    }
-    public void setIdMascota(int idMascota) {
-        this.idMascota = idMascota;
     }
     public String getNombreAnuncio() {
         return nombreAnuncio;
@@ -116,7 +108,6 @@ public class AdministracionCompras {
         result = prime * result + ((cveOrden == null) ? 0 : cveOrden.hashCode());
         result = prime * result + ((fechaCompra == null) ? 0 : fechaCompra.hashCode());
         result = prime * result + idCompra;
-        result = prime * result + idMascota;
         result = prime * result + ((nombreAnuncio == null) ? 0 : nombreAnuncio.hashCode());
         result = prime * result + ((urlFactura == null) ? 0 : urlFactura.hashCode());
         return result;
@@ -159,8 +150,6 @@ public class AdministracionCompras {
             return false;
         if (idCompra != other.idCompra)
             return false;
-        if (idMascota != other.idMascota)
-            return false;
         if (nombreAnuncio == null) {
             if (other.nombreAnuncio != null)
                 return false;
@@ -178,8 +167,8 @@ public class AdministracionCompras {
 
     @Override
     public String toString() {
-        return "AdministracionCompras [estadoEnvio=" + estadoEnvio + ", cveOrden=" + cveOrden + ", idMascota="
-                + idMascota + ", nombreAnuncio=" + nombreAnuncio + ", urlFactura=" + urlFactura + ", idCompra="
+        return "AdministracionCompras [estadoEnvio=" + estadoEnvio + ", cveOrden=" + cveOrden + 
+                ", nombreAnuncio=" + nombreAnuncio + ", urlFactura=" + urlFactura + ", idCompra="
                 + idCompra + ", fechaCompra=" + fechaCompra + ", calleNumero=" + calleNumero + ", colonia=" + colonia
                 + ", cp=" + cp + "]";
     }

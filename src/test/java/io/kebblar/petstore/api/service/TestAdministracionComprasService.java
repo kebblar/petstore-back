@@ -42,7 +42,7 @@ public class TestAdministracionComprasService {
     @Test
     public void testGetAll() throws SQLException, BusinessException{
         List<AdministracionCompras> getLista = new ArrayList<AdministracionCompras>();
-        AdministracionCompras compra = new AdministracionCompras(true,"cve_orden","nueva colonia","mascota foo","foo.com",1,"2020-10-10","calle goo numero 80",1, "84444");
+        AdministracionCompras compra = new AdministracionCompras(true,"cve_orden","nueva colonia","mascota foo","foo.com","2020-10-10","calle goo numero 80",1, "84444");
         getLista.add(compra);
         when(historialMapper.getAll()).thenReturn(getLista);
         assert(historialService.getAll().get(0).getCve_orden() == "foo.com");
