@@ -28,6 +28,7 @@ import java.util.List;
 import java.sql.SQLException;
 
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
+import io.kebblar.petstore.api.model.request.CarritoCompraRequest;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import org.slf4j.Logger;
@@ -152,6 +153,22 @@ public class CarritoServiceImpl implements CarritoService {
             throw new VistaCarritoException("No pudo obtenerse el carrito del usuario" );
         }
         return lista;
+    }
+
+    @Override
+    public int updateCarritoCompra(CarritoCompraRequest carritoCompraRequest) throws BusinessException {
+        int i = -1;
+        List<Carrito> carrito = getAll(carritoCompraRequest.getIdUsuario());
+        for (Carrito c : carrito) {
+            try {
+                c.setCveOrdenCompra(carritoCompraRequest.getCveOrdenCompra());
+                i=carritoMapper.update(c);
+            } catch (SQLException b) {
+                logger.info("No pudo actualizarse la orden compra del carrito");
+                throw new BusinessException();
+            }
+        }
+        return i;
     }
 
     /*

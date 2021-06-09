@@ -42,7 +42,7 @@ import io.kebblar.petstore.api.model.domain.Carrito;
 
 @Repository
 public interface CarritoMapper {
-    static final String CAMPOS = " id, id_usuario, id_anuncio, id_orden_compra ";
+    static final String CAMPOS = " id, id_usuario, id_anuncio, cve_orden_compra ";
 
     /**
      * Obtiene un objeto de tipo 'Carrito' dado su id.
@@ -55,7 +55,7 @@ public interface CarritoMapper {
             @Result(property = "id",   column = "id"),
             @Result(property = "idUsuario",   column = "id_usuario"),
             @Result(property = "idAnuncio",   column = "id_anuncio"),
-            @Result(property = "idOrdenCompra",   column = "id_orden_compra")    
+            @Result(property = "cveOrdenCompra",   column = "cve_orden_compra")
     })
     @Select("SELECT " + CAMPOS + " FROM carrito WHERE     id = #{id}     ") 
     Carrito getById(int id) throws SQLException;
@@ -69,7 +69,7 @@ public interface CarritoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id} AND id_orden_compra is NULL")
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id} AND cve_orden_compra is NULL")
     List<Carrito> getAll(int id) throws SQLException;
     
     /**
@@ -80,7 +80,7 @@ public interface CarritoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO carrito(id_usuario, id_anuncio, id_orden_compra) "
+    "INSERT INTO carrito(id_usuario, id_anuncio, cve_orden_compra) "
    + "VALUES(#{idUsuario}, #{idAnuncio}, NULL )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Carrito carrito) throws SQLException;
@@ -94,7 +94,7 @@ public interface CarritoMapper {
      */
     @Update(
     "UPDATE carrito" 
-    + " SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, id_orden_compra = #{idOrdenCompra}"
+    + " SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, cve_orden_compra = #{cveOrdenCompra}"
     + " WHERE id = #{id} ")
     int update(Carrito carrito) throws SQLException;
 

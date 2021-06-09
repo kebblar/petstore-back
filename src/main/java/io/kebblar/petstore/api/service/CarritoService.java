@@ -27,6 +27,7 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
+import io.kebblar.petstore.api.model.request.CarritoCompraRequest;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 
 /**
@@ -102,4 +103,14 @@ public interface CarritoService {
      * la informaci'on necesaria para pintarlos.
      */
     List<CarritoVista> getCarritoView(int id) throws VistaCarritoException;
+
+    /**
+     * Método que dado los datos de una compra que un usuario ya ha realizado, se encarga
+     * de introducir dicha información en el sistema, asociando un carrito de compras con una
+     * orden de compra ya pagada.
+     * @param carritoCompraRequest Objeto que contiene la información del usuario y el id de la compra.
+     * @return Un entero si todo salió bien
+     * @throws BusinessException cuando sucede algún error con la inserción
+     */
+    int updateCarritoCompra(CarritoCompraRequest carritoCompraRequest) throws BusinessException;
 }
