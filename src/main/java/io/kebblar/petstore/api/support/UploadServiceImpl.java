@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +96,7 @@ public class UploadServiceImpl implements UploadService {
      */
     public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException {
         UUID uuid = UUID.randomUUID();
-        String newName = uuid.toString() + ".png";
+        String newName = uuid.toString() + "."+(FilenameUtils.getExtension(mpf.getOriginalFilename()));
         int autoIncremental = 0;
         valida(mpf, max);
         UploadModel uploadModel = new UploadModel(
