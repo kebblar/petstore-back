@@ -83,18 +83,15 @@ public class CriptoServiceImpl implements CriptoService {
 
     private DatosOrden setNuevaOrden(TransaccionBtc transaction) {
         String uniqueID = UUID.randomUUID().toString();
-        return new DatosOrden(0,
-                transaction.getIdUsuario(),
+        return new DatosOrden(  transaction.getIdUsuario(),
                 transaction.getIdDireccion(),
                 1,
                 2,
                 3,
-                transaction.getIdAnuncio(),
                 uniqueID.substring(18),
                 transaction.getFecha(),
                 false,
                 (long)transaction.getMonto(),
-                (int)transaction.getMonto(),
                 transaction.getDescripcion(),
                 "");
     }

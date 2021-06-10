@@ -1,7 +1,34 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Convert.java
+ * Tipo:        clase
+ * AUTOR:       Daniel Alvarez Morales
+ * Fecha:       8 de Junio de 2021 (16_02)
+ *
+ * Historia:    .
+ *              20210503_1602 Creación
+ *
+ */
 package io.kebblar.petstore.api.utils;
 
 import java.util.regex.Pattern;
 
+/**
+ * <p>
+ * Implementación Metodos para convertir números a cadena
+ * <p>
+ *
+ * @author dalvarez
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class Convert {
     
     private static final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};

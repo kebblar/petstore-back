@@ -116,9 +116,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         logger.debug("Procesando una orden de compra");
         try {
             Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
-            
             UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
-            
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
             
@@ -157,9 +155,4 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 		}
         return ordenCompra;
     }
-    
-    
-
-    
-
 }
