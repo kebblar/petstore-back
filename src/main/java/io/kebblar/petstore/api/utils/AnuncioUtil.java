@@ -13,22 +13,40 @@
  * Fecha:       Jueves 20 de Mayo de 2021 (22_03)
  *
  * Historia:    .
- *              20210520_2203 Creación de éste POJO
+ *              20210520_2203 Creación de esta utileroa
+ *				20210520_2203 Se  agregan  metodos de  marca  de 
+ *				agua y renderizado de imagen
  *
  */
 package io.kebblar.petstore.api.utils;
 
+import java.awt.AlphaComposite;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import com.ibm.icu.text.SimpleDateFormat;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
-import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
-import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
+import org.springframework.beans.factory.annotation.Value;
+
+import com.ibm.icu.text.SimpleDateFormat;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.HttpStatus;
+import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
@@ -202,5 +220,115 @@ public class AnuncioUtil {
 		return response;
 		
 	}
+	
+	
+	/**
+	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado
+	 * @param request Clase que contiene los campos a validar
+	 * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
+	 */
+	public static void validaCampos(AnuncioRequest request) throws BusinessException {
+		//Validacion de campos obligatorios
+		if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
+			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
+		}
+		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
+		if(request.getIdCategoria()>7) {
+			throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
+		}
+		//Validacion de fechas de vigencia
+		Date fechaInicio = request.getFechaInicioVigencia() != null ? 
+				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+				:null;
+		Date fechaFin =request.getFechaFinVigencia() != null ?
+				java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+				:null;
+		if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
+			throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
+		}	
+	}
+	
+	/**
+	 * Metodo que permite renderizar una imagen y agregar marca de agua
+	 * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
+	 * @param logoSistema Logotipo de la empresa que ira como marca de agua
+	 * @param imagenBase Imagen que se renderizara y se agregara marca de agua
+	 * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
+	 * @return
+	 */
+	public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa,  
+			String uuidImagenBase, int altoImagen) {
+		
+			ImageIcon logoSistema=new ImageIcon(destinationFolder+"logo.png");
+			ImageIcon imagenBase=new ImageIcon(destinationFolder+uuidImagenBase);
+			//Se agrega marca de agua al logotipo del sistema
+	        ImageIcon watermarkLogo = logoSistema;
+	        BufferedImage bi = makeTransparent(watermarkLogo.getImage(), 50);
+	        //Se renderiza la imagen proporcionada
+	        BufferedImage imagenRender = renderizar(imagenBase.getImage(), altoImagen);
+	        BufferedImage bufferedImage = new BufferedImage(imagenRender.getWidth(), imagenRender.getHeight(), BufferedImage.TYPE_INT_RGB);
+	        Graphics graphics = bufferedImage.getGraphics();
+	        graphics.drawImage(imagenRender, 0, 0, null);
+	        graphics.setFont(new Font("Arial", Font.BOLD, 15));
+	        //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9 
+	        String watermark = "\u00a9 "+nomEmpresa;
+	        //Se calcula la poscion de la marca de agua con base al tamaño de la iamgen
+	        int posicionLeyendaX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.30));
+	        int posicionLeyendaY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.1)); 
+	        int posicionIconoX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.25));
+	        int posicionIconoY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.25));    
+	        graphics.drawString(watermark, posicionLeyendaX,posicionLeyendaY);
+	        graphics.drawImage(bi, posicionIconoX,posicionIconoY, bi.getWidth(), bi.getHeight(), null);
+	        graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
+	        graphics.dispose();
+	        //Se retorna la imagen renderizada y con marca de agua
+	        try {
+	            Path filepath = Paths.get(destinationFolder, uuidImagenBase);
+//	        	File newFile = new File(destinationFolder+"ejemplo1.png");
+	            ImageIO.write(bufferedImage, "png", filepath.toFile());
+	            bufferedImage.flush();
+//	            return bufferedImage;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+//			return bufferedImage;
+    }
+	
+	/**
+	 * Metodo que permite que una imagen tenga marca de agua
+	 * @param originalImage Imagen que sera la marca de agua
+	 * @param ancho  Medida a lo ancho a la que se renderizara la imagen
+	 * @return BufferedImage Imagen como marca de agua
+	 */
+	public static BufferedImage makeTransparent(Image originalImage, int ancho) {
+        double h = originalImage.getHeight(null);
+        double w = originalImage.getWidth(null);
+        double radio = h / w;
+        int largo = (int) (ancho * radio);
+        BufferedImage resizedImage = new BufferedImage(ancho, largo, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = resizedImage.createGraphics();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g.drawImage(originalImage, 0, 0, ancho, largo, null);
+        g.dispose();
+        return resizedImage;
+    }
+ 
+	/**
+	 * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada
+	 * @param originalImage Imagen a renderizar
+	 * @param alto Altura que se tomara como referencia para el renderizado
+	 * @return BufferedImage Imagen renderizada
+	 */
+	public static BufferedImage renderizar(Image originalImage, int alto) {
+        double h = originalImage.getHeight(null);
+        double w = originalImage.getWidth(null);
+        double radio = h / w;
+        int ancho = (int) (alto / radio);
+        BufferedImage resizedImage = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, ancho, alto, null);
+        g.dispose();
+        return resizedImage;
+    }
 
 }

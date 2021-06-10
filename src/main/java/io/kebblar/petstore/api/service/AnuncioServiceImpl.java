@@ -18,6 +18,8 @@
  *              logico
  *              20210528_1159 Se agrega el metodo de busqueda
  *              administracion
+ *              20210608_1930 Se agrega  renderizado de imagenes
+ *              del servicio de guardado
  *
  */
 package io.kebblar.petstore.api.service;
@@ -29,6 +31,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.ImageIcon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +87,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 
     @Value("${app.max-file-size}")
     private long max;
+    
+//    @Value("${imagen.tamano.alto}")
+    private int imagenAltura = 500;
 
     private final UploadService uploadService;
     private AnuncioMapper anuncioMapper;
@@ -109,7 +116,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 	            rollbackFor = TransactionException.class)
 	public AnuncioResponse guardar(AnuncioRequest request) throws BusinessException {
 		logger.info(request.toString());
-		validaCampos(request);
+		AnuncioUtil.validaCampos(request);
 		//Se valida si los estatus son correctos
 		if(request instanceof ActualizaAnuncioRequest) {
 			try {
@@ -240,8 +247,6 @@ public class AnuncioServiceImpl implements AnuncioService{
 				tipoMedia=1;
 			}else if(contentType.equals("image/png") ) {
 				tipoMedia=2;
-			}else if(contentType.equals("image/gif")) {
-				tipoMedia=3;
 			}else if(contentType.equals("video/mp4")) {
 				tipoMedia=4;
 			}else if(contentType.equals("video/avi")) {
@@ -256,6 +261,14 @@ public class AnuncioServiceImpl implements AnuncioService{
 			UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
 			AnuncioMedia imagenEnt= new AnuncioMedia(anuncio.getId(),upload.getNuevoNombre(),tipoMedia, Boolean.FALSE);
 			anuncioImagenMapper.insertImagen(imagenEnt);
+			
+			//Renderizacion de imagen con marca de agua
+			if(tipoMedia!=5) {
+				AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", imagenEnt.getUuid(), imagenAltura);
+			}else {
+			//Se realizaria la marca de agua para videos	
+			}
+			
 			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getIdTipo(),imagenEnt.getPrincipal());
 		}catch (UploadException e) {
 			throw new BusinessException(e.getShortMessage(),e.getDetailedMessage(),4091,"CVE_4091",HttpStatus.CONFLICT);
@@ -307,32 +320,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			throw new BusinessException("Error de sistema","Ocurrio un error al consultar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
 		}
 	}
-	
-	/**
-	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado
-	 * @param request Clase que contiene los campos a validar
-	 * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
-	 */
-	private void validaCampos(AnuncioRequest request) throws BusinessException {
-		//Validacion de campos obligatorios
-		if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
-			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}
-		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
-		if(request.getIdCategoria()>7) {
-			throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}
-		//Validacion de fechas de vigencia
-		Date fechaInicio = request.getFechaInicioVigencia() != null ? 
-				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-				:null;
-		Date fechaFin =request.getFechaFinVigencia() != null ?
-				java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-				:null;
-		if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
-			throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}	
-	}
+
 
 	/**
 	 * Metodo que permite realizar la busqueda de productos por medio de filtros, asi como tambien devuelve la paginacion
@@ -418,5 +406,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 
 		}
 	}
+	
+	
 
 }
