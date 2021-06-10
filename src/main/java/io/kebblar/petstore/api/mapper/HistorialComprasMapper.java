@@ -10,10 +10,11 @@
  * Artefacto:   HistorialComprasMapper.java
  * Tipo:        Interface
  * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Jueves 19 de Mayo de 2021 (09_25)
+ * Fecha:       Jueves 10 de Junio de 2021 (09_25)
  *
  * Historia:    .
  *              0210519_0925 Creación de éste Mapper
+ *              0210610_0925 Actualizacion de éste Mapper
  *
  */
 package io.kebblar.petstore.api.mapper;

@@ -10,13 +10,14 @@
  * Modulo:      AdministracionCompras
  * Tipo:        clase
  * Autor:       Luis Martinez
- * Fecha:       Wednesday 04 de April de 2021 (09_35)
+ * Fecha:       Thursday 10 June 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
  * POJO asociado a la entidad 'AdministracionCompras'.
  *
  * Historia:    .
  *              20210519_0935 Generado por LMtz
+ *              20210610_0935 Actualizado por LMtz
  *
  */
 package io.kebblar.petstore.api.model.domain;

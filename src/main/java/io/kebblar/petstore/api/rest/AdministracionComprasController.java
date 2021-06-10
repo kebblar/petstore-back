@@ -10,10 +10,11 @@
  * Artefacto:   AdministracionComprasController
  * Tipo:        clase
  * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Martes 19 de Mayo de 2021 (22_29)
+ * Fecha:       Jueve 10 de Mayo de 2021 (22_29)
  *
  * Historia:    .
  *              20210519_2229 Creación de éste controlador REST
+ *              20210610_2229 Actualizacion de éste controlador REST
  *
  */
 package io.kebblar.petstore.api.rest;

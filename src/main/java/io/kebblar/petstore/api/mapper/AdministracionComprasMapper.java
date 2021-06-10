@@ -10,7 +10,7 @@
  * Artefacto:   AdministracionComprasMapper.java
  * Tipo:        Interface
  * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Jueves 19 de Mayo de 2021 (09_25)
+ * Fecha:       Jueves 10 de Junio de 2021 (09_25)
  *
  * Historia:    .
  *              0210519_0925 Creación de éste Mapper
@@ -61,7 +61,7 @@ public interface AdministracionComprasMapper {
      * Actualiza el estado de una compra de en camino a enviado.
      *
      * @param estadoEnvio, el estado al que se va a actualizar la compra.
-     * @param idCompra, la compra que queremos actualizar.
+     * @param cveCompra, la compra que queremos actualizar.
      * @return un entero en caso de que la operacion fue exitosa.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
