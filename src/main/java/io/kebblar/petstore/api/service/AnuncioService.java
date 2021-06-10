@@ -26,6 +26,7 @@ package io.kebblar.petstore.api.service;
 import java.sql.SQLException;
 import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
@@ -125,10 +126,9 @@ public interface AnuncioService {
 	 /**
 	 * Método que permite asignar como principal la imagen del anuncio proporcionado
 	 * <p>El servicio validará que la imagen no haya sido eliminado previamente y que exista</p>
-	 * @param uuid Identificador de la imagen que será principal
-	 * @param idAnuncio Identificador del anuncio al que se le asignara una imagen como principal
+	 * @param {@link AnuncioImagenRequest} Clase que conetiene la informacion de la imagen que será principal
 	 * @throws BusinessException Excepcion lanzada en caso de error
 	 */
-	void imagenPrincipal(int idAnuncio, String uuid) throws BusinessException;
+	void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException;
 
 }

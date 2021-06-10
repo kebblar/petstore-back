@@ -52,6 +52,7 @@ import org.springframework.web.multipart.MultipartFile;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
+import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
@@ -203,13 +204,11 @@ public class AnuncioController {
 
 	@ApiOperation(value = "AnuncioController::Principal", 
 			notes = "Asigna como 'principal' a la imagen proporcionada")
-	@PutMapping(path = "/anuncios/imagen/principal/{idAnuncio}.json", produces = "application/json; charset=utf-8")
+	@PutMapping(path = "/anuncios/imagen/principal.json", produces = "application/json; charset=utf-8")
 	public void confirmaImagenPrincipal(
-			@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a convertir en principal.") 
-			@RequestHeader("uuid") String uuid,
-			@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
-			@PathVariable("idAnuncio") int idAnuncio)
+			@ApiParam(name = "imagenRequest", value = "Informacion de la imagen de un anuncio a convertir en principal.") 
+			@RequestBody AnuncioImagenRequest imagenRequest)
 			throws BusinessException {
-		 anuncioService.imagenPrincipal(idAnuncio, uuid);
+		 anuncioService.imagenPrincipal(imagenRequest);
 	}
 }

@@ -49,6 +49,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
+import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
@@ -393,24 +394,24 @@ public class AnuncioServiceImpl implements AnuncioService{
 	}
 
 	@Override
-	public void imagenPrincipal(int idAnuncio, String uuid) throws BusinessException {
+	public void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException {
 		try {
-			Anuncio anuncioBase = anuncioMapper.getAnuncioById(idAnuncio);
-			if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
+			Anuncio anuncioBase = anuncioMapper.getAnuncioById(imagenRequest.getIdAnuncio());
+			if(anuncioBase==null ||(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
 					|| AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()
-					|| AnuncioEstatusEnum.CANCELADO.getId()==anuncioBase.getIdEstatus()) {
+					|| AnuncioEstatusEnum.CANCELADO.getId()==anuncioBase.getIdEstatus())) {
 				throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido para ser modificado",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(idAnuncio);
+			List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(imagenRequest.getIdAnuncio());
 			if(imagenes==null || imagenes.isEmpty()) {
 				throw new BusinessException("Error de datos","El anuncio no cuenta con imagenenes asociadas",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
-			AnuncioMedia anuncioSolicitado=anuncioImagenMapper.getImagen(uuid);
+			AnuncioMedia anuncioSolicitado=anuncioImagenMapper.getImagen(imagenRequest.getUuid());
 			if(anuncioSolicitado==null) {
 				throw new BusinessException("Error de datos","Imagen de anuncio no encontrada",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
 			for(AnuncioMedia img:imagenes) {
-				if(uuid.equals(img.getUuid())) {
+				if(imagenRequest.getUuid().equals(img.getUuid())) {
 					anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.TRUE);
 				}else {
 					anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.FALSE);
