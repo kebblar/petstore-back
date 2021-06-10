@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 import org.apache.ibatis.annotations.*;
+import org.exolab.castor.mapping.xml.Sql;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,6 +76,18 @@ public interface CarritoMapper {
     @ResultMap("CarritoMap")
     @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id} AND cve_orden_compra is NULL")
     List<Carrito> getAll(int id) throws SQLException;
+
+    /**
+     * Obtiene una lista de objetos de tipo 'Carrito' asignados a la orden btc de un usuario.
+     *
+     * @param idUser Id del usuario que posee determinado carrito.
+     * @return Lista de obetos de tipo Carrito
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("CarritoMap")
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{idUser} AND cve_orden_compra='btcPen'")
+    List<Carrito> getBtcCarrito(int idUser) throws SQLException;
     
     /**
      * Inserta un objeto de tipo 'Carrito' con base en la información dada por el objeto de tipo 'Carrito'.

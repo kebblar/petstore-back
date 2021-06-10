@@ -1,7 +1,9 @@
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.mapper.CarritoMapper;
 import io.kebblar.petstore.api.mapper.CriptoMapper;
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
+import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.BitcoinTransactionException;
@@ -23,9 +25,11 @@ public class CriptoServiceImpl implements CriptoService {
     private CriptoMapper criptoMapper;
     private RemoteRestCallService remoteRestCallService;
     private OrdenCompraService ordenCompraService;
+    private CarritoMapper carritoMapper;
 
-    public CriptoServiceImpl(CriptoMapper criptoMapper, RemoteRestCallService remoteRestCallService, OrdenCompraService ordenCompraService){
+    public CriptoServiceImpl(CarritoMapper carritoMapper, CriptoMapper criptoMapper, RemoteRestCallService remoteRestCallService, OrdenCompraService ordenCompraService){
         this.criptoMapper=criptoMapper;
+        this.carritoMapper=carritoMapper;
         this.remoteRestCallService=remoteRestCallService;
         this.ordenCompraService = ordenCompraService;
     }
@@ -42,6 +46,11 @@ public class CriptoServiceImpl implements CriptoService {
     @Override
     public int insertTransaccion(TransaccionBtc transaccionBtc) throws MapperCallException {
         try{
+            List<Carrito> carrito = carritoMapper.getAll(transaccionBtc.getIdUsuario());
+            for (Carrito c : carrito) {
+                c.setCveOrdenCompra("btcPen");
+                carritoMapper.update(c);
+            }
             return criptoMapper.insertTransaccion(transaccionBtc);
         }catch (SQLException e){
             throw new MapperCallException("Problema insertando la transaccion", "Problema de insercion");
@@ -59,24 +68,45 @@ public class CriptoServiceImpl implements CriptoService {
             throw new BitcoinTransactionException("No puede recuperarse la lista de ordenes pendientes");
         }
         if (transactions.isEmpty()) {
-            logger.info("No hay transacciones pendientes");
+            logger.info("No hay transacciones btc pendientes");
         } else {
             //Revisamos cada transaccion para ver si esta ya a parece en la blockchain
             for(TransaccionBtc transaction : transactions) {
                 String wallet = transaction.getWallet();
                 BlockCyperChecker blockChecker = remoteRestCallService.verifyBalance(wallet);
+//                blockChecker.setBalance(1);
                 logger.info(blockChecker.toString());
-                if(blockChecker.getTotalReceived()!=0) {
-                    logger.info("Nuevo deposito encontrado de la direccion: " + wallet);
-                    if(blockChecker.getBalance() < transaction.getMonto()) throw new BitcoinTransactionException("El monto depositado no es correcto");
-                    DatosOrden datos = setNuevaOrden(transaction);
-                    try {
-                        ordenCompraService.procesarOrdenCompra(datos); //La compra comienza a procesarse cuando el pago es acreditado
-                        criptoMapper.delete(transaction.getId()); // Se borra del historial de transacciones pendientes
-                    } catch (SQLException | BusinessException e) {
-                        throw new BitcoinTransactionException("No puede procesarse la orden de compra o eliminarse");
+                    if(blockChecker.getBalance()>0){
+                        //Se verifica si el balance es distinto a cero
+                        logger.info("Deposito encontrado de la direccion: " + wallet);
+                        //Puede ser que el balance haya sido registrado con anterioridad, por lo que hay que verificar si es el mismo que
+                        //se tiene registrado desde la ultima verificaci'on.
+                        if(blockChecker.getBalance()==transaction.getLastBalance()){
+                            logger.info("deposito ya registrado en la direccion: " + wallet);
+                            continue;
+                        }else {
+                            if(blockChecker.getBalance()>=(transaction.getLastBalance()+transaction.getMonto())){
+                                DatosOrden datos = setNuevaOrden(transaction);
+                                logger.info(datos.toString());
+                                try {
+                                    ordenCompraService.procesarOrdenCompra(datos); //La compra comienza a procesarse cuando el pago es acreditado
+                                    criptoMapper.delete(transaction.getId()); // Se borra del historial de transacciones pendientes
+                                } catch (SQLException | BusinessException e) {
+                                    throw new BitcoinTransactionException("No puede procesarse la orden de compra o eliminarse");
+                                }
+                            }else {
+                                logger.info("Balance insuficiente, contactar con el comprador");
+                            }
+                            try {
+                                // se actualiza el balance con el nuevo monto encontrado
+                                transaction.setLastBalance(blockChecker.getBalance());
+                                criptoMapper.updateTransaccion(transaction);
+                                logger.info("Datos Transaccion actualizados:" + transaction.toString());
+                            }catch (SQLException e){
+                                throw new BitcoinTransactionException("No pudo actualizarse el monto de la nueva transaccion encontrada");
+                            }
+                        }
                     }
-                }
             }
         }
     }
@@ -85,7 +115,7 @@ public class CriptoServiceImpl implements CriptoService {
         String uniqueID = UUID.randomUUID().toString();
         return new DatosOrden(  transaction.getIdUsuario(),
                                 transaction.getIdDireccion(),
-                                1,
+                                transaction.getIdPaqueteria(),
                                 2,
                                 3,
                                 uniqueID.substring(18),

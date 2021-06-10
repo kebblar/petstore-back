@@ -135,8 +135,11 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             ordenCompraMapper.insert(ordenCompra);
 
-            carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
-            
+            if(ordenCompra.getIdMoneda() == 3) {
+                carritoService.updateCarritoCompraBtc(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
+            }else {
+                carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
+            }
     		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
     				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
 			String signedPdf = firmador.signPdf();

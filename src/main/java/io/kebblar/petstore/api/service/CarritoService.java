@@ -122,4 +122,14 @@ public interface CarritoService {
      * @throws BusinessException Cuando no puee actualizarse el carrito de compras con la orden.
      */
     void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException;
+
+    /**
+     * Método que dado los datos de una compra que un usuario ya ha realizado en BTC, se encarga
+     * de introducir dicha información en el sistema, asociando un carrito de compras con una
+     * orden de compra ya pagada.
+     * @param cveOrdenCompra clave de la orden compra.
+     * @param idUser id del usuario.
+     * @throws BusinessException Cuando no puee actualizarse el carrito de compras con la orden.
+     */
+    void updateCarritoCompraBtc(String cveOrdenCompra, int idUser) throws BusinessException;
 }

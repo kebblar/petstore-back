@@ -181,6 +181,20 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    @Override
+    public void updateCarritoCompraBtc(String cveOrdenCompra, int idUser) throws BusinessException {
+        try {
+            List<Carrito> carrito = carritoMapper.getBtcCarrito(idUser);
+            for(Carrito c : carrito) {
+                c.setCveOrdenCompra(cveOrdenCompra);
+                carritoMapper.update(c);
+             }
+        } catch (SQLException b) {
+            logger.info("No pudo actualizarse la orden compra del carrito");
+            throw new BusinessException();
+        }
+    }
+
     /*
     * Implementación del método save
     */
