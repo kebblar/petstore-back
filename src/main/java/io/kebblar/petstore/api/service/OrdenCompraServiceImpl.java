@@ -115,7 +115,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
         logger.debug("Procesando una orden de compra");
         try {
-            CreatePDF crearPdf = new CreatePDF();
             Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
             
             UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
@@ -123,7 +122,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
             
-            String pdf= crearPdf.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url);
+            String pdf= CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url);
             
             String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
             Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
@@ -131,8 +130,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             ordenCompra.setRecibo(url+pdf);
             
             ordenCompraMapper.insert(ordenCompra);
-            
-            
             
     		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
     				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);

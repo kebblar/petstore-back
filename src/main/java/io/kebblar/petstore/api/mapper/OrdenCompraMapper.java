@@ -57,21 +57,19 @@ public interface OrdenCompraMapper {
      * operación desde la base de datos.
      */
     @Results(id="OrdenCompraMap", value = {
-            @Result(property = "id",   column = "id"),
+            @Result(property = "cveOrdenCompra",   column = "cve_orden_compra"),
             @Result(property = "idUsuario",   column = "id_usuario"),
             @Result(property = "idDireccion",   column = "id_direccion_envio"),
             @Result(property = "idPaqueteria",   column = "id_paqueteria"),
             @Result(property = "idMetodoPago",   column = "id_metodo_pago"),
             @Result(property = "idMoneda",   column = "id_moneda"),
-            @Result(property = "idAnuncio",   column = "id_anuncio"),
-            @Result(property = "cveOrdenCompra",   column = "cve_orden_compra"),
-            @Result(property = "importeTotal",   column = "importe_total"),
+            @Result(property = "total",   column = "importe_total"),
             @Result(property = "fecha",   column = "fecha_hora_comprar"),
             @Result(property = "estadoEnvio",   column = "estado_envio"),
             @Result(property = "recibo",   column = "recibo")
     })
-    @Select("SELECT " + CAMPOS + " FROM orden_compra WHERE     id = #{id}     ")
-    DatosOrden getById(int id) throws SQLException ;
+    @Select("SELECT " + CAMPOS + " FROM orden_compra WHERE cveOrdenCompra = #{cveOrdenCompra}")
+    DatosOrden getById(String cveOrdenCompra) throws SQLException ;
 
     /**
      * Obtiene una lista de objetos de tipo 'DatosOrden'.
@@ -93,9 +91,9 @@ public interface OrdenCompraMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
-    "INSERT INTO orden_compra(id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo) "
-   + "VALUES(#{idUsuario}, #{idDireccion}, #{idPaqueteria}, #{idMetodoPago}, #{idMoneda}, #{idAnuncio}, #{cveOrdenCompra}, #{precio}, #{fecha}, #{estadoEnvio}, #{recibo} )")
-    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
+    "INSERT INTO orden_compra(cve_orden_compra, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, importe_total, fecha_hora_comprar, estado_envio, recibo) "
+   + "VALUES(#{cveOrdenCompra}, #{idUsuario}, #{idDireccion}, #{idPaqueteria}, #{idMetodoPago}, #{idMoneda}, #{total}, #{fecha}, #{estadoEnvio}, #{recibo} )")
+    @Options(useGeneratedKeys=true, keyProperty="cveOrdenCompra", keyColumn = "cve_orden_compra")
     int insert(DatosOrden datosOrden) throws SQLException;
 
 
