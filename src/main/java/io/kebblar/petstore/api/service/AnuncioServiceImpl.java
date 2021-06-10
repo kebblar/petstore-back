@@ -405,6 +405,10 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(imagenes==null || imagenes.isEmpty()) {
 				throw new BusinessException("Error de datos","El anuncio no cuenta con imagenenes asociadas",4091,"CVE_4091",HttpStatus.CONFLICT);
 			}
+			AnuncioMedia anuncioSolicitado=anuncioImagenMapper.getImagen(uuid);
+			if(anuncioSolicitado==null) {
+				throw new BusinessException("Error de datos","Imagen de anuncio no encontrada",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
 			for(AnuncioMedia img:imagenes) {
 				if(uuid.equals(img.getUuid())) {
 					anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.TRUE);

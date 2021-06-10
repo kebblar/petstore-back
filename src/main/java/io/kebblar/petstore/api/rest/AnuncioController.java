@@ -203,12 +203,12 @@ public class AnuncioController {
 
 	@ApiOperation(value = "AnuncioController::Principal", 
 			notes = "Asigna como 'principal' a la imagen proporcionada")
-	@PutMapping(path = "/anuncios/imagen/principal.json", produces = "application/json; charset=utf-8")
+	@PutMapping(path = "/anuncios/imagen/principal/{idAnuncio}.json", produces = "application/json; charset=utf-8")
 	public void confirmaImagenPrincipal(
 			@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a convertir en principal.") 
 			@RequestHeader("uuid") String uuid,
 			@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
-			@RequestHeader("idAnuncio") int idAnuncio)
+			@PathVariable("idAnuncio") int idAnuncio)
 			throws BusinessException {
 		 anuncioService.imagenPrincipal(idAnuncio, uuid);
 	}
