@@ -64,6 +64,22 @@ public class AnuncioImagenResponse {
 		this.uuid = uuid;
 	}
 
+	public Integer getIdTipo() {
+		return idTipo;
+	}
+
+	public void setIdTipo(Integer idTipo) {
+		this.idTipo = idTipo;
+	}
+
+	public Boolean getPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(Boolean principal) {
+		this.principal = principal;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
