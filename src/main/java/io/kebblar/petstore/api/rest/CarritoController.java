@@ -184,7 +184,7 @@ public class CarritoController {
     @ApiOperation(
             value = "CarritoController::carrito-compra",
             notes = "Se encarga de setear en el carrito el numero de orden en el momento en que" +
-                    " sucede una compra.")git ad
+                    " sucede una compra.")
     @PutMapping(
             value = "/carrito-compra.json",
             produces = "application/json; charset=utf-8")
