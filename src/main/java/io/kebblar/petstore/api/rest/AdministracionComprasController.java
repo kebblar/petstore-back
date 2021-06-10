@@ -64,12 +64,12 @@ public class AdministracionComprasController {
         return admini.getAll();
     }
 
-    @GetMapping(path = "/administracion-compras-update.json/{estado}/{idCompra}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/administracion-compras-update.json/{estado}/{cveCompra}", produces = "application/json; charset=utf-8")
     public String updateEstado(
             @ApiParam(name = "estado", value = "el nuevo estado de la compra.")
             @PathVariable int estado,
-            @ApiParam(name = "idCompra", value = "el id de la compra.")
-            @PathVariable int idCompra) throws BusinessException {
-        return admini.sent(estado,idCompra);
+            @ApiParam(name = "cveCompra", value = "el cve de la compra.")
+            @PathVariable String cveCompra) throws BusinessException {
+        return admini.sent(estado,cveCompra);
     }
 }

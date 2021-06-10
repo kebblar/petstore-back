@@ -47,7 +47,7 @@ public interface HistorialComprasMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="HistorialMap", value = {
-            @Result(property = "id", column = "id"),
+            @Result(property = "cveOrden", column = "cve_orden_compra"),
             @Result(property = "fechaHoraCompra", column = "fecha_hora_comprar"),
             @Result(property = "estadoEnvio", column = "estado_envio"),
             @Result(property = "nombreAnuncio", column = "nombre_anuncio"),
@@ -56,6 +56,6 @@ public interface HistorialComprasMapper {
             @Result(property = "urlPdf", column = "recibo"),
             @Result(property = "urlImagen", column = "imagen"),
         })
-    @Select("SELECT id,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen,id_usuario FROM historial_compras WHERE id_usuario = #{idUsuario}; ")
+    @Select("SELECT cve_orden_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar,estado_envio,nombre_anuncio,tipo,correo,recibo,imagen,id_usuario FROM historial_compras WHERE id_usuario = #{idUsuario}; ")
     List<HistorialCompras> getAll(@Param("idUsuario") int idUsuario) throws SQLException;
 }

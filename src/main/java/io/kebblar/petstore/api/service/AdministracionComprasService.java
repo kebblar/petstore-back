@@ -50,5 +50,5 @@ public interface AdministracionComprasService {
      * @return String que contiene un JSON que indica si todo salio bien o no.
      * @throws BusinessException es disparada por una regla de negocio
      */
-    String sent(int estadoEnvio, int idCompra) throws BusinessException;
+    String sent(int estadoEnvio, String cveCompra) throws BusinessException;
 }

@@ -57,9 +57,9 @@ public class AdministracionComprasServiceImpl implements AdministracionComprasSe
     }
 
     @Override
-    public String sent(int estadoEnvio, int idCompra) throws BusinessException {
+    public String sent(int estadoEnvio, String cveCompra) throws BusinessException {
         try {
-            mapper.sent(estadoEnvio, idCompra);
+            mapper.sent(estadoEnvio, cveCompra);
             return "{\"succed\": \"true\"}";
         }catch(Exception sql) {
             logger.error(sql.getMessage());
