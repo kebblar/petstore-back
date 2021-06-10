@@ -28,7 +28,7 @@ import java.util.List;
 import java.sql.SQLException;
 
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
-import io.kebblar.petstore.api.model.request.CarritoCompraRequest;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import org.slf4j.Logger;
@@ -84,6 +84,19 @@ public class CarritoServiceImpl implements CarritoService {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
+    }
+
+    @Override
+    public List<CarritoDatosFactura> getByCveOrden(String cve) throws BusinessException {
+        List<CarritoDatosFactura> carro;
+        try {
+            carro = carritoMapper.getByCve(cve);
+            if (carro.size()==0) throw new VistaCarritoException("La clave de orden ingresada no existe");
+
+        } catch (SQLException e) {
+            throw new VistaCarritoException("Error al intentar recuperar el carrito de la orden " + cve);
+        }
+        return carro;
     }
 
     /*
@@ -155,20 +168,17 @@ public class CarritoServiceImpl implements CarritoService {
         return lista;
     }
 
-    @Override
-    public int updateCarritoCompra(CarritoCompraRequest carritoCompraRequest) throws BusinessException {
-        int i = -1;
-        List<Carrito> carrito = getAll(carritoCompraRequest.getIdUsuario());
+    public void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException {
+        List<Carrito> carrito = getAll(idUser);
         for (Carrito c : carrito) {
             try {
-                c.setCveOrdenCompra(carritoCompraRequest.getCveOrdenCompra());
-                i=carritoMapper.update(c);
+                c.setCveOrdenCompra(cveCompra);
+                carritoMapper.update(c);
             } catch (SQLException b) {
                 logger.info("No pudo actualizarse la orden compra del carrito");
                 throw new BusinessException();
             }
         }
-        return i;
     }
 
     /*

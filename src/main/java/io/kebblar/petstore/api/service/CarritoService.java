@@ -27,7 +27,7 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
-import io.kebblar.petstore.api.model.request.CarritoCompraRequest;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 
 /**
@@ -49,6 +49,15 @@ public interface CarritoService {
      * o nulo si no se encuentra ese elemento en la tabla.
      */
     Carrito getById(int id) throws BusinessException;
+
+    /**
+     * Método que, dado la clave de la orden compra de un pedido, devuelve el carrito
+     * asociado a este.
+     * @param cve Clave de orden compra.
+     * @return Listado de objetos dentro del carrito con información textual.
+     * @throws BusinessException
+     */
+    List<CarritoDatosFactura> getByCveOrden(String cve) throws BusinessException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'carrito'.
@@ -108,9 +117,9 @@ public interface CarritoService {
      * Método que dado los datos de una compra que un usuario ya ha realizado, se encarga
      * de introducir dicha información en el sistema, asociando un carrito de compras con una
      * orden de compra ya pagada.
-     * @param carritoCompraRequest Objeto que contiene la información del usuario y el id de la compra.
-     * @return Un entero si todo salió bien
-     * @throws BusinessException cuando sucede algún error con la inserción
+     * @param cveCompra clave de la orden compra.
+     * @param idUser id del usuario.
+     * @throws BusinessException Cuando no puee actualizarse el carrito de compras con la orden.
      */
-    int updateCarritoCompra(CarritoCompraRequest carritoCompraRequest) throws BusinessException;
+    void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException;
 }

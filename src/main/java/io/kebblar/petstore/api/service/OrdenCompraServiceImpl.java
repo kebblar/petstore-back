@@ -69,6 +69,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     
     private MailSenderService mailSenderService;
 
+    private CarritoService carritoService;
+
 
     /*
      * Constructor con atributos mapper
@@ -77,12 +79,14 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
                                     UsuarioDetalleMapper usuarioDetalleMapper,
                                     UsuarioMapper usuarioMapper,
                                     MailSenderService mailSenderService,
-                                    Environment environment) {
+                                    Environment environment,
+                                    CarritoService carritoService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper=usuarioDetalleMapper;
         this.usuarioMapper=usuarioMapper;
         this.mailSenderService=mailSenderService;
         this.environment=environment;
+        this.carritoService=carritoService;
     }
 
     /*
@@ -130,6 +134,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             ordenCompra.setRecibo(url+pdf);
             
             ordenCompraMapper.insert(ordenCompra);
+
+            carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
             
     		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
     				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);

@@ -25,9 +25,13 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
+
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
+import io.kebblar.petstore.api.model.response.CarritoVista;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Carrito;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * <p>Descripción:</p>
@@ -108,4 +112,17 @@ public interface CarritoMapper {
     @Delete("DELETE FROM carrito WHERE id = #{id} ") 
     int delete(int id) throws SQLException;
 
+    /**
+     * Recupera los datos necesarios de los articulos de un carrito para generar el pdf de la compra.
+     * @param cve cadena que representa el id de la compra.
+     * @return Lista de datos sobre los elementos comprados.
+     * @throws SQLException Si ocurre algun problema en la consulta.
+     */
+    @Results(id="CarritoDatos", value = {
+            @Result(property = "titulo",   column = "titulo"),
+            @Result(property = "descripcion",   column = "descripcion"),
+            @Result(property = "precio",   column = "precio")
+    })
+    @Select("SELECT titulo,precio,descripcion FROM anuncio, carrito WHERE anuncio.id = carrito.id_anuncio AND cve_orden_compra = #{cve}")
+    List<CarritoDatosFactura> getByCve(String cve) throws SQLException;
 }

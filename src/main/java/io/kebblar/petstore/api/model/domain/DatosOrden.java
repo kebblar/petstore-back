@@ -58,7 +58,19 @@ public class DatosOrden implements Serializable {
     public DatosOrden() {
     }
 
-
+    public DatosOrden(int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long total, String descripcion, String recibo) {
+        this.idUsuario = idUsuario;
+        this.idDireccion = idDireccion;
+        this.idPaqueteria = idPaqueteria;
+        this.idMetodoPago = idMetodoPago;
+        this.idMoneda = idMoneda;
+        this.cveOrdenCompra = cveOrdenCompra;
+        this.fecha = fecha;
+        this.estadoEnvio = estadoEnvio;
+        this.total = total;
+        this.descripcion = descripcion;
+        this.recibo = recibo;
+    }
 
     /**
      * @return the idUsuario

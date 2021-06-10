@@ -24,8 +24,7 @@ package io.kebblar.petstore.api.rest;
 
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.request.CarritoCompraRequest;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 import io.kebblar.petstore.api.service.CarritoService;
 import io.swagger.annotations.Api;
@@ -181,15 +180,9 @@ public class CarritoController {
         return carritoService.delete(id);
     }
 
-    @ApiOperation(
-            value = "CarritoController::carrito-compra",
-            notes = "Se encarga de setear en el carrito el numero de orden en el momento en que" +
-                    " sucede una compra.")
-    @PutMapping(
-            value = "/carrito-compra.json",
-            produces = "application/json; charset=utf-8")
-    public int updateCarritoCompra(CarritoCompraRequest carritoCompraRequest) throws BusinessException {
-        return carritoService.updateCarritoCompra(carritoCompraRequest);
+    @GetMapping(value = "/carritoCve/{cve}.json", produces = "application/json; charset=utf-8")
+    public List<CarritoDatosFactura> getByClave(@PathVariable String cve) throws BusinessException {
+        return carritoService.getByCveOrden(cve);
     }
 
 }
