@@ -31,9 +31,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.ImageIcon;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,12 +81,14 @@ public class AnuncioServiceImpl implements AnuncioService{
 
     @Value("${app.destination-folder}")
     private String destinationFolder;
+    @Value("${app.destination-folder-video}")
+    private String destinationFolderVideo;
 
     @Value("${app.max-file-size}")
     private long max;
     
-//    @Value("${imagen.tamano.alto}")
-    private int imagenAltura = 500;
+    @Value("${app.imagen-tam}")
+    private int imagenAltura;
 
     private final UploadService uploadService;
     private AnuncioMapper anuncioMapper;
@@ -241,34 +240,37 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
 		try {
-			String contentType = file.getContentType();
 			int tipoMedia=0;
+			String carpetaDestino=destinationFolder;
+			String contentType = file.getContentType();
+			Anuncio anuncio=anuncioMapper.getAnuncioById(idAnuncio);
+			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
+				throw new BusinessException("Error de datos","No existe el  anuncio para asociar la imagen",4091,"CVE_4091",HttpStatus.CONFLICT);
+			}
 			if(contentType.equals("image/jpg") ||contentType.equals("image/jpeg")) {
 				tipoMedia=1;
 			}else if(contentType.equals("image/png") ) {
 				tipoMedia=2;
 			}else if(contentType.equals("video/mp4")) {
 				tipoMedia=4;
+				carpetaDestino=destinationFolderVideo;
 			}else if(contentType.equals("video/avi")) {
 				tipoMedia=5;
+				carpetaDestino=destinationFolderVideo;
 			}else {
-				throw new BusinessException("Error de datos","Formato de imagen no valido. Solo se aceptan: jpg, png, gif, mp4, avi",4091,"CVE_4091",HttpStatus.CONFLICT);
+				throw new BusinessException("Error de datos","Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi",4092,"CVE_4092",HttpStatus.CONFLICT);
 			}
-			Anuncio anuncio=anuncioMapper.getAnuncioById(idAnuncio);
-			if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
-				throw new BusinessException("Error de datos","No existe el  anuncio para asociar la imagen",4091,"CVE_4091",HttpStatus.CONFLICT);
-			}
-			UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
+			if (file.getSize() > max) {
+				BusinessException ue = new BusinessException("Error de datos","Limite excedido. Max: "+max+". Peso: " + file.getSize(),4091,"CVE_4091",HttpStatus.CONFLICT);
+	            throw ue;
+	        }
+			UploadModel upload = uploadService.storeOne(file, carpetaDestino, max);
 			AnuncioMedia imagenEnt= new AnuncioMedia(anuncio.getId(),upload.getNuevoNombre(),tipoMedia, Boolean.FALSE);
 			anuncioImagenMapper.insertImagen(imagenEnt);
-			
 			//Renderizacion de imagen con marca de agua
-			if(tipoMedia!=5) {
+			if(tipoMedia!=4 && tipoMedia!=5) {
 				AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", imagenEnt.getUuid(), imagenAltura);
-			}else {
-			//Se realizaria la marca de agua para videos	
 			}
-			
 			return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getIdTipo(),imagenEnt.getPrincipal());
 		}catch (UploadException e) {
 			throw new BusinessException(e.getShortMessage(),e.getDetailedMessage(),4091,"CVE_4091",HttpStatus.CONFLICT);

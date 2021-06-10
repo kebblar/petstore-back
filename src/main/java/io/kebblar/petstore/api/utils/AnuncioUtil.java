@@ -41,6 +41,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.ibm.icu.text.SimpleDateFormat;
@@ -281,17 +282,14 @@ public class AnuncioUtil {
 	        graphics.drawImage(bi, posicionIconoX,posicionIconoY, bi.getWidth(), bi.getHeight(), null);
 	        graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
 	        graphics.dispose();
-	        //Se retorna la imagen renderizada y con marca de agua
+	        //Se reescribe la imagen renderizada y con marca de agua
 	        try {
 	            Path filepath = Paths.get(destinationFolder, uuidImagenBase);
-//	        	File newFile = new File(destinationFolder+"ejemplo1.png");
-	            ImageIO.write(bufferedImage, "png", filepath.toFile());
+	            ImageIO.write(bufferedImage, FilenameUtils.getExtension(uuidImagenBase), filepath.toFile());
 	            bufferedImage.flush();
-//	            return bufferedImage;
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-//			return bufferedImage;
     }
 	
 	/**
