@@ -476,36 +476,31 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `orden_compra`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orden_compra` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Atributo que representa el identificador de la orden de compra',
-  `id_usuario` int(11) NOT NULL COMMENT 'Atributo que representa el identificador del usuario asociado a la compra',
-  `id_direccion_envio` int(11) NOT NULL COMMENT 'Atributo que representa la direccion a donde se enviar la mascota',
-  `id_paqueteria` int(11) NOT NULL COMMENT 'Atributo que representa el identificador de la paqueteria asociada a la compra',
-  `id_metodo_pago` int(11) NOT NULL COMMENT 'Atributo que representa el identificador del mtodo de pago asociada a la compra',
-  `id_moneda` int(11) NOT NULL COMMENT 'Atributo que representa el tipo de moneda involucrada en la compra, por ejemplo, pesos, dlllares, etc.',
-  `id_anuncio` int(11) NOT NULL COMMENT 'Atributo que representa el identificador del anuncio asociada a la orden de compra',
-  `cve_orden_compra` varchar(20) NOT NULL COMMENT 'Atributo que representa la clave alfanumrica que identifica de manera univoca a la orden de compra',
-  `importe_total` decimal(10,2) NOT NULL COMMENT 'Atributo que representa el importe total, es decir, costo de la mascota + costo de paqueteria',
-  `fecha_hora_comprar` date NOT NULL COMMENT 'Atributo que representa la fecha y hora en que se realiza la comprar',
-  `estado_envio` tinyint(1) NOT NULL COMMENT 'Atributo que representa el estado del envio, los valores validos son 1-En preparacion, 2-En camino, 3-Entregado',
-  `recibo` varchar(256) NOT NULL COMMENT 'Atributo que representa el nombre del archivo con el recibo de comprar en pdf',
-  PRIMARY KEY (`id`),
-  KEY `fk_orden_compra_usuario` (`id_usuario`),
-  KEY `fk_orden_compra_direccion_envio` (`id_direccion_envio`),
-  KEY `fk_orden_compra_paqueteria` (`id_paqueteria`),
-  KEY `fk_orden_compra_metodo_pago` (`id_metodo_pago`),
-  KEY `fk_orden_compra_moneda` (`id_moneda`),
-  KEY `fk_orden_anuncio` (`id_anuncio`),
-  CONSTRAINT `fk_orden_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`),
-  CONSTRAINT `fk_orden_compra_direccion_envio` FOREIGN KEY (`id_direccion_envio`) REFERENCES `direccion` (`id`),
-  CONSTRAINT `fk_orden_compra_metodo_pago` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`),
-  CONSTRAINT `fk_orden_compra_moneda` FOREIGN KEY (`id_moneda`) REFERENCES `moneda` (`id`),
-  CONSTRAINT `fk_orden_compra_paqueteria` FOREIGN KEY (`id_paqueteria`) REFERENCES `paqueteria` (`id`),
-  CONSTRAINT `fk_orden_compra_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
+/*!40101 SET @saved_cs_client = @@character_set_client /;
+/!40101 SET character_set_client = utf8 */;
+CREATE TABLE orden_compra (
+cve_orden_compra varchar(20) NOT NULL COMMENT 'Atributo que representa la clave alfanumerica que identifica de manera univoca a la orden de compra',
+id_usuario int(11) NOT NULL COMMENT 'Atributo que representa el identificador del usuario asociado a la compra',
+id_direccion_envio int(11) NOT NULL COMMENT 'Atributo que representa la direccion a donde se enviar la mascota',
+id_paqueteria int(11) NOT NULL COMMENT 'Atributo que representa el identificador de la paqueteria asociada a la compra',
+id_metodo_pago int(11) NOT NULL COMMENT 'Atributo que representa el identificador del mtodo de pago asociada a la compra',
+id_moneda int(11) NOT NULL COMMENT 'Atributo que representa el tipo de moneda involucrada en la compra, por ejemplo, pesos, dolares, etc.',
+importe_total decimal(10,2) NOT NULL COMMENT 'Atributo que representa el importe total, es decir, costo de la mascota + costo de paqueteria',
+fecha_hora_comprar date NOT NULL COMMENT 'Atributo que representa la fecha y hora en que se realiza la comprar',
+estado_envio tinyint(1) NOT NULL COMMENT 'Atributo que representa el estado del envio, los valores validos son 1-En preparacion, 2-En camino, 3-Entregado',
+recibo varchar(256) NOT NULL COMMENT 'Atributo que representa el nombre del archivo con el recibo de comprar en pdf',
+PRIMARY KEY (cve_orden_compra),
+KEY fk_orden_compra_usuario (id_usuario),
+KEY fk_orden_compra_direccion_envio (id_direccion_envio),
+KEY fk_orden_compra_paqueteria (id_paqueteria),
+KEY fk_orden_compra_metodo_pago (id_metodo_pago),
+KEY fk_orden_compra_moneda (id_moneda),
+CONSTRAINT fk_orden_compra_direccion_envio FOREIGN KEY (id_direccion_envio) REFERENCES direccion (id),
+CONSTRAINT fk_orden_compra_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES metodo_pago (id),
+CONSTRAINT fk_orden_compra_moneda FOREIGN KEY (id_moneda) REFERENCES moneda (id),
+CONSTRAINT fk_orden_compra_paqueteria FOREIGN KEY (id_paqueteria) REFERENCES paqueteria (id),
+CONSTRAINT fk_orden_compra_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orden_compra`
@@ -513,9 +508,24 @@ CREATE TABLE `orden_compra` (
 
 LOCK TABLES `orden_compra` WRITE;
 /*!40000 ALTER TABLE `orden_compra` DISABLE KEYS */;
-INSERT INTO `orden_compra` VALUES (2,1,37,3,1,1,2,'88R74085XM9110610',60.00,'2021-05-20',1,'');
+INSERT INTO `orden_compra` VALUES ('88R74085XM9110610',1,37,3,1,1,60.00,'2021-05-20',1,'');
 /*!40000 ALTER TABLE `orden_compra` ENABLE KEYS */;
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `carrito`;
+CREATE TABLE carrito (
+id int(11) NOT NULL AUTO_INCREMENT COMMENT 'Atributo que representa el identificador de un carrito de compras',
+id_usuario int(11) NOT NULL COMMENT 'Atributo que representa el identificador del usuario dueño del carrito de compras',
+id_anuncio int(11) NOT NULL COMMENT 'Atributo que representa el identificador del anuncio asociado al carrito',
+cve_orden_compra varchar(20) NULL COMMENT 'Atributo que representa la clave alfanumerica que identifica de manera univoca a la orden de compra',
+PRIMARY KEY (id),
+KEY fk_carrito_usuario (id_usuario),
+KEY fk_carrito_anuncio (id_anuncio),
+KEY fk_carrito_orden_compra (cve_orden_compra),
+CONSTRAINT fk_carrito_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id),
+CONSTRAINT fk_carrito_anuncio FOREIGN KEY (id_anuncio) REFERENCES anuncio (id),
+CONSTRAINT fk_carrito_orden_compra FOREIGN KEY (cve_orden_compra) REFERENCES orden_compra (cve_orden_compra)
+);
 
 --
 -- Table structure for table `pais`
@@ -654,29 +664,27 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `transaccion_btc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `transaccion_btc` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
-  `id_direccion` int(11) NOT NULL,
-  `wallet` varchar(50) NOT NULL,
-  `id_anuncio` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `monto` double NOT NULL,
-  `fecha` date NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_usr` (`id_usuario`),
-  KEY `fk_id_dir` (`id_direccion`),
-  KEY `fk_wallet` (`wallet`),
-  KEY `fk_anuncio` (`id_anuncio`),
-  CONSTRAINT `fk_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`),
-  CONSTRAINT `fk_id_dir` FOREIGN KEY (`id_direccion`) REFERENCES `direccion` (`id`),
-  CONSTRAINT `fk_id_usr` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `fk_wallet` FOREIGN KEY (`wallet`) REFERENCES `btc_wallet` (`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE transaccion_btc (
+id int(11) NOT NULL AUTO_INCREMENT,
+id_usuario int(11) NOT NULL,
+id_direccion int(11) NOT NULL,
+wallet varchar(50) NOT NULL,
+id_paqueteria int(11) NOT NULL,
+status tinyint(1) NOT NULL,
+monto double NOT NULL,
+fecha date NOT NULL,
+descripcion varchar(100) NOT NULL,
+last_balance double DEFAULT NULL,
+PRIMARY KEY (id),
+KEY fk_id_usr (id_usuario),
+KEY fk_id_dir (id_direccion),
+KEY fk_wallet (wallet),
+KEY fk_anuncio (id_paqueteria),
+CONSTRAINT fk_id_dir FOREIGN KEY (id_direccion) REFERENCES direccion (id),
+CONSTRAINT fk_id_usr FOREIGN KEY (id_usuario) REFERENCES usuario (id),
+CONSTRAINT fk_paqueteria FOREIGN KEY (id_paqueteria) REFERENCES paqueteria (id),
+CONSTRAINT fk_wallet FOREIGN KEY (wallet) REFERENCES btc_wallet (address)
+);
 
 --
 -- Dumping data for table `transaccion_btc`
@@ -684,7 +692,7 @@ CREATE TABLE `transaccion_btc` (
 
 LOCK TABLES `transaccion_btc` WRITE;
 /*!40000 ALTER TABLE `transaccion_btc` DISABLE KEYS */;
-INSERT INTO `transaccion_btc` VALUES (2,1,35,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,45,'2021-05-20','Mapache'),(3,1,37,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,410,'2021-05-20','Camaleon pantera macho 13 meses'),(4,1,36,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,410,'2021-05-20','Camaleon pantera macho 13 meses');
+INSERT INTO `transaccion_btc` VALUES (2,1,35,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,45.0,'2021-05-20','Mapache',NULL),(3,1,37,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,410,'2021-05-20','Camaleon pantera macho 13 meses',NULL),(4,1,36,'1MSzx9JGPEjXpWVDfeNKnDknTgqWeEyiLd',2,0,410,'2021-05-20','Camaleon pantera macho 13 meses',NULL);
 /*!40000 ALTER TABLE `transaccion_btc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -835,24 +843,85 @@ LOCK TABLES `valor_atributo` WRITE;
 /*!40000 ALTER TABLE `valor_atributo` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Final view structure for view `administracion_compras`
---
+DROP VIEW IF EXISTS `historial_compras`;
+CREATE VIEW historial_compras AS 
+    (select cve_orden_compra,
+    fecha_hora_comprar,
+    estado_envio,
+    titulo AS nombre_anuncio,
+    tipo AS tipo,
+    correo AS correo,
+    recibo AS recibo,
+    id_usuario,
+    uuid AS imagen from
+        (
+            select correo,id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,id_usuario from 
+                (
+                    select * from 
+                        (
+                            select id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,sb2.id_usuario from     
+                                    (
+                                        select id_metodo_pago,sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,orden_compra.id_usuario from 
+                                                (select * from carrito WHERE cve_orden_compra IS NOT NULL) sb1
+                                            join
+                                                orden_compra
+                                            On
+                                                orden_compra.cve_orden_compra = sb1.cve_orden_compra
+                                    ) sb2 
+                                join 
+                                    (
+                                        select anuncio.id, uuid, titulo  from anuncio_media JOIN anuncio ON anuncio.id = anuncio_media.id_anuncio 
+                                            WHERE anuncio_media.principal = 1
+                                    ) new_anuncio
+                                on 
+                                    new_anuncio.id = sb2.id_anuncio
+                        ) sb3
+                    join
+                        direccion
+                    on
+                        direccion.id = sb3.id_direccion_envio
+                ) sb3 
+                JOIN
+                    usuario
+                On
+                    usuario.id = sb3.id_usuario
+        ) sb4
+            join
+                metodo_pago
+            on
+                metodo_pago.id = sb4.id_metodo_pago);
 
-/*!50001 DROP TABLE IF EXISTS `administracion_compras`*/;
-/*!50001 DROP VIEW IF EXISTS `administracion_compras`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = latin1 */;
-/*!50001 SET character_set_results     = latin1 */;
-/*!50001 SET collation_connection      = latin1_swedish_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `administracion_compras` AS (select `s1`.`estado_envio` AS `estado_envio`,`petstore`.`direccion`.`calle_numero` AS `calle_numero`,`petstore`.`direccion`.`colonia` AS `colonia`,`petstore`.`direccion`.`cp` AS `cp`,`petstore`.`direccion`.`id` AS `id_direccion`,`s1`.`cve_orden_compra` AS `cve_orden_compra`,'1' AS `id_mascota`,`s1`.`titulo` AS `nombre_anuncio`,`s1`.`recibo` AS `recibo`,`s1`.`id_compra` AS `id_compra`,`s1`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`direccion` join (select `petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`orden_compra`.`id_direccion_envio` AS `id_direccion_envio`,`petstore`.`orden_compra`.`cve_orden_compra` AS `cve_orden_compra`,`petstore`.`anuncio`.`titulo` AS `titulo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id` AS `id_compra`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar` from (`petstore`.`orden_compra` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `petstore`.`orden_compra`.`id_anuncio`))) `s1` on(`s1`.`id_direccion_envio` = `petstore`.`direccion`.`id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+  DROP VIEW IF EXISTS `administracion_compras`;
+  CREATE VIEW administracion_compras AS 
+    (select 
+        sb3.estado_envio AS estado_envio,
+        direccion.calle_numero AS calle_numero,
+        direccion.colonia AS colonia,
+        direccion.cp AS cp,
+        direccion.id AS id_direccion,
+        sb3.cve_orden_compra AS cve_orden_compra,
+        sb3.titulo AS nombre_anuncio,
+        sb3.recibo AS recibo,
+        sb3.fecha_hora_comprar AS fecha_hora_comprar from
+            (
+                select titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from     
+                        (
+                            select sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from 
+                                    (select * from carrito WHERE cve_orden_compra IS NOT NULL) sb1
+                                join
+                                    orden_compra
+                                On
+                                    orden_compra.cve_orden_compra = sb1.cve_orden_compra
+                        ) sb2 
+                    join 
+                        anuncio
+                    on 
+                        anuncio.id = sb2.id_anuncio
+            ) sb3
+        join
+            direccion
+        on
+            direccion.id = sb3.id_direccion_envio);          
 
 --
 -- Final view structure for view `direccion_con_nombre`
@@ -873,25 +942,6 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
---
--- Final view structure for view `historial_compras`
---
-
-/*!50001 DROP TABLE IF EXISTS `historial_compras`*/;
-/*!50001 DROP VIEW IF EXISTS `historial_compras`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = latin1 */;
-/*!50001 SET character_set_results     = latin1 */;
-/*!50001 SET collation_connection      = latin1_swedish_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `historial_compras` AS (select `sb2`.`id` AS `id`,`sb2`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb2`.`estado_envio` AS `estado_envio`,`sb2`.`titulo` AS `nombre_anuncio`,`sb2`.`tipo` AS `tipo`,`petstore`.`usuario`.`correo` AS `correo`,`sb2`.`recibo` AS `recibo`,'http://photos.ci.ultrasist.net/img.png' AS `imagen`,`sb2`.`id_usuario` AS `id_usuario` from ((select `sb1`.`id` AS `id`,`sb1`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`sb1`.`estado_envio` AS `estado_envio`,`petstore`.`anuncio`.`titulo` AS `titulo`,`sb1`.`tipo` AS `tipo`,`sb1`.`recibo` AS `recibo`,`sb1`.`id_usuario` AS `id_usuario` from ((select `petstore`.`orden_compra`.`id` AS `id`,`petstore`.`orden_compra`.`id_anuncio` AS `id_anuncio`,`petstore`.`orden_compra`.`fecha_hora_comprar` AS `fecha_hora_comprar`,`petstore`.`orden_compra`.`estado_envio` AS `estado_envio`,`petstore`.`metodo_pago`.`tipo` AS `tipo`,`petstore`.`orden_compra`.`recibo` AS `recibo`,`petstore`.`orden_compra`.`id_usuario` AS `id_usuario` from (`petstore`.`orden_compra` join `petstore`.`metodo_pago` on(`petstore`.`metodo_pago`.`id` = `petstore`.`orden_compra`.`id_metodo_pago`))) `sb1` join `petstore`.`anuncio` on(`petstore`.`anuncio`.`id` = `sb1`.`id_anuncio`))) `sb2` join `petstore`.`usuario` on(`petstore`.`usuario`.`id` = `sb2`.`id_usuario`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
