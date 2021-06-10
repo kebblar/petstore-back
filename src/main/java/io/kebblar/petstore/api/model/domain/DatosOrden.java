@@ -39,7 +39,7 @@ public class DatosOrden implements Serializable {
     /**
      * Atributos de la clase
      */
-    private int id;
+
     private int idUsuario;
     private int idDireccion;
     private int idPaqueteria;
@@ -48,8 +48,7 @@ public class DatosOrden implements Serializable {
     private String cveOrdenCompra;
     private Date fecha;
     private boolean estadoEnvio;
-    private long precio;
-    private int total;
+    private long total;
     private String descripcion;
     private String recibo;
 
@@ -59,24 +58,7 @@ public class DatosOrden implements Serializable {
     public DatosOrden() {
     }
 
-    /**
-     * Constructor por con parámetros.
-     */
-    public DatosOrden(int id, int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long precio, int total, String descripcion, String recibo) {
-        this.id = id;
-        this.idUsuario = idUsuario;
-        this.idDireccion = idDireccion;
-        this.idPaqueteria = idPaqueteria;
-        this.idMetodoPago = idMetodoPago;
-        this.idMoneda = idMoneda;
-        this.cveOrdenCompra = cveOrdenCompra;
-        this.fecha = fecha;
-        this.estadoEnvio = estadoEnvio;
-        this.precio = precio;
-        this.total = total;
-        this.descripcion = descripcion;
-        this.recibo = recibo;
-    }
+
 
     /**
      * @return the idUsuario
@@ -157,34 +139,6 @@ public class DatosOrden implements Serializable {
     }
 
     /**
-     * @return the precio
-     */
-    public long getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(long precio) {
-        this.precio = precio;
-    }
-
-    /**
-     * @return the total
-     */
-    public int getTotal() {
-        return total;
-    }
-
-    /**
-     * @param total the total to set
-     */
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    /**
      * @return the fecha
      */
     public Date getFecha() {
@@ -239,38 +193,37 @@ public class DatosOrden implements Serializable {
     public void setCveOrdenCompra(String cveOrdenCompra) {
         this.cveOrdenCompra = cveOrdenCompra;
     }
+    
+    
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
+    public long getTotal() {
+		return total;
+	}
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    @Override
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
+
+
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DatosOrden)) return false;
         DatosOrden that = (DatosOrden) o;
-        return id == that.id && idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && estadoEnvio == that.estadoEnvio && precio == that.precio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
+        return idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && estadoEnvio == that.estadoEnvio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, cveOrdenCompra, fecha, estadoEnvio, precio, total, descripcion, recibo);
+        return Objects.hash(idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, cveOrdenCompra, fecha, estadoEnvio, total, descripcion, recibo);
     }
 
     @Override
     public String toString() {
         return "DatosOrden{" +
-                "id=" + id +
                 ", idUsuario=" + idUsuario +
                 ", idDireccion=" + idDireccion +
                 ", idPaqueteria=" + idPaqueteria +
@@ -279,7 +232,6 @@ public class DatosOrden implements Serializable {
                 ", cveOrdenCompra='" + cveOrdenCompra + '\'' +
                 ", fecha=" + fecha +
                 ", estadoEnvio=" + estadoEnvio +
-                ", precio=" + precio +
                 ", total=" + total +
                 ", descripcion='" + descripcion + '\'' +
                 ", recibo='" + recibo + '\'' +

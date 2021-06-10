@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: petstore
 -- ------------------------------------------------------
--- Server version   10.5.7-MariaDB-1:10.5.7+maria~focal
+-- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -341,13 +341,13 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Table structure for table `mascota_atributo`
+-- Table structure for table `mascota_valor_atributo`
 --
 
-DROP TABLE IF EXISTS `mascota_atributo`;
+DROP TABLE IF EXISTS `mascota_valor_atributo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mascota_atributo` (
+CREATE TABLE `mascota_valor_atributo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_anuncio` int(11) NOT NULL,
   `id_valor_atributo` int(11) NOT NULL,
@@ -360,12 +360,12 @@ CREATE TABLE `mascota_atributo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mascota_atributo`
+-- Dumping data for table `mascota_valor_atributo`
 --
 
-LOCK TABLES `mascota_atributo` WRITE;
-/*!40000 ALTER TABLE `mascota_atributo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mascota_atributo` ENABLE KEYS */;
+LOCK TABLES `mascota_valor_atributo` WRITE;
+/*!40000 ALTER TABLE `mascota_valor_atributo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mascota_valor_atributo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -382,7 +382,7 @@ CREATE TABLE `media_tipo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
- 
+
 --
 -- Dumping data for table `media_tipo`
 --
@@ -901,4 +901,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-03 17:55:52
+-- Dump completed on 2021-06-04 13:15:57
