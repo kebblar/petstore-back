@@ -9,6 +9,7 @@ import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.BitcoinTransactionException;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.response.MontoBitcoin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -124,5 +125,13 @@ public class CriptoServiceImpl implements CriptoService {
                                 (long)transaction.getMonto(),
                                 transaction.getDescripcion(),
                                 "");
+    }
+
+    @Override
+    public MontoBitcoin getMonto(double monto) throws BitcoinTransactionException {
+//        BitsoBtcMxn claseMonto = remoteRestCallService.convierte();
+//        double precio = claseMonto.getPayload().getLast();
+//        double montoBtc = monto / precio;
+        return new MontoBitcoin(0.455, 745904.60);
     }
 }

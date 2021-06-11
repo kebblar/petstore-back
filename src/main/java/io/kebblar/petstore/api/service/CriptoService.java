@@ -4,6 +4,7 @@ import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.BitcoinTransactionException;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.response.MontoBitcoin;
 
 public interface CriptoService {
 
@@ -31,4 +32,12 @@ public interface CriptoService {
      */
     void schedulerBlockchain() throws BitcoinTransactionException;
 
+    /**
+     * Convierte el monto recibido de pesos mecxicanos a bitcoin y adicional a ello informa tambi'en
+     * del precio al que hizo el cambio.
+     * @param monto cantidad en pesos mexicanos a ser convertida.
+     * @return Objeto con la informaci'on de la conversi'on.
+     * @throws BitcoinTransactionException Cuando hay alg'un problema con la conversi'on.
+     */
+    MontoBitcoin getMonto(double monto) throws BitcoinTransactionException;
 }
