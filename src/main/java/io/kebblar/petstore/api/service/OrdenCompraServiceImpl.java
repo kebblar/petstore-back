@@ -38,6 +38,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.CreatePDF;
 import io.kebblar.petstore.api.utils.Signer;
@@ -120,13 +121,12 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         logger.debug("Procesando una orden de compra");
         try {
             Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
-            
             UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
             
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
-            
-            String pdf= CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url);
+            String nombrePdf= CreatePDF.getNamePDF(usuarioDetalle.getId());
+			String pdf= nombrePdf + ".pdf";
             
             String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
             Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
@@ -140,6 +140,11 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             }else {
                 carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
             }
+            
+            List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
+            
+            CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito);
+            
     		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
     				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
 			String signedPdf = firmador.signPdf();

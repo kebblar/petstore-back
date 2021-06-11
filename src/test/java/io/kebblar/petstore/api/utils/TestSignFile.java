@@ -14,7 +14,7 @@ public class TestSignFile {
 				currentDirectory + "/upload/10122fbc4-dcfb-417c-bc33-73ef4fcb22d2.pdf");
 		String signedPdf = firmador.signPdf();
 		String hashPdfOriginal = firmador.verifySignature(signedPdf);
-		String hashPdfCalculated = firmador.createSum(currentDirectory + "/upload/10122fbc4-dcfb-417c-bc33-73ef4fcb22d2.pdf");
+		String hashPdfCalculated = firmador.createSum(currentDirectory + "/upload/1d8fcfca9-0172-459e-93e5-c018f1f592cc.pdf");
 		System.out.println(hashPdfCalculated);
 		System.out.println(hashPdfOriginal);
 		assert(hashPdfOriginal.equals(hashPdfCalculated));
