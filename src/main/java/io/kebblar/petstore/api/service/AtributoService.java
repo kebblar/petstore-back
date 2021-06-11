@@ -24,7 +24,6 @@ package io.kebblar.petstore.api.service;
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoTO;
-import io.kebblar.petstore.api.model.domain.CategoriaTO;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**

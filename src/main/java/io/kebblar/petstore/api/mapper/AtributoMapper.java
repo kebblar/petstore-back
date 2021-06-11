@@ -27,8 +27,6 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
-import io.kebblar.petstore.api.model.domain.AtributoTO;
-import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
 
 /**
  * <p>Descripción:</p>

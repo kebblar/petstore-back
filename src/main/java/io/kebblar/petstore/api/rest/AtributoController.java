@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoTO;
-import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.service.AtributoService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 

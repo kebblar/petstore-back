@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
@@ -31,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoTO;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
@@ -207,7 +205,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 		            			if(agregarAtributo) {
 	                				//mapVA.get(c.getIdCategoria()).add(auxVa);
 		            				List<ValorAtributo> va = new ArrayList<ValorAtributo>();
-		            				ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
+		            				//ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
 		                			aux.setRangos(va);
 		                			map.get(c.getIdCategoria()).getAtributos().add(aux);
 
