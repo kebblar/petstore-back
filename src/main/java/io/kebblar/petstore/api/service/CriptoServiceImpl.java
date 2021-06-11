@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
@@ -129,9 +131,17 @@ public class CriptoServiceImpl implements CriptoService {
 
     @Override
     public MontoBitcoin getMonto(double monto) throws BitcoinTransactionException {
-//        BitsoBtcMxn claseMonto = remoteRestCallService.convierte();
-//        double precio = claseMonto.getPayload().getLast();
-//        double montoBtc = monto / precio;
-        return new MontoBitcoin(0.455, 745904.60);
+        String claseMonto = remoteRestCallService.convierte();
+        int loc = claseMonto.indexOf("last");
+        double price = new Double(claseMonto.substring(loc).split("\"")[2]);
+        return new MontoBitcoin(round(monto/price,5), price);
+    }
+
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

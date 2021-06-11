@@ -31,11 +31,12 @@ public class RemoteRestCallServiceImpl implements RemoteRestCallService {
     public String convierte() {
         String url = "https://api.bitso.com/v3/ticker/?book=btc_mxn";
         RestTemplate restTemplate = new RestTemplate();
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "curl");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-        return restTemplate.getForObject(url, String.class, entity);
+        return restTemplate.postForObject(url, entity, String.class);
      //   return "abc";
     }
 

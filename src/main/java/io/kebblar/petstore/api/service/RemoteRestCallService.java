@@ -2,7 +2,6 @@ package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
-import io.kebblar.petstore.api.model.response.MontoBitcoin;
 
 public interface RemoteRestCallService {
     /**
