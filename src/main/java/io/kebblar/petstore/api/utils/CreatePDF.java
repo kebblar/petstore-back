@@ -21,6 +21,7 @@ package io.kebblar.petstore.api.utils;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 import com.itextpdf.barcodes.Barcode128;
@@ -48,6 +49,7 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 
 /**
  * <p>
@@ -67,30 +69,23 @@ public class CreatePDF {
 	
 	private static final Color headerBg = new DeviceRgb(54,120,182);
 	  
-	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, DatosOrden ordenCompra, String dest, String url) throws ProcessPDFException {
+	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, 
+			DatosOrden ordenCompra, String dest, String url, 
+			String nombrePdf, List<CarritoDatosFactura> listCarrito) throws ProcessPDFException {
 		String pdf="";
 		try {
-			String nombrePdf= getNamePDF(usuarioDetalle.getId());
 			pdf= nombrePdf + ".pdf";
 			PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
 			PageSize pageSize = PageSize.A4.rotate();
 			Document doc = new Document(pdfDoc, pageSize);
 			
-			System.out.println("Inicia Header");
 			doc.add(getHeader());
-			System.out.println("Header ok inicia Title");
-			doc.add(getTitle());
-			System.out.println("Ok title, inicia Datos factura");
+			doc.add(getTitle(ordenCompra));
 			doc.add(getDatosFactura(usuarioDetalle, usuario, doc));
-			System.out.println("Ok datos dactura inicia detalle");
 			doc.add(getTitulosDetalle());
-			System.out.println("Ok titulos detalle inicia detalle");
-			doc.add(getDetalleFactura(ordenCompra));
-			System.out.println(" ok detallke inicia total");
+			doc.add(getDetalleFactura(ordenCompra,listCarrito));
 			doc.add(getTotal(ordenCompra));
-			System.out.println("Ok total inicia barcode");
 			doc.add(getBarcode(url, pdf, nombrePdf, pdfDoc));
-			System.out.println("PDF ok");
 			
 			doc.close();
 			pdfDoc.close();
@@ -125,7 +120,7 @@ public class CreatePDF {
 		return cell;
 	}
 	
-	private static Table getTitle() {
+	private static Table getTitle(DatosOrden ordenCompra) {
 		Table tablePetstore = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
 		tablePetstore.addCell(createTextCellBold("Dirección:", true));
 		tablePetstore.addCell(createTextCell(1, 3, "Av Revolución Col Mixcoac CDMX", TextAlignment.LEFT, true));
@@ -136,7 +131,7 @@ public class CreatePDF {
 		tablePetstore.addCell(createTextCellBold("No DE FACTURA:", ColorConstants.WHITE, headerBg,TextAlignment.CENTER));
 		tablePetstore.addCell(createTextCellBold("FECHA:", ColorConstants.WHITE, headerBg,TextAlignment.CENTER));
 		tablePetstore.addCell(createTextCell(1,4,newLine, TextAlignment.CENTER, true));
-		tablePetstore.addCell(createTextCell("001", TextAlignment.CENTER, false));
+		tablePetstore.addCell(createTextCell(ordenCompra.getCveOrdenCompra(), TextAlignment.CENTER, false));
 		tablePetstore.addCell(createTextCell(getFecha(), TextAlignment.CENTER, false));
 		tablePetstore.addCell(createTextCell(1,6,newLine,TextAlignment.CENTER, true).setMinHeight(25));
 		return tablePetstore;
@@ -179,9 +174,7 @@ public class CreatePDF {
 	private static Table getTotal(DatosOrden ordenCompra) {
 		Table tableTotal = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
 		tableTotal.addCell(createTextCell(1, 3, newLine, TextAlignment.CENTER,true));
-		System.out.println("PDF obteniendo total");
 		tableTotal.addCell(createTextCell(1, 4, Convert.convertirNumero(String.valueOf(ordenCompra.getTotal()),true), TextAlignment.CENTER,true));
-		System.out.println("PDF ok");
 		tableTotal.addCell(createTextCellBold("SUBTOTAL:",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,1));
 		tableTotal.addCell(createTextCellBold(String.valueOf(ordenCompra.getTotal()),ColorConstants.WHITE, headerBg,TextAlignment.RIGHT,1,1));
 		tableTotal.addCell(createTextCell(1, 7, newLine, TextAlignment.CENTER,true));
@@ -190,12 +183,14 @@ public class CreatePDF {
 		return tableTotal;
 	}
 	
-	private static Table getDetalleFactura(DatosOrden ordenCompra) {
+	private static Table getDetalleFactura(DatosOrden ordenCompra, List<CarritoDatosFactura> listCarrito) {
 		Table tableDetalle = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
-		tableDetalle.addCell(createTextCell(1, 4, ordenCompra.getDescripcion(),TextAlignment.LEFT, false));
-		tableDetalle.addCell(createTextCell(1, 1, "1", TextAlignment.CENTER, false));
-		tableDetalle.addCell(createTextCell(1, 2, String.valueOf(ordenCompra.getTotal()), TextAlignment.CENTER, false));
-		tableDetalle.addCell(createTextCell(1, 2, String.valueOf(ordenCompra.getTotal()),TextAlignment.CENTER, false).setMinHeight(25));
+		for (CarritoDatosFactura carrito : listCarrito) {
+			tableDetalle.addCell(createTextCell(1, 4, carrito.getDescripcion(),TextAlignment.LEFT, false));
+			tableDetalle.addCell(createTextCell(1, 1, "1", TextAlignment.CENTER, false));
+			tableDetalle.addCell(createTextCell(1, 2, String.valueOf(carrito.getPrecio()), TextAlignment.CENTER, false));
+			tableDetalle.addCell(createTextCell(1, 2, String.valueOf(carrito.getPrecio()),TextAlignment.CENTER, false).setMinHeight(25));
+		}
 		return tableDetalle;
 	}
 
@@ -250,42 +245,44 @@ public class CreatePDF {
 		return cell;
 	}
 	
-	private static String getNamePDF(int id) {
+	public static String getNamePDF(int id) {
 	    return String.valueOf(id)+UUID.randomUUID().toString();
 	}
 	
 	private static String getFecha(){
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		 LocalDateTime now = LocalDateTime.now();  
-		System.out.println(dtf.format(now)); 
 		return dtf.format(now);
 	}
-	 
-  private static Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
-  	Cell cell = new Cell(col1, col2);
+
+	private static Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2)
+			throws ProcessPDFException {
+		Cell cell = new Cell(col1, col2);
 		Barcode128 code128 = new Barcode128(pdfDoc);
 		code128.setCode(code);
 		code128.setCodeType(Barcode128.CODE128);
 		PdfFormXObject xObject = code128.createFormXObject(ColorConstants.BLACK, ColorConstants.BLACK, pdfDoc);
 		xObject.makeIndirect(pdfDoc);
-	    Image rect = new Image(xObject);
-	    cell.setBorder(Border.NO_BORDER);
-	    cell.add(rect);
-	    return cell;
+		Image rect = new Image(xObject);
+		cell.setBorder(Border.NO_BORDER);
+		cell.add(rect);
+		return cell;
 	}
-	
-  private static Cell generateBarcodeQR(PdfDocument pdfDoc, String code,  Table tablebc, int col1, int col2) throws ProcessPDFException {
-  	Cell cell = new Cell(col1, col2);
+
+	private static Cell generateBarcodeQR(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2)
+			throws ProcessPDFException {
+		Cell cell = new Cell(col1, col2);
 		BarcodeQRCode qrCode = new BarcodeQRCode(code);
 		PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
 		barcodeObject.makeIndirect(pdfDoc);
-	    Image rect = new Image(barcodeObject);
-	    cell.setBorder(Border.NO_BORDER);
-	    cell.add(rect);
-	    return cell;
+		Image rect = new Image(barcodeObject);
+		cell.setBorder(Border.NO_BORDER);
+		cell.add(rect);
+		return cell;
 	}
-	
+
 	private static String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
-		return usuarioDetalle.getNombre()+ " "+usuarioDetalle.getApellidoPaterno()+ " " +usuarioDetalle.getApellidoMaterno();
+		return usuarioDetalle.getNombre() + " " + usuarioDetalle.getApellidoPaterno() + " "
+				+ usuarioDetalle.getApellidoMaterno();
 	}
 }
