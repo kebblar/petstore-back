@@ -39,6 +39,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.CreatePDF;
 import io.kebblar.petstore.api.utils.Signer;
@@ -72,7 +73,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 
     private CarritoService carritoService;
 
-
+    private DireccionService direccionService;
     /*
      * Constructor con atributos mapper
      */
@@ -81,13 +82,15 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
                                     UsuarioMapper usuarioMapper,
                                     MailSenderService mailSenderService,
                                     Environment environment,
-                                    CarritoService carritoService) {
+                                    CarritoService carritoService,
+                                    DireccionService direccionService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper=usuarioDetalleMapper;
         this.usuarioMapper=usuarioMapper;
         this.mailSenderService=mailSenderService;
         this.environment=environment;
         this.carritoService=carritoService;
+        this.direccionService=direccionService;
     }
 
     /*
@@ -143,7 +146,9 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
             
-            CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito);
+            List<DireccionConNombre> direcciones= direccionService.getDireccionEnvio(ordenCompra.getIdUsuario(), ordenCompra.getIdDireccion());
+            
+            CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito, direcciones);
             
     		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
     				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);

@@ -134,6 +134,17 @@ public class DireccionServiceImpl implements DireccionService {
             throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
+    
+    @Override
+    public List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException {
+        try {
+            return direccionMapper.getDireccionEnvio(idUser, idDir);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
+        }
+    }
+    
     /*
     Insert de una dirección ya asociada con el usuario
      */

@@ -50,6 +50,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 
 /**
  * <p>
@@ -71,7 +72,8 @@ public class CreatePDF {
 	  
 	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, 
 			DatosOrden ordenCompra, String dest, String url, 
-			String nombrePdf, List<CarritoDatosFactura> listCarrito) throws ProcessPDFException {
+			String nombrePdf, List<CarritoDatosFactura> listCarrito,
+			 List<DireccionConNombre> direcciones) throws ProcessPDFException {
 		String pdf="";
 		try {
 			pdf= nombrePdf + ".pdf";
@@ -81,7 +83,7 @@ public class CreatePDF {
 			
 			doc.add(getHeader());
 			doc.add(getTitle(ordenCompra));
-			doc.add(getDatosFactura(usuarioDetalle, usuario, doc));
+			doc.add(getDatosFactura(usuarioDetalle, usuario, doc, direcciones));
 			doc.add(getTitulosDetalle());
 			doc.add(getDetalleFactura(ordenCompra,listCarrito));
 			doc.add(getTotal(ordenCompra));
@@ -146,7 +148,8 @@ public class CreatePDF {
 		return tableDetalle;
 	}
 
-	private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc) {
+	private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, 
+			List<DireccionConNombre>direcciones) {
 		Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
 		table4.addCell(createTextCellBold("FACTURAR A:", ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,3));
 		table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
@@ -156,7 +159,7 @@ public class CreatePDF {
 		table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
 		table4.addCell(createTextCell(String.valueOf(usuarioDetalle.getId()),TextAlignment.CENTER, false));
 		table4.addCell(createTextCellBold("Pago contra entrega", false));
-		table4.addCell(createTextCell(1, 6, "Dirección: ",TextAlignment.LEFT, true));
+		table4.addCell(createTextCell(1, 6, "Dirección: "+getDireccion(direcciones),TextAlignment.LEFT, true));
 		table4.addCell(createTextCell(1, 6, "Teléfono: "+usuarioDetalle.getTelefonoCelular(),TextAlignment.LEFT, true));
 		table4.addCell(createTextCell(1, 6, "Correo eléctronico: "+usuario.getCorreo(),TextAlignment.LEFT, true));
 		table4.addCell(createTextCell(1,6,newLine,TextAlignment.LEFT, true).setMinHeight(25));
@@ -284,5 +287,16 @@ public class CreatePDF {
 	private static String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
 		return usuarioDetalle.getNombre() + " " + usuarioDetalle.getApellidoPaterno() + " "
 				+ usuarioDetalle.getApellidoMaterno();
+	}
+	
+	private static String getDireccion(List<DireccionConNombre> direcciones) {
+		String dir = "";
+		if(direcciones.size() >0 ) {
+			DireccionConNombre dirNombre= direcciones.get(0);
+			dir= dirNombre.getCalleNumero()+" "+dirNombre.getColonia()+ " " 
+			+dirNombre.getMunicipioNombre() + " "+dirNombre.getEstadoNombre() + " "
+			+dirNombre.getCp();
+		}
+		return dir;
 	}
 }
