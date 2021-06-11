@@ -82,10 +82,10 @@ public class CustomControllerAdvice {
         int value = geEx.getHttpStatus().value();
         return new ResponseEntity<>(crearMapaRetorno(geEx), HttpStatus.valueOf(value));
     }
-    
+
     /**
      * Construye una respuesta que contiene el consolidado de violaciones en una clave dada.
-     * 
+     *
      * @param spve
      * @return Mapa con la lista de errores detectados
      */

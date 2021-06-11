@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   EstadoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -47,11 +47,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -70,9 +70,9 @@ public class EstadoController {
     private EstadoService estadoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param estadoService Servicios de usuario
      */
     public EstadoController(EstadoService estadoService) {
@@ -98,7 +98,7 @@ public class EstadoController {
     public List<Estado> getAllEstados() throws ControllerException {
         return estadoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "EstadoController::get",
         notes = "Regresa un objeto Estado cuyo id "
@@ -112,7 +112,20 @@ public class EstadoController {
     ) throws BusinessException {
         return this.estadoService.getById(id);
     }
-    
+
+    @ApiOperation(
+            value = "EstadoController::getByPais",
+            notes = "Regresa los estados de determinado país"
+    )
+    @GetMapping(
+            value = "/estado-por-pais/{id}.json",
+            produces = "application/json; charset=utf-8")
+    public List<Estado> getByPais(
+            @ApiParam(name = "id", value = "Representa el id del pais")
+            @PathVariable int id) throws BusinessException {
+        return estadoService.getByPais(id);
+    }
+
     @ApiOperation(
         value = "EstadoController::insert",
         notes = "Recibe un objeto Estado el cual debe de ser insertado "
@@ -141,7 +154,7 @@ public class EstadoController {
     ) throws BusinessException {
         return estadoService.update(estado);
     }
-    
+
     @ApiOperation(
         value = "EstadoController::delete",
         notes = "Recibe un objeto Estado, el cual es buscado dentro de "
@@ -156,11 +169,4 @@ public class EstadoController {
         return estadoService.delete(estado);
     }
 
-    @GetMapping(
-            value = "/estado-por-pais/{id}.json",
-            produces = "application/json; charset=utf-8")
-    public List<Estado> getByPais(@PathVariable int id) throws BusinessException {
-        return estadoService.getByPais(id);
-    }
-    
 }

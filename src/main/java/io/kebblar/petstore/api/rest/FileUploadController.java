@@ -67,7 +67,7 @@ public class FileUploadController {
      * @throws UploadException si hay algun error
      */
     @PostMapping(
-            path = "/upload.json", 
+            path = "/upload.json",
             produces = "application/json; charset=utf-8"
             )
     public UploadModel handleFileUploadWithKDMCopy(
@@ -86,7 +86,7 @@ public class FileUploadController {
     // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
 
     @PutMapping(
-            path = "/upload.json", 
+            path = "/upload.json",
             produces = "application/json; charset=utf-8",
             consumes = { "multipart/*" }
             )
@@ -95,7 +95,7 @@ public class FileUploadController {
         return listaUpload;
     } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
     @PutMapping(
-            path = "/upload2.json", 
+            path = "/upload2.json",
             produces = "application/json; charset=utf-8",
             consumes = { "multipart/*" }
             )

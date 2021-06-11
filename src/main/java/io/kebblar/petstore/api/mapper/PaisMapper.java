@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   PaisMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.domain.Pais;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Pais 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Pais
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -51,9 +51,9 @@ public interface PaisMapper {
      */
     @Results(id="PaisMap", value = {
             @Result(property = "id",   column = "id"),
-            @Result(property = "nombre",   column = "nombre")    
+            @Result(property = "nombre",   column = "nombre")
     })
-    @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ") 
+    @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ")
     Pais getById(int id) throws SQLException;
 
     /**
@@ -64,9 +64,9 @@ public interface PaisMapper {
      * operación desde la base de datos.
      */
     @ResultMap("PaisMap")
-    @Select("SELECT " + CAMPOS + " FROM pais ") 
+    @Select("SELECT " + CAMPOS + " FROM pais ")
     List<Pais> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Pais' con base en la información dada por el objeto de tipo 'Pais'.
      *
@@ -95,7 +95,7 @@ public interface PaisMapper {
      * @return id del Pais borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM pais WHERE id = #{id} ") 
+    @Delete("DELETE FROM pais WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
 }

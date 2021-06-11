@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -26,7 +26,7 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 
 /**
  * <p>Descripción:</p>
- * Interface para el servicio asociado a la entidad {@link Direccion}. 
+ * Interface para el servicio asociado a la entidad {@link Direccion}.
  *
  * @author Gustavo A. Arellano
  * @since 1.0-SNAPSHOT
@@ -40,7 +40,7 @@ public interface DireccionService {
      *
 =======
      * <p>Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
-     * 
+     *
 >>>>>>> refs/heads/develop
      * @param direccion Instancia de Direccion con los datos de la llave.
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
@@ -60,7 +60,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo 'Direccion'.
 =======
-     * 
+     *
      * @param direccion objeto de tipo {@link Direccion}.
 >>>>>>> refs/heads/develop
      * @return int numero de registros insertados en la tabla'direccion'.
@@ -74,7 +74,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo 'Direccion'.
 =======
-     * 
+     *
      * @param direccion objeto de tipo {@link Direccion}.
 >>>>>>> refs/heads/develop
      * @return int numero de registros actualizados en la tabla'direccion'.
@@ -97,7 +97,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo 'Direccion'.
 =======
-     * 
+     *
      * @param direccion objeto de tipo {@link Direccion}.
 >>>>>>> refs/heads/develop
      * @return int numero de registros eliminados en la tabla'direccion'.
@@ -118,9 +118,9 @@ public interface DireccionService {
     /**
      * Metodo que recibe los datos de una direccion agregada durante el proceso de compra y distribuye su
      * contenido para almacenarlo de forma correcta en el sistema.
-     * @param nuevaDireccion
-     * @return
-     * @throws BusinessException
+     * @param nuevaDireccion objeto con los datos de la nueva dirección a insertar.
+     * @return entero si todo sale bien.
+     * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
     int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
 }

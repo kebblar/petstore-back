@@ -26,8 +26,8 @@ public class TestAccessService {
     private AccessService accessService = null;
 
     private Usuario usuario = new Usuario(
-            1, "gustavo_arellano@gmail.com", 
-            "399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4", 
+            1, "gustavo_arellano@gmail.com",
+            "399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4",
             1875437L, true, 3, 0, 0, 0, "regenra-clave-token", 0);
 
     @Before
@@ -41,7 +41,7 @@ public class TestAccessService {
         try {
             when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
             LoginResponse response = this.accessService.login(
-                    "gustavo_arellano@gmail.com", 
+                    "gustavo_arellano@gmail.com",
                     "Kebblar2017");
             System.out.println(response);
             assert(true);
@@ -49,9 +49,9 @@ public class TestAccessService {
             assert(false);
         }
     }
-    
+
     /**
-     * Con 2 intentos previos fallidos, se trata de ingresar 
+     * Con 2 intentos previos fallidos, se trata de ingresar
      * con un usuario existente pero con una clave incorrecta.
      */
     @Test
@@ -60,16 +60,16 @@ public class TestAccessService {
         try {
             when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
             this.accessService.login(
-                    "gustavo_arellano@gmail.com", 
+                    "gustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
         } catch (BusinessException e) {
             assert(true);
         }
     }
-    
+
     /**
-     * Se trata de ingresar con un usuario NO 
+     * Se trata de ingresar con un usuario NO
      * existente pero con una clave cualquiera.
      */
     @Test
@@ -78,14 +78,14 @@ public class TestAccessService {
         try {
             when(usuarioService.obtenUsuarioPorCorreo("xgustavo_arellano@gmail.com")).thenReturn(null);
             this.accessService.login(
-                    "xgustavo_arellano@gmail.com", 
+                    "xgustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
         } catch (BusinessException e) {
             assert(true);
         }
     }
-    
+
     @Test
     public void login2OkUserTest() {
         this.usuario.setAccesoNegadoContador(5);
@@ -105,7 +105,7 @@ public class TestAccessService {
         try {
             when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
             this.accessService.login(
-                    "gustavo_arellano@gmail.com", 
+                    "gustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
         } catch (BusinessException e) {

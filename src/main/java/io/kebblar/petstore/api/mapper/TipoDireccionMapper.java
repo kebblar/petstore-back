@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   TipoDireccionMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 
@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.model.domain.TipoDireccion;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -54,9 +54,9 @@ public interface TipoDireccionMapper {
     @Results(id="TipoDireccionMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM tipo_direccion WHERE     id = #{id}     ")
     TipoDireccion getById(int id) throws SQLException;
 
     /**
@@ -67,9 +67,9 @@ public interface TipoDireccionMapper {
      * operación desde la base de datos.
      */
     @ResultMap("TipoDireccionMap")
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion ") 
+    @Select("SELECT " + CAMPOS + " FROM tipo_direccion ")
     List<TipoDireccion> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'TipoDireccion' con base en la información dada por el objeto de tipo 'TipoDireccion'.
      *
@@ -91,7 +91,7 @@ public interface TipoDireccionMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE tipo_direccion" 
+    "UPDATE tipo_direccion"
     + " SET nombre = #{nombre}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(TipoDireccion tipoDireccion) throws SQLException;
@@ -103,7 +103,7 @@ public interface TipoDireccionMapper {
      * @return id del TipoDireccion borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ") 
+    @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
 }

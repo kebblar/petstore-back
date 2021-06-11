@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -34,7 +34,7 @@ import io.kebblar.petstore.api.model.domain.Direccion;
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 @Repository
 public interface DireccionMapper {
@@ -57,9 +57,9 @@ public interface DireccionMapper {
         @Result(property = "idTipoDireccion", column = "id_tipo_direccion"),
         @Result(property = "cp",          column = "cp"),
         @Result(property = "referencias", column = "referencias"),
-        @Result(property = "activo",      column = "activo")    
+        @Result(property = "activo",      column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM direccion WHERE id = #{id} ") 
+    @Select("SELECT " + CAMPOS + " FROM direccion WHERE id = #{id} ")
     Direccion getById(Direccion direccion) throws SQLException;
 
     /**
@@ -70,9 +70,9 @@ public interface DireccionMapper {
      * operación desde la base de datos.
      */
     @ResultMap("DireccionMap")
-    @Select("SELECT " + CAMPOS + " FROM direccion ") 
+    @Select("SELECT " + CAMPOS + " FROM direccion ")
     List<Direccion> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo {@link Direccion} con base en la información dada por el objeto de tipo {@link Direccion}.
      *
@@ -136,8 +136,9 @@ public interface DireccionMapper {
     List<DireccionConNombre> getDireccionesNombre(int id) throws SQLException;
 
     /**
-     * Agrega
-     * @return
+     * Agrega a la tabla de intersección de usuarios y direcciones un nuevo elemento.
+     * @param ud Elemento que corresponde al id del usuario y el id de la dirección relacionados.
+     * @return Un entero si es que todo salió bien.
      */
 
     @Insert("INSERT INTO usuario_direccion(id_usuario, id_direccion) VALUES( #{idUsuario} , #{idDireccion} )")

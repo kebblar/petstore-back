@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -20,13 +20,13 @@ package io.kebblar.petstore.api.model.domain;
 
 /**
  * Implementacion del POJO de la entidad de 'TickerWrapper'.
- * 
+ *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
 public class TickerWrapper {
-	
+
     private String symbol;
     private String priceChange;
     private String priceChangePercent;
@@ -48,7 +48,7 @@ public class TickerWrapper {
     private long firstId;
     private long lastId;
     private long count;
-    
+
     public String getSymbol() {
         return symbol;
     }

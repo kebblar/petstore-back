@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   DireccionConNombre .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Wednesday 05 de May de 2021 (08_24)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210512_0824 Implementación de clase 
+ * Historia:    20210512_0824 Implementación de clase
  *
  */
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'direccion_con_nombre'. 
+ * POJO asociado a la entidad 'direccion_con_nombre'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -77,7 +77,7 @@ public class DireccionConNombre implements Serializable {
     public int getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
@@ -91,84 +91,84 @@ public class DireccionConNombre implements Serializable {
     public String getCalleNumero() {
         return calleNumero;
     }
-    
+
     /**
      * Setter para calleNumero.
      */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
-    
+
     /**
      * Getter para colonia.
      */
     public String getColonia() {
         return colonia;
     }
-    
+
     /**
      * Setter para colonia.
      */
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
-    
+
     /**
      * Getter para cp.
      */
     public String getCp() {
         return cp;
     }
-    
+
     /**
      * Setter para cp.
      */
     public void setCp(String cp) {
         this.cp = cp;
     }
-    
+
     /**
      * Getter para municipioNombre.
      */
     public String getMunicipioNombre() {
         return municipioNombre;
     }
-    
+
     /**
      * Setter para municipioNombre.
      */
     public void setMunicipioNombre(String municipioNombre) {
         this.municipioNombre = municipioNombre;
     }
-    
+
     /**
      * Getter para estadoNombre.
      */
     public String getEstadoNombre() {
         return estadoNombre;
     }
-    
+
     /**
      * Setter para estadoNombre.
      */
     public void setEstadoNombre(String estadoNombre) {
         this.estadoNombre = estadoNombre;
     }
-    
+
     /**
      * Getter para paisNombre.
      */
     public String getPaisNombre() {
         return paisNombre;
     }
-    
+
     /**
      * Setter para paisNombre.
      */
     public void setPaisNombre(String paisNombre) {
         this.paisNombre = paisNombre;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena

@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -19,13 +19,13 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación 
+ * <p>Excepción que modela la respuesta a una petición de autenticación
  * cuyas credenciales proporcionadas fueron incorrectas.
- * 
+ *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
- * 
+ *
  * @author  luz
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
  * @version 1.0-SNAPSHOT
@@ -43,7 +43,7 @@ public class BadCredentialsException extends BusinessException {
             "CVE_1003",
             HttpStatus.UNAUTHORIZED);
     }
-    
+
     public BadCredentialsException() {
         super(
             "Las credenciales proporcionadas son inválidas",

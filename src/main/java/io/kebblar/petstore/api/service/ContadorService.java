@@ -10,7 +10,7 @@ public interface ContadorService {
      * @throws BusinessException
      */
     int getUsuarioDetalleCounter() throws BusinessException;
-   
+
     int getUsuarioCounter() throws BusinessException;
     int getPaisCounter() throws BusinessException;
     int getEstadoCounter() throws BusinessException;

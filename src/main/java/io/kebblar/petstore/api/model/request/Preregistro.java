@@ -24,15 +24,15 @@ public class Preregistro {
             message = "La clave debe tener al menos 1 número, 1 letra minuscula y una letra mayucula y no debe de " +
                     "contener espacios. Además debe tener de 8 a 30 caracteres")
     private String claveHash;
-    
+
     @ApiModelProperty(example = "5543562126")
     @Pattern(regexp="^\\d{10}$", message = "Teléfono inválido, deben ser exactamente 10 números sin expacios")
     private String telefono;
-    
+
     private Date fechaNacimiento;
-    
+
     private String randomString;
-    
+
     private long instanteRegistro;
 
     public Preregistro() {
@@ -42,8 +42,8 @@ public class Preregistro {
             String correo,
             String claveHash,
             String telefono,
-            Date fechaNacimiento, 
-            String randomString, 
+            Date fechaNacimiento,
+            String randomString,
             long instanteRegistro) {
         this.id = id;
         this.nick = nick;
@@ -186,5 +186,5 @@ public class Preregistro {
             return false;
         return true;
     }
-    
+
 }

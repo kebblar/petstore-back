@@ -1,124 +1,153 @@
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
- *              de: "AUTOR".
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion
+ *              de "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   Atributo.java
- * Tipo:        clase
- * AUTOR:       Javier Chávez Barrios (JCHB)
- * Fecha:       Martes 18 de Mayo de 2021 (20_28)
  *
- * Historia:    .
- *              20210518_2028 Creación de éste POJO
+ * Artefacto:   Atributo .java
+ * Proyecto:    petstore
+ * Tipo:        clase
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       sábado 06 de junio de 2021 (21_41)
+ *
+ *              ------------------------------------------------
+ *
+ * Historia:    20210605_2141 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'atributo'. 
+ * POJO asociado a la entidad 'atributo'.
  *
- * @author Javier Chávez Barrios
+ * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
 public class Atributo implements Serializable {
-	private static final long serialVersionUID = 6512580095034514100L;
 
-	private Integer id;
-	private String nombre;
-	private Boolean activo;
-	
-	public Atributo() {
-	}
+    private static final long serialVersionUID = 8063110643925882553L;
 
-	public Atributo(Integer id) {
-		this.id = id;
-	}
+    /**
+     * Atributos de la clase
+     */
+    private Integer id;
+    private String nombre;
+    private int activo;
 
-	public Atributo(Integer id, String nombre, Boolean activo) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.activo = activo;
-	}
+    /**
+     * Constructor por default (sin parámetros).
+     */
+    public Atributo() {
+    }
 
-	public Atributo(Integer id, String nombre) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-	}
+    /**
+     * Constructor basado en la llave primaria.
+     */
+    public Atributo(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
+    public Atributo(Integer id, String nombre, int activo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.activo = activo;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    /**
+     * Getter para id.
+     */
+    public Integer getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    /**
+     * Setter para id.
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    /**
+     * Getter para nombre.
+     */
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Boolean getActivo() {
-		return activo;
-	}
+    /**
+     * Setter para nombre.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
+    /**
+     * Getter para activo.
+     */
+    public int getActivo() {
+        return activo;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((activo == null) ? 0 : activo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		return result;
-	}
+    /**
+     * Setter para activo.
+     */
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atributo other = (Atributo) obj;
-		if (activo == null) {
-			if (other.activo != null)
-				return false;
-		} else if (!activo.equals(other.activo))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
-	}
 
-	@Override
-	public String toString() {
-		return "Atributo [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
-	}
+    /**
+     * Método toString para el pojo, representa al objeto en forma de cadena
+     */
+    @Override
+    public String toString() {
+        return "[Atributo] : ["
+                + " id =" + this.id
+                + " nombre =" + this.nombre
+                + " activo =" + this.activo
+                + "]";
+    }
+
+    /**
+     * Compara si dos instancias de la clase Atributo son iguales
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Atributo)) {
+            return false;
+        }
+        Atributo other = (Atributo) obj;
+        return
+               id == other.id &&
+               nombre == other.nombre &&
+               activo == other.activo;
+    }
+
+    /**
+     * Genera un hash del objeto
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            id,
+            nombre,
+            activo
+        );
+    }
 
 }

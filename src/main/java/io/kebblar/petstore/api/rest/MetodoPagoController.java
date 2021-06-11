@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MetodoPagoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'metodo_pago'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'metodo_pago'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -69,9 +69,9 @@ public class MetodoPagoController {
     private MetodoPagoService metodoPagoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param metodoPagoService Servicios de usuario
      */
     public MetodoPagoController(MetodoPagoService metodoPagoService) {
@@ -97,7 +97,7 @@ public class MetodoPagoController {
     public List<MetodoPago> getAllMetodoPago() throws BusinessException {
         return metodoPagoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "MetodoPagoController::get",
         notes = "Regresa un objeto MetodoPago cuyo id "
@@ -111,7 +111,21 @@ public class MetodoPagoController {
     ) throws BusinessException {
         return this.metodoPagoService.getById(id);
     }
-    
+
+    @ApiOperation(
+        value = "MetodoPagoController::getByUser",
+        notes = "Regresa un listado de objetos MetodoPago pertenecientes "
+            + "al usuario con el entero recibido como parametro.")
+    @GetMapping(
+        value = "/user-metodo-pago/{id}.json",
+        produces = "application/json; charset=utf-8")
+    public List<MetodoPago> getMetodoByUser(
+    @ApiParam(name="id", value="Representa el id del usuario buscado.")
+    @PathVariable int id
+    ) throws BusinessException {
+        return this.metodoPagoService.getByIdUser(id);
+    }
+
     @ApiOperation(
         value = "MetodoPagoController::insert",
         notes = "Recibe un objeto MetodoPago el cual debe de ser insertado "
@@ -140,7 +154,7 @@ public class MetodoPagoController {
     ) throws BusinessException {
         return metodoPagoService.update(metodoPago);
     }
-    
+
     @ApiOperation(
         value = "MetodoPagoController::delete",
         notes = "Recibe un objeto MetodoPago, el cual es buscado dentro de "
@@ -154,5 +168,5 @@ public class MetodoPagoController {
     ) throws BusinessException {
         return metodoPagoService.delete(metodoPago);
     }
-    
+
 }

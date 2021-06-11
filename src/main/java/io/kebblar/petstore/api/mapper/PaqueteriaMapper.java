@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   PaqueteriaMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de interface 
+ * Historia:    20210511_1444 Implementación de interface
  *
  */
 
@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.model.domain.Paqueteria;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -56,9 +56,9 @@ public interface PaqueteriaMapper {
             @Result(property = "nombre",   column = "nombre"),
             @Result(property = "breveDescripcion",   column = "breve_descripcion"),
             @Result(property = "htmlDescripcion",   column = "html_descripcion"),
-            @Result(property = "precio",   column = "precio")    
+            @Result(property = "precio",   column = "precio")
     })
-    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE     id = #{id}     ")
     Paqueteria getById(int id) throws SQLException;
 
     /**
@@ -69,9 +69,9 @@ public interface PaqueteriaMapper {
      * operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
-    @Select("SELECT " + CAMPOS + " FROM paqueteria ") 
+    @Select("SELECT " + CAMPOS + " FROM paqueteria ")
     List<Paqueteria> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Paqueteria' con base en la información dada por el objeto de tipo 'Paqueteria'.
      *
@@ -93,7 +93,7 @@ public interface PaqueteriaMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE paqueteria" 
+    "UPDATE paqueteria"
     + " SET nombre = #{nombre}, breve_descripcion = #{breveDescripcion}, html_descripcion = #{htmlDescripcion}, precio = #{precio}"
     + " WHERE id = #{id} ")
     int update(Paqueteria paqueteria) throws SQLException;
@@ -105,7 +105,7 @@ public interface PaqueteriaMapper {
      * @return id del Paqueteria borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM paqueteria WHERE id = #{id} ") 
+    @Delete("DELETE FROM paqueteria WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
 }

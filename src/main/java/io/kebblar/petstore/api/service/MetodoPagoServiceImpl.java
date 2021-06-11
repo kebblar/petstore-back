@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MetodoPagoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -34,10 +34,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'metodo_pago'. 
+ * Servicio asociado a la entidad 'metodo_pago'.
  *
  * <p>Implementación de la interfaz {@link MetodoPagoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -58,7 +58,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param metodoPagoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MetodoPagoServiceImpl(MetodoPagoMapper metodoPagoMapper) {
@@ -66,8 +66,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método getById
-    */
+     * Implementación del método getById.
+     */
     @Override
     public MetodoPago getById(int id) throws BusinessException {
         try {
@@ -79,8 +79,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método getAll
-    */
+     * Implementación del método getAll.
+     */
     @Override
     public List<MetodoPago> getAll() throws BusinessException {
         try {
@@ -92,8 +92,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método insert
-    */
+     * Implementación del método insert.
+     */
     @Override
     public int insert(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -105,8 +105,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método update
-    */
+     * Implementación del método update.
+     */
     @Override
     public int update(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -118,8 +118,8 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
     }
 
     /*
-    * Implementación del método delete
-    */
+     * Implementación del método delete.
+     */
     @Override
     public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -129,10 +129,22 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
             throw new BusinessException();
         }
     }
+    /*
+     *Retorna los pagor por usuario.
+     */
+    @Override
+    public List<MetodoPago> getByIdUser(int id) throws BusinessException {
+        try {
+            return metodoPagoMapper.getByIdUser(id);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
 
     /*
-    * Implementación del método save
-    */
+     * Implementación del método save.
+     */
     @Override
     public int save(MetodoPago metodoPago) throws BusinessException {
         try {

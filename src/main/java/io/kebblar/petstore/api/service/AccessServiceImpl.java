@@ -20,15 +20,15 @@ import io.kebblar.petstore.api.utils.DigestEncoder;
 @Service
 public class AccessServiceImpl implements AccessService {
     private static final Logger logger = LoggerFactory.getLogger(AccessServiceImpl.class);
-    
+
     @Value("${proyecto.message}")
     private String message;
-    
+
     private UsuarioService usuarioService;
     private JwtManagerService jwtManagerService;
-    
+
     public AccessServiceImpl(
-            UsuarioService usuarioService, 
+            UsuarioService usuarioService,
             JwtManagerService jwtManagerService) {
         this.usuarioService = usuarioService;
         this.jwtManagerService = jwtManagerService;
@@ -47,23 +47,23 @@ public class AccessServiceImpl implements AccessService {
 
     @Override
     public LoginResponse login(
-            Usuario usuario, 
-            String claveProporcionada, 
-            long delta, 
-            int maximoNumeroIntentosConcedidos, 
+            Usuario usuario,
+            String claveProporcionada,
+            long delta,
+            int maximoNumeroIntentosConcedidos,
             long instanteActual) throws BusinessException {
         // Si el usuario NO es nulo, procederé a calcular sus roles y sus direcciones:
         if(usuario==null) throw new BadCredentialsException();
 
         // Si el usuario fue encontrado, pero está inactivo, Notifica
         if(!usuario.isActivo()) throw new DisabledUserException();
-        
+
         // Calcula cuanto tiempo lleva bloqueado el usuario. Si lleva menos de lo establecido, Notifica
         long instanteDeBloqueo = usuario.getInstanteBloqueo();
         long diff = instanteActual - instanteDeBloqueo;
         long restante = delta - diff;
         if(instanteDeBloqueo>0 && restante>0) throw new WaitLoginException(restante/1000);
-        
+
         // Clave dada que debe ser validado contra el que está en la base de datos
         String clavePorVerificar = DigestEncoder.digest(claveProporcionada, usuario.getCorreo());
 
@@ -72,7 +72,7 @@ public class AccessServiceImpl implements AccessService {
             int numeroDeIntentosFallidos = usuario.getAccesoNegadoContador()+1;
             usuario.setAccesoNegadoContador(numeroDeIntentosFallidos);
             this.update(usuario);
-            
+
             // Si los intentos de ingreso inválidos superan un limite, actualiza y Notifica:
             if(numeroDeIntentosFallidos >= maximoNumeroIntentosConcedidos) {
                 usuario.setInstanteBloqueo(instanteActual);
@@ -96,14 +96,14 @@ public class AccessServiceImpl implements AccessService {
             // https://gitlab.ci.ultrasist.net/root/impi-chatbot-frontend/blob/develop/src/components/04-LogIn/login.vue
             UserFoundWrapper wrapper = getUserFoundWrapper(usuario.getId(), usuario.getCorreo());
             return new LoginResponse(
-                    wrapper.getUsuarioDetalle(), 
-                    new Date(ultimoIngresoExitoso), 
-                    usuario.getCorreo(), 
-                    wrapper.getJwt(), 
+                    wrapper.getUsuarioDetalle(),
+                    new Date(ultimoIngresoExitoso),
+                    usuario.getCorreo(),
+                    wrapper.getJwt(),
                     wrapper.getRoles());
         }
     }
-    
+
     private void valida(String usr, String clave) throws BusinessException {
         if(usr.trim().length()<1 || clave.trim().length()<1) throw new BadCredentialsException();
     }

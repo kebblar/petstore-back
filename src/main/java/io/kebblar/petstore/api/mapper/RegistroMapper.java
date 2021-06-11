@@ -8,12 +8,12 @@
  *              --------------------------------------------------
  * Paquete:     mx.qbits.unam.proyecto.api.mapper
  * Modulo:      Registro
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano
  * Fecha:       miércoles 08 de agosto de 2020 (00_58)
  * Version:     0.1.1-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad Registro 
+ * Interface 'Mapper' MyBatis asociado a la entidad Registro
  *
  * Historia:    .
  *              20200812_0058 Generado por arq.gen, basado en los
@@ -37,7 +37,7 @@ import java.sql.SQLException;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Registro 
+ * Interface 'Mapper' MyBatis asociado a la entidad Registro
  *
  * @author Gustavo A. Arellano
  * @version 0.1.1-SNAPSHOT
@@ -64,7 +64,7 @@ public interface RegistroMapper {
 
     @Insert("INSERT into usuario_rol(id_usuario, id_rol) values(#{idUsuario}, #{idRol})")
     Integer asociateRol(int idUsuario, int idRol) throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'usuario_detalle' con base en la información dada por el objeto de tipo 'usuarioDetalle'.
      *
@@ -92,7 +92,7 @@ public interface RegistroMapper {
     @Update("UPDATE preregistro SET nick = #{nick}, telefono = #{telefono}, fecha_nacimiento = #{fechaNacimiento}, clave_hash = #{claveHash}, random_string = #{randomString}, instante_registro = #{instanteRegistro} WHERE correo = #{correo} ")
     Integer update(Preregistro registro) throws SQLException;
 
-    @Select("DELETE FROM preregistro WHERE random_string = #{randomString} ") 
+    @Select("DELETE FROM preregistro WHERE random_string = #{randomString} ")
     Integer deleteByRandomString(String randomString) throws SQLException;
 
 }

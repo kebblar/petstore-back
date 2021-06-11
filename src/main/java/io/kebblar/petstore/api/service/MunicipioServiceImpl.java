@@ -1,41 +1,45 @@
+
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MunicipioServiceImpl.java
- * Tipo:        clase 
+ * Proyecto:    petstore
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
+
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import java.sql.SQLException;
+
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'municipio'. 
+ * Servicio asociado a la entidad 'municipio'.
  *
  * <p>Implementación de la interfaz {@link MunicipioService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -56,7 +60,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param municipioMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MunicipioServiceImpl(MunicipioMapper municipioMapper) {
@@ -64,20 +68,20 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método getById
+    * Implementación del método getById.
     */
-    //@Override
-//    public Municipio getById(int id) throws BusinessException {
-//        try {
-//            return municipioMapper.getById(id);
-//        } catch (SQLException e) {
-//            logger.error(e.getMessage());
-//            throw new BusinessException();
-//        }
-//    }
+    @Override
+    public Municipio getById(int id) throws BusinessException {
+        try {
+            return municipioMapper.getById(id);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
 
     /*
-    * Implementación del método getAll
+    * Implementación del método getAll.
     */
     @Override
     public List<Municipio> getAll() throws BusinessException {
@@ -90,7 +94,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método insert
+    * Implementación del método insert.
     */
     @Override
     public int insert(Municipio municipio) throws BusinessException {
@@ -103,7 +107,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método update
+    * Implementación del método update.
     */
     @Override
     public int update(Municipio municipio) throws BusinessException {
@@ -116,7 +120,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método delete
+    * Implementación del método delete.
     */
     @Override
     public int delete(Municipio municipio) throws BusinessException {
@@ -129,7 +133,20 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
     /*
-    * Implementación del método save
+    Devuelve la lista de municipios de un estado.
+     */
+    @Override
+    public List<Municipio> getByEstado(int id) throws BusinessException {
+        try{
+            return municipioMapper.getByEstado(id);
+        }catch (SQLException e){
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    /*
+    * Implementación del método save.
     */
     @Override
     public int save(Municipio municipio) throws BusinessException {
@@ -151,24 +168,6 @@ public class MunicipioServiceImpl implements MunicipioService {
             return municipioMapper.getPaginatedMunicipios(idEstado, (pageNumber-1)*pageSize, pageSize);
         } catch (Exception e) {
             throw new MapperCallException("Error de obtención de los Municipios", e.getMessage());
-        }
-    }
-
-    @Override
-    public Municipio getById(int id) throws BusinessException {
-        try {
-            return municipioMapper.getById(id);
-        } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de un Municipio por su ID", e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Municipio> getAllByEstado(int idEstado) throws BusinessException {
-        try {
-            return municipioMapper.getAllByEstado(idEstado);
-        } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
         }
     }
 

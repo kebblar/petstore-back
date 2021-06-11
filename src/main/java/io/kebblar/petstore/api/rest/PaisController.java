@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   PaisController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -44,11 +44,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -67,9 +67,9 @@ public class PaisController {
     private PaisService paisService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param paisService Servicios de usuario
      */
     public PaisController(PaisService paisService) {
@@ -109,7 +109,7 @@ public class PaisController {
     ) throws ControllerException {
         return this.paisService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "PaisController::insert",
         notes = "Recibe un objeto Pais el cual debe de ser insertado "
@@ -138,7 +138,7 @@ public class PaisController {
     ) throws ControllerException {
         return paisService.update(pais);
     }
-    
+
     @ApiOperation(
         value = "PaisController::delete",
         notes = "Recibe un objeto Pais, el cual es buscado dentro de "
@@ -152,5 +152,5 @@ public class PaisController {
     ) throws ControllerException {
         return paisService.delete(pais);
     }
-    
+
 }

@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   PaqueteriaController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'paqueteria'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'paqueteria'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -69,9 +69,9 @@ public class PaqueteriaController {
     private PaqueteriaService paqueteriaService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param paqueteriaService Servicios de usuario
      */
     public PaqueteriaController(PaqueteriaService paqueteriaService) {
@@ -97,7 +97,7 @@ public class PaqueteriaController {
     public List<Paqueteria> getAllPaqueteria() throws BusinessException {
         return paqueteriaService.getAll();
     }
-    
+
     @ApiOperation(
         value = "PaqueteriaController::get",
         notes = "Regresa un objeto Paqueteria cuyo id "
@@ -111,7 +111,7 @@ public class PaqueteriaController {
     ) throws BusinessException {
         return this.paqueteriaService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "PaqueteriaController::insert",
         notes = "Recibe un objeto Paqueteria el cual debe de ser insertado "
@@ -140,7 +140,7 @@ public class PaqueteriaController {
     ) throws BusinessException {
         return paqueteriaService.update(paqueteria);
     }
-    
+
     @ApiOperation(
         value = "PaqueteriaController::delete",
         notes = "Recibe un objeto Paqueteria, el cual es buscado dentro de "
@@ -154,5 +154,5 @@ public class PaqueteriaController {
     ) throws BusinessException {
         return paqueteriaService.delete(paqueteria);
     }
-    
+
 }

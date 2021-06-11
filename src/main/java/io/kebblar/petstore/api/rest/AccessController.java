@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -39,15 +39,15 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints 
+ * <p>Implementacion  del controlador REST asociado a los endpoints
  * de gestión del AccessController.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}
- * 
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no 
- * llevan  javadoc  debido a que la  documentación  Swagger  API 
+ *
+ * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.UsuarioDetalle
  * @see     io.kebblar.petstore.api.model.request.CredencialesRequest
@@ -61,15 +61,15 @@ public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
     private InvokeRestService invokeRestService;
-    
+
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param accessService Servicios de AccessService
      */
     public AccessController(
-            AccessService accessService, 
+            AccessService accessService,
             UsuarioService usuarioService,
             InvokeRestService invokeRestService) {
         this.accessService = accessService;
@@ -78,21 +78,21 @@ public class AccessController {
     }
 
     @PostMapping(
-            path = "/login.json", 
+            path = "/login.json",
             produces = "application/json; charset=utf-8")
     public LoginResponse login(@RequestBody CredencialesRequest cred) throws ControllerException {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
     @PostMapping(
-            path = "/usuario-preregistro.json", 
+            path = "/usuario-preregistro.json",
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
             @RequestBody Preregistro preRegistroRequest) throws ControllerException {
         return this.usuarioService.preRegistro(preRegistroRequest);
     }
-    
+
     @ApiOperation(
             value = "RegistroController::verificarCaptcha",
             notes = "Verifica que el Google captcha V 2.0 sea correcto")
@@ -106,16 +106,16 @@ public class AccessController {
     }
 
     @GetMapping(
-            path = "/confirma-preregistro.json", 
+            path = "/confirma-preregistro.json",
             produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token) throws ControllerException {
         return usuarioService.confirmaPreregistro(token);
     }
-    
+
     @GetMapping(
-            path = "/regenera-clave.json", 
+            path = "/regenera-clave.json",
             produces = "application/json; charset=utf-8")
     public Usuario regeneraClave(
             @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
@@ -123,9 +123,9 @@ public class AccessController {
         // pase lo que pase esté endpoint siempre regresa algo "bueno", para no alentar el "enumeration atack"
         return usuarioService.solicitaRegeneracionClave(correo);
     }
-    
+
     @GetMapping(
-            path = "/confirma-regenera-clave.json", 
+            path = "/confirma-regenera-clave.json",
             produces = "application/json; charset=utf-8")
     public Usuario confirmaRegeneraClave(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
@@ -133,6 +133,12 @@ public class AccessController {
             @ApiParam(name = "clave", value = "Nueva clave a actualizar")
             @RequestParam String clave) throws ControllerException {
         return usuarioService.confirmaRegeneraClave(token, clave);
+    }
+    @GetMapping(
+            path = "/bitso.json",
+            produces = "application/json; charset=utf-8")
+    public String bitso() {
+        return invokeRestService.getBitsoInfo2();
     }
 
 }

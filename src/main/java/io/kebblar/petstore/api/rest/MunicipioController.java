@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MunicipioController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210511_1444 Implementación de clase 
+ * Historia:    20210511_1444 Implementación de clase
  *
  */
 
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'municipio'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'municipio'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -68,9 +68,9 @@ public class MunicipioController {
     private MunicipioService municipioService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param municipioService Servicios de usuario
      */
     public MunicipioController(MunicipioService municipioService) {
@@ -96,7 +96,7 @@ public class MunicipioController {
     public List<Municipio> getAllMunicipio() throws BusinessException {
         return municipioService.getAll();
     }
-    
+
     @ApiOperation(
         value = "MunicipioController::get",
         notes = "Regresa un objeto Municipio cuyo id "
@@ -110,7 +110,7 @@ public class MunicipioController {
     ) throws BusinessException {
         return this.municipioService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "MunicipioController::insert",
         notes = "Recibe un objeto Municipio el cual debe de ser insertado "
@@ -139,7 +139,7 @@ public class MunicipioController {
     ) throws BusinessException {
         return municipioService.update(municipio);
     }
-    
+
     @ApiOperation(
         value = "MunicipioController::delete",
         notes = "Recibe un objeto Municipio, el cual es buscado dentro de "
@@ -158,9 +158,9 @@ public class MunicipioController {
             value= "/municipio-por-estado/{id}.json",
             produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
-        return municipioService.getAllByEstado(id);
+        return municipioService.getByEstado(id);
     }
-    
+
     @GetMapping(
             value= "/municipios-por-estado-paginados.json",
             produces = "application/json; charset=utf-8")

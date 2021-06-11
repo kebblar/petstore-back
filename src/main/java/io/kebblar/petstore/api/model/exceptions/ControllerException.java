@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -19,14 +19,14 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela las propiedades que definen una excepción 
+ * <p>Excepción que modela las propiedades que definen una excepción
  * y es utilizada por el {@link CustomControllerAdvice} para manipular la información
  * en la excepción.
- * 
+ *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
  * constructorescon la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
- * 
+ *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -58,7 +58,7 @@ public class ControllerException extends Exception {
         this.httpStatus = httpStatus;
         LOGGER.error(toString());
     }
-    
+
     @Override
     public String toString() {
         return "ControllerException [shortMessage=" + shortMessage + ", detailedMessage=" + detailedMessage

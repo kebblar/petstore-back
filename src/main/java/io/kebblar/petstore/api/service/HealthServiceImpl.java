@@ -56,18 +56,18 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 public class HealthServiceImpl implements HealthService {
     /**
      * slf4j logger.
-     * Why private+static+final? See: 
+     * Why private+static+final? See:
      * https://stackoverflow.com/questions/6653520/why-do-we-declare-loggers-static-final
-     * Why logger instead LOGGER? The logger reference is not a constant, but a final reference, 
+     * Why logger instead LOGGER? The logger reference is not a constant, but a final reference,
      * and should NOT be in uppercase. A constant VALUE should be in uppercase.
-     * Also, for this interesting damed shit, See: 
+     * Also, for this interesting damed shit, See:
      * https://stackoverflow.com/questions/1417190/should-a-static-final-logger-be-declared-in-upper-case
      */
     private static final Logger logger = LoggerFactory.getLogger(HealthServiceImpl.class);
 
     /** System environment property. */
     private Environment environment;
-    
+
     @Value("${logging.file.name}")
     private String logfile;
 
@@ -129,10 +129,10 @@ public class HealthServiceImpl implements HealthService {
         if (actPro.length > 0) {
             info.put("activeProfile", actPro[0]);
         }
-        
+
         String buildVersion = "1.0-SNAPSHOT"; // PROJECT_VERSION
         String projectName = "proyecto"; // PROJECT_NAME
-        
+
         info.put("build-version", buildVersion);
         info.put("project-name", projectName);
         info.put("project-id", projectName + "_" + buildVersion);

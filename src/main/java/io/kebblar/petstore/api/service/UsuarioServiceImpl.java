@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -61,42 +61,42 @@ import io.kebblar.petstore.api.utils.ValidadorClave;
 
 /**
  * <p>Implementación de la interfaz {@link UsuarioService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
+ *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
  * @see     io.kebblar.petstore.api.service.UsuarioService
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
-    
+
     private UsuarioMapper usuarioMapper;
     private RolMapper rolMapper;
     private RegistroMapper registroMapper;
     private UsuarioDetalleMapper usuarioDetalleMapper;
     private MailSenderService mailSenderService;
-    
+
     private static final int RANDOM_STRING_LEN = 6;
 
     /**
      * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales 
+     * los Mappers y todos los servicios adicionales
      * a ser empleados en esta clase.
-     * 
+     *
      * @param usuarioMapper
      * @param rolMapper
      * @param direccionMapper
      * @param usuarioDetalleMapper
      */
     public UsuarioServiceImpl(
-            UsuarioMapper usuarioMapper, 
-            RolMapper rolMapper, 
+            UsuarioMapper usuarioMapper,
+            RolMapper rolMapper,
             DireccionMapper direccionMapper,
-            UsuarioDetalleMapper usuarioDetalleMapper, 
+            UsuarioDetalleMapper usuarioDetalleMapper,
             RegistroMapper registroMapper,
             MailSenderService mailSenderService) {
         this.usuarioMapper = usuarioMapper;
@@ -200,7 +200,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error al obtener los detalles de un usuario", e.toString());
         }
     }
-    
+
     @Override
     public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
@@ -210,9 +210,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
-    private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws 
-            StrengthPasswordValidatorException, 
-            InternalServerException, 
+    private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
+            StrengthPasswordValidatorException,
+            InternalServerException,
             UserAlreadyExistsException,
             SQLException {
         // Valida si la clave proporcionada es compatible con el
@@ -221,16 +221,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         // Busca al usuario por su correo en la tabla de 'usuario'
         Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
-        
+
         // Si el usuario ya está en la tabla 'usuario', avisa error:
         if(usuario!=null) throw new UserAlreadyExistsException();
 
         // Busca el registro por mail en la tabla de 'registro':
         Preregistro registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
-        
+
         // Genera una cadena aleatoria de caracteres y crea un objeto de tipo 'PreRegistro':
         String randomString = DigestEncoder.getRandomString(RANDOM_STRING_LEN);
-        
+
         // Calcula el Hash de la clave con un salt del correo:
         String claveHasheada = DigestEncoder.digest(preRegistroRequest.getClaveHash(), preRegistroRequest.getCorreo());
 
@@ -238,7 +238,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         preRegistroRequest.setRandomString(randomString);
         preRegistroRequest.setInstanteRegistro(System.currentTimeMillis());
         preRegistroRequest.setClaveHash(claveHasheada);
-        
+
         // Si el usuario NO está en la tabla de 'registro', insertar info:
         if(registro==null) {
             logger.info("Creando registro en la tabla 'Registro'");
@@ -247,44 +247,44 @@ public class UsuarioServiceImpl implements UsuarioService {
             logger.info("Actualizando registro en la tabla 'Registro'");
             this.registroMapper.update(preRegistroRequest);
         }
-        
+
         // Envia correo de notificación:
         sendMail(
-                preRegistroRequest.getNick(), 
-                preRegistroRequest.getCorreo(), 
-                randomString, 
+                preRegistroRequest.getNick(),
+                preRegistroRequest.getCorreo(),
+                randomString,
                 "Clave de confirmación de registro");
         logger.info("Se ha enviado un correo para confirmación a: " + preRegistroRequest.getCorreo());
         return preRegistroRequest;
     }
-    
+
     @Override
     @Transactional(
-            propagation = Propagation.REQUIRED, 
+            propagation = Propagation.REQUIRED,
             isolation = Isolation.DEFAULT,
-            timeout = 36000, 
+            timeout = 36000,
             rollbackFor = TransactionException.class)
-    public Usuario confirmaPreregistro(String token) throws BusinessException {        
+    public Usuario confirmaPreregistro(String token) throws BusinessException {
         // El token sirve sólo 10 minutes:
         long DELTA = 1000*60*10;
-        
+
         // Obtén la túpla asociada al token de confirmación
         Preregistro preregistro = getPreregistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
         if(preregistro==null) throw new TokenNotExistException();
-        
+
         // Si ya expiró el token, notifica el error:
         long age = System.currentTimeMillis()-preregistro.getInstanteRegistro();
         if(age>DELTA) { // token expirado
             throw new TokenExpiredException();
         }
-        
+
         // Si la clave no es la misma, notifica el error:
         if(!token.equals(preregistro.getRandomString())) {
             throw new WrongTokenException("Error al comparar el token registrado con el token proporcionado");
         }
-        
+
         // Si todito lo anterior salió bien, actualiza los
         // datos, guárdalos y elimina el preregistro auxiliar:
         try {
@@ -310,15 +310,15 @@ public class UsuarioServiceImpl implements UsuarioService {
             0   // regeneraClaveTokenInstante
         );
         usuarioMapper.insert(usuario);
-        
-        
+
+
         // Obtén el id autogenerado del usuario recién creado:
         int idUsuario = usuario.getId();
-        
-        
+
+
         // Crea un objeto 'usuarioDetalles' (con el ID autogenerado) e insértalo en la DB:
         UsuarioDetalle usuarioDetalle = new UsuarioDetalle(
-            idUsuario, 
+            idUsuario,
             "",     // nombre
             "",     // apellidoPaterno
             "",     // apellidoMaterno
@@ -327,19 +327,19 @@ public class UsuarioServiceImpl implements UsuarioService {
             preregistro.getTelefono()    // telefonoCelular
         );
         this.usuarioDetalleMapper.insert(usuarioDetalle);
-        
+
 
         // asociar el usuario recién creado con el rol 2:
         this.rolMapper.insertUserRol(idUsuario, 2);
-        
+
         // Borra lo que tengas en la tabla registro
         this.registroMapper.deleteByRandomString(randomString);
-        
+
         // Notifica al log y retorna el id del usuario recién creado:
         logger.info("Nevo Usuario Creado con ID: " + idUsuario);
         return usuario;
     }
-    
+
     private void sendMail(String nick, String correo, String randomString, String titulo) {
         String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
         try {
@@ -349,11 +349,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         this.mailSenderService.sendHtmlMail(correo, titulo, body);
     }
-    
+
     /**
-     * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado 
+     * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado
      * por correo al momento del registro.
-     * 
+     *
      * @param token proporcionado por correo al momento del registro.
      * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
      * @throws BusinessException
@@ -362,7 +362,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return this.registroMapper.getByRandomString(token);
         } catch (SQLException e) {
-            throw new BusinessException("getRegistroByRandomString", e.toString()); 
+            throw new BusinessException("getRegistroByRandomString", e.toString());
         }
     }
     private String getTemplate(String user, String randStr) throws InternalServerException {
@@ -400,7 +400,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             return dummyUser;
         }
     }
-    
+
     @Override
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
         long UNA_HORA = 1000*60*60;
@@ -415,7 +415,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new TokenExpiredException();
         }
     }
-    
+
     @Override
     public Usuario cambiaClave(String correo, String clave) throws BusinessException {
         try {
