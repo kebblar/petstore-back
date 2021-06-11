@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaAtributoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (19_06)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_1906 Implementación de clase 
+ * Historia:    20210606_1906 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -44,11 +44,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'categoria_atributo'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'categoria_atributo'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -66,9 +66,9 @@ public class CategoriaAtributoController {
     private CategoriaAtributoService categoriaAtributoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param categoriaAtributoService Servicios de usuario
      */
     public CategoriaAtributoController(CategoriaAtributoService categoriaAtributoService) {
@@ -94,7 +94,7 @@ public class CategoriaAtributoController {
     public List<CategoriaAtributo> getAllCategoriaAtributo() throws BusinessException {
         return categoriaAtributoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "CategoriaAtributoController::get",
         notes = "Regresa un objeto CategoriaAtributo cuyo id "
@@ -108,7 +108,7 @@ public class CategoriaAtributoController {
     ) throws BusinessException {
         return this.categoriaAtributoService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "CategoriaAtributoController::insert",
         notes = "Recibe un objeto CategoriaAtributo el cual debe de ser insertado "
@@ -137,7 +137,7 @@ public class CategoriaAtributoController {
     ) throws BusinessException {
         return categoriaAtributoService.update(categoriaAtributo);
     }
-    
+
     @ApiOperation(
         value = "CategoriaAtributoController::delete",
         notes = "Recibe un objeto CategoriaAtributo, el cual es buscado dentro de "
@@ -151,7 +151,7 @@ public class CategoriaAtributoController {
     ) throws BusinessException {
         return categoriaAtributoService.delete(categoriaAtributo);
     }
-    
+
     @ApiOperation(
             value = "CategoriaAtributoController::get",
             notes = "Regresa una lista de objetos CategoriaAtributo cuyo id de categoria"
@@ -164,7 +164,7 @@ public class CategoriaAtributoController {
         @PathVariable int id) throws BusinessException {
             return this.categoriaAtributoService.getAllAtributoByCategoria(id);
    }
-    
+
    @ApiOperation(
             value = "CategoriaAtributoController::get",
             notes = "Regresa una lista de objetos CategoriaAtributo cuyo id de categoria"
@@ -177,7 +177,7 @@ public class CategoriaAtributoController {
         @PathVariable int id) throws ControllerException {
             return this.categoriaAtributoService.getAllAtributosFaltantesByCategoria(id);
    }
-  
-        
-    
+
+
+
 }

@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (00_02)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_0002 Implementación de interface 
+ * Historia:    20210605_0002 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -30,7 +30,7 @@ import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Categoria 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Categoria
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -52,9 +52,9 @@ public interface CategoriaMapper {
     @Results(id="CategoriaMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "categoria",   column = "categoria"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM categoria WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM categoria WHERE     id = #{id}     ")
     Categoria getById(int id) throws SQLException;
 
     /**
@@ -65,9 +65,9 @@ public interface CategoriaMapper {
      * operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria ") 
+    @Select("SELECT " + CAMPOS + " FROM categoria ")
     List<Categoria> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Categoria' con base en la información dada por el objeto de tipo 'Categoria'.
      *
@@ -89,7 +89,7 @@ public interface CategoriaMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE categoria" 
+    "UPDATE categoria"
     + " SET categoria = #{categoria}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(Categoria categoria) throws SQLException;
@@ -101,7 +101,7 @@ public interface CategoriaMapper {
      * @return id del Categoria borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM categoria WHERE id = #{id} ") 
+    @Delete("DELETE FROM categoria WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
@@ -113,9 +113,9 @@ public interface CategoriaMapper {
      * operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria WHERE categoria LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM categoria WHERE categoria LIKE '%' #{nombre} '%'")
     List<Categoria> getByNombre(String nombre) throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
@@ -124,14 +124,14 @@ public interface CategoriaMapper {
      * operación desde la base de datos.
      */
     @Select("select c.id as idCategoria, c.categoria as categoriaNombre,"
-    		+ " c.activo as estatusCategoria,"
-    		+ " ca.id_categoria, ca.id_atributo , a.id as idAtributo,"
-    		+ " a.nombre as nombreAtributo, a.activo as estatusAtributo,"
-    		+ " va.id as idRango, va.id_atributo as rangoIdAtributo, "
-    		+ " va.rango as rango, va.activo as estatusRango "
-    		+ " from categoria c left join categoria_atributo ca"
-    		+ " on c.id = ca.id_categoria left join atributo a "
-    		+ " on a.id = ca.id_atributo left join valor_atributo "
-    		+ "va on va.id_atributo = a.id order by c.id, a.id, va.id") 
-    List<CategoriaDetallesTO> getAllCategoriaDetalle() throws SQLException;    
+            + " c.activo as estatusCategoria,"
+            + " ca.id_categoria, ca.id_atributo , a.id as idAtributo,"
+            + " a.nombre as nombreAtributo, a.activo as estatusAtributo,"
+            + " va.id as idRango, va.id_atributo as rangoIdAtributo, "
+            + " va.rango as rango, va.activo as estatusRango "
+            + " from categoria c left join categoria_atributo ca"
+            + " on c.id = ca.id_categoria left join atributo a "
+            + " on a.id = ca.id_atributo left join valor_atributo "
+            + "va on va.id_atributo = a.id order by c.id, a.id, va.id")
+    List<CategoriaDetallesTO> getAllCategoriaDetalle() throws SQLException;
 }

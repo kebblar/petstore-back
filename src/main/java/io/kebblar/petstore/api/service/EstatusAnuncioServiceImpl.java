@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   EstatusAnuncioServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (00_13)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_0013 Implementación de clase 
+ * Historia:    20210606_0013 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.service;
@@ -32,10 +32,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'estatus_anuncio'. 
+ * Servicio asociado a la entidad 'estatus_anuncio'.
  *
  * <p>Implementación de la interfaz {@link EstatusAnuncioService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -56,7 +56,7 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param estatusAnuncioMapper mapper utilizado para llamar a metodos de persistencia
      */
     public EstatusAnuncioServiceImpl(EstatusAnuncioMapper estatusAnuncioMapper) {
@@ -146,12 +146,12 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
     }
 
     @Override
-	public List<EstatusAnuncio> getByNombre(String nombre) throws BusinessException {
+    public List<EstatusAnuncio> getByNombre(String nombre) throws BusinessException {
         try {
             return estatusAnuncioMapper.getByNombre(nombre);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException("Error de obtención de un EstatusAnuncio", e.getMessage());
         }
-	}
+    }
 }

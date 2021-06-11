@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: petstore
 -- ------------------------------------------------------
--- Server version	10.5.7-MariaDB-1:10.5.7+maria~focal
+-- Server version    10.5.7-MariaDB-1:10.5.7+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -844,7 +844,7 @@ LOCK TABLES `valor_atributo` WRITE;
 UNLOCK TABLES;
 
 DROP VIEW IF EXISTS `historial_compras`;
-CREATE VIEW historial_compras AS 
+CREATE VIEW historial_compras AS
     (select cve_orden_compra,
     fecha_hora_comprar,
     estado_envio,
@@ -855,32 +855,32 @@ CREATE VIEW historial_compras AS
     id_usuario,
     uuid AS imagen from
         (
-            select correo,id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,id_usuario from 
+            select correo,id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,id_usuario from
                 (
-                    select * from 
+                    select * from
                         (
-                            select id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,sb2.id_usuario from     
+                            select id_metodo_pago,uuid,titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,sb2.id_usuario from
                                     (
-                                        select id_metodo_pago,sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,orden_compra.id_usuario from 
+                                        select id_metodo_pago,sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar,orden_compra.id_usuario from
                                                 (select * from carrito WHERE cve_orden_compra IS NOT NULL) sb1
                                             join
                                                 orden_compra
                                             On
                                                 orden_compra.cve_orden_compra = sb1.cve_orden_compra
-                                    ) sb2 
-                                join 
+                                    ) sb2
+                                join
                                     (
-                                        select anuncio.id, uuid, titulo  from anuncio_media JOIN anuncio ON anuncio.id = anuncio_media.id_anuncio 
+                                        select anuncio.id, uuid, titulo  from anuncio_media JOIN anuncio ON anuncio.id = anuncio_media.id_anuncio
                                             WHERE anuncio_media.principal = 1
                                     ) new_anuncio
-                                on 
+                                on
                                     new_anuncio.id = sb2.id_anuncio
                         ) sb3
                     join
                         direccion
                     on
                         direccion.id = sb3.id_direccion_envio
-                ) sb3 
+                ) sb3
                 JOIN
                     usuario
                 On
@@ -892,8 +892,8 @@ CREATE VIEW historial_compras AS
                 metodo_pago.id = sb4.id_metodo_pago);
 
   DROP VIEW IF EXISTS `administracion_compras`;
-  CREATE VIEW administracion_compras AS 
-    (select 
+  CREATE VIEW administracion_compras AS
+    (select
         sb3.estado_envio AS estado_envio,
         direccion.calle_numero AS calle_numero,
         direccion.colonia AS colonia,
@@ -904,24 +904,24 @@ CREATE VIEW historial_compras AS
         sb3.recibo AS recibo,
         sb3.fecha_hora_comprar AS fecha_hora_comprar from
             (
-                select titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from     
+                select titulo,estado_envio,cve_orden_compra,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from
                         (
-                            select sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from 
+                            select sb1.cve_orden_compra,estado_envio,id_anuncio,id_direccion_envio,recibo,fecha_hora_comprar from
                                     (select * from carrito WHERE cve_orden_compra IS NOT NULL) sb1
                                 join
                                     orden_compra
                                 On
                                     orden_compra.cve_orden_compra = sb1.cve_orden_compra
-                        ) sb2 
-                    join 
+                        ) sb2
+                    join
                         anuncio
-                    on 
+                    on
                         anuncio.id = sb2.id_anuncio
             ) sb3
         join
             direccion
         on
-            direccion.id = sb3.id_direccion_envio);          
+            direccion.id = sb3.id_direccion_envio);
 
 --
 -- Final view structure for view `direccion_con_nombre`

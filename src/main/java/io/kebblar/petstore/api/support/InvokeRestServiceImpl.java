@@ -11,22 +11,22 @@ import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 
 @Service("invokeRestService")
 public class InvokeRestServiceImpl implements InvokeRestService {
-    
+
     public String getBitsoInfo2() {
         String url = "https://api.bitso.com/v3/ticker/?book=btc_mxn";
         RestTemplate restTemplate = new RestTemplate();
-                
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "curl");     //"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        
+
         return restTemplate.postForObject(url, entity, String.class);
-        
+
         // https://stackoverflow.com/questions/16781680/http-get-with-headers-using-resttemplate
         //return restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
     }
-    
-    
+
+
     @Override
     public String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException {
         try {

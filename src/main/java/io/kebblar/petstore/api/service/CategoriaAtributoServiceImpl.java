@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaAtributoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (19_06)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_1906 Implementación de clase 
+ * Historia:    20210606_1906 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.service;
@@ -34,10 +34,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'categoria_atributo'. 
+ * Servicio asociado a la entidad 'categoria_atributo'.
  *
  * <p>Implementación de la interfaz {@link CategoriaAtributoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -57,7 +57,7 @@ public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param categoriaAtributoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public CategoriaAtributoServiceImpl(CategoriaAtributoMapper categoriaAtributoMapper) {
@@ -135,31 +135,31 @@ public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
     @Override
     public int save(CategoriaAtributo categoriaAtributo) throws BusinessException {
         try {
-                return categoriaAtributoMapper.insert(categoriaAtributo); 
+                return categoriaAtributoMapper.insert(categoriaAtributo);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
 
-	@Override
-	public List<CategoriaAtributo> getAllAtributoByCategoria(int categoria) throws BusinessException {
-		try {
+    @Override
+    public List<CategoriaAtributo> getAllAtributoByCategoria(int categoria) throws BusinessException {
+        try {
             return categoriaAtributoMapper.getNombreAtributosByIdCategoria(categoria);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
-	}
+    }
 
-	@Override
-	public List<Atributo> getAllAtributosFaltantesByCategoria(int categoria) throws BusinessException {
-		try {
+    @Override
+    public List<Atributo> getAllAtributosFaltantesByCategoria(int categoria) throws BusinessException {
+        try {
             return categoriaAtributoMapper.getAtributosFaltantesByIdCategoria(categoria);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
-	}
+    }
 
 }

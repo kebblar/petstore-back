@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaAtributoMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (19_06)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_1906 Implementación de interface 
+ * Historia:    20210606_1906 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad CategoriaAtributo 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad CategoriaAtributo
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -52,9 +52,9 @@ public interface CategoriaAtributoMapper {
      */
     @Results(id="CategoriaAtributoMap", value = {
             @Result(property = "idCategoria",   column = "id_categoria"),
-            @Result(property = "idAtributo",   column = "id_atributo")    
+            @Result(property = "idAtributo",   column = "id_atributo")
     })
-    @Select("SELECT " + CAMPOS + " FROM categoria_atributo WHERE     id_categoria = #{idCategoria} ,         id_atributo = #{idAtributo}     ") 
+    @Select("SELECT " + CAMPOS + " FROM categoria_atributo WHERE     id_categoria = #{idCategoria} ,         id_atributo = #{idAtributo}     ")
     CategoriaAtributo getById(int id) throws SQLException;
 
     /**
@@ -65,9 +65,9 @@ public interface CategoriaAtributoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("CategoriaAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria_atributo ") 
+    @Select("SELECT " + CAMPOS + " FROM categoria_atributo ")
     List<CategoriaAtributo> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'CategoriaAtributo' con base en la información dada por el objeto de tipo 'CategoriaAtributo'.
      *
@@ -89,7 +89,7 @@ public interface CategoriaAtributoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE categoria_atributo" 
+    "UPDATE categoria_atributo"
     + " SET "
     + " WHERE id_categoria = #{idCategoria} , id_atributo = #{idAtributo} ")
     int update(CategoriaAtributo categoriaAtributo) throws SQLException;
@@ -101,7 +101,7 @@ public interface CategoriaAtributoMapper {
      * @return id del CategoriaAtributo borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM categoria_atributo WHERE id_categoria = #{idCategoria} and id_atributo = #{idAtributo} ") 
+    @Delete("DELETE FROM categoria_atributo WHERE id_categoria = #{idCategoria} and id_atributo = #{idAtributo} ")
     int delete(CategoriaAtributo categoriaAtributo) throws SQLException;
 
     /**
@@ -114,12 +114,12 @@ public interface CategoriaAtributoMapper {
     @Results(id="CategoriaAtributoNombreMap", value = {
             @Result(property = "idCategoria",   column = "id_categoria"),
             @Result(property = "idAtributo",   column = "id_atributo"),
-            @Result(property = "nombreAtributo",   column = "nombre")  
+            @Result(property = "nombreAtributo",   column = "nombre")
     })
-    @Select("SELECT ca.id_categoria,ca.id_atributo, a.nombre FROM categoria_atributo ca inner join atributo a on ca.id_atributo = a.id WHERE  ca.id_categoria = #{idCategoria} ") 
+    @Select("SELECT ca.id_categoria,ca.id_atributo, a.nombre FROM categoria_atributo ca inner join atributo a on ca.id_atributo = a.id WHERE  ca.id_categoria = #{idCategoria} ")
     List<CategoriaAtributo> getNombreAtributosByIdCategoria(int id) throws SQLException;
 
-    
+
     /**
      * Obtiene una lista de tipo 'Atributo' dado su id.
      *
@@ -129,9 +129,9 @@ public interface CategoriaAtributoMapper {
      */
     @Results(id="CategoriaAtributoAtributoMap", value = {
             @Result(property = "id",   column = "id"),
-            @Result(property = "nombre",   column = "nombre")  
+            @Result(property = "nombre",   column = "nombre")
     })
-    @Select("SELECT a.id, a.nombre FROM atributo a left join categoria_atributo ca on ca.id_atributo = a.id and ca.id_categoria = #{idCategoria} WHERE ca.id_categoria is null and a.activo = 1 ") 
+    @Select("SELECT a.id, a.nombre FROM atributo a left join categoria_atributo ca on ca.id_atributo = a.id and ca.id_categoria = #{idCategoria} WHERE ca.id_categoria is null and a.activo = 1 ")
     List<Atributo> getAtributosFaltantesByIdCategoria(int idCategoria) throws SQLException;
 
 }

@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   AtributoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (21_41)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2141 Implementación de clase 
+ * Historia:    20210605_2141 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -45,11 +45,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'atributo'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'atributo'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -67,9 +67,9 @@ public class AtributoController {
     private AtributoService atributoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param atributoService Servicios de usuario
      */
     public AtributoController(AtributoService atributoService) {
@@ -95,7 +95,7 @@ public class AtributoController {
     public List<Atributo> getAllAtributo() throws BusinessException {
         return atributoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "AtributoController::get",
         notes = "Regresa un objeto Atributo cuyo id "
@@ -109,7 +109,7 @@ public class AtributoController {
     ) throws BusinessException {
         return this.atributoService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "AtributoController::insert",
         notes = "Recibe un objeto Atributo el cual debe de ser insertado "
@@ -138,7 +138,7 @@ public class AtributoController {
     ) throws BusinessException {
         return atributoService.update(atributo);
     }
-    
+
     @ApiOperation(
         value = "AtributoController::delete",
         notes = "Recibe un objeto Atributo, el cual es buscado dentro de "
@@ -152,14 +152,14 @@ public class AtributoController {
     ) throws BusinessException {
         return atributoService.delete(atributo);
     }
-    
+
     @GetMapping(path = "/atributos/list/{nombre}.json", produces = "application/json; charset=utf-8")
     public List<Atributo> getAtributo(
             @ApiParam(name = "nombre", value = "Nombre del Atributo", defaultValue = "PESO")
             @PathVariable String nombre) throws BusinessException {
         return this.atributoService.getByNombre(nombre);
     }
-    
+
     @ApiOperation(
             value = "AtributoController::getAll",
             notes = "Regresa una lista de todos los objetos Atributo "
@@ -179,5 +179,5 @@ public class AtributoController {
         public List<AtributoTO> getAllAtributoDeralles() throws BusinessException {
             return atributoService.getAllAtributoDetalles();
         }
-        
+
 }

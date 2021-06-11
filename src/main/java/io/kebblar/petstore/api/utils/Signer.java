@@ -59,7 +59,7 @@ public class Signer {
     private String certificateFile;
     private String password = "hwb4aet!$fser";
     private String file;
-    
+
     /*
      * Constructor unico de la clase
      */
@@ -80,9 +80,9 @@ public class Signer {
         String hash = createSum(this.file);
         String signedFile = signWithPrivateKey(hash);
         return signedFile;
-        
+
     }
-    
+
     /**
      * Método utilizado para obtener el hash de un archivo.
      * El hash utilizado es SHA-256.
@@ -110,7 +110,7 @@ public class Signer {
 
         return toHexString(digestion);
     }
-    
+
     /**
      * Convierte un arreglo de bytes en una cadena hexadecimal.
      *
@@ -126,10 +126,10 @@ public class Signer {
         }
         return hexString.toString();
     }
-    
-    
+
+
     /**
-     * Usa el certificado para verifcar que cierto texto encriptado con una 
+     * Usa el certificado para verifcar que cierto texto encriptado con una
      * llave privada es válido.
      *
      * @param hash Arreglo de bytes a ser convertido a cadena.
@@ -142,7 +142,7 @@ public class Signer {
         Certificate cer = getCertificateFromString(certData);
         return decrypt(textoEncriptado.getBytes(), cer.getPublicKey());
     }
-    
+
     /**
      * Metodo que desencripta un texto en bytes usando una llave publica.
      *
@@ -156,7 +156,7 @@ public class Signer {
         byte[] decripted = decryptWithPublicKey(textoEncriptadoEnBytesDecodedBase64, publicKey);
         return new String(decripted);
     }
-    
+
     /**
      * Metodo que encripta un texto a partir de una llave privada y un password.
      *
@@ -207,7 +207,7 @@ public class Signer {
         byte[] encoded = Files.readAllBytes(ruta1);
         return new String(encoded, Charset.defaultCharset());
     }
-    
+
     /**
      * Metodo privado que desencripta un texto recibido como bytes con ayuda
      * de una llave piblica.
@@ -223,7 +223,7 @@ public class Signer {
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
         return cipher.doFinal(text);
     }
-    
+
     /**
      * Metodo privado que obtiene un objeto de tipo Certificate a partir de
      * un string que contiene el certificado.
@@ -238,7 +238,7 @@ public class Signer {
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         return cf.generateCertificate(stream);
     }
-    
+
     /**
      * Metodo privado que obtiene un array de bites a partir de una llave privada recibida
      * como parametro.
@@ -253,7 +253,7 @@ public class Signer {
         InputStream privateKeyInputStream = new FileInputStream(initialFile);
         return IOUtils.toByteArray(privateKeyInputStream);
     }
-    
+
     /**
      * Metodo privado que obtiene una instancia de la clase PrivateKey.
      *

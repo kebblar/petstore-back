@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   ValorAtributoMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       martes 06 de junio de 2021 (00_43)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_0043 Implementación de interface 
+ * Historia:    20210608_0043 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.domain.ValorAtributo;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad ValorAtributo 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad ValorAtributo
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -52,9 +52,9 @@ public interface ValorAtributoMapper {
             @Result(property = "id",   column = "id"),
             @Result(property = "idAtributo",   column = "id_atributo"),
             @Result(property = "rango",   column = "rango"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE     id = #{id}     ")
     ValorAtributo getById(int id) throws SQLException;
 
     /**
@@ -65,9 +65,9 @@ public interface ValorAtributoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("ValorAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo ") 
+    @Select("SELECT " + CAMPOS + " FROM valor_atributo ")
     List<ValorAtributo> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'ValorAtributo' con base en la información dada por el objeto de tipo 'ValorAtributo'.
      *
@@ -89,7 +89,7 @@ public interface ValorAtributoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE valor_atributo" 
+    "UPDATE valor_atributo"
     + " SET id_atributo = #{idAtributo}, rango = #{rango}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(ValorAtributo valorAtributo) throws SQLException;
@@ -101,7 +101,7 @@ public interface ValorAtributoMapper {
      * @return id del ValorAtributo borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM valor_atributo WHERE id = #{id} ") 
+    @Delete("DELETE FROM valor_atributo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
@@ -112,6 +112,6 @@ public interface ValorAtributoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("ValorAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE  id_atributo = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE  id_atributo = #{id}     ")
     List<ValorAtributo> getValorAtributoByIdAtributo(int id) throws SQLException;
 }

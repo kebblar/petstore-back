@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   Atributo .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (21_41)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2141 Implementación de clase 
+ * Historia:    20210605_2141 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'atributo'. 
+ * POJO asociado a la entidad 'atributo'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -71,42 +71,42 @@ public class Atributo implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para nombre.
      */
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Setter para nombre.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     /**
      * Getter para activo.
      */
     public int getActivo() {
         return activo;
     }
-    
+
     /**
      * Setter para activo.
      */
     public void setActivo(int activo) {
         this.activo = activo;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -119,7 +119,7 @@ public class Atributo implements Serializable {
                 + " activo =" + this.activo
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Atributo son iguales
      */
@@ -133,19 +133,19 @@ public class Atributo implements Serializable {
         }
         Atributo other = (Atributo) obj;
         return
-               id == other.id && 
-               nombre == other.nombre && 
-               activo == other.activo; 
+               id == other.id &&
+               nombre == other.nombre &&
+               activo == other.activo;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            nombre, 
+            id,
+            nombre,
             activo
         );
     }

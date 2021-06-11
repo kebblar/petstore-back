@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   AtributoMapper.java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (21_41)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2141 Implementación de interface 
+ * Historia:    20210605_2141 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -30,7 +30,7 @@ import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Atributo 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Atributo
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -52,9 +52,9 @@ public interface AtributoMapper {
     @Results(id="AtributoMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM atributo WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM atributo WHERE     id = #{id}     ")
     Atributo getById(int id) throws SQLException;
 
     /**
@@ -65,9 +65,9 @@ public interface AtributoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("AtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM atributo ") 
+    @Select("SELECT " + CAMPOS + " FROM atributo ")
     List<Atributo> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Atributo' con base en la información dada por el objeto de tipo 'Atributo'.
      *
@@ -89,7 +89,7 @@ public interface AtributoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE atributo" 
+    "UPDATE atributo"
     + " SET nombre = #{nombre}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(Atributo atributo) throws SQLException;
@@ -101,9 +101,9 @@ public interface AtributoMapper {
      * @return id del Atributo borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM atributo WHERE id = #{id} ") 
+    @Delete("DELETE FROM atributo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'atributo' filtrado por el nombre ingresado.
      *
@@ -113,7 +113,7 @@ public interface AtributoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("AtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM atributo WHERE nombre LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM atributo WHERE nombre LIKE '%' #{nombre} '%'")
     List<Atributo> getByNombre(String nombre) throws SQLException;
 
     /**
@@ -123,6 +123,6 @@ public interface AtributoMapper {
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
-    @Select("select a.id as idAtributo, a.nombre as nombreAtributo, a.activo as estatusAtributo, va.id as idRango, va.id_atributo as rangoIdAtributo, va.rango as rango, va.activo as estatusRango  from  atributo a left join valor_atributo va on va.id_atributo = a.id order by a.id, va.id") 
-    List<AtributoDetalleTO> getAllAtributoDetalle() throws SQLException;   
+    @Select("select a.id as idAtributo, a.nombre as nombreAtributo, a.activo as estatusAtributo, va.id as idRango, va.id_atributo as rangoIdAtributo, va.rango as rango, va.activo as estatusRango  from  atributo a left join valor_atributo va on va.id_atributo = a.id order by a.id, va.id")
+    List<AtributoDetalleTO> getAllAtributoDetalle() throws SQLException;
 }

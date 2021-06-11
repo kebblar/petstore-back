@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MediaTipoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (23_19)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2319 Implementación de clase 
+ * Historia:    20210605_2319 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -43,11 +43,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'media_tipo'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'media_tipo'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -65,9 +65,9 @@ public class MediaTipoController {
     private MediaTipoService mediaTipoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param mediaTipoService Servicios de usuario
      */
     public MediaTipoController(MediaTipoService mediaTipoService) {
@@ -93,7 +93,7 @@ public class MediaTipoController {
     public List<MediaTipo> getAllMediaTipo() throws BusinessException {
         return mediaTipoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "MediaTipoController::get",
         notes = "Regresa un objeto MediaTipo cuyo id "
@@ -107,7 +107,7 @@ public class MediaTipoController {
     ) throws BusinessException {
         return this.mediaTipoService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "MediaTipoController::insert",
         notes = "Recibe un objeto MediaTipo el cual debe de ser insertado "
@@ -136,7 +136,7 @@ public class MediaTipoController {
     ) throws BusinessException {
         return mediaTipoService.update(mediaTipo);
     }
-    
+
     @ApiOperation(
         value = "MediaTipoController::delete",
         notes = "Recibe un objeto MediaTipo, el cual es buscado dentro de "
@@ -150,7 +150,7 @@ public class MediaTipoController {
     ) throws BusinessException {
         return mediaTipoService.delete(mediaTipo);
     }
-    
+
     @GetMapping(path = "/mediatipos/list/{nombre}.json", produces = "application/json; charset=utf-8")
     public List<MediaTipo> getMediaTipo(
             @ApiParam(name = "nombre", value = "Nombre del MediaTipo", defaultValue = "PESO")

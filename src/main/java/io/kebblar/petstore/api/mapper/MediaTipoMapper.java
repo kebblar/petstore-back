@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MediaTipoMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (23_19)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2319 Implementación de interface 
+ * Historia:    20210605_2319 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.domain.MediaTipo;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad MediaTipo 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad MediaTipo
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -51,9 +51,9 @@ public interface MediaTipoMapper {
     @Results(id="MediaTipoMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "descripcion",   column = "descripcion"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM media_tipo WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM media_tipo WHERE     id = #{id}     ")
     MediaTipo getById(int id) throws SQLException;
 
     /**
@@ -64,9 +64,9 @@ public interface MediaTipoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("MediaTipoMap")
-    @Select("SELECT " + CAMPOS + " FROM media_tipo ") 
+    @Select("SELECT " + CAMPOS + " FROM media_tipo ")
     List<MediaTipo> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'MediaTipo' con base en la información dada por el objeto de tipo 'MediaTipo'.
      *
@@ -88,7 +88,7 @@ public interface MediaTipoMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE media_tipo" 
+    "UPDATE media_tipo"
     + " SET descripcion = #{descripcion}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(MediaTipo mediaTipo) throws SQLException;
@@ -100,7 +100,7 @@ public interface MediaTipoMapper {
      * @return id del MediaTipo borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM media_tipo WHERE id = #{id} ") 
+    @Delete("DELETE FROM media_tipo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
@@ -112,6 +112,6 @@ public interface MediaTipoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("MediaTipoMap")
-    @Select("SELECT " + CAMPOS + " FROM media_tipo WHERE descripcion LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM media_tipo WHERE descripcion LIKE '%' #{nombre} '%'")
     List<MediaTipo> getByNombre(String nombre) throws SQLException;
 }

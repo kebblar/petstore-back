@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (00_02)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_0002 Implementación de clase 
+ * Historia:    20210605_0002 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'categoria'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'categoria'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -68,9 +68,9 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param categoriaService Servicios de usuario
      */
     public CategoriaController(CategoriaService categoriaService) {
@@ -96,7 +96,7 @@ public class CategoriaController {
     public List<Categoria> getAllCategoria() throws BusinessException {
         return categoriaService.getAll();
     }
-    
+
     @ApiOperation(
         value = "CategoriaController::get",
         notes = "Regresa un objeto Categoria cuyo id "
@@ -110,7 +110,7 @@ public class CategoriaController {
     ) throws BusinessException {
         return this.categoriaService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "CategoriaController::insert",
         notes = "Recibe un objeto Categoria el cual debe de ser insertado "
@@ -139,7 +139,7 @@ public class CategoriaController {
     ) throws BusinessException {
         return categoriaService.update(categoria);
     }
-    
+
     @ApiOperation(
         value = "CategoriaController::delete",
         notes = "Recibe un objeto Categoria, el cual es buscado dentro de "
@@ -153,15 +153,15 @@ public class CategoriaController {
     ) throws BusinessException {
         return categoriaService.delete(categoria);
     }
-    
+
     @GetMapping(path = "/categorias/list/{nombre}.json", produces = "application/json; charset=utf-8")
     public List<Categoria> getCategoria(
             @ApiParam(name = "nombre", value = "Nombre de Categoria", defaultValue = "CANINOS")
             @PathVariable String nombre) throws BusinessException {
         return this.categoriaService.getByNombre(nombre);
     }
-    
-    
+
+
     @ApiOperation(
             value = "CategoriaController::getAllCategoriaDetalles",
             notes = "Regresa una lista de todos los objetos Categoria "
@@ -181,5 +181,5 @@ public class CategoriaController {
         public List<CategoriaTO> getAllCategoriaDetalles() throws BusinessException {
             return categoriaService.getAllCategoriaDetalles();
         }
-    
+
 }

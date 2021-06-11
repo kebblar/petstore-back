@@ -89,79 +89,79 @@ public class AdministracionCompras {
         this.cp = cp;
     }
 
-    
+
     @Override
-	public String toString() {
-		return "AdministracionCompras [estadoEnvio=" + estadoEnvio + ", cveOrden=" + cveOrden + ", nombreAnuncio="
-				+ nombreAnuncio + ", urlFactura=" + urlFactura + ", fechaCompra=" + fechaCompra + ", calleNumero="
-				+ calleNumero + ", colonia=" + colonia + ", cp=" + cp + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((calleNumero == null) ? 0 : calleNumero.hashCode());
-		result = prime * result + ((colonia == null) ? 0 : colonia.hashCode());
-		result = prime * result + ((cp == null) ? 0 : cp.hashCode());
-		result = prime * result + ((cveOrden == null) ? 0 : cveOrden.hashCode());
-		result = prime * result + ((estadoEnvio == null) ? 0 : estadoEnvio.hashCode());
-		result = prime * result + ((fechaCompra == null) ? 0 : fechaCompra.hashCode());
-		result = prime * result + ((nombreAnuncio == null) ? 0 : nombreAnuncio.hashCode());
-		result = prime * result + ((urlFactura == null) ? 0 : urlFactura.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AdministracionCompras other = (AdministracionCompras) obj;
-		if (calleNumero == null) {
-			if (other.calleNumero != null)
-				return false;
-		} else if (!calleNumero.equals(other.calleNumero))
-			return false;
-		if (colonia == null) {
-			if (other.colonia != null)
-				return false;
-		} else if (!colonia.equals(other.colonia))
-			return false;
-		if (cp == null) {
-			if (other.cp != null)
-				return false;
-		} else if (!cp.equals(other.cp))
-			return false;
-		if (cveOrden == null) {
-			if (other.cveOrden != null)
-				return false;
-		} else if (!cveOrden.equals(other.cveOrden))
-			return false;
-		if (estadoEnvio == null) {
-			if (other.estadoEnvio != null)
-				return false;
-		} else if (!estadoEnvio.equals(other.estadoEnvio))
-			return false;
-		if (fechaCompra == null) {
-			if (other.fechaCompra != null)
-				return false;
-		} else if (!fechaCompra.equals(other.fechaCompra))
-			return false;
-		if (nombreAnuncio == null) {
-			if (other.nombreAnuncio != null)
-				return false;
-		} else if (!nombreAnuncio.equals(other.nombreAnuncio))
-			return false;
-		if (urlFactura == null) {
-			if (other.urlFactura != null)
-				return false;
-		} else if (!urlFactura.equals(other.urlFactura))
-			return false;
-		return true;
-	}
-	public String getColonia() {
+    public String toString() {
+        return "AdministracionCompras [estadoEnvio=" + estadoEnvio + ", cveOrden=" + cveOrden + ", nombreAnuncio="
+                + nombreAnuncio + ", urlFactura=" + urlFactura + ", fechaCompra=" + fechaCompra + ", calleNumero="
+                + calleNumero + ", colonia=" + colonia + ", cp=" + cp + "]";
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((calleNumero == null) ? 0 : calleNumero.hashCode());
+        result = prime * result + ((colonia == null) ? 0 : colonia.hashCode());
+        result = prime * result + ((cp == null) ? 0 : cp.hashCode());
+        result = prime * result + ((cveOrden == null) ? 0 : cveOrden.hashCode());
+        result = prime * result + ((estadoEnvio == null) ? 0 : estadoEnvio.hashCode());
+        result = prime * result + ((fechaCompra == null) ? 0 : fechaCompra.hashCode());
+        result = prime * result + ((nombreAnuncio == null) ? 0 : nombreAnuncio.hashCode());
+        result = prime * result + ((urlFactura == null) ? 0 : urlFactura.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AdministracionCompras other = (AdministracionCompras) obj;
+        if (calleNumero == null) {
+            if (other.calleNumero != null)
+                return false;
+        } else if (!calleNumero.equals(other.calleNumero))
+            return false;
+        if (colonia == null) {
+            if (other.colonia != null)
+                return false;
+        } else if (!colonia.equals(other.colonia))
+            return false;
+        if (cp == null) {
+            if (other.cp != null)
+                return false;
+        } else if (!cp.equals(other.cp))
+            return false;
+        if (cveOrden == null) {
+            if (other.cveOrden != null)
+                return false;
+        } else if (!cveOrden.equals(other.cveOrden))
+            return false;
+        if (estadoEnvio == null) {
+            if (other.estadoEnvio != null)
+                return false;
+        } else if (!estadoEnvio.equals(other.estadoEnvio))
+            return false;
+        if (fechaCompra == null) {
+            if (other.fechaCompra != null)
+                return false;
+        } else if (!fechaCompra.equals(other.fechaCompra))
+            return false;
+        if (nombreAnuncio == null) {
+            if (other.nombreAnuncio != null)
+                return false;
+        } else if (!nombreAnuncio.equals(other.nombreAnuncio))
+            return false;
+        if (urlFactura == null) {
+            if (other.urlFactura != null)
+                return false;
+        } else if (!urlFactura.equals(other.urlFactura))
+            return false;
+        return true;
+    }
+    public String getColonia() {
         return colonia;
     }
     public void setColonia(String colonia) {

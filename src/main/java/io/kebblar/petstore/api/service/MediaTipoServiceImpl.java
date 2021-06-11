@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   MediaTipoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (23_19)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_2319 Implementación de clase 
+ * Historia:    20210605_2319 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.service;
@@ -32,10 +32,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'media_tipo'. 
+ * Servicio asociado a la entidad 'media_tipo'.
  *
  * <p>Implementación de la interfaz {@link MediaTipoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -55,7 +55,7 @@ public class MediaTipoServiceImpl implements MediaTipoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param mediaTipoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MediaTipoServiceImpl(MediaTipoMapper mediaTipoMapper) {
@@ -145,12 +145,12 @@ public class MediaTipoServiceImpl implements MediaTipoService {
     }
 
     @Override
-	public List<MediaTipo> getByNombre(String nombre) throws BusinessException {
+    public List<MediaTipo> getByNombre(String nombre) throws BusinessException {
         try {
             return mediaTipoMapper.getByNombre(nombre);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException("Error de obtención de un MediaTipo", e.getMessage());
         }
-	}
+    }
 }

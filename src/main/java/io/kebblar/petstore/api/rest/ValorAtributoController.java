@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   ValorAtributoController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       martes 06 de junio de 2021 (00_43)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_0043 Implementación de clase 
+ * Historia:    20210608_0043 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -44,11 +44,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'valor_atributo'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'valor_atributo'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -66,9 +66,9 @@ public class ValorAtributoController {
     private ValorAtributoService valorAtributoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param valorAtributoService Servicios de usuario
      */
     public ValorAtributoController(ValorAtributoService valorAtributoService) {
@@ -94,7 +94,7 @@ public class ValorAtributoController {
     public List<ValorAtributo> getAllValorAtributo() throws BusinessException {
         return valorAtributoService.getAll();
     }
-    
+
     @ApiOperation(
         value = "ValorAtributoController::get",
         notes = "Regresa un objeto ValorAtributo cuyo id "
@@ -108,7 +108,7 @@ public class ValorAtributoController {
     ) throws BusinessException {
         return this.valorAtributoService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "ValorAtributoController::insert",
         notes = "Recibe un objeto ValorAtributo el cual debe de ser insertado "
@@ -137,7 +137,7 @@ public class ValorAtributoController {
     ) throws BusinessException {
         return valorAtributoService.update(valorAtributo);
     }
-    
+
     @ApiOperation(
         value = "ValorAtributoController::delete",
         notes = "Recibe un objeto ValorAtributo, el cual es buscado dentro de "
@@ -151,7 +151,7 @@ public class ValorAtributoController {
     ) throws BusinessException {
         return valorAtributoService.delete(valorAtributo);
     }
-    
+
 
     @ApiOperation(
             value = "ValorAtributoController::get",
@@ -166,5 +166,5 @@ public class ValorAtributoController {
         ) throws BusinessException {
             return this.valorAtributoService.getAllByIdAtributo(id);
      }
-        
+
 }

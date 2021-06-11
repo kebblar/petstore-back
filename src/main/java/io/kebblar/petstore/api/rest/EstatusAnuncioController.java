@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   EstatusAnuncioController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (00_13)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_0013 Implementación de clase 
+ * Historia:    20210606_0013 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -44,11 +44,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estatus_anuncio'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estatus_anuncio'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -66,9 +66,9 @@ public class EstatusAnuncioController {
     private EstatusAnuncioService estatusAnuncioService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param estatusAnuncioService Servicios de usuario
      */
     public EstatusAnuncioController(EstatusAnuncioService estatusAnuncioService) {
@@ -94,7 +94,7 @@ public class EstatusAnuncioController {
     public List<EstatusAnuncio> getAllEstatusAnuncio() throws BusinessException {
         return estatusAnuncioService.getAll();
     }
-    
+
     @ApiOperation(
         value = "EstatusAnuncioController::get",
         notes = "Regresa un objeto EstatusAnuncio cuyo id "
@@ -108,7 +108,7 @@ public class EstatusAnuncioController {
     ) throws BusinessException {
         return this.estatusAnuncioService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "EstatusAnuncioController::insert",
         notes = "Recibe un objeto EstatusAnuncio el cual debe de ser insertado "
@@ -137,7 +137,7 @@ public class EstatusAnuncioController {
     ) throws BusinessException {
         return estatusAnuncioService.update(estatusAnuncio);
     }
-    
+
     @ApiOperation(
         value = "EstatusAnuncioController::delete",
         notes = "Recibe un objeto EstatusAnuncio, el cual es buscado dentro de "
@@ -151,7 +151,7 @@ public class EstatusAnuncioController {
     ) throws BusinessException {
         return estatusAnuncioService.delete(estatusAnuncio);
     }
-    
+
     @GetMapping(path = "/estatusanuncios/list/{nombre}.json", produces = "application/json; charset=utf-8")
     public List<EstatusAnuncio> getEstatusAnuncio(
             @ApiParam(name = "nombre", value = "Nombre del EstatusAnuncio", defaultValue = "EN LINEA")

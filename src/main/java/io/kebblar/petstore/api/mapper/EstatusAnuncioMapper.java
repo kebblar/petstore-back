@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   EstatusAnuncioMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (00_13)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_0013 Implementación de interface 
+ * Historia:    20210606_0013 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad EstatusAnuncio 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad EstatusAnuncio
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -50,9 +50,9 @@ public interface EstatusAnuncioMapper {
      */
     @Results(id="EstatusAnuncioMap", value = {
             @Result(property = "id",   column = "id"),
-            @Result(property = "descripcion",   column = "descripcion")    
+            @Result(property = "descripcion",   column = "descripcion")
     })
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE     id = #{id}     ")
     EstatusAnuncio getById(int id) throws SQLException;
 
     /**
@@ -63,9 +63,9 @@ public interface EstatusAnuncioMapper {
      * operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio ") 
+    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio ")
     List<EstatusAnuncio> getAll() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'EstatusAnuncio' con base en la información dada por el objeto de tipo 'EstatusAnuncio'.
      *
@@ -87,7 +87,7 @@ public interface EstatusAnuncioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE estatus_anuncio" 
+    "UPDATE estatus_anuncio"
     + " SET descripcion = #{descripcion}"
     + " WHERE id = #{id} ")
     int update(EstatusAnuncio estatusAnuncio) throws SQLException;
@@ -99,7 +99,7 @@ public interface EstatusAnuncioMapper {
      * @return id del EstatusAnuncio borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM estatus_anuncio WHERE id = #{id} ") 
+    @Delete("DELETE FROM estatus_anuncio WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
@@ -111,7 +111,7 @@ public interface EstatusAnuncioMapper {
      * operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE descripcion LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE descripcion LIKE '%' #{nombre} '%'")
     List<EstatusAnuncio> getByNombre(String nombre) throws SQLException;
 
 }

@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   ValorAtributoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       martes 06 de junio de 2021 (00_43)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_0043 Implementación de clase 
+ * Historia:    20210608_0043 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.service;
@@ -32,10 +32,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'valor_atributo'. 
+ * Servicio asociado a la entidad 'valor_atributo'.
  *
  * <p>Implementación de la interfaz {@link ValorAtributoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -55,7 +55,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param valorAtributoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public ValorAtributoServiceImpl(ValorAtributoMapper valorAtributoMapper) {
@@ -144,14 +144,14 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
-	@Override
-	public List<ValorAtributo> getAllByIdAtributo(int id) throws BusinessException {
-		  try {
-	            return valorAtributoMapper.getValorAtributoByIdAtributo(id);
-	        } catch (SQLException e) {
-	            logger.error(e.getMessage());
-	            throw new BusinessException();
-	        }
-	}
+    @Override
+    public List<ValorAtributo> getAllByIdAtributo(int id) throws BusinessException {
+          try {
+                return valorAtributoMapper.getValorAtributoByIdAtributo(id);
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                throw new BusinessException();
+            }
+    }
 
 }

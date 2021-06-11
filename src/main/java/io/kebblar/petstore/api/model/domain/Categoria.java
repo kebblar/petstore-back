@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   Categoria.java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       sábado 06 de junio de 2021 (00_02)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210605_0002 Implementación de clase 
+ * Historia:    20210605_0002 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'categoria'. 
+ * POJO asociado a la entidad 'categoria'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -71,42 +71,42 @@ public class Categoria implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para categoria.
      */
     public String getCategoria() {
         return categoria;
     }
-    
+
     /**
      * Setter para categoria.
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
+
     /**
      * Getter para activo.
      */
     public int getActivo() {
         return activo;
     }
-    
+
     /**
      * Setter para activo.
      */
     public void setActivo(int activo) {
         this.activo = activo;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -119,7 +119,7 @@ public class Categoria implements Serializable {
                 + " activo =" + this.activo
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Categoria son iguales
      */
@@ -133,19 +133,19 @@ public class Categoria implements Serializable {
         }
         Categoria other = (Categoria) obj;
         return
-               id == other.id && 
-               categoria == other.categoria && 
-               activo == other.activo; 
+               id == other.id &&
+               categoria == other.categoria &&
+               activo == other.activo;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            categoria, 
+            id,
+            categoria,
             activo
         );
     }

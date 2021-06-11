@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CategoriaAtributo .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       domingo 06 de junio de 2021 (19_06)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210606_1906 Implementación de clase 
+ * Historia:    20210606_1906 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.model.domain;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'categoria_atributo'. 
+ * POJO asociado a la entidad 'categoria_atributo'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -42,7 +42,7 @@ public class CategoriaAtributo implements Serializable {
     private Integer idCategoria;
     private Integer idAtributo;
     private String nombreAtributo;
-    
+
 
     /**
      * Constructor por default (sin parámetros).
@@ -57,7 +57,7 @@ public class CategoriaAtributo implements Serializable {
         this.idCategoria = idCategoria;
         this.idAtributo = idAtributo;
     }
-    
+
     /**
      * Constructor basado en la llave primaria.
      */
@@ -74,43 +74,43 @@ public class CategoriaAtributo implements Serializable {
     public Integer getIdCategoria() {
         return idCategoria;
     }
-    
+
     /**
      * Setter para idCategoria.
      */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
-    
+
     /**
      * Getter para idAtributo.
      */
     public Integer getIdAtributo() {
         return idAtributo;
     }
-    
+
     /**
      * Setter para idAtributo.
      */
     public void setIdAtributo(Integer idAtributo) {
         this.idAtributo = idAtributo;
     }
-        
+
     /**
      * Getter para nombreAtributo.
      */
     public String getNombreAtributo() {
-		return nombreAtributo;
-	}
+        return nombreAtributo;
+    }
 
     /**
      * setter para nombreAtributo.
      */
-	public void setNombreAtributo(String nombreAtributo) {
-		this.nombreAtributo = nombreAtributo;
-	}
+    public void setNombreAtributo(String nombreAtributo) {
+        this.nombreAtributo = nombreAtributo;
+    }
 
-	/**
+    /**
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override
@@ -121,7 +121,7 @@ public class CategoriaAtributo implements Serializable {
                 + " nombreAtributo =" + this.nombreAtributo
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase CategoriaAtributo son iguales
      */
@@ -135,17 +135,17 @@ public class CategoriaAtributo implements Serializable {
         }
         CategoriaAtributo other = (CategoriaAtributo) obj;
         return
-               idCategoria == other.idCategoria && 
-               idAtributo == other.idAtributo; 
+               idCategoria == other.idCategoria &&
+               idAtributo == other.idAtributo;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            idCategoria, 
+            idCategoria,
             idAtributo
         );
     }
