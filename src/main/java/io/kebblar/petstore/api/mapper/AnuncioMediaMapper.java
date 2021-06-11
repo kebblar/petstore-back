@@ -61,7 +61,7 @@ public interface AnuncioMediaMapper {
             @Result(property = "idTipo",   column = "id_tipo"),
             @Result(property = "principal",   column = "principal")
     })
-    @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE id_anuncio = #{id} ") 
+    @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE id_anuncio = #{id} ORDER BY principal DESC") 
 	List<AnuncioMedia> getImagenes(int id);
     
     /**
