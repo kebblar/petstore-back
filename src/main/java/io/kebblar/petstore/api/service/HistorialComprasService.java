@@ -10,13 +10,14 @@
  * Modulo:      HistorialComprasService
  * Tipo:        interface
  * Autor:       Luis Martinez
- * Fecha:       Martes 19 de mayo del 2021 (09_35)
+ * Fecha:       Jueves 10 de junio del 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
  * Servicio asociado a la entidad 'AdministracionCompras'.
  *
  * Historia:    .
  *              20210421_0935 Generado por LMtz
+ *              20210610_0935 Actualizado por LMtz
  *
  */
 package io.kebblar.petstore.api.service;

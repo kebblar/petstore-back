@@ -10,10 +10,11 @@
  * Artefacto:   AdministracionComprasController
  * Tipo:        clase
  * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Martes 19 de Mayo de 2021 (22_29)
+ * Fecha:       Jueve 10 de Mayo de 2021 (22_29)
  *
  * Historia:    .
  *              20210519_2229 Creación de éste controlador REST
+ *              20210610_2229 Actualizacion de éste controlador REST
  *
  */
 package io.kebblar.petstore.api.rest;
@@ -64,12 +65,12 @@ public class AdministracionComprasController {
         return admini.getAll();
     }
 
-    @GetMapping(path = "/administracion-compras-update.json/{estado}/{idCompra}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/administracion-compras-update.json/{estado}/{cveCompra}", produces = "application/json; charset=utf-8")
     public String updateEstado(
             @ApiParam(name = "estado", value = "el nuevo estado de la compra.")
             @PathVariable int estado,
-            @ApiParam(name = "idCompra", value = "el id de la compra.")
-            @PathVariable int idCompra) throws BusinessException {
-        return admini.sent(estado,idCompra);
+            @ApiParam(name = "cveCompra", value = "el cve de la compra.")
+            @PathVariable String cveCompra) throws BusinessException {
+        return admini.sent(estado,cveCompra);
     }
 }
