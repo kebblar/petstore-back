@@ -158,10 +158,10 @@ public class AnuncioUtil {
 		if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
 			consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
 		}
-		if (filtros.getFechaFinVigencia() != null) {
+		if (filtros.getFechaFinVigencia() != null && !filtros.getFechaFinVigencia().toString().isEmpty() ) {
 			consultaBase.append(" AND fecha_fin_vigencia <= ").append("'").append(filtros.getFechaFinVigencia()).append("'");
 		}
-		if (filtros.getFechaInicioVigencia() != null) {
+		if (filtros.getFechaInicioVigencia() != null && !filtros.getFechaInicioVigencia().toString().isEmpty()) {
 			consultaBase.append(" AND fecha_inicio_vigencia >= ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
 		}
 		response.add(consultaBase.toString());
