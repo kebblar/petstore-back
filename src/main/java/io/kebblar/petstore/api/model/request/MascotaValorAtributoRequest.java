@@ -18,6 +18,8 @@
  */
 package io.kebblar.petstore.api.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Implementacion del POJO de la entidad de 'ActualizaAnuncioRequest'.
  * 
@@ -28,6 +30,7 @@ package io.kebblar.petstore.api.model.request;
 public class MascotaValorAtributoRequest {
 	
 	private int id;
+	@JsonProperty("valor")
 	private int idValorAtributo;
 	public int getId() {
 		return id;
