@@ -10,7 +10,7 @@
  * Artefacto:   AdministracionComprasMapper.java
  * Tipo:        Interface
  * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Jueves 19 de Mayo de 2021 (09_25)
+ * Fecha:       Jueves 10 de Junio de 2021 (09_25)
  *
  * Historia:    .
  *              0210519_0925 Creación de éste Mapper
@@ -50,24 +50,22 @@ public interface AdministracionComprasMapper {
             @Result(property = "colonia", column = "colonia"),
             @Result(property = "cp", column = "cp"),
             @Result(property = "cveOrden", column = "cve_orden_compra"),
-            @Result(property = "idMascota", column = "id_mascota"),
             @Result(property = "nombreAnuncio", column = "nombre_anuncio"),
             @Result(property = "urlFactura", column = "recibo"),
-            @Result(property = "idCompra", column = "id_compra"),
             @Result(property = "fechaCompra", column = "fecha_hora_comprar"),
         })
-    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,id_mascota,nombre_anuncio,recibo,id_compra,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;")
+    @Select("select estado_envio,calle_numero,colonia,cp,cve_orden_compra,nombre_anuncio,recibo,DATE_FORMAT(fecha_hora_comprar, '%d/%m/%y') as fecha_hora_comprar from administracion_compras;")
     List<AdministracionCompras> getAll() throws SQLException;
 
     /**
      * Actualiza el estado de una compra de en camino a enviado.
      *
      * @param estadoEnvio, el estado al que se va a actualizar la compra.
-     * @param idCompra, la compra que queremos actualizar.
+     * @param cveCompra, la compra que queremos actualizar.
      * @return un entero en caso de que la operacion fue exitosa.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE orden_compra SET estado_envio = ${estadoEnvio} WHERE id = #{idCompra};")
-    int sent(int estadoEnvio, int idCompra) throws SQLException;
+    @Update("UPDATE orden_compra SET estado_envio = ${estadoEnvio} WHERE cve_orden_compra = #{cveCompra};")
+    int sent(int estadoEnvio, String cveCompra) throws SQLException;
 
 }

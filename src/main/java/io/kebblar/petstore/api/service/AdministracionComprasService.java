@@ -10,13 +10,14 @@
  * Modulo:      AdministracionComprasService
  * Tipo:        interface
  * Autor:       Luis Martinez
- * Fecha:       Martes 19 de mayo del 2021 (09_35)
+ * Fecha:       Jueve 10 de junio del 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
  * Interface para el servicio asociado a la entidad 'AdministracionCompras'.
  *
  * Historia:    .
  *              20210421_0935 Generado por LMtz
+ *              20210610_0935 Actualizado por LMtz
  *
  */
 package io.kebblar.petstore.api.service;
@@ -46,9 +47,9 @@ public interface AdministracionComprasService {
      * Método utilizado para actualizar el estado de una compra.
      *
      * @param int estadoEnvio, el nuevo estado que queremos colocar.
-     * @param int idCompra, el id de la compra que queremos actualizar.
+     * @param String cveCompra, el cveCompra de la compra que queremos actualizar.
      * @return String que contiene un JSON que indica si todo salio bien o no.
      * @throws BusinessException es disparada por una regla de negocio
      */
-    String sent(int estadoEnvio, int idCompra) throws BusinessException;
+    String sent(int estadoEnvio, String cveCompra) throws BusinessException;
 }

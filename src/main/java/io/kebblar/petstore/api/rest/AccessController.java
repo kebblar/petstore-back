@@ -134,5 +134,11 @@ public class AccessController {
             @RequestParam String clave) throws ControllerException {
         return usuarioService.confirmaRegeneraClave(token, clave);
     }
+    @GetMapping(
+            path = "/bitso.json",
+            produces = "application/json; charset=utf-8")
+    public String bitso() {
+        return invokeRestService.getBitsoInfo2();
+    }
 
 }

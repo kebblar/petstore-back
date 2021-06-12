@@ -10,7 +10,7 @@
  * Modulo:      AdministracionComprasService
  * Tipo:        interface
  * Autor:       Luis Martinez
- * Fecha:       Martes 19 de mayo del 2021 (09_35)
+ * Fecha:       Jueve 10 de junio del 2021 (09_35)
  * Version:     1.0-SNAPSHOT
  * .
  * Servicio asociado a la entidad 'AdministracionCompras'.
@@ -57,14 +57,14 @@ public class AdministracionComprasServiceImpl implements AdministracionComprasSe
     }
 
     @Override
-    public String sent(int estadoEnvio, int idCompra) throws BusinessException {
+    public String sent(int estadoEnvio, String cveCompra) throws BusinessException {
         try {
-            mapper.sent(estadoEnvio, idCompra);
+            mapper.sent(estadoEnvio, cveCompra);
             return "{\"succed\": \"true\"}";
         }catch(Exception sql) {
             logger.error(sql.getMessage());
-            throw new BusinessException("id no encontrado o estado del envio invalido",
-                    "ocurrio un error al actualizar el estado del envio porque el id no existe o porque el estado envio no es valido",500,"500",
+            throw new BusinessException("cve no encontrado o estado del envio invalido",
+                    "ocurrio un error al actualizar el estado del envio porque el cve no existe o porque el estado envio no es valido",500,"500",
                     HttpStatus.NOT_FOUND);
         }
 
