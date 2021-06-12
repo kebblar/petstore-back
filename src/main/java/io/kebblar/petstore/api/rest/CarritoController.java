@@ -24,7 +24,8 @@ package io.kebblar.petstore.api.rest;
 
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
+import io.kebblar.petstore.api.model.response.CarritoVista;
 import io.kebblar.petstore.api.service.CarritoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,26 +75,29 @@ public class CarritoController {
                     " su carrito de compras en el frontend, es necesario otorgar el id del usuario" +
                     "del que se desea obtener el carrito.")
     @GetMapping(
-            value = "/carritoPba/{id}.json",
+            value = "/carritoVista/{id}.json",
             produces = "application/json; charset=utf-8")
-    public List<Map> getCarrito() {
-        List<Map> list = new ArrayList<>();
-        Map<String, Object> uno = new HashMap<>();
-        Map<String, Object> dos = new HashMap<>();
-        uno.put("idCarrito", 1);
-        uno.put("urlImagen", "https://photos.ci.ultrasist.net/f59b0c41-c534-47d9-afb9-7c5230b9767f.png");
-        uno.put("nombre", "Tarantula hembra de 10 cm");
-        uno.put("idAnuncio", 8);
-        uno.put("precio", 344);
-
-        dos.put("idCarrito", 3);
-        dos.put("urlImagen", "https://photos.ci.ultrasist.net/22c84708-a3e6-4486-8b04-3221f71b8e38.png");
-        dos.put("nombre", "Gecko de dia frutero");
-        dos.put("idAnuncio", 16);
-        dos.put("precio", 194);
-        list.add(uno);
-        list.add(dos);
-        return list;
+    public List<CarritoVista> getCarritoView(
+            @ApiParam(name = "id", value = "id del usuario")
+            @PathVariable int id) throws BusinessException{
+                return carritoService.getCarritoView(id);
+//        List<Map> list = new ArrayList<>();
+//        Map<String, Object> uno = new HashMap<>();
+//        Map<String, Object> dos = new HashMap<>();
+//        uno.put("idCarrito", 1);
+//        uno.put("urlImagen", "https://photos.ci.ultrasist.net/f59b0c41-c534-47d9-afb9-7c5230b9767f.png");
+//        uno.put("nombre", "Tarantula hembra de 10 cm");
+//        uno.put("idAnuncio", 8);
+//        uno.put("precio", 344);
+//
+//        dos.put("idCarrito", 3);
+//        dos.put("urlImagen", "https://photos.ci.ultrasist.net/22c84708-a3e6-4486-8b04-3221f71b8e38.png");
+//        dos.put("nombre", "Gecko de dia frutero");
+//        dos.put("idAnuncio", 16);
+//        dos.put("precio", 194);
+//        list.add(uno);
+//        list.add(dos);
+//        return list;
     }
 
     @ApiOperation(
@@ -167,13 +171,18 @@ public class CarritoController {
             notes = "Recibe un objeto Carrito, el cual es buscado dentro de "
                     +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/carrito.json",
+            value = "/carrito/{id}.json",
             produces = "application/json; charset=utf-8")
     public int delete(
-            @ApiParam(name="carrito", value="Carrito que será removido del sistema.")
-            @RequestBody Carrito carrito
+            @ApiParam(name="id", value="id del carrito que será removido del sistema.")
+            @PathVariable int id
     ) throws BusinessException {
-        return carritoService.delete(carrito);
+        return carritoService.delete(id);
+    }
+
+    @GetMapping(value = "/carritoCve/{cve}.json", produces = "application/json; charset=utf-8")
+    public List<CarritoDatosFactura> getByClave(@PathVariable String cve) throws BusinessException {
+        return carritoService.getByCveOrden(cve);
     }
 
 }

@@ -45,7 +45,7 @@ public class Carrito implements Serializable {
     private Integer id;
     private int idUsuario;
     private int idAnuncio;
-    private int idOrdenCompra;
+    private String cveOrdenCompra;
 
     /**
      * Constructor por default (sin parámetros).
@@ -63,11 +63,11 @@ public class Carrito implements Serializable {
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public Carrito(Integer id, int idUsuario, int idAnuncio, int idOrdenCompra) {
+    public Carrito(Integer id, int idUsuario, int idAnuncio, String cveOrdenCompra) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idAnuncio = idAnuncio;
-        this.idOrdenCompra = idOrdenCompra;
+        this.cveOrdenCompra = cveOrdenCompra;
     }
 
     /**
@@ -113,17 +113,17 @@ public class Carrito implements Serializable {
     }
     
     /**
-     * Getter para idOrdenCompra.
+     * Getter para cveOrdenCompra.
      */
-    public int getIdOrdenCompra() {
-        return idOrdenCompra;
+    public String getCveOrdenCompra() {
+        return cveOrdenCompra;
     }
     
     /**
-     * Setter para idOrdenCompra.
+     * Setter para cveOrdenCompra.
      */
-    public void setIdOrdenCompra(int idOrdenCompra) {
-        this.idOrdenCompra = idOrdenCompra;
+    public void setCveOrdenCompra(String cveOrdenCompra) {
+        this.cveOrdenCompra = cveOrdenCompra;
     }
     
 
@@ -136,7 +136,7 @@ public class Carrito implements Serializable {
                 + " id =" + this.id
                 + " idUsuario =" + this.idUsuario
                 + " idAnuncio =" + this.idAnuncio
-                + " idOrdenCompra =" + this.idOrdenCompra
+                + " idOrdenCompra =" + this.cveOrdenCompra
                 + "]";
     }
     
@@ -156,7 +156,7 @@ public class Carrito implements Serializable {
                id == other.id && 
                idUsuario == other.idUsuario && 
                idAnuncio == other.idAnuncio && 
-               idOrdenCompra == other.idOrdenCompra; 
+               cveOrdenCompra == other.cveOrdenCompra;
     }
     
     /**
@@ -167,8 +167,8 @@ public class Carrito implements Serializable {
         return Objects.hash(
             id, 
             idUsuario, 
-            idAnuncio, 
-            idOrdenCompra
+            idAnuncio,
+                cveOrdenCompra
         );
     }
 

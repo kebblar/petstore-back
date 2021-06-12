@@ -139,4 +139,9 @@ public class MascotaController {
         return remoteRestCallService.callTickerMicroservice();
     }
 
+    @GetMapping(path = "/btc-mxn.json", produces = "application/json; charset=utf-8")
+    public String getPrecio() throws ControllerException {
+        return remoteRestCallService.convierte();
+    }
+
 }
