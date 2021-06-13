@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210608_1315 Implementación de interface 
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
@@ -44,7 +42,6 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @see Carrito
  */
-
 @Repository
 public interface CarritoMapper {
     static final String CAMPOS = " id, id_usuario, id_anuncio, cve_orden_compra ";
@@ -96,23 +93,18 @@ public interface CarritoMapper {
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert(
-    "INSERT INTO carrito(id_usuario, id_anuncio, cve_orden_compra) "
-   + "VALUES(#{idUsuario}, #{idAnuncio}, NULL )")
+    @Insert("INSERT INTO carrito(id_usuario, id_anuncio, cve_orden_compra) VALUES(#{idUsuario}, #{idAnuncio}, NULL )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Carrito carrito) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'Carrito' con base en la infrmación dada por el objeto de tipo 'Carrito'.
      *
      * @param carrito a ser actualizado.
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update(
-    "UPDATE carrito" 
-    + " SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, cve_orden_compra = #{cveOrdenCompra}"
-    + " WHERE id = #{id} ")
+    @Update("UPDATE carrito SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, cve_orden_compra = #{cveOrdenCompra} WHERE id = #{id} ")
     int update(Carrito carrito) throws SQLException;
 
     /**
