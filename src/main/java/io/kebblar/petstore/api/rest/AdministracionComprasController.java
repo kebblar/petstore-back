@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.domain.AdministracionCompras;
@@ -65,7 +66,7 @@ public class AdministracionComprasController {
         return admini.getAll();
     }
 
-    @GetMapping(path = "/administracion-compras-update.json/{estado}/{cveCompra}", produces = "application/json; charset=utf-8")
+    @PostMapping(path = "/administracion-compras-update.json/{estado}/{cveCompra}", produces = "application/json; charset=utf-8")
     public String updateEstado(
             @ApiParam(name = "estado", value = "el nuevo estado de la compra.")
             @PathVariable int estado,
