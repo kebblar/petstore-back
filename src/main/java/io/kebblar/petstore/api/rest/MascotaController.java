@@ -82,7 +82,9 @@ public class MascotaController {
         this.remoteRestCallService=remoteRestCallService;
     }
 
-    @GetMapping(path = "/prueba.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/prueba.json", 
+        produces = "application/json; charset=utf-8")
     public Map<String, String> prueba() throws ControllerException {
         String token = jwtManagerService.createToken("gus");
         Map<String, String> mapa = new HashMap<>();
@@ -91,7 +93,9 @@ public class MascotaController {
         return mapa;
     }
 
-    @GetMapping(path = "/prueba2.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/prueba2.json", 
+        produces = "application/json; charset=utf-8")
     public Map<String, String> prueba2() throws ControllerException {
         Map<String, String> mapa = new HashMap<>();
         mapa.put("dato-1", "gus");
@@ -101,40 +105,54 @@ public class MascotaController {
 
     /* Procesamiento de entidades de tipo "Mascota" */
 
-    @GetMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/mascotas.json", 
+        produces = "application/json; charset=utf-8")
     public List<Mascota> getAll() throws ControllerException {
         return mascotaService.getAll();
     }
 
-    @PostMapping(path = "/mascotas/filtro.json", produces = "application/json; charset=utf-8")
+    @PostMapping(
+        path = "/mascotas/filtro.json", 
+        produces = "application/json; charset=utf-8")
     public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws ControllerException {
         return mascotaService.getByCriteria(criterios);
     }
 
-    @GetMapping(path = "/mascotas/{id}.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/mascotas/{id}.json", 
+        produces = "application/json; charset=utf-8")
     public Mascota getMascota(@PathVariable int id) throws ControllerException {
         return mascotaService.getById(id);
     }
 
-    @PostMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    @PostMapping(
+        path = "/mascotas.json", 
+        produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.insert(mascota);
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
 
-    @PutMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    @PutMapping(
+        path = "/mascotas.json", 
+        produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.update(mascota);
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
 
-    @DeleteMapping(path = "/mascotas.json", produces = "application/json; charset=utf-8")
+    @DeleteMapping(
+        path = "/mascotas.json", 
+        produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws ControllerException {
         int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
 
-    @GetMapping(path = "/tickers.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/tickers.json", 
+        produces = "application/json; charset=utf-8")
     public TickerWrapper getTicker() throws ControllerException {
         return remoteRestCallService.callTickerMicroservice();
     }
