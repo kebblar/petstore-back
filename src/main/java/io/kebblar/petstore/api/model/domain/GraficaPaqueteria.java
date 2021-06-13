@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -35,18 +34,13 @@ import java.io.Serializable;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class GraficaPaqueteria implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
-    /**
-     * Atributos de la clase
-     */
     private String paqueteria;
     private Long cantidad;
 
     public GraficaPaqueteria(String paqueteria, Long cantidad) {
-        super();
         this.paqueteria = paqueteria;
         this.cantidad = cantidad;
     }
