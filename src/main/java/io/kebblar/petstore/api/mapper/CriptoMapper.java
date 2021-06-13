@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CriptoMapper {
-    static final String CAMPOS = "id, id_usuario, id_direccion, wallet, id_anuncio, status, monto, fecha, descripcion";
+    static final String CAMPOS = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, descripcion, last_balance";
 
     /**
      * Obtiene la direccion de la cartera digital de bitcoin del usuario cuyo id es introducido.
@@ -38,8 +38,17 @@ public interface CriptoMapper {
      * @return entero si se inserta con 'exito el objeto.
      * @throws SQLException Si ocurre un problema de inserci'on.
      */
-    @Insert("Insert into transaccion_btc(id_usuario, id_direccion, wallet, id_anuncio, status, monto, fecha, descripcion) VALUES (#{idUsuario}, #{idDireccion}, #{wallet}, #{idAnuncio}, #{status}, #{monto}, #{fecha}, #{descripcion})")
+    @Insert("Insert into transaccion_btc(id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, descripcion, last_balance) VALUES (#{idUsuario}, #{idDireccion}, #{wallet}, #{idPaqueteria}, #{status}, #{monto}, #{fecha}, #{descripcion}, #{lastBalance})")
     int insertTransaccion(TransaccionBtc transaccionBtc) throws SQLException;
+
+    /**
+     * Actualiza una transaccion de bitcoin con informacion nueva.
+     * @param transaccionBtc objeto que simboliza una peticion.
+     * @return entero si todo sale bien.
+     * @throws SQLException En caso de un problema con la consulta.
+     */
+    @Update("UPDATE transaccion_btc SET id_usuario = #{idUsuario}, id_direccion = #{idDireccion}, wallet = #{wallet}, id_paqueteria = #{idPaqueteria}, status = #{status}, monto = #{monto}, fecha = #{fecha}, descripcion = #{descripcion}, last_balance = #{lastBalance}")
+    int updateTransaccion(TransaccionBtc transaccionBtc) throws  SQLException;
 
     /**
      * Regresa una lista de todos las transacciones pendientes de validacion.
@@ -51,11 +60,12 @@ public interface CriptoMapper {
             @Result(property = "idUsuario", column = "id_usuario"),
             @Result(property = "idDireccion",     column = "id_direccion"),
             @Result(property = "wallet",      column = "wallet"),
-            @Result(property = "idAnuncio",    column = "id_anuncio"),
+            @Result(property = "idPaqueteria",    column = "id_paqueteria"),
             @Result(property = "status", column = "status"),
             @Result(property = "monto", column = "monto"),
             @Result(property = "fecha",          column = "fecha"),
-            @Result(property = "descripcion", column = "descripcion")
+            @Result(property = "descripcion", column = "descripcion"),
+            @Result(property = "lastBalance", column = "last_balance")
     })
     @Select("SELECT " +CAMPOS+ " FROM transaccion_btc WHERE status=false")
     List<TransaccionBtc> getAll() throws SQLException;

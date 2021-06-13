@@ -1,5 +1,24 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   TestCriptomonedas.java
+ * Tipo:        clase
+ * AUTOR:       Fhernanda Romo (GAA)
+ * Fecha:       Domingo 13 de Junio de 2021 (17_50)
+ *
+ * Historia:    .
+ *              20210504_1950 Creación de éste test
+ *
+ */
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.mapper.CarritoMapper;
 import io.kebblar.petstore.api.mapper.CriptoMapper;
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
@@ -15,6 +34,7 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.calls;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,13 +49,14 @@ public class TestCriptomonedas {
 
     private RemoteRestCallService remote;
     private CriptoService criptoService;
+    private CarritoMapper carritoMapper;
 
     private TransaccionBtc t1 = new TransaccionBtc();
     private TransaccionBtc t2 = new TransaccionBtc();
 
     @Before
     public void prepare() throws SQLException {
-        criptoService = new CriptoServiceImpl(criptoMapper, remote, ordenCompraService);
+        criptoService = new CriptoServiceImpl(carritoMapper,criptoMapper, remote, ordenCompraService);
 
         when(criptoMapper.getByUser(1)).thenReturn("cadenaWallet");
         when(criptoMapper.getByUser(2)).thenThrow(new SQLException());
