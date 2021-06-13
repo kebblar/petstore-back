@@ -7,7 +7,6 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.response.MontoBitcoin;
 
 public interface CriptoService {
-
     /**
      * Retorna la billetera digital asociada a determinado usuario del cual conocemos su id dentro del sistema.
      * @param id Representa el id del usuario del que se recuperar'a la cartera.
