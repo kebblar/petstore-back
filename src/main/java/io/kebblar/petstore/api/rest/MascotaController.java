@@ -63,6 +63,7 @@ import io.kebblar.petstore.api.support.JwtManagerService;
 @RestController
 @RequestMapping(value = "/api")
 public class MascotaController {
+    
     private MascotaService mascotaService;
     private RemoteRestCallService remoteRestCallService;
     private JwtManagerService jwtManagerService;
@@ -129,6 +130,10 @@ public class MascotaController {
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
 
+    @ApiOperation(
+        value = "MascotaController::getTicker",
+        notes = "Recupera la información del precio del Ethereum al momento de ser invocado"
+    )
     @GetMapping(
         path = "/tickers.json", 
         produces = "application/json; charset=utf-8")
@@ -136,6 +141,10 @@ public class MascotaController {
         return remoteRestCallService.callTickerMicroservice();
     }
 
+    @ApiOperation(
+        value = "MascotaController::btc-mxn",
+        notes = "Recupera el precio del bitcoin al momento de ser invocado, lo muestra en pesos"
+    )
     @GetMapping(
         path = "/btc-mxn.json", 
         produces = "application/json; charset=utf-8")
