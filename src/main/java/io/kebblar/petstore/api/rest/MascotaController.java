@@ -141,15 +141,4 @@ public class MascotaController {
         return remoteRestCallService.callTickerMicroservice();
     }
 
-    @ApiOperation(
-        value = "MascotaController::btc-mxn",
-        notes = "Recupera el precio del bitcoin al momento de ser invocado, lo muestra en pesos"
-    )
-    @GetMapping(
-        path = "/btc-mxn.json", 
-        produces = "application/json; charset=utf-8")
-    public String getPrecio() throws ControllerException {
-        return remoteRestCallService.convierte();
-    }
-
 }
