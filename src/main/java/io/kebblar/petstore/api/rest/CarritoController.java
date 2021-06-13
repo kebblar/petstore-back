@@ -159,12 +159,12 @@ public class CarritoController {
     ) throws BusinessException {
         return carritoService.delete(id);
     }
-    
+
     @ApiOperation(
             value = "CarritoController::getByClave",
             notes = "Retorna una lista de objetos 'CarritoDatosFactura' asociados a una clave")
     @GetMapping(
-        value = "/carritoCve/{cve}.json", 
+        value = "/carritoCve/{cve}.json",
         produces = "application/json; charset=utf-8")
     public List<CarritoDatosFactura> getByClave(@PathVariable String cve) throws BusinessException {
         return carritoService.getByCveOrden(cve);

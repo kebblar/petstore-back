@@ -131,7 +131,7 @@ public class DireccionServiceImpl implements DireccionService {
             throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
-    
+
     @Override
     public List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException {
         try {
@@ -141,7 +141,7 @@ public class DireccionServiceImpl implements DireccionService {
             throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
-    
+
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
         int idDireccion;

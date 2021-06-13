@@ -103,7 +103,7 @@ public interface DireccionService {
      * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
     int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
-    
+
     /**
      * Metodo que recibe los datos de una direccion espesifica para un usuario y regresa la dirección asociada para el envio de su compra
      * @param idUser Id del usuario
@@ -112,6 +112,6 @@ public interface DireccionService {
      * o nulo si no se encuentra ese elemento en la tabla.
      * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
-	List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException;
+    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException;
 }
 

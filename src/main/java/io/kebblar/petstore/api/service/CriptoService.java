@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CriptoService .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Sunday 13 de June de 2021 (13_15)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_1315 Implementación de interface 
+ * Historia:    20210608_1315 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.service;

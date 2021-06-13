@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'anuncio' para mostrar su detalle. 
+ * POJO asociado a la entidad 'anuncio' para mostrar su detalle.
  *
  * @author Edgar Uribe Mendez
  * @version 1.0-SNAPSHOT

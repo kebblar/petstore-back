@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CarritoMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 06 de June de 2021 (13_15)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_1315 Implementación de interface 
+ * Historia:    20210608_1315 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -59,7 +59,7 @@ public interface CarritoMapper {
             @Result(property = "idAnuncio",   column = "id_anuncio"),
             @Result(property = "cveOrdenCompra",   column = "cve_orden_compra")
     })
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM carrito WHERE     id = #{id}     ")
     Carrito getById(int id) throws SQLException;
 
     /**
@@ -85,7 +85,7 @@ public interface CarritoMapper {
     @ResultMap("CarritoMap")
     @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{idUser} AND cve_orden_compra='btcPen'")
     List<Carrito> getBtcCarrito(int idUser) throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Carrito' con base en la información dada por el objeto de tipo 'Carrito'.
      *
@@ -114,7 +114,7 @@ public interface CarritoMapper {
      * @return id del Carrito borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM carrito WHERE id = #{id} ") 
+    @Delete("DELETE FROM carrito WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**

@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   Carrito .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 06 de June de 2021 (13_15)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_1315 Implementación de clase 
+ * Historia:    20210608_1315 Implementación de clase
  *
  */
 
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'carrito'. 
+ * POJO asociado a la entidad 'carrito'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -76,56 +76,56 @@ public class Carrito implements Serializable {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Setter para id.
      */
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Getter para idUsuario.
      */
     public int getIdUsuario() {
         return idUsuario;
     }
-    
+
     /**
      * Setter para idUsuario.
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
     /**
      * Getter para idAnuncio.
      */
     public int getIdAnuncio() {
         return idAnuncio;
     }
-    
+
     /**
      * Setter para idAnuncio.
      */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
-    
+
     /**
      * Getter para cveOrdenCompra.
      */
     public String getCveOrdenCompra() {
         return cveOrdenCompra;
     }
-    
+
     /**
      * Setter para cveOrdenCompra.
      */
     public void setCveOrdenCompra(String cveOrdenCompra) {
         this.cveOrdenCompra = cveOrdenCompra;
     }
-    
+
 
     /**
      * Método toString para el pojo, representa al objeto en forma de cadena
@@ -139,7 +139,7 @@ public class Carrito implements Serializable {
                 + " idOrdenCompra =" + this.cveOrdenCompra
                 + "]";
     }
-    
+
     /**
      * Compara si dos instancias de la clase Carrito son iguales
      */
@@ -153,20 +153,20 @@ public class Carrito implements Serializable {
         }
         Carrito other = (Carrito) obj;
         return
-               id == other.id && 
-               idUsuario == other.idUsuario && 
-               idAnuncio == other.idAnuncio && 
+               id == other.id &&
+               idUsuario == other.idUsuario &&
+               idAnuncio == other.idAnuncio &&
                cveOrdenCompra == other.cveOrdenCompra;
     }
-    
+
     /**
      * Genera un hash del objeto
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            idUsuario, 
+            id,
+            idUsuario,
             idAnuncio,
                 cveOrdenCompra
         );

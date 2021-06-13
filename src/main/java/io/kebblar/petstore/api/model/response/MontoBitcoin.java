@@ -79,7 +79,7 @@ public class MontoBitcoin {
     public void setCambio(double cambio) {
         this.cambio = cambio;
     }
-    
+
     /**
      * Método equals para el pojo, para saber si dos objetos son iguales.
      */

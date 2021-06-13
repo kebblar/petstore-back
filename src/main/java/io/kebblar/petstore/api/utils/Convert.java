@@ -21,14 +21,14 @@ package io.kebblar.petstore.api.utils;
 import java.util.regex.Pattern;
 
 public class Convert {
-    
+
     private static final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};
     private static final String[] DECENAS = {"diez ", "once ", "doce ", "trece ", "catorce ", "quince ", "dieciseis ",
         "diecisiete ", "dieciocho ", "diecinueve", "veinte ", "treinta ", "cuarenta ",
         "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa "};
     private static final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
         "setecientos ", "ochocientos ", "novecientos "};
-    
+
     public static String ok(int n) {
         if (n<0) return "MENOS "+ok(-n);
         if (n>=0 && n<21) return UNIDADES[n];
@@ -41,7 +41,7 @@ public class Convert {
     }
 
     public static String convertirNumero(String numero, boolean mayusculas) {
-    	
+
         String literal = "";
         String parte_decimal;
         numero = numero.replace(".", ",");
@@ -77,7 +77,7 @@ public class Convert {
         String num = numero.substring(numero.length() - 1);
         return UNIDADES[Integer.parseInt(num)];
     }
-    private static String getDecenas(String num) {     
+    private static String getDecenas(String num) {
         int n = Integer.parseInt(num);
         if (n < 10) {
             return getUnidades(num);
@@ -117,7 +117,7 @@ public class Convert {
               return "" + getCentenas(c);
         }
     }
-    private static String getMillones(String numero) {    
+    private static String getMillones(String numero) {
         String miles = numero.substring(numero.length() - 6);
         String millon = numero.substring(0, numero.length() - 6);
         String n = "";

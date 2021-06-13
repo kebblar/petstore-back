@@ -205,22 +205,22 @@ public class DatosOrden implements Serializable {
     public void setCveOrdenCompra(String cveOrdenCompra) {
         this.cveOrdenCompra = cveOrdenCompra;
     }
-    
-    
+
+
 
     public long getTotal() {
-		return total;
-	}
+        return total;
+    }
 
 
 
-	public void setTotal(long total) {
-		this.total = total;
-	}
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
 
 
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DatosOrden)) return false;

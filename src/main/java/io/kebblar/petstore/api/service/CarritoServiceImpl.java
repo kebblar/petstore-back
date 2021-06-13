@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   CarritoServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Tuesday 06 de June de 2021 (13_15)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210608_1315 Implementación de clase 
+ * Historia:    20210608_1315 Implementación de clase
  *
  */
 package io.kebblar.petstore.api.service;
@@ -38,10 +38,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'carrito'. 
+ * Servicio asociado a la entidad 'carrito'.
  *
  * <p>Implementación de la interfaz {@link CarritoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -62,7 +62,7 @@ public class CarritoServiceImpl implements CarritoService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param carritoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public CarritoServiceImpl(CarritoMapper carritoMapper, AnuncioService anuncioService) {

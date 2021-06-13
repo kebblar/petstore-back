@@ -143,7 +143,7 @@ public interface DireccionMapper {
 
     @Insert("INSERT INTO usuario_direccion(id_usuario, id_direccion) VALUES( #{idUsuario} , #{idDireccion} )")
     int insertUsuarioDireccion(UsuarioDireccion ud) throws SQLException;
-    
+
     /**
      * Obtiene un objeto de tipo 'DireccionConNombre' dado el id direccion y id usuario
      *
@@ -162,5 +162,5 @@ public interface DireccionMapper {
     })
     @Select("SELECT id_direccion, calle_numero, colonia, cp, municipio_nombre, estado_nombre, pais_nombre " +
             "from usuario_direccion inner join direccion_con_nombre on id=id_direccion and id_usuario=#{idUser} and id_direccion=#{idDir} and activo=true")
-	List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir);
+    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir);
 }

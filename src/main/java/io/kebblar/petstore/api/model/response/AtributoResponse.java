@@ -20,7 +20,7 @@ package io.kebblar.petstore.api.model.response;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'atributo' para mostrar el detalle. 
+ * POJO asociado a la entidad 'atributo' para mostrar el detalle.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
