@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'anuncio' para mostrar su detalle.
  *
  * @author Edgar Uribe Mendez
@@ -31,7 +30,6 @@ import java.util.List;
  * @since 1.0-SNAPSHOT
  */
 public class DetalleAnuncioResponse {
-
     private Integer id;
     private Integer idCategoria;
     private String descCategoria;
@@ -47,24 +45,32 @@ public class DetalleAnuncioResponse {
     private List<AnuncioImagenResponse> imagenes;
 
     public DetalleAnuncioResponse() {
-
     }
-    public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String sku, String titulo,
-                                  String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short estatus,
-                                  String descEstatus, List<AtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
-        this.id = id;
-        this.idCategoria = idCategoria;
-        this.descCategoria = descCategoria;
-        this.sku = sku;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.fechaInicioVigencia = fechaInicioVigencia;
-        this.fechaFinVigencia = fechaFinVigencia;
-        this.estatus = estatus;
-        this.descEstatus = descEstatus;
-        this.atributos = atributos;
-        this.imagenes = imagenes;
+    
+    public DetalleAnuncioResponse(
+        Integer id, 
+        Integer idCategoria, 
+        String descCategoria, 
+        String sku, String titulo,          
+        String descripcion, 
+        BigDecimal precio, 
+        Date fechaInicioVigencia, 
+        Date fechaFinVigencia, 
+        short estatus,
+        String descEstatus, List<AtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
+            this.id = id;
+            this.idCategoria = idCategoria;
+            this.descCategoria = descCategoria;
+            this.sku = sku;
+            this.titulo = titulo;
+            this.descripcion = descripcion;
+            this.precio = precio;
+            this.fechaInicioVigencia = fechaInicioVigencia;
+            this.fechaFinVigencia = fechaFinVigencia;
+            this.estatus = estatus;
+            this.descEstatus = descEstatus;
+            this.atributos = atributos;
+            this.imagenes = imagenes;
     }
     public Integer getId() {
         return id;
