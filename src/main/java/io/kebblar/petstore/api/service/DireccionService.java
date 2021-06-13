@@ -35,7 +35,7 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 public interface DireccionService {
 
     /**
-     * <p>Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
+     * Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
      *
      * @param direccion Instancia de Direccion con los datos de la llave.
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
