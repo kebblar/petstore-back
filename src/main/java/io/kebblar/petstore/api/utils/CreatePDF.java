@@ -53,10 +53,8 @@ import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 
 /**
- * <p>
  * Implementación Metodos para crear una factura en PDF
  *
- * <p>
  * Todos los métodos de esta clase disparan {@link ProcessPDFException}
  *
  * @author dalvarez
@@ -65,16 +63,18 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
  * @since 1.0-SNAPSHOT
  */
 public class CreatePDF {
-	
 	private final static String newLine = System.getProperty("line.separator");
-	
 	private static final Color headerBg = new DeviceRgb(54,120,182);
-	  
-	public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle,Usuario usuario, 
-			DatosOrden ordenCompra, String dest, String url, 
-			String nombrePdf, List<CarritoDatosFactura> listCarrito,
-			 List<DireccionConNombre> direcciones) throws ProcessPDFException {
+	public static String createPDFOrdenCompra(
+		UsuarioDetalle usuarioDetalle,Usuario usuario, 
+		DatosOrden ordenCompra, 
+		String dest, 
+		String url, 
+		String nombrePdf, 
+		List<CarritoDatosFactura> listCarrito,
+		List<DireccionConNombre> direcciones) throws ProcessPDFException {
 		String pdf="";
+		
 		try {
 			pdf= nombrePdf + ".pdf";
 			PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
