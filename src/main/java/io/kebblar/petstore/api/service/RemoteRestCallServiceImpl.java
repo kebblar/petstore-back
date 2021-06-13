@@ -10,10 +10,10 @@
  * Artefacto:   RemoteRestCallServiceImpl.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Martes 4 de Mayo de 2021 (17_50)
+ * Fecha:       Domingo 13 junio de 2021 (17_50)
  *
  * Historia:    .
- *              20210504_1950 Creación de éste controlador REST
+ *              20210504_1950 Creación de la implementación de este service.
  *
  */
 package io.kebblar.petstore.api.service;
