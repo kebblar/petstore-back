@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210608_1315 Implementación de clase 
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.ArrayList;
@@ -56,7 +54,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service("carritoService")
 public class CarritoServiceImpl implements CarritoService {
-
     private static final Logger logger = LoggerFactory.getLogger(CarritoServiceImpl.class);
 
     private CarritoMapper carritoMapper;
@@ -73,9 +70,6 @@ public class CarritoServiceImpl implements CarritoService {
         this.anuncioService = anuncioService;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Carrito getById(int id) throws BusinessException {
         try {
@@ -99,9 +93,6 @@ public class CarritoServiceImpl implements CarritoService {
         return carro;
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Carrito> getAll(int id) throws BusinessException {
         try {
@@ -112,9 +103,6 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Carrito carrito) throws BusinessException {
         try {
@@ -125,9 +113,6 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Carrito carrito) throws BusinessException {
         try {
@@ -138,9 +123,6 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(int id) throws BusinessException {
         try {
@@ -195,9 +177,6 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Carrito carrito) throws BusinessException {
         try {
