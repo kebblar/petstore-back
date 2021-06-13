@@ -83,29 +83,6 @@ public class MascotaController {
     }
 
     @GetMapping(
-        path = "/prueba.json", 
-        produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba() throws ControllerException {
-        String token = jwtManagerService.createToken("gus");
-        Map<String, String> mapa = new HashMap<>();
-        mapa.put("dato-1", token);
-        mapa.put("dato-2", "tavo_bad");
-        return mapa;
-    }
-
-    @GetMapping(
-        path = "/prueba2.json", 
-        produces = "application/json; charset=utf-8")
-    public Map<String, String> prueba2() throws ControllerException {
-        Map<String, String> mapa = new HashMap<>();
-        mapa.put("dato-1", "gus");
-        mapa.put("dato-2", "tavo");
-        return mapa;
-    }
-
-    /* Procesamiento de entidades de tipo "Mascota" */
-
-    @GetMapping(
         path = "/mascotas.json", 
         produces = "application/json; charset=utf-8")
     public List<Mascota> getAll() throws ControllerException {
