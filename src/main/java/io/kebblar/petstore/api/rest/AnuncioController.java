@@ -67,7 +67,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'anuncio'. 
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
@@ -86,10 +85,9 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class AnuncioController {
-	 
-	 private AnuncioService anuncioService;
+    private AnuncioService anuncioService;
 	   
-	 /**
+    /**
      * Constructor que realiza el setting de los servicios que serán 
      * utilizados en este controlador.
      * 
@@ -99,16 +97,17 @@ public class AnuncioController {
         this.anuncioService = anuncioService;
     }
 	    
-	@ApiOperation(value = "AnuncioController::Registro",
-	        notes = "Recibe un objeto <strong>AnuncioRequest</strong> que contiene la información para el "
-	        		+ "registro de un anuncio.")
-	@PostMapping(value = "/anuncios.json",
+    @ApiOperation(
+	    value = "AnuncioController::Registro",
+	    notes = "Recibe un objeto <strong>AnuncioRequest</strong> que contiene la información para el registro de un anuncio.")
+    @PostMapping(
+	    value = "/anuncios.json",
             produces = "application/json; charset=utf-8")
-	@ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public AnuncioResponse registro(
-    		@ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
-    		@RequestBody @Valid AnuncioRequest anuncio) throws BusinessException {
-		return anuncioService.guardar(anuncio);
+        @ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
+    	@RequestBody @Valid AnuncioRequest anuncio) throws BusinessException {
+	    return anuncioService.guardar(anuncio);
     }
 	
 	@ApiOperation(value = "AnuncioController::Actualiza",
