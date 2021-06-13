@@ -135,6 +135,11 @@ public class CriptoServiceImpl implements CriptoService {
         }
     }
 
+    /**
+     * Crea un objeto orden con los datos de una transacción.
+     * @param transaction Transacción btc almacenada.
+     * @return Objeto datosOrden con los datos pasados como parámetro.
+     */
     private DatosOrden setNuevaOrden(TransaccionBtc transaction) {
         String uniqueID = UUID.randomUUID().toString();
         return new DatosOrden(  transaction.getIdUsuario(),
@@ -158,6 +163,12 @@ public class CriptoServiceImpl implements CriptoService {
         return new MontoBitcoin(round(monto/price,5), price);
     }
 
+    /**
+     * Método que redondea un número a determinados decimales.
+     * @param value Número a redondear.
+     * @param places Cantidad de decimales a los que se redondeará.
+     * @return Resultado después del redondeo.
+     */
     private double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
