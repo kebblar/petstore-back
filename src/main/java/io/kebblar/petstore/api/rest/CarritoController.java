@@ -79,25 +79,8 @@ public class CarritoController {
             produces = "application/json; charset=utf-8")
     public List<CarritoVista> getCarritoView(
             @ApiParam(name = "id", value = "id del usuario")
-            @PathVariable int id) throws BusinessException{
+            @PathVariable int id) throws BusinessException {
                 return carritoService.getCarritoView(id);
-//        List<Map> list = new ArrayList<>();
-//        Map<String, Object> uno = new HashMap<>();
-//        Map<String, Object> dos = new HashMap<>();
-//        uno.put("idCarrito", 1);
-//        uno.put("urlImagen", "https://photos.ci.ultrasist.net/f59b0c41-c534-47d9-afb9-7c5230b9767f.png");
-//        uno.put("nombre", "Tarantula hembra de 10 cm");
-//        uno.put("idAnuncio", 8);
-//        uno.put("precio", 344);
-//
-//        dos.put("idCarrito", 3);
-//        dos.put("urlImagen", "https://photos.ci.ultrasist.net/22c84708-a3e6-4486-8b04-3221f71b8e38.png");
-//        dos.put("nombre", "Gecko de dia frutero");
-//        dos.put("idAnuncio", 16);
-//        dos.put("precio", 194);
-//        list.add(uno);
-//        list.add(dos);
-//        return list;
     }
 
     @ApiOperation(
@@ -169,7 +152,7 @@ public class CarritoController {
     @ApiOperation(
             value = "CarritoController::delete",
             notes = "Recibe un objeto Carrito, el cual es buscado dentro de "
-                    +"la base de datos y en caso de existir es eliminado.")
+                    + "la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
             value = "/carrito/{id}.json",
             produces = "application/json; charset=utf-8")
@@ -179,8 +162,13 @@ public class CarritoController {
     ) throws BusinessException {
         return carritoService.delete(id);
     }
-
-    @GetMapping(value = "/carritoCve/{cve}.json", produces = "application/json; charset=utf-8")
+    
+    @ApiOperation(
+            value = "CarritoController::getByClave",
+            notes = "Retorna una lista de objetos 'CarritoDatosFactura' asociados a una clave")
+    @GetMapping(
+        value = "/carritoCve/{cve}.json", 
+        produces = "application/json; charset=utf-8")
     public List<CarritoDatosFactura> getByClave(@PathVariable String cve) throws BusinessException {
         return carritoService.getByCveOrden(cve);
     }
