@@ -13,7 +13,7 @@
  * Fecha:       Domingo 13 Junio de 2021 (17_50)
  *
  * Historia:    .
- *              20210504_1950 Creación de éste controlador REST
+ *              20210504_1950 Creación de éste pojo
  *
  */
 package io.kebblar.petstore.api.utils;
