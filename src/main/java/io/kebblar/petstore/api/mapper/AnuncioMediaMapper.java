@@ -31,8 +31,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
+
 /**
- * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen 
  *
  * @author Isabel Contreras Garcia
@@ -43,10 +43,8 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
  */
 @Repository
 public interface AnuncioMediaMapper {
-
-	 static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
+    static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 	 
-  
     /**
      * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado
      * 
