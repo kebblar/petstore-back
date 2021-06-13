@@ -1,3 +1,24 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion 
+ *              de "AUTOR".
+ *
+ *              ------------------------------------------------
+ * 
+ * Artefacto:   CriptoService .java
+ * Proyecto:    petstore
+ * Tipo:        interface 
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Sunday 13 de June de 2021 (13_15)
+ * 
+ *              ------------------------------------------------
+ *
+ * Historia:    20210608_1315 Implementación de interface 
+ *
+ */
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
