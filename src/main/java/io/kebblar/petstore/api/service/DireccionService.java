@@ -35,13 +35,8 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 public interface DireccionService {
 
     /**
-<<<<<<< HEAD
-     * Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria....
-     *
-=======
      * <p>Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
      *
->>>>>>> refs/heads/develop
      * @param direccion Instancia de Direccion con los datos de la llave.
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
@@ -56,13 +51,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para insertar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros insertados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -70,13 +60,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros actualizados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -93,13 +78,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para eliminar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros eliminados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
