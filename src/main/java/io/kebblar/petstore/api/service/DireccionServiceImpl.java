@@ -49,9 +49,7 @@ public class DireccionServiceImpl implements DireccionService {
     private DireccionMapper direccionMapper;
 
     /**
-     * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales
-     * a ser empleados en esta clase.
+     * Constructor que realiza el setting de todos los Mappers y todos los servicios adicionales a ser empleados en esta clase.
      *
      * @param direccionMapper
      */
