@@ -36,7 +36,7 @@ public interface DireccionService {
 
     /**
 <<<<<<< HEAD
-     * Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
+     * Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria....
      *
 =======
      * <p>Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
