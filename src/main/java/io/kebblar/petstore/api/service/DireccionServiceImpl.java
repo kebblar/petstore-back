@@ -122,9 +122,6 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
-    /*
-     * Implementación del método getById ?
-     */
     @Override
     public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
         try {
@@ -145,9 +142,6 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
     
-    /*
-    Insert de una dirección ya asociada con el usuario ?
-     */
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
         int idDireccion;
