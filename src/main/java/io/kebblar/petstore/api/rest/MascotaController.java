@@ -133,4 +133,5 @@ public class MascotaController {
     public TickerWrapper getTicker() throws ControllerException {
         return remoteRestCallService.callTickerMicroservice();
     }
+    
 }
