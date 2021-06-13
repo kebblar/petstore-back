@@ -42,7 +42,6 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 
 /**
- * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
  *
  * @author Isabel Contreras Garcia
@@ -53,12 +52,10 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
  */
 @Repository
 public interface AnuncioMapper {
-
-	 static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia,"
-	 		+ " fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
-	 static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
+    static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
+    static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
 	 
-	 /**
+    /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
      *
      * @param Anuncio a ser insertado.
@@ -83,7 +80,7 @@ public interface AnuncioMapper {
     int insertAtributo(MascotaValorAtributo anuncioAtributo) throws SQLException;
     
     /**
-     * Consulta el objeto de tipo 'Anuncio' con base al id proporcionado
+     * Consulta el objeto de tipo 'Anuncio' con base al id proporcionado.
      * 
      * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
      * @return Clase de tipo 'Anuncio' con la informacion asociada
@@ -107,7 +104,8 @@ public interface AnuncioMapper {
     Anuncio getAnuncioById(int id) throws SQLException;
 	 
     /**
-     * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
+     * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
+     *
      * @param id Identificador del anuncio a actualizar
      * @param estatus Estatus al cual se actualizara el anuncio
      * @return numero de registyros actualizados
@@ -129,18 +127,19 @@ public interface AnuncioMapper {
     		+ " WHERE id = #{id} ")
     int update(Anuncio anuncio) throws SQLException; 
 
-	/**
-	 * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio
-	 * @param id Identificador del anuncio del cual se eliminaran los atributos
-	 * @return el numero de registros actualizados.
-	 * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
-	 */
+   /** 
+    * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio.
+    *
+    * @param id Identificador del anuncio del cual se eliminaran los atributos
+    * @return el numero de registros actualizados.
+    * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+    */
     @Delete("DELETE FROM mascota_valor_atributo WHERE id_anuncio = #{id} ")
-	int deleteAtributos(int id) throws SQLException;
-	   
-    
+    int deleteAtributos(int id) throws SQLException;
+	
     /**
-     * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio
+     * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
+     *
      * @param id Identificador del anuncio a actualizar
      * @param estatus Estatus al cual se actualizara el anuncio
      * @return numero de registros actualizados
@@ -150,7 +149,8 @@ public interface AnuncioMapper {
     int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
     
     /**
-     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara
+     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara.
+     *
      * @param map
      * @return Lista de BusquedaAdministracionResponse
      * @throws SQLException
@@ -169,17 +169,18 @@ public interface AnuncioMapper {
     List<BusquedaAdministracionResponse> busquedaAnuncio(Map<String,String> map) throws SQLException;
     
     /**
-     * Obtiene la categoria mediante el id
+     * Obtiene la categoria mediante el id.
+     *
      * @param idCategoria
      * @return Modelo Categoria
      * @throws SQLException
      */
-    
     @Select("SELECT id, categoria FROM categoria WHERE id = #{idCategoria} ")
     Categoria obtieneCategoria(int idCategoria) throws SQLException;
     
     /**
-     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara
+     * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara.
+     *
      * @param map
      * @return Lista de BusquedaAdministracionResponse
      * @throws SQLException
@@ -188,7 +189,8 @@ public interface AnuncioMapper {
     List<BusquedaAdministracionResponse> obtieneCantidad(Map<String,String> map) throws SQLException;
 
     /**
-     * Consulta el objeto de tipo 'AnuncioAtributo' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'AnuncioAtributo' con base al id del anuncio proporcionado.
+     *
      * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
      * @return Listado de clases de tipo 'AnuncioAtributo' con la informacion de los atributos de un anuncio
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
@@ -199,10 +201,11 @@ public interface AnuncioMapper {
             @Result(property = "valor",   column = "valor")
     })
     @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
-	List<MascotaValorAtributo> atributosPorAnuncio(int id);
+    List<MascotaValorAtributo> atributosPorAnuncio(int id);
     
     /**
-     * Consulta por filtros para la búsqueda de usuario final
+     * Consulta por filtros para la búsqueda de usuario final.
+     *
      * @param map
      * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
@@ -220,7 +223,8 @@ public interface AnuncioMapper {
     List<DetalleAnuncioResponse> busquedaFiltro(Map<String,String> map) throws SQLException;
     
     /**
-     * Consulta por filtros para la búsqueda de usuario final para obtener total de registros
+     * Consulta por filtros para la búsqueda de usuario final para obtener total de registros.
+     *
      * @param map
      * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
@@ -228,9 +232,9 @@ public interface AnuncioMapper {
     @Select("${total}")
     List<DetalleAnuncioResponse> totalAnuncioFiltro(Map<String,String> map) throws SQLException;
     
-
     /**
-     * Consulta el objeto de tipo 'MascotaValorAtributo' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'MascotaValorAtributo' con base al id del anuncio proporcionado.
+     *
      * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
      * @return Listado de clases de tipo 'ValorAtributoResponse' con la informacion de los atributos de un anuncio
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
@@ -247,9 +251,11 @@ public interface AnuncioMapper {
     		+ " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
     		+ " JOIN atributo a ON va.id_atributo=a.id "
     		+ " WHERE mva.id_anuncio = #{idAnuncio}")
-	List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
+    List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
+	
     /**
-     * 
+     * Obtiene...
+     *
      * @param id
      * @return
      * @throws SQLException
@@ -258,7 +264,7 @@ public interface AnuncioMapper {
     String obtieneDescPorId(int id) throws SQLException;
     
     /**
-     * Consulta el objeto de tipo 'DetalleAnuncioResponse' con base al id proporcionado
+     * Consulta el objeto de tipo 'DetalleAnuncioResponse' con base al id proporcionado.
      * 
      * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
      * @return Clase de tipo 'DetalleAnuncioResponse' con la informacion asociada
@@ -285,5 +291,4 @@ public interface AnuncioMapper {
     		+ " JOIN categoria cat ON a.id_categoria=cat.id "
     		+ " WHERE a.id = #{id} ") 
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
-    
 }
