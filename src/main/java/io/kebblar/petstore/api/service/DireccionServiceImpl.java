@@ -123,7 +123,7 @@ public class DireccionServiceImpl implements DireccionService {
     }
 
     /*
-     * Implementación del método getById
+     * Implementación del método getById ?
      */
     @Override
     public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
@@ -146,7 +146,7 @@ public class DireccionServiceImpl implements DireccionService {
     }
     
     /*
-    Insert de una dirección ya asociada con el usuario
+    Insert de una dirección ya asociada con el usuario ?
      */
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
@@ -163,14 +163,14 @@ public class DireccionServiceImpl implements DireccionService {
                 nuevaDireccion.getCp(),
                 nuevaDireccion.getReferencias(),
                 true);
-        try{
+        try {
             //Se inserta recuperando su id
             direccionMapper.insert(d);
             idDireccion = d.getId();
             //El id de esa dirección se asocia al id del usuario que la ingresó
             ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
             return direccionMapper.insertUsuarioDireccion(ud);
-        }catch(Exception e){
+        } catch(Exception e) {
             throw new MapperCallException("Error al insertar la nueva dirección y asociarla con el usuario", e.getMessage());
         }
     }
