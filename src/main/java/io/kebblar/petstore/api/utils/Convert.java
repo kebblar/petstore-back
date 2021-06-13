@@ -1,3 +1,21 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Convert.java
+ * Tipo:        clase
+ * AUTOR:       Daniel Alvarez (GAA)
+ * Fecha:       Domingo 13 Junio de 2021 (17_50)
+ *
+ * Historia:    .
+ *              20210504_1950 Creación de éste controlador REST
+ *
+ */
 package io.kebblar.petstore.api.utils;
 
 import java.util.regex.Pattern;
