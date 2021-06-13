@@ -45,10 +45,8 @@ import io.kebblar.petstore.api.utils.CreatePDF;
 import io.kebblar.petstore.api.utils.Signer;
 
 /**
- * <p>
  * Implementación de la interfaz {@link OrdenCompraService}.
  * 
- * <p>
  * Todos los métodos de esta clase disparan {@link BusinessException}
  * 
  * @author dalvarez
@@ -62,28 +60,24 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     private static final Logger logger = LoggerFactory.getLogger(OrdenCompraServiceImpl.class);
     
     private Environment environment;
-
     private OrdenCompraMapper ordenCompraMapper;
-    
     private UsuarioDetalleMapper usuarioDetalleMapper;
-    
     private UsuarioMapper usuarioMapper;
-    
     private MailSenderService mailSenderService;
-
     private CarritoService carritoService;
-
     private DireccionService direccionService;
+	
     /*
      * Constructor con atributos mapper
      */
-    public OrdenCompraServiceImpl(OrdenCompraMapper ordenCompraMapper, 
-                                    UsuarioDetalleMapper usuarioDetalleMapper,
-                                    UsuarioMapper usuarioMapper,
-                                    MailSenderService mailSenderService,
-                                    Environment environment,
-                                    CarritoService carritoService,
-                                    DireccionService direccionService) {
+    public OrdenCompraServiceImpl(
+	    OrdenCompraMapper ordenCompraMapper, 
+            UsuarioDetalleMapper usuarioDetalleMapper,
+            UsuarioMapper usuarioMapper,
+            MailSenderService mailSenderService,
+            Environment environment,
+            CarritoService carritoService,
+            DireccionService direccionService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper=usuarioDetalleMapper;
         this.usuarioMapper=usuarioMapper;
@@ -93,9 +87,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         this.direccionService=direccionService;
     }
 
-    /*
-     * Implementación del método getAll
-     */
     @Override
     public List<DatosOrden> getAll() throws BusinessException {
         try {
@@ -105,10 +96,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         }
     }
     
-    
-    /*
-     * Implementación del método insert
-     */
     @Override
     public int insert(DatosOrden datosOrden) throws BusinessException {
         try {
@@ -117,7 +104,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             throw new BusinessException("Error al insertar Orden de compra",e.getMessage());
         }
     }
-
 
     @Override
     public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
@@ -129,7 +115,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
             String nombrePdf= CreatePDF.getNamePDF(usuarioDetalle.getId());
-			String pdf= nombrePdf + ".pdf";
+	    String pdf= nombrePdf + ".pdf";
             
             String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
             Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
@@ -140,19 +126,16 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
 
             if(ordenCompra.getIdMoneda() == 3) {
                 carritoService.updateCarritoCompraBtc(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
-            }else {
+            } else {
                 carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
             }
             
             List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
-            
             List<DireccionConNombre> direcciones= direccionService.getDireccionEnvio(ordenCompra.getIdUsuario(), ordenCompra.getIdDireccion());
-            
             CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito, direcciones);
             
-    		Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key",
-    				environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
-			String signedPdf = firmador.signPdf();
+    	    Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key", environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
+	    String signedPdf = firmador.signPdf();
             
             mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
             		"<h1 style='text-align:center;'>Gracias por tu compra!</h1>" +
@@ -173,12 +156,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
         } catch (Exception e) {
         	 throw new BusinessException("Error Signer: ",e.getMessage());
-		}
+	}
         return ordenCompra;
     }
     
-    
-
-    
-
 }
