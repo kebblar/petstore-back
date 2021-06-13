@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210608_1315 Implementación de interface 
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -38,9 +36,7 @@ import io.kebblar.petstore.api.model.response.CarritoVista;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface CarritoService {
-
     /**
      * Método utilizado para recuperar un elemento de la tabla 'carrito'. por medio de su llave primaria.
      * 
