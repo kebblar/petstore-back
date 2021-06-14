@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenMapper.java
+ * Artefacto:   AnuncioMediaMapper.java
  * Tipo:        Interface
  * AUTOR:       Maria Isabel Contreras Garcia (MICG)
  * Fecha:       Jueves 25 de Mayo de 2021 (17_58)
@@ -103,4 +103,5 @@ public interface AnuncioMediaMapper {
      */
     @Update("UPDATE anuncio_media SET principal = #{principal} WHERE uuid = #{uuid} ")
     int actualizaPrincipal(String uuid, Boolean principal) throws SQLException;
+    
 }
