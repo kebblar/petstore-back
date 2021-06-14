@@ -32,7 +32,7 @@ public enum AnuncioEstatusEnum {
     PUBLICADO ((short)3, "Publicado"),
     VENCIDO ((short)4, "Vencido"),
     ELIMINADO ((short)5, "Eliminado"),
-    CANCELADO ((short)5, "Cancelado");
+    CANCELADO ((short)6, "Cancelado");
     
     private short id;
     private String desEstatus;
