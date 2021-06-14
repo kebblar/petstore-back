@@ -19,9 +19,7 @@ package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import javax.validation.constraints.Min;
-
 import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
 
 /**
@@ -32,7 +30,6 @@ import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
  * @since   1.0-SNAPSHOT
  */
 public class BusquedaRequest {
-
     private BigDecimal precio;
     private Long idCategoria;
     private List<Integer> atributos;
@@ -40,6 +37,7 @@ public class BusquedaRequest {
     private int numPaginas;
     @Min(value = 1, message = "{min.tamano.paginas}")
     private int tamPaginas;
+    
     public BigDecimal getPrecio() {
         return precio;
     }
@@ -119,7 +117,6 @@ public class BusquedaRequest {
     public BusquedaRequest(BigDecimal precio, Long idCategoria, List<Integer> atributos,
             @Min(value = 1, message = "{min.paginado}") int numPaginas,
             @Min(value = 1, message = "{min.tamano.paginas}") int tamPaginas) {
-        super();
         this.precio = precio;
         this.idCategoria = idCategoria;
         this.atributos = atributos;
@@ -127,9 +124,6 @@ public class BusquedaRequest {
         this.tamPaginas = tamPaginas;
     }
     public BusquedaRequest() {
-        super();
-        // TODO Auto-generated constructor stub
     }
-    
-    
+
 }
