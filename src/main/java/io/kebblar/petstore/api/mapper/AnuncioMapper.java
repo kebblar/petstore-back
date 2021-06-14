@@ -254,11 +254,11 @@ public interface AnuncioMapper {
     List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
     
     /**
-     * Obtiene...
+     * Obtiene la descripción de la entidad 'estatus_anuncio' para un cierto id (PK) dado.
      *
-     * @param id
-     * @return
-     * @throws SQLException
+     * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'estatus_anuncio'
+     * @return Cadena con la descrición del estatus
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @Select("SELECT descripcion FROM estatus_anuncio WHERE id = #{id}")
     String obtieneDescPorId(int id) throws SQLException;
