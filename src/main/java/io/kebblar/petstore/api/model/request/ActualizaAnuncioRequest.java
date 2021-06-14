@@ -30,7 +30,7 @@ import javax.validation.constraints.Min;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class ActualizaAnuncioRequest extends AnuncioRequest{
+public class ActualizaAnuncioRequest extends AnuncioRequest {
 
     @Min(value = 1, message = "{min.anuncio.id}")
     private int id;
@@ -41,6 +41,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest{
     public ActualizaAnuncioRequest(int id) {
         this.id = id;
     }
+    
     public ActualizaAnuncioRequest(int id,String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
             int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> atributos) {
         super(titulo, descripcion, fechaInicioVigencia, fechaFinVigencia, idCategoria, precio, atributos);
@@ -81,4 +82,5 @@ public class ActualizaAnuncioRequest extends AnuncioRequest{
     public String toString() {
         return "ActualizaAnuncioRequest [id=" + id + "]";
     }
+    
 }
