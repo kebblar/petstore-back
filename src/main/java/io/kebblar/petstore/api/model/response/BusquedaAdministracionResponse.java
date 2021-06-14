@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   BusquedaAdministracionResponse.java
  * Tipo:        clase
  * AUTOR:       Edgar Uribe Mendez (EUM)
  * Fecha:       Martes 28 de Mayo de 2021 (21_35)
@@ -21,7 +21,6 @@ package io.kebblar.petstore.api.model.response;
 import java.util.Date;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'anuncio' para realizar la busqueda. 
  *
  * @author Edgar Uribe Mendez
@@ -29,7 +28,6 @@ import java.util.Date;
  * @since 1.0-SNAPSHOT
  */
 public class BusquedaAdministracionResponse {
-
     private int id;
     private long folio;
     private String titulo;
@@ -41,6 +39,7 @@ public class BusquedaAdministracionResponse {
     private int idEstatus;
     private String descripcionEstatus;
     private String descripcionCategoria;
+    
     public int getId() {
         return id;
     }
@@ -107,6 +106,7 @@ public class BusquedaAdministracionResponse {
     public void setDescripcionCategoria(String descripcionCategoria) {
         this.descripcionCategoria = descripcionCategoria;
     }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -124,6 +124,7 @@ public class BusquedaAdministracionResponse {
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -181,6 +182,7 @@ public class BusquedaAdministracionResponse {
             return false;
         return true;
     }
+    
     @Override
     public String toString() {
         return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
@@ -189,10 +191,10 @@ public class BusquedaAdministracionResponse {
                 + ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
                 + descripcionCategoria + "]";
     }
+    
     public BusquedaAdministracionResponse(int id, long folio, String titulo, Date fechaInicioVigencia,
             Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
             String descripcionEstatus, String descripcionCategoria) {
-        super();
         this.id = id;
         this.folio = folio;
         this.titulo = titulo;
@@ -205,10 +207,8 @@ public class BusquedaAdministracionResponse {
         this.descripcionEstatus = descripcionEstatus;
         this.descripcionCategoria = descripcionCategoria;
     }
-    public BusquedaAdministracionResponse() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
     
+    public BusquedaAdministracionResponse() {
+    }
+ 
 }
