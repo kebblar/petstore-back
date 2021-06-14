@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagen.java
+ * Artefacto:   AnuncioMedia.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_28)
@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'anuncio_imagen'. 
  *
  * @author Javier Chávez Barrios
@@ -52,6 +51,7 @@ public class AnuncioMedia implements Serializable {
         this.idTipo = idTipo;
         this.principal = principal;
     }
+    
     public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         super();
         this.id = id;
@@ -155,6 +155,5 @@ public class AnuncioMedia implements Serializable {
         return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo
                 + ", principal=" + principal + "]";
     }
-    
-    
+      
 }
