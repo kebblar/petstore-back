@@ -68,7 +68,7 @@ import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
 
 /**
- * <p>Implementación de la interfaz de servicios para 'Anuncio'.
+ * Implementación de la interfaz de servicios para 'Anuncio'.
  * 
  * @author  Maria Isabel Contreras Garcia
  * @see     io.kebblar.petstore.api.model.domain.Anuncio
@@ -76,8 +76,7 @@ import io.kebblar.petstore.api.utils.AnuncioUtil;
  * @since   1.0-SNAPSHOT 
  */
 @Service
-public class AnuncioServiceImpl implements AnuncioService{
-
+public class AnuncioServiceImpl implements AnuncioService {
     private static final Logger logger = LoggerFactory.getLogger(AnuncioServiceImpl.class);
 
     @Value("${app.destination-folder}")
@@ -101,8 +100,7 @@ public class AnuncioServiceImpl implements AnuncioService{
      * 
      * @param anuncioMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService,
-            AnuncioMediaMapper anuncioImagenMapper) {
+    public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService, AnuncioMediaMapper anuncioImagenMapper) {
         this.anuncioMapper = anuncioMapper;
         this.uploadService = uploadService;
         this.anuncioImagenMapper = anuncioImagenMapper;
@@ -323,16 +321,13 @@ public class AnuncioServiceImpl implements AnuncioService{
         }
     }
 
-
     /**
      * Metodo que permite realizar la busqueda de productos por medio de filtros, asi como tambien devuelve la paginacion
      * @param filtros permite utilizar los campos como filtros en la sentencia SQL
      * @throws BusinessException, SQLException
      */
     @Override
-    public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros)
-            throws BusinessException, SQLException {
-        
+    public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException {
         List<String> cadenasMapper = AnuncioUtil.busquedaFiltros(filtros);
         Map<String, String> mapSql = new HashMap<>();
         mapSql.put("sql", cadenasMapper.get(1));
