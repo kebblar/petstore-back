@@ -3,13 +3,10 @@ package io.kebblar.petstore.api.model.response;
 import java.util.List;
 
 public class PaginacionAnunciosResponse {
-
     private int totalAnuncios;
     private List<BusquedaAdministracionResponse> listaAnuncios;
     
-    
     public PaginacionAnunciosResponse(int totalAnuncios, List<BusquedaAdministracionResponse> listaAnuncios) {
-        super();
         this.totalAnuncios = totalAnuncios;
         this.listaAnuncios = listaAnuncios;
     }
@@ -50,15 +47,17 @@ public class PaginacionAnunciosResponse {
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
+    
     public void setTotalAnuncios(int totalAnuncios) {
         this.totalAnuncios = totalAnuncios;
     }
+    
     public List<BusquedaAdministracionResponse> getListaAnuncios() {
         return listaAnuncios;
     }
+    
     public void setListaAnuncios(List<BusquedaAdministracionResponse> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
     }
-    
-    
+     
 }
