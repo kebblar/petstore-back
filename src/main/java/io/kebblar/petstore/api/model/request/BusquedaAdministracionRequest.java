@@ -14,7 +14,8 @@
  *
  * Historia:    20210508_0938 Creación de éste POJO
  *
- */package io.kebblar.petstore.api.model.request;
+ */
+package io.kebblar.petstore.api.model.request;
 
 import java.time.LocalDate;
 
@@ -26,7 +27,6 @@ import java.time.LocalDate;
  * @since   1.0-SNAPSHOT
  */
 public class BusquedaAdministracionRequest {
-
     private long folio;
     private String titulo;
     private LocalDate fechaInicioVigencia;
@@ -35,6 +35,7 @@ public class BusquedaAdministracionRequest {
     private int idCategoria;
     private int numPaginas;
     private int tamPaginas;
+    
     public long getFolio() {
         return folio;
     }
@@ -141,7 +142,6 @@ public class BusquedaAdministracionRequest {
     }
     public BusquedaAdministracionRequest(long folio, String titulo, LocalDate fechaInicioVigencia,
             LocalDate fechaFinVigencia, int estatus, int idCategoria, int numPaginas, int tamPaginas) {
-        super();
         this.folio = folio;
         this.titulo = titulo;
         this.fechaInicioVigencia = fechaInicioVigencia;
@@ -152,9 +152,6 @@ public class BusquedaAdministracionRequest {
         this.tamPaginas = tamPaginas;
     }
     public BusquedaAdministracionRequest() {
-        super();
-        // TODO Auto-generated constructor stub
     }
-    
-    
+        
 }
