@@ -19,7 +19,6 @@
 package io.kebblar.petstore.api.utils;
 
 /**
- * <p>Descripción:</p>
  * ENUM asociado a los estatud de la entidad 'anuncio'. 
  *
  * @author Maria Isabel Contreras Garcia
@@ -49,6 +48,7 @@ public enum AnuncioEstatusEnum {
     public String getDesEstatus() {
         return desEstatus;
     }
+    
     public static String getDescripcion(short idEnum){
         for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
             if(eu.getId() == idEnum){
