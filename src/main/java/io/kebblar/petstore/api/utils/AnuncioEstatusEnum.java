@@ -27,35 +27,35 @@ package io.kebblar.petstore.api.utils;
  * @since 1.0-SNAPSHOT
  */
 public enum AnuncioEstatusEnum {
-	EN_EDICION ((short)1, "En edición"),
-	ACTIVO ((short)2, "Activo"),
-	PUBLICADO ((short)3, "Publicado"),
-	VENCIDO ((short)4, "Vencido"),
-	ELIMINADO ((short)5, "Eliminado"),
-	CANCELADO ((short)5, "Cancelado");
-	
-	private short id;
-	private String desEstatus;
-	
-	AnuncioEstatusEnum(short id, String desEstatus) {
-	    this.id = id;
-	    this.desEstatus = desEstatus;
-	}
+    EN_EDICION ((short)1, "En edición"),
+    ACTIVO ((short)2, "Activo"),
+    PUBLICADO ((short)3, "Publicado"),
+    VENCIDO ((short)4, "Vencido"),
+    ELIMINADO ((short)5, "Eliminado"),
+    CANCELADO ((short)5, "Cancelado");
+    
+    private short id;
+    private String desEstatus;
+    
+    AnuncioEstatusEnum(short id, String desEstatus) {
+        this.id = id;
+        this.desEstatus = desEstatus;
+    }
 
-	public short getId() {
-	    return id;
-	}
+    public short getId() {
+        return id;
+    }
 
-	public String getDesEstatus() {
-	    return desEstatus;
-	}
-	public static String getDescripcion(short idEnum){
-		for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
-			if(eu.getId() == idEnum){
-				return eu.getDesEstatus();
-			}
-		}
-		return "";
-	}
+    public String getDesEstatus() {
+        return desEstatus;
+    }
+    public static String getDescripcion(short idEnum){
+        for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
+            if(eu.getId() == idEnum){
+                return eu.getDesEstatus();
+            }
+        }
+        return "";
+    }
 
 }

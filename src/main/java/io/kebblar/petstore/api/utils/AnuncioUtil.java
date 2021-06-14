@@ -14,8 +14,8 @@
  *
  * Historia:    .
  *              20210520_2203 Creación de esta utileroa
- *				20210520_2203 Se  agregan  metodos de  marca  de 
- *				agua y renderizado de imagen
+ *              20210520_2203 Se  agregan  metodos de  marca  de 
+ *              agua y renderizado de imagen
  *
  */
 package io.kebblar.petstore.api.utils;
@@ -54,245 +54,238 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
-	private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
-
-	/**
-	 * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
-	 * <p>El folio se conformara por 
-	 * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
-	 * teniendo un total de 14 posiciones. </p>
-	 * @return String de 14 posiciones.
-	 */
-	public static String generaFolio() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
-		Random random = new Random();
-		String folio=dateFormat.format(new Date());
-		return folio+String.format("%04d", random.nextInt(10000));
-	}
-
-	/**
-	 * Método que permite validar las fechas de periodo enviadas.
-	 * <p>1. Valida que el periodo inicial sea posterior o igual a la fecha actual</p>
-	 * <p>2. Valida que la fecha de inicio no sea posterior a la fecha final</p>
-	 * @param fechaInicioVigencia
-	 * @param fechaFinVigencia
-	 * @return
-	 */
-	public static boolean validaFechasPeriodo(Date fechaInicioVigencia, Date fechaFinVigencia){
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-			String sFechaBase=dateFormat.format(new Date());
-			String sFechaIniVigencia=fechaInicioVigencia!=null ? dateFormat.format(fechaInicioVigencia):null;
-			String sFechaFinVigencia=fechaFinVigencia!=null?dateFormat.format(fechaFinVigencia):null;
-			
-			Date fechaBase = dateFormat.parse(sFechaBase);
-			fechaInicioVigencia = sFechaIniVigencia!=null?dateFormat.parse(sFechaIniVigencia):null;
-			fechaFinVigencia = sFechaFinVigencia!=null?dateFormat.parse(sFechaFinVigencia):null;
-			boolean fechasValidas = true;
-			//Se valida que la fecha de inicio no sea anterior a la fecha actual
-			if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)){
-				fechasValidas = false;
-			} 
-			//Se valida que la fecha de fin sno sea anterior a la fecha actual
-			if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)){
-				fechasValidas = false;
-			} 
-			//Se valida que la fecha de fin no sea mayor fecha inicio
-			if(fechaInicioVigencia!=null && fechaFinVigencia!=null 
-					&& fechaInicioVigencia.after(fechaFinVigencia)){
-				fechasValidas = false;
-			} 
-			return fechasValidas;
-		} catch (ParseException ex) {
-		
-		}
-		return false;
-	}
 	
-	/**
-	 * Metodo que permite comparar dos fechas entre si
-	 * @param fechaBase Fecha que se tomara como base para comparar
-	 * @param fechaAComparar Fecha con la que se compara la fecha base
-	 * @return Si la fecha Base es igual a la fecha a compara, regresa 0
-	 * Si la fecha base es anterior a la fecha a comparar, regresa un valor menor a 0
-	 * Si la fecha base es posterior a la fecha a comparar, regresa un valor mayor a 0
-	 */
-	public static int comparafechas(Date fechaBase, Date fechaAComparar){
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-			String sFechaBase=dateFormat.format(fechaBase);
-			String sFechaAComparar=dateFormat.format(fechaAComparar);
+    private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
 
-			fechaBase = dateFormat.parse(sFechaBase);
-			fechaAComparar = dateFormat.parse(sFechaAComparar);
-
-			return fechaBase.compareTo(fechaAComparar);
-		} catch (ParseException ex) {
-		
-		}
-		return 0;
-	}
-	
-	/**
-	 * Método que concatena las condiciones de consulta a la cadena SQL
-	 * @param filtros
-	 * @return String que contiene toda la cadena para la sentencia SQL
-	 */
-	public static List<String> busquedaFiltros(BusquedaAdministracionRequest filtros) {
-		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id IS NOT NULL");
-		List<String> response = new ArrayList<>();
-		int getPageSize = filtros.getTamPaginas();
-		int getPageNumber = filtros.getNumPaginas();
-		
-		String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
-		String pageSize = Integer.toString(getPageSize);
-		if (filtros.getIdCategoria() != 0) {
-			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
-		}
-		if (filtros.getFolio() != 0) {
-			consultaBase.append(" AND folio = ").append(filtros.getFolio());
-		}
-		if (filtros.getEstatus() != 0) {
-			consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
-		}
-		if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
-			consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
-		}
-		if (filtros.getFechaFinVigencia() != null && !filtros.getFechaFinVigencia().toString().isEmpty() ) {
-			consultaBase.append(" AND fecha_fin_vigencia <= ").append("'").append(filtros.getFechaFinVigencia()).append("'");
-		}
-		if (filtros.getFechaInicioVigencia() != null && !filtros.getFechaInicioVigencia().toString().isEmpty()) {
-			consultaBase.append(" AND fecha_inicio_vigencia >= ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
-		}
-		response.add(consultaBase.toString());
-		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
-		response.add(consultaBase.toString());
-		return response;
-		
-	}
-	/**
-	 * Filtra la búsqueda de usuario final
-	 * @param filtros
-	 * @return Lista de strings
-	 */
-	public static List<String> busqueda(BusquedaRequest filtros) {
-		StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id_estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
-		List<String> response = new ArrayList<>();
-		int getPageSize = filtros.getTamPaginas();
-		int getPageNumber = filtros.getNumPaginas();
-		
-		String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
-		String pageSize = Integer.toString(getPageSize);
-		if (filtros.getIdCategoria() != null && filtros.getIdCategoria() != 0 ) {
-			consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
-		}
-		if (filtros.getPrecio() != null && filtros.getPrecio() != BigDecimal.ZERO) {
-			consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
-		}
-		if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
-			consultaBase.append(" AND id IN (");
-			int i=1;
-	        StringBuilder sb = new StringBuilder();
-	        int size = filtros.getAtributos().size();
-	        
-			for (Integer atributo : filtros.getAtributos()) {
-				if (atributo != 0 ) {
-					sb.append("(");
-		            sb.append(String.format(TEMPLATE, atributo));
-		            sb.append(")");
-		            sb.append((i++<size)?" INTERSECT ":"");
-				}
-			}
-			
-			consultaBase.append(sb).append(")");
-			
-		}
-
-		
-		response.add(consultaBase.toString());
-		consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
-		response.add(consultaBase.toString());
-		return response;
-		
-	}
-	
-	
-	/**
-	 * Método privado que permite realizar validaciones de negocio para confirmar el guardado
-	 * @param request Clase que contiene los campos a validar
-	 * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
-	 */
-	public static void validaCampos(AnuncioRequest request) throws BusinessException {
-		//Validacion de campos obligatorios
-		if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
-			throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}
-		//TODO: En cuanto se tenga el Mapper de catalogo, se validara el estatus del registro de categoria proporcionado
-		if(request.getIdCategoria()>7) {
-			throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}
-		//Validacion de fechas de vigencia
-		Date fechaInicio = request.getFechaInicioVigencia() != null ? 
-				java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-				:null;
-		Date fechaFin =request.getFechaFinVigencia() != null ?
-				java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-				:null;
-		if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
-			throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
-		}	
-	}
-	
-	/**
-	 * Metodo que permite renderizar una imagen y agregar marca de agua
-	 * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
-	 * @param logoSistema Logotipo de la empresa que ira como marca de agua
-	 * @param imagenBase Imagen que se renderizara y se agregara marca de agua
-	 * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
-	 * @return
-	 */
-	public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa,  
-			String uuidImagenBase, int altoImagen) {
-		
-			ImageIcon logoSistema=new ImageIcon(destinationFolder+"logo.png");
-			ImageIcon imagenBase=new ImageIcon(destinationFolder+uuidImagenBase);
-			//Se agrega marca de agua al logotipo del sistema
-	        ImageIcon watermarkLogo = logoSistema;
-	        BufferedImage bi = makeTransparent(watermarkLogo.getImage(), 50);
-	        //Se renderiza la imagen proporcionada
-	        BufferedImage imagenRender = renderizar(imagenBase.getImage(), altoImagen);
-	        BufferedImage bufferedImage = new BufferedImage(imagenRender.getWidth(), imagenRender.getHeight(), BufferedImage.TYPE_INT_RGB);
-	        Graphics graphics = bufferedImage.getGraphics();
-	        graphics.drawImage(imagenRender, 0, 0, null);
-	        graphics.setFont(new Font("Arial", Font.BOLD, 15));
-	        //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9 
-	        String watermark = "\u00a9 "+nomEmpresa;
-	        //Se calcula la poscion de la marca de agua con base al tamaño de la iamgen
-	        int posicionLeyendaX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.30));
-	        int posicionLeyendaY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.1)); 
-	        int posicionIconoX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.25));
-	        int posicionIconoY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.25));    
-	        graphics.drawString(watermark, posicionLeyendaX,posicionLeyendaY);
-	        graphics.drawImage(bi, posicionIconoX,posicionIconoY, bi.getWidth(), bi.getHeight(), null);
-	        graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
-	        graphics.dispose();
-	        //Se reescribe la imagen renderizada y con marca de agua
-	        try {
-	            Path filepath = Paths.get(destinationFolder, uuidImagenBase);
-	            ImageIO.write(bufferedImage, FilenameUtils.getExtension(uuidImagenBase), filepath.toFile());
-	            bufferedImage.flush();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+    /**
+     * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
+     * <p>El folio se conformara por 
+     * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
+     * teniendo un total de 14 posiciones. </p>
+     * @return String de 14 posiciones.
+     */
+    public static String generaFolio() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
+        Random random = new Random();
+        String folio=dateFormat.format(new Date());
+        return folio+String.format("%04d", random.nextInt(10000));
     }
-	
-	/**
-	 * Metodo que permite que una imagen tenga marca de agua
-	 * @param originalImage Imagen que sera la marca de agua
-	 * @param ancho  Medida a lo ancho a la que se renderizara la imagen
-	 * @return BufferedImage Imagen como marca de agua
-	 */
-	public static BufferedImage makeTransparent(Image originalImage, int ancho) {
+
+    /**
+     * Método que permite validar las fechas de periodo enviadas.
+     * <p>1. Valida que el periodo inicial sea posterior o igual a la fecha actual</p>
+     * <p>2. Valida que la fecha de inicio no sea posterior a la fecha final</p>
+     * @param fechaInicioVigencia
+     * @param fechaFinVigencia
+     * @return
+     */
+    public static boolean validaFechasPeriodo(Date fechaInicioVigencia, Date fechaFinVigencia){
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+            String sFechaBase=dateFormat.format(new Date());
+            String sFechaIniVigencia=fechaInicioVigencia!=null ? dateFormat.format(fechaInicioVigencia):null;
+            String sFechaFinVigencia=fechaFinVigencia!=null?dateFormat.format(fechaFinVigencia):null;
+            Date fechaBase = dateFormat.parse(sFechaBase);
+            fechaInicioVigencia = sFechaIniVigencia!=null?dateFormat.parse(sFechaIniVigencia):null;
+            fechaFinVigencia = sFechaFinVigencia!=null?dateFormat.parse(sFechaFinVigencia):null;
+            boolean fechasValidas = true;
+            //Se valida que la fecha de inicio no sea anterior a la fecha actual
+            if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)){
+                fechasValidas = false;
+            } 
+            //Se valida que la fecha de fin sno sea anterior a la fecha actual
+            if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)){
+                fechasValidas = false;
+            } 
+            //Se valida que la fecha de fin no sea mayor fecha inicio
+            if(fechaInicioVigencia!=null && fechaFinVigencia!=null 
+                    && fechaInicioVigencia.after(fechaFinVigencia)){
+                fechasValidas = false;
+            } 
+            return fechasValidas;
+        } catch (ParseException ex) {
+        
+        }
+        return false;
+    }
+    
+    /**
+     * Metodo que permite comparar dos fechas entre si
+     * @param fechaBase Fecha que se tomara como base para comparar
+     * @param fechaAComparar Fecha con la que se compara la fecha base
+     * @return Si la fecha Base es igual a la fecha a compara, regresa 0
+     * Si la fecha base es anterior a la fecha a comparar, regresa un valor menor a 0
+     * Si la fecha base es posterior a la fecha a comparar, regresa un valor mayor a 0
+     */
+    public static int comparafechas(Date fechaBase, Date fechaAComparar){
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+            String sFechaBase=dateFormat.format(fechaBase);
+            String sFechaAComparar=dateFormat.format(fechaAComparar);
+            fechaBase = dateFormat.parse(sFechaBase);
+            fechaAComparar = dateFormat.parse(sFechaAComparar);
+            return fechaBase.compareTo(fechaAComparar);
+        } catch (ParseException ex) {
+        
+        }
+        return 0;
+    }
+    
+    /**
+     * Método que concatena las condiciones de consulta a la cadena SQL
+     * @param filtros
+     * @return String que contiene toda la cadena para la sentencia SQL
+     */
+    public static List<String> busquedaFiltros(BusquedaAdministracionRequest filtros) {
+        StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id IS NOT NULL");
+        List<String> response = new ArrayList<>();
+        int getPageSize = filtros.getTamPaginas();
+        int getPageNumber = filtros.getNumPaginas();
+        
+        String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
+        String pageSize = Integer.toString(getPageSize);
+        if (filtros.getIdCategoria() != 0) {
+            consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
+        }
+        if (filtros.getFolio() != 0) {
+            consultaBase.append(" AND folio = ").append(filtros.getFolio());
+        }
+        if (filtros.getEstatus() != 0) {
+            consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
+        }
+        if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
+            consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
+        }
+        if (filtros.getFechaFinVigencia() != null && !filtros.getFechaFinVigencia().toString().isEmpty() ) {
+            consultaBase.append(" AND fecha_fin_vigencia <= ").append("'").append(filtros.getFechaFinVigencia()).append("'");
+        }
+        if (filtros.getFechaInicioVigencia() != null && !filtros.getFechaInicioVigencia().toString().isEmpty()) {
+            consultaBase.append(" AND fecha_inicio_vigencia >= ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
+        }
+        response.add(consultaBase.toString());
+        consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
+        response.add(consultaBase.toString());
+        return response;
+        
+    }
+    
+    /**
+     * Filtra la búsqueda de usuario final
+     * @param filtros
+     * @return Lista de strings
+     */
+    public static List<String> busqueda(BusquedaRequest filtros) {
+        StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id_estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
+        List<String> response = new ArrayList<>();
+        int getPageSize = filtros.getTamPaginas();
+        int getPageNumber = filtros.getNumPaginas();
+        
+        String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
+        String pageSize = Integer.toString(getPageSize);
+        if (filtros.getIdCategoria() != null && filtros.getIdCategoria() != 0 ) {
+            consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
+        }
+        if (filtros.getPrecio() != null && filtros.getPrecio() != BigDecimal.ZERO) {
+            consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
+        }
+        if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
+            consultaBase.append(" AND id IN (");
+            int i=1;
+            StringBuilder sb = new StringBuilder();
+            int size = filtros.getAtributos().size();
+            
+            for (Integer atributo : filtros.getAtributos()) {
+                if (atributo != 0 ) {
+                    sb.append("(");
+                    sb.append(String.format(TEMPLATE, atributo));
+                    sb.append(")");
+                    sb.append((i++<size)?" INTERSECT ":"");
+                }
+            }
+            consultaBase.append(sb).append(")");   
+        }
+        response.add(consultaBase.toString());
+        consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
+        response.add(consultaBase.toString());
+        return response;
+        
+    }
+    
+    /**
+     * Método privado que permite realizar validaciones de negocio para confirmar el guardado
+     * @param request Clase que contiene los campos a validar
+     * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
+     */
+    public static void validaCampos(AnuncioRequest request) throws BusinessException {
+        //Validacion de campos obligatorios
+        if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
+            throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
+        }
+        if(request.getIdCategoria()==0) {
+            throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
+        }
+        //Validacion de fechas de vigencia
+        Date fechaInicio = request.getFechaInicioVigencia() != null ? 
+                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+                :null;
+        Date fechaFin =request.getFechaFinVigencia() != null ?
+                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+                :null;
+        if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
+            throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
+        }   
+    }
+    
+    /**
+     * Metodo que permite renderizar una imagen y agregar marca de agua
+     * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
+     * @param logoSistema Logotipo de la empresa que ira como marca de agua
+     * @param imagenBase Imagen que se renderizara y se agregara marca de agua
+     * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
+     * @return
+     */
+    public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa,  
+            String uuidImagenBase, int altoImagen) {
+        
+            ImageIcon logoSistema=new ImageIcon(destinationFolder+"logo.png");
+            ImageIcon imagenBase=new ImageIcon(destinationFolder+uuidImagenBase);
+            //Se agrega marca de agua al logotipo del sistema
+            ImageIcon watermarkLogo = logoSistema;
+            BufferedImage bi = makeTransparent(watermarkLogo.getImage(), 50);
+            //Se renderiza la imagen proporcionada
+            BufferedImage imagenRender = renderizar(imagenBase.getImage(), altoImagen);
+            BufferedImage bufferedImage = new BufferedImage(imagenRender.getWidth(), imagenRender.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics graphics = bufferedImage.getGraphics();
+            graphics.drawImage(imagenRender, 0, 0, null);
+            graphics.setFont(new Font("Arial", Font.BOLD, 15));
+            //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9 
+            String watermark = "\u00a9 "+nomEmpresa;
+            //Se calcula la poscion de la marca de agua con base al tamaño de la iamgen
+            int posicionLeyendaX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.30));
+            int posicionLeyendaY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.1)); 
+            int posicionIconoX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.25));
+            int posicionIconoY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.25));    
+            graphics.drawString(watermark, posicionLeyendaX,posicionLeyendaY);
+            graphics.drawImage(bi, posicionIconoX,posicionIconoY, bi.getWidth(), bi.getHeight(), null);
+            graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
+            graphics.dispose();
+            //Se reescribe la imagen renderizada y con marca de agua
+            try {
+                Path filepath = Paths.get(destinationFolder, uuidImagenBase);
+                ImageIO.write(bufferedImage, FilenameUtils.getExtension(uuidImagenBase), filepath.toFile());
+                bufferedImage.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+    
+    /**
+     * Metodo que permite que una imagen tenga marca de agua
+     * @param originalImage Imagen que sera la marca de agua
+     * @param ancho  Medida a lo ancho a la que se renderizara la imagen
+     * @return BufferedImage Imagen como marca de agua
+     */
+    public static BufferedImage makeTransparent(Image originalImage, int ancho) {
         double h = originalImage.getHeight(null);
         double w = originalImage.getWidth(null);
         double radio = h / w;
@@ -305,13 +298,13 @@ public class AnuncioUtil {
         return resizedImage;
     }
  
-	/**
-	 * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada
-	 * @param originalImage Imagen a renderizar
-	 * @param alto Altura que se tomara como referencia para el renderizado
-	 * @return BufferedImage Imagen renderizada
-	 */
-	public static BufferedImage renderizar(Image originalImage, int alto) {
+    /**
+     * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada
+     * @param originalImage Imagen a renderizar
+     * @param alto Altura que se tomara como referencia para el renderizado
+     * @return BufferedImage Imagen renderizada
+     */
+    public static BufferedImage renderizar(Image originalImage, int alto) {
         double h = originalImage.getHeight(null);
         double w = originalImage.getWidth(null);
         double radio = h / w;

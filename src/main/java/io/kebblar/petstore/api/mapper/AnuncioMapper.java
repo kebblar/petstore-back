@@ -54,7 +54,7 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 public interface AnuncioMapper {
     static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
     static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
-	 
+     
     /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
      *
@@ -63,8 +63,8 @@ public interface AnuncioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  "
-    		+ " #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion}, "
-    		+ " #{fechaEliminacion}, #{idEstatus} )")
+            + " #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion}, "
+            + " #{fechaEliminacion}, #{idEstatus} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
     
@@ -102,7 +102,7 @@ public interface AnuncioMapper {
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ") 
     Anuncio getAnuncioById(int id) throws SQLException;
-	 
+     
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
      *
@@ -122,9 +122,9 @@ public interface AnuncioMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE anuncio SET id_categoria = #{idCategoria}, titulo = #{titulo}, descripcion = #{descripcion}, "
-    		+ " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
-    		+ " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus} "
-    		+ " WHERE id = #{id} ")
+            + " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
+            + " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus} "
+            + " WHERE id = #{id} ")
     int update(Anuncio anuncio) throws SQLException; 
 
    /** 
@@ -136,7 +136,7 @@ public interface AnuncioMapper {
     */
     @Delete("DELETE FROM mascota_valor_atributo WHERE id_anuncio = #{id} ")
     int deleteAtributos(int id) throws SQLException;
-	
+    
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
      *
@@ -247,12 +247,12 @@ public interface AnuncioMapper {
             @Result(property = "nombreAtributo",   column = "nombre_atributo")
     })
     @Select("SELECT mva.id, mva.id_valor_atributo, va.id_atributo AS id_atributo, a.nombre AS nombre_atributo, va.rango "
-    		+ " FROM mascota_valor_atributo mva "
-    		+ " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
-    		+ " JOIN atributo a ON va.id_atributo=a.id "
-    		+ " WHERE mva.id_anuncio = #{idAnuncio}")
+            + " FROM mascota_valor_atributo mva "
+            + " JOIN valor_atributo va ON mva.id_valor_atributo=va.id "
+            + " JOIN atributo a ON va.id_atributo=a.id "
+            + " WHERE mva.id_anuncio = #{idAnuncio}")
     List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
-	
+    
     /**
      * Obtiene...
      *
@@ -284,11 +284,11 @@ public interface AnuncioMapper {
             @Result(property = "descEstatus",   column = "descripcion_estatus") 
     })
     @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
-    		+ " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
-    		+ " a.id_estatus, a.id_categoria, ea.descripcion as descripcion_estatus, "
-    		+ " cat.categoria FROM anuncio a "
-    		+ " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "
-    		+ " JOIN categoria cat ON a.id_categoria=cat.id "
-    		+ " WHERE a.id = #{id} ") 
+            + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
+            + " a.id_estatus, a.id_categoria, ea.descripcion as descripcion_estatus, "
+            + " cat.categoria FROM anuncio a "
+            + " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "
+            + " JOIN categoria cat ON a.id_categoria=cat.id "
+            + " WHERE a.id = #{id} ") 
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
 }
