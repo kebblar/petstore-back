@@ -32,6 +32,8 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class VistaCarritoException extends BusinessException{
+    private static final long serialVersionUID = 129288280347509459L;
+
     public VistaCarritoException(String msg) {
         super(msg,
                 "Error al recuperar la vista del carrito",

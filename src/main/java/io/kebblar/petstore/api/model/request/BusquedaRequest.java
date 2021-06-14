@@ -20,7 +20,6 @@ package io.kebblar.petstore.api.model.request;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.validation.constraints.Min;
-import io.kebblar.petstore.api.model.domain.MascotaValorAtributo;
 
 /**
  * Implementacion del POJO de la entidad de 'BusquedaRequest'.

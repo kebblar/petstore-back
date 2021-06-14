@@ -25,12 +25,9 @@ import java.util.List;
 import java.sql.SQLException;
 
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
-import io.kebblar.petstore.api.model.response.CarritoVista;
 import org.apache.ibatis.annotations.*;
-import org.exolab.castor.mapping.xml.Sql;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Carrito;
-import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * <p>Descripción:</p>

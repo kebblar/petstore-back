@@ -18,10 +18,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +38,6 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.response.ProcesaMascotaResponse;
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
-import io.kebblar.petstore.api.support.JwtManagerService;
 
 /**
  * <p>Implementacion  del controlador REST asociado a los endpoints
@@ -65,20 +61,17 @@ import io.kebblar.petstore.api.support.JwtManagerService;
 public class MascotaController {
     private MascotaService mascotaService;
     private RemoteRestCallService remoteRestCallService;
-    private JwtManagerService jwtManagerService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
      *
      * @param mascotaService Servicio de Mascota
-     * @param jwtManagerService Servicio de jswManager
      * @param mailSenderService Serivico de mailSender
      * @param remoteRestCallService Servicio de remoteRestCall
      */
-    public MascotaController(MascotaService mascotaService, JwtManagerService jwtManagerService, RemoteRestCallService remoteRestCallService) {
+    public MascotaController(MascotaService mascotaService, RemoteRestCallService remoteRestCallService) {
         this.mascotaService = mascotaService;
-        this.jwtManagerService=jwtManagerService;
         this.remoteRestCallService=remoteRestCallService;
     }
 
