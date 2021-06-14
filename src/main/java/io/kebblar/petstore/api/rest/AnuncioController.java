@@ -102,7 +102,7 @@ public class AnuncioController {
 	    notes = "Recibe un objeto <strong>AnuncioRequest</strong> que contiene la información para el registro de un anuncio.")
     @PostMapping(
 	    value = "/anuncios.json",
-        produces = "application/json; charset=utf-8")
+            produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public AnuncioResponse registro(
         @ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
@@ -110,28 +110,31 @@ public class AnuncioController {
 	    return anuncioService.guardar(anuncio);
     }
 	
-	@ApiOperation(value = "AnuncioController::Actualiza",
-	    notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para "
-	        	+ "actualizar un anuncio.")
-	@PutMapping(value = "/anuncios.json",
-        produces = "application/json; charset=utf-8")
+    @ApiOperation(
+	    value = "AnuncioController::Actualiza",
+	    notes = "Recibe un objeto <strong>ActualizaAnuncioRequest</strong> que contiene la información para actualizar un anuncio.")
+	@PutMapping(
+	    value = "/anuncios.json",
+            produces = "application/json; charset=utf-8")
     public AnuncioResponse actualizar(
         @ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
     	@RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
-		return anuncioService.guardar(anuncio);
+	    return anuncioService.guardar(anuncio);
     }
 	
-	@ApiOperation(value = "AnuncioController::Confirmar",
+    @ApiOperation(
+	    value = "AnuncioController::Confirmar",
 	    notes = "Recibe el identificador del anuncio que confirma el guardado del anuncio")
-	@PutMapping(value = "/anuncios/confirmar/{id}.json",
-        produces = "application/json; charset=utf-8")
+    @PutMapping(
+	    value = "/anuncios/confirmar/{id}.json",
+            produces = "application/json; charset=utf-8")
     public AnuncioResponse confirmarAnuncio(
     	@ApiParam(name="id", value="Identificador del anuncio.")
     	@PathVariable int id) throws BusinessException {
-		return anuncioService.confirmarAnuncio(id);
+	    return anuncioService.confirmarAnuncio(id);
     }
 
-	@ApiOperation(
+    @ApiOperation(
         value = "AnuncioController::eliminar",
         notes = "Recibe un identificador del anuncio a eliminar en el sistema.")
     @DeleteMapping(
@@ -140,10 +143,10 @@ public class AnuncioController {
     public AnuncioResponse eliminar(
     	@ApiParam(name="id", value="Identificador del anuncio que será removido del sistema.")
     	@RequestParam int id ) throws BusinessException {
-		return anuncioService.eliminarAnuncio(id);
+	    return anuncioService.eliminarAnuncio(id);
     }
 	
-	@ApiOperation(
+    @ApiOperation(
         value = "AnuncioController::Detalle",
         notes = "Recibe un identificador del anuncio del cual se consultara el detalle.")
     @GetMapping(
@@ -152,58 +155,66 @@ public class AnuncioController {
     public DetalleAnuncioResponse anuncios(
     	@ApiParam(name="id", value="Identificador del anuncio del cual se consultara el detalle.")
     	@PathVariable int id ) throws BusinessException {
-		return anuncioService.detalleAnuncio(id);
+	    return anuncioService.detalleAnuncio(id);
     }
 
-	@ApiOperation(value = "AnuncioController::Registro", 
-		notes = "Recibe una imagen que sera asociada a un anuncio")
-	@PostMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
-	public AnuncioImagenResponse guardarImagen(
-		@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
-		@RequestHeader("idAnuncio") int idAnuncio,
-		@ApiParam(name = "file", value = "Imagen a guardar.") 
-		@RequestParam("file") MultipartFile file) throws BusinessException {
-		return anuncioService.guardarImagen(idAnuncio, file);
-	}
+    @ApiOperation(
+	value = "AnuncioController::Registro", 
+	notes = "Recibe una imagen que sera asociada a un anuncio")
+    @PostMapping(
+	    path = "/anuncios/imagen.json", 
+	    produces = "application/json; charset=utf-8")
+    public AnuncioImagenResponse guardarImagen(
+	@ApiParam(name = "idAnuncio", value = "Identificador del anuncio.") 
+	@RequestHeader("idAnuncio") int idAnuncio,
+	@ApiParam(name = "file", value = "Imagen a guardar.") 
+	@RequestParam("file") MultipartFile file) throws BusinessException {
+	    return anuncioService.guardarImagen(idAnuncio, file);
+    }
 	
-	@ApiOperation(value = "AnuncioController::Eliminar", 
-		notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
-	@DeleteMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
-	public void eliminarImagen(
-		@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a eliminar.") 
-		@RequestHeader("uuid") String uuid) throws BusinessException {
-		anuncioService.eliminarImagen(uuid);
-	}
+    @ApiOperation(
+	    value = "AnuncioController::Eliminar", 
+	    notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
+    @DeleteMapping(path = "/anuncios/imagen.json", produces = "application/json; charset=utf-8")
+    public void eliminarImagen(
+	@ApiParam(name = "uuid", value = "Identificador de la imagen de un anuncio a eliminar.") 
+	@RequestHeader("uuid") String uuid) throws BusinessException {
+	    anuncioService.eliminarImagen(uuid);
+    }
 
-	@ApiOperation(value = "AnuncioController::BusquedaAdministracion",
-	    notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para "
-	        	+ "realizar la busqueda de productos.")
-	@PostMapping(value = "anuncio/search.json",
-        produces = "application/json; charset=utf-8")
-	public PaginacionAnunciosResponse busquedaAdministracion( 
-		@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
-		@RequestBody BusquedaAdministracionRequest filtros) throws BusinessException, SQLException{
-		return anuncioService.busquedaAdministracion(filtros);
-	}
+    @ApiOperation(
+	    value = "AnuncioController::BusquedaAdministracion",
+	    notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para realizar la busqueda de productos.")
+    @PostMapping(
+	    value = "anuncio/search.json",
+            produces = "application/json; charset=utf-8")
+    public PaginacionAnunciosResponse busquedaAdministracion( 
+	@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
+	@RequestBody BusquedaAdministracionRequest filtros) throws BusinessException, SQLException{
+	    return anuncioService.busquedaAdministracion(filtros);
+    }
 	
-	@ApiOperation(value = "AnuncioController::BusquedaUsuarioFinal",
-	    notes = "Recibe un objeto <strong>BusquedaRequest</strong> que contiene la información para "
-	        	+ "realizar la busqueda de productos.")
-	@PostMapping(value = "anuncio/filter.json",
-        produces = "application/json; charset=utf-8")
-	public BusquedaResponse busquedaUsuarioFinal( 
-		@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
-		@RequestBody @Valid BusquedaRequest filtros) throws BusinessException, SQLException{
-		return anuncioService.busqueda(filtros);
-	}
+    @ApiOperation(
+	    value = "AnuncioController::BusquedaUsuarioFinal",
+	    notes = "Recibe un objeto <strong>BusquedaRequest</strong> que contiene la información para realizar la busqueda de productos.")
+    @PostMapping(
+	    value = "anuncio/filter.json",
+            produces = "application/json; charset=utf-8")
+    public BusquedaResponse busquedaUsuarioFinal( 
+	@ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
+	@RequestBody @Valid BusquedaRequest filtros) throws BusinessException, SQLException{
+	    return anuncioService.busqueda(filtros);
+    }
 	
-
-	@ApiOperation(value = "AnuncioController::Principal", 
-		notes = "Asigna como 'principal' a la imagen proporcionada")
-	@PutMapping(path = "/anuncios/imagen/principal.json", produces = "application/json; charset=utf-8")
-	public void confirmaImagenPrincipal(
-		@ApiParam(name = "imagenRequest", value = "Informacion de la imagen de un anuncio a convertir en principal.") 
-		@RequestBody AnuncioImagenRequest imagenRequest) throws BusinessException {
-		anuncioService.imagenPrincipal(imagenRequest);
-	}
+    @ApiOperation(
+	    value = "AnuncioController::Principal", 
+	    notes = "Asigna como 'principal' a la imagen proporcionada")
+    @PutMapping(
+	    path = "/anuncios/imagen/principal.json", 
+	    produces = "application/json; charset=utf-8")
+    public void confirmaImagenPrincipal(
+	@ApiParam(name = "imagenRequest", value = "Informacion de la imagen de un anuncio a convertir en principal.") 
+	@RequestBody AnuncioImagenRequest imagenRequest) throws BusinessException {
+	    anuncioService.imagenPrincipal(imagenRequest);
+    }
 }
