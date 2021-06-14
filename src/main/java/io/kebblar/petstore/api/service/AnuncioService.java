@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**
- * <p>Definición de la interfaz de servicios para 'Anuncio'.
+ * Definición de la interfaz de servicios para 'Anuncio'.
  * 
  * @author  micontreras
  * @see     io.kebblar.petstore.api.model.domain.Anuncio
@@ -50,8 +50,8 @@ public interface AnuncioService {
     /**
      * Método que permite realizar el registro de un producto.
      * <p>Se guardan los datos generales y atributos del producto,
-     *
      * en este punto el anuncio tendrá un estatus de 1= En edición {@link AnuncioEstatusEnum}</p>
+     *
      * @param {@link AnuncioRequest}  Clase que contiene la información del {@link Anuncio} que se dara de alta
      * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException
