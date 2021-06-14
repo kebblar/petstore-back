@@ -62,6 +62,7 @@ public class AnuncioUtil {
      * <p>El folio se conformara por 
      * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
      * teniendo un total de 14 posiciones. </p>
+     *
      * @return String de 14 posiciones.
      */
     public static String generaFolio() {
@@ -75,6 +76,7 @@ public class AnuncioUtil {
      * Método que permite validar las fechas de periodo enviadas.
      * <p>1. Valida que el periodo inicial sea posterior o igual a la fecha actual</p>
      * <p>2. Valida que la fecha de inicio no sea posterior a la fecha final</p>
+     *
      * @param fechaInicioVigencia
      * @param fechaFinVigencia
      * @return
@@ -110,7 +112,8 @@ public class AnuncioUtil {
     }
     
     /**
-     * Metodo que permite comparar dos fechas entre si
+     * Metodo que permite comparar dos fechas entre si.
+     *
      * @param fechaBase Fecha que se tomara como base para comparar
      * @param fechaAComparar Fecha con la que se compara la fecha base
      * @return Si la fecha Base es igual a la fecha a compara, regresa 0
@@ -132,7 +135,8 @@ public class AnuncioUtil {
     }
     
     /**
-     * Método que concatena las condiciones de consulta a la cadena SQL
+     * Método que concatena las condiciones de consulta a la cadena SQL.
+     *
      * @param filtros
      * @return String que contiene toda la cadena para la sentencia SQL
      */
@@ -170,7 +174,8 @@ public class AnuncioUtil {
     }
     
     /**
-     * Filtra la búsqueda de usuario final
+     * Filtra la búsqueda de usuario final.
+     *
      * @param filtros
      * @return Lista de strings
      */
@@ -208,11 +213,11 @@ public class AnuncioUtil {
         consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
         response.add(consultaBase.toString());
         return response;
-        
     }
     
     /**
-     * Método privado que permite realizar validaciones de negocio para confirmar el guardado
+     * Método privado que permite realizar validaciones de negocio para confirmar el guardado.
+     *
      * @param request Clase que contiene los campos a validar
      * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
      */
@@ -237,16 +242,15 @@ public class AnuncioUtil {
     }
     
     /**
-     * Metodo que permite renderizar una imagen y agregar marca de agua
+     * Metodo que permite renderizar una imagen y agregar marca de agua.
+     *
      * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
      * @param logoSistema Logotipo de la empresa que ira como marca de agua
      * @param imagenBase Imagen que se renderizara y se agregara marca de agua
      * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
      * @return
      */
-    public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa,  
-            String uuidImagenBase, int altoImagen) {
-        
+    public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa, String uuidImagenBase, int altoImagen) {
             ImageIcon logoSistema=new ImageIcon(destinationFolder+"logo.png");
             ImageIcon imagenBase=new ImageIcon(destinationFolder+uuidImagenBase);
             //Se agrega marca de agua al logotipo del sistema
@@ -280,7 +284,8 @@ public class AnuncioUtil {
     }
     
     /**
-     * Metodo que permite que una imagen tenga marca de agua
+     * Metodo que permite que una imagen tenga marca de agua.
+     *
      * @param originalImage Imagen que sera la marca de agua
      * @param ancho  Medida a lo ancho a la que se renderizara la imagen
      * @return BufferedImage Imagen como marca de agua
@@ -299,7 +304,8 @@ public class AnuncioUtil {
     }
  
     /**
-     * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada
+     * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada.
+     *
      * @param originalImage Imagen a renderizar
      * @param alto Altura que se tomara como referencia para el renderizado
      * @return BufferedImage Imagen renderizada
