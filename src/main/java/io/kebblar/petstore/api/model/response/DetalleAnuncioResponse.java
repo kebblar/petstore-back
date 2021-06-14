@@ -159,7 +159,7 @@ public class DetalleAnuncioResponse {
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
         result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
         result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-        result  prime * result + ((folio == null) ? 0 : folio.hashCode());
+        result = prime * result + ((folio == null) ? 0 : folio.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
         result = prime * result + idEstatus;
