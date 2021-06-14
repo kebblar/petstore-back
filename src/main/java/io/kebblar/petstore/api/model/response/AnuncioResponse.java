@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   AnuncioResponse.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_40)
@@ -19,7 +19,6 @@
 package io.kebblar.petstore.api.model.response;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'anuncio' para mostrar la informacion base. 
  *
  * @author Javier Chávez Barrios
@@ -27,7 +26,6 @@ package io.kebblar.petstore.api.model.response;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioResponse {
-
     private int id;
     private String folio;
     private String info;
@@ -39,6 +37,7 @@ public class AnuncioResponse {
         this.id = id;
         this.folio = folio;
     }
+    
     public AnuncioResponse(int id, String folio, String info) {
         this.id = id;
         this.folio = folio;
@@ -48,15 +47,19 @@ public class AnuncioResponse {
     public int getId() {
         return id;
     }
+    
     public void setId(int id) {
         this.id = id;
     }
+    
     public String getFolio() {
         return folio;
     }
+    
     public void setFolio(String folio) {
         this.folio = folio;
     }
+    
     public String getInfo() {
         return info;
     }
@@ -107,7 +110,5 @@ public class AnuncioResponse {
     public String toString() {
         return "AnuncioResponse [id=" + id + ", folio=" + folio + ", info=" + info + "]";
     }
-    
-    
     
 }
