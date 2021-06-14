@@ -2,22 +2,19 @@ package io.kebblar.petstore.api.model.response;
 
 import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
 
-public class MascotaValorAtributoResponse extends MascotaValorAtributoRequest{
-
+public class MascotaValorAtributoResponse extends MascotaValorAtributoRequest {
     private String rango;
     private int idAtributo;
     private String nombreAtributo;
 
     public MascotaValorAtributoResponse() {
-
     }
 
     public MascotaValorAtributoResponse(int id, int idValorAtributo) {
         super(id, idValorAtributo);
     }
 
-    public MascotaValorAtributoResponse(int id, int idValorAtributo, String rango, int idAtributo,
-            String nombreAtributo) {
+    public MascotaValorAtributoResponse(int id, int idValorAtributo, String rango, int idAtributo, String nombreAtributo) {
         super(id, idValorAtributo);
         this.rango = rango;
         this.idAtributo = idAtributo;
@@ -84,8 +81,7 @@ public class MascotaValorAtributoResponse extends MascotaValorAtributoRequest{
 
     @Override
     public String toString() {
-        return "MascotaValorAtributoResponse [rango=" + rango + ", idAtributo=" + idAtributo + ", nombreAtributo="
-                + nombreAtributo + "]";
+        return "MascotaValorAtributoResponse [rango=" + rango + ", idAtributo=" + idAtributo + ", nombreAtributo=" + nombreAtributo + "]";
     }
     
 }
