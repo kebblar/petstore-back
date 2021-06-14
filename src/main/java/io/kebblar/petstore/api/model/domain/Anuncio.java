@@ -7,168 +7,185 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   Anuncio.java
  * Tipo:        clase
- * AUTOR:       Edgar Uribe Mendez (EUM)
- * Fecha:       Martes 24 de Mayo de 2021 (21_30)
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_28)
  *
  * Historia:    .
- *              20210524_2130 Creación de éste POJO
+ *              20210518_2028 Creación de éste POJO
+ *              20210604_1314 Modificacion de 'sku' por 'folio'
  *
  */
-package io.kebblar.petstore.api.model.response;
+package io.kebblar.petstore.api.model.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
- * POJO asociado a la entidad 'anuncio' para mostrar su detalle. 
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'anuncio'. 
  *
- * @author Edgar Uribe Mendez
+ * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class DetalleAnuncioResponse {
+public class Anuncio implements Serializable {
+    private static final long serialVersionUID = -143592035892511227L;
+
     private Integer id;
     private Integer idCategoria;
-    private String descCategoria;
     private String folio;
     private String titulo;
     private String descripcion;
     private BigDecimal precio;
     private Date fechaInicioVigencia;
     private Date fechaFinVigencia;
+    private Date fechaAlta;
+    private Date fechaModificacion;
+    private Date fechaEliminacion;
     private short idEstatus;
-    private String descEstatus;
-    private List<MascotaValorAtributoResponse> atributos;
-    private List<AnuncioImagenResponse> imagenes;
     
+    public Anuncio() {
+    }
+
+    public Anuncio(Integer id) {
+        this.id = id;
+    }
+
+    public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
+            Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
+            Date fechaEliminacion, short idEstatus) {
+        this.id = id;
+        this.idCategoria = idCategoria;
+        this.folio = folio;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.fechaInicioVigencia = fechaInicioVigencia;
+        this.fechaFinVigencia = fechaFinVigencia;
+        this.fechaAlta = fechaAlta;
+        this.fechaModificacion = fechaModificacion;
+        this.fechaEliminacion = fechaEliminacion;
+        this.idEstatus = idEstatus;
+    }
+
     public Integer getId() {
         return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public Integer getIdCategoria() {
         return idCategoria;
     }
-    
+
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
-    
-    public String getDescCategoria() {
-        return descCategoria;
-    }
-    
-    public void setDescCategoria(String descCategoria) {
-        this.descCategoria = descCategoria;
-    }
-    
+
     public String getFolio() {
         return folio;
     }
-    
+
     public void setFolio(String folio) {
         this.folio = folio;
     }
-    
+
     public String getTitulo() {
         return titulo;
     }
-    
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
+
     public String getDescripcion() {
         return descripcion;
     }
-    
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public BigDecimal getPrecio() {
         return precio;
     }
-    
+
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
-    
+
     public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
-    
+
     public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
-    
+
     public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
-    
+
     public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
-    
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public Date getFechaEliminacion() {
+        return fechaEliminacion;
+    }
+
+    public void setFechaEliminacion(Date fechaEliminacion) {
+        this.fechaEliminacion = fechaEliminacion;
+    }
+
     public short getIdEstatus() {
         return idEstatus;
     }
-    
+
     public void setIdEstatus(short idEstatus) {
         this.idEstatus = idEstatus;
     }
-    
-    public String getDescEstatus() {
-        return descEstatus;
-    }
-    
-    public void setDescEstatus(String descEstatus) {
-        this.descEstatus = descEstatus;
-    }
-    
-    public List<MascotaValorAtributoResponse> getAtributos() {
-        return atributos;
-    }
-    
-    public void setAtributos(List<MascotaValorAtributoResponse> atributos) {
-        this.atributos = atributos;
-    }
-    
-    public List<AnuncioImagenResponse> getImagenes() {
-        return imagenes;
-    }
-    
-    public void setImagenes(List<AnuncioImagenResponse> imagenes) {
-        this.imagenes = imagenes;
-    }
-    
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((atributos == null) ? 0 : atributos.hashCode());
-        result = prime * result + ((descCategoria == null) ? 0 : descCategoria.hashCode());
-        result = prime * result + ((descEstatus == null) ? 0 : descEstatus.hashCode());
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+        result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
+        result = prime * result + ((fechaEliminacion == null) ? 0 : fechaEliminacion.hashCode());
         result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
         result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-        result  prime * result + ((folio == null) ? 0 : folio.hashCode());
+        result = prime * result + ((fechaModificacion == null) ? 0 : fechaModificacion.hashCode());
+        result = prime * result + ((folio == null) ? 0 : folio.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
         result = prime * result + idEstatus;
-        result = prime * result + ((imagenes == null) ? 0 : imagenes.hashCode());
         result = prime * result + ((precio == null) ? 0 : precio.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -177,26 +194,21 @@ public class DetalleAnuncioResponse {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        DetalleAnuncioResponse other = (DetalleAnuncioResponse) obj;
-        if (atributos == null) {
-            if (other.atributos != null)
-                return false;
-        } else if (!atributos.equals(other.atributos))
-            return false;
-        if (descCategoria == null) {
-            if (other.descCategoria != null)
-                return false;
-        } else if (!descCategoria.equals(other.descCategoria))
-            return false;
-        if (descEstatus == null) {
-            if (other.descEstatus != null)
-                return false;
-        } else if (!descEstatus.equals(other.descEstatus))
-            return false;
+        Anuncio other = (Anuncio) obj;
         if (descripcion == null) {
             if (other.descripcion != null)
                 return false;
         } else if (!descripcion.equals(other.descripcion))
+            return false;
+        if (fechaAlta == null) {
+            if (other.fechaAlta != null)
+                return false;
+        } else if (!fechaAlta.equals(other.fechaAlta))
+            return false;
+        if (fechaEliminacion == null) {
+            if (other.fechaEliminacion != null)
+                return false;
+        } else if (!fechaEliminacion.equals(other.fechaEliminacion))
             return false;
         if (fechaFinVigencia == null) {
             if (other.fechaFinVigencia != null)
@@ -207,6 +219,11 @@ public class DetalleAnuncioResponse {
             if (other.fechaInicioVigencia != null)
                 return false;
         } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
+            return false;
+        if (fechaModificacion == null) {
+            if (other.fechaModificacion != null)
+                return false;
+        } else if (!fechaModificacion.equals(other.fechaModificacion))
             return false;
         if (folio == null) {
             if (other.folio != null)
@@ -225,11 +242,6 @@ public class DetalleAnuncioResponse {
             return false;
         if (idEstatus != other.idEstatus)
             return false;
-        if (imagenes == null) {
-            if (other.imagenes != null)
-                return false;
-        } else if (!imagenes.equals(other.imagenes))
-            return false;
         if (precio == null) {
             if (other.precio != null)
                 return false;
@@ -242,35 +254,12 @@ public class DetalleAnuncioResponse {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
-        return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
-                + ", folio=" + folio + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
-                + ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
-                + ", idEstatus=" + idEstatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos
-                + ", imagenes=" + imagenes + "]";
+        return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
+                + ", descripcion=" + descripcion + ", precio=" + precio + ", fechaInicioVigencia=" + fechaInicioVigencia
+                + ", fechaFinVigencia=" + fechaFinVigencia + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
+                + fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", idEstatus=" + idEstatus + "]";
     }
-    
-    public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
-            String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
-            String descEstatus, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
-        this.id = id;
-        this.idCategoria = idCategoria;
-        this.descCategoria = descCategoria;
-        this.folio = folio;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.fechaInicioVigencia = fechaInicioVigencia;
-        this.fechaFinVigencia = fechaFinVigencia;
-        this.idEstatus = idEstatus;
-        this.descEstatus = descEstatus;
-        this.atributos = atributos;
-        this.imagenes = imagenes;
-    }
-    
-    public DetalleAnuncioResponse() {
-    }
-    
 }

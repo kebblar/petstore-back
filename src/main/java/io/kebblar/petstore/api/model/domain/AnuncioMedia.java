@@ -3,66 +3,84 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
+ *              modificar los  datos  establecidos en la mención 
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   AnuncioMedia.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
- * Fecha:       Martes 18 de Mayo de 2021 (20_35)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_28)
  *
  * Historia:    .
- *              20210518_2035 Creación de éste POJO
+ *              20210518_2028 Creación de éste POJO
+ *              20210604_1325 Se agregan los campos de 'idTipo' y
+ *              'principal'
  *
  */
-package io.kebblar.petstore.api.model.response;
+package io.kebblar.petstore.api.model.domain;
+
+import java.io.Serializable;
 
 /**
- * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen. 
+ * POJO asociado a la entidad 'anuncio_imagen'. 
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class AnuncioImagenResponse {
-    private Integer idImagen;
+public class AnuncioMedia implements Serializable {
+    private static final long serialVersionUID = -4759453261602831311L;
+    
+    private Integer id;
     private Integer idAnuncio;
     private String uuid;
     private Integer idTipo;
     private Boolean principal;
     
-    public AnuncioImagenResponse() {
+    public AnuncioMedia() {
+    }
+
+    public AnuncioMedia(Integer id) {
+        this.id = id;
+    }
+
+    public AnuncioMedia(Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
+        this.idAnuncio = idAnuncio;
+        this.uuid = uuid;
+        this.idTipo = idTipo;
+        this.principal = principal;
     }
     
-    public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
-        this.idImagen = idImagen;
+    public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
+        super();
+        this.id = id;
         this.idAnuncio = idAnuncio;
         this.uuid = uuid;
         this.idTipo = idTipo;
         this.principal = principal;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
-    
+
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
-    
-    public Integer getIdImagen() {
-        return idImagen;
-    }
-    
-    public void setIdImagen(Integer idImagen) {
-        this.idImagen = idImagen;
-    }
-    
+
     public String getUuid() {
         return uuid;
     }
-    
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
@@ -87,8 +105,8 @@ public class AnuncioImagenResponse {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((idAnuncio == null) ? 0 : idAnuncio.hashCode());
-        result = prime * result + ((idImagen == null) ? 0 : idImagen.hashCode());
         result = prime * result + ((idTipo == null) ? 0 : idTipo.hashCode());
         result = prime * result + ((principal == null) ? 0 : principal.hashCode());
         result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
@@ -103,16 +121,16 @@ public class AnuncioImagenResponse {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AnuncioImagenResponse other = (AnuncioImagenResponse) obj;
+        AnuncioMedia other = (AnuncioMedia) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
         if (idAnuncio == null) {
             if (other.idAnuncio != null)
                 return false;
         } else if (!idAnuncio.equals(other.idAnuncio))
-            return false;
-        if (idImagen == null) {
-            if (other.idImagen != null)
-                return false;
-        } else if (!idImagen.equals(other.idImagen))
             return false;
         if (idTipo == null) {
             if (other.idTipo != null)
@@ -134,8 +152,8 @@ public class AnuncioImagenResponse {
 
     @Override
     public String toString() {
-        return "AnuncioImagenResponse [idImagen=" + idImagen + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid
-                + ", idTipo=" + idTipo + ", principal=" + principal + "]";
+        return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo
+                + ", principal=" + principal + "]";
     }
-    
+      
 }

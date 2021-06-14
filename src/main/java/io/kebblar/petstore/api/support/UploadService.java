@@ -45,11 +45,15 @@ public interface UploadService {
     public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws UploadException;
 
     /**
-     * Store one.
+     * Procesa un archivos que le es enviado desde el front.
      *
-     * @param mpf the mpf
-     * @return the upload model
-     * @throws UploadException the upload exception
+     * @param mpf MultipartFile archivo enviados desde el front
+     * @param destinationFolder String path to file destination
+     * @param max long max size allowed for the file
+     *
+     * @return Objetos de tipo UploadModel
+     *
+     * @throws UploadException Se dispara en caso de que el proceso de upload falle
      */
-    UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException;
+    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException;
 }
