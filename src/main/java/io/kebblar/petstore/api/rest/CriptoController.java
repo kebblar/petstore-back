@@ -2,6 +2,7 @@ package io.kebblar.petstore.api.rest;
 
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.response.MontoBitcoin;
 import io.kebblar.petstore.api.service.CriptoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +30,16 @@ public class CriptoController {
             @ApiParam(name = "id", value = "Representa el id del usuario")
             @PathVariable int id) throws BusinessException{
         return criptoService.getByUser(id);
+    }
+
+    @ApiOperation(
+            value = "CriptoController::get-monto",
+            notes = "Retorna el monto de la compra en moneda btc")
+    @GetMapping(
+            value = "/monto-btc/{monto}.json",
+            produces = "application/json; charset=utf-8" )
+    public MontoBitcoin getMonto(@PathVariable double monto) throws BusinessException {
+        return criptoService.getMonto(monto);
     }
 
     @ApiOperation(

@@ -35,13 +35,8 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 public interface DireccionService {
 
     /**
-<<<<<<< HEAD
      * Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
      *
-=======
-     * <p>Método utilizado para recuperar un elemento de la tabla 'direccion'. por medio de su llave primaria.
-     *
->>>>>>> refs/heads/develop
      * @param direccion Instancia de Direccion con los datos de la llave.
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
@@ -56,13 +51,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para insertar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros insertados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -70,13 +60,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros actualizados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -93,13 +78,8 @@ public interface DireccionService {
 
     /**
      * Método utilizado para eliminar un registro en la tabla 'direccion'.
-<<<<<<< HEAD
-     *
-     * @param direccion objeto de tipo 'Direccion'.
-=======
      *
      * @param direccion objeto de tipo {@link Direccion}.
->>>>>>> refs/heads/develop
      * @return int numero de registros eliminados en la tabla'direccion'.
      * @throws Exception es disparada por una regla de negocio
      */
@@ -123,5 +103,15 @@ public interface DireccionService {
      * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
     int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
+
+    /**
+     * Metodo que recibe los datos de una direccion espesifica para un usuario y regresa la dirección asociada para el envio de su compra
+     * @param idUser Id del usuario
+     * @param idDir Id de la direccion
+     * @return La información del elemento recuperado en una instacia de la clase DireccionConNombre
+     * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
+     */
+    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException;
 }
 

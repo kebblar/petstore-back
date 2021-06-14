@@ -38,14 +38,15 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
+import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.CreatePDF;
+import io.kebblar.petstore.api.utils.Signer;
 
 /**
- * <p>
  * Implementación de la interfaz {@link OrdenCompraService}.
  * 
- * <p>
  * Todos los métodos de esta clase disparan {@link BusinessException}
  * 
  * @author dalvarez
@@ -59,34 +60,33 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     private static final Logger logger = LoggerFactory.getLogger(OrdenCompraServiceImpl.class);
     
     private Environment environment;
-
     private OrdenCompraMapper ordenCompraMapper;
-    
     private UsuarioDetalleMapper usuarioDetalleMapper;
-    
     private UsuarioMapper usuarioMapper;
-    
     private MailSenderService mailSenderService;
-
-
+    private CarritoService carritoService;
+    private DireccionService direccionService;
+    
     /*
      * Constructor con atributos mapper
      */
-    public OrdenCompraServiceImpl(OrdenCompraMapper ordenCompraMapper, 
-                                    UsuarioDetalleMapper usuarioDetalleMapper,
-                                    UsuarioMapper usuarioMapper,
-                                    MailSenderService mailSenderService,
-                                    Environment environment) {
+    public OrdenCompraServiceImpl(
+        OrdenCompraMapper ordenCompraMapper, 
+            UsuarioDetalleMapper usuarioDetalleMapper,
+            UsuarioMapper usuarioMapper,
+            MailSenderService mailSenderService,
+            Environment environment,
+            CarritoService carritoService,
+            DireccionService direccionService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper=usuarioDetalleMapper;
         this.usuarioMapper=usuarioMapper;
         this.mailSenderService=mailSenderService;
         this.environment=environment;
+        this.carritoService=carritoService;
+        this.direccionService=direccionService;
     }
 
-    /*
-     * Implementación del método getAll
-     */
     @Override
     public List<DatosOrden> getAll() throws BusinessException {
         try {
@@ -96,10 +96,6 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         }
     }
     
-    
-    /*
-     * Implementación del método insert
-     */
     @Override
     public int insert(DatosOrden datosOrden) throws BusinessException {
         try {
@@ -109,20 +105,17 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         }
     }
 
-
     @Override
     public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
         logger.debug("Procesando una orden de compra");
         try {
-            CreatePDF crearPdf = new CreatePDF();
             Usuario usuario=usuarioMapper.getById(ordenCompra.getIdUsuario());
-            
             UsuarioDetalle usuarioDetalle= usuarioDetalleMapper.getById(usuario.getId());
             
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
-            
-            String pdf= crearPdf.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url);
+            String nombrePdf= CreatePDF.getNamePDF(usuarioDetalle.getId());
+            String pdf= nombrePdf + ".pdf";
             
             String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
             Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(formatDate);
@@ -130,21 +123,40 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             ordenCompra.setRecibo(url+pdf);
             
             ordenCompraMapper.insert(ordenCompra);
+
+            if(ordenCompra.getIdMoneda() == 3) {
+                carritoService.updateCarritoCompraBtc(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
+            } else {
+                carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
+            }
             
-            mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", "Recibo de compra PETSTORE", new File(dest+pdf));
+            List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
+            List<DireccionConNombre> direcciones= direccionService.getDireccionEnvio(ordenCompra.getIdUsuario(), ordenCompra.getIdDireccion());
+            CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito, direcciones);
             
+            Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key", environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
+            String signedPdf = firmador.signPdf();
+            
+            mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
+                    "<h1 style='text-align:center;'>Gracias por tu compra!</h1>" +
+                    "<hr> <br>" + 
+                    "<h2 style='text-align:center;'>A continuacion encontraras el recibo de tu compra</h2> " +
+                    "<img style='display: block;\r\n"
+                    + "  margin-left: auto;\r\n"
+                    + "  margin-right: auto;\r\n"
+                    + "  width: 293px;height: 172px;' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPPYqewTwvHD5CYGqIngd8ENFVmEgf-M_ig&usqp=CAU'> <br>"+
+                    "<small>Por propositos de seguridad te enviamos el pdf firmado: " + signedPdf  + "</small> <br>" + 
+                    "<hr>", new File(dest+pdf));
         } catch (SQLException e) {
             throw new BusinessException("Error SQL: ",e.getMessage());
         } catch (ParseException e) {
             throw new BusinessException("Error ParseException: ",e.getMessage());
         } catch(ProcessPDFException p) {
             throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
-        }
+        } catch (Exception e) {
+             throw new BusinessException("Error Signer: ",e.getMessage());
+    }
         return ordenCompra;
     }
     
-    
-
-    
-
 }

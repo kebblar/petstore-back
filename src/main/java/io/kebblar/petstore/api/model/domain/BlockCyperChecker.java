@@ -8,13 +8,13 @@ import java.util.Objects;
 public class BlockCyperChecker {
 
     private String address;
-    private long totalReceived;
-    private long totalSent;
-    private long balance;
-    private long finalBalance;
-    private long nTx;
-    private long unconfirmedNTx;
-    private long finalNTx;
+    private double totalReceived;
+    private double totalSent;
+    private double balance;
+    private double finalBalance;
+    private double nTx;
+    private double unconfirmedNTx;
+    private double finalNTx;
 
     /*
      * Constructor sin parametros
@@ -26,7 +26,7 @@ public class BlockCyperChecker {
         return address;
     }
 
-    public BlockCyperChecker(String address, long totalReceived, long totalSent, long balance, long finalBalance, long nTx, long unconfirmedNTx, long finalNTx) {
+    public BlockCyperChecker(String address, double totalReceived, double totalSent, double balance, double finalBalance, double nTx, double unconfirmedNTx, double finalNTx) {
         this.address = address;
         this.totalReceived = totalReceived;
         this.totalSent = totalSent;
@@ -55,59 +55,59 @@ public class BlockCyperChecker {
         this.address = address;
     }
 
-    public long getTotalReceived() {
+    public double getTotalReceived() {
         return totalReceived;
     }
 
-    public void setTotalReceived(long totalReceived) {
+    public void setTotalReceived(double totalReceived) {
         this.totalReceived = totalReceived;
     }
 
-    public long getTotalSent() {
+    public double getTotalSent() {
         return totalSent;
     }
 
-    public void setTotalSent(long totalSent) {
+    public void setTotalSent(double totalSent) {
         this.totalSent = totalSent;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public long getFinalBalance() {
+    public double getFinalBalance() {
         return finalBalance;
     }
 
-    public void setFinalBalance(long finalBalance) {
+    public void setFinalBalance(double finalBalance) {
         this.finalBalance = finalBalance;
     }
 
-    public long getnTx() {
+    public double getnTx() {
         return nTx;
     }
 
-    public void setnTx(long nTx) {
+    public void setnTx(double nTx) {
         this.nTx = nTx;
     }
 
-    public long getUnconfirmedNTx() {
+    public double getUnconfirmedNTx() {
         return unconfirmedNTx;
     }
 
-    public void setUnconfirmedNTx(long unconfirmedNTx) {
+    public void setUnconfirmedNTx(double unconfirmedNTx) {
         this.unconfirmedNTx = unconfirmedNTx;
     }
 
-    public long getFinalNTx() {
+    public double getFinalNTx() {
         return finalNTx;
     }
 
-    public void setFinalNTx(long finalNTx) {
+    public void setFinalNTx(double finalNTx) {
         this.finalNTx = finalNTx;
     }
 

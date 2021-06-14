@@ -49,9 +49,7 @@ public class DireccionServiceImpl implements DireccionService {
     private DireccionMapper direccionMapper;
 
     /**
-     * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales
-     * a ser empleados en esta clase.
+     * Constructor que realiza el setting de todos los Mappers y todos los servicios adicionales a ser empleados en esta clase.
      *
      * @param direccionMapper
      */
@@ -122,9 +120,6 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
-    /*
-     * Implementación del método getById
-     */
     @Override
     public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
         try {
@@ -134,9 +129,17 @@ public class DireccionServiceImpl implements DireccionService {
             throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
-    /*
-    Insert de una dirección ya asociada con el usuario
-     */
+
+    @Override
+    public List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException {
+        try {
+            return direccionMapper.getDireccionEnvio(idUser, idDir);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
+        }
+    }
+
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
         int idDireccion;
@@ -152,14 +155,14 @@ public class DireccionServiceImpl implements DireccionService {
                 nuevaDireccion.getCp(),
                 nuevaDireccion.getReferencias(),
                 true);
-        try{
+        try {
             //Se inserta recuperando su id
             direccionMapper.insert(d);
             idDireccion = d.getId();
             //El id de esa dirección se asocia al id del usuario que la ingresó
             ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
             return direccionMapper.insertUsuarioDireccion(ud);
-        }catch(Exception e){
+        } catch(Exception e) {
             throw new MapperCallException("Error al insertar la nueva dirección y asociarla con el usuario", e.getMessage());
         }
     }
