@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioAtributo.java
+ * Artefacto:   MascotaValorAtributo.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_28)
@@ -25,7 +25,6 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'mascota_valor_atributo'. 
  *
  * @author Javier Chávez Barrios
@@ -47,7 +46,6 @@ public class MascotaValorAtributo implements Serializable {
     }
 
     public MascotaValorAtributo(Integer id, Integer idAnuncio, Integer idValorAtributo) {
-        super();
         this.id = id;
         this.idAnuncio = idAnuncio;
         this.idValorAtributo = idValorAtributo;
@@ -116,8 +114,7 @@ public class MascotaValorAtributo implements Serializable {
 
     @Override
     public String toString() {
-        return "MascotaValorAtributo [id=" + id + ", idAnuncio=" + idAnuncio + ", idValorAtributo=" + idValorAtributo
-                + "]";
+        return "MascotaValorAtributo [id=" + id + ", idAnuncio=" + idAnuncio + ", idValorAtributo=" + idValorAtributo + "]";
     }
 
 }
