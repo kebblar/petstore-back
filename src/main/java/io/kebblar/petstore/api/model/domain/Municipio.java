@@ -20,23 +20,19 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'municipio'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class Municipio implements Serializable {
-
     private static final long serialVersionUID = 5007490559310553080L;
 
     /**
