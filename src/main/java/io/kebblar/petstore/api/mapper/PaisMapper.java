@@ -29,7 +29,6 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Pais;
 
 /**
- * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Pais
  *
  * @author Fhernanda Romo
@@ -38,7 +37,6 @@ import io.kebblar.petstore.api.model.domain.Pais;
  *
  * @see Pais
  */
-
 @Repository
 public interface PaisMapper {
     static final String CAMPOS = " id, nombre ";
@@ -111,5 +109,4 @@ public interface PaisMapper {
     @Select("SELECT " + CAMPOS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'") 
     List<Pais> getByNombre(String nombre) throws SQLException;
 
-    
 }
