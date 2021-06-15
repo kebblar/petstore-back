@@ -25,13 +25,9 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
 import io.kebblar.petstore.api.model.domain.GraficaComprador;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaComprador
  *
  * @author Ulises López
