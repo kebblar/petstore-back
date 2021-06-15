@@ -30,7 +30,6 @@ import io.kebblar.petstore.api.mapper.PaisMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'pais'.
  *
  * <p>Implementación de la interfaz {@link PaisService}.
@@ -44,12 +43,9 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see  Pais
  * @see  PaisService
  */
-
 @Service("paisService")
 public class PaisServiceImpl implements PaisService {
-
     private static final Logger logger = LoggerFactory.getLogger(PaisServiceImpl.class);
-
     private PaisMapper paisMapper;
 
     /**
@@ -75,9 +71,6 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Pais> getAll() throws BusinessException {
         try {
@@ -88,9 +81,6 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Pais pais) throws BusinessException {
         try {
@@ -101,9 +91,6 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Pais pais) throws BusinessException {
         try {
@@ -114,9 +101,6 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(Pais pais) throws BusinessException {
         try {
@@ -127,9 +111,6 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Pais pais) throws BusinessException {
         try {
@@ -138,6 +119,16 @@ public class PaisServiceImpl implements PaisService {
             } else {
                 return paisMapper.update(pais);
             }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+    
+    @Override
+    public List<Pais> getByNombre(String nombre) throws BusinessException {
+        try {
+            return paisMapper.getByNombre(nombre);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();

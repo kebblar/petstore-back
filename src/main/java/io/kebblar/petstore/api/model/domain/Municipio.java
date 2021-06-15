@@ -20,23 +20,19 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Descripción:</p>
  * POJO asociado a la entidad 'municipio'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class Municipio implements Serializable {
-
     private static final long serialVersionUID = 5007490559310553080L;
 
     /**
@@ -45,6 +41,8 @@ public class Municipio implements Serializable {
     private Integer id;
     private int idEstado;
     private String nombre;
+    private String nombrePais;
+    private String nombreEstado;
 
     /**
      * Constructor por default (sin parámetros).
@@ -68,6 +66,17 @@ public class Municipio implements Serializable {
         this.nombre = nombre;
     }
 
+    /**
+     * Constructor basado en atributos temporales para el nombre del Estado.
+     */
+    public Municipio(Integer id, int idEstado, String nombre, String nombrePais, String nombreEstado) {
+        this.id = id;
+        this.idEstado = idEstado;
+        this.nombre = nombre;
+        this.nombrePais = nombrePais;
+        this.nombreEstado = nombreEstado;
+    }
+    
     /**
      * Getter para id.
      */
@@ -110,16 +119,42 @@ public class Municipio implements Serializable {
         this.nombre = nombre;
     }
 
+    /**
+     * Getter para nombrePais.
+     */
+    public String getNombrePais() {
+		return nombrePais;
+	}
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * Setter para nombrePais.
      */
-    @Override
+	public void setNombrePais(String nombrePais) {
+		this.nombrePais = nombrePais;
+	}
+
+    /**
+     * Getter para nombreEstado.
+     */
+	public String getNombreEstado() {
+		return nombreEstado;
+	}
+
+    /**
+     * Setter para nombreEstado.
+     */
+	public void setNombreEstado(String nombreEstado) {
+		this.nombreEstado = nombreEstado;
+	}
+
+	@Override
     public String toString() {
         return "[Municipio] : ["
                 + " id =" + this.id
                 + " idEstado =" + this.idEstado
                 + " nombre =" + this.nombre
+                + " nombrePais =" + this.nombrePais
+                + " nombreEstado =" + this.nombreEstado
                 + "]";
     }
 

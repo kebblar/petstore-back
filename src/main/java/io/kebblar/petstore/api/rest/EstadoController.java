@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
@@ -40,13 +38,11 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.EstadoService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
@@ -61,12 +57,10 @@ import io.swagger.annotations.ApiOperation;
  * @see Estado
  * @see EstadoService
  */
-
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class EstadoController {
-
     private EstadoService estadoService;
 
     /**
@@ -115,8 +109,7 @@ public class EstadoController {
 
     @ApiOperation(
             value = "EstadoController::getByPais",
-            notes = "Regresa los estados de determinado país"
-    )
+            notes = "Regresa los estados de determinado país")
     @GetMapping(
             value = "/estado-por-pais/{id}.json",
             produces = "application/json; charset=utf-8")
@@ -135,8 +128,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="estado", value="Estado que será insertado en el sistema.")
-    @RequestBody Estado estado
-    ) throws BusinessException {
+    @RequestBody Estado estado) throws BusinessException {
         return estadoService.insert(estado);
     }
 
@@ -150,8 +142,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="estado", value="Estado que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Estado estado
-    ) throws BusinessException {
+    @RequestBody Estado estado) throws BusinessException {
         return estadoService.update(estado);
     }
 
@@ -164,9 +155,39 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="estado", value="Estado que será removido del sistema.")
-    @RequestBody Estado estado
-    ) throws BusinessException {
+    @RequestBody Estado estado) throws BusinessException {
         return estadoService.delete(estado);
     }
+    
+    
+    @GetMapping(
+        path = "/estados/list/{nombre}.json", 
+        produces = "application/json; charset=utf-8")
+    public List<Estado> getEstado(
+            @ApiParam(name = "nombre", value = "Nombre del Estado", defaultValue = "Mexico")
+            @PathVariable String nombre) throws ControllerException {
+    	System.out.println(nombre);
+        return this.estadoService.getByNombre(nombre);
+    }
+
+    @GetMapping(
+        path = "/estados/pais/{id}.json", 
+        produces = "application/json; charset=utf-8")
+    public List<Estado> getEstadosbyPais(
+            @ApiParam(name = "id", value = "ID del Estado", defaultValue = "1")
+            @PathVariable int id
+            ) throws ControllerException {
+        return this.estadoService.getEstadosByPais(id); 
+    }
+    
+    @ApiOperation(
+            value = "EstadoController::getAllNombrePais",
+            notes = "Regresa una lista de todos los objetos Estado ")
+        @GetMapping(
+            value = "/estados-nombre-pais.json",
+            produces = "application/json; charset=utf-8")
+        public List<Estado> getAllEstadosNombrePAis() throws ControllerException {
+            return estadoService.getAllNombrePais();
+        }
 
 }

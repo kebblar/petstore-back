@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -33,7 +31,6 @@ import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'estado'.
  *
  * <p>Implementación de la interfaz {@link EstadoService}.
@@ -47,12 +44,9 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see  Estado
  * @see  EstadoService
  */
-
 @Service("estadoService")
 public class EstadoServiceImpl implements EstadoService {
-
     private static final Logger logger = LoggerFactory.getLogger(EstadoServiceImpl.class);
-
     private EstadoMapper estadoMapper;
 
     /**
@@ -65,9 +59,6 @@ public class EstadoServiceImpl implements EstadoService {
         this.estadoMapper = estadoMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Estado getById(int id) throws BusinessException {
         try {
@@ -78,9 +69,6 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Estado> getAll() throws BusinessException {
         try {
@@ -91,9 +79,6 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Estado estado) throws BusinessException {
         try {
@@ -104,9 +89,6 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Estado estado) throws BusinessException {
         try {
@@ -117,9 +99,6 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(Estado estado) throws BusinessException {
         try {
@@ -129,9 +108,7 @@ public class EstadoServiceImpl implements EstadoService {
             throw new BusinessException();
         }
     }
-    /*
-    Se recuperan los estados por país
-     */
+
     @Override
     public List<Estado> getByPais(int id) throws BusinessException {
         try{
@@ -142,9 +119,6 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Estado estado) throws BusinessException {
         try {
@@ -153,6 +127,36 @@ public class EstadoServiceImpl implements EstadoService {
             } else {
                 return estadoMapper.update(estado);
             }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+    
+    @Override
+    public List<Estado> getByNombre(String nombre) throws BusinessException {
+        try {
+            return estadoMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
+        try {
+            return estadoMapper.getEstadosByPais(idPais);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public List<Estado> getAllNombrePais() throws BusinessException {
+        try {
+            return estadoMapper.getAllNombrePais();
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new BusinessException();

@@ -17,7 +17,8 @@
  *              ------------------------------------------------
  *
  * Historia:    20210511_1444 Implementación de interface
- *
+ *              20210516_0214 Creación del método getByNombre
+ *              20210516_0214 Creación del método getEstadosByPais *
  */
 package io.kebblar.petstore.api.mapper;
 
@@ -28,7 +29,6 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Estado;
 
 /**
- * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Estado
  *
  * @author Fhernanda Romo
@@ -37,7 +37,6 @@ import io.kebblar.petstore.api.model.domain.Estado;
  *
  * @see Estado
  */
-
 @Repository
 public interface EstadoMapper {
     static final String CAMPOS = " id, id_pais, nombre ";
@@ -75,8 +74,7 @@ public interface EstadoMapper {
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert(
-    "INSERT INTO estado(id, id_pais, nombre) VALUES(#{id}, #{idPais}, #{nombre} )")
+    @Insert("INSERT INTO estado(id, id_pais, nombre) VALUES(#{id}, #{idPais}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Estado estado) throws SQLException;
 
@@ -108,4 +106,45 @@ public interface EstadoMapper {
      */
     @Select("SELECT " + CAMPOS + " FROM estado WHERE id_pais=#{id}" )
     List<Estado> getByPais(int id) throws SQLException;
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'estado' haciedo INNER JOIN con la tabla Pais para la obtencion del nombre del Pais.
+     *
+     * @return Lista de obetos de tipo estado 
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */	
+    @Results(id="EstadoNombreMap", value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "idPais", column = "id_pais"),
+            @Result(property = "nombrePais", column = "nombre_pais"),
+            @Result(property = "nombre", column = "nombre")  
+        })
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais ") 
+    List<Estado> getAllNombrePais() throws SQLException;
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
+     *
+     * @param  String nombre del estado.
+     * @return Lista de objetos de tipo estado filtrado por el nombre ingresado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("EstadoNombreMap")
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.nombre LIKE '%' #{nombre} '%'") 
+    List<Estado> getByNombre(String nombre) throws SQLException;
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'estado' filtrado por el id ingresado.
+     *
+     * @param  int id del estado.
+     * @return Lista de obetos de tipo estado filtrado por el id ingresado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("EstadoMap")
+    @Select("SELECT " + CAMPOS + " FROM estado WHERE id_pais = #{id} ") 
+	List<Estado> getEstadosByPais(int idPais);
+
 }

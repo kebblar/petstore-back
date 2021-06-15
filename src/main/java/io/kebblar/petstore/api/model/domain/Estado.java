@@ -1,22 +1,13 @@
 
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
-<<<<<<< HEAD
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion
- *              de "AUTOR".
-=======
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
  *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
->>>>>>> refs/heads/develop
  *
  *              ------------------------------------------------
-<<<<<<< HEAD
  *
  * Artefacto:   Estado .java
  * Proyecto:    petstore
@@ -25,22 +16,11 @@
  * Fecha:       Tuesday 05 de May de 2021 (14_44)
  *
  *              ------------------------------------------------
-=======
- * Artefacto:   Estado.java
- * Tipo:        clase
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 4 de Mayo de 2021 (17_35)
->>>>>>> refs/heads/develop
  *
-<<<<<<< HEAD
- * Historia:    20210511_1444 Implementación de clase
-=======
  * Historia:    .
  *              20210504_1735 Creación de éste POJO
->>>>>>> refs/heads/develop
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -53,16 +33,13 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class Estado implements Serializable {
     private static final long serialVersionUID = -4082525936309639098L;
 
-    /**
-     * Atributos de la clase
-     */
     private Integer id;
     private int idPais;
     private String nombre;
+    private String nombrePais;
 
     /**
      * Constructor por default (sin parámetros).
@@ -84,6 +61,16 @@ public class Estado implements Serializable {
         this.id = id;
         this.idPais = idPais;
         this.nombre = nombre;
+    }
+    
+    /**
+     * Constructor basado en atributos temporales para el nombre del Pais.
+     */
+    public Estado(Integer id, int idPais, String nombre, String nombrePais) {
+        this.id = id;
+        this.idPais = idPais;
+        this.nombre = nombre;
+        this.nombrePais = nombrePais;
     }
 
     /**
@@ -127,6 +114,21 @@ public class Estado implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    /**
+     * Getter para nombrePais.
+     */
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    /**
+     * Setter para nombrePais.
+     */
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
 
 
     /**

@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para  copiarlo, distribuirlo o modificarlo total
@@ -17,7 +16,6 @@
  *              20210506_0938 Creación
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -25,7 +23,6 @@ import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'pais'.
  *
  * @author Luz
@@ -85,4 +82,11 @@ public interface PaisService {
      */
     int delete(Pais pais) throws BusinessException;
 
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'pais'. por medio de su nombre.
+     * 
+     * @param nombre Nombre de Pais.
+     * @return La información del elemento recuperado en una instacia de la clase País o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Pais> getByNombre(String nombre) throws BusinessException;
 }

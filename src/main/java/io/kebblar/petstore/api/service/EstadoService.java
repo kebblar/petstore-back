@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de interface
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -28,14 +26,12 @@ import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'estado'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface EstadoService {
 
     /**
@@ -97,4 +93,28 @@ public interface EstadoService {
      * @throws BusinessException En caso que ocurra un problema con la recuperación de la información.
      */
     List<Estado> getByPais(int id) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su nombre.
+     * 
+     * @param nombre Nombre de Estado.
+     * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Estado> getByNombre(String nombre) throws BusinessException;
+
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su pais.
+     * 
+     * @param id Id de Pais.
+     * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Estado> getEstadosByPais(int id) throws BusinessException;
+	
+    /**
+     * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
+     *
+     * @return Lista con todos los elementos de la tabla 'estado'.
+     */
+    List<Estado> getAllNombrePais() throws BusinessException;
+	
 }

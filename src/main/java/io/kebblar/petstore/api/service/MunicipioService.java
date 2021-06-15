@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de interface
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -28,15 +26,12 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad {@link Municipio}.
-
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface MunicipioService {
 
     /**
@@ -111,4 +106,19 @@ public interface MunicipioService {
      * @throws BusinessException En caso de cualquier error lógico o físico.
      */
     List<Municipio> getByEstado(int id) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
+     * 
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Municipio> getMunicipiosDescripcion() throws BusinessException;
+	
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado filtrado por nombre del municipio.
+     * 
+     * @param nombre Nombre del que retoraremos el conjunto de municipios paginados
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException;
 }

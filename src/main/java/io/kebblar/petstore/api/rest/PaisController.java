@@ -19,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
@@ -43,7 +42,6 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
@@ -58,12 +56,10 @@ import io.swagger.annotations.ApiOperation;
  * @see Pais
  * @see PaisService
  */
-
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class PaisController {
-
     private PaisService paisService;
 
     /**
@@ -151,6 +147,13 @@ public class PaisController {
             @RequestBody Pais pais
     ) throws ControllerException {
         return paisService.delete(pais);
+    }
+    
+    @GetMapping(path = "/paises/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    public List<Pais> getPais(
+            @ApiParam(name = "nombre", value = "Nombre del Pais", defaultValue = "Mexico")
+            @PathVariable String nombre) throws ControllerException {
+        return this.paisService.getByNombre(nombre);
     }
 
 }
