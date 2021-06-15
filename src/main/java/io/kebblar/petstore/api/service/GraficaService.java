@@ -16,7 +16,6 @@
  *              20210609_0938 Creación
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
