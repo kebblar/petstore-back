@@ -43,12 +43,9 @@ public class GraficaComprador implements Serializable {
     private Date fecha;
 
     public GraficaComprador() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
     public GraficaComprador(String comprador, Long cantidad, Date fecha) {
-        super();
         this.comprador = comprador;
         this.cantidad = cantidad;
         this.fecha = fecha;
