@@ -27,7 +27,7 @@ import java.time.LocalDate;
  * @since   1.0-SNAPSHOT
  */
 public class BusquedaAdministracionRequest {
-    private long folio;
+    private String folio;
     private String titulo;
     private LocalDate fechaInicioVigencia;
     private LocalDate fechaFinVigencia;
@@ -36,10 +36,10 @@ public class BusquedaAdministracionRequest {
     private int numPaginas;
     private int tamPaginas;
     
-    public long getFolio() {
+    public String getFolio() {
         return folio;
     }
-    public void setFolio(long folio) {
+    public void setFolio(String folio) {
         this.folio = folio;
     }
     public String getTitulo() {
@@ -91,7 +91,7 @@ public class BusquedaAdministracionRequest {
         result = prime * result + estatus;
         result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
         result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-        result = prime * result + (int) (folio ^ (folio >>> 32));
+        result = prime * result +  + ((folio == null) ? 0 : folio.hashCode());
         result = prime * result + idCategoria;
         result = prime * result + numPaginas;
         result = prime * result + tamPaginas;
@@ -140,7 +140,7 @@ public class BusquedaAdministracionRequest {
                 + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", estatus=" + estatus
                 + ", idCategoria=" + idCategoria + ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
     }
-    public BusquedaAdministracionRequest(long folio, String titulo, LocalDate fechaInicioVigencia,
+    public BusquedaAdministracionRequest(String folio, String titulo, LocalDate fechaInicioVigencia,
             LocalDate fechaFinVigencia, int estatus, int idCategoria, int numPaginas, int tamPaginas) {
         this.folio = folio;
         this.titulo = titulo;

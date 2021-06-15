@@ -151,8 +151,8 @@ public class AnuncioUtil {
         if (filtros.getIdCategoria() != 0) {
             consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
         }
-        if (filtros.getFolio() != 0) {
-            consultaBase.append(" AND folio = ").append(filtros.getFolio());
+        if (filtros.getFolio() != null && !filtros.getFolio().isEmpty()) {
+            consultaBase.append(" AND folio LIKE '").append(filtros.getFolio()).append("%' ");
         }
         if (filtros.getEstatus() != 0) {
             consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
