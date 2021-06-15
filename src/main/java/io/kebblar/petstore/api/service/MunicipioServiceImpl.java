@@ -50,9 +50,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service("municipioService")
 public class MunicipioServiceImpl implements MunicipioService {
-
     private static final Logger logger = LoggerFactory.getLogger(MunicipioServiceImpl.class);
-
     private MunicipioMapper municipioMapper;
 
     /**
@@ -65,9 +63,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         this.municipioMapper = municipioMapper;
     }
 
-    /*
-    * Implementación del método getById.
-    */
     @Override
     public Municipio getById(int id) throws BusinessException {
         try {
@@ -78,9 +73,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    * Implementación del método getAll.
-    */
     @Override
     public List<Municipio> getAll() throws BusinessException {
         try {
@@ -91,9 +83,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    * Implementación del método insert.
-    */
     @Override
     public int insert(Municipio municipio) throws BusinessException {
         try {
@@ -104,9 +93,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    * Implementación del método update.
-    */
     @Override
     public int update(Municipio municipio) throws BusinessException {
         try {
@@ -117,9 +103,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    * Implementación del método delete.
-    */
     @Override
     public int delete(Municipio municipio) throws BusinessException {
         try {
@@ -130,9 +113,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    Devuelve la lista de municipios de un estado.
-     */
     @Override
     public List<Municipio> getByEstado(int id) throws BusinessException {
         try{
@@ -143,9 +123,6 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
-    /*
-    * Implementación del método save.
-    */
     @Override
     public int save(Municipio municipio) throws BusinessException {
         try {
@@ -170,22 +147,22 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
     
     @Override
-	public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
-		 try {
-	            return municipioMapper.getMunicipiosDescripcion();
-	        } catch (Exception e) {
-	            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
-	        }
-	}
+    public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
+        try {
+            return municipioMapper.getMunicipiosDescripcion();
+        } catch (Exception e) {
+            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+        }
+    }
 	
 	
-	@Override
-	public List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException {
-		 try {
-	            return municipioMapper.getByNombre(nombre);
-	        } catch (Exception e) {
-	            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
-	        }
-	}
+    @Override
+    public List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException {
+        try {
+            return municipioMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+        }
+    }
 
 }
