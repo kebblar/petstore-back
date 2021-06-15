@@ -19,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
@@ -170,5 +169,18 @@ public class MunicipioController {
             @RequestParam int pageSize
             ) throws BusinessException {
         return municipioService.getPaginatedMunicipios(idEstado, pageNumber, pageSize);
+    }
+    
+    @GetMapping(path = "/municipios/list/descripcion.json", produces = "application/json; charset=utf-8")
+    public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
+        return this.municipioService.getMunicipiosDescripcion(); 
+    }
+    
+    @GetMapping(path = "/municipios/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    public List<Municipio> getMunicipiosbyEstado(
+            @ApiParam(name = "nombre", value = "nombre del Municipio", defaultValue = "Ixtapaluca")
+            @PathVariable String nombre
+            ) throws BusinessException {
+        return this.municipioService.getMunicipiosDescripcionByNombre(nombre); 
     }
 }

@@ -63,6 +63,7 @@ public class Estado implements Serializable {
     private Integer id;
     private int idPais;
     private String nombre;
+    private String nombrePais;
 
     /**
      * Constructor por default (sin parámetros).
@@ -84,6 +85,16 @@ public class Estado implements Serializable {
         this.id = id;
         this.idPais = idPais;
         this.nombre = nombre;
+    }
+    
+    /**
+     * Constructor basado en atributos temporales para el nombre del Pais.
+     */
+    public Estado(Integer id, int idPais, String nombre, String nombrePais) {
+        this.id = id;
+        this.idPais = idPais;
+        this.nombre = nombre;
+        this.nombrePais = nombrePais;
     }
 
     /**
@@ -127,6 +138,21 @@ public class Estado implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    /**
+     * Getter para nombrePais.
+     */
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    /**
+     * Setter para nombrePais.
+     */
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
 
 
     /**

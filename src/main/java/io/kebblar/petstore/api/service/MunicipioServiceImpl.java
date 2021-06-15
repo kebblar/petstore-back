@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -170,5 +168,24 @@ public class MunicipioServiceImpl implements MunicipioService {
             throw new MapperCallException("Error de obtención de los Municipios", e.getMessage());
         }
     }
+    
+    @Override
+	public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
+		 try {
+	            return municipioMapper.getMunicipiosDescripcion();
+	        } catch (Exception e) {
+	            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+	        }
+	}
+	
+	
+	@Override
+	public List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException {
+		 try {
+	            return municipioMapper.getByNombre(nombre);
+	        } catch (Exception e) {
+	            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+	        }
+	}
 
 }

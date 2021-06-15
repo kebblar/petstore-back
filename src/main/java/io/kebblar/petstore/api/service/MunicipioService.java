@@ -111,4 +111,19 @@ public interface MunicipioService {
      * @throws BusinessException En caso de cualquier error lógico o físico.
      */
     List<Municipio> getByEstado(int id) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
+     * 
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+	List<Municipio> getMunicipiosDescripcion() throws BusinessException;
+	
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado filtrado por nombre del municipio.
+     * 
+     * @param nombre Nombre del que retoraremos el conjunto de municipios paginados
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+	List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException;
 }

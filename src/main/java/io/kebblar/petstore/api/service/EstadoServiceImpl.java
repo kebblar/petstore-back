@@ -158,5 +158,38 @@ public class EstadoServiceImpl implements EstadoService {
             throw new BusinessException();
         }
     }
+    
+    @Override
+	public List<Estado> getByNombre(String nombre) throws BusinessException {
+        try {
+            return estadoMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+	}
+
+	@Override
+	public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
+        try {
+            return estadoMapper.getEstadosByPais(idPais);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+	}
+	
+	/*
+	    * Implementación del método getAll
+	    */
+	    @Override
+	    public List<Estado> getAllNombrePais() throws BusinessException {
+	        try {
+	            return estadoMapper.getAllNombrePais();
+	        } catch (SQLException e) {
+	            logger.error(e.getMessage());
+	            throw new BusinessException();
+	        }
+	    }
 
 }

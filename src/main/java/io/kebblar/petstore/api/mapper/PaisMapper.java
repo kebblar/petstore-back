@@ -17,6 +17,7 @@
  *              ------------------------------------------------
  *
  * Historia:    20210511_1444 Implementación de interface
+ *              20210516_0214 Creación del metodo getByNombre
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -89,7 +90,7 @@ public interface PaisMapper {
     int update(Pais pais) throws SQLException;
 
     /**
-     * Borra (de manera lógica y no física) el registro de Pais.
+     * Borra (física) el registro de Pais.
      *
      * @param id id del Pais a ser borrado
      * @return id del Pais borrado
@@ -98,4 +99,17 @@ public interface PaisMapper {
     @Delete("DELETE FROM pais WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
+    /**
+     * Obtiene una lista de objetos de tipo 'pais' filtrado por el nombre ingresado.
+     *
+     * @param  String nombre del pais.
+     * @return Lista de objetos de tipo pais filtrado por el nombre ingresado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("PaisMap")
+    @Select("SELECT " + CAMPOS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'") 
+    List<Pais> getByNombre(String nombre) throws SQLException;
+
+    
 }

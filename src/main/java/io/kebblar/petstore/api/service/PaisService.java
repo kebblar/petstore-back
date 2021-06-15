@@ -85,4 +85,11 @@ public interface PaisService {
      */
     int delete(Pais pais) throws BusinessException;
 
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'pais'. por medio de su nombre.
+     * 
+     * @param nombre Nombre de Pais.
+     * @return La información del elemento recuperado en una instacia de la clase País o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Pais> getByNombre(String nombre) throws BusinessException;
 }

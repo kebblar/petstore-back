@@ -143,5 +143,15 @@ public class PaisServiceImpl implements PaisService {
             throw new BusinessException();
         }
     }
+    
+    @Override
+	public List<Pais> getByNombre(String nombre) throws BusinessException {
+        try {
+            return paisMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+	}
 
 }

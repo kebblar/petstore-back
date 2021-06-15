@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.rest;
 
 import java.util.List;
@@ -168,5 +166,33 @@ public class EstadoController {
     ) throws BusinessException {
         return estadoService.delete(estado);
     }
+    
+    
+    @GetMapping(path = "/estados/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    public List<Estado> getEstado(
+            @ApiParam(name = "nombre", value = "Nombre del Estado", defaultValue = "Mexico")
+            @PathVariable String nombre) throws ControllerException {
+    	System.out.println(nombre);
+        return this.estadoService.getByNombre(nombre);
+    }
+
+    @GetMapping(path = "/estados/pais/{id}.json", produces = "application/json; charset=utf-8")
+    public List<Estado> getEstadosbyPais(
+            @ApiParam(name = "id", value = "ID del Estado", defaultValue = "1")
+            @PathVariable int id
+            ) throws ControllerException {
+        return this.estadoService.getEstadosByPais(id); 
+    }
+    
+    @ApiOperation(
+            value = "EstadoController::getAllNombrePais",
+            notes = "Regresa una lista de todos los objetos Estado ")
+        @GetMapping(
+            value = "/estados-nombre-pais.json",
+            produces = "application/json; charset=utf-8")
+        public List<Estado> getAllEstadosNombrePAis() throws ControllerException {
+            return estadoService.getAllNombrePais();
+        }
+
 
 }

@@ -152,5 +152,12 @@ public class PaisController {
     ) throws ControllerException {
         return paisService.delete(pais);
     }
+    
+    @GetMapping(path = "/paises/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    public List<Pais> getPais(
+            @ApiParam(name = "nombre", value = "Nombre del Pais", defaultValue = "Mexico")
+            @PathVariable String nombre) throws ControllerException {
+        return this.paisService.getByNombre(nombre);
+    }
 
 }
