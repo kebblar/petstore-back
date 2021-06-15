@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para  copiarlo, distribuirlo o modificarlo total
@@ -23,9 +22,6 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Interface para el servicio asociado a la entidad 'grafica'.
  *
  * @author Ulises López
