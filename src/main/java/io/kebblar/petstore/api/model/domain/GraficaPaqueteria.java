@@ -43,11 +43,9 @@ public class GraficaPaqueteria implements Serializable {
     private Date fecha;
 
     public GraficaPaqueteria() {
-        super();
     }
 
     public GraficaPaqueteria(String paqueteria, Long cantidad, Date fecha) {
-        super();
         this.paqueteria = paqueteria;
         this.cantidad = cantidad;
         this.fecha = fecha;
