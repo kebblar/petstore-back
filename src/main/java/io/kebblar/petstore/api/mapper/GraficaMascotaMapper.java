@@ -43,7 +43,7 @@ import io.kebblar.petstore.api.model.domain.GraficaMascota;
 
 @Repository
 public interface GraficaMascotaMapper {
-    static final String CAMPOS = " mascota, cantidad ";
+    static final String CAMPOS = " mascota, cantidad, fecha ";
 
     /**
      * Obtiene una lista de tipo 'GraficaMascota'.
@@ -53,15 +53,16 @@ public interface GraficaMascotaMapper {
      *                      operación desde la base de datos.
      */
     @Results(id = "GraficaMap", value = { @Result(property = "mascota", column = "mascota"),
-            @Result(property = "cantidad", column = "cantidad") })
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad from orden_compra oc "
+            @Result(property = "cantidad", column = "cantidad"),
+            @Result(property = "fecha", column = "fecha")})
+    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
     +"inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) group by cat.categoria ")
     List<GraficaMascota> getAll() throws SQLException;
 
     @ResultMap("GraficaMap")
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad from orden_compra oc "
+    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
     + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "

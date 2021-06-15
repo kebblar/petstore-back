@@ -26,6 +26,7 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Implementacion del POJO de la entidad de {@link GraficaPaqueteria}.
@@ -39,18 +40,17 @@ public class GraficaPaqueteria implements Serializable {
 
     private String paqueteria;
     private Long cantidad;
+    private Date fecha;
 
-    public GraficaPaqueteria(String paqueteria, Long cantidad) {
+    public GraficaPaqueteria() {
+        super();
+    }
+
+    public GraficaPaqueteria(String paqueteria, Long cantidad, Date fecha) {
+        super();
         this.paqueteria = paqueteria;
         this.cantidad = cantidad;
-    }
-
-    public Long getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Long cantidad) {
-        this.cantidad = cantidad;
+        this.fecha = fecha;
     }
 
     public String getPaqueteria() {
@@ -61,13 +61,29 @@ public class GraficaPaqueteria implements Serializable {
         this.paqueteria = paqueteria;
     }
 
+    public Long getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
     @Override
     public String toString() {
-        return "GraficaPaqueteria [paqueteria=" + paqueteria + ", cantidad=" + cantidad + "]";
+        return "GraficaPaqueteria [paqueteria=" + paqueteria + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
     @Override
@@ -75,6 +91,7 @@ public class GraficaPaqueteria implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
+        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
         result = prime * result + ((paqueteria == null) ? 0 : paqueteria.hashCode());
         return result;
     }
@@ -92,6 +109,11 @@ public class GraficaPaqueteria implements Serializable {
             if (other.cantidad != null)
                 return false;
         } else if (!cantidad.equals(other.cantidad))
+            return false;
+        if (fecha == null) {
+            if (other.fecha != null)
+                return false;
+        } else if (!fecha.equals(other.fecha))
             return false;
         if (paqueteria == null) {
             if (other.paqueteria != null)

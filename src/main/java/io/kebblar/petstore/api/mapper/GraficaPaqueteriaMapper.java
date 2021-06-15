@@ -43,7 +43,7 @@ import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 
 @Repository
 public interface GraficaPaqueteriaMapper {
-    static final String CAMPOS = " paqueteria, cantidad ";
+    static final String CAMPOS = " paqueteria, cantidad, fecha ";
 
     /**
      * Obtiene una lista de tipo 'GraficaPaqueteria'.
@@ -53,13 +53,14 @@ public interface GraficaPaqueteriaMapper {
      *                      operación desde la base de datos.
      */
     @Results(id = "GraficaPaqMap", value = { @Result(property = "paqueteria", column = "paqueteria"),
-            @Result(property = "cantidad", column = "cantidad") })
-    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad from orden_compra oc "
+            @Result(property = "cantidad", column = "cantidad"),
+            @Result(property = "fecha", column = "fecha")})
+    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) " + "group by paq.nombre ")
     List<GraficaPaqueteria> getPaqueteria() throws SQLException;
 
     @ResultMap("GraficaPaqMap")
-    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad from orden_compra oc "
+    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} " + "group by paq.nombre ")
     List<GraficaPaqueteria> getPaqueteriaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;

@@ -26,6 +26,7 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Implementacion del POJO de la entidad de {@link GraficaMascota}.
@@ -39,18 +40,18 @@ public class GraficaMascota implements Serializable {
 
     private String mascota;
     private Long cantidad;
+    private Date fecha;
 
-    public GraficaMascota(String mascota, Long cantidad) {
+    public GraficaMascota() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    public GraficaMascota(String mascota, Long cantidad, Date fecha) {
+        super();
         this.mascota = mascota;
         this.cantidad = cantidad;
-    }
-
-    public Long getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Long cantidad) {
-        this.cantidad = cantidad;
+        this.fecha = fecha;
     }
 
     public String getMascota() {
@@ -61,13 +62,29 @@ public class GraficaMascota implements Serializable {
         this.mascota = mascota;
     }
 
+    public Long getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
     @Override
     public String toString() {
-        return "Grafica [mascota=" + mascota + ", cantidad=" + cantidad + "]";
+        return "GraficaMascota [mascota=" + mascota + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
     @Override
@@ -75,6 +92,7 @@ public class GraficaMascota implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
+        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
         result = prime * result + ((mascota == null) ? 0 : mascota.hashCode());
         return result;
     }
@@ -92,6 +110,11 @@ public class GraficaMascota implements Serializable {
             if (other.cantidad != null)
                 return false;
         } else if (!cantidad.equals(other.cantidad))
+            return false;
+        if (fecha == null) {
+            if (other.fecha != null)
+                return false;
+        } else if (!fecha.equals(other.fecha))
             return false;
         if (mascota == null) {
             if (other.mascota != null)

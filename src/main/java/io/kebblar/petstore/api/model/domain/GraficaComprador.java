@@ -26,6 +26,7 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Implementacion del POJO de la entidad de {@link GraficaComprador}.
@@ -39,10 +40,18 @@ public class GraficaComprador implements Serializable {
 
     private String comprador;
     private Long cantidad;
+    private Date fecha;
 
-    public GraficaComprador(String comprador, Long cantidad) {
+    public GraficaComprador() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    public GraficaComprador(String comprador, Long cantidad, Date fecha) {
+        super();
         this.comprador = comprador;
         this.cantidad = cantidad;
+        this.fecha = fecha;
     }
 
     public String getComprador() {
@@ -61,13 +70,21 @@ public class GraficaComprador implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
     @Override
     public String toString() {
-        return "GraficaComprador [comprador=" + comprador + ", cantidad=" + cantidad + "]";
+        return "GraficaComprador [comprador=" + comprador + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
     @Override
@@ -76,6 +93,7 @@ public class GraficaComprador implements Serializable {
         int result = 1;
         result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
         result = prime * result + ((comprador == null) ? 0 : comprador.hashCode());
+        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
         return result;
     }
 
@@ -97,6 +115,11 @@ public class GraficaComprador implements Serializable {
             if (other.comprador != null)
                 return false;
         } else if (!comprador.equals(other.comprador))
+            return false;
+        if (fecha == null) {
+            if (other.fecha != null)
+                return false;
+        } else if (!fecha.equals(other.fecha))
             return false;
         return true;
     }
