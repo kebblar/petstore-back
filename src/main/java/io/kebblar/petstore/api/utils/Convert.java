@@ -9,7 +9,7 @@
  *              ------------------------------------------------
  * Artefacto:   Convert.java
  * Tipo:        clase
- * AUTOR:       Daniel Alvarez (GAA)
+ * AUTOR:       Daniel Alvarez
  * Fecha:       Domingo 13 Junio de 2021 (17_50)
  *
  * Historia:    .
@@ -20,6 +20,13 @@ package io.kebblar.petstore.api.utils;
 
 import java.util.regex.Pattern;
 
+
+/**
+ * Clase de soporte para convertir cantidades numericas a letras formato String
+ *
+ * @author Daniel Alvarez
+ * @version 1.0
+ */
 public class Convert {
 
     private static final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};
@@ -40,8 +47,13 @@ public class Convert {
         return "to big";
     }
 
+    /**
+     * Método para transformar cantidades a cadena  String
+     * @param cifra numerica
+     * @param valor opcional para convertir cifra a letras mayusculas
+     * @return String cadena convertida
+     */
     public static String convertirNumero(String numero, boolean mayusculas) {
-
         String literal = "";
         String parte_decimal;
         numero = numero.replace(".", ",");
@@ -73,10 +85,22 @@ public class Convert {
             return literal = null;
         }
     }
+    
+    /**
+     * Método para transformar las unidades de una cifra de número a letras 
+     * @param unidades de una cifra
+     * @return String cadena convertida
+     */
     private static String getUnidades(String numero) {
         String num = numero.substring(numero.length() - 1);
         return UNIDADES[Integer.parseInt(num)];
     }
+    
+    /**
+     * Método para transformar las decenas de una cifra de número a letras 
+     * @param decenas de una cifra
+     * @return String cadena convertida
+     */
     private static String getDecenas(String num) {
         int n = Integer.parseInt(num);
         if (n < 10) {
@@ -92,6 +116,12 @@ public class Convert {
             return DECENAS[n - 10];
         }
     }
+    
+    /**
+     * Método para transformar las centenas de una cifra de número a letras 
+     * @param centenas de una cifra
+     * @return String cadena convertida
+     */
     private static String getCentenas(String num) {
         if (Integer.parseInt(num) > 99) {
             if (Integer.parseInt(num) == 100) {
@@ -103,6 +133,12 @@ public class Convert {
             return getDecenas(Integer.parseInt(num) + "");
         }
     }
+    
+    /**
+     * Método para transformar los miles de una cifra de número a letras 
+     * @param miles de una cifra
+     * @return String cadena convertida
+     */
     private static String getMiles(String numero) {
         String c = numero.substring(numero.length() - 3);
         String m = numero.substring(0, numero.length() - 3);
@@ -117,6 +153,12 @@ public class Convert {
               return "" + getCentenas(c);
         }
     }
+    
+    /**
+     * Método para transformar millones de una cifra de número a letras 
+     * @param millones de una cifra
+     * @return String cadena convertida
+     */
     private static String getMillones(String numero) {
         String miles = numero.substring(numero.length() - 6);
         String millon = numero.substring(0, numero.length() - 6);
