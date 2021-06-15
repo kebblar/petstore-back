@@ -43,12 +43,9 @@ public class GraficaMascota implements Serializable {
     private Date fecha;
 
     public GraficaMascota() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
     public GraficaMascota(String mascota, Long cantidad, Date fecha) {
-        super();
         this.mascota = mascota;
         this.cantidad = cantidad;
         this.fecha = fecha;
