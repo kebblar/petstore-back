@@ -37,17 +37,12 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Implementacion del REST Controller asociado a los endpoints de gestión del
  * POJO 'grafica'.
  *
- * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
- * <p>
- * NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
  * debido a que la documentación Swagger API cumple con ese objetivo.
  *
  * @author Ulises López
@@ -62,7 +57,6 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "grafica")
 @RequestMapping(value = "/api")
 public class GraficaController {
-
     private GraficaService graficaService;
 
     /**
@@ -136,19 +130,5 @@ public class GraficaController {
 
         return graficaService.getCompradorAsiduoRango(fechaInicio, fechaFin);
     }
-
-    /*
-     * @GetMapping(path =
-     * "/grafica-comprador-asiduo-rango.json/{fechaInicio}/{fechaFin}", produces =
-     * "application/json; charset=utf-8") public String getCompradorAsiduoRango(
-     * 
-     * @ApiParam(name = "fechaInicio", value =
-     * "La fechaInicio de busqueda") @PathVariable Date fechaInicio,
-     * 
-     * @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable
-     * Date fechaFin) throws BusinessException {
-     * 
-     * return graficaService.getCompradorAsiduoRango(fechaInicio, fechaFin); }
-     */
 
 }
