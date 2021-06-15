@@ -39,16 +39,11 @@ import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>
- * Descripción:
- * </p>
  * Servicio asociado a la entidad 'grafica'.
  *
- * <p>
- * Implementación de la interfaz {@link GraficaService}.
+ * <p>Implementación de la interfaz {@link GraficaService}.
  *
- * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
@@ -60,31 +55,24 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service("graficaService")
 public class GraficaServiceImpl implements GraficaService {
-
     private static final Logger logger = LoggerFactory.getLogger(GraficaServiceImpl.class);
 
     private GraficaMascotaMapper graficaMapper;
     private GraficaPaqueteriaMapper graficaPaqueteriaMapper;
     private GraficaCompradorMapper graficaCompradorMapper;
-
-    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper,
-            GraficaCompradorMapper graficaCompradorMapper) {
-        super();
-        this.graficaMapper = graficaMapper;
-        this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
-        this.graficaCompradorMapper = graficaCompradorMapper;
-    }
-
+    
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los servicios
      * adicionales a ser empleados en esta clase.
      *
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
+    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper, GraficaCompradorMapper graficaCompradorMapper) {
+        this.graficaMapper = graficaMapper;
+        this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
+        this.graficaCompradorMapper = graficaCompradorMapper;
+    }
 
-    /*
-     * Implementación del método getMascotaMasVendida
-     */
     @Override
     public String getMascotaMasVendida() throws BusinessException {
         try {
@@ -100,9 +88,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    /*
-     * Implementación del método getMascotaMasVendidaRango
-     */
     @Override
     public String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -119,9 +104,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    /*
-     * Implementación del método getPaqueteria
-     */
     @Override
     public String getPaqueteria() throws BusinessException {
         try {
@@ -138,9 +120,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    /*
-     * Implementación del método getPaqueteriaRango
-     */
     @Override
     public String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -158,9 +137,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    /*
-     * Implementación del método getCompradorAsiduo
-     */
     @Override
     public String getCompradorAsiduo() throws BusinessException {
         try {
@@ -176,10 +152,7 @@ public class GraficaServiceImpl implements GraficaService {
             throw new BusinessException();
         }
     }
-
-    /*
-     * Implementación del método getCompradorAsiduoRango
-     */
+    
     @Override
     public String getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -196,7 +169,7 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    public String convertirFecha(Date fecha) {
+    private String convertirFecha(Date fecha) {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String fechaStr = simpleDateFormat.format(new Date());
@@ -204,7 +177,7 @@ public class GraficaServiceImpl implements GraficaService {
         return fechaStr;
     }
 
-    public String formatearGraficaMascota(List<GraficaMascota> graficas) {
+    private String formatearGraficaMascota(List<GraficaMascota> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
         String mes = "";
@@ -225,7 +198,7 @@ public class GraficaServiceImpl implements GraficaService {
 
     }
 
-    public String formatearGraficaComprador(List<GraficaComprador> graficas) {
+    private String formatearGraficaComprador(List<GraficaComprador> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
         String mes = "";
@@ -243,10 +216,9 @@ public class GraficaServiceImpl implements GraficaService {
         cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
         System.out.println(cadena + "]}}");
         return cadena + "]}}";
-
     }
 
-    public String formatearGraficaPaqueteria(List<GraficaPaqueteria> graficas) {
+    private String formatearGraficaPaqueteria(List<GraficaPaqueteria> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
         String mes = "";
@@ -255,7 +227,6 @@ public class GraficaServiceImpl implements GraficaService {
         String cadenaMes;
         sb.append("{\"chart\":{\"label\":[");
         for (int i = 0; i < graficas.size(); i++) {
-
             sb.append("\"" + graficas.get(i).getPaqueteria() + "\",");
             sbData.append(graficas.get(i).getCantidad() + ",");
             mes = ("\"" + obtenerNombreMes(graficas.get(i).getFecha()) + "\",");
@@ -268,7 +239,7 @@ public class GraficaServiceImpl implements GraficaService {
 
     }
 
-    public String obtenerNombreMes(Date fecha) {
+    private String obtenerNombreMes(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
         String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
