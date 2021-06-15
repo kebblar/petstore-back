@@ -38,13 +38,11 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.service.MunicipioService;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'municipio'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
@@ -59,7 +57,6 @@ import io.swagger.annotations.ApiOperation;
  * @see Municipio
  * @see MunicipioService
  */
-
 @RestController
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
@@ -105,8 +102,7 @@ public class MunicipioController {
         produces = "application/json; charset=utf-8")
     public Municipio getMunicipio(
     @ApiParam(name="id", value="Representa el id del municipio buscado.")
-    @PathVariable int id
-    ) throws BusinessException {
+    @PathVariable int id) throws BusinessException {
         return this.municipioService.getById(id);
     }
 
@@ -115,12 +111,11 @@ public class MunicipioController {
         notes = "Recibe un objeto Municipio el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/municipio.json",
-            produces = "application/json; charset=utf-8")
+        value = "/municipio.json",
+        produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="municipio", value="Municipio que será insertado en el sistema.")
-    @RequestBody Municipio municipio
-    ) throws BusinessException {
+    @RequestBody Municipio municipio) throws BusinessException {
         return municipioService.insert(municipio);
     }
 
@@ -130,12 +125,11 @@ public class MunicipioController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/municipio.json",
-            produces = "application/json; charset=utf-8")
+        value = "/municipio.json",
+        produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="municipio", value="Municipio que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Municipio municipio
-    ) throws BusinessException {
+    @RequestBody Municipio municipio) throws BusinessException {
         return municipioService.update(municipio);
     }
 
@@ -144,25 +138,24 @@ public class MunicipioController {
         notes = "Recibe un objeto Municipio, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/municipio.json",
-            produces = "application/json; charset=utf-8")
+        value = "/municipio.json",
+        produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="municipio", value="Municipio que será removido del sistema.")
-    @RequestBody Municipio municipio
-    ) throws BusinessException {
+    @RequestBody Municipio municipio) throws BusinessException {
         return municipioService.delete(municipio);
     }
 
     @GetMapping(
-            value= "/municipio-por-estado/{id}.json",
-            produces = "application/json; charset=utf-8")
+        value= "/municipio-por-estado/{id}.json",
+        produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstado(@PathVariable int id) throws BusinessException{
         return municipioService.getByEstado(id);
     }
 
     @GetMapping(
-            value= "/municipios-por-estado-paginados.json",
-            produces = "application/json; charset=utf-8")
+        value= "/municipios-por-estado-paginados.json",
+        produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstadoPaginados(
             @RequestParam int idEstado,
             @RequestParam int pageNumber,
@@ -171,16 +164,21 @@ public class MunicipioController {
         return municipioService.getPaginatedMunicipios(idEstado, pageNumber, pageSize);
     }
     
-    @GetMapping(path = "/municipios/list/descripcion.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/municipios/list/descripcion.json", 
+        produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
         return this.municipioService.getMunicipiosDescripcion(); 
     }
     
-    @GetMapping(path = "/municipios/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+        path = "/municipios/list/{nombre}.json", 
+        produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosbyEstado(
             @ApiParam(name = "nombre", value = "nombre del Municipio", defaultValue = "Ixtapaluca")
             @PathVariable String nombre
             ) throws BusinessException {
         return this.municipioService.getMunicipiosDescripcionByNombre(nombre); 
     }
+    
 }
