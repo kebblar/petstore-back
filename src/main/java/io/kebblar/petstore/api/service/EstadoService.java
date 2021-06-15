@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de interface
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -28,14 +26,12 @@ import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Interface para el servicio asociado a la entidad 'estado'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface EstadoService {
 
     /**
@@ -112,7 +108,7 @@ public interface EstadoService {
      * @param id Id de Pais.
      * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
      */
-	List<Estado> getEstadosByPais(int id) throws BusinessException;
+    List<Estado> getEstadosByPais(int id) throws BusinessException;
 	
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
@@ -120,6 +116,5 @@ public interface EstadoService {
      * @return Lista con todos los elementos de la tabla 'estado'.
      */
     List<Estado> getAllNombrePais() throws BusinessException;
-	
 	
 }
