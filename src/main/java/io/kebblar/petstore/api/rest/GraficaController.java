@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.service.GraficaService;
@@ -86,12 +87,11 @@ public class GraficaController {
         return graficaService.getMascotaMasVendida();
     }
 
-    @GetMapping(path = "/grafica-mascota-mas-vendida-rango.json/{fechaInicio}/{fechaFin}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/grafica-mascota-mas-vendida-rango.json", produces = "application/json; charset=utf-8")
     public String getMascotaMasVendidaRango(
-            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
-            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
+            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @RequestParam String fechaInicio,
+            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @RequestParam String fechaFin)
             throws BusinessException {
-
         return graficaService.getMascotaMasVendidaRango(fechaInicio, fechaFin);
     }
 
@@ -107,10 +107,10 @@ public class GraficaController {
         return graficaService.getPaqueteria();
     }
 
-    @GetMapping(path = "/grafica-paqueteria-rango.json/{fechaInicio}/{fechaFin}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/grafica-paqueteria-rango.json", produces = "application/json; charset=utf-8")
     public String getPaqueteriaRango(
-            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
-            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
+            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @RequestParam String fechaInicio,
+            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @RequestParam String fechaFin)
             throws BusinessException {
 
         return graficaService.getPaqueteriaRango(fechaInicio, fechaFin);
@@ -128,10 +128,10 @@ public class GraficaController {
         return graficaService.getCompradorAsiduo();
     }
 
-    @GetMapping(path = "/grafica-comprador-asiduo-rango.json/{fechaInicio}/{fechaFin}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/grafica-comprador-asiduo-rango.json", produces = "application/json; charset=utf-8")
     public String getCompradorAsiduoRango(
-            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
-            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
+            @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @RequestParam String fechaInicio,
+            @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @RequestParam String fechaFin)
             throws BusinessException {
 
         return graficaService.getCompradorAsiduoRango(fechaInicio, fechaFin);
