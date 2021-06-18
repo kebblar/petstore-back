@@ -26,7 +26,6 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Implementacion del POJO de la entidad de {@link Chart}.
