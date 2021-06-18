@@ -207,7 +207,7 @@ public class GraficaServiceImpl implements GraficaService {
             Date date = formatter.parse(fecha);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
-            mes = new SimpleDateFormat("MMMM").format(cal.getTime());
+            mes = new SimpleDateFormat("M").format(cal.getTime());
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
