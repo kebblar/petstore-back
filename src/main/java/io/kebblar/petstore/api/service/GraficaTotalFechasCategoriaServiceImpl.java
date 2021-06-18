@@ -114,11 +114,11 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
     		List<String> fechas,
     		List<String> categorias){
     	Long[][] arregloDatos = new Long[categorias.size()][fechas.size()];
-    	System.out.print(arregloDatos[0][0]);
+    	//System.out.print(arregloDatos[0][0]);
     	for (int i = 0; i <= arregloDatos.length - 1; i++) {
     		Arrays.fill(arregloDatos[i], new Long(0));
     	}
-    	System.out.print(arregloDatos[0][0]);
+    	//System.out.print(arregloDatos[0][0]);
     	for (int i = 0; i <= datos.size() - 1; i++) {
     		String anio = Integer.toString(datos.get(i).getAnio());
     		String mes = obtenerNombreMes(datos.get(i).getMes());
@@ -136,23 +136,26 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
     	List<String> fechas = obtenerEtiquetasMeses(datos);
     	List<String> categorias = Arrays.asList("CANINOS","FELINOS",
     					"ARACNIDOS","REPTILES","PECES","AVES","ROEDORES");
+    	List<String> colores = Arrays.asList("#96590C","#FF6400",
+				"#FF00D4","#96FF33","#00FFA2","#85DBFC","#FFFA5A");
     	String cadena_fechas = StringUtils.join(fechas, "\",\"");
-    	System.out.println(cadena_fechas);
-    	cadena = cadena + cadena_fechas + "\"], \"datasets\": [";
+    	//System.out.println(cadena_fechas);
+    	cadena = cadena + cadena_fechas + "\"], \"yAxisID\": \"yAxis\", \"datasets\": [ ";
     	Long[][] arregloDatos = obtenerArregloDatos(datos,fechas,categorias);
     	for (int i = 0; i <= arregloDatos.length - 1; i++) {
-    		cadena = cadena + "{\"label\": \"" + categorias.get(i)+"\",\"data\":[";
+    		cadena = cadena + "{ \"label\": \"" + categorias.get(i)+"\", ";
+    		cadena = cadena + "\"backgroundColor\": \"" + colores.get(i)+"\",\"data\":[";
     		List<Long> totales = new ArrayList<Long>();
     		for (int j = 0; j <= arregloDatos[i].length - 1; j++) {
     			totales.add(arregloDatos[i][j]);
     		}
-    		System.out.println(totales);
+    		//System.out.println(totales);
     		String cadena_totales = StringUtils.join(totales, ",");
     		cadena = cadena + cadena_totales +"]},";
     		}
-    	System.out.println(cadena);
+    	//System.out.println(cadena);
     	cadena = cadena.substring(0,cadena.length()-1);
-    	System.out.println(cadena);
+    	//System.out.println(cadena);
     	return cadena+"]}}";
     }
 
