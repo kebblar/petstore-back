@@ -52,7 +52,7 @@ public interface GraficaMascotaMapper {
     @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
-            + "inner join categoria cat on (cat.id = anun.id_categoria) group by cat.categoria, oc.fecha_hora_comprar order by cantidad desc limit 5 ")
+            + "inner join categoria cat on (cat.id = anun.id_categoria) group by cat.categoria order by cantidad desc limit 5 ")
     List<Chart> getAll() throws SQLException;
 
     @ResultMap("GraficaMap")
@@ -61,7 +61,7 @@ public interface GraficaMascotaMapper {
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} "
-            + "group by cat.categoria, oc.fecha_hora_comprar order by cantidad desc limit 5")
+            + "group by cat.categoria order by cantidad desc limit 5")
     List<Chart> getMascotaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;
 
 }
