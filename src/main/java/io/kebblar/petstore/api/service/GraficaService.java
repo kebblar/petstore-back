@@ -18,6 +18,7 @@
  */
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.model.domain.GraficaTO;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
@@ -31,35 +32,35 @@ public interface GraficaService {
 
     /**
      * Método utilizado para obtener una cadena indicando las mascotas mas vendidas
-     * 'graficaMascota'.
+     * 'graficaTO'.
      *
-     * @return String.
+     * @return GraficaTO.
      */
-    String getMascotaMasVendida() throws BusinessException;
+    GraficaTO getMascotaMasVendida() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las mascotas mas vendidas
-     * por rango de fechas 'graficaMascota'.
+     * por rango de fechas 'graficaTO'.
      *
-     * @return String.
+     * @return GraficaTO.
      */
-    String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
+    GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
-     * 'graficaPaqueteria'.
+     * 'graficaTO'.
      *
-     * @return String.
+     * @return GraficaTO.
      */
-    String getPaqueteria() throws BusinessException;
+    GraficaTO getPaqueteria() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
-     * por rango de fechas 'graficaPaqueteria'.
+     * por rango de fechas 'graficaTO'.
      *
-     * @return String.
+     * @return GraficaTO.
      */
-    String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
+    GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando los compradores mas

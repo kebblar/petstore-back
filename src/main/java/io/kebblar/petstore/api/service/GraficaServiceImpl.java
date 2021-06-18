@@ -33,17 +33,20 @@ import com.ibm.icu.util.Calendar;
 import io.kebblar.petstore.api.mapper.GraficaCompradorMapper;
 import io.kebblar.petstore.api.mapper.GraficaMascotaMapper;
 import io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper;
+import io.kebblar.petstore.api.model.domain.GraficaTO;
+import io.kebblar.petstore.api.model.domain.Chart;
 import io.kebblar.petstore.api.model.domain.GraficaComprador;
 import io.kebblar.petstore.api.model.domain.GraficaMascota;
-import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * Servicio asociado a la entidad 'grafica'.
  *
- * <p>Implementación de la interfaz {@link GraficaService}.
+ * <p>
+ * Implementación de la interfaz {@link GraficaService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>
+ * Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
@@ -60,28 +63,30 @@ public class GraficaServiceImpl implements GraficaService {
     private GraficaMascotaMapper graficaMapper;
     private GraficaPaqueteriaMapper graficaPaqueteriaMapper;
     private GraficaCompradorMapper graficaCompradorMapper;
-    
+
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los servicios
      * adicionales a ser empleados en esta clase.
      *
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper, GraficaCompradorMapper graficaCompradorMapper) {
+    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper,
+            GraficaCompradorMapper graficaCompradorMapper) {
         this.graficaMapper = graficaMapper;
         this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
         this.graficaCompradorMapper = graficaCompradorMapper;
     }
 
     @Override
-    public String getMascotaMasVendida() throws BusinessException {
+    public GraficaTO getMascotaMasVendida() throws BusinessException {
         try {
-            String cadena = "";
-            List<GraficaMascota> graficas = graficaMapper.getAll();
-            if (!graficas.isEmpty()) {
-                cadena = formatearGraficaMascota(graficas);
+            GraficaTO graphs = new GraficaTO();
+            List<Chart> graficas = graficaMapper.getAll();
+            for (Chart chart : graficas) {
+                chart.setMes(convertirFecha(chart.getMes()));
             }
-            return cadena;
+            graphs.setChart(graficas);
+            return graphs;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -89,15 +94,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
-            String cadena = "";
-            List<GraficaMascota> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
-            if (!graficas.isEmpty()) {
-                cadena = formatearGraficaMascota(graficas);
-                return cadena;
+            GraficaTO graphs = new GraficaTO();
+            List<Chart> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
+            for (Chart chart : graficas) {
+                chart.setMes(convertirFecha(chart.getMes()));
             }
-            return cadena;
+            graphs.setChart(graficas);
+            return graphs;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -105,15 +110,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getPaqueteria() throws BusinessException {
+    public GraficaTO getPaqueteria() throws BusinessException {
         try {
-            String cadena = "";
-            List<GraficaPaqueteria> graficas = graficaPaqueteriaMapper.getPaqueteria();
-            if (!graficas.isEmpty()) {
-                cadena = formatearGraficaPaqueteria(graficas);
-                return cadena;
+            GraficaTO graphs = new GraficaTO();
+            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteria();
+            for (Chart chart : graficas) {
+                chart.setMes(convertirFecha(chart.getMes()));
             }
-            return cadena;
+            graphs.setChart(graficas);
+            return graphs;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -121,16 +126,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
-            String cadena = "";
-            List<GraficaPaqueteria> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni,
-                    fechaFin);
-            if (!graficas.isEmpty()) {
-                cadena = formatearGraficaPaqueteria(graficas);
-                return cadena;
+            GraficaTO graphs = new GraficaTO();
+            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
+            for (Chart chart : graficas) {
+                chart.setMes(convertirFecha(chart.getMes()));
             }
-            return cadena;
+            graphs.setChart(graficas);
+            return graphs;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -152,7 +156,7 @@ public class GraficaServiceImpl implements GraficaService {
             throw new BusinessException();
         }
     }
-    
+
     @Override
     public String getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -169,35 +173,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
     }
 
-    private String convertirFecha(Date fecha) {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String fechaStr = simpleDateFormat.format(new Date());
-        System.out.println(fechaStr);
-        return fechaStr;
-    }
-
-    private String formatearGraficaMascota(List<GraficaMascota> graficas) {
-        StringBuilder sb = new StringBuilder();
-        StringBuilder sbData = new StringBuilder();
-        String mes = "";
-        String cadena;
-        String cadenaTmp;
-        String cadenaMes;
-        sb.append("{\"chart\":{\"label\":[");
-        for (int i = 0; i < graficas.size(); i++) {
-            sb.append("\"" + graficas.get(i).getMascota() + "\",");
-            sbData.append(graficas.get(i).getCantidad() + ",");
-            mes = ("\"" + obtenerNombreMes(graficas.get(i).getFecha()) + "\",");
-        }
-        cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
-        cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
-        cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
-        System.out.println(cadena + "]}}");
-        return cadena + "]}}";
-
-    }
-
     private String formatearGraficaComprador(List<GraficaComprador> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
@@ -209,7 +184,7 @@ public class GraficaServiceImpl implements GraficaService {
         for (int i = 0; i < graficas.size(); i++) {
             sb.append("\"" + graficas.get(i).getComprador() + "\",");
             sbData.append(graficas.get(i).getCantidad() + ",");
-            mes = ("\"" + obtenerNombreMes(graficas.get(i).getFecha()) + "\",");
+            mes = ("\"" + obtenerMes(graficas.get(i).getFecha()) + "\",");
         }
         cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
         cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
@@ -218,31 +193,24 @@ public class GraficaServiceImpl implements GraficaService {
         return cadena + "]}}";
     }
 
-    private String formatearGraficaPaqueteria(List<GraficaPaqueteria> graficas) {
-        StringBuilder sb = new StringBuilder();
-        StringBuilder sbData = new StringBuilder();
-        String mes = "";
-        String cadena;
-        String cadenaTmp;
-        String cadenaMes;
-        sb.append("{\"chart\":{\"label\":[");
-        for (int i = 0; i < graficas.size(); i++) {
-            sb.append("\"" + graficas.get(i).getPaqueteria() + "\",");
-            sbData.append(graficas.get(i).getCantidad() + ",");
-            mes = ("\"" + obtenerNombreMes(graficas.get(i).getFecha()) + "\",");
-        }
-        cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
-        cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
-        cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
-        System.out.println(cadena + "]}}");
-        return cadena + "]}}";
-
-    }
-
-    private String obtenerNombreMes(Date fecha) {
+    private String obtenerMes(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
         String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
+        return mes;
+    }
+
+    private String convertirFecha(String fecha) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String mes = "";
+        try {
+            Date date = formatter.parse(fecha);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            mes = new SimpleDateFormat("M").format(cal.getTime());
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
         return mes;
     }
 
