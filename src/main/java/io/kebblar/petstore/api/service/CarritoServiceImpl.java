@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
 
+import io.kebblar.petstore.api.model.exceptions.CarritoException;
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
@@ -75,7 +76,6 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
@@ -98,7 +98,6 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.getAll(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
@@ -108,7 +107,6 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.insert(carrito);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
@@ -118,7 +116,6 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.update(carrito);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
@@ -128,7 +125,6 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.delete(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
@@ -144,7 +140,6 @@ public class CarritoServiceImpl implements CarritoService {
                 lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
             }
         } catch (BusinessException e) {
-            logger.error(e.getMessage());
             throw new VistaCarritoException("No pudo obtenerse el carrito del usuario" );
         }
         return lista;
@@ -157,7 +152,6 @@ public class CarritoServiceImpl implements CarritoService {
                 c.setCveOrdenCompra(cveCompra);
                 carritoMapper.update(c);
             } catch (SQLException b) {
-                logger.info("No pudo actualizarse la orden compra del carrito");
                 throw new BusinessException();
             }
         }
@@ -172,8 +166,7 @@ public class CarritoServiceImpl implements CarritoService {
                 carritoMapper.update(c);
              }
         } catch (SQLException b) {
-            logger.info("No pudo actualizarse la orden compra del carrito");
-            throw new BusinessException();
+            throw new CarritoException("No pudo actualizarse la orden compra del carrito del usuario" + idUser);
         }
     }
 
@@ -186,7 +179,6 @@ public class CarritoServiceImpl implements CarritoService {
                 return carritoMapper.update(carrito);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new BusinessException();
         }
     }
