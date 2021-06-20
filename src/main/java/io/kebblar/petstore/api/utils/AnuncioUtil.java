@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -251,8 +252,8 @@ public class AnuncioUtil {
      * @return
      */
     public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa, String uuidImagenBase, int altoImagen) {
-            ImageIcon logoSistema=new ImageIcon(destinationFolder+"logo.png");
-            ImageIcon imagenBase=new ImageIcon(destinationFolder+uuidImagenBase);
+            ImageIcon logoSistema=new ImageIcon(destinationFolder+File.separator+"logo.png");
+            ImageIcon imagenBase=new ImageIcon(destinationFolder+File.separator+uuidImagenBase);
             //Se agrega marca de agua al logotipo del sistema
             ImageIcon watermarkLogo = logoSistema;
             BufferedImage bi = makeTransparent(watermarkLogo.getImage(), 50);
