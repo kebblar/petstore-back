@@ -151,7 +151,7 @@ public class CarritoServiceImpl implements CarritoService {
         for (Carrito carrito : carritos) {
             try {
                 carrito.setCveOrdenCompra(cveCompra);
-                carritoMapper.update(c);
+                carritoMapper.update(carrito);
             } catch (Exception e) {
                 throw new DatabaseException(e.getMessage());
             }
