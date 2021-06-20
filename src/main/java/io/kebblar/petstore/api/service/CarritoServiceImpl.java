@@ -147,12 +147,12 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     public void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException {
-        List<Carrito> carrito = getAll(idUser);
-        for (Carrito c : carrito) {
+        List<Carrito> carritos = getAll(idUser);
+        for (Carrito carrito : carritos) {
             try {
-                c.setCveOrdenCompra(cveCompra);
+                carrito.setCveOrdenCompra(cveCompra);
                 carritoMapper.update(c);
-            } catch (Exception b) {
+            } catch (Exception e) {
                 throw new DatabaseException(e.getMessage());
             }
         }
