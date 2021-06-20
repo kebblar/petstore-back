@@ -31,6 +31,7 @@ import io.kebblar.petstore.api.mapper.CarritoMapper;
 import io.kebblar.petstore.api.model.exceptions.CarritoException;
 import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
