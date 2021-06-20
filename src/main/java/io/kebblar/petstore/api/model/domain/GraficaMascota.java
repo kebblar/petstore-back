@@ -37,7 +37,4 @@ import java.util.Date;
  */
 public class GraficaMascota implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
-
-
-
 }
