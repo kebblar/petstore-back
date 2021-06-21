@@ -31,19 +31,15 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
  * @since   1.0-SNAPSHOT 
  */
 public interface InvokeRestService {
-	
-	 /**
-	   * <p>Método utilizado para procesar validación por captcha
-	   * 
-	   * @param Objeto de tipo GoogleCaptcha.
-	   * @return Cadena con el resultado de la validación captcha.
-	   * @throws GoogleCaptchaException
-	   */
+  /**
+    * <p>Método utilizado para procesar validación por captcha
+    * 
+    * @param Objeto de tipo GoogleCaptcha.
+    * @return Cadena con el resultado de la validación captcha.
+    * @throws GoogleCaptchaException
+    */
     String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException;
     
-    /**
-     * 
-     */
     String getBitsoInfo2();
     
     /**
