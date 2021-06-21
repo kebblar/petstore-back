@@ -29,20 +29,19 @@ import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
  * @since   1.0-SNAPSHOT 
  */
 public interface SmsService {
-	
-	 /**
-	   * <p>Método utilizado para envio de mensajes SMS.
-	   * 
-	   * @param Número de telefono
-	   * @param Mensaje de texto
-	   * @throws ProcessPDFException
-	   */
+       /**
+        * <p>Método utilizado para envio de mensajes SMS.
+        * 
+        * @param Número de telefono
+        * @param Mensaje de texto
+        * @throws ProcessPDFException
+        */
 	void envioSms(String numero, String mesj) throws ProcessPDFException;
 	
-	 /**
-	   * <p>Método utilizado para generar una clave de 5 dígitos la cual sera utilizada para enviarla en un mensaje SMS
-	   * 
-	   * @return Clave de 5 dígitos aleatorios
-	   */
+        /**
+         * <p>Método utilizado para generar una clave de 5 dígitos la cual sera utilizada para enviarla en un mensaje SMS
+         * 
+         * @return Clave de 5 dígitos aleatorios
+         */
 	String getCveSMS();
 }
