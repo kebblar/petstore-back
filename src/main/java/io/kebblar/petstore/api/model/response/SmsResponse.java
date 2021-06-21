@@ -25,10 +25,6 @@ package io.kebblar.petstore.api.model.response;
  * @since   1.0-SNAPSHOT
  */
 public class SmsResponse {
-	
-	/**
-     * Atributos de la clase
-     */
 	private String ipCaller;
 	private String fechaInvocacon;
 	private String mensajeDado;
@@ -36,9 +32,6 @@ public class SmsResponse {
 	private boolean exito;
 	private String resultMsg;
 	
-	/**
-     * Constructor por default (sin parámetros).
-     */
 	public SmsResponse() {
 	}
 
@@ -109,19 +102,13 @@ public class SmsResponse {
 		this.resultMsg = resultMsg;
 	}
 
-	/**
-     * Método toString para el pojo, representa al objeto en forma de cadena
-     */
 	@Override
 	public String toString() {
 		return "SmsResponse [ipCaller=" + ipCaller + ", fechaInvocacon=" + fechaInvocacon + ", mensajeDado="
 				+ mensajeDado + ", telefonoDado=" + telefonoDado + ", exito=" + exito + ", resultMsg=" + resultMsg
 				+ "]";
 	}
-	
-	/**
-     * Genera un hash del objeto
-     */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -135,9 +122,6 @@ public class SmsResponse {
 		return result;
 	}
 
-	/**
-     * Compara si dos instancias de la clase son iguales
-     */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
