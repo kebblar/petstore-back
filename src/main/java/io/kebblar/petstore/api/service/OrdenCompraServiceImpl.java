@@ -66,6 +66,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     private MailSenderService mailSenderService;
     private CarritoService carritoService;
     private DireccionService direccionService;
+    private SmsService smsService;
     
     /*
      * Constructor con atributos mapper
@@ -77,7 +78,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             MailSenderService mailSenderService,
             Environment environment,
             CarritoService carritoService,
-            DireccionService direccionService) {
+            DireccionService direccionService,
+            SmsService smsService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper=usuarioDetalleMapper;
         this.usuarioMapper=usuarioMapper;
@@ -85,6 +87,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         this.environment=environment;
         this.carritoService=carritoService;
         this.direccionService=direccionService;
+        this.smsService=smsService;
     }
 
     @Override
@@ -129,6 +132,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             } else {
                 carritoService.updateCarritoCompra(ordenCompra.getCveOrdenCompra(), ordenCompra.getIdUsuario());
             }
+            String cveSMS = smsService.getCveSMS();
+            String msjSMS = environment.getProperty( "app.sms.msj" )+cveSMS;
             
             List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
             List<DireccionConNombre> direcciones= direccionService.getDireccionEnvio(ordenCompra.getIdUsuario(), ordenCompra.getIdDireccion());
@@ -136,7 +141,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key", environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
             String signedPdf = firmador.signPdf();
-            
+            CreatePDF.protectDocument(dest+pdf, cveSMS);
             mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
                     "<h1 style='text-align:center;'>Gracias por tu compra!</h1>" +
                     "<hr> <br>" + 
@@ -147,6 +152,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
                     + "  width: 293px;height: 172px;' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPPYqewTwvHD5CYGqIngd8ENFVmEgf-M_ig&usqp=CAU'> <br>"+
                     "<small>Por propositos de seguridad te enviamos el pdf firmado: " + signedPdf  + "</small> <br>" + 
                     "<hr>", new File(dest+pdf));
+            smsService.envioSms(usuarioDetalle.getTelefonoCelular(),msjSMS);
+            
         } catch (SQLException e) {
             throw new BusinessException("Error SQL: ",e.getMessage());
         } catch (ParseException e) {
@@ -155,8 +162,8 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             throw new BusinessException("Error ProcessPDFException: ",p.getMessage());
         } catch (Exception e) {
              throw new BusinessException("Error Signer: ",e.getMessage());
-    }
+        }
         return ordenCompra;
     }
-    
+
 }

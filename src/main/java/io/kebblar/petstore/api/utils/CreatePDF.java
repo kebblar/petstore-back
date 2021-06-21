@@ -10,7 +10,7 @@
  * Artefacto:   CreatePDF.java
  * Tipo:        clase
  * AUTOR:       Daniel Alvarez Morales
- * Fecha:       15 de Mayo de 2021 (16_02)
+ * Fecha:       20 de Mayo de 2021 (16_02)
  *
  * Historia:    .
  *              20210503_1602 Creación
@@ -18,12 +18,15 @@
  */
 package io.kebblar.petstore.api.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
-
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.io.font.constants.StandardFonts;
@@ -44,7 +47,6 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
-
 import io.kebblar.petstore.api.model.domain.DatosOrden;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
@@ -68,8 +70,7 @@ public class CreatePDF {
     private static final Color headerBg = new DeviceRgb(54,120,182);
     
     /**
-     * Método para crear una facttura con los articulos de compra. Factura en formato PDF.
-     *
+     * Método para crear una facttura con los articulos de compra. Factura en formato PDF
      * @param usuarioDetalle
      * @param usuario
      * @param ordenCompra
@@ -78,6 +79,7 @@ public class CreatePDF {
      * @param nombrePdf
      * @param listCarrito
      * @param direcciones
+     * @param cveSMS 
      * @return nombre del documento 
      * @throws ProcessPDFException
      */
@@ -188,15 +190,15 @@ public class CreatePDF {
         return tableDetalle;
     }
     
-    /**
-     * Método para crear talba con los datos de la factura.
-     *
-     * @param usuarioDetalle
-     * @param usuario
-     * @param documento
-     * @param direcciones
-     * @return Tabla itext a ser añadida al docuento PDF
-     */
+	/**
+	 * Método para crear talba con los datos de la factura.
+	 *
+	 * @param usuarioDetalle
+	 * @param usuario
+	 * @param documento
+	 * @param direcciones
+	 * @return Tabla itext a ser añadida al docuento PDF
+	 */
     private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, List<DireccionConNombre>direcciones) {
         Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
         table4.addCell(createTextCellBold("FACTURAR A:", ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,3));
@@ -206,7 +208,7 @@ public class CreatePDF {
         table4.addCell(createTextCell(1, 3, getNombreCompleto(usuarioDetalle),TextAlignment.LEFT,true));
         table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
         table4.addCell(createTextCell(String.valueOf(usuarioDetalle.getId()),TextAlignment.CENTER, false));
-        table4.addCell(createTextCellBold("Pago contra entrega", false));
+        table4.addCell(createTextCell("El producto puede incurrir en tiempos largos de entrega",TextAlignment.CENTER, false));
         table4.addCell(createTextCell(1, 6, "Dirección: "+getDireccion(direcciones),TextAlignment.LEFT, true));
         table4.addCell(createTextCell(1, 6, "Teléfono: "+usuarioDetalle.getTelefonoCelular(),TextAlignment.LEFT, true));
         table4.addCell(createTextCell(1, 6, "Correo eléctronico: "+usuario.getCorreo(),TextAlignment.LEFT, true));
@@ -291,7 +293,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con alineación y borde personalizados.
-     +
+     *
      * @param texto
      * @param alineación
      * @param borde
@@ -460,5 +462,24 @@ public class CreatePDF {
         }
         return dir;
     }
-	
+    
+    /**
+     * Método para proteger archivo PDF.
+     *
+     * @param path de la ubicación del documento pdf
+     * @param userPassword
+     * @throws IOException
+     */
+    public static void protectDocument(String path, String userPassword) throws IOException {
+        File file = new File(path);
+        PDDocument document = PDDocument.load(file);
+        AccessPermission ap = new AccessPermission();
+        StandardProtectionPolicy spp = new StandardProtectionPolicy("1234", userPassword, ap);
+        spp.setEncryptionKeyLength(128);
+        spp.setPermissions(ap);
+        document.protect(spp);
+        document.save(path);
+        document.close();
+    }
+    
 }
