@@ -112,7 +112,8 @@ public class CreatePDF {
     }
 
     /**
-     * Metodo para crear tabla con la cabezera de la factura
+     * Metodo para crear tabla con la cabezera de la factura.
+     *
      * @return Tabla itext a ser añadida al docuento PDF
      * @throws ProcessPDFException
      */
@@ -124,7 +125,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para crear celdas de una tabla para la factura
+     * Método para crear celdas de una tabla para la factura.
+     *
      * @param texto
      * @param tamaño
      * @param color
@@ -152,7 +154,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para crear tabla con titulos de la factura
+     * Método para crear tabla con titulos de la factura.
+     *
      * @param ordenCompra
      * @return Tabla itext a ser añadida al docuento PDF
      */
@@ -174,7 +177,8 @@ public class CreatePDF {
     }
 
     /**
-     * Metodo para crear tabla con los titulos del detalle de  la factura
+     * Metodo para crear tabla con los titulos del detalle de  la factura.
+     *
      * @return Tabla itext a ser añadida al docuento PDF
      */
     private static Table getTitulosDetalle() {
@@ -187,15 +191,15 @@ public class CreatePDF {
     }
     
 	/**
-	 * Método para crear talba con los datos de la factura 
+	 * Método para crear talba con los datos de la factura.
+	 *
 	 * @param usuarioDetalle
 	 * @param usuario
 	 * @param documento
 	 * @param direcciones
 	 * @return Tabla itext a ser añadida al docuento PDF
 	 */
-    private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc,
-            List<DireccionConNombre>direcciones) {
+    private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, List<DireccionConNombre>direcciones) {
         Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
         table4.addCell(createTextCellBold("FACTURAR A:", ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,3));
         table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
@@ -213,7 +217,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para generar tabla con el codigo de baras de la factura
+     * Método para generar tabla con el codigo de baras de la factura.
+     *
      * @param url
      * @param pdf
      * @param nombrePdf
@@ -230,7 +235,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para generar tabla con el total de la compra
+     * Método para generar tabla con el total de la compra.
+     *
      * @param ordenCompra
      * @return Tabla itext a ser añadida al docuento PDF
      */
@@ -247,7 +253,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para generar tabla con el detalle de productos de la compra
+     * Método para generar tabla con el detalle de productos de la compra.
+     *
      * @param ordenCompra
      * @param listCarrito
      * @return Tabla itext a ser añadida al docuento PDF
@@ -265,6 +272,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con columnas, alineación y borde personalizados.
+     *
      * @param columna 1
      * @param columna 2
      * @param texto
@@ -285,6 +293,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con alineación y borde personalizados.
+     *
      * @param texto
      * @param alineación
      * @param borde
@@ -302,6 +311,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con borde personalizado.
+     *
      * @param texto
      * @param borde
      * @return Celda itext a ser añadido a la tabla PDF
@@ -319,6 +329,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con color y alineación personalizado.
+     *
      * @param texto
      * @param color en texto
      * @param colorBackground
@@ -338,6 +349,7 @@ public class CreatePDF {
 
     /**
      * Método para generar celdas con color, alineación y columnas personalizadas.
+     *
      * @param texto
      * @param color
      * @param colorBackground
@@ -358,7 +370,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para obtener nombre de pdf dinamico
+     * Método para obtener nombre de pdf dinamico.
+     *
      * @param id de usuario
      * @return nombre del pdf
      */
@@ -367,7 +380,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para obtener la fecha actual del sistema
+     * Método para obtener la fecha actual del sistema.
+     *
      * @return fecha
      */
     private static String getFecha(){
@@ -377,7 +391,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para generar codigo de barras
+     * Método para generar codigo de barras.
+     *
      * @param pdfDoc
      * @param código
      * @param Tabla pdf
@@ -386,8 +401,7 @@ public class CreatePDF {
      * @return Celda itext a ser añadido a la tabla PDF
      * @throws ProcessPDFException
      */
-    private static Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2)
-            throws ProcessPDFException {
+    private static Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
         Cell cell = new Cell(col1, col2);
         Barcode128 code128 = new Barcode128(pdfDoc);
         code128.setCode(code);
@@ -401,7 +415,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para generar código de barras QR
+     * Método para generar código de barras QR.
+     *
      * @param pdfDoc
      * @param código
      * @param Tabla pdf
@@ -410,8 +425,7 @@ public class CreatePDF {
      * @return Celda itext a ser añadido a la tabla PDF
      * @throws ProcessPDFException
      */
-    private static Cell generateBarcodeQR(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2)
-            throws ProcessPDFException {
+    private static Cell generateBarcodeQR(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
         Cell cell = new Cell(col1, col2);
         BarcodeQRCode qrCode = new BarcodeQRCode(code);
         PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
@@ -423,7 +437,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para obtener el nombre completo de un usuario
+     * Método para obtener el nombre completo de un usuario.
+     *
      * @param usuarioDetalle
      * @return Nombre de usuario
      */
@@ -432,7 +447,8 @@ public class CreatePDF {
     }
 
     /**
-     * Método para obtener la dirección de envío de un usuario
+     * Método para obtener la dirección de envío de un usuario.
+     *
      * @param direcciones
      * @return dirección del usuario
      */
@@ -448,13 +464,13 @@ public class CreatePDF {
     }
     
     /**
-     * Método para proteger archivo PDF
+     * Método para proteger archivo PDF.
+     *
      * @param path de la ubicación del documento pdf
      * @param userPassword
      * @throws IOException
      */
     public static void protectDocument(String path, String userPassword) throws IOException {
-    	
         File file = new File(path);
         PDDocument document = PDDocument.load(file);
         AccessPermission ap = new AccessPermission();
@@ -465,6 +481,5 @@ public class CreatePDF {
         document.save(path);
         document.close();
     }
-    
     
 }
