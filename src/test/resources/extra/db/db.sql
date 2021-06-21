@@ -49,7 +49,7 @@ CREATE TABLE `anuncio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `folio` varchar(14) NOT NULL,
   `titulo` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `descripcion` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `descripcion` varchar(10000) CHARACTER SET utf8 NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `fecha_inicio_vigencia` date DEFAULT NULL,
   `fecha_fin_vigencia` date DEFAULT NULL,
