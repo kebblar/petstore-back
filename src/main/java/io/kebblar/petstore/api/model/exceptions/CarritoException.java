@@ -32,6 +32,8 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class CarritoException extends BusinessException {
+    private static final long serialVersionUID = -2374644132039662770L;
+
     public CarritoException(String s) {
         super(s,
                 "Error al asociar el carrito a una compra",

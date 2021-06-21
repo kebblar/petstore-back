@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import io.kebblar.petstore.api.model.domain.GraficaMascota;
 import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 
 @Repository

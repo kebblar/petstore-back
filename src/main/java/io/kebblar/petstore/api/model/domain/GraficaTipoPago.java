@@ -1,7 +1,5 @@
 package io.kebblar.petstore.api.model.domain;
 
-import java.util.Date;
-
 /**
  * Implementacion del POJO de la entidad de {@link GraficaTipoPago.
  *
@@ -10,8 +8,6 @@ import java.util.Date;
  * @since 1.0-SNAPSHOT
  */
 public class GraficaTipoPago {
-	private static final long serialVersionUID = 4897377279463910357L;
-
 	private String tipo_pago;
 	private Long total_venta;
 	private int cantidad_ordenes;

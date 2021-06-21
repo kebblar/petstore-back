@@ -36,7 +36,6 @@ import io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper;
 import io.kebblar.petstore.api.model.domain.GraficaTO;
 import io.kebblar.petstore.api.model.domain.Chart;
 import io.kebblar.petstore.api.model.domain.GraficaComprador;
-import io.kebblar.petstore.api.model.domain.GraficaMascota;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**

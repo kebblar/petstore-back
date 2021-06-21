@@ -1,9 +1,7 @@
 package io.kebblar.petstore.api.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,11 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
 
-import com.ibm.icu.util.Calendar;
-
-import io.kebblar.petstore.api.mapper.GraficaMascotaMapper;
 import io.kebblar.petstore.api.mapper.GraficaTipoPagoMapper;
-import io.kebblar.petstore.api.model.domain.GraficaMascota;
 import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 

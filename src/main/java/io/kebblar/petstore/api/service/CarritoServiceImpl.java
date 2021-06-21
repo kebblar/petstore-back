@@ -69,6 +69,7 @@ public class CarritoServiceImpl implements CarritoService {
      * @param carritoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public CarritoServiceImpl(CarritoMapper carritoMapper, AnuncioService anuncioService) {
+        logger.info("CarritoServiceImpl constructor invoked");
         this.carritoMapper = carritoMapper;
         this.anuncioService = anuncioService;
     }
