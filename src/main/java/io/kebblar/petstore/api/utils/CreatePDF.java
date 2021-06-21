@@ -204,7 +204,7 @@ public class CreatePDF {
         table4.addCell(createTextCell(1, 3, getNombreCompleto(usuarioDetalle),TextAlignment.LEFT,true));
         table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
         table4.addCell(createTextCell(String.valueOf(usuarioDetalle.getId()),TextAlignment.CENTER, false));
-        table4.addCell(createTextCellBold("Pago contra entrega", false));
+        table4.addCell(createTextCell("El producto puede incurrir en tiempos largos de entrega",TextAlignment.CENTER, false));
         table4.addCell(createTextCell(1, 6, "Dirección: "+getDireccion(direcciones),TextAlignment.LEFT, true));
         table4.addCell(createTextCell(1, 6, "Teléfono: "+usuarioDetalle.getTelefonoCelular(),TextAlignment.LEFT, true));
         table4.addCell(createTextCell(1, 6, "Correo eléctronico: "+usuario.getCorreo(),TextAlignment.LEFT, true));
