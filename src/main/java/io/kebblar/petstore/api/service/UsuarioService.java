@@ -186,4 +186,12 @@ public interface UsuarioService {
      */
     Usuario cambiaClave(String correo, String clave) throws BusinessException;
 
+    /**
+     * Actualiza la información adicional de un usuario en su tabla "usuario_detalle".
+     * 
+     * @param usuarioDetalle Información a ser actualizada
+     * @return Información actualizada
+     * @throws BusinessException
+     */
+    UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 }

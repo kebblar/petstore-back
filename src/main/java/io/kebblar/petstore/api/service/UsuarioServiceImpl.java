@@ -432,4 +432,15 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new DatabaseException(e.getMessage());
         }
     }
+    
+    @Override
+    public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
+        try {
+            usuarioDetalleMapper.update(usuarioDetalle);
+            return usuarioDetalle;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
+
 }

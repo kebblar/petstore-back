@@ -35,6 +35,7 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.swagger.annotations.ApiParam;
 import io.kebblar.petstore.api.model.domain.Usuario;
+import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 /**
@@ -122,9 +123,21 @@ public class UsuarioController {
             @ApiParam(name = "credenciales", value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
-        System.out.println(jwt+"<----------------------------");
          return this.usuarioService.cambiaClave(
                  credenciales.getUsuario(),
                  credenciales.getClave());
     }
+    
+    @PutMapping(
+            path = "/usuario-detalles.json", 
+            produces = "application/json; charset=utf-8")
+    public UsuarioDetalle updateUsuarioDetalles(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(name = "usuarioDetalle", value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
+            @RequestBody UsuarioDetalle usuarioDetalle
+            ) throws ControllerException {
+         System.out.println(jwt+"<----------------------------GOOSE");
+         return this.usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
+    }
+    
 }
