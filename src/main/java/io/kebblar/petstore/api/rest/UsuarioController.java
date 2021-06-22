@@ -70,73 +70,99 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping(path = "/usuarios/{id}.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+            path = "/usuarios/{id}.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario getUser(
-            @ApiParam(name = "id", value = "ID del Usuario", defaultValue = "1")
+            @ApiParam(
+                    name = "id", 
+                    value = "ID del Usuario", 
+                    defaultValue = "1")
             @PathVariable int id
             ) throws ControllerException {
         return this.usuarioService.obtenUsuarioPorId(id);
     }
 
-    @GetMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+            path = "/usuarios.json", 
+            produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws ControllerException {
         return this.usuarioService.obtenTodosUsuarios();
     }
 
-    @PostMapping(path = "/usuarios-thin.json", produces = "application/json; charset=utf-8")
+    @PostMapping(
+            path = "/usuarios-thin.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario createUserThin(
-            @ApiParam(name = "credenciales", value = "Crea un Usuario empleando sólo sus credenciales")
+            @ApiParam(
+                    name = "credenciales", 
+                    value = "Crea un Usuario empleando sólo sus credenciales")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
         return this.usuarioService.creaUsuario(credenciales);
     }
 
-    @PostMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    @PostMapping(
+            path = "/usuarios.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario createUser(
-            @ApiParam(name = "usuario", value = "Crea un Usuario empleando todos sus atributos")
+            @ApiParam(
+                    name = "usuario", 
+                    value = "Crea un Usuario empleando todos sus atributos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
         return this.usuarioService.creaUsuario(usuario);
     }
 
-    @PutMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    @PutMapping(
+            path = "/usuarios.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario updateUsuario(
-            @ApiParam(name = "usuario", value = "Actualiza un Usuario empleando todos los atributos provistos")
+            @ApiParam(
+                    name = "usuario", 
+                    value = "Actualiza un Usuario empleando todos los atributos provistos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
          return this.usuarioService.actualizaUsuario(usuario);
     }
 
-    @DeleteMapping(path = "/usuarios.json", produces = "application/json; charset=utf-8")
+    @DeleteMapping(
+            path = "/usuarios.json", 
+            produces = "application/json; charset=utf-8")
     public Usuario borraUsuario(
-            @ApiParam(name = "id", value = "Borra un Usuario cuyo ID es dado")
+            @ApiParam(
+                    name = "id", 
+                    value = "Borra un Usuario cuyo ID es dado")
             @RequestParam int id) throws ControllerException {
          return this.usuarioService.eliminaUsuario(id);
     }
-
 
     @PutMapping(
             path = "/cambia-clave.json",
             produces = "application/json; charset=utf-8")
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
-            @ApiParam(name = "credenciales", value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
+            @ApiParam(
+                    name = "credenciales", 
+                    value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
          return this.usuarioService.cambiaClave(
                  credenciales.getUsuario(),
                  credenciales.getClave());
     }
-    
+
     @PutMapping(
             path = "/usuario-detalles.json", 
             produces = "application/json; charset=utf-8")
     public UsuarioDetalle updateUsuarioDetalles(
             @RequestHeader("jwt") String jwt,
-            @ApiParam(name = "usuarioDetalle", value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
+            @ApiParam(
+                    name = "usuarioDetalle", 
+                    value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
             @RequestBody UsuarioDetalle usuarioDetalle
             ) throws ControllerException {
          return this.usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
     }
-    
+
 }

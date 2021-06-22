@@ -2,7 +2,7 @@ package io.kebblar.petstore.api.utils;
 
 public class StringUtils {
     public static void main(String...s) {
-        System.out.println(limpia("(55) 16@91-3070#"));
+        System.out.println(limpia("+82 (54) 16@91-3070#"));
     }
     
     public static String limpia(String s) {
@@ -15,7 +15,7 @@ public class StringUtils {
     }
 
     private static char separa(char s) {
-        if(s>47 && s<56) return s;
+        if(s>47 && s<=57) return s;
         return '@';
     }
 }
