@@ -37,6 +37,7 @@ import io.kebblar.petstore.api.model.domain.CategoriaTO;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 import io.kebblar.petstore.api.mapper.CategoriaMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Descripción:</p>
