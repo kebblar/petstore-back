@@ -136,7 +136,6 @@ public class UsuarioController {
             @ApiParam(name = "usuarioDetalle", value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
             @RequestBody UsuarioDetalle usuarioDetalle
             ) throws ControllerException {
-         System.out.println(jwt+"<----------------------------GOOSE");
          return this.usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
     }
     

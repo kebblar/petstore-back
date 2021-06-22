@@ -57,6 +57,7 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
+import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
 
 /**
@@ -436,11 +437,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
         try {
+            String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
+            usuarioDetalle.setTelefonoCelular(nuevoCel);
             usuarioDetalleMapper.update(usuarioDetalle);
             return usuarioDetalle;
         } catch (Exception e) {
             throw new DatabaseException(e.getMessage());
         }
     }
+    
 
 }
