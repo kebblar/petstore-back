@@ -107,7 +107,7 @@ public class PaisServiceImpl implements PaisService {
             return paisMapper.delete(pais.getId());
         } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("Error en la eliminación del pais seleccionado ", e.getMessage());
         }
     }
 
