@@ -134,9 +134,9 @@ public class CategoriaServiceImpl implements CategoriaService {
     public int delete(Categoria categoria) throws BusinessException {
         try {
             return categoriaMapper.delete(categoria.getId());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("Error en la eliminación de la categoria seleccionada ", e.getMessage());
         }
     }
 
