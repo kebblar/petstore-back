@@ -56,4 +56,5 @@ public class MapperCallException extends BusinessException {
         logger.error("UID:: " + technicalDescription);
         return "Codigo de error: " + uid;
     }
+    
 }
