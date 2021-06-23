@@ -237,7 +237,7 @@ public class CreatePDF {
     private static Table getTotal(DatosOrden ordenCompra) {
         Table tableTotal = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         tableTotal.addCell(createTextCell(1, 3, newLine, TextAlignment.CENTER,true));
-        tableTotal.addCell(createTextCell(1, 4, Convert.convertirNumero(String.valueOf(ordenCompra.getTotal()),true), TextAlignment.CENTER,true));
+        tableTotal.addCell(createTextCell(1, 4, Convert.convertir((int)ordenCompra.getTotal()), TextAlignment.CENTER,true));
         tableTotal.addCell(createTextCellBold("SUBTOTAL:",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,1));
         tableTotal.addCell(createTextCellBold(String.valueOf(ordenCompra.getTotal()),ColorConstants.WHITE, headerBg,TextAlignment.RIGHT,1,1));
         tableTotal.addCell(createTextCell(1, 7, newLine, TextAlignment.CENTER,true));
@@ -396,6 +396,7 @@ public class CreatePDF {
         xObject.makeIndirect(pdfDoc);
         Image rect = new Image(xObject);
         cell.setBorder(Border.NO_BORDER);
+        cell.setMargins(20f, 20f, 0f, 20f);
         cell.add(rect);
         return cell;
     }
@@ -416,9 +417,10 @@ public class CreatePDF {
         BarcodeQRCode qrCode = new BarcodeQRCode(code);
         PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
         barcodeObject.makeIndirect(pdfDoc);
-        Image rect = new Image(barcodeObject);
+        Image imgQR = new Image(barcodeObject);
+        imgQR.scaleToFit(75, 75);
         cell.setBorder(Border.NO_BORDER);
-        cell.add(rect);
+        cell.add(imgQR);
         return cell;
     }
 
