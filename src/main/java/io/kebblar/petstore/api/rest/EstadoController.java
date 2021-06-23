@@ -161,13 +161,12 @@ public class EstadoController {
     
     
     @GetMapping(
-        path = "/estados/list/{nombre}.json", 
+        path = "/estados/list/{nombre}/{idPais}.json", 
         produces = "application/json; charset=utf-8")
     public List<Estado> getEstado(
-            @ApiParam(name = "nombre", value = "Nombre del Estado", defaultValue = "Mexico")
-            @PathVariable String nombre) throws ControllerException {
-    	System.out.println(nombre);
-        return this.estadoService.getByNombre(nombre);
+            @ApiParam(name = "nombre", value = "Nombre del Estado", defaultValue = "Mexico") @PathVariable String nombre,
+            @ApiParam(name = "idPais", value = "Pais seleccionado", defaultValue = "1") @PathVariable int idPais) throws ControllerException {
+        return this.estadoService.getByNombre(nombre, idPais);
     }
 
     @GetMapping(

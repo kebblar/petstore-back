@@ -181,4 +181,24 @@ public class MunicipioController {
         return this.municipioService.getMunicipiosDescripcionByNombre(nombre); 
     }
     
+    @GetMapping(
+            path = "/municipios/pais/{id}/{nombre}.json", 
+            produces = "application/json; charset=utf-8")
+        public List<Municipio> getMunicipiosbyPaisId(
+                @ApiParam(name = "id", value = "id del pais", defaultValue = "1") @PathVariable int id,
+                @ApiParam(name = "nombre", value = "nombre del municipio", defaultValue = "Ixtapaluca") @PathVariable String nombre
+                ) throws BusinessException {
+    	System.out.println("Pais " + id + " nombre " + nombre);
+            return this.municipioService.getMunicipiosByPaisDescripcion(id,nombre); 
+        }
+    
+    @GetMapping(
+            path = "/municipios/estado/{id}/{nombre}.json", 
+            produces = "application/json; charset=utf-8")
+        public List<Municipio> getMunicipiosbyEstadoId(
+                @ApiParam(name = "id", value = "id del estado", defaultValue = "1") @PathVariable int id,
+                @ApiParam(name = "nombre", value = "id del estado", defaultValue = "Ixtapaluca") @PathVariable String nombre
+               ) throws BusinessException {
+            return this.municipioService.getMunicipiosByEstadoDescripcion(id, nombre);
+        }
 }
