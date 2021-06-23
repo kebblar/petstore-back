@@ -25,6 +25,7 @@ package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
 import org.springframework.web.multipart.MultipartFile;
+
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
@@ -141,5 +142,12 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException;
-
+    
+    /**
+     * Método que permite publicar o finalizar un anuncio y
+     * que permite pasar a vencido los anuncios cuya fecha de vencimiento ha sido alcanzada
+     * @throws BusinessException Excepcion lanzada en caso de error
+     */
+    void schedulerPublicarAnuncio() throws BusinessException;
+ 
 }
