@@ -413,7 +413,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
     
     @Override
-    @Scheduled(cron = "0 0 0 * * ?") //Se invoca el metodo cada dia
+    @Scheduled(cron = "0 0 2 * * ?") //Se invoca el metodo cada dia
     public void schedulerPublicarAnuncio() throws BusinessException {
         logger.info("Llamando servicio para PUBLICAR los anuncios cuya fecha de inicio de publicacion es el dia de hoy");  
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
