@@ -293,10 +293,25 @@ public interface AnuncioMapper {
             + " WHERE a.id = #{id} ") 
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
 
+    /**
+     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin
+     * @param fechaInicio - Filtro de fecha de inicio con la que se comparara la fecha de inicio vigencia
+     * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
+     * @param estatus - Estatus mediante el cual se filtraran los anuncios
+     * @return Listado de clases de tipo 'Anuncio' con la informacion de los anuncio
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
     @ResultMap("AnuncioMap")
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_inicio_vigencia BETWEEN #{fechaInicio} AND #{fechaFin}") 
     List<Anuncio> anunciosPorPublicar(String fechaInicio, String fechaFin,  short estatus) throws SQLException;
     
+    /**
+     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin
+     * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
+     * @param estatus - Estatus mediante el cual se filtraran los anuncios
+     * @return Listado de clases de tipo 'Anuncio' con la informacion de los anuncio
+     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     */
     @ResultMap("AnuncioMap")
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_fin_vigencia < #{fechaFin}") 
     List<Anuncio> anunciosPorVencer(String fechaFin, short estatus) throws SQLException;
