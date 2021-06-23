@@ -25,8 +25,11 @@
 package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +37,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -406,6 +410,54 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
 
         }
+    }
+    
+    @Override
+    //@Scheduled(cron = "0 0 0 * * ?") //Se invoca el metodo cada dia
+    @Scheduled(cron = "0 */1 * * * ?") //Se invoca el metodo cada minuto
+    public void schedulerPublicarAnuncio() throws BusinessException {
+        logger.info("Llamando servicio para PUBLICAR los anuncios cuya fecha de inicio de publicacion es el dia de hoy");  
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar  calendar=Calendar.getInstance();
+        try {
+        	//1. Se consultan todos los anuncios con estatus "ACTIVO" y con fecha de publicacion al dia de hoy
+            String fechaBase=dateFormat.format(calendar.getTime());
+            String fechaInicio=fechaBase+" 00:00:00";
+            String fechaFin=fechaBase+" 23:59:59";
+            logger.info("====> Periodo de busqueda: "+fechaInicio+" - "+fechaFin);  
+			List<Anuncio> anuncios = anuncioMapper.anunciosPorPublicar(fechaInicio, fechaFin, AnuncioEstatusEnum.ACTIVO.getId());
+			//2. Se cambia el estatus a PUBLICADO
+			if(anuncios!=null && !anuncios.isEmpty()) {
+				for(Anuncio a:anuncios) {
+					 anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.PUBLICADO.getId());
+				}
+				logger.info("====> Total de anuncios que pasaron a PUBLICADOS del dia "+anuncios.size());  
+			}else {
+				 logger.info("====> No se encontraron anuncios para pasar a PUBLICAR del periodo "+fechaInicio+" al "+fechaFin);  
+			}
+		} catch (SQLException e) {
+			 logger.error("====>Ocurrio un error durante el proceso de PUBLICAR anuncios: "+e.getMessage());
+		}
+        
+        logger.info("Llamando servicio de cambiar estatus a VENCIDO los anuncios cuya fecha fin de publicacion fue el dia de ayer");
+        try {
+        	calendar.add(Calendar.DATE,-1); 
+        	//1. Se consultan los anuncios con estatus PUBLICADO con fecha de publicacion final al día de ayer
+            String fechaFin=dateFormat.format(calendar.getTime())+" 23:59:59";
+            logger.info("====> Fecha fin de publicacion: "+fechaFin);  
+			List<Anuncio> anuncios = anuncioMapper.anunciosPorVencer(fechaFin, AnuncioEstatusEnum.PUBLICADO.getId());
+			 //2. Se cambia el estatus a VENCIDO
+			if(anuncios!=null && !anuncios.isEmpty()) {
+				for(Anuncio a:anuncios) {
+					 anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.VENCIDO.getId());
+				}
+				logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia "+anuncios.size());  
+			}else {
+				 logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);  
+			}
+		} catch (SQLException e) {
+			 logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
+		}
     }
  
 }

@@ -30,6 +30,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -291,4 +292,12 @@ public interface AnuncioMapper {
             + " JOIN categoria cat ON a.id_categoria=cat.id "
             + " WHERE a.id = #{id} ") 
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
+
+    @ResultMap("AnuncioMap")
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_inicio_vigencia BETWEEN #{fechaInicio} AND #{fechaFin}") 
+    List<Anuncio> anunciosPorPublicar(String fechaInicio, String fechaFin,  short estatus) throws SQLException;
+    
+    @ResultMap("AnuncioMap")
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_fin_vigencia < #{fechaFin}") 
+    List<Anuncio> anunciosPorVencer(String fechaFin, short estatus) throws SQLException;
 }
