@@ -121,4 +121,21 @@ public interface MunicipioService {
      * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
      */
     List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
+     * 
+     * @param id id del pais
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException;
+    
+    /**
+     * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
+     * 
+     * @param id id del estado
+     * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     */
+    List<Municipio> getMunicipiosByEstadoDescripcion(int estado, String nombre) throws BusinessException;
+	
 }

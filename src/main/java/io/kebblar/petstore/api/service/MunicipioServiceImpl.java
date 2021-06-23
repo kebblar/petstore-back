@@ -164,5 +164,35 @@ public class MunicipioServiceImpl implements MunicipioService {
             throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
         }
     }
+    
+    @Override
+    public List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException {
+        try {
+        	if(pais > 0 && nombre == null) {
+            return municipioMapper.getMunicipiosByPaisDescripcion(pais);
+        	} else if (pais > 0 && nombre.length()>0 ) {
+        	return municipioMapper.getMunicipiosByPaisNombreDescripcion(pais, nombre);
+        	} else if(nombre != null) {
+                return municipioMapper.getByNombre(nombre);
+            }  else {
+                return municipioMapper.getMunicipiosDescripcion();
+        	}
+        } catch (Exception e) {
+            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+        }
+    }
+	
+    @Override
+    public List<Municipio> getMunicipiosByEstadoDescripcion(int estado, String nombre) throws BusinessException {
+        try {
+        	if(estado > 0 ) {
+        	return municipioMapper.getMunicipiosByEstadoNombreDescripcion(estado, nombre);
+        	}else {
+                return municipioMapper.getMunicipiosDescripcion();
+        	}
+        } catch (Exception e) {
+            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+        }
+    }
 
 }

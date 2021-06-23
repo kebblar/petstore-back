@@ -155,5 +155,50 @@ public interface MunicipioMapper {
     		+ "INNER JOIN estado e on m.id_estado = e.id "
     		+ "INNER JOIN pais p on e.id_pais = p.id  ") 
 	List<Municipio> getMunicipiosDescripcion();
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
+     * y el nombre del estado.
+     *
+     * @param int idPais identificador del pais
+     * @return Lista de obetos de tipo Municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("PaisEstadoMunicipioMap")
+    @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
+    		+ "INNER JOIN estado e on m.id_estado = e.id "
+    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais}  ") 
+	List<Municipio> getMunicipiosByPaisDescripcion(int idPais);
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
+     * y el nombre del estado.
+     *
+     * @param int idPais identificador del pais
+     * @return Lista de obetos de tipo Municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("PaisEstadoMunicipioMap")
+    @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
+    		+ "INNER JOIN estado e on m.id_estado = e.id "
+    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais} and m.nombre LIKE '%' #{nombre} '%' ") 
+	List<Municipio> getMunicipiosByPaisNombreDescripcion(int idPais, String nombre);
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
+     * y el nombre del estado.
+     *
+     * @param int idPais identificador del pais
+     * @return Lista de obetos de tipo Municipio
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("PaisEstadoMunicipioMap")
+    @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
+    		+ "INNER JOIN estado e on m.id_estado = e.id "
+    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE m.id_estado = #{idEstado}  and m.nombre LIKE '%' #{nombre} '%' ") 
+	List<Municipio> getMunicipiosByEstadoNombreDescripcion(int idEstado, String nombre);
 
 }

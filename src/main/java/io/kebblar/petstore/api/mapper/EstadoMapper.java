@@ -143,8 +143,22 @@ public interface EstadoMapper {
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
-    @ResultMap("EstadoMap")
-    @Select("SELECT " + CAMPOS + " FROM estado WHERE id_pais = #{id} ") 
+    @ResultMap("EstadoNombreMap")
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais}") 
 	List<Estado> getEstadosByPais(int idPais);
+    
+    /**
+     * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
+     *
+     * @param  String nombre del estado.
+     * @param  int idPais del estado.
+     * @return Lista de objetos de tipo estado filtrado por el nombre ingresado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("EstadoNombreMap")
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais} and e.nombre LIKE '%' #{nombre} '%'") 
+    List<Estado> getByNombreAndIdPais(String nombre, int idPais) throws SQLException;
+    
 
 }
