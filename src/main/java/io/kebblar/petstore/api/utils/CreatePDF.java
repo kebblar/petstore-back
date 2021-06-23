@@ -255,7 +255,7 @@ public class CreatePDF {
     private static Table getDetalleFactura(DatosOrden ordenCompra, List<CarritoDatosFactura> listCarrito) {
         Table tableDetalle = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         for (CarritoDatosFactura carrito : listCarrito) {
-            tableDetalle.addCell(createTextCell(1, 4, carrito.getDescripcion(),TextAlignment.LEFT, false));
+            tableDetalle.addCell(createTextCell(1, 4, carrito.getTitulo(),TextAlignment.LEFT, false));
             tableDetalle.addCell(createTextCell(1, 1, "1", TextAlignment.CENTER, false));
             tableDetalle.addCell(createTextCell(1, 2, String.valueOf(carrito.getPrecio()), TextAlignment.CENTER, false));
             tableDetalle.addCell(createTextCell(1, 2, String.valueOf(carrito.getPrecio()),TextAlignment.CENTER, false).setMinHeight(25));
