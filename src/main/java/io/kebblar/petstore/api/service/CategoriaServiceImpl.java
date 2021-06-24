@@ -257,10 +257,9 @@ public class CategoriaServiceImpl implements CategoriaService {
                              }
                              la.add(a);
                         }
-
-
                     } catch (Exception e) {
-                        // TODO: handle exception
+                        logger.error("Excepción NO tratada");
+                        logger.error(e.getMessage());
                     }
                     cto.setCategoria(cat);
                     cto.setAtributos(la);

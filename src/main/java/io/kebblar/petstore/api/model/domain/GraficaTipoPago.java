@@ -24,8 +24,6 @@ public class GraficaTipoPago {
 	}
 
 	public GraficaTipoPago() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getTipo_pago() {

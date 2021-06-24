@@ -216,6 +216,10 @@ public class UsuarioServiceImpl implements UsuarioService {
             InternalServerException,
             UserAlreadyExistsException,
             SQLException {
+        // Quitale los caracteres raros al teléfono.
+        String nuevoCel = StringUtils.limpia(preRegistroRequest.getTelefono());
+        preRegistroRequest.setTelefono(nuevoCel);
+        
         // Valida si la clave proporcionada es compatible con el
         // patrón de seguridad de claves solicitado por el sistema:
         ValidadorClave.validate(preRegistroRequest.getClaveHash());
@@ -404,6 +408,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
+        ValidadorClave.validate(clave);
         long UNA_HORA = 1000*60*60;
         Usuario usuario = usuarioMapper.getByToken(token);
         if(usuario==null) throw new TokenNotExistException();

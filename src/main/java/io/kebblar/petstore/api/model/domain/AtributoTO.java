@@ -47,7 +47,6 @@ public class AtributoTO implements Serializable {
     private List<ValorAtributo> rangos;
 
     public AtributoTO(int id, String nombre, int activo) {
-        // TODO Auto-generated constructor stub
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;

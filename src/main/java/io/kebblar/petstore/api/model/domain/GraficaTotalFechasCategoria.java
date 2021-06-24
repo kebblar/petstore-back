@@ -37,8 +37,6 @@
 	public class GraficaTotalFechasCategoria implements Serializable {
 	    
 		public GraficaTotalFechasCategoria() {
-			super();
-			// TODO Auto-generated constructor stub
 		}
 		
 		private static final long serialVersionUID = 4897377279463910357L;
