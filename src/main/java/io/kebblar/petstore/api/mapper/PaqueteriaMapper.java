@@ -108,4 +108,16 @@ public interface PaqueteriaMapper {
     @Delete("DELETE FROM paqueteria WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
+    /**
+     * Obtiene una lista de objetos de tipo 'paqueteria' filtrado por el nombre ingresado.
+     *
+     * @param  String nombre la paqueteria.
+     * @return Lista de objetos de tipo paqueteria filtrado por el nombre ingresado
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * operación desde la base de datos.
+     */
+    @ResultMap("PaqueteriaMap")
+    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'") 
+    List<Paqueteria> getByNombre(String nombre) throws SQLException;
+
 }

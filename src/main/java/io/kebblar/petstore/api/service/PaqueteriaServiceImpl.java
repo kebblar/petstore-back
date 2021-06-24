@@ -146,5 +146,14 @@ public class PaqueteriaServiceImpl implements PaqueteriaService {
             throw new BusinessException();
         }
     }
+    @Override
+    public List<Paqueteria> getByNombre(String nombre) throws BusinessException {
+        try {
+            return paqueteriaMapper.getByNombre(nombre);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
 
 }
