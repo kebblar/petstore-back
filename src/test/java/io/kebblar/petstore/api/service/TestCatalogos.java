@@ -11,14 +11,12 @@ import io.kebblar.petstore.api.mapper.PaisMapper;
 import io.kebblar.petstore.api.mapper.ValorAtributoMapper;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.Categoria;
-import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 import io.kebblar.petstore.api.model.domain.MediaTipo;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +98,6 @@ public class TestCatalogos {
     private MediaTipo mediaTipo;
     private Categoria categoria;
     private Atributo atributo;
-    private CategoriaAtributo  categoriaAtributo;
     private ValorAtributo valorAtributo;
 
     @Before
@@ -121,7 +117,6 @@ public class TestCatalogos {
 		mediaTipo = new  MediaTipo(1,"JPG",1);
 		categoria = new Categoria(1,"CANINOS", 1);
 		atributo = new Atributo(1,"PESO",1);
-		categoriaAtributo = new CategoriaAtributo(1, 1);
 		valorAtributo = new ValorAtributo(1,1,"10 - 20 KILOS",1);
 		estados.add(new Estado(1,1,"VERACRUZ"));
 		estados.add(new Estado(2,1,"TABASCO"));
