@@ -27,6 +27,8 @@ package io.kebblar.petstore.api.service;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +36,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -140,22 +143,18 @@ public class AnuncioServiceImpl implements AnuncioService {
         anuncioAlta.setIdCategoria(request.getIdCategoria());
         anuncioAlta.setDescripcion(request.getDescripcion());
         anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
-        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
-                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
-                :null);
-        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?
-                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
-                :null);
+        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia());
+        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia());
         try {
             //Si los datos son correctos, se procede con el guardado o actualizacion
             if(request instanceof ActualizaAnuncioRequest) {
                 anuncioAlta.setId(((ActualizaAnuncioRequest)request).getId());
-                anuncioAlta.setFechaModificacion(new Date());
+                anuncioAlta.setFechaModificacion(LocalDateTime.now(ZoneId.of("America/Mexico_City")));
                 anuncioMapper.update(anuncioAlta);
                 anuncioMapper.deleteAtributos(anuncioAlta.getId());
             }else {
                 anuncioAlta.setFolio(AnuncioUtil.generaFolio());
-                anuncioAlta.setFechaAlta(new Date());
+                anuncioAlta.setFechaAlta(LocalDateTime.now(ZoneId.of("America/Mexico_City")));
                 anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
                 anuncioMapper.insert(anuncioAlta);
             }
@@ -199,20 +198,19 @@ public class AnuncioServiceImpl implements AnuncioService {
                 anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.PUBLICADO.getId());
                 response.setInfo("El anuncio ha sido publicado correctamente.");
                 return response;
-            }
-            //Si el anuncio tiene fechas de inicio de vigencia igual a la fecha actual, pasa a estatus PUBLICADO
-            if(anuncio.getFechaInicioVigencia()!=null && 
-                    AnuncioUtil.comparafechas(new Date(), anuncio.getFechaInicioVigencia())>=0) {
-                anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.PUBLICADO.getId());
-                response.setInfo("El anuncio ha sido publicado correctamente.");
-                return response;
-            }
-            //Si el anuncio tiene fecha de inicio de vigencia posterior a la fecha actual, pasa a esatus ACTIVO
-            if(anuncio.getFechaInicioVigencia()!=null && 
-                    AnuncioUtil.comparafechas(new Date(), anuncio.getFechaInicioVigencia())<0) {
-                anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.ACTIVO.getId());
-                response.setInfo("El anuncio ha sido guardado, se publicara en cuanto llegue la fecha solicitada.");
-                return response;
+            } 
+            if(anuncio.getFechaInicioVigencia()!=null) {
+	            int valorCompara = LocalDate.now(ZoneId.of("America/Mexico_City")).compareTo(anuncio.getFechaInicioVigencia());
+	            //Si el anuncio tiene fechas de inicio de vigencia igual a la fecha actual, pasa a estatus PUBLICADO
+	            if(valorCompara >=0) {
+	                anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.PUBLICADO.getId());
+	                response.setInfo("El anuncio ha sido publicado correctamente.");
+	            }
+	            //Si el anuncio tiene fecha de inicio de vigencia posterior a la fecha actual, pasa a esatus ACTIVO
+	            if(valorCompara <0) {
+	                anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.ACTIVO.getId());
+	                response.setInfo("El anuncio ha sido guardado, se publicara en cuanto llegue la fecha solicitada.");
+	            }
             }
         } catch (SQLException e) {
             throw new BusinessException("Error de sistema","Ocurrio un error al confirmar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);

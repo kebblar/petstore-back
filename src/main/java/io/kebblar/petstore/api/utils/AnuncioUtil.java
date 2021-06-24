@@ -30,16 +30,21 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
 import org.apache.commons.io.FilenameUtils;
+
 import com.ibm.icu.text.SimpleDateFormat;
+
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
@@ -68,9 +73,8 @@ public class AnuncioUtil {
      */
     public static String generaFolio() {
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
-        Random random = new Random();
         String folio=dateFormat.format(new Date());
-        return folio+String.format("%04d", random.nextInt(10000));
+        return folio+String.format("%04d", new Random().nextInt(10000));
     }
 
     /**
@@ -82,59 +86,30 @@ public class AnuncioUtil {
      * @param fechaFinVigencia
      * @return
      */
-    public static boolean validaFechasPeriodo(Date fechaInicioVigencia, Date fechaFinVigencia){
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-            String sFechaBase=dateFormat.format(new Date());
-            String sFechaIniVigencia=fechaInicioVigencia!=null ? dateFormat.format(fechaInicioVigencia):null;
-            String sFechaFinVigencia=fechaFinVigencia!=null?dateFormat.format(fechaFinVigencia):null;
-            Date fechaBase = dateFormat.parse(sFechaBase);
-            fechaInicioVigencia = sFechaIniVigencia!=null?dateFormat.parse(sFechaIniVigencia):null;
-            fechaFinVigencia = sFechaFinVigencia!=null?dateFormat.parse(sFechaFinVigencia):null;
-            boolean fechasValidas = true;
-            //Se valida que la fecha de inicio no sea anterior a la fecha actual
-            if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)){
-                fechasValidas = false;
-            } 
-            //Se valida que la fecha de fin sno sea anterior a la fecha actual
-            if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)){
-                fechasValidas = false;
-            } 
-            //Se valida que la fecha de fin no sea mayor fecha inicio
-            if(fechaInicioVigencia!=null && fechaFinVigencia!=null 
-                    && fechaInicioVigencia.after(fechaFinVigencia)){
-                fechasValidas = false;
-            } 
-            return fechasValidas;
-        } catch (ParseException ex) {
-        
-        }
-        return false;
+    public static boolean validaFechasPeriodo(LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia){
+        LocalDate fechaActual = LocalDate.now(ZoneId.of("America/Mexico_City"));
+    	
+        String sFechaIniVigencia= fechaInicioVigencia!=null ? fechaInicioVigencia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")):null;
+        String sFechaFinVigencia= fechaFinVigencia!=null ? fechaFinVigencia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")):null;
+        fechaInicioVigencia = (sFechaIniVigencia ==null)? null: LocalDate.parse(sFechaIniVigencia,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        fechaFinVigencia = (sFechaFinVigencia ==null)? null: LocalDate.parse(sFechaFinVigencia,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        boolean fechasValidas = true;
+        //Se valida que la fecha de inicio no sea anterior a la fecha actual
+        if(fechaInicioVigencia!=null && fechaActual.isAfter(fechaInicioVigencia)){
+            fechasValidas = false;
+        } 
+        //Se valida que la fecha de fin sno sea anterior a la fecha actual
+        if(fechaFinVigencia!=null && fechaActual.isAfter(fechaFinVigencia)){
+            fechasValidas = false;
+        } 
+        //Se valida que la fecha de fin no sea mayor fecha inicio
+        if(fechaInicioVigencia!=null && fechaFinVigencia!=null 
+                && fechaInicioVigencia.isAfter(fechaFinVigencia)){
+            fechasValidas = false;
+        } 
+        return fechasValidas;  
     }
-    
-    /**
-     * Metodo que permite comparar dos fechas entre si.
-     *
-     * @param fechaBase Fecha que se tomara como base para comparar
-     * @param fechaAComparar Fecha con la que se compara la fecha base
-     * @return Si la fecha Base es igual a la fecha a compara, regresa 0
-     * Si la fecha base es anterior a la fecha a comparar, regresa un valor menor a 0
-     * Si la fecha base es posterior a la fecha a comparar, regresa un valor mayor a 0
-     */
-    public static int comparafechas(Date fechaBase, Date fechaAComparar){
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-            String sFechaBase=dateFormat.format(fechaBase);
-            String sFechaAComparar=dateFormat.format(fechaAComparar);
-            fechaBase = dateFormat.parse(sFechaBase);
-            fechaAComparar = dateFormat.parse(sFechaAComparar);
-            return fechaBase.compareTo(fechaAComparar);
-        } catch (ParseException ex) {
         
-        }
-        return 0;
-    }
-    
     /**
      * Método que concatena las condiciones de consulta a la cadena SQL.
      *
@@ -233,13 +208,7 @@ public class AnuncioUtil {
             throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
         }
         //Validacion de fechas de vigencia
-        Date fechaInicio = request.getFechaInicioVigencia() != null ? 
-                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-                :null;
-        Date fechaFin =request.getFechaFinVigencia() != null ?
-                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-                :null;
-        if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
+        if(!AnuncioUtil.validaFechasPeriodo(request.getFechaInicioVigencia(), request.getFechaFinVigencia())) {
             throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
         }   
     }
