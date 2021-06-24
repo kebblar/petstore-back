@@ -51,6 +51,7 @@ public interface GraficaPaqueteriaMapper {
             @Result(property = "data", column = "cantidad"), @Result(property = "mes", column = "fecha") })
     @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
+            + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")
     List<Chart> getPaqueteria() throws SQLException;
 

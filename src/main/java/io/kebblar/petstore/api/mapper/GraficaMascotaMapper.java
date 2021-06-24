@@ -52,6 +52,7 @@ public interface GraficaMascotaMapper {
     @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
+            + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) group by cat.categoria order by cantidad desc limit 5 ")
     List<Chart> getAll() throws SQLException;
 
