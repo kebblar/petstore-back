@@ -68,42 +68,40 @@ public class GraficaVentasTotalesController {
     }
 
     @ApiOperation(value = "GraficaVentasTotalesController::getTotalImporteVentas", 
-    		notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
-                    + "a la grafica de importe total de ventas.")
+        notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
+        + "a la grafica de importe total de ventas.")
     @GetMapping(value = "/grafica-total-importe-ventas.json", produces = "application/json; charset=utf-8")
     public String getTotalImporteVentas() throws ControllerException {
         return graficaVentasTotalesService.getTotalImporteVentas();
     }
     
-    @ApiOperation(
-            value = "GraficaVentasTotalesController::getTotalImporteVentasFiltroFechas",
-            notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
-                + "a la grafica de importe total de ventas con filtro de fechas.")
+    @ApiOperation(value = "GraficaVentasTotalesController::getTotalImporteVentasFiltroFechas",
+        notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
+        + "a la grafica de importe total de ventas con filtro de fechas.")
     @GetMapping(path = "/grafica-total-importe-ventas-filtro.json", produces = "application/json; charset=utf-8")
     public String getTotalImporteVentasFiltroFechas(
-            @ApiParam(name = "fechaInicio", value = "La fechaInicio de búsqueda") @RequestParam String fechaInicio,
-            @ApiParam(name = "fechaFin", value = "La fechaFin de búsqueda") @RequestParam String fechaFin)
-            throws BusinessException {
+        @ApiParam(name = "fechaInicio", value = "La fechaInicio de búsqueda") @RequestParam String fechaInicio,
+        @ApiParam(name = "fechaFin", value = "La fechaFin de búsqueda") @RequestParam String fechaFin)
+        throws BusinessException {
         return graficaVentasTotalesService.getTotalImporteVentasFiltroFechas(fechaInicio, fechaFin);
     }
     
     @ApiOperation(value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentas", 
-    		notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
-                    + "a la grafica de total de número de órdenes de ventas.")
+        notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
+        + "a la grafica de total de número de órdenes de ventas.")
     @GetMapping(value = "/grafica-total-numero-ordenes-ventas.json", produces = "application/json; charset=utf-8")
     public String getNumeroOrdenesTotalVentas() throws ControllerException {
         return graficaVentasTotalesService.getNumeroOrdenesTotalVentas();
     }
     
-    @ApiOperation(
-            value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentasFiltroFechas",
-            notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
-                + "a la grafica de total de número de órdenes de ventas con filtro de fechas.")
+    @ApiOperation(value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentasFiltroFechas",
+        notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
+        + "a la grafica de total de número de órdenes de ventas con filtro de fechas.")
     @GetMapping(path = "/grafica-total-numero-ordenes-ventas-filtro.json", produces = "application/json; charset=utf-8")
     public String getNumeroOrdenesTotalVentasFiltroFechas(
-            @ApiParam(name = "fechaInicio", value = "La fechaInicio de búsqueda") @RequestParam String fechaInicio,
-            @ApiParam(name = "fechaFin", value = "La fechaFin de búsqueda") @RequestParam String fechaFin)
-            throws BusinessException {
+        @ApiParam(name = "fechaInicio", value = "La fechaInicio de búsqueda") @RequestParam String fechaInicio,
+        @ApiParam(name = "fechaFin", value = "La fechaFin de búsqueda") @RequestParam String fechaFin)
+        throws BusinessException {
         return graficaVentasTotalesService.getNumeroOrdenesTotalVentasFiltroFechas(fechaInicio, fechaFin);
     }
 
