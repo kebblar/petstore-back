@@ -6,8 +6,10 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -52,6 +54,8 @@ public class TestAnuncioService {
 	private AnuncioService anuncioService;
 	private List<MascotaValorAtributoRequest> atributos;
 	private ActualizaAnuncioRequest actualizaAnuncioRequest;
+	private LocalDate fechaActual = LocalDate.now(ZoneId.of("\"America/Mexico_City\""));
+	private LocalDateTime fechaTimeActual = LocalDateTime.now(ZoneId.of("\"America/Mexico_City\""));
 	
 	@Before
 	public void pedro() throws SQLException {
@@ -67,7 +71,7 @@ public class TestAnuncioService {
 	public void actualizacion() throws Exception{
 	  when(anuncioMapper.getAnuncioById(1)).thenReturn(
 	        new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
-	        new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3)
+	        new BigDecimal(234), fechaActual, fechaActual, fechaTimeActual, fechaTimeActual, null, (short) 3)
 	  );
 	    this.atributos = new ArrayList<>();
 	    this.atributos.add(new MascotaValorAtributoRequest(1,1));
@@ -178,8 +182,8 @@ public class TestAnuncioService {
 			anuncioResponse1.setIdCategoria(1);
 			anuncioResponse1.setId(1);
 			anuncioResponse1.setFolio("124123513");
-			anuncioResponse1.setFechaInicioVigencia(new Date());
-			anuncioResponse1.setFechaFinVigencia(new Date());
+			anuncioResponse1.setFechaInicioVigencia(fechaActual);
+			anuncioResponse1.setFechaFinVigencia(fechaActual);
 			anuncioResponse1.setDescripcion("Descripcion");
 			anuncioResponse1.setDescEstatus("Activo");
 		    List<AnuncioMedia> media = new ArrayList<>();
