@@ -212,6 +212,7 @@ public class AnuncioUtil {
             consultaBase.append(sb).append(")");   
         }
         response.add(consultaBase.toString());
+        consultaBase.append(" ORDER BY fecha_alta DESC ");
         consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
         response.add(consultaBase.toString());
         return response;

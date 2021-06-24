@@ -120,17 +120,20 @@ public class AnuncioServiceImpl implements AnuncioService {
         logger.info(request.toString());
         AnuncioUtil.validaCampos(request);
         //Se valida si los estatus son correctos
-        if(request instanceof ActualizaAnuncioRequest) {
-            try {
-                Anuncio anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
-                if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
-                        || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
-                    throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido o ha sido eliminado",4091,"CVE_4091",HttpStatus.CONFLICT);
-                    }
-                } catch (SQLException e) {
-                    throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
-                    }
+	    if(request instanceof ActualizaAnuncioRequest) {
+	        try {
+	            Anuncio anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
+	            if(anuncioBase == null) {
+	            	throw new BusinessException("No existe el anuncio","El anuncio solicitado no existe",4091,"CVE_4091",HttpStatus.CONFLICT);
+	            }
+	            if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
+	                    || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
+	            	throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido o ha sido eliminado",4091,"CVE_4091",HttpStatus.CONFLICT);
+                }
+            } catch (SQLException e) {
+                throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
             }
+	    }
         Anuncio anuncioAlta= new Anuncio();
         anuncioAlta.setTitulo(request.getTitulo());
         anuncioAlta.setPrecio(request.getPrecio());
@@ -138,10 +141,10 @@ public class AnuncioServiceImpl implements AnuncioService {
         anuncioAlta.setDescripcion(request.getDescripcion());
         anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
         anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
-                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
                 :null);
         anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?
-                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
                 :null);
         try {
             //Si los datos son correctos, se procede con el guardado o actualizacion
