@@ -188,7 +188,6 @@ public class MunicipioController {
                 @ApiParam(name = "id", value = "id del pais", defaultValue = "1") @PathVariable int id,
                 @ApiParam(name = "nombre", value = "nombre del municipio", defaultValue = "Ixtapaluca") @PathVariable String nombre
                 ) throws BusinessException {
-    	System.out.println("Pais " + id + " nombre " + nombre);
             return this.municipioService.getMunicipiosByPaisDescripcion(id,nombre); 
         }
     
