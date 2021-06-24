@@ -52,7 +52,9 @@ public interface GraficaCompradorMapper {
             @Result(property = "cantidad", column = "cantidad"),
             @Result(property = "fecha", column = "fecha")})
     @Select("SELECT usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha from orden_compra oc "
-            + "inner join usuario_detalle usu on (usu.id_usuario = oc.id_usuario) " + "group by usu.nombre order by cantidad desc limit 5")
+            + "inner join usuario_detalle usu on (usu.id_usuario = oc.id_usuario) "
+            + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
+            + "group by usu.nombre order by cantidad desc limit 5")
     List<GraficaComprador> getComprador() throws SQLException;
 
     @ResultMap("GraficaComMap")
