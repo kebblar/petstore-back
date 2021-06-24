@@ -168,7 +168,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     @Override
     public List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException {
         try {
-        	if(pais > 0 && nombre == null) {
+        	if(pais > 0 && (nombre == null || nombre.isBlank())) {
             return municipioMapper.getMunicipiosByPaisDescripcion(pais);
         	} else if (pais > 0 && nombre.length()>0 ) {
         	return municipioMapper.getMunicipiosByPaisNombreDescripcion(pais, nombre);
