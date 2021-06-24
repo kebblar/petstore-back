@@ -58,6 +58,8 @@ public class SmsServiceImpl implements SmsService {
 	@Override
 	public String getCveSMS() {
 	    double cve = 10000 + Math.random() * 90000;
-	    return String.valueOf((int) cve);
+	    String clave = String.valueOf((int) cve);
+        logger.info("Clave Generada para la apertura del PDF via SMS: -->"+clave+"<--");
+	    return clave;
 	}
 }
