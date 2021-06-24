@@ -18,9 +18,6 @@
  */
 package io.kebblar.petstore.api.utils;
 
-import java.util.regex.Pattern;
-
-
 /**
  * Clase de soporte para convertir cantidades numericas a letras formato String
  *
