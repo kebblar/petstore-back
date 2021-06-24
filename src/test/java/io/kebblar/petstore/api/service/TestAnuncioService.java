@@ -54,8 +54,8 @@ public class TestAnuncioService {
 	private AnuncioService anuncioService;
 	private List<MascotaValorAtributoRequest> atributos;
 	private ActualizaAnuncioRequest actualizaAnuncioRequest;
-	private LocalDate fechaActual = LocalDate.now(ZoneId.of("\"America/Mexico_City\""));
-	private LocalDateTime fechaTimeActual = LocalDateTime.now(ZoneId.of("\"America/Mexico_City\""));
+	private LocalDate fechaActual = LocalDate.now(ZoneId.of("America/Mexico_City"));
+	private LocalDateTime fechaTimeActual = LocalDateTime.now(ZoneId.of("America/Mexico_City"));
 	
 	@Before
 	public void pedro() throws SQLException {
