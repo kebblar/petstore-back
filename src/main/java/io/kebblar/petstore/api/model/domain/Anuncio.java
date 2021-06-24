@@ -21,8 +21,7 @@ package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>Descripción:</p>
@@ -41,11 +40,11 @@ public class Anuncio implements Serializable {
     private String titulo;
     private String descripcion;
     private BigDecimal precio;
-    private LocalDate fechaInicioVigencia;
-    private LocalDate fechaFinVigencia;
-    private LocalDateTime fechaAlta;
-    private LocalDateTime fechaModificacion;
-    private LocalDateTime fechaEliminacion;
+    private Date fechaInicioVigencia;
+    private Date fechaFinVigencia;
+    private Date fechaAlta;
+    private Date fechaModificacion;
+    private Date fechaEliminacion;
     private short idEstatus;
     
     public Anuncio() {
@@ -56,8 +55,8 @@ public class Anuncio implements Serializable {
     }
 
     public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
-    		LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, LocalDateTime fechaAlta, LocalDateTime fechaModificacion,
-    		LocalDateTime fechaEliminacion, short idEstatus) {
+            Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
+            Date fechaEliminacion, short idEstatus) {
         this.id = id;
         this.idCategoria = idCategoria;
         this.folio = folio;
@@ -120,43 +119,43 @@ public class Anuncio implements Serializable {
         this.precio = precio;
     }
 
-    public LocalDate getFechaInicioVigencia() {
+    public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
-    public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
+    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
-    public LocalDate getFechaFinVigencia() {
+    public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
-    public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
+    public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
-    public LocalDateTime getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(LocalDateTime fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public LocalDateTime getFechaEliminacion() {
+    public Date getFechaEliminacion() {
         return fechaEliminacion;
     }
 
-    public void setFechaEliminacion(LocalDateTime fechaEliminacion) {
+    public void setFechaEliminacion(Date fechaEliminacion) {
         this.fechaEliminacion = fechaEliminacion;
     }
 

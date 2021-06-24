@@ -19,7 +19,7 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,8 +37,8 @@ public class DetalleAnuncioResponse {
     private String titulo;
     private String descripcion;
     private BigDecimal precio;
-    private LocalDate fechaInicioVigencia;
-    private LocalDate fechaFinVigencia;
+    private Date fechaInicioVigencia;
+    private Date fechaFinVigencia;
     private short idEstatus;
     private String descEstatus;
     private List<MascotaValorAtributoResponse> atributos;
@@ -100,19 +100,19 @@ public class DetalleAnuncioResponse {
         this.precio = precio;
     }
     
-    public LocalDate getFechaInicioVigencia() {
+    public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
     
-    public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
+    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
     
-    public LocalDate getFechaFinVigencia() {
+    public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
     
-    public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
+    public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
     
@@ -253,7 +253,7 @@ public class DetalleAnuncioResponse {
     }
     
     public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
-            String descripcion, BigDecimal precio, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, short idEstatus,
+            String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
             String descEstatus, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
         this.id = id;
         this.idCategoria = idCategoria;
