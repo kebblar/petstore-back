@@ -155,4 +155,11 @@ public class PaqueteriaController {
         return paqueteriaService.delete(paqueteria);
     }
 
+    @GetMapping(path = "/paqueteria/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    public List<Paqueteria> getPAqueterias(
+            @ApiParam(name = "nombre", value = "Nombre la paqueteria", defaultValue = "DHL")
+            @PathVariable String nombre) throws BusinessException {
+        return this.paqueteriaService.getByNombre(nombre);
+    }
+
 }
