@@ -36,7 +36,7 @@ public interface GraficaService {
      *
      * @return GraficaTO.
      */
-    GraficaTO getMascotaMasVendida() throws BusinessException;
+    String getMascotaMasVendida() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las mascotas mas vendidas
@@ -44,23 +44,23 @@ public interface GraficaService {
      *
      * @return GraficaTO.
      */
-    GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
+    String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
      * 'graficaTO'.
      *
-     * @return GraficaTO.
+     * @return String.
      */
-    GraficaTO getPaqueteria() throws BusinessException;
+    String getPaqueteria() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
      * por rango de fechas 'graficaTO'.
      *
-     * @return GraficaTO.
+     * @return String.
      */
-    GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
+    String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando los compradores mas

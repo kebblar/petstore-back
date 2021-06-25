@@ -36,6 +36,8 @@ import io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper;
 import io.kebblar.petstore.api.model.domain.GraficaTO;
 import io.kebblar.petstore.api.model.domain.Chart;
 import io.kebblar.petstore.api.model.domain.GraficaComprador;
+import io.kebblar.petstore.api.model.domain.GraficaMascota;
+import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
@@ -77,15 +79,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public GraficaTO getMascotaMasVendida() throws BusinessException {
+    public String getMascotaMasVendida() throws BusinessException {
         try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaMapper.getAll();
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
+            String cadena = "";
+            List<GraficaMascota> graficas = graficaMapper.getAll();
+            if (!graficas.isEmpty()) {
+                cadena = formatearGraficaMascota(graficas);
+                return cadena;
             }
-            graphs.setChart(graficas);
-            return graphs;
+            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -93,15 +95,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
+            String cadena = "";
+            List<GraficaMascota> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
+            if (!graficas.isEmpty()) {
+                cadena = formatearGraficaMascota(graficas);
+                return cadena;
             }
-            graphs.setChart(graficas);
-            return graphs;
+            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -109,15 +111,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public GraficaTO getPaqueteria() throws BusinessException {
+    public String getPaqueteria() throws BusinessException {
         try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteria();
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
+            String cadena = "";
+            List<GraficaPaqueteria> graficas = graficaPaqueteriaMapper.getPaqueteria();
+            if (!graficas.isEmpty()) {
+                cadena = formatearGraficaPaqueteria(graficas);
+                return cadena;
             }
-            graphs.setChart(graficas);
-            return graphs;
+            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -125,15 +127,15 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
+            String cadena = "";
+            List<GraficaPaqueteria> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
+            if (!graficas.isEmpty()) {
+                cadena = formatearGraficaPaqueteria(graficas);
+                return cadena;
             }
-            graphs.setChart(graficas);
-            return graphs;
+            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
@@ -182,6 +184,46 @@ public class GraficaServiceImpl implements GraficaService {
         sb.append("{\"chart\":{\"label\":[");
         for (int i = 0; i < graficas.size(); i++) {
             sb.append("\"" + graficas.get(i).getComprador() + "\",");
+            sbData.append(graficas.get(i).getCantidad() + ",");
+            mes = ("\"" + obtenerMes(graficas.get(i).getFecha()) + "\",");
+        }
+        cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
+        cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
+        cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
+        System.out.println(cadena + "]}}");
+        return cadena + "]}}";
+    }
+    
+    private String formatearGraficaPaqueteria(List<GraficaPaqueteria> graficas) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbData = new StringBuilder();
+        String mes = "";
+        String cadena;
+        String cadenaTmp;
+        String cadenaMes;
+        sb.append("{\"chart\":{\"label\":[");
+        for (int i = 0; i < graficas.size(); i++) {
+            sb.append("\"" + graficas.get(i).getPaqueteria() + "\",");
+            sbData.append(graficas.get(i).getCantidad() + ",");
+            mes = ("\"" + obtenerMes(graficas.get(i).getFecha()) + "\",");
+        }
+        cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
+        cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
+        cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
+        System.out.println(cadena + "]}}");
+        return cadena + "]}}";
+    }
+    
+    private String formatearGraficaMascota(List<GraficaMascota> graficas) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbData = new StringBuilder();
+        String mes = "";
+        String cadena;
+        String cadenaTmp;
+        String cadenaMes;
+        sb.append("{\"chart\":{\"label\":[");
+        for (int i = 0; i < graficas.size(); i++) {
+            sb.append("\"" + graficas.get(i).getMascota() + "\",");
             sbData.append(graficas.get(i).getCantidad() + ",");
             mes = ("\"" + obtenerMes(graficas.get(i).getFecha()) + "\",");
         }

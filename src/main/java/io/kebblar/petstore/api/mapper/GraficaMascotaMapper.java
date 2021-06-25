@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-import io.kebblar.petstore.api.model.domain.Chart;
+import io.kebblar.petstore.api.model.domain.GraficaMascota;
 
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Chart
@@ -47,15 +47,15 @@ public interface GraficaMascotaMapper {
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      *                      operación desde la base de datos.
      */
-    @Results(id = "GraficaMap", value = { @Result(property = "label", column = "mascota"),
-            @Result(property = "data", column = "cantidad"), @Result(property = "mes", column = "fecha") })
+    @Results(id = "GraficaMap", value = { @Result(property = "mascota", column = "mascota"),
+            @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
     @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "
             + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "group by cat.categoria order by cantidad desc limit 5 ")
-    List<Chart> getAll() throws SQLException;
+    List<GraficaMascota> getAll() throws SQLException;
 
     @ResultMap("GraficaMap")
     @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
@@ -64,6 +64,6 @@ public interface GraficaMascotaMapper {
             + "inner join categoria cat on (cat.id = anun.id_categoria) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} "
             + "group by cat.categoria order by cantidad desc limit 5")
-    List<Chart> getMascotaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;
+    List<GraficaMascota> getMascotaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;
 
 }

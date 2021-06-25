@@ -79,12 +79,12 @@ public class GraficaController {
             + "capaz de ajustar lo necesario para que la cadena resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(value = "/grafica-mascota-mas-vendida.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getMascotaMasVendida() throws ControllerException {
+    public String getMascotaMasVendida() throws ControllerException {
         return graficaService.getMascotaMasVendida();
     }
 
     @GetMapping(path = "/grafica-mascota-mas-vendida-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getMascotaMasVendidaRango(
+    public String getMascotaMasVendidaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
@@ -99,12 +99,12 @@ public class GraficaController {
             + "capaz de ajustar lo necesario para que la cadena resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(value = "/grafica-paqueteria.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getPaqueteria() throws ControllerException {
+    public String getPaqueteria() throws ControllerException {
         return graficaService.getPaqueteria();
     }
 
     @GetMapping(path = "/grafica-paqueteria-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getPaqueteriaRango(
+    public String getPaqueteriaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
