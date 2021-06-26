@@ -35,7 +35,10 @@
 package io.kebblar.petstore.api.rest;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
@@ -49,6 +52,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
@@ -62,6 +66,7 @@ import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -216,5 +221,19 @@ public class AnuncioController {
     @ApiParam(name = "imagenRequest", value = "Informacion de la imagen de un anuncio a convertir en principal.")
     @RequestBody AnuncioImagenRequest imagenRequest) throws BusinessException {
         anuncioService.imagenPrincipal(imagenRequest);
+    }
+    
+    @ApiOperation(
+            value = "AnuncioController::content",
+            notes = "Regesa el primer anuncio de entre todos los anuncios que coinciden con la busqueda dada")
+    @GetMapping(
+        value = "/content/{seccion}/{description}",
+        produces = "application/json; charset=utf-8")
+    public Anuncio anunciosByUrl(
+          @PathVariable String description,
+          @PathVariable String seccion) throws BusinessException {
+        //anuncioService.updateSearchUrl();
+        List<Anuncio> lista = anuncioService.getBySearchUrl(description);
+        return lista.get(0);
     }
 }

@@ -67,7 +67,7 @@ public class TestAnuncioService {
     public void actualizacion() throws Exception{
       when(anuncioMapper.getAnuncioById(1)).thenReturn(
             new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
-            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3)
+            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3, "url-search")
       );
         this.atributos = new ArrayList<>();
         this.atributos.add(new MascotaValorAtributoRequest(1,1));

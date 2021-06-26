@@ -53,7 +53,7 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
  */
 @Repository
 public interface AnuncioMapper {
-    static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
+    static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus, search_url ";
     static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
 
     /**
@@ -65,7 +65,7 @@ public interface AnuncioMapper {
      */
     @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  "
             + " #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion}, "
-            + " #{fechaEliminacion}, #{idEstatus} )")
+            + " #{fechaEliminacion}, #{idEstatus}, #{searchUrl} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
 
@@ -99,11 +99,20 @@ public interface AnuncioMapper {
             @Result(property = "fechaAlta",   column = "fecha_alta"),
             @Result(property = "fechaModificacion",   column = "fecha_modificacion"),
             @Result(property = "fechaEliminacion",   column = "fecha_eliminacion"),
-            @Result(property = "idEstatus",   column = "id_estatus")
+            @Result(property = "idEstatus",   column = "id_estatus"),
+            @Result(property = "searchUrl",   column = "search_url")
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ")
     Anuncio getAnuncioById(int id) throws SQLException;
+    
+    @ResultMap("AnuncioMap")
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio")
+    List<Anuncio> getAll() throws SQLException;
 
+    @ResultMap("AnuncioMap")
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url = #{searchUrl}")
+    List<Anuncio> getBySearchUrl(String searchUrl) throws SQLException;
+    
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
      *
@@ -124,7 +133,8 @@ public interface AnuncioMapper {
      */
     @Update("UPDATE anuncio SET id_categoria = #{idCategoria}, titulo = #{titulo}, descripcion = #{descripcion}, "
             + " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
-            + " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus} "
+            + " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus}, "
+            + " search_url = #{searchUrl} "
             + " WHERE id = #{id} ")
     int update(Anuncio anuncio) throws SQLException;
 
@@ -294,7 +304,8 @@ public interface AnuncioMapper {
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
 
     /**
-     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin
+     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin.
+     * 
      * @param fechaInicio - Filtro de fecha de inicio con la que se comparara la fecha de inicio vigencia
      * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
      * @param estatus - Estatus mediante el cual se filtraran los anuncios
@@ -306,7 +317,8 @@ public interface AnuncioMapper {
     List<Anuncio> anunciosPorPublicar(String fechaInicio, String fechaFin,  short estatus) throws SQLException;
 
     /**
-     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin
+     * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin.
+     * 
      * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
      * @param estatus - Estatus mediante el cual se filtraran los anuncios
      * @return Listado de clases de tipo 'Anuncio' con la informacion de los anuncio

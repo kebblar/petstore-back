@@ -24,8 +24,11 @@
 package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
@@ -150,4 +153,13 @@ public interface AnuncioService {
      */
     void schedulerPublicarAnuncio() throws BusinessException;
 
+    /*
+     * Busca los anuncios que pseen el url dado
+     */
+    List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException;
+    
+    /**
+     * Auxiliar que actualiza los url's de búsqueda de los anuncios
+     */
+    void updateSearchUrl();
 }
