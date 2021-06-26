@@ -43,17 +43,17 @@ public class ChartWrapper {
         this.chart = chart;
     }
 
-    public ChartData getGraphData() {
+    public ChartData getChart() {
         return chart;
     }
 
-    public void setGraphData(ChartData chart) {
+    public void setChart(ChartData chart) {
         this.chart = chart;
     }
 
     @Override
     public String toString() {
-        return "Chart [graphData=" + chart + "]";
+        return "Chart [chart=" + chart + "]";
     }
 
     @Override

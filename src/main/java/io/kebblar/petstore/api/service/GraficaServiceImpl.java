@@ -83,13 +83,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getMascotaMasVendida() throws BusinessException {
+    public ChartWrapper getMascotaMasVendida() throws BusinessException {
         try {
             List<Grafica> graficas = graficaMapper.getAll();
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -99,13 +97,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public ChartWrapper getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
             List<Grafica> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-                System.out.println("Cadena Json : " + gson.toJson(y));
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -115,13 +111,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getPaqueteria() throws BusinessException {
+    public ChartWrapper getPaqueteria() throws BusinessException {
         try {
             List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteria();
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-                System.out.println("Cadena Json : " + gson.toJson(y));
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -131,13 +125,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
+    public ChartWrapper getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
             List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-                System.out.println("Cadena Json : " + gson.toJson(y));
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -147,13 +139,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getCompradorAsiduo() throws BusinessException {
+    public ChartWrapper getCompradorAsiduo() throws BusinessException {
         try {
             List<Grafica> graficas = graficaCompradorMapper.getComprador();
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-                System.out.println("Cadena Json : " + gson.toJson(y));
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -163,13 +153,11 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public String getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
+    public ChartWrapper getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
             List<Grafica> graficas = graficaCompradorMapper.getCompradorPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                ChartWrapper y = build2(graficas);
-                System.out.println("Cadena Json : " + gson.toJson(y));
-                return gson.toJson(y);
+                return build2(graficas);   
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
