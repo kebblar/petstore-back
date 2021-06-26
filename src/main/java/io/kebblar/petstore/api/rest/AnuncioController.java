@@ -225,15 +225,15 @@ public class AnuncioController {
     
     @ApiOperation(
             value = "AnuncioController::content",
-            notes = "Regesa el primer anuncio de entre todos los anuncios que coinciden con la busqueda dada")
+            notes = "Regesa la lista de anuncios activos de entre todos los que coinciden con la busqueda dada")
     @GetMapping(
         value = "/content/{seccion}/{description}",
         produces = "application/json; charset=utf-8")
-    public Anuncio anunciosByUrl(
+    public List<Anuncio> anunciosByUrl(
           @PathVariable String description,
           @PathVariable String seccion) throws BusinessException {
         //anuncioService.updateSearchUrl();
-        List<Anuncio> lista = anuncioService.getBySearchUrl(description);
-        return lista.get(0);
+        return anuncioService.getBySearchUrl(description); // lista NO nula con al menos 1 elemento
     }
+
 }

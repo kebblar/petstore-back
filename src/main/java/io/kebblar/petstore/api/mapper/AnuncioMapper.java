@@ -110,7 +110,7 @@ public interface AnuncioMapper {
     List<Anuncio> getAll() throws SQLException;
 
     @ResultMap("AnuncioMap")
-    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url = #{searchUrl} and (id_estatus=2 or id_estatus=3)")
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url like #{searchUrl} and (id_estatus=2 or id_estatus=3)")
     List<Anuncio> getBySearchUrl(String searchUrl) throws SQLException; // estos paréntesis --> ^ que se usan en el query--> ^ son MUY importantes !!!!
     
     /**
