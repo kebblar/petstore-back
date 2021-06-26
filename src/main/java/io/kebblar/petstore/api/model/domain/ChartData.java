@@ -44,8 +44,6 @@ public class ChartData implements Serializable {
     private Set<String> mes;
 
     public ChartData() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
     public ChartData(List<String> label, List<Long> data, Set<String> mes) {
