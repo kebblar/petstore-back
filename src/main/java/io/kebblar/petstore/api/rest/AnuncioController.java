@@ -224,14 +224,13 @@ public class AnuncioController {
     }
     
     @ApiOperation(
-            value = "AnuncioController::content",
+            value = "AnuncioController::getBySearchUrl",
             notes = "Regesa la lista de anuncios activos de entre todos los que coinciden con la busqueda dada")
     @GetMapping(
-        value = "/content/{seccion}/{description}",
+        value = "/content/{description}",
         produces = "application/json; charset=utf-8")
-    public List<Anuncio> anunciosByUrl(
-          @PathVariable String description,
-          @PathVariable String seccion) throws BusinessException {
+    public List<Anuncio> getBySearchUrl(
+          @PathVariable(required = true) String description) throws BusinessException {
         //anuncioService.updateSearchUrl();
         return anuncioService.getBySearchUrl(description); // lista NO nula con al menos 1 elemento
     }

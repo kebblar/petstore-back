@@ -544,6 +544,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     
     @Override
     public List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException {
+        if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";
         try {
             List<Anuncio> lista = anuncioMapper.getBySearchUrl(searchUrl);
             if(lista==null || lista.size()<1) {
@@ -554,4 +555,5 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new DatabaseException(e.getMessage());
         }
     }
+
 }
