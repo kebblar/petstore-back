@@ -148,13 +148,16 @@ public class AdminController {
             return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
         }
     }
-    @GetMapping(path = "/content/{description}", produces = "application/json; charset=utf-8")
-    public List<String> getContentByName(@PathVariable String description) {
+    @GetMapping(path = "/content/{seccion}/{description}", produces = "application/json; charset=utf-8")
+    public List<String> getContentByName(
+            @PathVariable String description, 
+            @PathVariable String seccion) {
         List<String> result = new ArrayList<>();
         result.add(description);
         result.add("listo");
         result.add("ya");
         result.add("quedo");
+        result.add(seccion);
         return result;
     }
 }
