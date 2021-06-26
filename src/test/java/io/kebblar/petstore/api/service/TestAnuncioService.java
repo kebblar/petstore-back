@@ -56,11 +56,11 @@ public class TestAnuncioService {
     @Before
     public void pedro() throws SQLException {
         this.anuncioService= new AnuncioServiceImpl(anuncioMapper, uploadService, anuncioImagenMapper);
-
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio existente
+    * Escenario donde se trata de actualizar un anuncio existente.
+    * 
     * @throws Exception
     */
     @Test()
@@ -80,7 +80,8 @@ public class TestAnuncioService {
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio que no existe
+    * Escenario donde se trata de actualizar un anuncio que no existe.
+    * 
     * @throws SQLException
     * @throws BusinessException
     * @throws Exception
@@ -165,7 +166,6 @@ public class TestAnuncioService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -200,4 +200,5 @@ public class TestAnuncioService {
             e.printStackTrace();
         }
     }
+    
 }
