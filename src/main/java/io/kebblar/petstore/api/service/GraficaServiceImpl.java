@@ -72,7 +72,7 @@ public class GraficaServiceImpl implements GraficaService {
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
     public GraficaServiceImpl(
-            GraficaMascotaMapper graficaMapper, 
+            GraficaMascotaMapper graficaMapper,
             GraficaPaqueteriaMapper graficaPaqueteriaMapper,
             GraficaCompradorMapper graficaCompradorMapper) {
         this.graficaMapper = graficaMapper;
@@ -85,7 +85,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaMapper.getAll();
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -99,7 +99,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -113,7 +113,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteria();
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -127,7 +127,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -141,7 +141,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaCompradorMapper.getComprador();
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -155,7 +155,7 @@ public class GraficaServiceImpl implements GraficaService {
         try {
             List<Grafica> graficas = graficaCompradorMapper.getCompradorPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                return build2(graficas);   
+                return build2(graficas);
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -179,6 +179,6 @@ public class GraficaServiceImpl implements GraficaService {
         }
         ChartData chartData = new ChartData(label, data, mes);
         return new ChartWrapper(chartData);
-    }  
+    }
 
 }

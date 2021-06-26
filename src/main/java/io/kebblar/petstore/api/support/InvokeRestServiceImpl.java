@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -33,7 +33,7 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
 
 /**
  * Implementación de la interfaz {@link InvokeRestService}.
- * 
+ *
  * @author dalvarez
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
@@ -90,7 +90,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("credentials", credential); 
+            headers.add("credentials", credential);
             SmsRequest smsRequest = new SmsRequest(tel, msj);
             HttpEntity<SmsRequest> request = new HttpEntity<>(smsRequest, headers);
             ResponseEntity<SmsResponse> result = new RestTemplate().postForEntity(url, request, SmsResponse.class);

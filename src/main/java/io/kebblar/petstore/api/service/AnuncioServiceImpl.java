@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -14,7 +14,7 @@
  *
  * Historia:    .
  *              20210510_0050 Creación de éste servicio
- *              20210523_2030 Se  agrega  el  metodo  de  elimado 
+ *              20210523_2030 Se  agrega  el  metodo  de  elimado
  *              logico
  *              20210528_1159 Se agrega el metodo de busqueda
  *              administracion
@@ -73,11 +73,11 @@ import io.kebblar.petstore.api.utils.AnuncioUtil;
 
 /**
  * Implementación de la interfaz de servicios para 'Anuncio'.
- * 
+ *
  * @author  Maria Isabel Contreras Garcia
  * @see     io.kebblar.petstore.api.model.domain.Anuncio
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 @Service
 public class AnuncioServiceImpl implements AnuncioService {
@@ -90,7 +90,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Value("${app.max-file-size}")
     private long max;
-    
+
     @Value("${app.imagen-tam}")
     private int imagenAltura;
 
@@ -101,7 +101,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param anuncioMapper mapper utilizado para llamar a metodos de persistencia
      */
     public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService, AnuncioMediaMapper anuncioImagenMapper) {
@@ -109,38 +109,38 @@ public class AnuncioServiceImpl implements AnuncioService {
         this.uploadService = uploadService;
         this.anuncioImagenMapper = anuncioImagenMapper;
     }
-    
+
     @Override
     @Transactional(
-                propagation = Propagation.REQUIRED, 
+                propagation = Propagation.REQUIRED,
                 isolation = Isolation.DEFAULT,
-                timeout = 36000, 
+                timeout = 36000,
                 rollbackFor = TransactionException.class)
     public AnuncioResponse guardar(AnuncioRequest request) throws BusinessException {
         logger.info(request.toString());
         AnuncioUtil.validaCampos(request);
         //Se valida si los estatus son correctos
-	    if(request instanceof ActualizaAnuncioRequest) {
-	        try {
-	            Anuncio anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
-	            if(anuncioBase == null) {
-	            	throw new BusinessException("No existe el anuncio","El anuncio solicitado no existe",4091,"CVE_4091",HttpStatus.CONFLICT);
-	            }
-	            if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
-	                    || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
-	            	throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido o ha sido eliminado",4091,"CVE_4091",HttpStatus.CONFLICT);
+        if(request instanceof ActualizaAnuncioRequest) {
+            try {
+                Anuncio anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
+                if(anuncioBase == null) {
+                    throw new BusinessException("No existe el anuncio","El anuncio solicitado no existe",4091,"CVE_4091",HttpStatus.CONFLICT);
+                }
+                if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus()
+                        || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
+                    throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido o ha sido eliminado",4091,"CVE_4091",HttpStatus.CONFLICT);
                 }
             } catch (SQLException e) {
                 throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
             }
-	    }
+        }
         Anuncio anuncioAlta= new Anuncio();
         anuncioAlta.setTitulo(request.getTitulo());
         anuncioAlta.setPrecio(request.getPrecio());
         anuncioAlta.setIdCategoria(request.getIdCategoria());
         anuncioAlta.setDescripcion(request.getDescripcion());
         anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
-        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? 
+        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ?
                 java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
                 :null);
         anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?
@@ -167,19 +167,19 @@ public class AnuncioServiceImpl implements AnuncioService {
                 }
             logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
             return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
-        }catch (Exception e) { 
+        }catch (Exception e) {
             e.printStackTrace();
             throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
         }
     }
-    
+
     @Override
     public AnuncioResponse confirmarAnuncio(int id) throws BusinessException {
         AnuncioResponse response = new AnuncioResponse();
         try {
             //Si los datos son correctos, se procede con el guardado
             Anuncio anuncio = anuncioMapper.getAnuncioById(id);
-            if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getIdEstatus() 
+            if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getIdEstatus()
                     && AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getIdEstatus()
                     && AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getIdEstatus()) {
                 throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
@@ -201,14 +201,14 @@ public class AnuncioServiceImpl implements AnuncioService {
                 return response;
             }
             //Si el anuncio tiene fechas de inicio de vigencia igual a la fecha actual, pasa a estatus PUBLICADO
-            if(anuncio.getFechaInicioVigencia()!=null && 
+            if(anuncio.getFechaInicioVigencia()!=null &&
                     AnuncioUtil.comparafechas(new Date(), anuncio.getFechaInicioVigencia())>=0) {
                 anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.PUBLICADO.getId());
                 response.setInfo("El anuncio ha sido publicado correctamente.");
                 return response;
             }
             //Si el anuncio tiene fecha de inicio de vigencia posterior a la fecha actual, pasa a esatus ACTIVO
-            if(anuncio.getFechaInicioVigencia()!=null && 
+            if(anuncio.getFechaInicioVigencia()!=null &&
                     AnuncioUtil.comparafechas(new Date(), anuncio.getFechaInicioVigencia())<0) {
                 anuncioMapper.actualizaEstatus(id, AnuncioEstatusEnum.ACTIVO.getId());
                 response.setInfo("El anuncio ha sido guardado, se publicara en cuanto llegue la fecha solicitada.");
@@ -217,9 +217,9 @@ public class AnuncioServiceImpl implements AnuncioService {
         } catch (SQLException e) {
             throw new BusinessException("Error de sistema","Ocurrio un error al confirmar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
         }
-        return response;    
+        return response;
     }
-    
+
     @Override
     public AnuncioResponse eliminarAnuncio(int id) throws BusinessException {
         AnuncioResponse response = new AnuncioResponse();
@@ -231,17 +231,17 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
             if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
                 throw new BusinessException("Error de datos","El anuncio ha sido eliminado previamente",4091,"CVE_4091",HttpStatus.CONFLICT);
-            }       
+            }
             //Se procede a realizar el eliminado del registro
             anuncioMapper.eliminaAnuncio(id, AnuncioEstatusEnum.ELIMINADO.getId(), new Date());
             response.setId(anuncio.getId());
-            response.setFolio(anuncio.getFolio());  
+            response.setFolio(anuncio.getFolio());
         } catch (SQLException e) {
             throw new BusinessException("Error de sistema","Ocurrio un error al tratar de eliminar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
         }
-        return response;    
+        return response;
     }
-    
+
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
         try {
@@ -285,7 +285,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     @Override
-    public void eliminarImagen(String idImagen) throws BusinessException {      
+    public void eliminarImagen(String idImagen) throws BusinessException {
         try {
             AnuncioMedia entidad=anuncioImagenMapper.getImagen(idImagen);
             if(entidad==null) {
@@ -311,7 +311,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 logger.error("Este anuncio (folio: "+detalleResponse.getFolio()+") NO se encuentra ni ACTIVO ni PUBLICADO id: " + id);
                 //throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
                 return null;
-            }   
+            }
             //Se consulta la informacion de los atributos del anuncio
             List<MascotaValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
             //Se consulta la informacion de las imagenes del anuncio
@@ -326,7 +326,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             //Se envía solo lo necesario del detalle del anunio
             detalleResponse.setAtributos(atributosResponse);
             detalleResponse.setImagenes(imagenesResponse);
-            return detalleResponse; 
+            return detalleResponse;
         } catch (SQLException e) {
             throw new BusinessException("Error de sistema","Ocurrio un error al consultar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
         }
@@ -347,9 +347,9 @@ public class AnuncioServiceImpl implements AnuncioService {
         List<BusquedaAdministracionResponse> anuncios = anuncioMapper.busquedaAnuncio(mapSql);
         List<BusquedaAdministracionResponse> totalAnuncios = anuncioMapper.obtieneCantidad(mapSql);
         PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(totalAnuncios != null ? totalAnuncios.size() : 0, anuncios);
-            
+
         for (BusquedaAdministracionResponse anuncio:anuncios) {
-            Categoria objetoCategoria = new Categoria();            
+            Categoria objetoCategoria = new Categoria();
             anuncio.setDescripcionEstatus(anuncioMapper.obtieneDescPorId(anuncio.getIdEstatus()));
             objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
             anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
@@ -366,7 +366,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         mapSql.put("total", cadenasMapper.get(0));
         List<DetalleAnuncioResponse> anuncios = anuncioMapper.busquedaFiltro(mapSql);
         List<DetalleAnuncioResponse> totalAnuncios = anuncioMapper.totalAnuncioFiltro(mapSql);
-        
+
         for (DetalleAnuncioResponse anuncio : anuncios) {
             Categoria objetoCategoria = new Categoria();
             objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
@@ -384,7 +384,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
         response.setListaAnuncios(anuncios);
         response.setTotalAnuncios(totalAnuncios != null ? totalAnuncios.size() : 0);
-        
+
         return response;
     }
 
@@ -392,7 +392,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     public void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException {
         try {
             Anuncio anuncioBase = anuncioMapper.getAnuncioById(imagenRequest.getIdAnuncio());
-            if(anuncioBase==null ||(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() 
+            if(anuncioBase==null ||(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus()
                     || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()
                     || AnuncioEstatusEnum.CANCELADO.getId()==anuncioBase.getIdEstatus())) {
                 throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido para ser modificado",4091,"CVE_4091",HttpStatus.CONFLICT);
@@ -410,7 +410,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                     anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.TRUE);
                 }else {
                     anuncioImagenMapper.actualizaPrincipal(img.getUuid(), Boolean.FALSE);
-                }   
+                }
             }
         } catch (SQLException e) {
             logger.info("Error: "+e.getMessage());
@@ -418,52 +418,52 @@ public class AnuncioServiceImpl implements AnuncioService {
 
         }
     }
-    
+
     @Override
     @Scheduled(cron = "0 0 2 * * ?") //Se invoca el metodo cada dia
     public void schedulerPublicarAnuncio() throws BusinessException {
-        logger.info("Llamando servicio para PUBLICAR los anuncios cuya fecha de inicio de publicacion es el dia de hoy");  
+        logger.info("Llamando servicio para PUBLICAR los anuncios cuya fecha de inicio de publicacion es el dia de hoy");
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Calendar  calendar=Calendar.getInstance();
         try {
-        	//1. Se consultan todos los anuncios con estatus "ACTIVO" y con fecha de publicacion al dia de hoy
+            //1. Se consultan todos los anuncios con estatus "ACTIVO" y con fecha de publicacion al dia de hoy
             String fechaBase=dateFormat.format(calendar.getTime());
             String fechaInicio=fechaBase+" 00:00:00";
             String fechaFin=fechaBase+" 23:59:59";
-            logger.info("====> Periodo de busqueda: "+fechaInicio+" - "+fechaFin);  
-			List<Anuncio> anuncios = anuncioMapper.anunciosPorPublicar(fechaInicio, fechaFin, AnuncioEstatusEnum.ACTIVO.getId());
-			//2. Se cambia el estatus a PUBLICADO
-			if(anuncios!=null && !anuncios.isEmpty()) {
-				for(Anuncio a:anuncios) {
-					 anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.PUBLICADO.getId());
-				}
-				logger.info("====> Total de anuncios que pasaron a PUBLICADOS del dia "+anuncios.size());  
-			}else {
-				 logger.info("====> No se encontraron anuncios para pasar a PUBLICAR del periodo "+fechaInicio+" al "+fechaFin);  
-			}
-		} catch (SQLException e) {
-			 logger.error("====>Ocurrio un error durante el proceso de PUBLICAR anuncios: "+e.getMessage());
-		}
-        
+            logger.info("====> Periodo de busqueda: "+fechaInicio+" - "+fechaFin);
+            List<Anuncio> anuncios = anuncioMapper.anunciosPorPublicar(fechaInicio, fechaFin, AnuncioEstatusEnum.ACTIVO.getId());
+            //2. Se cambia el estatus a PUBLICADO
+            if(anuncios!=null && !anuncios.isEmpty()) {
+                for(Anuncio a:anuncios) {
+                     anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.PUBLICADO.getId());
+                }
+                logger.info("====> Total de anuncios que pasaron a PUBLICADOS del dia "+anuncios.size());
+            }else {
+                 logger.info("====> No se encontraron anuncios para pasar a PUBLICAR del periodo "+fechaInicio+" al "+fechaFin);
+            }
+        } catch (SQLException e) {
+             logger.error("====>Ocurrio un error durante el proceso de PUBLICAR anuncios: "+e.getMessage());
+        }
+
         logger.info("Llamando servicio de cambiar estatus a VENCIDO los anuncios cuya fecha fin de publicacion fue el dia de ayer");
         try {
-        	calendar.add(Calendar.DATE,-1); 
-        	//1. Se consultan los anuncios con estatus PUBLICADO con fecha de publicacion final al día de ayer
+            calendar.add(Calendar.DATE,-1);
+            //1. Se consultan los anuncios con estatus PUBLICADO con fecha de publicacion final al día de ayer
             String fechaFin=dateFormat.format(calendar.getTime())+" 23:59:59";
-            logger.info("====> Fecha fin de publicacion: "+fechaFin);  
-			List<Anuncio> anuncios = anuncioMapper.anunciosPorVencer(fechaFin, AnuncioEstatusEnum.PUBLICADO.getId());
-			 //2. Se cambia el estatus a VENCIDO
-			if(anuncios!=null && !anuncios.isEmpty()) {
-				for(Anuncio a:anuncios) {
-					 anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.VENCIDO.getId());
-				}
-				logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia "+anuncios.size());  
-			}else {
-				 logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);  
-			}
-		} catch (SQLException e) {
-			 logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
-		}
+            logger.info("====> Fecha fin de publicacion: "+fechaFin);
+            List<Anuncio> anuncios = anuncioMapper.anunciosPorVencer(fechaFin, AnuncioEstatusEnum.PUBLICADO.getId());
+             //2. Se cambia el estatus a VENCIDO
+            if(anuncios!=null && !anuncios.isEmpty()) {
+                for(Anuncio a:anuncios) {
+                     anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.VENCIDO.getId());
+                }
+                logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia "+anuncios.size());
+            }else {
+                 logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);
+            }
+        } catch (SQLException e) {
+             logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
+        }
     }
- 
+
 }

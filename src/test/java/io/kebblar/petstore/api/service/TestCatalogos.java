@@ -39,58 +39,58 @@ public class TestCatalogos {
 
     @Mock
     private PaisMapper paisMapper;
-    
+
     @Mock
     private EstadoMapper estadoMapper;
 
     @Mock
     private MunicipioMapper municipioMapper;
-    
+
     @Mock
     private EstatusAnuncioMapper estatusAnuncioMapper;
-    
-    @Mock 
+
+    @Mock
     private MediaTipoMapper mediaTipoMapper;
-    
+
     @Mock
     private CategoriaMapper categoriaMapper;
-    
+
     @Mock
     private AtributoMapper atributoMapper;
-    
+
     @Mock
     private ValorAtributoMapper valorAtributoMapper;
-    
+
     @Mock
     private CategoriaAtributoMapper categoriaAtributoMapper;
-  
+
     @Mock
     private PaisService paisService;
-    
+
     @Mock
     private EstadoService estadoService;
 
     @Mock
     private MunicipioService municipioService;
-    
+
     @Mock
     private EstatusAnuncioService estatusAnuncioService;
-    
+
     @Mock
     private MediaTipoService mediaTipoService;
-    
+
     @Mock
     private CategoriaService categoriaService;
-    
+
     @Mock
     private AtributoService atributoService;
-    
+
     @Mock
     private CategoriaAtributoService categoriaAtributoService;
-    
+
     @Mock
     private ValorAtributoService valorAtributoService;
-           
+
     private Pais pais;
     private List<Estado> estados = new ArrayList<>();
     private List<Municipio> municipios = new ArrayList<>();
@@ -102,39 +102,39 @@ public class TestCatalogos {
 
     @Before
     public void prepare() throws Exception {
-  
+
         paisService = new PaisServiceImpl(paisMapper);
-		estadoService = new EstadoServiceImpl(estadoMapper);
-		municipioService = new MunicipioServiceImpl(municipioMapper);
-		estatusAnuncioService = new EstatusAnuncioServiceImpl(estatusAnuncioMapper);
-		mediaTipoService = new MediaTipoServiceImpl(mediaTipoMapper);
-		categoriaService = new CategoriaServiceImpl(categoriaMapper);
-		categoriaAtributoService = new  CategoriaAtributoServiceImpl(categoriaAtributoMapper);
-		atributoService = new AtributoServiceImpl(atributoMapper);
-		valorAtributoService = new ValorAtributoServiceImpl(valorAtributoMapper);
-		pais = new  Pais(1, "México");
-		estatus = new EstatusAnuncio(1,"ACTIVO");
-		mediaTipo = new  MediaTipo(1,"JPG",1);
-		categoria = new Categoria(1,"CANINOS", 1);
-		atributo = new Atributo(1,"PESO",1);
-		valorAtributo = new ValorAtributo(1,1,"10 - 20 KILOS",1);
-		estados.add(new Estado(1,1,"VERACRUZ"));
-		estados.add(new Estado(2,1,"TABASCO"));
-		municipios.add(new Municipio(1,1, "ALVARADO"));
-		municipios.add(new Municipio(1,1, "BOCA DEL RIO"));
-		when(paisMapper.getById(1)).thenReturn(pais);
-		when(estadoMapper.getByPais(1)).thenReturn(estados);
-		when(municipioMapper.getByEstado(1)).thenReturn(municipios);
-		when(estatusAnuncioMapper.getById(1)).thenReturn(estatus);
-		when(mediaTipoMapper.getById(1)).thenReturn(mediaTipo);
-		when(categoriaMapper.getById(1)).thenReturn(categoria);
-	   // when(categoriaAtributoMapper.getAtributosFaltantesByIdCategoria(1).get(0)).thenReturn(atributo);
-		when(atributoMapper.getById(1)).thenReturn(atributo);
-		when(valorAtributoMapper.getById(1)).thenReturn(valorAtributo);
-        
+        estadoService = new EstadoServiceImpl(estadoMapper);
+        municipioService = new MunicipioServiceImpl(municipioMapper);
+        estatusAnuncioService = new EstatusAnuncioServiceImpl(estatusAnuncioMapper);
+        mediaTipoService = new MediaTipoServiceImpl(mediaTipoMapper);
+        categoriaService = new CategoriaServiceImpl(categoriaMapper);
+        categoriaAtributoService = new  CategoriaAtributoServiceImpl(categoriaAtributoMapper);
+        atributoService = new AtributoServiceImpl(atributoMapper);
+        valorAtributoService = new ValorAtributoServiceImpl(valorAtributoMapper);
+        pais = new  Pais(1, "México");
+        estatus = new EstatusAnuncio(1,"ACTIVO");
+        mediaTipo = new  MediaTipo(1,"JPG",1);
+        categoria = new Categoria(1,"CANINOS", 1);
+        atributo = new Atributo(1,"PESO",1);
+        valorAtributo = new ValorAtributo(1,1,"10 - 20 KILOS",1);
+        estados.add(new Estado(1,1,"VERACRUZ"));
+        estados.add(new Estado(2,1,"TABASCO"));
+        municipios.add(new Municipio(1,1, "ALVARADO"));
+        municipios.add(new Municipio(1,1, "BOCA DEL RIO"));
+        when(paisMapper.getById(1)).thenReturn(pais);
+        when(estadoMapper.getByPais(1)).thenReturn(estados);
+        when(municipioMapper.getByEstado(1)).thenReturn(municipios);
+        when(estatusAnuncioMapper.getById(1)).thenReturn(estatus);
+        when(mediaTipoMapper.getById(1)).thenReturn(mediaTipo);
+        when(categoriaMapper.getById(1)).thenReturn(categoria);
+       // when(categoriaAtributoMapper.getAtributosFaltantesByIdCategoria(1).get(0)).thenReturn(atributo);
+        when(atributoMapper.getById(1)).thenReturn(atributo);
+        when(valorAtributoMapper.getById(1)).thenReturn(valorAtributo);
+
 
     }
-  
+
     @Test
     public void getEstadosByPaisTest() {
         try {
@@ -152,7 +152,7 @@ public class TestCatalogos {
             logger.info("Problema con el estado");
         }
     }
-    
+
     @Test
     public void getPaisById() {
         try {
@@ -161,52 +161,52 @@ public class TestCatalogos {
             logger.info("Problema con el pais");
         }
     }
-    
+
    @Test
     public void getEstatusById() {
-    	try {
+        try {
             assertEquals(estatus, estatusAnuncioService.getById(1));
         } catch (Exception e) {
             logger.info("Problema con el estatus");
         }
     }
-   
+
    @Test
    public void getMediatipoById() {
-   	try {
+       try {
            assertEquals(mediaTipo, mediaTipoService.getById(1));
        } catch (Exception e) {
            logger.info("Problema con el media");
        }
    }
-   
+
    @Test
    public void getCategoriaById() {
-   	try {
+       try {
            assertEquals(categoria, categoriaService.getById(1));
        } catch (Exception e) {
            logger.info("Problema con el categoria");
        }
    }
-   
+
    @Test
    public void getAtributoById() {
-   	try {
+       try {
            assertEquals(atributo, atributoService.getById(1));
        } catch (Exception e) {
            logger.info("Problema con el atributo");
        }
    }
-   
+
    @Test
    public void getValorAtributoyId() {
-   	try {
+       try {
            assertEquals(valorAtributo, valorAtributoService.getById(1));
        } catch (Exception e) {
            logger.info("Problema con el valor");
        }
    }
-    
-    
+
+
 
 }

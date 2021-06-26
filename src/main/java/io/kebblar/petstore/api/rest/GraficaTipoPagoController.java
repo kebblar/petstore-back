@@ -34,19 +34,19 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "graficaTipoPago")
 @RequestMapping(value = "/api")
 public class GraficaTipoPagoController {
-	private GraficaTipoPagoService graficaTipoPagoService;
-	
-	/**
+    private GraficaTipoPagoService graficaTipoPagoService;
+
+    /**
      * Constructor que realiza el setting de los servicios que serán utilizados en
      * este controlador.
      *
      * @param graficaTipoPagoService Servicios de grafica
      */
-	public GraficaTipoPagoController(GraficaTipoPagoService graficaTipoPagoService) {
-		super();
-		this.graficaTipoPagoService = graficaTipoPagoService;
-	}
-	
+    public GraficaTipoPagoController(GraficaTipoPagoService graficaTipoPagoService) {
+        super();
+        this.graficaTipoPagoService = graficaTipoPagoService;
+    }
+
     @ApiOperation(value = "GraficaController::getMontoTotalTipoPago", notes = "Regresa una cadena de todos los objetos Grafica "
             + "debidamente paginados con base en el payload de " + "request. " + "<br/><br/>"
             + "En el caso de que los parámetros proporcionados "
@@ -66,6 +66,6 @@ public class GraficaTipoPagoController {
             throws BusinessException {
         return graficaTipoPagoService.getMontoTipoPagoRango(fechaInicio, fechaFin);
     }
-	
+
 
 }

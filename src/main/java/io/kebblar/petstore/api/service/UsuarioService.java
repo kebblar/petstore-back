@@ -188,7 +188,7 @@ public interface UsuarioService {
 
     /**
      * Actualiza la información adicional de un usuario en su tabla "usuario_detalle".
-     * 
+     *
      * @param usuarioDetalle Información a ser actualizada
      * @return Información actualizada
      * @throws BusinessException

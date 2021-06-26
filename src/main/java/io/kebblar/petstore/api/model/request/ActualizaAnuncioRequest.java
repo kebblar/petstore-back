@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -25,7 +25,7 @@ import javax.validation.constraints.Min;
 
 /**
  * Implementacion del POJO de la entidad de 'ActualizaAnuncioRequest'.
- * 
+ *
  * @author  Isabel Contreras
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -41,7 +41,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
     public ActualizaAnuncioRequest(int id) {
         this.id = id;
     }
-    
+
     public ActualizaAnuncioRequest(int id,String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
             int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> atributos) {
         super(titulo, descripcion, fechaInicioVigencia, fechaFinVigencia, idCategoria, precio, atributos);
@@ -82,5 +82,5 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
     public String toString() {
         return "ActualizaAnuncioRequest [id=" + id + "]";
     }
-    
+
 }

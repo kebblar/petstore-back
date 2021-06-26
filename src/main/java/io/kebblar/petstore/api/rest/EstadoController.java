@@ -158,10 +158,10 @@ public class EstadoController {
     @RequestBody Estado estado) throws BusinessException {
         return estadoService.delete(estado);
     }
-    
-    
+
+
     @GetMapping(
-        path = "/estados/list/{nombre}/{idPais}.json", 
+        path = "/estados/list/{nombre}/{idPais}.json",
         produces = "application/json; charset=utf-8")
     public List<Estado> getEstado(
             @ApiParam(name = "nombre", value = "Nombre del Estado", defaultValue = "Mexico") @PathVariable String nombre,
@@ -170,15 +170,15 @@ public class EstadoController {
     }
 
     @GetMapping(
-        path = "/estados/pais/{id}.json", 
+        path = "/estados/pais/{id}.json",
         produces = "application/json; charset=utf-8")
     public List<Estado> getEstadosbyPais(
             @ApiParam(name = "id", value = "ID del Estado", defaultValue = "1")
             @PathVariable int id
             ) throws ControllerException {
-        return this.estadoService.getEstadosByPais(id); 
+        return this.estadoService.getEstadosByPais(id);
     }
-    
+
     @ApiOperation(
             value = "EstadoController::getAllNombrePais",
             notes = "Regresa una lista de todos los objetos Estado ")

@@ -5,7 +5,7 @@ import java.util.List;
 public class PaginacionAnunciosResponse {
     private int totalAnuncios;
     private List<BusquedaAdministracionResponse> listaAnuncios;
-    
+
     public PaginacionAnunciosResponse(int totalAnuncios, List<BusquedaAdministracionResponse> listaAnuncios) {
         this.totalAnuncios = totalAnuncios;
         this.listaAnuncios = listaAnuncios;
@@ -24,7 +24,7 @@ public class PaginacionAnunciosResponse {
         result = prime * result + totalAnuncios;
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -43,21 +43,21 @@ public class PaginacionAnunciosResponse {
             return false;
         return true;
     }
-    
+
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
-    
+
     public void setTotalAnuncios(int totalAnuncios) {
         this.totalAnuncios = totalAnuncios;
     }
-    
+
     public List<BusquedaAdministracionResponse> getListaAnuncios() {
         return listaAnuncios;
     }
-    
+
     public void setListaAnuncios(List<BusquedaAdministracionResponse> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
     }
-     
+
 }

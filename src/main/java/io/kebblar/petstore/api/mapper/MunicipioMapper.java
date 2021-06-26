@@ -120,7 +120,7 @@ public interface MunicipioMapper {
     @ResultMap("MunicipioMap")
     @Select("SELECT " + CAMPOS + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}")
     List<Municipio> getPaginatedMunicipios(int idEstado, int startRow, int pageSize);
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
      * y el nombre del estado filtrando el nombre del municipio.
@@ -134,12 +134,12 @@ public interface MunicipioMapper {
             @Result(property = "idEstado", column = "id_estado"),
             @Result(property = "nombreEstado", column = "nombre_estado"),
             @Result(property = "nombrePais", column = "nombre_pais"),
-            @Result(property = "nombre", column = "nombre")    
+            @Result(property = "nombre", column = "nombre")
         })
     @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
-    		+ "INNER JOIN estado e on m.id_estado = e.id "
-    		+ "INNER JOIN pais p on e.id_pais = p.id "
-    		+ "WHERE m.nombre LIKE '%' #{nombre} '%'") 
+            + "INNER JOIN estado e on m.id_estado = e.id "
+            + "INNER JOIN pais p on e.id_pais = p.id "
+            + "WHERE m.nombre LIKE '%' #{nombre} '%'")
     List<Municipio> getByNombre(String nombre) throws SQLException;
 
     /**
@@ -152,10 +152,10 @@ public interface MunicipioMapper {
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
-    		+ "INNER JOIN estado e on m.id_estado = e.id "
-    		+ "INNER JOIN pais p on e.id_pais = p.id  ") 
-	List<Municipio> getMunicipiosDescripcion();
-    
+            + "INNER JOIN estado e on m.id_estado = e.id "
+            + "INNER JOIN pais p on e.id_pais = p.id  ")
+    List<Municipio> getMunicipiosDescripcion();
+
     /**
      * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
      * y el nombre del estado.
@@ -167,10 +167,10 @@ public interface MunicipioMapper {
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
-    		+ "INNER JOIN estado e on m.id_estado = e.id "
-    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais}  ") 
-	List<Municipio> getMunicipiosByPaisDescripcion(int idPais);
-    
+            + "INNER JOIN estado e on m.id_estado = e.id "
+            + "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais}  ")
+    List<Municipio> getMunicipiosByPaisDescripcion(int idPais);
+
     /**
      * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
      * y el nombre del estado.
@@ -182,10 +182,10 @@ public interface MunicipioMapper {
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
-    		+ "INNER JOIN estado e on m.id_estado = e.id "
-    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais} and m.nombre LIKE '%' #{nombre} '%' ") 
-	List<Municipio> getMunicipiosByPaisNombreDescripcion(int idPais, String nombre);
-    
+            + "INNER JOIN estado e on m.id_estado = e.id "
+            + "INNER JOIN pais p on e.id_pais = p.id WHERE e.id_pais = #{idPais} and m.nombre LIKE '%' #{nombre} '%' ")
+    List<Municipio> getMunicipiosByPaisNombreDescripcion(int idPais, String nombre);
+
     /**
      * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais
      * y el nombre del estado.
@@ -197,8 +197,8 @@ public interface MunicipioMapper {
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + AUX_CAMPOS + " FROM municipio m "
-    		+ "INNER JOIN estado e on m.id_estado = e.id "
-    		+ "INNER JOIN pais p on e.id_pais = p.id WHERE m.id_estado = #{idEstado}  and m.nombre LIKE '%' #{nombre} '%' ") 
-	List<Municipio> getMunicipiosByEstadoNombreDescripcion(int idEstado, String nombre);
+            + "INNER JOIN estado e on m.id_estado = e.id "
+            + "INNER JOIN pais p on e.id_pais = p.id WHERE m.id_estado = #{idEstado}  and m.nombre LIKE '%' #{nombre} '%' ")
+    List<Municipio> getMunicipiosByEstadoNombreDescripcion(int idEstado, String nombre);
 
 }

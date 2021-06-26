@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Implementacion del POJO de la entidad de 'ActualizaAnuncioRequest'.
- * 
+ *
  * @author  Isabel Contreras
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -31,23 +31,23 @@ public class MascotaValorAtributoRequest {
     private int id;
     @JsonProperty("valor")
     private int idValorAtributo;
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getIdValorAtributo() {
         return idValorAtributo;
     }
-    
+
     public void setIdValorAtributo(int idValorAtributo) {
         this.idValorAtributo = idValorAtributo;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -56,7 +56,7 @@ public class MascotaValorAtributoRequest {
         result = prime * result + idValorAtributo;
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -72,18 +72,18 @@ public class MascotaValorAtributoRequest {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "MascotaValorAtributoRequest [id=" + id + ", idValorAtributo=" + idValorAtributo + "]";
     }
-    
+
     public MascotaValorAtributoRequest(int id, int idValorAtributo) {
         this.id = id;
         this.idValorAtributo = idValorAtributo;
     }
-    
+
     public MascotaValorAtributoRequest() {
     }
-      
+
 }

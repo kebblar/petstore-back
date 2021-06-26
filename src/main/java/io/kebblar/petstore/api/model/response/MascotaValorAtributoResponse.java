@@ -83,5 +83,5 @@ public class MascotaValorAtributoResponse extends MascotaValorAtributoRequest {
     public String toString() {
         return "MascotaValorAtributoResponse [rango=" + rango + ", idAtributo=" + idAtributo + ", nombreAtributo=" + nombreAtributo + "]";
     }
-    
+
 }

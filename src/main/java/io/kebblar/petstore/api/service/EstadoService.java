@@ -93,10 +93,10 @@ public interface EstadoService {
      * @throws BusinessException En caso que ocurra un problema con la recuperación de la información.
      */
     List<Estado> getByPais(int id) throws BusinessException;
-    
+
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su nombre.
-     * 
+     *
      * @param nombre Nombre de Estado.
      * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
      */
@@ -104,17 +104,17 @@ public interface EstadoService {
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su pais.
-     * 
+     *
      * @param id Id de Pais.
      * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
      */
     List<Estado> getEstadosByPais(int id) throws BusinessException;
-	
+
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
      *
      * @return Lista con todos los elementos de la tabla 'estado'.
      */
     List<Estado> getAllNombrePais() throws BusinessException;
-	
+
 }

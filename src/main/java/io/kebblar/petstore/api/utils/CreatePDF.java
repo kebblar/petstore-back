@@ -65,10 +65,10 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
  * @since 1.0-SNAPSHOT
  */
 public class CreatePDF {
-	
+
     private final static String newLine = System.getProperty("line.separator");
     private static final Color headerBg = new DeviceRgb(54,120,182);
-    
+
     /**
      * Método para crear una facttura con los articulos de compra. Factura en formato PDF
      * @param usuarioDetalle
@@ -79,15 +79,15 @@ public class CreatePDF {
      * @param nombrePdf
      * @param listCarrito
      * @param direcciones
-     * @param cveSMS 
-     * @return nombre del documento 
+     * @param cveSMS
+     * @return nombre del documento
      * @throws ProcessPDFException
      */
     public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle, Usuario usuario,
         DatosOrden ordenCompra, String dest, String url,  String nombrePdf,
         List<CarritoDatosFactura> listCarrito, List<DireccionConNombre> direcciones) throws ProcessPDFException {
-        
-    	String pdf="";
+
+        String pdf="";
 
         try {
             pdf= nombrePdf + ".pdf";
@@ -189,16 +189,16 @@ public class CreatePDF {
         tableDetalle.addCell(createTextCellBold("IMPORTE",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,2));
         return tableDetalle;
     }
-    
-	/**
-	 * Método para crear talba con los datos de la factura.
-	 *
-	 * @param usuarioDetalle
-	 * @param usuario
-	 * @param documento
-	 * @param direcciones
-	 * @return Tabla itext a ser añadida al docuento PDF
-	 */
+
+    /**
+     * Método para crear talba con los datos de la factura.
+     *
+     * @param usuarioDetalle
+     * @param usuario
+     * @param documento
+     * @param direcciones
+     * @return Tabla itext a ser añadida al docuento PDF
+     */
     private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, List<DireccionConNombre>direcciones) {
         Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
         table4.addCell(createTextCellBold("FACTURAR A:", ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,3));
@@ -445,7 +445,7 @@ public class CreatePDF {
      * @return Nombre de usuario
      */
     private static String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
-    	return usuarioDetalle.getNombre() + " " + usuarioDetalle.getApellidoPaterno() + " " + usuarioDetalle.getApellidoMaterno();
+        return usuarioDetalle.getNombre() + " " + usuarioDetalle.getApellidoPaterno() + " " + usuarioDetalle.getApellidoMaterno();
     }
 
     /**
@@ -464,7 +464,7 @@ public class CreatePDF {
         }
         return dir;
     }
-    
+
     /**
      * Método para proteger archivo PDF.
      *
@@ -483,5 +483,5 @@ public class CreatePDF {
         document.save(path);
         document.close();
     }
-    
+
 }

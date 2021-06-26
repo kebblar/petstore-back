@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * POJO asociado a la entidad 'anuncio' para mostrar su detalle. 
+ * POJO asociado a la entidad 'anuncio' para mostrar su detalle.
  *
  * @author Edgar Uribe Mendez
  * @version 1.0-SNAPSHOT
@@ -43,111 +43,111 @@ public class DetalleAnuncioResponse {
     private String descEstatus;
     private List<MascotaValorAtributoResponse> atributos;
     private List<AnuncioImagenResponse> imagenes;
-    
+
     public Integer getId() {
         return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public Integer getIdCategoria() {
         return idCategoria;
     }
-    
+
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
-    
+
     public String getDescCategoria() {
         return descCategoria;
     }
-    
+
     public void setDescCategoria(String descCategoria) {
         this.descCategoria = descCategoria;
     }
-    
+
     public String getFolio() {
         return folio;
     }
-    
+
     public void setFolio(String folio) {
         this.folio = folio;
     }
-    
+
     public String getTitulo() {
         return titulo;
     }
-    
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
+
     public String getDescripcion() {
         return descripcion;
     }
-    
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public BigDecimal getPrecio() {
         return precio;
     }
-    
+
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
-    
+
     public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
-    
+
     public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
-    
+
     public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
-    
+
     public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
-    
+
     public short getIdEstatus() {
         return idEstatus;
     }
-    
+
     public void setIdEstatus(short idEstatus) {
         this.idEstatus = idEstatus;
     }
-    
+
     public String getDescEstatus() {
         return descEstatus;
     }
-    
+
     public void setDescEstatus(String descEstatus) {
         this.descEstatus = descEstatus;
     }
-    
+
     public List<MascotaValorAtributoResponse> getAtributos() {
         return atributos;
     }
-    
+
     public void setAtributos(List<MascotaValorAtributoResponse> atributos) {
         this.atributos = atributos;
     }
-    
+
     public List<AnuncioImagenResponse> getImagenes() {
         return imagenes;
     }
-    
+
     public void setImagenes(List<AnuncioImagenResponse> imagenes) {
         this.imagenes = imagenes;
     }
-    
+
 
     @Override
     public int hashCode() {
@@ -168,7 +168,7 @@ public class DetalleAnuncioResponse {
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -242,7 +242,7 @@ public class DetalleAnuncioResponse {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
@@ -251,7 +251,7 @@ public class DetalleAnuncioResponse {
                 + ", idEstatus=" + idEstatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos
                 + ", imagenes=" + imagenes + "]";
     }
-    
+
     public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
             String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
             String descEstatus, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
@@ -269,8 +269,8 @@ public class DetalleAnuncioResponse {
         this.atributos = atributos;
         this.imagenes = imagenes;
     }
-    
+
     public DetalleAnuncioResponse() {
     }
-    
+
 }

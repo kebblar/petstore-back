@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -14,9 +14,9 @@
  *
  * Historia:    .
  *              20210510_0105 Creación de ésta interfaz
- *              20210523_2034 Se  agrega  el  método  de  elimado 
+ *              20210523_2034 Se  agrega  el  método  de  elimado
  *              logico
- *              20210524_1800 Se  agrega  el  método  de consulta 
+ *              20210524_1800 Se  agrega  el  método  de consulta
  *              de atributos del anunio
  *
  */
@@ -43,7 +43,7 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio
  *
  * @author Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -55,7 +55,7 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 public interface AnuncioMapper {
     static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus ";
     static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
-     
+
     /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
      *
@@ -68,7 +68,7 @@ public interface AnuncioMapper {
             + " #{fechaEliminacion}, #{idEstatus} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Anuncio anuncio) throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'AnuncioAtributo' con base en la información dada por el objeto de tipo 'AnuncioAtributo'.
      *
@@ -79,10 +79,10 @@ public interface AnuncioMapper {
     @Insert("INSERT INTO mascota_valor_atributo("+CAMPOS_MASCOTA_VALOR_ATRIBUTOS+") VALUES(#{idAnuncio}, #{idValorAtributo})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insertAtributo(MascotaValorAtributo anuncioAtributo) throws SQLException;
-    
+
     /**
      * Consulta el objeto de tipo 'Anuncio' con base al id proporcionado.
-     * 
+     *
      * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
      * @return Clase de tipo 'Anuncio' con la informacion asociada
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
@@ -99,11 +99,11 @@ public interface AnuncioMapper {
             @Result(property = "fechaAlta",   column = "fecha_alta"),
             @Result(property = "fechaModificacion",   column = "fecha_modificacion"),
             @Result(property = "fechaEliminacion",   column = "fecha_eliminacion"),
-            @Result(property = "idEstatus",   column = "id_estatus") 
+            @Result(property = "idEstatus",   column = "id_estatus")
     })
-    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ") 
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ")
     Anuncio getAnuncioById(int id) throws SQLException;
-     
+
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
      *
@@ -113,8 +113,8 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error
      */
     @Update("UPDATE anuncio SET id_estatus = #{idEstatus} WHERE id = #{id} ")
-    int actualizaEstatus(int id, short idEstatus) throws SQLException;   
-    
+    int actualizaEstatus(int id, short idEstatus) throws SQLException;
+
     /**
      * Actualiza un objeto de tipo 'anuncio' con base en la información dada por el objeto de tipo 'anuncio'.
      *
@@ -126,9 +126,9 @@ public interface AnuncioMapper {
             + " precio = #{precio}, fecha_inicio_vigencia = #{fechaInicioVigencia}, fecha_fin_vigencia = #{fechaFinVigencia}, "
             + " fecha_modificacion = #{fechaModificacion},  fecha_eliminacion = #{fechaEliminacion}, id_estatus = #{idEstatus} "
             + " WHERE id = #{id} ")
-    int update(Anuncio anuncio) throws SQLException; 
+    int update(Anuncio anuncio) throws SQLException;
 
-   /** 
+   /**
     * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio.
     *
     * @param id Identificador del anuncio del cual se eliminaran los atributos
@@ -137,7 +137,7 @@ public interface AnuncioMapper {
     */
     @Delete("DELETE FROM mascota_valor_atributo WHERE id_anuncio = #{id} ")
     int deleteAtributos(int id) throws SQLException;
-    
+
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.
      *
@@ -148,7 +148,7 @@ public interface AnuncioMapper {
      */
     @Update("UPDATE anuncio SET id_estatus = #{estatus}, fecha_eliminacion = #{fechaEliminacion} WHERE id = #{id} ")
     int eliminaAnuncio(int id, short estatus, Date fechaEliminacion) throws SQLException;
-    
+
     /**
      * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara.
      *
@@ -168,7 +168,7 @@ public interface AnuncioMapper {
      })
     @Select("${sql}")
     List<BusquedaAdministracionResponse> busquedaAnuncio(Map<String,String> map) throws SQLException;
-    
+
     /**
      * Obtiene la categoria mediante el id.
      *
@@ -178,7 +178,7 @@ public interface AnuncioMapper {
      */
     @Select("SELECT id, categoria FROM categoria WHERE id = #{idCategoria} ")
     Categoria obtieneCategoria(int idCategoria) throws SQLException;
-    
+
     /**
      * Metodo que mediante una llave hash obtiene la cadena SQL que se realizara.
      *
@@ -203,7 +203,7 @@ public interface AnuncioMapper {
     })
     @Select("SELECT * FROM anuncio_atributo WHERE id_anuncio = #{id} ")
     List<MascotaValorAtributo> atributosPorAnuncio(int id);
-    
+
     /**
      * Consulta por filtros para la búsqueda de usuario final.
      *
@@ -222,7 +222,7 @@ public interface AnuncioMapper {
     })
     @Select("${sql}")
     List<DetalleAnuncioResponse> busquedaFiltro(Map<String,String> map) throws SQLException;
-    
+
     /**
      * Consulta por filtros para la búsqueda de usuario final para obtener total de registros.
      *
@@ -232,7 +232,7 @@ public interface AnuncioMapper {
      */
     @Select("${total}")
     List<DetalleAnuncioResponse> totalAnuncioFiltro(Map<String,String> map) throws SQLException;
-    
+
     /**
      * Consulta el objeto de tipo 'MascotaValorAtributo' con base al id del anuncio proporcionado.
      *
@@ -253,7 +253,7 @@ public interface AnuncioMapper {
             + " JOIN atributo a ON va.id_atributo=a.id "
             + " WHERE mva.id_anuncio = #{idAnuncio}")
     List<MascotaValorAtributoResponse> valorAtributosPorAnuncio(int idAnuncio);
-    
+
     /**
      * Obtiene la descripción de la entidad 'estatus_anuncio' para un cierto id (PK) dado.
      *
@@ -263,10 +263,10 @@ public interface AnuncioMapper {
      */
     @Select("SELECT descripcion FROM estatus_anuncio WHERE id = #{id}")
     String obtieneDescPorId(int id) throws SQLException;
-    
+
     /**
      * Consulta el objeto de tipo 'DetalleAnuncioResponse' con base al id proporcionado.
-     * 
+     *
      * @param id Identificador por medio del cual se realizara la búsqueda del objeto 'anuncio'
      * @return Clase de tipo 'DetalleAnuncioResponse' con la informacion asociada
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
@@ -282,7 +282,7 @@ public interface AnuncioMapper {
             @Result(property = "fechaInicioVigencia",   column = "fecha_inicio_vigencia"),
             @Result(property = "fechaFinVigencia",   column = "fecha_fin_vigencia"),
             @Result(property = "idEstatus",   column = "id_estatus"),
-            @Result(property = "descEstatus",   column = "descripcion_estatus") 
+            @Result(property = "descEstatus",   column = "descripcion_estatus")
     })
     @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
             + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
@@ -290,7 +290,7 @@ public interface AnuncioMapper {
             + " cat.categoria FROM anuncio a "
             + " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "
             + " JOIN categoria cat ON a.id_categoria=cat.id "
-            + " WHERE a.id = #{id} ") 
+            + " WHERE a.id = #{id} ")
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
 
     /**
@@ -302,9 +302,9 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioMap")
-    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_inicio_vigencia BETWEEN #{fechaInicio} AND #{fechaFin}") 
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_inicio_vigencia BETWEEN #{fechaInicio} AND #{fechaFin}")
     List<Anuncio> anunciosPorPublicar(String fechaInicio, String fechaFin,  short estatus) throws SQLException;
-    
+
     /**
      * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin
      * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
@@ -313,6 +313,6 @@ public interface AnuncioMapper {
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioMap")
-    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_fin_vigencia < #{fechaFin}") 
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio  WHERE id_estatus = #{estatus} and fecha_fin_vigencia < #{fechaFin}")
     List<Anuncio> anunciosPorVencer(String fechaFin, short estatus) throws SQLException;
 }

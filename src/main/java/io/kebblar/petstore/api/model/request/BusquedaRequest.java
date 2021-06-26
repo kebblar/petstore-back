@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -23,7 +23,7 @@ import javax.validation.constraints.Min;
 
 /**
  * Implementacion del POJO de la entidad de 'BusquedaRequest'.
- * 
+ *
  * @author  Edgar Uribe
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -36,7 +36,7 @@ public class BusquedaRequest {
     private int numPaginas;
     @Min(value = 1, message = "{min.tamano.paginas}")
     private int tamPaginas;
-    
+
     public BigDecimal getPrecio() {
         return precio;
     }

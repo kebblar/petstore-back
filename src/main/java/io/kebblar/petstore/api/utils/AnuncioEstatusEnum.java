@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -19,7 +19,7 @@
 package io.kebblar.petstore.api.utils;
 
 /**
- * ENUM asociado a los estatud de la entidad 'anuncio'. 
+ * ENUM asociado a los estatud de la entidad 'anuncio'.
  *
  * @author Maria Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -32,10 +32,10 @@ public enum AnuncioEstatusEnum {
     VENCIDO ((short)4, "Vencido"),
     ELIMINADO ((short)5, "Eliminado"),
     CANCELADO ((short)6, "Cancelado");
-    
+
     private short id;
     private String desEstatus;
-    
+
     AnuncioEstatusEnum(short id, String desEstatus) {
         this.id = id;
         this.desEstatus = desEstatus;
@@ -48,7 +48,7 @@ public enum AnuncioEstatusEnum {
     public String getDesEstatus() {
         return desEstatus;
     }
-    
+
     public static String getDescripcion(short idEnum){
         for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
             if(eu.getId() == idEnum){

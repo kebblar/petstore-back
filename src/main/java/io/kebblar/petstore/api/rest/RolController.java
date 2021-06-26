@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   RolController .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       jueves 06 de junio de 2021 (17_26)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210624_1726 Implementación de clase 
+ * Historia:    20210624_1726 Implementación de clase
  *
  */
 
@@ -46,11 +46,11 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'rol'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'rol'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -69,9 +69,9 @@ public class RolController {
     private RolService rolService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param rolService Servicios de usuario
      */
     public RolController(RolService rolService) {
@@ -97,7 +97,7 @@ public class RolController {
     public List<Rol> getAllRol() throws BusinessException {
         return rolService.getAll();
     }
-    
+
     @ApiOperation(
         value = "RolController::get",
         notes = "Regresa un objeto Rol cuyo id "
@@ -111,7 +111,7 @@ public class RolController {
     ) throws BusinessException {
         return this.rolService.getById(id);
     }
-    
+
     @ApiOperation(
         value = "RolController::insert",
         notes = "Recibe un objeto Rol el cual debe de ser insertado "
@@ -140,7 +140,7 @@ public class RolController {
     ) throws BusinessException {
         return rolService.update(rol);
     }
-    
+
     @ApiOperation(
         value = "RolController::delete",
         notes = "Recibe un objeto Rol, el cual es buscado dentro de "
@@ -154,5 +154,5 @@ public class RolController {
     ) throws BusinessException {
         return rolService.delete(rol);
     }
-    
+
 }

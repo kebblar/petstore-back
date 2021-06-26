@@ -106,23 +106,23 @@ public interface EstadoMapper {
      */
     @Select("SELECT " + CAMPOS + " FROM estado WHERE id_pais=#{id}" )
     List<Estado> getByPais(int id) throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'estado' haciedo INNER JOIN con la tabla Pais para la obtencion del nombre del Pais.
      *
-     * @return Lista de obetos de tipo estado 
+     * @return Lista de obetos de tipo estado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
-     */	
+     */
     @Results(id="EstadoNombreMap", value = {
             @Result(property = "id", column = "id"),
             @Result(property = "idPais", column = "id_pais"),
             @Result(property = "nombrePais", column = "nombre_pais"),
-            @Result(property = "nombre", column = "nombre")  
+            @Result(property = "nombre", column = "nombre")
         })
-    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais ") 
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais ")
     List<Estado> getAllNombrePais() throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
      *
@@ -132,9 +132,9 @@ public interface EstadoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("EstadoNombreMap")
-    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.nombre LIKE '%' #{nombre} '%'") 
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.nombre LIKE '%' #{nombre} '%'")
     List<Estado> getByNombre(String nombre) throws SQLException;
-    
+
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el id ingresado.
      *
@@ -144,9 +144,9 @@ public interface EstadoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("EstadoNombreMap")
-    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais}") 
-	List<Estado> getEstadosByPais(int idPais);
-    
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais}")
+    List<Estado> getEstadosByPais(int idPais);
+
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
      *
@@ -157,8 +157,8 @@ public interface EstadoMapper {
      * operación desde la base de datos.
      */
     @ResultMap("EstadoNombreMap")
-    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais} and e.nombre LIKE '%' #{nombre} '%'") 
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais} and e.nombre LIKE '%' #{nombre} '%'")
     List<Estado> getByNombreAndIdPais(String nombre, int idPais) throws SQLException;
-    
+
 
 }

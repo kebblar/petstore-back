@@ -219,7 +219,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Quitale los caracteres raros al teléfono.
         String nuevoCel = StringUtils.limpia(preRegistroRequest.getTelefono());
         preRegistroRequest.setTelefono(nuevoCel);
-        
+
         // Valida si la clave proporcionada es compatible con el
         // patrón de seguridad de claves solicitado por el sistema:
         ValidadorClave.validate(preRegistroRequest.getClaveHash());
@@ -438,7 +438,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new DatabaseException(e.getMessage());
         }
     }
-    
+
     @Override
     public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
         try {
@@ -450,6 +450,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new DatabaseException(e.getMessage());
         }
     }
-    
+
 
 }

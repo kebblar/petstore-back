@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -21,7 +21,7 @@ package io.kebblar.petstore.api.model.response;
 import java.util.Date;
 
 /**
- * POJO asociado a la entidad 'anuncio' para realizar la busqueda. 
+ * POJO asociado a la entidad 'anuncio' para realizar la busqueda.
  *
  * @author Edgar Uribe Mendez
  * @version 1.0-SNAPSHOT
@@ -39,180 +39,180 @@ public class BusquedaAdministracionResponse {
     private int idEstatus;
     private String descripcionEstatus;
     private String descripcionCategoria;
-    
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getFolio() {
-		return folio;
-	}
-	public void setFolio(String folio) {
-		this.folio = folio;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	public Date getFechaInicioVigencia() {
-		return fechaInicioVigencia;
-	}
-	public void setFechaInicioVigencia(Date fechaInicioVigencia) {
-		this.fechaInicioVigencia = fechaInicioVigencia;
-	}
-	public Date getFechaFinVigencia() {
-		return fechaFinVigencia;
-	}
-	public void setFechaFinVigencia(Date fechaFinVigencia) {
-		this.fechaFinVigencia = fechaFinVigencia;
-	}
-	public String getEstatus() {
-		return estatus;
-	}
-	public void setEstatus(String estatus) {
-		this.estatus = estatus;
-	}
-	public Integer getIdCategoria() {
-		return idCategoria;
-	}
-	public void setIdCategoria(Integer idCategoria) {
-		this.idCategoria = idCategoria;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public int getIdEstatus() {
-		return idEstatus;
-	}
-	public void setIdEstatus(int idEstatus) {
-		this.idEstatus = idEstatus;
-	}
-	public String getDescripcionEstatus() {
-		return descripcionEstatus;
-	}
-	public void setDescripcionEstatus(String descripcionEstatus) {
-		this.descripcionEstatus = descripcionEstatus;
-	}
-	public String getDescripcionCategoria() {
-		return descripcionCategoria;
-	}
-	public void setDescripcionCategoria(String descripcionCategoria) {
-		this.descripcionCategoria = descripcionCategoria;
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-		result = prime * result + ((descripcionCategoria == null) ? 0 : descripcionCategoria.hashCode());
-		result = prime * result + ((descripcionEstatus == null) ? 0 : descripcionEstatus.hashCode());
-		result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
-		result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
-		result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-		result = prime * result + ((folio == null) ? 0 : folio.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
-		result = prime * result + idEstatus;
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BusquedaAdministracionResponse other = (BusquedaAdministracionResponse) obj;
-		if (descripcion == null) {
-			if (other.descripcion != null)
-				return false;
-		} else if (!descripcion.equals(other.descripcion))
-			return false;
-		if (descripcionCategoria == null) {
-			if (other.descripcionCategoria != null)
-				return false;
-		} else if (!descripcionCategoria.equals(other.descripcionCategoria))
-			return false;
-		if (descripcionEstatus == null) {
-			if (other.descripcionEstatus != null)
-				return false;
-		} else if (!descripcionEstatus.equals(other.descripcionEstatus))
-			return false;
-		if (estatus == null) {
-			if (other.estatus != null)
-				return false;
-		} else if (!estatus.equals(other.estatus))
-			return false;
-		if (fechaFinVigencia == null) {
-			if (other.fechaFinVigencia != null)
-				return false;
-		} else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-			return false;
-		if (fechaInicioVigencia == null) {
-			if (other.fechaInicioVigencia != null)
-				return false;
-		} else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-			return false;
-		if (folio == null) {
-			if (other.folio != null)
-				return false;
-		} else if (!folio.equals(other.folio))
-			return false;
-		if (id != other.id)
-			return false;
-		if (idCategoria == null) {
-			if (other.idCategoria != null)
-				return false;
-		} else if (!idCategoria.equals(other.idCategoria))
-			return false;
-		if (idEstatus != other.idEstatus)
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
-				+ ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
-				+ ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion
-				+ ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
-				+ descripcionCategoria + "]";
-	}
-	
-	public BusquedaAdministracionResponse(int id, String folio, String titulo, Date fechaInicioVigencia,
-			Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
-			String descripcionEstatus, String descripcionCategoria) {
-		super();
-		this.id = id;
-		this.folio = folio;
-		this.titulo = titulo;
-		this.fechaInicioVigencia = fechaInicioVigencia;
-		this.fechaFinVigencia = fechaFinVigencia;
-		this.estatus = estatus;
-		this.idCategoria = idCategoria;
-		this.descripcion = descripcion;
-		this.idEstatus = idEstatus;
-		this.descripcionEstatus = descripcionEstatus;
-		this.descripcionCategoria = descripcionCategoria;
-	}
-	
-	public BusquedaAdministracionResponse() {
-	}
-    
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getFolio() {
+        return folio;
+    }
+    public void setFolio(String folio) {
+        this.folio = folio;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    public Date getFechaInicioVigencia() {
+        return fechaInicioVigencia;
+    }
+    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
+        this.fechaInicioVigencia = fechaInicioVigencia;
+    }
+    public Date getFechaFinVigencia() {
+        return fechaFinVigencia;
+    }
+    public void setFechaFinVigencia(Date fechaFinVigencia) {
+        this.fechaFinVigencia = fechaFinVigencia;
+    }
+    public String getEstatus() {
+        return estatus;
+    }
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public int getIdEstatus() {
+        return idEstatus;
+    }
+    public void setIdEstatus(int idEstatus) {
+        this.idEstatus = idEstatus;
+    }
+    public String getDescripcionEstatus() {
+        return descripcionEstatus;
+    }
+    public void setDescripcionEstatus(String descripcionEstatus) {
+        this.descripcionEstatus = descripcionEstatus;
+    }
+    public String getDescripcionCategoria() {
+        return descripcionCategoria;
+    }
+    public void setDescripcionCategoria(String descripcionCategoria) {
+        this.descripcionCategoria = descripcionCategoria;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+        result = prime * result + ((descripcionCategoria == null) ? 0 : descripcionCategoria.hashCode());
+        result = prime * result + ((descripcionEstatus == null) ? 0 : descripcionEstatus.hashCode());
+        result = prime * result + ((estatus == null) ? 0 : estatus.hashCode());
+        result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
+        result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
+        result = prime * result + ((folio == null) ? 0 : folio.hashCode());
+        result = prime * result + id;
+        result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
+        result = prime * result + idEstatus;
+        result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BusquedaAdministracionResponse other = (BusquedaAdministracionResponse) obj;
+        if (descripcion == null) {
+            if (other.descripcion != null)
+                return false;
+        } else if (!descripcion.equals(other.descripcion))
+            return false;
+        if (descripcionCategoria == null) {
+            if (other.descripcionCategoria != null)
+                return false;
+        } else if (!descripcionCategoria.equals(other.descripcionCategoria))
+            return false;
+        if (descripcionEstatus == null) {
+            if (other.descripcionEstatus != null)
+                return false;
+        } else if (!descripcionEstatus.equals(other.descripcionEstatus))
+            return false;
+        if (estatus == null) {
+            if (other.estatus != null)
+                return false;
+        } else if (!estatus.equals(other.estatus))
+            return false;
+        if (fechaFinVigencia == null) {
+            if (other.fechaFinVigencia != null)
+                return false;
+        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
+            return false;
+        if (fechaInicioVigencia == null) {
+            if (other.fechaInicioVigencia != null)
+                return false;
+        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
+            return false;
+        if (folio == null) {
+            if (other.folio != null)
+                return false;
+        } else if (!folio.equals(other.folio))
+            return false;
+        if (id != other.id)
+            return false;
+        if (idCategoria == null) {
+            if (other.idCategoria != null)
+                return false;
+        } else if (!idCategoria.equals(other.idCategoria))
+            return false;
+        if (idEstatus != other.idEstatus)
+            return false;
+        if (titulo == null) {
+            if (other.titulo != null)
+                return false;
+        } else if (!titulo.equals(other.titulo))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
+                + ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
+                + ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion
+                + ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
+                + descripcionCategoria + "]";
+    }
+
+    public BusquedaAdministracionResponse(int id, String folio, String titulo, Date fechaInicioVigencia,
+            Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
+            String descripcionEstatus, String descripcionCategoria) {
+        super();
+        this.id = id;
+        this.folio = folio;
+        this.titulo = titulo;
+        this.fechaInicioVigencia = fechaInicioVigencia;
+        this.fechaFinVigencia = fechaFinVigencia;
+        this.estatus = estatus;
+        this.idCategoria = idCategoria;
+        this.descripcion = descripcion;
+        this.idEstatus = idEstatus;
+        this.descripcionEstatus = descripcionEstatus;
+        this.descripcionCategoria = descripcionCategoria;
+    }
+
+    public BusquedaAdministracionResponse() {
+    }
+
 }

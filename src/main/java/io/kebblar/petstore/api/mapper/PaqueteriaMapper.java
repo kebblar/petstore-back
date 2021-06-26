@@ -117,7 +117,7 @@ public interface PaqueteriaMapper {
      * operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
-    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'")
     List<Paqueteria> getByNombre(String nombre) throws SQLException;
 
 }

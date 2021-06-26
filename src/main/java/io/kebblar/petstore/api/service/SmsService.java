@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -22,26 +22,26 @@ import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 
 /**
  * <p>Definición de la interfaz de servicios para 'SmsService'.
- * 
+ *
  * @author  dalvarez
  * @see     io.kebblar.petstore.api.model.domain.DatosOrden
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface SmsService {
        /**
         * <p>Método utilizado para envio de mensajes SMS.
-        * 
+        *
         * @param Número de telefono
         * @param Mensaje de texto
         * @throws ProcessPDFException
         */
-	void envioSms(String numero, String mesj) throws ProcessPDFException;
-	
+    void envioSms(String numero, String mesj) throws ProcessPDFException;
+
         /**
          * <p>Método utilizado para generar una clave de 5 dígitos la cual sera utilizada para enviarla en un mensaje SMS
-         * 
+         *
          * @return Clave de 5 dígitos aleatorios
          */
-	String getCveSMS();
+    String getCveSMS();
 }

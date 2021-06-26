@@ -56,7 +56,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
      * adicionales a ser empleados en esta clase.
      *
      * @param graficaVentasTotalesMapper mapper utilizado para llamar a metodos de persistencia
-     */    
+     */
     public GraficaVentasTotalesServiceImpl(GraficaVentasTotalesMapper graficaVentasTotalesMapper) {
         this.graficaVentasTotalesMapper = graficaVentasTotalesMapper;
     }
@@ -88,14 +88,14 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             throw new DatabaseException("Error al obtener los datos para la gráfica importe total de ventas con filtro de fecha");
         }
     }
-    
+
     @Override
     public String getNumeroOrdenesTotalVentas() throws DatabaseException {
         try {
             String cadena = "";
             List<GraficaVentasTotales> datos = graficaVentasTotalesMapper.getTotalVentas();
             if (!datos.isEmpty()) {
-            	cadena = obtenerJSONDatosNumeroOrdenes(datos);
+                cadena = obtenerJSONDatosNumeroOrdenes(datos);
             }
             return cadena;
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             throw new DatabaseException("Error al obtener los datos para la gráfica total de número de órdenes de ventas con filtro de fecha");
         }
     }
-    
+
     private List<String> obtenerEtiquetasMeses(List<GraficaVentasTotales> datos) {
         List <String> etiquetas = new ArrayList<String>();
         for (int i = 0; i <= datos.size() - 1; i++) {
@@ -129,7 +129,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         }
         return etiquetas;
     }
-    
+
     private Integer[][] obtenerArregloDatosNumeroOrdenes(
         List<GraficaVentasTotales> datos,
         List<String> fechas,
@@ -144,10 +144,10 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             String fecha = mes+"-"+anio;
             int indice_fecha = fechas.indexOf(fecha);
             arregloDatos [0][indice_fecha] = datos.get(i).getCantidad_ordenes();
-        }    
+        }
         return arregloDatos;
     }
-    
+
     private Long[][] obtenerArregloDatosImporte(
         List<GraficaVentasTotales> datos,
         List<String> fechas,
@@ -165,7 +165,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         }
         return arregloDatos;
     }
-    
+
     private String obtenerJSONDatosNumeroOrdenes(
         List<GraficaVentasTotales> datos) {
         String cadena = "{\"chartdata\": {\"labels\": [\"";
@@ -189,7 +189,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         cadena = cadena.substring(0,cadena.length()-1);
         return cadena+"]}}";
     }
-    
+
     private String obtenerJSONDatosImporte(
         List<GraficaVentasTotales> datos) {
         String cadena = "{\"chartdata\": {\"labels\": [\"";
@@ -211,11 +211,11 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             cadena = cadena + cadena_totales +"]},";
         }
         cadena = cadena.substring(0,cadena.length()-1);
-    	return cadena+"]}}";
+        return cadena+"]}}";
     }
 
     private String obtenerNombreMes(int mes) {
-        String cadena_mes = "";    				
+        String cadena_mes = "";
         switch(mes) {
         case 1: cadena_mes = "Enero";
         break;

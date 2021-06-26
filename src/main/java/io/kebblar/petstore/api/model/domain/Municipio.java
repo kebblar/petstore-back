@@ -76,7 +76,7 @@ public class Municipio implements Serializable {
         this.nombrePais = nombrePais;
         this.nombreEstado = nombreEstado;
     }
-    
+
     /**
      * Getter para id.
      */
@@ -123,31 +123,31 @@ public class Municipio implements Serializable {
      * Getter para nombrePais.
      */
     public String getNombrePais() {
-		return nombrePais;
-	}
+        return nombrePais;
+    }
 
     /**
      * Setter para nombrePais.
      */
-	public void setNombrePais(String nombrePais) {
-		this.nombrePais = nombrePais;
-	}
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
 
     /**
      * Getter para nombreEstado.
      */
-	public String getNombreEstado() {
-		return nombreEstado;
-	}
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
 
     /**
      * Setter para nombreEstado.
      */
-	public void setNombreEstado(String nombreEstado) {
-		this.nombreEstado = nombreEstado;
-	}
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "[Municipio] : ["
                 + " id =" + this.id

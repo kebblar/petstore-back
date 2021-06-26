@@ -125,7 +125,7 @@ public class PaisServiceImpl implements PaisService {
             throw new BusinessException();
         }
     }
-    
+
     @Override
     public List<Pais> getByNombre(String nombre) throws BusinessException {
         try {

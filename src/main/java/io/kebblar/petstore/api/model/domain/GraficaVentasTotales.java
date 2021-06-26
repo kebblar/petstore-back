@@ -37,7 +37,7 @@ import java.io.Serializable;
 public class GraficaVentasTotales implements Serializable {
     public GraficaVentasTotales() {
     }
-    
+
     private static final long serialVersionUID = 4897377279463910357L;
     private Long total_venta;
     private int cantidad_ordenes;
@@ -46,7 +46,7 @@ public class GraficaVentasTotales implements Serializable {
 
     public GraficaVentasTotales(Long total_venta, int cantidad_ordenes, int mes, int anio) {
         this.total_venta = total_venta;
-	this.cantidad_ordenes = cantidad_ordenes;
+    this.cantidad_ordenes = cantidad_ordenes;
         this.mes = mes;
         this.anio = anio;
     }
@@ -66,7 +66,7 @@ public class GraficaVentasTotales implements Serializable {
     public void setCantidad_ordenes(int cantidad_ordenes) {
         this.cantidad_ordenes = cantidad_ordenes;
     }
-    
+
     public int getMes() {
         return mes;
     }

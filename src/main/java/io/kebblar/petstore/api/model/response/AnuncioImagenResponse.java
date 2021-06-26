@@ -19,7 +19,7 @@
 package io.kebblar.petstore.api.model.response;
 
 /**
- * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen. 
+ * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -31,10 +31,10 @@ public class AnuncioImagenResponse {
     private String uuid;
     private Integer idTipo;
     private Boolean principal;
-    
+
     public AnuncioImagenResponse() {
     }
-    
+
     public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         this.idImagen = idImagen;
         this.idAnuncio = idAnuncio;
@@ -46,23 +46,23 @@ public class AnuncioImagenResponse {
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
-    
+
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
-    
+
     public Integer getIdImagen() {
         return idImagen;
     }
-    
+
     public void setIdImagen(Integer idImagen) {
         this.idImagen = idImagen;
     }
-    
+
     public String getUuid() {
         return uuid;
     }
-    
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
@@ -137,5 +137,5 @@ public class AnuncioImagenResponse {
         return "AnuncioImagenResponse [idImagen=" + idImagen + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid
                 + ", idTipo=" + idTipo + ", principal=" + principal + "]";
     }
-    
+
 }

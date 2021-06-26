@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -14,7 +14,7 @@
  *
  * Historia:    .
  *              20210520_2203 Creación de esta utileroa
- *              20210520_2203 Se  agregan  metodos de  marca  de 
+ *              20210520_2203 Se  agregan  metodos de  marca  de
  *              agua y renderizado de imagen
  *
  */
@@ -48,19 +48,19 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
 /**
  * <p>Descripción:</p>
- * Utilería de apoyo para los servicios asociados a la entidad'anuncio'. 
+ * Utilería de apoyo para los servicios asociados a la entidad'anuncio'.
  *
  * @author Maria Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
-	
+
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
 
     /**
      * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
-     * <p>El folio se conformara por 
+     * <p>El folio se conformara por
      * yyMMddHHmm0000, siendo los ultimos 4 ceros un random rellenado con espacios a la izquierda
      * teniendo un total de 14 posiciones. </p>
      *
@@ -95,23 +95,23 @@ public class AnuncioUtil {
             //Se valida que la fecha de inicio no sea anterior a la fecha actual
             if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)){
                 fechasValidas = false;
-            } 
+            }
             //Se valida que la fecha de fin sno sea anterior a la fecha actual
             if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)){
                 fechasValidas = false;
-            } 
+            }
             //Se valida que la fecha de fin no sea mayor fecha inicio
-            if(fechaInicioVigencia!=null && fechaFinVigencia!=null 
+            if(fechaInicioVigencia!=null && fechaFinVigencia!=null
                     && fechaInicioVigencia.after(fechaFinVigencia)){
                 fechasValidas = false;
-            } 
+            }
             return fechasValidas;
         } catch (ParseException ex) {
-        
+
         }
         return false;
     }
-    
+
     /**
      * Metodo que permite comparar dos fechas entre si.
      *
@@ -130,11 +130,11 @@ public class AnuncioUtil {
             fechaAComparar = dateFormat.parse(sFechaAComparar);
             return fechaBase.compareTo(fechaAComparar);
         } catch (ParseException ex) {
-        
+
         }
         return 0;
     }
-    
+
     /**
      * Método que concatena las condiciones de consulta a la cadena SQL.
      *
@@ -146,7 +146,7 @@ public class AnuncioUtil {
         List<String> response = new ArrayList<>();
         int getPageSize = filtros.getTamPaginas();
         int getPageNumber = filtros.getNumPaginas();
-        
+
         String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
         String pageSize = Integer.toString(getPageSize);
         if (filtros.getIdCategoria() != 0) {
@@ -172,9 +172,9 @@ public class AnuncioUtil {
         consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
         response.add(consultaBase.toString());
         return response;
-        
+
     }
-    
+
     /**
      * Filtra la búsqueda de usuario final.
      *
@@ -186,7 +186,7 @@ public class AnuncioUtil {
         List<String> response = new ArrayList<>();
         int getPageSize = filtros.getTamPaginas();
         int getPageNumber = filtros.getNumPaginas();
-        
+
         String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
         String pageSize = Integer.toString(getPageSize);
         if (filtros.getIdCategoria() != null && filtros.getIdCategoria() != 0 ) {
@@ -200,7 +200,7 @@ public class AnuncioUtil {
             int i=1;
             StringBuilder sb = new StringBuilder();
             int size = filtros.getAtributos().size();
-            
+
             for (Integer atributo : filtros.getAtributos()) {
                 if (atributo != 0 ) {
                     sb.append("(");
@@ -209,7 +209,7 @@ public class AnuncioUtil {
                     sb.append((i++<size)?" INTERSECT ":"");
                 }
             }
-            consultaBase.append(sb).append(")");   
+            consultaBase.append(sb).append(")");
         }
         response.add(consultaBase.toString());
         consultaBase.append(" ORDER BY fecha_alta DESC ");
@@ -217,7 +217,7 @@ public class AnuncioUtil {
         response.add(consultaBase.toString());
         return response;
     }
-    
+
     /**
      * Método privado que permite realizar validaciones de negocio para confirmar el guardado.
      *
@@ -233,7 +233,7 @@ public class AnuncioUtil {
             throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
         }
         //Validacion de fechas de vigencia
-        Date fechaInicio = request.getFechaInicioVigencia() != null ? 
+        Date fechaInicio = request.getFechaInicioVigencia() != null ?
                 java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
                 :null;
         Date fechaFin =request.getFechaFinVigencia() != null ?
@@ -241,9 +241,9 @@ public class AnuncioUtil {
                 :null;
         if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
             throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
-        }   
+        }
     }
-    
+
     /**
      * Metodo que permite renderizar una imagen y agregar marca de agua.
      *
@@ -265,13 +265,13 @@ public class AnuncioUtil {
             Graphics graphics = bufferedImage.getGraphics();
             graphics.drawImage(imagenRender, 0, 0, null);
             graphics.setFont(new Font("Arial", Font.BOLD, 15));
-            //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9 
+            //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9
             String watermark = "\u00a9 "+nomEmpresa;
             //Se calcula la poscion de la marca de agua con base al tamaño de la iamgen
             int posicionLeyendaX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.30));
-            int posicionLeyendaY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.1)); 
+            int posicionLeyendaY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.1));
             int posicionIconoX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.25));
-            int posicionIconoY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.25));    
+            int posicionIconoY=imagenRender.getHeight()-((int)(imagenRender.getHeight()*0.25));
             graphics.drawString(watermark, posicionLeyendaX,posicionLeyendaY);
             graphics.drawImage(bi, posicionIconoX,posicionIconoY, bi.getWidth(), bi.getHeight(), null);
             graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
@@ -285,7 +285,7 @@ public class AnuncioUtil {
                 e.printStackTrace();
             }
     }
-    
+
     /**
      * Metodo que permite que una imagen tenga marca de agua.
      *
@@ -305,7 +305,7 @@ public class AnuncioUtil {
         g.dispose();
         return resizedImage;
     }
- 
+
     /**
      * Metodo que permite regresar una imagen renderizada con base a la altura proporcionada.
      *

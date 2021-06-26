@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 
 /**
  * Implementacion del POJO de la entidad de 'BusquedaAdministracionRequest'.
- * 
+ *
  * @author  Edgar Uribe
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -35,7 +35,7 @@ public class BusquedaAdministracionRequest {
     private int idCategoria;
     private int numPaginas;
     private int tamPaginas;
-    
+
     public String getFolio() {
         return folio;
     }
@@ -153,5 +153,5 @@ public class BusquedaAdministracionRequest {
     }
     public BusquedaAdministracionRequest() {
     }
-        
+
 }

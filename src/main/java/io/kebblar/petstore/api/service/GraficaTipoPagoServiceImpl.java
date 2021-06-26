@@ -31,156 +31,156 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  */
 @Service("graficaTipoPagoService")
 public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
-	private static final Logger logger = LoggerFactory.getLogger(GraficaTipoPagoServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(GraficaTipoPagoServiceImpl.class);
 
-	private GraficaTipoPagoMapper graficaTipoPagoMapper;
+    private GraficaTipoPagoMapper graficaTipoPagoMapper;
 
-	/**
-	 * Constructor que realiza el setting de todos los Mappers y todos los servicios
-	 * adicionales a ser empleados en esta clase.
-	 *
-	 * @param graficaTipoPagoMapper mapper utilizado para llamar a metodos de
-	 *                              persistencia
-	 */
-	public GraficaTipoPagoServiceImpl(GraficaTipoPagoMapper graficaTipoPagoMapper) {
-		super();
-		this.graficaTipoPagoMapper = graficaTipoPagoMapper;
-	}
-
-	@Override
-	public String getMontoTotalTipoPago() throws BusinessException {
-		try {
-			String cadena = "";
-			List<GraficaTipoPago> datos = graficaTipoPagoMapper.getAll();
-			if (!datos.isEmpty()) {
-				cadena = obtenerJSONDatos(datos);
-				return cadena;
-			}
-			return cadena;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			throw new BusinessException();
-		}
-	}
-
-	@Override
-	public String getMontoTipoPagoRango(String fechaIni, String fechaFin) throws BusinessException {
-		try {
-			String cadena = "";
-			List<GraficaTipoPago> datos = graficaTipoPagoMapper.getTipoPagoPorRangoDeFechas(fechaIni, fechaFin);
-			if (!datos.isEmpty()) {
-				cadena = obtenerJSONDatos(datos);
-				return cadena;
-			}
-			return cadena;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			throw new BusinessException();
-		}
-	}
-
-	private List<String> obtenerEtiquetasMeses(List<GraficaTipoPago> datos) {
-		List<String> etiquetas = new ArrayList<String>();
-		for (int i = 0; i <= datos.size() - 1; i++) {
-			String anio = Integer.toString(datos.get(i).getAnio());
-			String mes = obtenerNombreMes(datos.get(i).getMes());
-			String fecha = mes + "-" + anio;
-			if (!etiquetas.contains(fecha)) {
-				etiquetas.add(fecha);
-			}
-		}
-		return etiquetas;
-	}
-
-	private Long[][] obtenerArregloDatos(
-    		List<GraficaTipoPago> datos,
-    		List<String> fechas,
-    		List<String> tipoPago){
-    	Long[][] arregloDatos = new Long[tipoPago.size()][fechas.size()];
-    	System.out.print(arregloDatos[0][0]);
-    	for (int i = 0; i <= arregloDatos.length - 1; i++) {
-    		Arrays.fill(arregloDatos[i], new Long(0));
-    	}
-    	System.out.print(arregloDatos[0][0]);
-    	for (int i = 0; i <= datos.size() - 1; i++) {
-    		String anio = Integer.toString(datos.get(i).getAnio());
-    		String mes = obtenerNombreMes(datos.get(i).getMes());
-    		String fecha = mes+"-"+anio;
-			int indice_fecha = fechas.indexOf(fecha);
-			int indice_tipoPago = tipoPago.indexOf(datos.get(i).getTipo_pago());
-			arregloDatos [indice_tipoPago][indice_fecha] = datos.get(i).getTotal_venta();
-    		}
-    	return arregloDatos;
+    /**
+     * Constructor que realiza el setting de todos los Mappers y todos los servicios
+     * adicionales a ser empleados en esta clase.
+     *
+     * @param graficaTipoPagoMapper mapper utilizado para llamar a metodos de
+     *                              persistencia
+     */
+    public GraficaTipoPagoServiceImpl(GraficaTipoPagoMapper graficaTipoPagoMapper) {
+        super();
+        this.graficaTipoPagoMapper = graficaTipoPagoMapper;
     }
-	
-	
-	private String obtenerJSONDatos(List<GraficaTipoPago> datos) {
-		String cadena = "{\"chartdata\": {\"labels\": [\"";
-		List<String> fechas = obtenerEtiquetasMeses(datos);
-		List<String> tipoPago = Arrays.asList("bitcoin", "paypal");
-		List<String> colores = Arrays.asList("#00ffa2", "blue");
-		String cadena_fechas = StringUtils.join(fechas, "\",\"");
-		System.out.println(cadena_fechas);
-		cadena = cadena + cadena_fechas + "\"], \"datasets\": [";
-		Long[][] arregloDatos = obtenerArregloDatos(datos, fechas, tipoPago);
-		for (int i = 0; i <= arregloDatos.length - 1; i++) {
-			cadena = cadena + "{\"label\": \"" + tipoPago.get(i) + "\",";
-			cadena = cadena + "\"backgroundColor\": \"" + colores.get(i) + "\",\"data\":[";
-			List<Long> totales = new ArrayList<Long>();
-			for (int j = 0; j <= arregloDatos[i].length - 1; j++) {
-				totales.add(arregloDatos[i][j]);
-			}
-			System.out.println(totales);
-			String cadena_totales = StringUtils.join(totales, ",");
-			cadena = cadena + cadena_totales + "]},";
-		}
-		System.out.println(cadena);
-		cadena = cadena.substring(0, cadena.length() - 1);
-		System.out.println(cadena);
-		return cadena + "]}}";
-	}
 
-	private String obtenerNombreMes(int mes) {
-		String cadena_mes = "";
-		switch (mes) {
-		case 1:
-			cadena_mes = "Enero";
-			break;
-		case 2:
-			cadena_mes = "Febrero";
-			break;
-		case 3:
-			cadena_mes = "Marzo";
-			break;
-		case 4:
-			cadena_mes = "Abril";
-			break;
-		case 5:
-			cadena_mes = "Mayo";
-			break;
-		case 6:
-			cadena_mes = "Junio";
-			break;
-		case 7:
-			cadena_mes = "Julio";
-			break;
-		case 8:
-			cadena_mes = "Agosto";
-			break;
-		case 9:
-			cadena_mes = "Septiembre";
-			break;
-		case 10:
-			cadena_mes = "Octubre";
-			break;
-		case 11:
-			cadena_mes = "Noviembre";
-			break;
-		case 12:
-			cadena_mes = "Diciembre";
-			break;
-		}
-		return cadena_mes;
-	}
+    @Override
+    public String getMontoTotalTipoPago() throws BusinessException {
+        try {
+            String cadena = "";
+            List<GraficaTipoPago> datos = graficaTipoPagoMapper.getAll();
+            if (!datos.isEmpty()) {
+                cadena = obtenerJSONDatos(datos);
+                return cadena;
+            }
+            return cadena;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public String getMontoTipoPagoRango(String fechaIni, String fechaFin) throws BusinessException {
+        try {
+            String cadena = "";
+            List<GraficaTipoPago> datos = graficaTipoPagoMapper.getTipoPagoPorRangoDeFechas(fechaIni, fechaFin);
+            if (!datos.isEmpty()) {
+                cadena = obtenerJSONDatos(datos);
+                return cadena;
+            }
+            return cadena;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+    }
+
+    private List<String> obtenerEtiquetasMeses(List<GraficaTipoPago> datos) {
+        List<String> etiquetas = new ArrayList<String>();
+        for (int i = 0; i <= datos.size() - 1; i++) {
+            String anio = Integer.toString(datos.get(i).getAnio());
+            String mes = obtenerNombreMes(datos.get(i).getMes());
+            String fecha = mes + "-" + anio;
+            if (!etiquetas.contains(fecha)) {
+                etiquetas.add(fecha);
+            }
+        }
+        return etiquetas;
+    }
+
+    private Long[][] obtenerArregloDatos(
+            List<GraficaTipoPago> datos,
+            List<String> fechas,
+            List<String> tipoPago){
+        Long[][] arregloDatos = new Long[tipoPago.size()][fechas.size()];
+        System.out.print(arregloDatos[0][0]);
+        for (int i = 0; i <= arregloDatos.length - 1; i++) {
+            Arrays.fill(arregloDatos[i], new Long(0));
+        }
+        System.out.print(arregloDatos[0][0]);
+        for (int i = 0; i <= datos.size() - 1; i++) {
+            String anio = Integer.toString(datos.get(i).getAnio());
+            String mes = obtenerNombreMes(datos.get(i).getMes());
+            String fecha = mes+"-"+anio;
+            int indice_fecha = fechas.indexOf(fecha);
+            int indice_tipoPago = tipoPago.indexOf(datos.get(i).getTipo_pago());
+            arregloDatos [indice_tipoPago][indice_fecha] = datos.get(i).getTotal_venta();
+            }
+        return arregloDatos;
+    }
+
+
+    private String obtenerJSONDatos(List<GraficaTipoPago> datos) {
+        String cadena = "{\"chartdata\": {\"labels\": [\"";
+        List<String> fechas = obtenerEtiquetasMeses(datos);
+        List<String> tipoPago = Arrays.asList("bitcoin", "paypal");
+        List<String> colores = Arrays.asList("#00ffa2", "blue");
+        String cadena_fechas = StringUtils.join(fechas, "\",\"");
+        System.out.println(cadena_fechas);
+        cadena = cadena + cadena_fechas + "\"], \"datasets\": [";
+        Long[][] arregloDatos = obtenerArregloDatos(datos, fechas, tipoPago);
+        for (int i = 0; i <= arregloDatos.length - 1; i++) {
+            cadena = cadena + "{\"label\": \"" + tipoPago.get(i) + "\",";
+            cadena = cadena + "\"backgroundColor\": \"" + colores.get(i) + "\",\"data\":[";
+            List<Long> totales = new ArrayList<Long>();
+            for (int j = 0; j <= arregloDatos[i].length - 1; j++) {
+                totales.add(arregloDatos[i][j]);
+            }
+            System.out.println(totales);
+            String cadena_totales = StringUtils.join(totales, ",");
+            cadena = cadena + cadena_totales + "]},";
+        }
+        System.out.println(cadena);
+        cadena = cadena.substring(0, cadena.length() - 1);
+        System.out.println(cadena);
+        return cadena + "]}}";
+    }
+
+    private String obtenerNombreMes(int mes) {
+        String cadena_mes = "";
+        switch (mes) {
+        case 1:
+            cadena_mes = "Enero";
+            break;
+        case 2:
+            cadena_mes = "Febrero";
+            break;
+        case 3:
+            cadena_mes = "Marzo";
+            break;
+        case 4:
+            cadena_mes = "Abril";
+            break;
+        case 5:
+            cadena_mes = "Mayo";
+            break;
+        case 6:
+            cadena_mes = "Junio";
+            break;
+        case 7:
+            cadena_mes = "Julio";
+            break;
+        case 8:
+            cadena_mes = "Agosto";
+            break;
+        case 9:
+            cadena_mes = "Septiembre";
+            break;
+        case 10:
+            cadena_mes = "Octubre";
+            break;
+        case 11:
+            cadena_mes = "Noviembre";
+            break;
+        case 12:
+            cadena_mes = "Diciembre";
+            break;
+        }
+        return cadena_mes;
+    }
 
 }

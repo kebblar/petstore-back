@@ -11,14 +11,14 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  */
 public interface GraficaTipoPagoService {
 
-	/**
+    /**
      * Método utilizado para obtener una cadena indicando monto total por tipo de pago
      * 'graficaMontoTipoPago'.
      *
      * @return String.
      */
     String getMontoTotalTipoPago() throws BusinessException;
-    
+
     /**
      * Método utilizado para obtener una cadena indicando monto total por tipo de pago
      * por rango de fechas 'graficaMontoTipoPago'.

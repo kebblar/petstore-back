@@ -22,12 +22,12 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestGrafcasPie {
-    
+
     @Test
     public void main() {
         // Gson convierte objetos en cadenas Json y viciversa
         Gson gson = new Gson();
-        
+
         // Crea listas de POJOS para hacer una prueba
         List<GraficaPaqueteria> graficasPaqueteria = getGraficasPaqueteria();
         List<GraficaMascota> graficasMascota = getGraficasMascota();
@@ -35,18 +35,18 @@ public class TestGrafcasPie {
         // Calcula las cadenas DE TU MANERA
         String a = formatearGraficaPaqueteria(graficasPaqueteria);
         String b = formatearGraficaMascota(graficasMascota);
-        
+
         // Crea objetos A MI MANERA
         ChartWrapper x1 = build(graficasPaqueteria);
         ChartWrapper y1 = build2(graficasMascota);
-        
+
         String x = gson.toJson(x1);
         String y = gson.toJson(y1);
 
         assertEquals(a,x);
         assertEquals(b,y);
     }
-    
+
     private ChartWrapper build(List<GraficaPaqueteria> graficasPaqueteria) {
         List<String> label = new ArrayList<>();
         List<Long> data = new ArrayList<>();
@@ -71,8 +71,8 @@ public class TestGrafcasPie {
         }
         ChartData chartData = new ChartData(label, data, mes);
         return new ChartWrapper(chartData);
-    }    
-    
+    }
+
     private String formatearGraficaPaqueteria(List<GraficaPaqueteria> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
@@ -92,7 +92,7 @@ public class TestGrafcasPie {
         //System.out.println(cadena + "]}}");
         return cadena + "]}}";
     }
-    
+
     private String formatearGraficaMascota(List<GraficaMascota> graficas) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbData = new StringBuilder();
@@ -113,8 +113,8 @@ public class TestGrafcasPie {
         return cadena + "]}}";
     }
 
-    
-    
+
+
     private String obtenerMes(Date fecha) {
         return new SimpleDateFormat("MMMM").format(fecha);
     }
@@ -128,7 +128,7 @@ public class TestGrafcasPie {
         }
         return graficasPaqueteria;
     }
-    
+
     private List<GraficaMascota> getGraficasMascota() {
         List<GraficaMascota> graficasMascota = new ArrayList<>();
         GraficaMascota gp = null;
@@ -138,5 +138,5 @@ public class TestGrafcasPie {
         }
         return graficasMascota;
     }
-    
+
 }

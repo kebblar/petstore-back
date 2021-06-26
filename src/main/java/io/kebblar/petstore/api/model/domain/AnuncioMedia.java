@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 
 /**
- * POJO asociado a la entidad 'anuncio_imagen'. 
+ * POJO asociado a la entidad 'anuncio_imagen'.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -31,13 +31,13 @@ import java.io.Serializable;
  */
 public class AnuncioMedia implements Serializable {
     private static final long serialVersionUID = -4759453261602831311L;
-    
+
     private Integer id;
     private Integer idAnuncio;
     private String uuid;
     private Integer idTipo;
     private Boolean principal;
-    
+
     public AnuncioMedia() {
     }
 
@@ -51,7 +51,7 @@ public class AnuncioMedia implements Serializable {
         this.idTipo = idTipo;
         this.principal = principal;
     }
-    
+
     public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         super();
         this.id = id;
@@ -155,5 +155,5 @@ public class AnuncioMedia implements Serializable {
         return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo
                 + ", principal=" + principal + "]";
     }
-      
+
 }

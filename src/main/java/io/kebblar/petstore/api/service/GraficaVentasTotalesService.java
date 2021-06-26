@@ -44,7 +44,7 @@ public interface GraficaVentasTotalesService {
      * @return String.
      */
     String getTotalImporteVentasFiltroFechas(String fechaIni, String fechaFin) throws DatabaseException;
-    
+
     /**
      * Método utilizado para obtener una cadena indicando las datos para la gráfica de total de órdenes de compra de ventas
      * asociados a la entidad 'GraficaVentasTotales'.
@@ -60,5 +60,5 @@ public interface GraficaVentasTotalesService {
      * @return String.
      */
     String getNumeroOrdenesTotalVentasFiltroFechas(String fechaIni, String fechaFin) throws DatabaseException;
-    
+
 }

@@ -84,7 +84,7 @@ public interface PaisService {
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'pais'. por medio de su nombre.
-     * 
+     *
      * @param nombre Nombre de Pais.
      * @return La información del elemento recuperado en una instacia de la clase País o nulo si no se encuentra ese elemento en la tabla.
      */

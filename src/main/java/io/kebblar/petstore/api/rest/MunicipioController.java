@@ -163,36 +163,36 @@ public class MunicipioController {
             ) throws BusinessException {
         return municipioService.getPaginatedMunicipios(idEstado, pageNumber, pageSize);
     }
-    
+
     @GetMapping(
-        path = "/municipios/list/descripcion.json", 
+        path = "/municipios/list/descripcion.json",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
-        return this.municipioService.getMunicipiosDescripcion(); 
+        return this.municipioService.getMunicipiosDescripcion();
     }
-    
+
     @GetMapping(
-        path = "/municipios/list/{nombre}.json", 
+        path = "/municipios/list/{nombre}.json",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosbyEstado(
             @ApiParam(name = "nombre", value = "nombre del Municipio", defaultValue = "Ixtapaluca")
             @PathVariable String nombre
             ) throws BusinessException {
-        return this.municipioService.getMunicipiosDescripcionByNombre(nombre); 
+        return this.municipioService.getMunicipiosDescripcionByNombre(nombre);
     }
-    
+
     @GetMapping(
-            path = "/municipios/pais/{id}/{nombre}.json", 
+            path = "/municipios/pais/{id}/{nombre}.json",
             produces = "application/json; charset=utf-8")
         public List<Municipio> getMunicipiosbyPaisId(
                 @ApiParam(name = "id", value = "id del pais", defaultValue = "1") @PathVariable int id,
                 @ApiParam(name = "nombre", value = "nombre del municipio", defaultValue = "Ixtapaluca") @PathVariable String nombre
                 ) throws BusinessException {
-            return this.municipioService.getMunicipiosByPaisDescripcion(id,nombre); 
+            return this.municipioService.getMunicipiosByPaisDescripcion(id,nombre);
         }
-    
+
     @GetMapping(
-            path = "/municipios/estado/{id}/{nombre}.json", 
+            path = "/municipios/estado/{id}/{nombre}.json",
             produces = "application/json; charset=utf-8")
         public List<Municipio> getMunicipiosbyEstadoId(
                 @ApiParam(name = "id", value = "id del estado", defaultValue = "1") @PathVariable int id,

@@ -44,7 +44,7 @@ public interface GraficaTotalFechasCategoriaMapper {
     static final String IJAnuncioCarrito = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
     static final String IJCategoriaAnuncio = " inner join petstore.categoria as cat on cat.id = anuncio.id_categoria";
     static final String GroupCategoriaMesAnio = " group by anio, mes, categoria";
-    
+
     /**
      * Obtiene una lista de tipo 'GraficaTotalFechasCategoria'.
      *
@@ -52,8 +52,8 @@ public interface GraficaTotalFechasCategoriaMapper {
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      *                      operación desde la base de datos.
      */
-    @Results(id = "GraficaTotalFechasCategoria", value = { 
-    		@Result(property = "categoria", column = "categoria"),
+    @Results(id = "GraficaTotalFechasCategoria", value = {
+            @Result(property = "categoria", column = "categoria"),
             @Result(property = "total_venta", column = "total_venta"),
             @Result(property = "cantidad_ordenes", column = "cantidad_ordenes"),
             @Result(property = "mes", column = "mes"),
@@ -62,11 +62,11 @@ public interface GraficaTotalFechasCategoriaMapper {
             +IJCarritoOrden+IJAnuncioCarrito+IJCategoriaAnuncio
             +GroupCategoriaMesAnio)
     List<GraficaTotalFechasCategoria> getTotalCategoria() throws SQLException;
-    
+
     @ResultMap("GraficaTotalFechasCategoria")
     @Select("SELECT "+CAMPOS+ " from petstore.orden_compra as orden "
             +IJCarritoOrden+IJAnuncioCarrito+IJCategoriaAnuncio
-            +" where orden.fecha_hora_comprar between #{fechaIni} and #{fechaFin}" 
+            +" where orden.fecha_hora_comprar between #{fechaIni} and #{fechaFin}"
             +GroupCategoriaMesAnio)
     List<GraficaTotalFechasCategoria> getTotalCategoriaFiltroFechas(String fechaIni, String fechaFin) throws SQLException;
 

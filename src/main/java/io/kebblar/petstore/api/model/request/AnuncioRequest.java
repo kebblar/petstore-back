@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Implementacion del POJO de la entidad de 'AnuncioRequest'.
- * 
+ *
  * @author  Edgar Uribe
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -47,7 +47,7 @@ public class AnuncioRequest {
     @NotNull(message = "{notnull.anuncio.precio}")
     private BigDecimal precio;
     private List <MascotaValorAtributoRequest> mascotaValorAtributo;
-    
+
     public AnuncioRequest() {
     }
 

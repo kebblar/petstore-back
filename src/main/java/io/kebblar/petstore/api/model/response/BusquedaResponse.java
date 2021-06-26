@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -21,7 +21,7 @@ package io.kebblar.petstore.api.model.response;
 import java.util.List;
 
 /**
- * POJO asociado a la entidad 'anuncio' para realizar la busqueda. 
+ * POJO asociado a la entidad 'anuncio' para realizar la busqueda.
  *
  * @author Edgar Uribe Mendez
  * @version 1.0-SNAPSHOT
@@ -30,23 +30,23 @@ import java.util.List;
 public class BusquedaResponse {
     private int totalAnuncios;
     private List<DetalleAnuncioResponse> listaAnuncios;
-    
+
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
-    
+
     public void setTotalAnuncios(int totalAnuncios) {
         this.totalAnuncios = totalAnuncios;
     }
-    
+
     public List<DetalleAnuncioResponse> getListaAnuncios() {
         return listaAnuncios;
     }
-    
+
     public void setListaAnuncios(List<DetalleAnuncioResponse> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -55,7 +55,7 @@ public class BusquedaResponse {
         result = prime * result + totalAnuncios;
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -74,17 +74,17 @@ public class BusquedaResponse {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "BusquedaResponse [totalAnuncios=" + totalAnuncios + ", listaAnuncios=" + listaAnuncios + "]";
     }
-    
+
     public BusquedaResponse(int totalAnuncios, List<DetalleAnuncioResponse> listaAnuncios) {
         this.totalAnuncios = totalAnuncios;
         this.listaAnuncios = listaAnuncios;
     }
-    
+
     public BusquedaResponse() {
     }
 

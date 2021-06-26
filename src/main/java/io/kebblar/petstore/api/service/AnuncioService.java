@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -14,9 +14,9 @@
  *
  * Historia:    .
  *              20210510_2339 Creación de ésta interfaz
- *              20210523_2025 Se  agrega  el  metodo  de  elimado 
+ *              20210523_2025 Se  agrega  el  metodo  de  elimado
  *              logico
- *              20210525_1806 Se  agrega  el  metodo  de consulta 
+ *              20210525_1806 Se  agrega  el  metodo  de consulta
  *              detalle de un anuncio
  *              20210528_1157 Se agrega el metodo BusquedaAdministracion
  *
@@ -40,11 +40,11 @@ import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 
 /**
  * Definición de la interfaz de servicios para 'Anuncio'.
- * 
+ *
  * @author  micontreras
  * @see     io.kebblar.petstore.api.model.domain.Anuncio
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface AnuncioService {
 
@@ -58,7 +58,7 @@ public interface AnuncioService {
      * @throws BusinessException
      */
     AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
-	
+
     /**
      * Método que permite confirmar el registro de un producto {@link AnuncioEstatusEnum}
      * con base al identificador proporcionado, cumpliendo las siguientes reglas para su publicación:
@@ -77,7 +77,7 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
-	
+
     /**
      * Método que permite eliminar logicamente un producto con base al identificador proporcionado
      * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
@@ -87,7 +87,7 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
-	
+
     /**
      * Método que permite obtener el detalle de un anuncio con base al identificador.
      *
@@ -96,9 +96,9 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException;
-	
 
-    /** 
+
+    /**
      * Método que permite el guardado de las imagenes de un anuncio.
      *
      * @param idAnuncio Identificador del anuncio con el cual se va a asociar la imagen
@@ -107,7 +107,7 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;
- 
+
     /**
      * Método que permite el eliminado de las imagenes de un anuncio.
      *
@@ -115,25 +115,25 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void eliminarImagen(String uuid) throws BusinessException;
- 
+
     /**
      * Método que permite la búsqueda de productos para búsqueda de aministracion (ABC).
      *
      * @param {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
-     * @return {@link PaginacionAnunciosResponse} 
+     * @return {@link PaginacionAnunciosResponse}
      * @throws BusinessException, SQLException
      */
     PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException;
- 
+
     /**
      * Método que permite la búsqueda de productos para búsqueda de usuario final.
      *
      * @param {@link BusquedaRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
-     * @return {@link BusquedaResponse} 
+     * @return {@link BusquedaResponse}
      * @throws BusinessException, SQLException
      */
     BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException;
- 
+
     /**
      * Método que permite asignar como principal la imagen del anuncio proporcionado.
      *
@@ -142,12 +142,12 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException;
-    
+
     /**
      * Método que permite publicar o finalizar un anuncio y
      * que permite pasar a vencido los anuncios cuya fecha de vencimiento ha sido alcanzada
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void schedulerPublicarAnuncio() throws BusinessException;
- 
+
 }

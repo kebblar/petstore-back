@@ -44,6 +44,6 @@ public interface GraficaTotalFechasCategoriaService {
      * @return String.
      */
     String getTotalPorCategoriaFiltroFechas(String fechaIni, String fechaFin) throws BusinessException;
-    
+
 }
 

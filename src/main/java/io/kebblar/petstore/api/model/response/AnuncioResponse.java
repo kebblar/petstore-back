@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -19,7 +19,7 @@
 package io.kebblar.petstore.api.model.response;
 
 /**
- * POJO asociado a la entidad 'anuncio' para mostrar la informacion base. 
+ * POJO asociado a la entidad 'anuncio' para mostrar la informacion base.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -29,37 +29,37 @@ public class AnuncioResponse {
     private int id;
     private String folio;
     private String info;
-    
+
     public AnuncioResponse() {
     }
-    
+
     public AnuncioResponse(int id, String folio) {
         this.id = id;
         this.folio = folio;
     }
-    
+
     public AnuncioResponse(int id, String folio, String info) {
         this.id = id;
         this.folio = folio;
         this.info = info;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getFolio() {
         return folio;
     }
-    
+
     public void setFolio(String folio) {
         this.folio = folio;
     }
-    
+
     public String getInfo() {
         return info;
     }
@@ -67,7 +67,7 @@ public class AnuncioResponse {
     public void setInfo(String info) {
         this.info = info;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -110,5 +110,5 @@ public class AnuncioResponse {
     public String toString() {
         return "AnuncioResponse [id=" + id + ", folio=" + folio + ", info=" + info + "]";
     }
-    
+
 }

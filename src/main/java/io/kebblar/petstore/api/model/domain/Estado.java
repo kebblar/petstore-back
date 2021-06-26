@@ -62,7 +62,7 @@ public class Estado implements Serializable {
         this.idPais = idPais;
         this.nombre = nombre;
     }
-    
+
     /**
      * Constructor basado en atributos temporales para el nombre del Pais.
      */
@@ -114,7 +114,7 @@ public class Estado implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     /**
      * Getter para nombrePais.
      */

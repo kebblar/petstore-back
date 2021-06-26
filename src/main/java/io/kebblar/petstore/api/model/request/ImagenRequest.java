@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Implementacion del POJO de la entidad de 'ImagenRequest'.
- * 
+ *
  * @author  Javier Chàvez
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -32,10 +32,10 @@ public class ImagenRequest {
 
     private int id;//Identificador del anuncio
     private MultipartFile[] files;
-    
+
     public ImagenRequest() {
     }
-    
+
     public ImagenRequest(int id, MultipartFile[] files) {
         this.id = id;
         this.files = files;

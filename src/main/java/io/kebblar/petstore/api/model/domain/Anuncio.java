@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -25,7 +25,7 @@ import java.util.Date;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad 'anuncio'. 
+ * POJO asociado a la entidad 'anuncio'.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -46,7 +46,7 @@ public class Anuncio implements Serializable {
     private Date fechaModificacion;
     private Date fechaEliminacion;
     private short idEstatus;
-    
+
     public Anuncio() {
     }
 

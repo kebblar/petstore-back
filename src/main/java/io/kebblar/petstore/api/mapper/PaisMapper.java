@@ -106,7 +106,7 @@ public interface PaisMapper {
      * operación desde la base de datos.
      */
     @ResultMap("PaisMap")
-    @Select("SELECT " + CAMPOS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'") 
+    @Select("SELECT " + CAMPOS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'")
     List<Pais> getByNombre(String nombre) throws SQLException;
 
 }

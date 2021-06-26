@@ -46,13 +46,13 @@ public class RouterController {
         model.addAttribute("attribute", "forwardWithForwardPrefix");
         return new ModelAndView("forward:/", model);
     }
-    
+
     @GetMapping(value = "/post/**")
     public ModelAndView redirectQueryPath(ModelMap model) {
         model.addAttribute("attribute", "forwardWithForwardPrefix");
         return new ModelAndView("forward:/", model);
     }
-    
+
     @GetMapping("/token.json")
     public String getToken(){
         return JWTUtil.getJWTToken();

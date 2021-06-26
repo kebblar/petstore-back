@@ -92,7 +92,7 @@ public interface PaqueteriaService {
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'paqueteria'. por medio de su nombre.
-     * 
+     *
      * @param nombre Nombre la paqueteria.
      * @return La información del elemento recuperado en una instacia de la clase paqueteria o nulo si no se encuentra ese elemento en la tabla.
      */

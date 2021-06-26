@@ -76,28 +76,28 @@ public class MascotaController {
     }
 
     @GetMapping(
-        path = "/mascotas.json", 
+        path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
     public List<Mascota> getAll() throws ControllerException {
         return mascotaService.getAll();
     }
 
     @PostMapping(
-        path = "/mascotas/filtro.json", 
+        path = "/mascotas/filtro.json",
         produces = "application/json; charset=utf-8")
     public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws ControllerException {
         return mascotaService.getByCriteria(criterios);
     }
 
     @GetMapping(
-        path = "/mascotas/{id}.json", 
+        path = "/mascotas/{id}.json",
         produces = "application/json; charset=utf-8")
     public Mascota getMascota(@PathVariable int id) throws ControllerException {
         return mascotaService.getById(id);
     }
 
     @PostMapping(
-        path = "/mascotas.json", 
+        path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.insert(mascota);
@@ -105,7 +105,7 @@ public class MascotaController {
     }
 
     @PutMapping(
-        path = "/mascotas.json", 
+        path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
         int id = mascotaService.update(mascota);
@@ -113,7 +113,7 @@ public class MascotaController {
     }
 
     @DeleteMapping(
-        path = "/mascotas.json", 
+        path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
     public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws ControllerException {
         int result = mascotaService.delete(id);
@@ -121,10 +121,10 @@ public class MascotaController {
     }
 
     @GetMapping(
-        path = "/tickers.json", 
+        path = "/tickers.json",
         produces = "application/json; charset=utf-8")
     public TickerWrapper getTicker() throws ControllerException {
         return remoteRestCallService.callTickerMicroservice();
     }
-    
+
 }

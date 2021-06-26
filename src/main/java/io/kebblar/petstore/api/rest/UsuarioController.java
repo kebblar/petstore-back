@@ -71,12 +71,12 @@ public class UsuarioController {
     }
 
     @GetMapping(
-            path = "/usuarios/{id}.json", 
+            path = "/usuarios/{id}.json",
             produces = "application/json; charset=utf-8")
     public Usuario getUser(
             @ApiParam(
-                    name = "id", 
-                    value = "ID del Usuario", 
+                    name = "id",
+                    value = "ID del Usuario",
                     defaultValue = "1")
             @PathVariable int id
             ) throws ControllerException {
@@ -84,18 +84,18 @@ public class UsuarioController {
     }
 
     @GetMapping(
-            path = "/usuarios.json", 
+            path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws ControllerException {
         return this.usuarioService.obtenTodosUsuarios();
     }
 
     @PostMapping(
-            path = "/usuarios-thin.json", 
+            path = "/usuarios-thin.json",
             produces = "application/json; charset=utf-8")
     public Usuario createUserThin(
             @ApiParam(
-                    name = "credenciales", 
+                    name = "credenciales",
                     value = "Crea un Usuario empleando sólo sus credenciales")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
@@ -103,11 +103,11 @@ public class UsuarioController {
     }
 
     @PostMapping(
-            path = "/usuarios.json", 
+            path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public Usuario createUser(
             @ApiParam(
-                    name = "usuario", 
+                    name = "usuario",
                     value = "Crea un Usuario empleando todos sus atributos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
@@ -115,11 +115,11 @@ public class UsuarioController {
     }
 
     @PutMapping(
-            path = "/usuarios.json", 
+            path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public Usuario updateUsuario(
             @ApiParam(
-                    name = "usuario", 
+                    name = "usuario",
                     value = "Actualiza un Usuario empleando todos los atributos provistos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
@@ -127,11 +127,11 @@ public class UsuarioController {
     }
 
     @DeleteMapping(
-            path = "/usuarios.json", 
+            path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public Usuario borraUsuario(
             @ApiParam(
-                    name = "id", 
+                    name = "id",
                     value = "Borra un Usuario cuyo ID es dado")
             @RequestParam int id) throws ControllerException {
          return this.usuarioService.eliminaUsuario(id);
@@ -143,7 +143,7 @@ public class UsuarioController {
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
             @ApiParam(
-                    name = "credenciales", 
+                    name = "credenciales",
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
@@ -153,12 +153,12 @@ public class UsuarioController {
     }
 
     @PutMapping(
-            path = "/usuario-detalles.json", 
+            path = "/usuario-detalles.json",
             produces = "application/json; charset=utf-8")
     public UsuarioDetalle updateUsuarioDetalles(
             @RequestHeader("jwt") String jwt,
             @ApiParam(
-                    name = "usuarioDetalle", 
+                    name = "usuarioDetalle",
                     value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
             @RequestBody UsuarioDetalle usuarioDetalle
             ) throws ControllerException {

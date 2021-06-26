@@ -67,14 +67,14 @@ public class GraficaVentasTotalesController {
         this.graficaVentasTotalesService = graficaVentasTotalesService;
     }
 
-    @ApiOperation(value = "GraficaVentasTotalesController::getTotalImporteVentas", 
+    @ApiOperation(value = "GraficaVentasTotalesController::getTotalImporteVentas",
         notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
         + "a la grafica de importe total de ventas.")
     @GetMapping(value = "/grafica-total-importe-ventas.json", produces = "application/json; charset=utf-8")
     public String getTotalImporteVentas() throws ControllerException {
         return graficaVentasTotalesService.getTotalImporteVentas();
     }
-    
+
     @ApiOperation(value = "GraficaVentasTotalesController::getTotalImporteVentasFiltroFechas",
         notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
         + "a la grafica de importe total de ventas con filtro de fechas.")
@@ -85,15 +85,15 @@ public class GraficaVentasTotalesController {
         throws BusinessException {
         return graficaVentasTotalesService.getTotalImporteVentasFiltroFechas(fechaInicio, fechaFin);
     }
-    
-    @ApiOperation(value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentas", 
+
+    @ApiOperation(value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentas",
         notes = "Regresa una cadena de los objetos graficaVentasTotales pertenecientes "
         + "a la grafica de total de número de órdenes de ventas.")
     @GetMapping(value = "/grafica-total-numero-ordenes-ventas.json", produces = "application/json; charset=utf-8")
     public String getNumeroOrdenesTotalVentas() throws ControllerException {
         return graficaVentasTotalesService.getNumeroOrdenesTotalVentas();
     }
-    
+
     @ApiOperation(value = "GraficaVentasTotalesController::getNumeroOrdenesTotalVentasFiltroFechas",
         notes = "Regresa un listado de objetos graficaVentasTotales pertenecientes "
         + "a la grafica de total de número de órdenes de ventas con filtro de fechas.")

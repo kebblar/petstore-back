@@ -150,7 +150,7 @@ public class AdminController {
     }
     @GetMapping(path = "/content/{seccion}/{description}", produces = "application/json; charset=utf-8")
     public List<String> getContentByName(
-            @PathVariable String description, 
+            @PathVariable String description,
             @PathVariable String seccion) {
         List<String> result = new ArrayList<>();
         result.add(description);

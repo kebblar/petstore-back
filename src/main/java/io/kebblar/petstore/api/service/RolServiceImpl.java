@@ -4,20 +4,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   RolServiceImpl .java
  * Proyecto:    petstore
- * Tipo:        clase 
+ * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       jueves 06 de junio de 2021 (17_26)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210624_1726 Implementación de clase 
+ * Historia:    20210624_1726 Implementación de clase
  *
  */
 
@@ -34,10 +34,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Descripción:</p>
- * Servicio asociado a la entidad 'rol'. 
+ * Servicio asociado a la entidad 'rol'.
  *
  * <p>Implementación de la interfaz {@link RolService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -58,7 +58,7 @@ public class RolServiceImpl implements RolService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param rolMapper mapper utilizado para llamar a metodos de persistencia
      */
     public RolServiceImpl(RolMapper rolMapper) {

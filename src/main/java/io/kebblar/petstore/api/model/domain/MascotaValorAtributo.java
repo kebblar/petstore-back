@@ -3,7 +3,7 @@
  *              para  copiarlo, distribuirlo o modificarlo total
  *              o  parcialmente  siempre y cuando  mantenga este
  *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención 
+ *              modificar los  datos  establecidos en la mención
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
@@ -14,7 +14,7 @@
  *
  * Historia:    .
  *              20210518_2028 Creación de éste POJO
- *              20210604_2028 Se  modificar  para  agregar  los 
+ *              20210604_2028 Se  modificar  para  agregar  los
  *              nuevos campos
  *              202106041315 Se renombra de la clase y se quitan
  *              campos que ya no son necesarios
@@ -25,7 +25,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 
 /**
- * POJO asociado a la entidad 'mascota_valor_atributo'. 
+ * POJO asociado a la entidad 'mascota_valor_atributo'.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -33,11 +33,11 @@ import java.io.Serializable;
  */
 public class MascotaValorAtributo implements Serializable {
     private static final long serialVersionUID = 8636526037194157358L;
-    
+
     private Integer id;
     private Integer idAnuncio;
     private Integer idValorAtributo;
-    
+
     public MascotaValorAtributo() {
     }
 

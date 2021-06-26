@@ -133,15 +133,15 @@ public class EstadoServiceImpl implements EstadoService {
             throw new BusinessException();
         }
     }
-    
+
     @Override
     public List<Estado> getByNombre(String nombre, int idPais) throws BusinessException {
         try {
-        	if(idPais > 0) {
+            if(idPais > 0) {
                 return estadoMapper.getByNombreAndIdPais(nombre, idPais);
-        	} else  {
+            } else  {
                 return estadoMapper.getByNombre(nombre);
-        	}
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();

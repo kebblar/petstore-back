@@ -3,20 +3,20 @@
  *              para copiarlo,  distribuirlo o modificarlo total
  *              o  parcialmente siempre y cuando  mantenga  este
  *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
+ *              modificar  los datos establecidos en  la mencion
  *              de "AUTOR".
  *
  *              ------------------------------------------------
- * 
+ *
  * Artefacto:   RolMapper .java
  * Proyecto:    petstore
- * Tipo:        interface 
+ * Tipo:        interface
  * AUTOR:       Fhernanda Romo
  * Fecha:       jueves 06 de junio de 2021 (17_26)
- * 
+ *
  *              ------------------------------------------------
  *
- * Historia:    20210624_1726 Implementación de interface 
+ * Historia:    20210624_1726 Implementación de interface
  *
  */
 package io.kebblar.petstore.api.mapper;
@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Rol 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Rol
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -41,7 +41,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
 @Repository
 public interface RolMapper {
     static final String CAMPOS = " id, nombre, activo ";
-    
+
     @Select("SELECT id, nombre, activo FROM rol")
     List<Rol> getAll() throws SQLException;
 
@@ -53,7 +53,7 @@ public interface RolMapper {
 
     @Insert("INSERT INTO usuario_rol VALUES(#{idUsuario}, #{idRol})")
     int insertUserRol(int idUsuario, int idRol) throws SQLException;
-    
+
     /**
      * Obtiene un objeto de tipo 'Rol' dado su id.
      *
@@ -64,9 +64,9 @@ public interface RolMapper {
     @Results(id="RolMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
-            @Result(property = "activo",   column = "activo")    
+            @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM rol WHERE     id = #{id}     ") 
+    @Select("SELECT " + CAMPOS + " FROM rol WHERE     id = #{id}     ")
     Rol getById(int id) throws SQLException;
 
     /**
@@ -77,9 +77,9 @@ public interface RolMapper {
      * operación desde la base de datos.
      */
     @ResultMap("RolMap")
-    @Select("SELECT " + CAMPOS + " FROM rol ") 
+    @Select("SELECT " + CAMPOS + " FROM rol ")
     List<Rol> getAllSinFiltros() throws SQLException;
-    
+
     /**
      * Inserta un objeto de tipo 'Rol' con base en la información dada por el objeto de tipo 'Rol'.
      *
@@ -101,7 +101,7 @@ public interface RolMapper {
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE rol" 
+    "UPDATE rol"
     + " SET nombre = #{nombre}, activo = #{activo}"
     + " WHERE id = #{id} ")
     int update(Rol rol) throws SQLException;
@@ -113,7 +113,7 @@ public interface RolMapper {
      * @return id del Rol borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Delete("DELETE FROM rol WHERE id = #{id} ") 
+    @Delete("DELETE FROM rol WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
 }
