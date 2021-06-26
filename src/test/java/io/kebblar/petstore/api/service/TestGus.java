@@ -28,7 +28,7 @@ public class TestGus {
         String b = test.formatearGraficaMascota(graficasMascota);
         
         // Crea objetos A MI MANERA
-        ChartWrapper x = build(graficasPaqueteria);
+        ChartData x = build(graficasPaqueteria);
         ChartWrapper y = build2(graficasMascota);
         
         // Pinta tus cadenas
@@ -46,7 +46,7 @@ public class TestGus {
         // Hasta se podría eliminar la clase ChartWrapper si a los clienes de este pojo se les ajusta su recepción
     }
     
-    private static ChartWrapper build(List<GraficaPaqueteria> graficasPaqueteria) {
+    private static ChartData build(List<GraficaPaqueteria> graficasPaqueteria) {
         List<String> label = new ArrayList<>();
         List<Long> data = new ArrayList<>();
         Set<String> mes = new HashSet<>();
@@ -56,7 +56,7 @@ public class TestGus {
             data.add(gp.getCantidad());
         }
         ChartData chartData = new ChartData(label, data, mes);
-        return new ChartWrapper(chartData);
+        return chartData;//new ChartWrapper(chartData);
     }
 
     private static ChartWrapper build2(List<GraficaMascota> graficasMascota) {
