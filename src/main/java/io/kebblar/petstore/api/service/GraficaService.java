@@ -18,8 +18,8 @@
  */
 package io.kebblar.petstore.api.service;
 
-import io.kebblar.petstore.api.model.domain.GraficaTO;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.domain.ChartWrapper;
 
 /**
  * Interface para el servicio asociado a la entidad 'grafica'.
@@ -32,50 +32,50 @@ public interface GraficaService {
 
     /**
      * Método utilizado para obtener una cadena indicando las mascotas mas vendidas
-     * 'graficaTO'.
+     * 'ChartWrapper'.
      *
-     * @return GraficaTO.
+     * @return ChartWrapper.
      */
-    GraficaTO getMascotaMasVendida() throws BusinessException;
+    ChartWrapper getMascotaMasVendida() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las mascotas mas vendidas
      * por rango de fechas 'graficaTO'.
      *
-     * @return GraficaTO.
+     * @return ChartWrapper.
      */
-    GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
+    ChartWrapper getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
      * 'graficaTO'.
      *
-     * @return GraficaTO.
+     * @return ChartWrapper.
      */
-    GraficaTO getPaqueteria() throws BusinessException;
+    ChartWrapper getPaqueteria() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando las paqueterias mas usadas
      * por rango de fechas 'graficaTO'.
      *
-     * @return GraficaTO.
+     * @return ChartWrapper.
      */
-    GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
+    ChartWrapper getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando los compradores mas
      * recurrentes 'graficaComprador'.
      *
-     * @return String.
+     * @return ChartWrapper.
      */
-    String getCompradorAsiduo() throws BusinessException;
+    ChartWrapper getCompradorAsiduo() throws BusinessException;
 
     /**
      * Método utilizado para obtener una cadena indicando los compradores mas
      * recurrentes por rango de fechas 'graficaComprador'.
      *
-     * @return String.
+     * @return ChartWrapper.
      */
-    String getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException;
+    ChartWrapper getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException;
 
 }

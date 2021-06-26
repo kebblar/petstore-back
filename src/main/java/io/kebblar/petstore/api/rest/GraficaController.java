@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.service.GraficaService;
-import io.kebblar.petstore.api.model.domain.GraficaTO;
+import io.kebblar.petstore.api.model.domain.ChartWrapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.swagger.annotations.Api;
@@ -38,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * Implementacion del REST Controller asociado a los endpoints de gestión del
- * POJO 'grafica'.
+ * POJO 'ChartWrapper'.
  *
  * <p>
  * Todos los métodos de esta clase disparan {@link BusinessException}
@@ -51,7 +51,7 @@ import io.swagger.annotations.ApiOperation;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Grafica
+ * @see ChartWrapper
  * @see GraficaService
  */
 
@@ -71,7 +71,7 @@ public class GraficaController {
         this.graficaService = graficaService;
     }
 
-    @ApiOperation(value = "GraficaController::getMascotaMasVendida", notes = "Regresa una cadena de todos los objetos Grafica "
+    @ApiOperation(value = "GraficaController::getMascotaMasVendida", notes = "Regresa una cadena de todos los objetos ChartWrapper "
             + "debidamente paginados con base en el payload de " + "request. " + "<br/><br/>"
             + "En el caso de que los parámetros proporcionados "
             + "<b><i><label style='color:blue;'>excedan</label><i></b> las "
@@ -79,19 +79,19 @@ public class GraficaController {
             + "capaz de ajustar lo necesario para que la cadena resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(value = "/grafica-mascota-mas-vendida.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getMascotaMasVendida() throws ControllerException {
+    public ChartWrapper getMascotaMasVendida() throws ControllerException {
         return graficaService.getMascotaMasVendida();
     }
 
     @GetMapping(path = "/grafica-mascota-mas-vendida-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getMascotaMasVendidaRango(
+    public ChartWrapper getMascotaMasVendidaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
         return graficaService.getMascotaMasVendidaRango(fechaInicio, fechaFin);
     }
 
-    @ApiOperation(value = "GraficaController::getPaqueteria", notes = "Regresa una cadena de todos los objetos Grafica "
+    @ApiOperation(value = "GraficaController::getPaqueteria", notes = "Regresa una cadena de todos los objetos ChartWrapper "
             + "debidamente paginados con base en el payload de " + "request. " + "<br/><br/>"
             + "En el caso de que los parámetros proporcionados "
             + "<b><i><label style='color:blue;'>excedan</label><i></b> las "
@@ -99,20 +99,19 @@ public class GraficaController {
             + "capaz de ajustar lo necesario para que la cadena resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(value = "/grafica-paqueteria.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getPaqueteria() throws ControllerException {
+    public ChartWrapper getPaqueteria() throws ControllerException {
         return graficaService.getPaqueteria();
     }
 
     @GetMapping(path = "/grafica-paqueteria-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
-    public GraficaTO getPaqueteriaRango(
+    public ChartWrapper getPaqueteriaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
-
         return graficaService.getPaqueteriaRango(fechaInicio, fechaFin);
     }
 
-    @ApiOperation(value = "GraficaController::getCompradorAsiduo", notes = "Regresa una cadena de todos los objetos Grafica Comprador Asiduo"
+    @ApiOperation(value = "GraficaController::getCompradorAsiduo", notes = "Regresa una cadena de todos los objetos ChartWrapper Comprador Asiduo"
             + "debidamente paginados con base en el payload de " + "request. " + "<br/><br/>"
             + "En el caso de que los parámetros proporcionados "
             + "<b><i><label style='color:blue;'>excedan</label><i></b> las "
@@ -120,16 +119,15 @@ public class GraficaController {
             + "capaz de ajustar lo necesario para que la cadena resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(value = "/grafica-comprador-asiduo.json", produces = "application/json; charset=utf-8")
-    public String getCompradorAsiduo() throws ControllerException {
+    public ChartWrapper getCompradorAsiduo() throws ControllerException {
         return graficaService.getCompradorAsiduo();
     }
 
     @GetMapping(path = "/grafica-comprador-asiduo-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
-    public String getCompradorAsiduoRango(
+    public ChartWrapper getCompradorAsiduoRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
-
         return graficaService.getCompradorAsiduoRango(fechaInicio, fechaFin);
     }
 
