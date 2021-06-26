@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 import io.kebblar.petstore.api.mapper.EstatusAnuncioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Descripción:</p>
@@ -122,9 +123,9 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
     public int delete(EstatusAnuncio estatusAnuncio) throws BusinessException {
         try {
             return estatusAnuncioMapper.delete(estatusAnuncio.getId());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("Error en la eliminación del estatus seleccionado ", e.getMessage());
         }
     }
 

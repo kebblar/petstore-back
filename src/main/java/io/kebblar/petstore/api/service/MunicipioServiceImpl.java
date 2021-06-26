@@ -107,9 +107,9 @@ public class MunicipioServiceImpl implements MunicipioService {
     public int delete(Municipio municipio) throws BusinessException {
         try {
             return municipioMapper.delete(municipio.getId());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("Error en la eliminación del Municipio seleccionado ", e.getMessage());
         }
     }
 
