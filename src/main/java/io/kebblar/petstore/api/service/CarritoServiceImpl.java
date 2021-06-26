@@ -96,7 +96,7 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public List<Carrito> getAll(int id) throws BusinessException {
+    public List<Carrito> getCarritoByUserId(int id) throws BusinessException {
         try {
             return carritoMapper.getAll(id);
         } catch (Exception e) {
@@ -135,11 +135,13 @@ public class CarritoServiceImpl implements CarritoService {
     public List<CarritoVista> getCarritoView(int id) throws VistaCarritoException {
         List<CarritoVista> lista = new ArrayList<>();
         try {
-            List<Carrito> carrito = getAll(id);
+            List<Carrito> carrito = getCarritoByUserId(id);
             for(Carrito elem : carrito) {
                 DetalleAnuncioResponse d = anuncioService.detalleAnuncio(elem.getIdAnuncio());
-                String imagen = d.getImagenes().get(0).getUuid();
-                lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
+                if(d!=null) {
+                    String imagen = d.getImagenes().get(0).getUuid();
+                    lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
+                }
             }
         } catch (BusinessException e) {
             throw new VistaCarritoException("No pudo obtenerse el carrito del usuario" );
@@ -148,7 +150,7 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     public void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException {
-        List<Carrito> carritos = getAll(idUser);
+        List<Carrito> carritos = getCarritoByUserId(idUser);
         for (Carrito carrito : carritos) {
             try {
                 carrito.setCveOrdenCompra(cveCompra);

@@ -61,7 +61,7 @@ public interface CarritoService {
      * @param id Id del usuario del que ser recuprear'a su carrito.
      * @return Lista con todos los elementos de la tabla 'carrito'.
      */
-    List<Carrito> getAll(int id) throws BusinessException;
+    List<Carrito> getCarritoByUserId(int id) throws BusinessException;
 
     /**
      * Método utilizado para insertar un registro en la tabla 'carrito'.

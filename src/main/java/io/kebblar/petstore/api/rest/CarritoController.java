@@ -96,7 +96,7 @@ public class CarritoController {
             @ApiParam(name = "id", value = "Id del usuario.")
             @PathVariable int id
     ) throws BusinessException {
-        return carritoService.getAll(id);
+        return carritoService.getCarritoByUserId(id);
     }
 
     @ApiOperation(
