@@ -26,7 +26,8 @@ import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-import io.kebblar.petstore.api.model.domain.Chart;
+import io.kebblar.petstore.api.model.domain.Grafica;
+
 
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Chart
@@ -35,7 +36,7 @@ import io.kebblar.petstore.api.model.domain.Chart;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see Chart
+ * @see ChartData
  */
 
 @Repository
@@ -47,19 +48,19 @@ public interface GraficaPaqueteriaMapper {
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      *                      operación desde la base de datos.
      */
-    @Results(id = "GraficaPaqMap", value = { @Result(property = "label", column = "paqueteria"),
-            @Result(property = "data", column = "cantidad"), @Result(property = "mes", column = "fecha") })
+    @Results(id = "GraficaPaqMap", value = { @Result(property = "etiqueta", column = "paqueteria"),
+            @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
     @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
             + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")
-    List<Chart> getPaqueteria() throws SQLException;
+    List<Grafica> getPaqueteria() throws SQLException;
 
     @ResultMap("GraficaPaqMap")
     @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} "
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")
-    List<Chart> getPaqueteriaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;
+    List<Grafica> getPaqueteriaPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;
 
 }

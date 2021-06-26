@@ -22,20 +22,22 @@
 package io.kebblar.petstore.api.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ibm.icu.util.Calendar;
-
 import io.kebblar.petstore.api.mapper.GraficaCompradorMapper;
 import io.kebblar.petstore.api.mapper.GraficaMascotaMapper;
 import io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper;
-import io.kebblar.petstore.api.model.domain.GraficaTO;
-import io.kebblar.petstore.api.model.domain.Chart;
-import io.kebblar.petstore.api.model.domain.GraficaComprador;
+import io.kebblar.petstore.api.model.domain.ChartData;
+import io.kebblar.petstore.api.model.domain.ChartWrapper;
+import io.kebblar.petstore.api.model.domain.Grafica;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
@@ -51,7 +53,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see GraficaMascota
+ * @see Grafica
  * @see GraficaService
  */
 
@@ -69,7 +71,9 @@ public class GraficaServiceImpl implements GraficaService {
      *
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper,
+    public GraficaServiceImpl(
+            GraficaMascotaMapper graficaMapper, 
+            GraficaPaqueteriaMapper graficaPaqueteriaMapper,
             GraficaCompradorMapper graficaCompradorMapper) {
         this.graficaMapper = graficaMapper;
         this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
@@ -77,140 +81,104 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     @Override
-    public GraficaTO getMascotaMasVendida() throws BusinessException {
+    public ChartWrapper getMascotaMasVendida() throws BusinessException {
         try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaMapper.getAll();
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
-            }
-            graphs.setChart(graficas);
-            return graphs;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
-        }
-    }
-
-    @Override
-    public GraficaTO getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
-        try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
-            }
-            graphs.setChart(graficas);
-            return graphs;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
-        }
-    }
-
-    @Override
-    public GraficaTO getPaqueteria() throws BusinessException {
-        try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteria();
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
-            }
-            graphs.setChart(graficas);
-            return graphs;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
-        }
-    }
-
-    @Override
-    public GraficaTO getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
-        try {
-            GraficaTO graphs = new GraficaTO();
-            List<Chart> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
-            for (Chart chart : graficas) {
-                chart.setMes(convertirFecha(chart.getMes()));
-            }
-            graphs.setChart(graficas);
-            return graphs;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
-        }
-    }
-
-    @Override
-    public String getCompradorAsiduo() throws BusinessException {
-        try {
-            String cadena = "";
-            List<GraficaComprador> graficas = graficaCompradorMapper.getComprador();
+            List<Grafica> graficas = graficaMapper.getAll();
             if (!graficas.isEmpty()) {
-                cadena = formatearGraficaComprador(graficas);
-                return cadena;
+                return build2(graficas);   
             }
-            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
+        return null;
     }
 
     @Override
-    public String getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
+    public ChartWrapper getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
-            String cadena = "";
-            List<GraficaComprador> graficas = graficaCompradorMapper.getCompradorPorRangoDeFechas(fechaIni, fechaFin);
+            List<Grafica> graficas = graficaMapper.getMascotaPorRangoDeFechas(fechaIni, fechaFin);
             if (!graficas.isEmpty()) {
-                cadena = formatearGraficaComprador(graficas);
-                return cadena;
+                return build2(graficas);   
             }
-            return cadena;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new BusinessException();
         }
+        return null;
     }
 
-    private String formatearGraficaComprador(List<GraficaComprador> graficas) {
-        StringBuilder sb = new StringBuilder();
-        StringBuilder sbData = new StringBuilder();
-        String mes = "";
-        String cadena;
-        String cadenaTmp;
-        String cadenaMes;
-        sb.append("{\"chart\":{\"label\":[");
-        for (int i = 0; i < graficas.size(); i++) {
-            sb.append("\"" + graficas.get(i).getComprador() + "\",");
-            sbData.append(graficas.get(i).getCantidad() + ",");
-            mes = ("\"" + obtenerMes(graficas.get(i).getFecha()) + "\",");
+    @Override
+    public ChartWrapper getPaqueteria() throws BusinessException {
+        try {
+            List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteria();
+            if (!graficas.isEmpty()) {
+                return build2(graficas);   
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
         }
-        cadenaTmp = sb.substring(0, sb.toString().length() - 1) + "],\"data\":[" + sbData.toString();
-        cadenaMes = cadenaTmp.substring(0, cadenaTmp.toString().length() - 1) + "],\"mes\":[" + mes;
-        cadena = cadenaMes.substring(0, cadenaMes.toString().length() - 1);
-        System.out.println(cadena + "]}}");
-        return cadena + "]}}";
+        return null;
+    }
+
+    @Override
+    public ChartWrapper getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
+        try {
+            List<Grafica> graficas = graficaPaqueteriaMapper.getPaqueteriaPorRangoDeFechas(fechaIni, fechaFin);
+            if (!graficas.isEmpty()) {
+                return build2(graficas);   
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+        return null;
+    }
+
+    @Override
+    public ChartWrapper getCompradorAsiduo() throws BusinessException {
+        try {
+            List<Grafica> graficas = graficaCompradorMapper.getComprador();
+            if (!graficas.isEmpty()) {
+                return build2(graficas);   
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+        return null;
+    }
+
+    @Override
+    public ChartWrapper getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
+        try {
+            List<Grafica> graficas = graficaCompradorMapper.getCompradorPorRangoDeFechas(fechaIni, fechaFin);
+            if (!graficas.isEmpty()) {
+                return build2(graficas);   
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new BusinessException();
+        }
+        return null;
     }
 
     private String obtenerMes(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
-        return mes;
+        return new SimpleDateFormat("MMMM").format(fecha);
     }
 
-    private String convertirFecha(String fecha) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String mes = "";
-        try {
-            Date date = formatter.parse(fecha);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            mes = new SimpleDateFormat("M").format(cal.getTime());
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
+    private ChartWrapper build2(List<Grafica> grafica) {
+        List<String> label = new ArrayList<>();
+        List<Long> data = new ArrayList<>();
+        Set<String> mes = new HashSet<>();
+        for(Grafica gp : grafica) {
+            label.add(gp.getEtiqueta());
+            mes.add(obtenerMes(gp.getFecha()));
+            data.add(gp.getCantidad());
         }
-        return mes;
-    }
+        ChartData chartData = new ChartData(label, data, mes);
+        return new ChartWrapper(chartData);
+    }  
 
 }
