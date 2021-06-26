@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * Servicio asociado a la entidad 'estado'.
@@ -103,9 +104,9 @@ public class EstadoServiceImpl implements EstadoService {
     public int delete(Estado estado) throws BusinessException {
         try {
             return estadoMapper.delete(estado.getId());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new MapperCallException("Error en la eliminación del estado seleccionado ", e.getMessage());
         }
     }
 
