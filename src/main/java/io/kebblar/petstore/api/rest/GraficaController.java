@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.service.GraficaService;
-import io.kebblar.petstore.api.model.domain.GraficaTO;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.swagger.annotations.Api;

@@ -13,46 +13,47 @@
  *
  *              ------------------------------------------------
  *
- * Artefacto:   GraficaTO .java
+ * Artefacto:   Chart .java
  * Proyecto:    petstore
  * Tipo:        clase
  * AUTOR:       Ulises López
- * Fecha:       Tuesday 17 de Jun de 2021 (14_44)
+ * Fecha:       Tuesday 25 de Jun de 2021 (20_02)
  *
  *              ------------------------------------------------
  *
- * Historia:    20210610_1444 Implementación de clase
+ * Historia:    20210625_1002 Implementación de clase
  */
 package io.kebblar.petstore.api.model.domain;
 
-import java.util.List;
-
 /**
- * Implementacion del POJO de la entidad de {@link GraficaTO}.
+ * Implementacion del POJO de la entidad de {@link ChartWrapper}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class GraficaTO {
 
-    List<ChartData> chart;
+public class ChartWrapper {
+    private ChartData chart;
 
-    public GraficaTO() {
-        super();
+    public ChartWrapper() {
     }
 
-    public GraficaTO(List<ChartData> chart) {
-        super();
+    public ChartWrapper(ChartData chart) {
         this.chart = chart;
     }
 
-    public List<ChartData> getChart() {
+    public ChartData getGraphData() {
         return chart;
     }
 
-    public void setChart(List<ChartData> chart) {
+    public void setGraphData(ChartData chart) {
         this.chart = chart;
+    }
+
+    @Override
+    public String toString() {
+        return "Chart [graphData=" + chart + "]";
     }
 
     @Override
@@ -71,7 +72,7 @@ public class GraficaTO {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GraficaTO other = (GraficaTO) obj;
+        ChartWrapper other = (ChartWrapper) obj;
         if (chart == null) {
             if (other.chart != null)
                 return false;
