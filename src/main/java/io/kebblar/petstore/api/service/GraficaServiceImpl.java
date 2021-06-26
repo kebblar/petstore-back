@@ -32,9 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.ibm.icu.util.Calendar;
-
 import io.kebblar.petstore.api.mapper.GraficaCompradorMapper;
 import io.kebblar.petstore.api.mapper.GraficaMascotaMapper;
 import io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper;
@@ -67,7 +64,6 @@ public class GraficaServiceImpl implements GraficaService {
     private GraficaMascotaMapper graficaMapper;
     private GraficaPaqueteriaMapper graficaPaqueteriaMapper;
     private GraficaCompradorMapper graficaCompradorMapper;
-    Gson gson = new Gson();
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los servicios
@@ -75,7 +71,9 @@ public class GraficaServiceImpl implements GraficaService {
      *
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public GraficaServiceImpl(GraficaMascotaMapper graficaMapper, GraficaPaqueteriaMapper graficaPaqueteriaMapper,
+    public GraficaServiceImpl(
+            GraficaMascotaMapper graficaMapper, 
+            GraficaPaqueteriaMapper graficaPaqueteriaMapper,
             GraficaCompradorMapper graficaCompradorMapper) {
         this.graficaMapper = graficaMapper;
         this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
@@ -167,10 +165,7 @@ public class GraficaServiceImpl implements GraficaService {
     }
 
     private String obtenerMes(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
-        return mes;
+        return new SimpleDateFormat("MMMM").format(fecha);
     }
 
     private ChartWrapper build2(List<Grafica> grafica) {

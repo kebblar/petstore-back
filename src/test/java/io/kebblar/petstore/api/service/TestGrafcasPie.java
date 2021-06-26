@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.gson.Gson;
-import com.ibm.icu.util.Calendar;
 
 import io.kebblar.petstore.api.model.domain.ChartData;
 import io.kebblar.petstore.api.model.domain.ChartWrapper;
@@ -117,10 +116,7 @@ public class TestGrafcasPie {
     
     
     private String obtenerMes(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
-        return mes;
+        return new SimpleDateFormat("MMMM").format(fecha);
     }
 
     private List<GraficaPaqueteria> getGraficasPaqueteria() {
