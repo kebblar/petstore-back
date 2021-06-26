@@ -7,46 +7,48 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.google.gson.Gson;
 import com.ibm.icu.util.Calendar;
 
+import io.kebblar.petstore.api.model.domain.ChartData;
+import io.kebblar.petstore.api.model.domain.ChartWrapper;
 import io.kebblar.petstore.api.model.domain.GraficaMascota;
 import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 
-public class TestGus {
-    public static void main(String...argv) {
+import static org.junit.Assert.assertEquals;
+
+@RunWith(MockitoJUnitRunner.class)
+public class TestGrafcasPie {
+    
+    @Test
+    public void main() {
         // Gson convierte objetos en cadenas Json y viciversa
         Gson gson = new Gson();
-        TestGus test = new TestGus();
         
         // Crea listas de POJOS para hacer una prueba
         List<GraficaPaqueteria> graficasPaqueteria = getGraficasPaqueteria();
         List<GraficaMascota> graficasMascota = getGraficasMascota();
 
         // Calcula las cadenas DE TU MANERA
-        String a = test.formatearGraficaPaqueteria(graficasPaqueteria);
-        String b = test.formatearGraficaMascota(graficasMascota);
+        String a = formatearGraficaPaqueteria(graficasPaqueteria);
+        String b = formatearGraficaMascota(graficasMascota);
         
         // Crea objetos A MI MANERA
-        ChartData x = build(graficasPaqueteria);
-        ChartWrapper y = build2(graficasMascota);
+        ChartWrapper x1 = build(graficasPaqueteria);
+        ChartWrapper y1 = build2(graficasMascota);
         
-        // Pinta tus cadenas
-        System.out.println(a);
-        System.out.println(b);
-        
-        System.out.println("------------------------------------------");
-        
-        // Pinta las representaciones JSON de mis objetos
-        System.out.println(gson.toJson(x));
-        System.out.println(gson.toJson(y));
-        
-        // OBSERVEN QUE DA LO MISMO !!!!!!!!!!!!
-        // EXAMINEN LA SIMPLEZA DE LAS CLASES DE PRUEBA: ChartWrapper y ChartData
-        // Hasta se podría eliminar la clase ChartWrapper si a los clienes de este pojo se les ajusta su recepción
+        String x = gson.toJson(x1);
+        String y = gson.toJson(y1);
+
+        assertEquals(a,x);
+        assertEquals(b,y);
     }
     
-    private static ChartData build(List<GraficaPaqueteria> graficasPaqueteria) {
+    private ChartWrapper build(List<GraficaPaqueteria> graficasPaqueteria) {
         List<String> label = new ArrayList<>();
         List<Long> data = new ArrayList<>();
         Set<String> mes = new HashSet<>();
@@ -56,10 +58,10 @@ public class TestGus {
             data.add(gp.getCantidad());
         }
         ChartData chartData = new ChartData(label, data, mes);
-        return chartData;//new ChartWrapper(chartData);
+        return new ChartWrapper(chartData);
     }
 
-    private static ChartWrapper build2(List<GraficaMascota> graficasMascota) {
+    private ChartWrapper build2(List<GraficaMascota> graficasMascota) {
         List<String> label = new ArrayList<>();
         List<Long> data = new ArrayList<>();
         Set<String> mes = new HashSet<>();
@@ -114,14 +116,14 @@ public class TestGus {
 
     
     
-    private static String obtenerMes(Date fecha) {
+    private String obtenerMes(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
         String mes = new SimpleDateFormat("MMMM").format(cal.getTime());
         return mes;
     }
 
-    private static List<GraficaPaqueteria> getGraficasPaqueteria() {
+    private List<GraficaPaqueteria> getGraficasPaqueteria() {
         List<GraficaPaqueteria> graficasPaqueteria = new ArrayList<>();
         GraficaPaqueteria gp = null;
         for(long i =0; i<10; i++) {
@@ -131,7 +133,7 @@ public class TestGus {
         return graficasPaqueteria;
     }
     
-    private static List<GraficaMascota> getGraficasMascota() {
+    private List<GraficaMascota> getGraficasMascota() {
         List<GraficaMascota> graficasMascota = new ArrayList<>();
         GraficaMascota gp = null;
         for(long i =0; i<10; i++) {

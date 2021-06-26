@@ -108,7 +108,6 @@ public class GraficaController {
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
-
         return graficaService.getPaqueteriaRango(fechaInicio, fechaFin);
     }
 
@@ -129,7 +128,6 @@ public class GraficaController {
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
             @ApiParam(name = "fechaFin", value = "La fechaFin de busqueda") @PathVariable String fechaFin)
             throws BusinessException {
-
         return graficaService.getCompradorAsiduoRango(fechaInicio, fechaFin);
     }
 
