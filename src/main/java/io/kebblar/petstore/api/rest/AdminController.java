@@ -19,6 +19,7 @@
 package io.kebblar.petstore.api.rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -146,6 +148,14 @@ public class AdminController {
             return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");
         }
     }
-
+    @GetMapping(path = "/content/{description}", produces = "application/json; charset=utf-8")
+    public List<String> getContentByName(@PathVariable String description) {
+        List<String> result = new ArrayList<>();
+        result.add(description);
+        result.add("listo");
+        result.add("ya");
+        result.add("quedo");
+        return result;
+    }
 }
 
