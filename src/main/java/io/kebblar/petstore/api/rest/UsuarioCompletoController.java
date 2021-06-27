@@ -120,4 +120,10 @@ public class UsuarioCompletoController {
         return usuarioCompletoService.update(usuarioCompleto);
     }
 
+    @GetMapping(
+            value = "/usuario-completos-paginated.json",
+            produces = "application/json; charset=utf-8")
+        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int startRow, int pageSize) throws BusinessException {
+            return usuarioCompletoService.getAllPaginated(startRow, pageSize);
+        }
 }
