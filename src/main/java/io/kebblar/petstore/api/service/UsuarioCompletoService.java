@@ -59,5 +59,11 @@ public interface UsuarioCompletoService {
      * @throws Exception es disparada por una regla de negocio
      */
     int update(UsuarioCompleto usuarioCompleto) throws BusinessException;
-
+    
+    /**
+     * Método utilizado para obtener una lista PAGINADA con todos los elementos de la tabla 'usuario_completo'.
+     * 
+     * @return Lista con todos los elementos de la tabla 'usuario_completo'.
+     */
+    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException;
 }

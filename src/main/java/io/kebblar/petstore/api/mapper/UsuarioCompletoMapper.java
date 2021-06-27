@@ -94,4 +94,10 @@ public interface UsuarioCompletoMapper {
     + " WHERE id = #{id}")
     int update(UsuarioCompleto usuarioCompleto) throws SQLException;
 
+    @Select("SELECT count(*) from usuario_completo ")
+    int count() throws SQLException;
+    
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT " + CAMPOS + " FROM usuario_completo LIMIT #{startRow},#{pageSize}") 
+    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;    
 }

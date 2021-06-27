@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 import io.kebblar.petstore.api.mapper.UsuarioCompletoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * <p>Descripción:</p>
@@ -62,43 +63,43 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         this.usuarioCompletoMapper = usuarioCompletoMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public UsuarioCompleto getById(int id) throws BusinessException {
         try {
             return usuarioCompletoMapper.getById(id);
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<UsuarioCompleto> getAll() throws BusinessException {
         try {
             return usuarioCompletoMapper.getAll();
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(UsuarioCompleto usuarioCompleto) throws BusinessException {
         try {
             return usuarioCompletoMapper.update(usuarioCompleto);
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
+    @Override
+    public List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException {
+        try {
+            return usuarioCompletoMapper.getAllPaginated(startRow, pageSize);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 }
