@@ -123,7 +123,7 @@ public class UsuarioCompletoController {
     @GetMapping(
             value = "/usuario-completos-paginated.json",
             produces = "application/json; charset=utf-8")
-        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int startRow, int pageSize) throws BusinessException {
-            return usuarioCompletoService.getAllPaginated(startRow, pageSize);
+        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws BusinessException {
+            return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
         }
 }

@@ -94,9 +94,9 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
     }
 
     @Override
-    public List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException {
+    public List<UsuarioCompleto> getAllPaginated(int pageNumber, int pageSize) throws BusinessException {
         try {
-            return usuarioCompletoMapper.getAllPaginated(startRow, pageSize);
+            return usuarioCompletoMapper.getAllPaginated((pageNumber-1)*pageSize, pageSize);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             throw new DatabaseException(e.getMessage());
