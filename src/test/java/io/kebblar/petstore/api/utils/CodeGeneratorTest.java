@@ -25,7 +25,7 @@ public class CodeGeneratorTest {
                 "garellano",
                 "garellano",
                 "org.mariadb.jdbc.Driver");
-        String[] seleccionTablas = {"usuario","rol"};
+        String[] seleccionTablas = {"usuario_completo"};
         go(seleccionTablas, listaCompleta);
     }
 

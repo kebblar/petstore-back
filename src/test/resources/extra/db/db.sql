@@ -756,6 +756,36 @@ INSERT INTO `usuario` VALUES (0,'fher@abc.com.mx','Hola1234',1618526363060,1,0,0
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `usuario_completo`
+--
+
+DROP TABLE IF EXISTS `usuario_completo`;
+/*!50001 DROP VIEW IF EXISTS `usuario_completo`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `usuario_completo` (
+  `id` tinyint NOT NULL,
+  `correo` tinyint NOT NULL,
+  `clave` tinyint NOT NULL,
+  `creado` tinyint NOT NULL,
+  `activo` tinyint NOT NULL,
+  `acceso_negado_contador` tinyint NOT NULL,
+  `instante_bloqueo` tinyint NOT NULL,
+  `instante_ultimo_acceso` tinyint NOT NULL,
+  `instante_ultimo_cambio_clave` tinyint NOT NULL,
+  `regenera_clave_token` tinyint NOT NULL,
+  `regenera_clave_instante` tinyint NOT NULL,
+  `id_usuario` tinyint NOT NULL,
+  `nombre` tinyint NOT NULL,
+  `apellido_paterno` tinyint NOT NULL,
+  `apellido_materno` tinyint NOT NULL,
+  `fecha_nacimiento` tinyint NOT NULL,
+  `nick_name` tinyint NOT NULL,
+  `telefono_celular` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `usuario_detalle`
 --
 
@@ -924,6 +954,25 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `usuario_completo`
+--
+
+/*!50001 DROP TABLE IF EXISTS `usuario_completo`*/;
+/*!50001 DROP VIEW IF EXISTS `usuario_completo`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`garellano`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `usuario_completo` AS select `usuario`.`id` AS `id`,`usuario`.`correo` AS `correo`,`usuario`.`clave` AS `clave`,`usuario`.`creado` AS `creado`,`usuario`.`activo` AS `activo`,`usuario`.`acceso_negado_contador` AS `acceso_negado_contador`,`usuario`.`instante_bloqueo` AS `instante_bloqueo`,`usuario`.`instante_ultimo_acceso` AS `instante_ultimo_acceso`,`usuario`.`instante_ultimo_cambio_clave` AS `instante_ultimo_cambio_clave`,`usuario`.`regenera_clave_token` AS `regenera_clave_token`,`usuario`.`regenera_clave_instante` AS `regenera_clave_instante`,`usuario_detalle`.`id_usuario` AS `id_usuario`,`usuario_detalle`.`nombre` AS `nombre`,`usuario_detalle`.`apellido_paterno` AS `apellido_paterno`,`usuario_detalle`.`apellido_materno` AS `apellido_materno`,`usuario_detalle`.`fecha_nacimiento` AS `fecha_nacimiento`,`usuario_detalle`.`nick_name` AS `nick_name`,`usuario_detalle`.`telefono_celular` AS `telefono_celular` from (`usuario` join `usuario_detalle`) where `usuario`.`id` = `usuario_detalle`.`id_usuario` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -934,4 +983,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-27  6:55:20
+-- Dump completed on 2021-06-27 14:55:16
