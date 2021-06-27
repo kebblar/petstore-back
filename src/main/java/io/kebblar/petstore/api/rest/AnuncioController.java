@@ -229,8 +229,7 @@ public class AnuncioController {
     @GetMapping(
         value = "/content/{description}",
         produces = "application/json; charset=utf-8")
-    public List<Anuncio> getBySearchUrl(
-          @PathVariable(required = true) String description) throws BusinessException {
+    public List<Anuncio> getBySearchUrl(@PathVariable(required = true) String description) throws BusinessException {
         //anuncioService.updateSearchUrl();
         return anuncioService.getBySearchUrl(description); // lista NO nula con al menos 1 elemento
     }
