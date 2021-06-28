@@ -132,19 +132,17 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public List<CarritoVista> getCarritoView(int id) throws VistaCarritoException {
+    public List<CarritoVista> getCarritoView(int id) throws BusinessException {
         List<CarritoVista> lista = new ArrayList<>();
-        try {
-            List<Carrito> carrito = getCarritoByUserId(id);
-            for(Carrito elem : carrito) {
+        List<Carrito> carrito = getCarritoByUserId(id);
+        for(Carrito elem : carrito) {
+            try {
                 DetalleAnuncioResponse d = anuncioService.detalleAnuncio(elem.getIdAnuncio());
-                if(d!=null) {
-                    String imagen = d.getImagenes().get(0).getUuid();
-                    lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
-                }
+                String imagen = d.getImagenes().get(0).getUuid();
+                lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
+            } catch(BusinessException e) {
+                logger.error(e.getMessage());
             }
-        } catch (BusinessException e) {
-            throw new VistaCarritoException("No pudo obtenerse el carrito del usuario" );
         }
         return lista;
     }
