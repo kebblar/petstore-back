@@ -153,8 +153,14 @@ public interface AnuncioService {
      */
     void schedulerPublicarAnuncio() throws BusinessException;
 
-    /*
-     * Busca los anuncios que pseen el url dado
+    /**
+     * Dada la url única de un anuncio activo, este es buscado en el sistema y retornado dentro de una lista,
+     * en caso que se ingrese la palabra "all" como parámetro, todos los anuncios activos o publicados son
+     * retornados como una lista de objetos anuncio.
+     *
+     * @param searchUrl cadena que representa el fragmento de la url a buscar.
+     * @return lista de objetos anuncio que concuerdan con la url.
+     * @throws BusinessException En caso que la url no retorne resultados.
      */
     List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException;
     
