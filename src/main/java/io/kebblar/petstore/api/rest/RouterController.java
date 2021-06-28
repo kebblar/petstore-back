@@ -47,7 +47,7 @@ public class RouterController {
         return new ModelAndView("forward:/", model);
     }
 
-    @GetMapping(value = "/post/**")
+    @GetMapping(value = "/posts/**")
     public ModelAndView redirectQueryPath(ModelMap model) {
         model.addAttribute("attribute", "forwardWithForwardPrefix");
         return new ModelAndView("forward:/", model);
