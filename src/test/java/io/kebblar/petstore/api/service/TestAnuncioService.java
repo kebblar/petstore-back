@@ -56,18 +56,18 @@ public class TestAnuncioService {
     @Before
     public void pedro() throws SQLException {
         this.anuncioService= new AnuncioServiceImpl(anuncioMapper, uploadService, anuncioImagenMapper);
-
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio existente
+    * Escenario donde se trata de actualizar un anuncio existente.
+    * 
     * @throws Exception
     */
     @Test()
     public void actualizacion() throws Exception{
       when(anuncioMapper.getAnuncioById(1)).thenReturn(
             new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
-            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3)
+            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3, "url-search")
       );
         this.atributos = new ArrayList<>();
         this.atributos.add(new MascotaValorAtributoRequest(1,1));
@@ -80,7 +80,8 @@ public class TestAnuncioService {
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio que no existe
+    * Escenario donde se trata de actualizar un anuncio que no existe.
+    * 
     * @throws SQLException
     * @throws BusinessException
     * @throws Exception
@@ -165,7 +166,6 @@ public class TestAnuncioService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -200,4 +200,5 @@ public class TestAnuncioService {
             e.printStackTrace();
         }
     }
+    
 }

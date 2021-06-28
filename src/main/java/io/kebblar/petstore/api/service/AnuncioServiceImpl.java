@@ -51,7 +51,9 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
+import io.kebblar.petstore.api.model.exceptions.NotFoundException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
@@ -140,12 +142,8 @@ public class AnuncioServiceImpl implements AnuncioService {
         anuncioAlta.setIdCategoria(request.getIdCategoria());
         anuncioAlta.setDescripcion(request.getDescripcion());
         anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
-        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ?
-                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
-                :null);
-        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?
-                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant())
-                :null);
+        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ?java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
+        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
         try {
             //Si los datos son correctos, se procede con el guardado o actualizacion
             if(request instanceof ActualizaAnuncioRequest) {
@@ -153,12 +151,19 @@ public class AnuncioServiceImpl implements AnuncioService {
                 anuncioAlta.setFechaModificacion(new Date());
                 anuncioMapper.update(anuncioAlta);
                 anuncioMapper.deleteAtributos(anuncioAlta.getId());
-            }else {
+            } else {
                 anuncioAlta.setFolio(AnuncioUtil.generaFolio());
                 anuncioAlta.setFechaAlta(new Date());
                 anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
                 anuncioMapper.insert(anuncioAlta);
             }
+            
+            // Actualiza el search_url en todo caso
+            Integer idGenerado = anuncioAlta.getId();
+            anuncioAlta.setSearchUrl(idGenerado + "-" + limpia(request.getTitulo()));
+            anuncioMapper.update(anuncioAlta);
+            // fin actualiza search url
+            
             for(MascotaValorAtributoRequest ar : request.getMascotaValorAtributo()) {
                 MascotaValorAtributo aa =  new MascotaValorAtributo();
                 aa.setIdAnuncio(anuncioAlta.getId());
@@ -171,6 +176,62 @@ public class AnuncioServiceImpl implements AnuncioService {
             e.printStackTrace();
             throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
         }
+    }
+    
+    /**
+     * Limpia una cadena de caracteres "raras" y regresa la misma 
+     * cadena (en minúsculas) sustituyendo las letras "raras" por guiones medios.
+     * 
+     * @param original Cadena original de tipo String 
+     * @return  Cadena limpia
+     */
+    public static String limpia(String original) {
+        String UN_ESPACIO = " ";
+        String DOS_ESPACIOS = "  ";
+        String GUION_MEDIO = "-";
+        String DOS_GUIONES_MEDIOS = "--";
+        String LETRAS_VALIDAS = "0123456789abcdefghijklmnopqrstuvwxyz-";
+
+        // Quita espacios al inicio y al final. Además, manda todo a minusculas
+        String source = original.trim().toLowerCase();
+
+        int i = 1;
+        // Colapsa espacios juntos en un solo espacio
+        do {
+            i = source.indexOf(DOS_ESPACIOS);
+            source = source.replace(DOS_ESPACIOS, UN_ESPACIO);
+        } while (i>0);
+        
+        // Cambia especios simpes restantes por guion medio
+        source = source.replace(UN_ESPACIO, GUION_MEDIO);
+        
+        // Cambia minúsculas acentuadas por minúsculas sin acento
+        // No necsito cambiar las mayúsculas porque la cadena está en lowercase
+        source = source.replace('á', 'a');
+        source = source.replace('é', 'e');
+        source = source.replace('í', 'i');
+        source = source.replace('ó', 'o');
+        source = source.replace('ú', 'u');
+        source = source.replace('ñ', 'n');
+        
+        // Cambia todo lo que NO esté en "LETRAS_VALIDAS" por -
+        i = source.length();
+        StringBuilder result = new StringBuilder();
+        for(int j=0; j<i; j++) {
+            char test = source.charAt(j);
+            result = (LETRAS_VALIDAS.indexOf(test)<1)?result.append(GUION_MEDIO):result.append(test);
+        }
+        
+        // elimina repeticiones de guiones mendios consecutivos
+        source = result.toString();
+        i=0;
+        do {
+            i = source.indexOf(DOS_GUIONES_MEDIOS);
+            source = source.replace(DOS_GUIONES_MEDIOS, GUION_MEDIO);
+        } while (i>=0);
+        
+        
+        return source;
     }
 
     @Override
@@ -462,6 +523,35 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
         } catch (SQLException e) {
              logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
+        }
+    }
+
+    public void updateSearchUrl() {
+        try {
+            List<Anuncio> anuncios = anuncioMapper.getAll();
+            for(Anuncio anuncio : anuncios) {
+                String limpia = limpia(anuncio.getTitulo());
+                Integer id = anuncio.getId();
+                anuncio.setSearchUrl(id+"-"+limpia);
+                anuncioMapper.update(anuncio);
+                logger.info("actualizando el searchurl del anuncio "+anuncio.getId()+" con la info:" +limpia);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+    }
+    
+    @Override
+    public List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException {
+        if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";
+        try {
+            List<Anuncio> lista = anuncioMapper.getBySearchUrl(searchUrl);
+            if(lista==null || lista.size()<1) {
+                throw new NotFoundException(searchUrl);
+            }
+            return lista;
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
         }
     }
 

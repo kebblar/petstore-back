@@ -46,6 +46,7 @@ public class Anuncio implements Serializable {
     private Date fechaModificacion;
     private Date fechaEliminacion;
     private short idEstatus;
+    private String searchUrl;
 
     public Anuncio() {
     }
@@ -56,7 +57,7 @@ public class Anuncio implements Serializable {
 
     public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
             Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
-            Date fechaEliminacion, short idEstatus) {
+            Date fechaEliminacion, short idEstatus, String searchUrl) {
         this.id = id;
         this.idCategoria = idCategoria;
         this.folio = folio;
@@ -69,6 +70,7 @@ public class Anuncio implements Serializable {
         this.fechaModificacion = fechaModificacion;
         this.fechaEliminacion = fechaEliminacion;
         this.idEstatus = idEstatus;
+        this.searchUrl= searchUrl;
     }
 
     public Integer getId() {
@@ -166,6 +168,23 @@ public class Anuncio implements Serializable {
     public void setIdEstatus(short idEstatus) {
         this.idEstatus = idEstatus;
     }
+    
+    public String getSearchUrl() {
+        return searchUrl;
+    }
+
+    public void setSearchUrl(String searchUrl) {
+        this.searchUrl = searchUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
+                + ", descripcion=" + descripcion + ", precio=" + precio + ", fechaInicioVigencia=" + fechaInicioVigencia
+                + ", fechaFinVigencia=" + fechaFinVigencia + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
+                + fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", idEstatus=" + idEstatus
+                + ", searchUrl=" + searchUrl + "]";
+    }
 
     @Override
     public int hashCode() {
@@ -182,6 +201,7 @@ public class Anuncio implements Serializable {
         result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
         result = prime * result + idEstatus;
         result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+        result = prime * result + ((searchUrl == null) ? 0 : searchUrl.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
@@ -247,6 +267,11 @@ public class Anuncio implements Serializable {
                 return false;
         } else if (!precio.equals(other.precio))
             return false;
+        if (searchUrl == null) {
+            if (other.searchUrl != null)
+                return false;
+        } else if (!searchUrl.equals(other.searchUrl))
+            return false;
         if (titulo == null) {
             if (other.titulo != null)
                 return false;
@@ -255,11 +280,4 @@ public class Anuncio implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
-                + ", descripcion=" + descripcion + ", precio=" + precio + ", fechaInicioVigencia=" + fechaInicioVigencia
-                + ", fechaFinVigencia=" + fechaFinVigencia + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
-                + fechaModificacion + ", fechaEliminacion=" + fechaEliminacion + ", idEstatus=" + idEstatus + "]";
-    }
 }
