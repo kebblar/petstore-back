@@ -143,14 +143,14 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             String signedPdf = firmador.signPdf();
             CreatePDF.protectDocument(dest+pdf, cveSMS);
             mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
-                    "<h1 style='text-align:center;'>Gracias por tu compra!</h1>" +
+                    "<h1 style='text-align:center;'>¡Gracias por tu compra!</h1>" +
                     "<hr> <br>" + 
-                    "<h2 style='text-align:center;'>A continuacion encontraras el recibo de tu compra</h2> " +
+                    "<h2 style='text-align:center;'>A continuación encontrarás el recibo de tu compra.</h2> " +
                     "<img style='display: block;\r\n"
                     + "  margin-left: auto;\r\n"
                     + "  margin-right: auto;\r\n"
                     + "  width: 293px;height: 172px;' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPPYqewTwvHD5CYGqIngd8ENFVmEgf-M_ig&usqp=CAU'> <br>"+
-                    "<small>Por propositos de seguridad te enviamos el pdf firmado: " + signedPdf  + "</small> <br>" + 
+                    "<small>Por propósitos de seguridad te enviamos el pdf firmado: " + signedPdf  + "</small> <br>" + 
                     "<hr>", new File(dest+pdf));
             smsService.envioSms(usuarioDetalle.getTelefonoCelular(),msjSMS);
             
