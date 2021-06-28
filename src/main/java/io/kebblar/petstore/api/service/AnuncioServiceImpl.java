@@ -367,11 +367,10 @@ public class AnuncioServiceImpl implements AnuncioService {
                 throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
             }
             short status = detalleResponse.getIdEstatus();
-            if( AnuncioEstatusEnum.ACTIVO.getId()!=status &&
-                AnuncioEstatusEnum.PUBLICADO.getId()!=status) {
+            if( AnuncioEstatusEnum.ELIMINADO.getId()==status) {
                 logger.error("Este anuncio (folio: "+detalleResponse.getFolio()+") NO se encuentra ni ACTIVO ni PUBLICADO id: " + id);
-                //throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
-                return null;
+                throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
+                //return null;
             }
             //Se consulta la informacion de los atributos del anuncio
             List<MascotaValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
@@ -544,6 +543,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     
     @Override
     public List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException {
+        if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";
         try {
             List<Anuncio> lista = anuncioMapper.getBySearchUrl(searchUrl);
             if(lista==null || lista.size()<1) {
@@ -554,4 +554,5 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new DatabaseException(e.getMessage());
         }
     }
+
 }

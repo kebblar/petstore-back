@@ -104,14 +104,27 @@ public interface AnuncioMapper {
     })
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE id = #{id} ")
     Anuncio getAnuncioById(int id) throws SQLException;
-    
+
+    /**
+     * Método que retorna todos los anuncios registrados en el sistema.
+     *
+     * @return Lista de anuncios que existen en el sistema.
+     * @throws SQLException En caso de no poder realizar la consulta.
+     */
     @ResultMap("AnuncioMap")
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio")
     List<Anuncio> getAll() throws SQLException;
 
+    /**
+     * Regresa los anuncios activos o publicados por medio de su url única.
+     *
+     * @param searchUrl cadena que corresponde a la url de un anuncio.
+     * @return lista de anuncios que corresponden al fragmento de la url ingresado.
+     * @throws SQLException Cuando la consulta no puede ser realizada.
+     */
     @ResultMap("AnuncioMap")
-    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url = #{searchUrl}")
-    List<Anuncio> getBySearchUrl(String searchUrl) throws SQLException;
+    @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url like #{searchUrl} and (id_estatus=2 or id_estatus=3)")
+    List<Anuncio> getBySearchUrl(String searchUrl) throws SQLException; // estos paréntesis --> ^ que se usan en el query--> ^ son MUY importantes !!!!
     
     /**
      * Metodo que permite actualizar el estatus de un anuncio,con base al identificador del anuncio.

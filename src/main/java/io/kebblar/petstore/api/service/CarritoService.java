@@ -107,7 +107,7 @@ public interface CarritoService {
      * @return lista de los elementos del carrito del usuario, solamente conteniendo
      * la informaci'on necesaria para pintarlos.
      */
-    List<CarritoVista> getCarritoView(int id) throws VistaCarritoException;
+    List<CarritoVista> getCarritoView(int id) throws BusinessException;
 
     /**
      * Método que dado los datos de una compra que un usuario ya ha realizado, se encarga
