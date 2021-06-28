@@ -24,7 +24,6 @@ package io.kebblar.petstore.api.service;
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.VistaCarritoException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.CarritoVista;
 
@@ -107,7 +106,7 @@ public interface CarritoService {
      * @return lista de los elementos del carrito del usuario, solamente conteniendo
      * la informaci'on necesaria para pintarlos.
      */
-    List<CarritoVista> getCarritoView(int id) throws VistaCarritoException;
+    List<CarritoVista> getCarritoView(int id) throws BusinessException;
 
     /**
      * Método que dado los datos de una compra que un usuario ya ha realizado, se encarga
