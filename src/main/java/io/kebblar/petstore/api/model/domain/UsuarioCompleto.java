@@ -50,7 +50,6 @@ public class UsuarioCompleto implements Serializable {
     private long instanteUltimoCambioClave;
     private String regeneraClaveToken;
     private long regeneraClaveInstante;
-    private int idUsuario;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -68,7 +67,7 @@ public class UsuarioCompleto implements Serializable {
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public UsuarioCompleto(int id, String correo, String clave, long creado, boolean activo, int accesoNegadoContador, long instanteBloqueo, long instanteUltimoAcceso, long instanteUltimoCambioClave, String regeneraClaveToken, long regeneraClaveInstante, int idUsuario, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String nickName, String telefonoCelular) {
+    public UsuarioCompleto(int id, String correo, String clave, long creado, boolean activo, int accesoNegadoContador, long instanteBloqueo, long instanteUltimoAcceso, long instanteUltimoCambioClave, String regeneraClaveToken, long regeneraClaveInstante, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String nickName, String telefonoCelular) {
         this.id = id;
         this.correo = correo;
         this.clave = clave;
@@ -80,7 +79,6 @@ public class UsuarioCompleto implements Serializable {
         this.instanteUltimoCambioClave = instanteUltimoCambioClave;
         this.regeneraClaveToken = regeneraClaveToken;
         this.regeneraClaveInstante = regeneraClaveInstante;
-        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -244,20 +242,6 @@ public class UsuarioCompleto implements Serializable {
     }
     
     /**
-     * Getter para idUsuario.
-     */
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-    
-    /**
-     * Setter para idUsuario.
-     */
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-    
-    /**
      * Getter para nombre.
      */
     public String getNombre() {
@@ -359,7 +343,6 @@ public class UsuarioCompleto implements Serializable {
                 + " instanteUltimoCambioClave =" + this.instanteUltimoCambioClave
                 + " regeneraClaveToken =" + this.regeneraClaveToken
                 + " regeneraClaveInstante =" + this.regeneraClaveInstante
-                + " idUsuario =" + this.idUsuario
                 + " nombre =" + this.nombre
                 + " apellidoPaterno =" + this.apellidoPaterno
                 + " apellidoMaterno =" + this.apellidoMaterno
@@ -393,7 +376,6 @@ public class UsuarioCompleto implements Serializable {
                instanteUltimoCambioClave == other.instanteUltimoCambioClave && 
                regeneraClaveToken == other.regeneraClaveToken && 
                regeneraClaveInstante == other.regeneraClaveInstante && 
-               idUsuario == other.idUsuario && 
                nombre == other.nombre && 
                apellidoPaterno == other.apellidoPaterno && 
                apellidoMaterno == other.apellidoMaterno && 
@@ -419,7 +401,6 @@ public class UsuarioCompleto implements Serializable {
             instanteUltimoCambioClave, 
             regeneraClaveToken, 
             regeneraClaveInstante, 
-            idUsuario, 
             nombre, 
             apellidoPaterno, 
             apellidoMaterno, 

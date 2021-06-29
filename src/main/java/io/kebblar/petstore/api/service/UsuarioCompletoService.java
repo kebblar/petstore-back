@@ -66,4 +66,12 @@ public interface UsuarioCompletoService {
      * @return Lista con todos los elementos de la tabla 'usuario_completo'.
      */
     List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException;
+    
+    /**
+     * Regresa el Conteo de usuarios en el sistema.
+     * 
+     * @return entero con el Conteo de usuarios en el sistema.
+     * @throws BusinessException
+     */
+    int countUsuarios() throws BusinessException;
 }

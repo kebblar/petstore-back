@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
  */
 @Repository
 public interface UsuarioCompletoMapper {
-    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
+    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
 
     /**
      * Obtiene un objeto de tipo 'UsuarioCompleto' dado su id.
@@ -59,7 +59,6 @@ public interface UsuarioCompletoMapper {
             @Result(property = "instanteUltimoCambioClave",   column = "instante_ultimo_cambio_clave"),
             @Result(property = "regeneraClaveToken",   column = "regenera_clave_token"),
             @Result(property = "regeneraClaveInstante",   column = "regenera_clave_instante"),
-            @Result(property = "idUsuario",   column = "id_usuario"),
             @Result(property = "nombre",   column = "nombre"),
             @Result(property = "apellidoPaterno",   column = "apellido_paterno"),
             @Result(property = "apellidoMaterno",   column = "apellido_materno"),
@@ -95,7 +94,7 @@ public interface UsuarioCompletoMapper {
     int update(UsuarioCompleto usuarioCompleto) throws SQLException;
 
     @Select("SELECT count(*) from usuario_completo ")
-    int count() throws SQLException;
+    int countUsuarios() throws SQLException;
     
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS + " FROM usuario_completo LIMIT #{startRow},#{pageSize}") 

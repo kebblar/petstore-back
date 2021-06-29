@@ -32,7 +32,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'usuario_completo'. 
  *
  * <p>Implementación de la interfaz {@link UsuarioCompletoService}.
@@ -60,6 +59,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
      * @param usuarioCompletoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public UsuarioCompletoServiceImpl(UsuarioCompletoMapper usuarioCompletoMapper) {
+        logger.debug("Invocando al constructor de la clase");
         this.usuarioCompletoMapper = usuarioCompletoMapper;
     }
 
@@ -68,7 +68,6 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new DatabaseException(e.getMessage());
         }
     }
@@ -78,7 +77,6 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new DatabaseException(e.getMessage());
         }
     }
@@ -88,7 +86,6 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.update(usuarioCompleto);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new DatabaseException(e.getMessage());
         }
     }
@@ -98,8 +95,17 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAllPaginated((pageNumber-1)*pageSize, pageSize);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
             throw new DatabaseException(e.getMessage());
         }
     }
+    
+    @Override
+    public int countUsuarios() throws BusinessException {
+        try {
+            return usuarioCompletoMapper.countUsuarios();
+        } catch (SQLException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
+    
 }
