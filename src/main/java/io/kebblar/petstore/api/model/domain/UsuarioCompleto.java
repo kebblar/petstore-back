@@ -67,7 +67,24 @@ public class UsuarioCompleto implements Serializable {
     /**
      * Constructor basado en todos los atributos de la clase.
      */
-    public UsuarioCompleto(int id, String correo, String clave, long creado, boolean activo, int accesoNegadoContador, long instanteBloqueo, long instanteUltimoAcceso, long instanteUltimoCambioClave, String regeneraClaveToken, long regeneraClaveInstante, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String nickName, String telefonoCelular) {
+    public UsuarioCompleto(
+            int id, 
+            String correo, 
+            String clave, 
+            long creado, 
+            boolean activo, 
+            int accesoNegadoContador, 
+            long instanteBloqueo, 
+            long instanteUltimoAcceso, 
+            long instanteUltimoCambioClave, 
+            String regeneraClaveToken, 
+            long regeneraClaveInstante, 
+            String nombre, 
+            String apellidoPaterno, 
+            String apellidoMaterno, 
+            Date fechaNacimiento, 
+            String nickName, 
+            String telefonoCelular) {
         this.id = id;
         this.correo = correo;
         this.clave = clave;
@@ -146,7 +163,7 @@ public class UsuarioCompleto implements Serializable {
     /**
      * Getter para activo.
      */
-    public boolean getActivo() {
+    public boolean isActivo() {
         return activo;
     }
     

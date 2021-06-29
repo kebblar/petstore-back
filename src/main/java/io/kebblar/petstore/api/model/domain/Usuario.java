@@ -44,7 +44,6 @@ public class Usuario {
     public Usuario(int id, String correo, String clave) {
         this.id = id;
         this.correo = correo;
-        this.setClave(clave);
         this.clave = clave;
         // Default values
         this.activo = true;

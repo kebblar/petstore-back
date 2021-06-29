@@ -25,6 +25,8 @@ import java.util.List;
 import java.sql.SQLException;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 
 /**
@@ -80,18 +82,20 @@ public interface UsuarioCompletoMapper {
     @Select("SELECT " + CAMPOS + " FROM usuario_completo ") 
     List<UsuarioCompleto> getAll() throws SQLException;
 
-/**
-     * Actualiza un objeto de tipo 'UsuarioCompleto' con base en la infrmación dada por el objeto de tipo 'UsuarioCompleto'.
+    /**
+     * OJO : Actualiza un objeto de tipo 'Usuario' con base en la 
+     * infrmación dada por el objeto de tipo 'UsuarioCompleto'.
      *
      * @param usuarioCompleto a ser actualizado.
      * @return el numero de registros actualizados.
+     * 
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE usuario_completo" 
-    + " SET activo = #{activo}, acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante}, nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular}"
+    "UPDATE usuario" 
+    + " SET activo = #{activo}, acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante}"
     + " WHERE id = #{id}")
-    int update(UsuarioCompleto usuarioCompleto) throws SQLException;
+    int updateUsuarioPlano(Usuario usuario) throws SQLException;
 
     @Select("SELECT count(*) from usuario_completo ")
     int countUsuarios() throws SQLException;

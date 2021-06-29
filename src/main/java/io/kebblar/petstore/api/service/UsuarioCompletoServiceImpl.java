@@ -26,8 +26,12 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
+import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.mapper.UsuarioCompletoMapper;
+import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
@@ -50,7 +54,8 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioCompletoServiceImpl.class);
 
-    private UsuarioCompletoMapper usuarioCompletoMapper;
+    private UsuarioCompletoMapper usuarioCompletoMapper;    
+    private UsuarioDetalleMapper usuarioDetalleMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -58,9 +63,13 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
      * 
      * @param usuarioCompletoMapper mapper utilizado para llamar a metodos de persistencia
      */
-    public UsuarioCompletoServiceImpl(UsuarioCompletoMapper usuarioCompletoMapper) {
+    public UsuarioCompletoServiceImpl(
+            UsuarioDetalleMapper usuarioDetalleMapper,
+            UsuarioCompletoMapper usuarioCompletoMapper
+            ) {
         logger.debug("Invocando al constructor de la clase");
         this.usuarioCompletoMapper = usuarioCompletoMapper;
+        this.usuarioDetalleMapper = usuarioDetalleMapper;
     }
 
     @Override
@@ -83,8 +92,32 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
 
     @Override
     public int update(UsuarioCompleto usuarioCompleto) throws BusinessException {
+        Usuario u = new Usuario(
+                usuarioCompleto.getId(), 
+                "", // el correo no se actualiza aqui 
+                "", // la clave no se actualiza aqui
+                -1L, // la fecha de creación debe ser incambiable 
+                usuarioCompleto.isActivo(), 
+                usuarioCompleto.getAccesoNegadoContador(), 
+                usuarioCompleto.getInstanteBloqueo(), 
+                usuarioCompleto.getInstanteUltimoAcceso(), 
+                usuarioCompleto.getInstanteUltimoCambioClave(), 
+                usuarioCompleto.getRegeneraClaveToken(), 
+                usuarioCompleto.getRegeneraClaveInstante()
+                );
+        UsuarioDetalle ud = new UsuarioDetalle(
+                usuarioCompleto.getId(), 
+                usuarioCompleto.getNombre(), 
+                usuarioCompleto.getApellidoPaterno(), 
+                usuarioCompleto.getApellidoMaterno(), 
+                usuarioCompleto.getNickName(), 
+                usuarioCompleto.getFechaNacimiento(), 
+                usuarioCompleto.getTelefonoCelular()
+                );
         try {
-            return usuarioCompletoMapper.update(usuarioCompleto);
+            int a = usuarioCompletoMapper.updateUsuarioPlano(u);
+            int b = usuarioDetalleMapper.update(ud);
+            return a+b;
         } catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         }
