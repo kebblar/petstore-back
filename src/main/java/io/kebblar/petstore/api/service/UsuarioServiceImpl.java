@@ -424,6 +424,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario cambiaClave(String correo, String clave) throws BusinessException {
+        // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede 
+        // invocar este servicio y cambiarle la clave a cualquiera !!!!!
+        // Para corregir este bug de seguridad, este servicio DEBE recibir el JWT y
+        // A) verificar que es un JWT de un usuario con rol 'admin' 
+        // o bien que:
+        // B) el JWT es del usuario para el cual se está dando el correo
+        // Si no se cumple con alguna de estas dos condiciones, se deberá impedir el cambio
+        // y se deberá disparar la excepción de NO autorizado (401: unauthorized)
         try {
             Usuario usuario = usuarioMapper.getByCorreo(correo);
             if(usuario==null) {
