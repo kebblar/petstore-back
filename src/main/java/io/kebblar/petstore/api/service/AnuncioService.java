@@ -162,10 +162,18 @@ public interface AnuncioService {
      * @return lista de objetos anuncio que concuerdan con la url.
      * @throws BusinessException En caso que la url no retorne resultados.
      */
-    List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException;
+    List<DetalleAnuncioResponse> getBySearchUrl(String searchUrl) throws BusinessException;
     
     /**
      * Auxiliar que actualiza los url's de búsqueda de los anuncios
      */
     void updateSearchUrl();
+    
+    /**
+     * Regresa un anuncio con todos sus detalles
+     * 
+     * @return lista de objetos de tipo 'DetalleAnuncioResponse'
+     * @throws BusinessException
+     */
+    List<DetalleAnuncioResponse> detalleAllAnuncio() throws BusinessException;
 }

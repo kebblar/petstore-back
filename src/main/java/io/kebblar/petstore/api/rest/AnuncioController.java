@@ -191,7 +191,7 @@ public class AnuncioController {
         value = "AnuncioController::BusquedaAdministracion",
         notes = "Recibe un objeto <strong>BusquedaAdministracionRequest</strong> que contiene la información para realizar la busqueda de productos.")
     @PostMapping(
-        value = "anuncio/search.json",
+        value = "/anuncio/search.json",
             produces = "application/json; charset=utf-8")
     public PaginacionAnunciosResponse busquedaAdministracion(
     @ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
@@ -203,7 +203,7 @@ public class AnuncioController {
         value = "AnuncioController::BusquedaUsuarioFinal",
         notes = "Recibe un objeto <strong>BusquedaRequest</strong> que contiene la información para realizar la busqueda de productos.")
     @PostMapping(
-        value = "anuncio/filter.json",
+        value = "/anuncio/filter.json",
             produces = "application/json; charset=utf-8")
     public BusquedaResponse busquedaUsuarioFinal(
     @ApiParam(name="filtros", value="Objeto que se usara para realizar la busqueda con paginacion")
@@ -229,8 +229,18 @@ public class AnuncioController {
     @GetMapping(
         value = "/content/{description}",
         produces = "application/json; charset=utf-8")
-    public List<Anuncio> getBySearchUrl(@PathVariable(required = true) String description) throws BusinessException {
+    public List<DetalleAnuncioResponse> getBySearchUrl(@PathVariable(required = true) String description) throws BusinessException {
         return anuncioService.getBySearchUrl(description); // lista NO nula con al menos 1 elemento
+    }
+    
+    @ApiOperation(
+            value = "AnuncioController::getDetalleAllAnuncio",
+            notes = "Regesa la lista de TODOS los anuncios activos")
+    @GetMapping(
+        value = "/anuncios.json",
+        produces = "application/json; charset=utf-8")
+    public List<DetalleAnuncioResponse> getDetalleAllAnuncio() throws BusinessException {
+        return anuncioService.detalleAllAnuncio();
     }
 
 }

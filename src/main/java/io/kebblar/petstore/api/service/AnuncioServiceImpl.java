@@ -357,7 +357,28 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new BusinessException("Error de sistema","Error al tratar de eliminar la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
         }
     }
-
+    
+    @Override
+    public List<DetalleAnuncioResponse> detalleAllAnuncio() throws BusinessException {
+        try {
+            List<DetalleAnuncioResponse> wrapper = anuncioMapper.getAllAnuncioDetalle();
+            for(DetalleAnuncioResponse dar : wrapper) {
+                int id = dar.getId();
+                List<MascotaValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
+                List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(id);
+                List<AnuncioImagenResponse> imagenesResponse = new ArrayList<>();
+                for(AnuncioMedia img : imagenes) {
+                    imagenesResponse.add(new AnuncioImagenResponse(img.getId(),img.getIdAnuncio(), img.getUuid(), img.getIdTipo(),img.getPrincipal()));
+                }
+                dar.setAtributos(atributosResponse);
+                dar.setImagenes(imagenesResponse);
+            }
+            return wrapper;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
+    
     @Override
     public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
         try {
@@ -541,14 +562,21 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
     
     @Override
-    public List<Anuncio> getBySearchUrl(String searchUrl) throws BusinessException {
+    public List<DetalleAnuncioResponse> getBySearchUrl(String searchUrl) throws BusinessException {
         if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";
         try {
             List<Anuncio> lista = anuncioMapper.getBySearchUrl(searchUrl);
             if(lista==null || lista.size()<1) {
                 throw new NotFoundException(searchUrl);
             }
-            return lista;
+            List<DetalleAnuncioResponse> respuesta = new ArrayList<>();
+            DetalleAnuncioResponse detalle = null;
+            for(Anuncio anuncio : lista) {
+                int id = anuncio.getId();
+                detalle = this.detalleAnuncio(id);
+                respuesta.add(detalle);
+            }
+            return respuesta;
         } catch (SQLException e) {
             throw new DatabaseException(e.getMessage());
         }

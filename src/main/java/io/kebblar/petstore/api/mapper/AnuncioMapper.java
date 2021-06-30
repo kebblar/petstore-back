@@ -315,6 +315,15 @@ public interface AnuncioMapper {
             + " JOIN categoria cat ON a.id_categoria=cat.id "
             + " WHERE a.id = #{id} ")
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
+    
+    @ResultMap("AnuncioDetalleMap")
+    @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
+            + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
+            + " a.id_estatus, a.id_categoria, ea.descripcion as descripcion_estatus, "
+            + " cat.categoria FROM anuncio a "
+            + " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "
+            + " JOIN categoria cat ON a.id_categoria=cat.id ")
+    List<DetalleAnuncioResponse> getAllAnuncioDetalle() throws SQLException;
 
     /**
      * Metodo que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin.
