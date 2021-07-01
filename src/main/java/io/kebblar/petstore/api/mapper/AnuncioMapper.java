@@ -305,10 +305,11 @@ public interface AnuncioMapper {
             @Result(property = "fechaInicioVigencia",   column = "fecha_inicio_vigencia"),
             @Result(property = "fechaFinVigencia",   column = "fecha_fin_vigencia"),
             @Result(property = "idEstatus",   column = "id_estatus"),
-            @Result(property = "descEstatus",   column = "descripcion_estatus")
+            @Result(property = "descEstatus",   column = "descripcion_estatus"),
+            @Result(property = "searchUrl",   column = "search_url")
     })
     @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
-            + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
+            + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia, a.search_url, "
             + " a.id_estatus, a.id_categoria, ea.descripcion as descripcion_estatus, "
             + " cat.categoria FROM anuncio a "
             + " JOIN estatus_anuncio ea ON a.id_estatus=ea.id "

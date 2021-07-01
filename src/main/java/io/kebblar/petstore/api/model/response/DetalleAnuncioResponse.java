@@ -41,8 +41,31 @@ public class DetalleAnuncioResponse {
     private Date fechaFinVigencia;
     private short idEstatus;
     private String descEstatus;
+    private String searchUrl;
     private List<MascotaValorAtributoResponse> atributos;
     private List<AnuncioImagenResponse> imagenes;
+
+    public DetalleAnuncioResponse() {
+    }
+
+    public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
+            String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
+            String descEstatus, String searchUrl, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
+        this.id = id;
+        this.idCategoria = idCategoria;
+        this.descCategoria = descCategoria;
+        this.folio = folio;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.fechaInicioVigencia = fechaInicioVigencia;
+        this.fechaFinVigencia = fechaFinVigencia;
+        this.idEstatus = idEstatus;
+        this.descEstatus = descEstatus;
+        this.atributos = atributos;
+        this.imagenes = imagenes;
+        this.searchUrl = searchUrl;
+    }
 
     public Integer getId() {
         return id;
@@ -148,6 +171,22 @@ public class DetalleAnuncioResponse {
         this.imagenes = imagenes;
     }
 
+    public String getSearchUrl() {
+        return searchUrl;
+    }
+
+    public void setSearchUrl(String searchUrl) {
+        this.searchUrl = searchUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
+                + ", folio=" + folio + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
+                + ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
+                + ", idEstatus=" + idEstatus + ", descEstatus=" + descEstatus + ", searchUrl=" + searchUrl
+                + ", atributos=" + atributos + ", imagenes=" + imagenes + "]";
+    }
 
     @Override
     public int hashCode() {
@@ -165,6 +204,7 @@ public class DetalleAnuncioResponse {
         result = prime * result + idEstatus;
         result = prime * result + ((imagenes == null) ? 0 : imagenes.hashCode());
         result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+        result = prime * result + ((searchUrl == null) ? 0 : searchUrl.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
@@ -235,42 +275,17 @@ public class DetalleAnuncioResponse {
                 return false;
         } else if (!precio.equals(other.precio))
             return false;
+        if (searchUrl == null) {
+            if (other.searchUrl != null)
+                return false;
+        } else if (!searchUrl.equals(other.searchUrl))
+            return false;
         if (titulo == null) {
             if (other.titulo != null)
                 return false;
         } else if (!titulo.equals(other.titulo))
             return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
-                + ", folio=" + folio + ", titulo=" + titulo + ", descripcion=" + descripcion + ", precio=" + precio
-                + ", fechaInicioVigencia=" + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia
-                + ", idEstatus=" + idEstatus + ", descEstatus=" + descEstatus + ", atributos=" + atributos
-                + ", imagenes=" + imagenes + "]";
-    }
-
-    public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
-            String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
-            String descEstatus, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
-        this.id = id;
-        this.idCategoria = idCategoria;
-        this.descCategoria = descCategoria;
-        this.folio = folio;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.fechaInicioVigencia = fechaInicioVigencia;
-        this.fechaFinVigencia = fechaFinVigencia;
-        this.idEstatus = idEstatus;
-        this.descEstatus = descEstatus;
-        this.atributos = atributos;
-        this.imagenes = imagenes;
-    }
-
-    public DetalleAnuncioResponse() {
     }
 
 }
