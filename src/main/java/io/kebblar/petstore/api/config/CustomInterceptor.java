@@ -71,7 +71,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     private void construye(HttpServletResponse response, String message) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = new HashMap<>();
-        map.put("Invalid token", message);
+        map.put("invalid-token", message);
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         try {
