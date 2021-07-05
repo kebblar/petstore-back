@@ -17,9 +17,12 @@
  */
 package io.kebblar.petstore.api.config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import io.kebblar.petstore.api.utils.JWTUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Clase CustomInterceptor.
@@ -48,12 +54,31 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             for (String headerName : lista) {
                 String valor = request.getHeader(headerName);
                 if(headerName.contains("jwt")) {
-                    logger.info("App current uri detected: "+uri);
+                    logger.info("App current uri detected:: "+uri);
                     logger.info("El header "+headerName+" tiene el valor: " + valor);
+                    try {
+                        JWTUtil.valida(valor, System.currentTimeMillis());
+                    } catch (Exception e) {
+                        construye(response, e.getMessage());
+                        return false;
+                    }
                 }
             }
         }
         return true;
+    }
+    
+    private void construye(HttpServletResponse response, String message) {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> map = new HashMap<>();
+        map.put("Invalid token", message);
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        try {
+            response.getWriter().write(mapper.writeValueAsString(map));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 //        Enumeration<String> names = request.getParameterNames();
 //        while (names.hasMoreElements())

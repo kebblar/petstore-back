@@ -19,7 +19,6 @@ package io.kebblar.petstore.api.rest;
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.swagger.annotations.Api;
-import io.kebblar.petstore.api.utils.JWTUtil;
 
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,7 @@ public class RouterController {
 
     @GetMapping("/token.json")
     public String getToken(){
-        return JWTUtil.getJWTToken();
+        return "token-de-prueba_RouterController-getToken";
     }
 
     @GetMapping("/info-cripto/{add}.json")
