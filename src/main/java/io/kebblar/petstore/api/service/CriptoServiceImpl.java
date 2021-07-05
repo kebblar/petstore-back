@@ -82,9 +82,9 @@ public class CriptoServiceImpl implements CriptoService {
     }
 
     @Override
-    @Scheduled(fixedDelay = 3600000) //Se invoca el metodo cada hora
+    @Scheduled(fixedDelay = 12*60*60*1000) //Se invoca el metodo cada 12 horas
     public void schedulerBlockchain() throws BitcoinTransactionException {
-        logger.info("Llamando servicio de verificacion de blockchain");
+        logger.info("Llamando servicio de verificacion de blockchain CADA 12 horas");
         List<TransaccionBtc> transactions;
         try {
             transactions = criptoMapper.getAll();
