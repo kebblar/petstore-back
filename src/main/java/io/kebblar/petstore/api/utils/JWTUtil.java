@@ -131,7 +131,8 @@ public class JWTUtil {
     }
     
     public static void valida(String token, long currentTime) throws Exception {
-        String estructuraInvalida = "El token posee una estructra inválida";
+        if(token==null || token.trim().length()<1) return;
+        String estructuraInvalida = "El token posee una estructra inválida: --->"+token+"<---";
         // from: https://jwt.io/
         Base64.Decoder decoder = Base64.getDecoder();
         String[] chunks = token.split("\\.");
