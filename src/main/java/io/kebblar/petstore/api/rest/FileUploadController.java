@@ -28,9 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  * Endpoint para subir archivos.
@@ -103,6 +106,35 @@ public class FileUploadController {
     public UploadModel upload2(@RequestParam("files") MultipartFile files) throws UploadException {
         UploadModel upload = uploadService.storeOne(files, destinationFolder, max);
         return upload;
+    }
+    
+    
+    @ApiOperation(
+    value = "AnuncioController::Registro",
+    notes = "Recibe una imagen que sera asociada a un anuncio")
+    @PostMapping(
+        path = "/up/imagen.json",
+        produces = "application/json; charset=utf-8")
+    public UploadModel guardarImagen(
+    @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
+    @RequestHeader("idAnuncio") int idAnuncio,
+    @ApiParam(name = "file", value = "Imagen a guardar.")
+    @RequestParam("file") MultipartFile file) throws BusinessException {
+        return uploadService.storeOne(file, destinationFolder, max);
+    }
+    
+    @ApiOperation(
+    value = "AnuncioController::Registro",
+    notes = "Recibe una imagen que sera asociada a un anuncio")
+    @PostMapping(
+        path = "/up/imagen2.json",
+        produces = "application/json; charset=utf-8")
+    public List<UploadModel> guardarImagen2(
+    @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
+    @RequestHeader("idAnuncio") int idAnuncio,
+    @ApiParam(name = "file", value = "Imagen a guardar.")
+    @RequestParam("file") MultipartFile[] files) throws BusinessException {
+        return uploadService.store(files, destinationFolder, max);
     }
 }
 /*

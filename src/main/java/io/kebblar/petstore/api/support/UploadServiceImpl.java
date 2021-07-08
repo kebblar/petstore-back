@@ -37,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
+import io.kebblar.petstore.api.utils.WaterMark;
 
 /**
  * Clase encargada de gestionar los archivos que se suben desde el cliente web.
@@ -113,6 +114,7 @@ public class UploadServiceImpl implements UploadService {
         //Path filepath = Paths.get("/Users/garellano/Desktop/peliculas", newName);
         try {
             mpf.transferTo(filepath);
+            WaterMark.getInstance().addWatermarkOnImage(destinationFolder, newName, "logo.png", "_"+newName);
             // AQUI EN ESTA LINEA HAY QUE GUARDAR EL OBJETO "uploadModel" en la base...
             // Algo asi como la siguiente linea:
             // poner: storageMapper.insert(uploadModel)

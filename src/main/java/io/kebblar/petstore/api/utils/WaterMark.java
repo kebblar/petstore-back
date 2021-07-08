@@ -1,7 +1,6 @@
 package io.kebblar.petstore.api.utils;
 
 import java.awt.AlphaComposite;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,43 +12,92 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class WaterMark {
-    private static final String RUTA="/Users/garellano/Desktop/peliculas/";
-
+    private static final String RUTA="/Users/garellano/Desktop/pics/";
+    private static WaterMark instance =null;
+    
     public static void main(String[] args) {
         new WaterMark().addWatermarkOnImage();
     }
-
+    private WaterMark() {
+    }
+    public static WaterMark getInstance() {
+        if(instance==null) {
+            instance = new WaterMark();
+        }
+        return instance;
+    }
     public void addWatermarkOnImage() {
-        File newFile = new File(RUTA + "campo2.jpg");
-        File watermarkImageFile = new File(RUTA + "01.jpg");
-        File origFile = new File(RUTA + "campo.jpg");
-
+        addWatermarkOnImage(RUTA, "out_ok.jpg", "logo.png", "out_ok.jpg");
+    }
+    public void addWatermarkOnImage(String path, String origFileName, String watermarkImageFileName, String newFileName) {
+        File origFile           = new File(path + origFileName);
+        File watermarkImageFile = new File(path + watermarkImageFileName);
+        File newFile            = new File(path + newFileName);
+        
+        if(!origFile.exists()) {
+            System.out.println("No existe: "+origFile.getPath());
+            return;
+        }
+        if(!watermarkImageFile.exists()) {
+            System.out.println("No existe: "+watermarkImageFile.getPath());
+            return;
+        }
+//        if(!newFile.exists()) {
+//            System.out.println("No existe: "+newFile.getPath());
+//            return;
+//        }
+        addWatermarkOnImage(origFile, watermarkImageFile, newFile);
+    }
+    public void addWatermarkOnImage(File originalFile, File watermarkImageFile, File newFile) {
         ImageIcon watermarkImage = new ImageIcon(watermarkImageFile.getPath());
-        BufferedImage bi = makeTransparent(watermarkImage.getImage(), 600);
+        BufferedImage watermarkBufferedImage = makeTransparent(watermarkImage.getImage(), watermarkImage.getIconWidth());
 
-        ImageIcon icon = new ImageIcon(origFile.getPath());
+        ImageIcon original = new ImageIcon(originalFile.getPath());
 
         // create BufferedImage object of same width and height as of original image
-        BufferedImage bufferedImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage originalBufferedImage = new BufferedImage(original.getIconWidth(), original.getIconHeight(), BufferedImage.TYPE_INT_RGB);
 
         // create graphics object and add original image to it
-        Graphics graphics = bufferedImage.getGraphics();
-        graphics.drawImage(icon.getImage(), 0, 0, null);
+        Graphics graphics = originalBufferedImage.getGraphics();
+        graphics.drawImage(original.getImage(), 0, 0, null);
 
+        /** /
         // set font for the watermark text
         graphics.setFont(new Font("Arial", Font.BOLD, 30));
-
         // unicode characters for (c) is \u00a9
-        String watermark = "\u00a9 JavaXp.com";
-
+        String watermarkText = "\u00a9 petstore.ci.ultrasist.net";
         // add the watermark text
-        graphics.drawString(watermark, 0, icon.getIconHeight() / 2);
-        graphics.drawImage(bi, 100, 100, bi.getWidth(), bi.getHeight(), null);
-        graphics.drawImage(bi, 600, 600, bi.getWidth(), bi.getHeight(), null);
+        graphics.drawString(watermarkText, 0, original.getIconHeight() / 2);
+        /**/
+
+        int wOrig = originalBufferedImage.getWidth();
+        int hOrig = originalBufferedImage.getHeight();
+
+        int impresionesH = (hOrig<=wOrig)?4:3;
+        int impresionesV = (hOrig<=wOrig)?3:4; 
+        
+        int cuadrosH=2*impresionesH+1;
+        int cuadrosV=2*impresionesV+1;
+        
+        int minWater = (cuadrosH>cuadrosV)?cuadrosV:cuadrosH;
+        
+        int wWater = watermarkBufferedImage.getWidth();
+        int hWater = watermarkBufferedImage.getHeight();
+        
+        for(int y=1; y<cuadrosV; y=y+2) {
+            for(int x=1; x<cuadrosH; x=x+2) {
+                graphics.drawImage(watermarkBufferedImage, 
+                    (wOrig/cuadrosH)*x, 
+                    (hOrig/cuadrosV)*y, 
+                    wWater/minWater, 
+                    hWater/minWater, 
+                    null);
+            }
+        }
         graphics.dispose();
 
         try {
-            ImageIO.write(bufferedImage, "jpg", newFile);
+            ImageIO.write(originalBufferedImage, "jpg", newFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +111,7 @@ public class WaterMark {
         int largo = (int) (ancho * radio);
         BufferedImage resizedImage = new BufferedImage(ancho, largo, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = resizedImage.createGraphics();
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
         g.drawImage(originalImage, 0, 0, ancho, largo, null);
         g.dispose();
         return resizedImage;
