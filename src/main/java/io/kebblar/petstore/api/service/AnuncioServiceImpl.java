@@ -320,7 +320,11 @@ public class AnuncioServiceImpl implements AnuncioService {
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException {
         AnuncioImagenResponse air = null;
         for(MultipartFile mpf : files) {
-            air = guardarImagen(idAnuncio, mpf);
+            try {
+                air = guardarImagen(idAnuncio, mpf);
+            } catch (BusinessException e) {
+                System.out.println(e.getDetailedMessage());
+            }
         }
         return air;
     }
