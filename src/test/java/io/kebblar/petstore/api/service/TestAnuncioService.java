@@ -99,7 +99,7 @@ public class TestAnuncioService {
             );
                 anuncioService.guardar(actualizaAnuncioRequest);
             }catch (BusinessException e) {
-                assertEquals(e.getLocalExceptionNumber() , 4091);
+                assertEquals(e.getLocalExceptionNumber() , 9094);
             }
     }
 

@@ -177,6 +177,23 @@ public class AnuncioController {
         return anuncioService.guardarImagen(idAnuncio, file);
     }
 
+    
+    @ApiOperation(
+    value = "AnuncioController::Registro",
+    notes = "Recibe una imagen que sera asociada a un anuncio")
+    @PostMapping(
+        path = "/anuncios/imagen2.json",
+        produces = "application/json; charset=utf-8")
+    public AnuncioImagenResponse guardarImagen2(
+    @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
+    @RequestHeader("idAnuncio") int idAnuncio,
+    @ApiParam(name = "file", value = "Imagen a guardar.")
+    @RequestParam("file") MultipartFile[] files) throws BusinessException {
+        return anuncioService.guardarImagen(idAnuncio, files);
+    }
+    
+    
+    
     @ApiOperation(
         value = "AnuncioController::Eliminar",
         notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")

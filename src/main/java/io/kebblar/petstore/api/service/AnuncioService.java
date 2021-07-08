@@ -110,6 +110,8 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;
+    
+    AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException;
 
     /**
      * Método que permite el eliminado de las imagenes de un anuncio.

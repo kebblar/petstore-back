@@ -315,6 +315,15 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
         return response;
     }
+    
+    @Override
+    public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException {
+        AnuncioImagenResponse air = null;
+        for(MultipartFile mpf : files) {
+            air = guardarImagen(idAnuncio, mpf);
+        }
+        return air;
+    }
 
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
