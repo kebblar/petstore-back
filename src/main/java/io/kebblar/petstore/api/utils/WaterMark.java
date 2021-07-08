@@ -92,8 +92,8 @@ public class WaterMark {
                 graphics.drawImage(watermarkBufferedImage, 
                     (wOrig/cuadrosH)*x, 
                     (hOrig/cuadrosV)*y, 
-                    wWater*factor, 
-                    hWater*factor, 
+                    factor, 
+                    hWater*factor/wWater, 
                     null);
             }
         }
