@@ -30,6 +30,7 @@ public class WaterMark {
         addWatermarkOnImage(RUTA, "out_ok.jpg", "logo.png", "out_ok.jpg");
     }
     public void addWatermarkOnImage(String path, String origFileName, String watermarkImageFileName, String newFileName) {
+        if(!path.endsWith("/")) path = path + File.separator;
         File origFile           = new File(path + origFileName);
         File watermarkImageFile = new File(path + watermarkImageFileName);
         File newFile            = new File(path + newFileName);
