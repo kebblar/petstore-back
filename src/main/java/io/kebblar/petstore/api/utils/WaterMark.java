@@ -85,13 +85,15 @@ public class WaterMark {
         int wWater = watermarkBufferedImage.getWidth();
         int hWater = watermarkBufferedImage.getHeight();
         
+        int factor = wOrig/minWater;
+        
         for(int y=1; y<cuadrosV; y=y+2) {
             for(int x=1; x<cuadrosH; x=x+2) {
                 graphics.drawImage(watermarkBufferedImage, 
                     (wOrig/cuadrosH)*x, 
                     (hOrig/cuadrosV)*y, 
-                    wWater/minWater, 
-                    hWater/minWater, 
+                    wWater*factor, 
+                    hWater*factor, 
                     null);
             }
         }
