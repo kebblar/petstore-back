@@ -94,6 +94,7 @@ public class FileUploadController {
         List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
         return listaUpload;
     } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
+
     @PutMapping(
             path = "/upload2.json",
             produces = "application/json; charset=utf-8",

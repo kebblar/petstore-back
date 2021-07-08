@@ -24,6 +24,7 @@
  */
 package io.kebblar.petstore.api.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,8 +35,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.tika.Tika;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -52,8 +56,10 @@ import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
-import io.kebblar.petstore.api.model.exceptions.HttpStatus;
+import io.kebblar.petstore.api.model.exceptions.FileUploadException;
+import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.NotFoundException;
+import io.kebblar.petstore.api.model.exceptions.RuleException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
 import io.kebblar.petstore.api.model.request.AnuncioImagenRequest;
@@ -87,6 +93,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Value("${app.destination-folder}")
     private String destinationFolder;
+    
     @Value("${app.destination-folder-video}")
     private String destinationFolderVideo;
 
@@ -96,17 +103,24 @@ public class AnuncioServiceImpl implements AnuncioService {
     @Value("${app.imagen-tam}")
     private int imagenAltura;
 
-    private final UploadService uploadService;
+    private UploadService uploadService;
     private AnuncioMapper anuncioMapper;
     private AnuncioMediaMapper anuncioImagenMapper;
+
+    private Tika tika = new Tika();
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     *
-     * @param anuncioMapper mapper utilizado para llamar a metodos de persistencia
+     * 
+     * @param anuncioMapper
+     * @param uploadService
+     * @param anuncioImagenMapper
      */
-    public AnuncioServiceImpl(AnuncioMapper anuncioMapper, UploadService uploadService, AnuncioMediaMapper anuncioImagenMapper) {
+    public AnuncioServiceImpl(
+            AnuncioMapper anuncioMapper, 
+            UploadService uploadService, 
+            AnuncioMediaMapper anuncioImagenMapper) {
         this.anuncioMapper = anuncioMapper;
         this.uploadService = uploadService;
         this.anuncioImagenMapper = anuncioImagenMapper;
@@ -121,21 +135,21 @@ public class AnuncioServiceImpl implements AnuncioService {
     public AnuncioResponse guardar(AnuncioRequest request) throws BusinessException {
         logger.info(request.toString());
         AnuncioUtil.validaCampos(request);
+        Anuncio anuncioBase = null;
         //Se valida si los estatus son correctos
         if(request instanceof ActualizaAnuncioRequest) {
             try {
-                Anuncio anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
-                if(anuncioBase == null) {
-                    throw new BusinessException("No existe el anuncio","El anuncio solicitado no existe",4091,"CVE_4091",HttpStatus.CONFLICT);
-                }
-                if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus()
-                        || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
-                    throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido o ha sido eliminado",4091,"CVE_4091",HttpStatus.CONFLICT);
-                }
+                anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
             } catch (SQLException e) {
-                throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new DatabaseException("No se pudo validar el estatus del anuncio");
             }
-        }
+            if(anuncioBase == null) {
+                throw new NotFoundException("El anuncio solicitado no existe");
+            }
+            if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
+                throw new RuleException("El anuncio no se encuentra en un estatus valido o ha sido eliminado");
+            }
+         }
         Anuncio anuncioAlta= new Anuncio();
         anuncioAlta.setTitulo(request.getTitulo());
         anuncioAlta.setPrecio(request.getPrecio());
@@ -173,7 +187,6 @@ public class AnuncioServiceImpl implements AnuncioService {
             logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
             return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
         }catch (Exception e) {
-            e.printStackTrace();
             throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
         }
     }
@@ -243,14 +256,14 @@ public class AnuncioServiceImpl implements AnuncioService {
             if(AnuncioEstatusEnum.EN_EDICION.getId()!=anuncio.getIdEstatus()
                     && AnuncioEstatusEnum.ACTIVO.getId()!=anuncio.getIdEstatus()
                     && AnuncioEstatusEnum.PUBLICADO.getId()!=anuncio.getIdEstatus()) {
-                throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("El anuncio no se encuentra en un estatus valido");
             }
             if(!AnuncioUtil.validaFechasPeriodo(anuncio.getFechaInicioVigencia(), anuncio.getFechaFinVigencia())) {
-                throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("Fechas de vigencia no validas");
             }
             List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(id);
             if(imagenes==null || imagenes.isEmpty()) {
-                throw new BusinessException("Error de datos","El anuncio debe tener asociada al menos una imagen para confirmar su registro", 4092,"CVE_4092",HttpStatus.CONFLICT);
+                throw new RuleException("El anuncio debe tener asociada al menos una imagen para confirmar su registro");
             }
             response.setId(anuncio.getId());
             response.setFolio(anuncio.getFolio());
@@ -276,7 +289,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 return response;
             }
         } catch (SQLException e) {
-            throw new BusinessException("Error de sistema","Ocurrio un error al confirmar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
+            throw new DatabaseException("Ocurrio un error al confirmar la información.");
         }
         return response;
     }
@@ -288,32 +301,43 @@ public class AnuncioServiceImpl implements AnuncioService {
             //Se consulta la informacion del anuncio, para validar estatus
             Anuncio anuncio = anuncioMapper.getAnuncioById(id);
             if(anuncio == null) {
-                throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("No se encontro informacion");
             }
             if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
-                throw new BusinessException("Error de datos","El anuncio ha sido eliminado previamente",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("El anuncio ha sido eliminado previamente");
             }
             //Se procede a realizar el eliminado del registro
             anuncioMapper.eliminaAnuncio(id, AnuncioEstatusEnum.ELIMINADO.getId(), new Date());
             response.setId(anuncio.getId());
             response.setFolio(anuncio.getFolio());
         } catch (SQLException e) {
-            throw new BusinessException("Error de sistema","Ocurrio un error al tratar de eliminar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
+            throw new DatabaseException("Ocurrio un error al tratar de eliminar la información.");
         }
         return response;
     }
 
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
+        String contentType = "no-pude-detectar-el-tipo-mime";
+        try {
+            contentType = this.tika.detect(file.getInputStream());
+        } catch (IOException e) {
+            throw new InternalServerException("Error al leer el archivo", e.toString());
+        }
+        
+        long size = file.getSize();
+        if (size > max) {
+            throw new FileUploadException(size, max);
+        }
+        
         try {
             int tipoMedia=0;
             String carpetaDestino=destinationFolder;
-            String contentType = file.getContentType();
             Anuncio anuncio=anuncioMapper.getAnuncioById(idAnuncio);
             if(anuncio==null || AnuncioEstatusEnum.ELIMINADO.getId()==anuncio.getIdEstatus()) {
-                throw new BusinessException("Error de datos","No existe el  anuncio para asociar la imagen",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("No existe el  anuncio para asociar la imagen dada.");
             }
-            if(contentType.equals("image/jpg") ||contentType.equals("image/jpeg")) {
+            if(contentType.equals("image/jpg") || contentType.equals("image/jpeg")) {
                 tipoMedia=1;
             }else if(contentType.equals("image/png") ) {
                 tipoMedia=2;
@@ -324,11 +348,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 tipoMedia=5;
                 carpetaDestino=destinationFolderVideo;
             }else {
-                throw new BusinessException("Error de datos","Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi",4092,"CVE_4092",HttpStatus.CONFLICT);
-            }
-            if (file.getSize() > max) {
-                BusinessException ue = new BusinessException("Error de datos","Limite excedido. Max: "+max+". Peso: " + file.getSize(),4091,"CVE_4091",HttpStatus.CONFLICT);
-                throw ue;
+                throw new FileUploadException("Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi");
             }
             UploadModel upload = uploadService.storeOne(file, carpetaDestino, max);
             AnuncioMedia imagenEnt= new AnuncioMedia(anuncio.getId(),upload.getNuevoNombre(),tipoMedia, Boolean.FALSE);
@@ -339,22 +359,19 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
             return new AnuncioImagenResponse(imagenEnt.getId(),anuncio.getId(),imagenEnt.getUuid(),imagenEnt.getIdTipo(),imagenEnt.getPrincipal());
         }catch (UploadException e) {
-            throw new BusinessException(e.getShortMessage(),e.getDetailedMessage(),4091,"CVE_4091",HttpStatus.CONFLICT);
+            throw new FileUploadException(e.getShortMessage());
         }catch (SQLException e) {
-            throw new BusinessException("Error de sistema","Error al guardar la imagen.",4091,"CVE_4091",HttpStatus.CONFLICT);
+            throw new DatabaseException(e.getMessage());
         }
     }
 
     @Override
     public void eliminarImagen(String idImagen) throws BusinessException {
         try {
-            AnuncioMedia entidad=anuncioImagenMapper.getImagen(idImagen);
-            if(entidad==null) {
-                throw new BusinessException("Error de datos","No se encuentra la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
-            }
-            anuncioImagenMapper.eliminarImagen(idImagen);
-        }catch(SQLException e) {
-            throw new BusinessException("Error de sistema","Error al tratar de eliminar la informacion solicitada",4091,"CVE_4091",HttpStatus.CONFLICT);
+            int borrados = anuncioImagenMapper.eliminarImagen(idImagen);
+            if(borrados<1) throw new RuleException("No hay ninguna imagen cuyo ID sea igual a: "+idImagen);
+        } catch(SQLException e) {
+            throw new DatabaseException(e.getMessage());
         }
     }
     
@@ -383,14 +400,14 @@ public class AnuncioServiceImpl implements AnuncioService {
     public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
         try {
             //Se consulta la informacion del anuncio, para validar estatus
-            DetalleAnuncioResponse detalleResponse= anuncioMapper.getAnuncioDetalle(id);
+            DetalleAnuncioResponse detalleResponse = anuncioMapper.getAnuncioDetalle(id);
             if(detalleResponse == null) {
-                throw new BusinessException("Error de datos","No se encontro informacion",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("No se encontro informacion");
             }
             short status = detalleResponse.getIdEstatus();
             if( AnuncioEstatusEnum.ELIMINADO.getId()==status) {
                 logger.error("Este anuncio (folio: "+detalleResponse.getFolio()+") NO se encuentra ni ACTIVO ni PUBLICADO id: " + id);
-                throw new BusinessException("Error de datos","Anuncio no disponible",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("Anuncio no disponible");
             }
             //Se consulta la informacion de los atributos del anuncio
             List<MascotaValorAtributoResponse> atributosResponse = anuncioMapper.valorAtributosPorAnuncio(id);
@@ -408,7 +425,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             detalleResponse.setImagenes(imagenesResponse);
             return detalleResponse;
         } catch (SQLException e) {
-            throw new BusinessException("Error de sistema","Ocurrio un error al consultar la información.", 4092,"CVE_4092",HttpStatus.CONFLICT);
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -475,15 +492,15 @@ public class AnuncioServiceImpl implements AnuncioService {
             if(anuncioBase==null ||(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus()
                     || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()
                     || AnuncioEstatusEnum.CANCELADO.getId()==anuncioBase.getIdEstatus())) {
-                throw new BusinessException("Error de datos","El anuncio no se encuentra en un estatus valido para ser modificado",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("El anuncio no se encuentra en un estatus valido para ser modificado");
             }
             List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(imagenRequest.getIdAnuncio());
             if(imagenes==null || imagenes.isEmpty()) {
-                throw new BusinessException("Error de datos","El anuncio no cuenta con imagenenes asociadas",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("El anuncio no cuenta con imagenenes asociadas");
             }
             AnuncioMedia anuncioSolicitado=anuncioImagenMapper.getImagen(imagenRequest.getUuid());
             if(anuncioSolicitado==null) {
-                throw new BusinessException("Error de datos","Imagen de anuncio no encontrada",4091,"CVE_4091",HttpStatus.CONFLICT);
+                throw new RuleException("Imagen de anuncio no encontrada");
             }
             for(AnuncioMedia img:imagenes) {
                 if(imagenRequest.getUuid().equals(img.getUuid())) {
@@ -494,7 +511,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
         } catch (SQLException e) {
             logger.info("Error: "+e.getMessage());
-            throw new BusinessException("Error de datos","No se pudo validar el estatus del anuncio",4091,"CVE_4091",HttpStatus.CONFLICT);
+            throw new RuleException("No se pudo validar el estatus del anuncio");
 
         }
     }
@@ -539,7 +556,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 }
                 logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia "+anuncios.size());
             }else {
-                 logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);
+                logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);
             }
         } catch (SQLException e) {
              logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
