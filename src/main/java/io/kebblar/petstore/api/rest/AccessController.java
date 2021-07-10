@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
-//import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;

@@ -6,7 +6,7 @@ public class TokenExpiredException extends BusinessException {
     public TokenExpiredException() {
         super(
             "Token expirado",
-            "El token que ha proporcionado no es válido, ya que ha expirado.",
+            "El token que se ha proporcionado no es válido, ya que ha expirado.",
             2007,
             "CVE_2007",
             HttpStatus.UNAUTHORIZED);
