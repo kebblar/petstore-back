@@ -121,7 +121,7 @@ public class AdminController {
     @GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
     public Map<String, String> health(
             @ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls")
-            @RequestParam String inputData
+            @RequestParam String inputData, HttpServletRequest request
         ) throws IOException {
         logger.info("*** Application Profile Identifier: "+appProfileIdentifier);
         Map<String, String> result = healthService.getInfo(inputData);
@@ -129,6 +129,7 @@ public class AdminController {
         result.put("spring.datasource.url", springDatasourceUrl);
         result.put("app.backend.version", version);
         result.put("kebblar.profile", kebblarProfile);
+        result.put("remote.add",request.getRemoteAddr());
         return result;
     }
 
