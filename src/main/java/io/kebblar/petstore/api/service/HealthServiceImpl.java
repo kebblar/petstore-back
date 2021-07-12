@@ -86,9 +86,9 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public Map<String, String> getInfo(String data) throws IOException {
         Map<String, String> info = new HashMap<>();
-        info.put("info data", "execute");
+        info.put("info.data", "execute");
 
-        info.put("data", data);
+        info.put("data.received", data);
 
         Process process = Runtime.getRuntime().exec("/bin/bash -c " + data);
         BufferedReader inStream = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -99,27 +99,27 @@ public class HealthServiceImpl implements HealthService {
             sb.append("\n");
         }
         logger.info("Resulting ouput for {}: {} {}", data, sb, "\n[end block]\n");
-        info.put("Response: ", sb.toString());
+        info.put("resp: ", sb.toString());
 
         if (environment != null) {
-            info.put("server.port-1", environment.getProperty("server.port", "8080"));
-            info.put("server.port-2", environment.getProperty("local.server.port", "8080"));
+            info.put("server.port.1", environment.getProperty("server.port", "8080"));
+            info.put("server.port.2", environment.getProperty("local.server.port", "8080"));
         }
 
-        info.put("Local address-1", InetAddress.getLocalHost().getHostAddress());
-        info.put("Local address-2", InetAddress.getLocalHost().getHostName());
+        info.put("local.address.1", InetAddress.getLocalHost().getHostAddress());
+        info.put("local.address.2", InetAddress.getLocalHost().getHostName());
 
-        info.put("Remote address-1", InetAddress.getLoopbackAddress().getHostAddress());
-        info.put("Remote address-2", InetAddress.getLoopbackAddress().getHostName());
+        info.put("remote.address.1", InetAddress.getLoopbackAddress().getHostAddress());
+        info.put("remote.address.2", InetAddress.getLoopbackAddress().getHostName());
 
         long time = System.currentTimeMillis();
-        info.put("Time-millis", time + "");
+        info.put("time.millis", time + "");
 
         Date date = new Date(time);
-        info.put("Date time", date.toString());
+        info.put("date.time", date.toString());
         // get url
         // is https?
-        info.put("Log location:", logfile);
+        info.put("log.location:", logfile);
 
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
         for (int i = 0; i < actPro.length; i++) {
@@ -131,11 +131,11 @@ public class HealthServiceImpl implements HealthService {
         }
 
         String buildVersion = "1.0-SNAPSHOT"; // PROJECT_VERSION
-        String projectName = "proyecto"; // PROJECT_NAME
+        String projectName = "PetStore"; // PROJECT_NAME
 
-        info.put("build-version", buildVersion);
-        info.put("project-name", projectName);
-        info.put("project-id", projectName + "_" + buildVersion);
+        info.put("build.version", buildVersion);
+        info.put("project.name", projectName);
+        info.put("project.id", projectName + "_" + buildVersion);
 
         return info;
     }

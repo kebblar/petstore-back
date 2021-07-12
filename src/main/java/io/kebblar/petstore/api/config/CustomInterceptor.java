@@ -41,7 +41,18 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
 
     /** logger. */
     private Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
-
+    
+    private String JWT_TOKEN;
+    
+    /**
+     * Costructor que recibe el jwtoken para validar los tokens que vienen en el header.
+     * Esto facilita su posterior procesamiento
+     * 
+     * @param jwtToken
+     */
+    public CustomInterceptor(String jwtToken) {
+        this.JWT_TOKEN = jwtToken;
+    }
     /**
      * {@inheritDoc}
      */
@@ -53,11 +64,12 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             ArrayList<String> lista = Collections.list(headerNames);
             for (String headerName : lista) {
                 String valor = request.getHeader(headerName);
-                if(headerName.contains("jwt")) {
-                    logger.info("App current uri detected:: "+uri);
-                    logger.info("El header "+headerName+" tiene el valor: " + valor);
+                if(headerName.contains("jwt") && valor!=null && valor.trim().length()>0) {
+                    logger.info("App caller IP detected:: " + request.getRemoteAddr());
+                    logger.info("App current uri detected:: " + uri);
+                    logger.info("El header " + headerName + " tiene el valor: " + valor);
                     try {
-                        JWTUtil.valida(valor, System.currentTimeMillis());
+                        JWTUtil.getInstance().verifyToken(valor, JWT_TOKEN, System.currentTimeMillis());
                     } catch (Exception e) {
                         construye(response, e.getMessage());
                         return false;
@@ -80,6 +92,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             e.printStackTrace();
         }
     }
+
 //        Enumeration<String> names = request.getParameterNames();
 //        while (names.hasMoreElements())
 //            System.out.println("Value is: " + names.nextElement());

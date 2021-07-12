@@ -71,6 +71,9 @@ public class AdminController {
 
     @Value("${spring.datasource.url}")
     private String springDatasourceUrl;
+    
+    @Value("${app.backend.version}")
+    private String version;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -122,6 +125,7 @@ public class AdminController {
         Map<String, String> result = healthService.getInfo(inputData);
         result.put("app.profile.identifier", appProfileIdentifier);
         result.put("spring.datasource.url", springDatasourceUrl);
+        result.put("app.backend.version", version);
         return result;
     }
 

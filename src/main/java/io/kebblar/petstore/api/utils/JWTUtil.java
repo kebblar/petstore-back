@@ -36,6 +36,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
 import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
 
 /**
@@ -110,6 +111,15 @@ public class JWTUtil {
         return hexString.toString();
     }
     
+    /**
+     * Verifica que un token sea válido y que le pertenezca al usuario 
+     * que le es pasado como parámetro.
+     * 
+     * @param jwt
+     * @param user
+     * @param encryptKey
+     * @throws BusinessException
+     */
     public void verifyToken(String jwt, String user, String encryptKey) throws BusinessException {
         try {
             Claims claims = Jwts.parser()
@@ -130,7 +140,40 @@ public class JWTUtil {
         }
     }
     
-    public static void valida(String token, long currentTime) throws Exception {
+    /**
+     * Segunda versión de verifyToken que regresa el ID dentro del token o bien
+     * dispara una excepción en caso de que el token o sea inválido.
+     * 
+     * @param jwt
+     * @param encryptKey
+     * @param ahorita
+     * 
+     * @return Cadena con el ID contenido en un Token válido
+     * @throws BusinessException
+     */
+    public String verifyToken(String jwt, String encryptKey, long ahorita) throws BusinessException {
+        try {
+            Claims claims = Jwts.parser()
+               .setSigningKey(encryptKey.getBytes())
+               .parseClaimsJws(jwt).getBody();
+            long expiration = claims.getExpiration().getTime();
+            if(expiration < ahorita) throw new TokenExpiredException();
+            //showInfo(claims);
+            return claims.getId();
+        } catch(Exception e) {
+            throw new WrongTokenException(e.getMessage());
+        }
+    }
+    
+    public void showInfo(Claims claims) {
+        logger.info("ID: " + claims.getId());
+        logger.info("Subject: " + claims.getSubject());
+        logger.info("Issuer: " + claims.getIssuer());
+        logger.info("Expiration: " + claims.getExpiration());
+        logger.info("IssuedAt: " + claims.getIssuedAt());
+    }
+    
+    public void valida(String token, String encryptKey, long currentTime) throws Exception {
         if(token==null || token.trim().length()<1) return;
         String estructuraInvalida = "El token posee una estructra inválida: --->"+token+"<---";
         // from: https://jwt.io/
