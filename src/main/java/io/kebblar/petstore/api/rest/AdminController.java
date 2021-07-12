@@ -130,6 +130,7 @@ public class AdminController {
         result.put("app.backend.version", version);
         result.put("kebblar.profile", kebblarProfile);
         result.put("remote.add",request.getRemoteAddr());
+        result.put("remote.add.2",request.getHeader("X-Forwarded-For"));
         return result;
     }
 
