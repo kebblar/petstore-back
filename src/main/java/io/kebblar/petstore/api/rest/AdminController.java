@@ -74,7 +74,9 @@ public class AdminController {
     
     @Value("${app.backend.version}")
     private String version;
-
+    
+    @Value("${kebblar.profile}")
+    private String kebblarProfile;
     /**
      * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
@@ -126,6 +128,7 @@ public class AdminController {
         result.put("app.profile.identifier", appProfileIdentifier);
         result.put("spring.datasource.url", springDatasourceUrl);
         result.put("app.backend.version", version);
+        result.put("kebblar.profile", kebblarProfile);
         return result;
     }
 
