@@ -65,8 +65,9 @@ public class CustomControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> userErrorHandler(MethodArgumentNotValidException geEx) {
-        logger.error(getStackTraceExStr(geEx));
-        return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.BAD_REQUEST);
+        Map<String, Object> lista = buildValidationErrorResponse(geEx);
+        logger.error(lista.toString());
+        return new ResponseEntity<>(lista, HttpStatus.BAD_REQUEST);
     }
 
     /**

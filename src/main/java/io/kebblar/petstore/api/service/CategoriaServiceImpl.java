@@ -37,7 +37,7 @@ import io.kebblar.petstore.api.model.domain.CategoriaTO;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 import io.kebblar.petstore.api.mapper.CategoriaMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * <p>Descripción:</p>
@@ -68,6 +68,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @param categoriaMapper mapper utilizado para llamar a metodos de persistencia
      */
     public CategoriaServiceImpl(CategoriaMapper categoriaMapper) {
+        logger.info("Invoking CategoriaServiceImpl constructor");
         this.categoriaMapper = categoriaMapper;
     }
 
@@ -79,8 +80,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -90,15 +90,16 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public List<Categoria> getAll() throws BusinessException {
         try {
+            /** /
             System.out.println("Tamaño: "+ categoriaMapper.getAllCategoriaDetalle().size());
             for (CategoriaDetallesTO c: categoriaMapper.getAllCategoriaDetalle()) {
                 System.out.println(c.toString());
             }
-           //getAllCategoriaDetalles();
+            getAllCategoriaDetalles();
+            /**/
             return categoriaMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -110,8 +111,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.insert(categoria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -123,8 +123,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.update(categoria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -136,8 +135,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.delete(categoria.getId());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error en la eliminación de la categoria seleccionada ", e.getMessage());
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -153,8 +151,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                 return categoriaMapper.update(categoria);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -163,8 +160,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException("Error de obtención de una Categoria", e.getMessage());
+            throw new DatabaseException(e.getMessage());
         }
     }
 
@@ -179,8 +175,6 @@ public class CategoriaServiceImpl implements CategoriaService {
             Map<Integer, CategoriaTO> map = new HashMap<Integer, CategoriaTO>();
            // Map<Integer, List<AtributoTO>> mapA = new HashMap<Integer, List<AtributoTO>>();
             //Map<Integer, List<ValorAtributo>> mapVA = new HashMap<Integer, List<ValorAtributo>>();
-
-
 
             for (CategoriaDetallesTO c: categoriaMapper.getAllCategoriaDetalle()) {
                 if(map.containsKey(c.getIdCategoria())) {
@@ -201,7 +195,6 @@ public class CategoriaServiceImpl implements CategoriaService {
                                         break;
                                     }
                                 }
-
 
                                 if(agregarAtributo) {
                                     //mapVA.get(c.getIdCategoria()).add(auxVa);
@@ -265,7 +258,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                     cto.setAtributos(la);
                     map.put(c.getIdCategoria(), cto);
                 }
-                System.out.println(c.toString());
+                //System.out.println(c.toString());
             }
 
             for (Integer key : map.keySet()) {
@@ -276,8 +269,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
             return ct;
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e.getMessage());
         }
     }
 }

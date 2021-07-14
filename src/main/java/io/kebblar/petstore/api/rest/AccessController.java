@@ -18,6 +18,8 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,7 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
+import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
 import io.kebblar.petstore.api.service.UsuarioService;
@@ -90,6 +93,15 @@ public class AccessController {
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
             @RequestBody Preregistro preRegistroRequest) throws ControllerException {
         return this.usuarioService.preRegistro(preRegistroRequest);
+    }
+
+    @PostMapping(
+            path = "/usuario-preregistro2.json",
+            produces = "application/json; charset=utf-8")
+    public Preregistro preRegistro2(
+            @ApiParam(name = "preRegistroRequest", value = "Información con el detalle de un Usuario")
+            @RequestBody @Valid PreregistroRequest preRegistroRequest) throws ControllerException {
+        return this.usuarioService.preRegistro2(preRegistroRequest);
     }
 
     @ApiOperation(

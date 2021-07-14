@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.RuleException;
 import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
 import io.kebblar.petstore.api.model.exceptions.TokenNotExistException;
@@ -55,6 +57,7 @@ import io.kebblar.petstore.api.model.exceptions.UserNotExistsException;
 import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
+import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 import io.kebblar.petstore.api.utils.StringUtils;
@@ -210,7 +213,62 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new DatabaseException(e.toString());
         }
     }
-
+    
+    public int daysBetweenDates(Date startDate, Date endDate) {
+        long diff = endDate.getTime() - startDate.getTime();
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));            
+        return Math.abs(diffDays);
+    }
+    
+    private void validaFechaPropuesta(int anio, int mes, int dia) throws BusinessException {
+        // NOTA: Ya hay prevalidaciones en el POJO: PreregistroRequest
+        if(dia==31) {
+            if(mes==2 || mes==4 || mes==6 || mes==9 || mes==11) throw new RuleException("Este mes NO posee 31 dias");
+        }
+        if(dia==30 && mes==2) {
+            throw new RuleException("Febrero no posee 30 dias");
+        }
+        if(dia==29 && mes==2) {
+           for(int i=0; i<30; i++) {
+               int comp = 1900+(4*i);
+               if(anio==comp) return;
+           }
+           throw new RuleException("En "+anio+" febrero no fué biciesto"); 
+        }
+    }
+    
+    @Override
+    public Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException {
+        int edadMinima=21;
+        int dia = preRegistroRequest.getDay();
+        int mes = preRegistroRequest.getMonth();
+        int anio = preRegistroRequest.getYear();
+        validaFechaPropuesta(anio, mes, dia);
+        //Calendar cal = Calendar.getInstance();
+        //cal.set(preRegistroRequest.getYear(), preRegistroRequest.getMonth()-1, preRegistroRequest.getDay());
+        //Date fechaNacimiento = cal.getTime();
+        @SuppressWarnings("deprecation")
+        Date fechaNacimiento = new Date(anio-1900, mes-1, dia);
+        Date now = new Date();
+        int diff = daysBetweenDates(now, fechaNacimiento);
+        int min = 1+ 365*edadMinima + 21/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
+        if(diff<min) throw new RuleException("La edad mínima para pertenecer a este sitio es de "+edadMinima+" años cumplidos.");
+        Preregistro preRegistro = new Preregistro
+                (preRegistroRequest.getId(), 
+                 preRegistroRequest.getNick(), 
+                 preRegistroRequest.getCorreo(), 
+                 preRegistroRequest.getClaveHash(), 
+                 preRegistroRequest.getTelefono(), 
+                 fechaNacimiento, 
+                 preRegistroRequest.getRandomString(), 
+                 preRegistroRequest.getInstanteRegistro());
+        try {
+            return preRegistroHelper(preRegistro);
+        } catch (SQLException e) {
+            throw new DatabaseException(e.toString());
+        }
+    }
+    
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
             StrengthPasswordValidatorException,
             InternalServerException,

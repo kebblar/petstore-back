@@ -26,6 +26,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
+import io.kebblar.petstore.api.model.request.PreregistroRequest;
 /**
  * <p>Definición de la interfaz de servicios para 'Usuario'.
  *
@@ -146,6 +147,17 @@ public interface UsuarioService {
      * @throws BusinessException
      */
     Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    
+    /**
+     * Similar a preRegistro. La diferencia es que PreregistroRequest no tiene Date y a cambio, 
+     * tiene tres campos numéricos: year, month y day
+     * 
+     * @param preRegistroRequest
+     * @return Retorna la estructura de datos que recive transformada en un objeto de tipo Preregistro
+     * 
+     * @throws BusinessException
+     */
+    Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException;
 
     /**
      * Confirma el registro de un usuario al sistema
