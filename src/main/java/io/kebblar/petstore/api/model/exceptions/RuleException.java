@@ -37,8 +37,8 @@ public class RuleException extends BusinessException {
         super(
             "Transacción fallida. Haciendo rollback del proceso.",
             msg,
-            4008,
-            "CVE_4008",
+            1015,
+            "CVE_1015",
             HttpStatus.PRECONDITION_FAILED);
     }
 

@@ -35,10 +35,10 @@ public class WrongTokenException extends BusinessException {
 
     public WrongTokenException(String msg) {
         super(
-            msg,
             "El token que se ha proporcionado es incorrecto.",
-            2008,
-            "CVE_2008",
+            msg,
+            1025,
+            "CVE_1025",
             HttpStatus.FORBIDDEN);
     }
 

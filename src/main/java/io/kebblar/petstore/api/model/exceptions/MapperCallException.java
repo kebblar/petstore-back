@@ -46,8 +46,8 @@ public class MapperCallException extends BusinessException {
         super(
             shortMessage,
             buildMessage(technicalDescription),
-            4001,
-            "CVE_4001",
+            1012,
+            "CVE_1012",
             HttpStatus.BAD_REQUEST);
     }
 

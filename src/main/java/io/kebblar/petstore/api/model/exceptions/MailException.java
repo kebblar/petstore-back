@@ -38,8 +38,8 @@ public class MailException extends BusinessException {
         super(
             "Error en el servicio de envio de correos",
             msg,
-            2011,
-            "CVE_2011",
+            1011,
+            "CVE_1011",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

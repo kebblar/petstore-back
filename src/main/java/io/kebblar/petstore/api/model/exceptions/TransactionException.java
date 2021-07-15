@@ -35,10 +35,10 @@ public class TransactionException extends BusinessException {
 
     public TransactionException(String msg) {
         super(
-            msg,
             "Transacción fallida. Haciendo rollback del proceso.",
-            4008,
-            "CVE_4008",
+            msg,
+            1019,
+            "CVE_1019",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

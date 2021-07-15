@@ -39,8 +39,8 @@ public class ProcessPDFException extends BusinessException {
             super(
                 shortMessage,
                 technicalDescription,
-                9001,
-                "CVE_9001",
+                1014,
+                "CVE_1014",
                 HttpStatus.INTERNAL_SERVER_ERROR);
         }
 }

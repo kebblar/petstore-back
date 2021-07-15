@@ -7,8 +7,8 @@ public class UploadException extends BusinessException {
         super(
             "Error en el servicio de envio de carga de archivos",
             msg,
-            2022,
-            "CVE_2022",
+            1020,
+            "CVE_1020",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -35,10 +35,11 @@ public class BitcoinTransactionException extends BusinessException {
     private static final long serialVersionUID = -4440655023335060611L;
 
     public BitcoinTransactionException(String msg) {
-        super(msg,
-              "Error al procesar bitcoin como metodo de pago",
-              2009,
-              "CVE-2009",
-              HttpStatus.BAD_REQUEST);
+        super(
+            "Error al procesar bitcoin como metodo de pago",
+            msg,
+            1002,
+            "CVE-1002",
+            HttpStatus.BAD_REQUEST);
     }
 }

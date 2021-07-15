@@ -46,12 +46,7 @@ public class ValidadorClave {
 
         if(!result.isValid()) { // NOT valid !!!!
            List<String> messages = validator.getMessages(result);
-           StringBuilder sb = new StringBuilder();
-           for(String msg : messages) {
-               sb.append(msg);
-               sb.append("\n");
-           }
-           throw new StrengthPasswordValidatorException(sb.toString(), messages);
+           throw new StrengthPasswordValidatorException(messages);
         }
         return true;
       }

@@ -7,8 +7,8 @@ public class UserAlreadyExistsException extends BusinessException{
         super(
             "Error de registro",
             "El correo proporcionado ya se encuentra registrado en la base de datos.",
-            2005,
-            "CVE_2005",
+            1021,
+            "CVE_1021",
             HttpStatus.BAD_REQUEST);
     }
 

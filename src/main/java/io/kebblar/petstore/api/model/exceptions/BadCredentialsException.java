@@ -39,8 +39,8 @@ public class BadCredentialsException extends BusinessException {
         super(
             "Las credenciales proporcionadas son inválidas",
             String.format(mensaje, maxAllowed-counter),
-            1003,
-            "CVE_1003",
+            1001,
+            "CVE_1001",
             HttpStatus.UNAUTHORIZED);
     }
 

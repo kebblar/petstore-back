@@ -35,10 +35,10 @@ public class DatabaseException extends BusinessException {
 
     public DatabaseException(String msg) {
         super(
-            msg,
             "Error en el proceso de datos hacia o desde la Base de datos",
-            50011,
-            "CVE_50011",
+            msg,
+            1005,
+            "CVE_1005",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

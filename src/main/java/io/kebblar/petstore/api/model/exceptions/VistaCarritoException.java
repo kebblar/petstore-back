@@ -35,10 +35,11 @@ public class VistaCarritoException extends BusinessException{
     private static final long serialVersionUID = 129288280347509459L;
 
     public VistaCarritoException(String msg) {
-        super(msg,
-                "Error al recuperar la vista del carrito",
-                2010,
-                "CVE-2010",
-                HttpStatus.BAD_REQUEST);
+        super(
+            "Error al recuperar la vista del carrito",
+            msg,
+            1023,
+            "CVE-1023",
+            HttpStatus.BAD_REQUEST);
     }
 }

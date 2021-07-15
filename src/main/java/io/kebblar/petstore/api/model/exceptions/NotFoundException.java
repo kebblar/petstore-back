@@ -37,9 +37,9 @@ public class NotFoundException extends BusinessException {
     public NotFoundException(String resource) {
         super(
             "Recurso no encontrado. Error 404",
-            "El recurso solicitado no existe:"+resource,
-            9094,
-            "CVE_9044",
+            String.format("El recurso solicitado no existe: %s",resource),
+            1013,
+            "CVE_1013",
             HttpStatus.NOT_FOUND);
     }
 }

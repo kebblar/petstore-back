@@ -37,8 +37,8 @@ public class GoogleCaptchaException extends BusinessException {
         super(
             "Captcha Error",
             msg,
-            7018,
-            "CVE_7018",
+            1009,
+            "CVE_1009",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

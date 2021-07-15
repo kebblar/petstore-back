@@ -7,8 +7,8 @@ public class TokenNotExistException extends BusinessException {
         super(
             "Token inexistente",
             "El token que se ha proporcionado no ha podido ser encontrado en la base de datos.",
-            2006,
-            "CVE_2006",
+            1018,
+            "CVE_1018",
             HttpStatus.FORBIDDEN);
     }
 

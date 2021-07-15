@@ -8,8 +8,8 @@ public class BlockedUserException extends BusinessException{
         super(
             "Usuario bloqueado",
             String.format(mensaje, intentos),
-            1002,
-            "CVE_1002",
+            1003,
+            "CVE_1003",
             HttpStatus.BAD_REQUEST);
     }
 

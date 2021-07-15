@@ -7,8 +7,8 @@ public class InternalServerException extends BusinessException {
         super(
             shortMessage,
             longMessage,
-            9999,
-            "CVE_9999",
+            1010,
+            "CVE_1010",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
