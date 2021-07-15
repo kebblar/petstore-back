@@ -36,6 +36,7 @@ public class TransactionException extends BusinessException {
     public TransactionException(Exception e) {
         super(e);
     }
+    
     public TransactionException(String msg) {
         super(
             "Transacción fallida. Haciendo rollback del proceso.",

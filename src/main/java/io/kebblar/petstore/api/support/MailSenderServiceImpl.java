@@ -124,7 +124,7 @@ public class MailSenderServiceImpl implements MailSenderService {
             javaMailSender.send(mail);
             return "";
         } catch (MessagingException me) {
-            throw new MailException(me.getMessage());
+            throw new MailException(me);
         }
     }
 

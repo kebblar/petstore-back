@@ -73,7 +73,7 @@ public class UploadServiceImpl implements UploadService {
     private void valida(MultipartFile mpf, long max) throws UploadException {
         long peso = mpf.getSize();
         if (peso>max) {
-            UploadException ue = new UploadException("Limite excedido. Max: "+max+". Upload: " + peso + ".");
+            UploadException ue = new UploadException(max, peso);
             throw ue;
         }
 
@@ -81,7 +81,7 @@ public class UploadServiceImpl implements UploadService {
         try {
             mimeType = this.tika.detect(mpf.getInputStream());
         } catch (IOException e) {
-            throw new UploadException("Tipo mime dexonocido");
+            throw new UploadException();
             // AQUI, ADEMÁS, VALIDAR QUE EL MIME TYPE ES DE UNA IMAGEN Y NO UNA COSA RARA, COMO UN VIRUS
             // SI SE DETECTA UN ARCHIVO RARO, LANZAR UNA EXCEPCIÓN Y GRABAR EN LA BITACORA UN INCIDENTE GRAVE
         }
@@ -120,7 +120,7 @@ public class UploadServiceImpl implements UploadService {
             // poner: storageMapper.insert(uploadModel)
             return uploadModel;
         } catch (IllegalStateException | IOException e) {
-            throw new UploadException(e.getMessage());
+            throw new UploadException(e);
         }
     }
 
@@ -142,7 +142,7 @@ public class UploadServiceImpl implements UploadService {
             }
             return hashtext;
         } catch (NoSuchAlgorithmException | IOException e) {
-            throw new UploadException(e.getMessage());
+            throw new UploadException(e);
         }
     }
 

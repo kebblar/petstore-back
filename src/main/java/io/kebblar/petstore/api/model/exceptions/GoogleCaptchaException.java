@@ -33,10 +33,10 @@ package io.kebblar.petstore.api.model.exceptions;
 public class GoogleCaptchaException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
-    public GoogleCaptchaException(String msg) {
+    public GoogleCaptchaException(Exception e) {
         super(
             "Captcha Error",
-            msg,
+            e.getMessage(),
             1009,
             "CVE_1009",
             HttpStatus.INTERNAL_SERVER_ERROR);

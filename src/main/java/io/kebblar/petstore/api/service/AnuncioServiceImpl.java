@@ -374,7 +374,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         }catch (UploadException e) {
             throw new FileUploadException(e.getShortMessage());
         }catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -384,7 +384,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             int borrados = anuncioImagenMapper.eliminarImagen(idImagen);
             if(borrados<1) throw new RuleException("No hay ninguna imagen cuyo ID sea igual a: "+idImagen);
         } catch(SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
     
@@ -405,7 +405,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
             return wrapper;
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
     
@@ -438,7 +438,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             detalleResponse.setImagenes(imagenesResponse);
             return detalleResponse;
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -608,7 +608,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
             return respuesta;
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 

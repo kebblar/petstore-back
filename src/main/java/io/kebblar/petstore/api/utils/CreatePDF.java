@@ -107,7 +107,7 @@ public class CreatePDF {
             pdfDoc.close();
             return pdf;
         } catch (Exception e) {
-            throw new ProcessPDFException("Error al generar Factura PDF", e.getMessage());
+            throw new ProcessPDFException(e);
         }
     }
 
@@ -149,7 +149,7 @@ public class CreatePDF {
             cell.add(p);
             return cell;
         } catch (IOException e) {
-            throw new ProcessPDFException("Error ProcessPDFException: ",e.getMessage());
+            throw new ProcessPDFException(e);
         }
     }
 

@@ -33,13 +33,15 @@ package io.kebblar.petstore.api.model.exceptions;
 public class RuleException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    //TODO: esta es una fuente de conflictos en el proceso de internacionalización
     public RuleException(String msg) {
         super(
-            "Transacción fallida. Haciendo rollback del proceso.",
+            "Se ha detectado una violación a aguna regla de negocio.",
             msg,
             1015,
             "CVE_1015",
             HttpStatus.PRECONDITION_FAILED);
     }
-
+    // Quiza convenga tener subclases de esta con la especialización en los 
+    // mensajes; algo similar a lo que se hace con UserAlreadyExistsException
 }

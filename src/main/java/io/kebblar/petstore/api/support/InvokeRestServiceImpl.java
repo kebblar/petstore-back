@@ -64,7 +64,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
                     googleCaptcha.getResponse());
             return result;
         } catch (RestClientException e) {
-            throw new GoogleCaptchaException(e.getMessage());
+            throw new GoogleCaptchaException(e);
         }
     }
 
@@ -97,7 +97,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
             SmsResponse resp= result.getBody();
             return resp;
         } catch (Exception e) {
-            throw new ProcessPDFException("Error al generar Factura PDF", e.getMessage());
+            throw new ProcessPDFException(e);
         }
     }
 }

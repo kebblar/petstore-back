@@ -501,7 +501,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioMapper.update(usuario);
             return usuario;
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -513,7 +513,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDetalleMapper.update(usuarioDetalle);
             return usuarioDetalle;
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 

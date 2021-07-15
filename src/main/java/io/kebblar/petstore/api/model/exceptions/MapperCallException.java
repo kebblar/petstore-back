@@ -53,7 +53,7 @@ public class MapperCallException extends BusinessException {
 
     private static String buildMessage(String technicalDescription) {
         String uid = UUID.randomUUID().toString();
-        logger.error("UID:: " + technicalDescription);
+        logger.error("UID: " + uid + ". Desc: " + technicalDescription);
         return "Codigo de error: " + uid;
     }
 

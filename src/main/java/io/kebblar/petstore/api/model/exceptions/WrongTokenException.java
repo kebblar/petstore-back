@@ -37,6 +37,7 @@ public class WrongTokenException extends BusinessException {
         super(e);
     }
     
+    //TODO: Aqui igualmente puede proceder tener varias especializacones de esta clase... para evitar el "msg"
     public WrongTokenException(String msg) {
         super(
             "El token que se ha proporcionado es incorrecto.",

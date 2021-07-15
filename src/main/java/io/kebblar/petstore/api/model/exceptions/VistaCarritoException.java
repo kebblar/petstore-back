@@ -34,10 +34,10 @@ package io.kebblar.petstore.api.model.exceptions;
 public class VistaCarritoException extends BusinessException{
     private static final long serialVersionUID = 129288280347509459L;
 
-    public VistaCarritoException(String msg) {
+    public VistaCarritoException(String clave) {
         super(
             "Error al recuperar la vista del carrito",
-            msg,
+            String.format("La clave de orden ingresada no existe: %s", clave),
             1023,
             "CVE-1023",
             HttpStatus.BAD_REQUEST);

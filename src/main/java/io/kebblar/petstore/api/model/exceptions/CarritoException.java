@@ -33,11 +33,12 @@ package io.kebblar.petstore.api.model.exceptions;
  */
 public class CarritoException extends BusinessException {
     private static final long serialVersionUID = -2374644132039662770L;
+    private static final String detailedMessage = "No pudo actualizarse la orden compra del carrito del usuario %d";
 
-    public CarritoException(String message) {
+    public CarritoException(int idUser) {
         super(
             "Error al asociar el carrito a una compra",
-            message,
+            String.format(detailedMessage, idUser),
             1004,
             "CVE-1004",
             HttpStatus.BAD_REQUEST);

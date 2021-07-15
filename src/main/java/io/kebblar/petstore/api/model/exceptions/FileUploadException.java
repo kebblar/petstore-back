@@ -12,6 +12,8 @@ public class FileUploadException extends BusinessException {
             "CVE_1007",
             HttpStatus.BAD_REQUEST);
     }
+    
+    // Otra que parece genuina
     public FileUploadException(String msg) {
         super(
             "Error al subir un archivo",

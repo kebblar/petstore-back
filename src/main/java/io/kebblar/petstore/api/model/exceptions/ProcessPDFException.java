@@ -35,12 +35,16 @@ package io.kebblar.petstore.api.model.exceptions;
 public class ProcessPDFException extends BusinessException {
     private static final long serialVersionUID = 1L;
 
-    public ProcessPDFException(String shortMessage, String technicalDescription) {
-            super(
-                shortMessage,
-                technicalDescription,
-                1014,
-                "CVE_1014",
-                HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ProcessPDFException(Exception technicalDescription) {
+        super(
+            "Error al generar el documento PDF",
+            technicalDescription.getMessage(),
+            1014,
+            "CVE_1014",
+            HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
+
+/*
+
+*/

@@ -34,6 +34,8 @@ package io.kebblar.petstore.api.model.exceptions;
 public class BitcoinTransactionException extends BusinessException {
     private static final long serialVersionUID = -4440655023335060611L;
 
+    // Esra es de las pocas excepciones de que manera genuina 
+    // recibe un argumento de tipo string en su constructor
     public BitcoinTransactionException(String msg) {
         super(
             "Error al procesar bitcoin como metodo de pago",

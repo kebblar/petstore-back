@@ -79,7 +79,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.getById(id);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -88,9 +88,9 @@ public class CarritoServiceImpl implements CarritoService {
         List<CarritoDatosFactura> carro;
         try {
             carro = carritoMapper.getByCve(cve);
-            if (carro.size()==0) throw new VistaCarritoException("La clave de orden ingresada no existe");
+            if (carro.size()==0) throw new VistaCarritoException(cve);
         } catch (SQLException e) {
-            throw new VistaCarritoException("Error al intentar recuperar el carrito de la orden " + cve);
+            throw new DatabaseException(e);
         }
         return carro;
     }
@@ -100,7 +100,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.getAll(id);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -109,7 +109,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.insert(carrito);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -118,7 +118,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.update(carrito);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -127,7 +127,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             return carritoMapper.delete(id);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -154,7 +154,7 @@ public class CarritoServiceImpl implements CarritoService {
                 carrito.setCveOrdenCompra(cveCompra);
                 carritoMapper.update(carrito);
             } catch (Exception e) {
-                throw new DatabaseException(e.getMessage());
+                throw new DatabaseException(e);
             }
         }
     }
@@ -168,7 +168,7 @@ public class CarritoServiceImpl implements CarritoService {
                 carritoMapper.update(c);
              }
         } catch (Exception b) {
-            throw new CarritoException("No pudo actualizarse la orden compra del carrito del usuario" + idUser);
+            throw new CarritoException(idUser);
         }
     }
 
@@ -181,7 +181,7 @@ public class CarritoServiceImpl implements CarritoService {
                 return carritoMapper.update(carrito);
             }
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 

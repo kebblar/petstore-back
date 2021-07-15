@@ -77,7 +77,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -86,7 +86,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -119,7 +119,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
             int b = usuarioDetalleMapper.update(ud);
             return a+b;
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -128,7 +128,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAllPaginated((pageNumber-1)*pageSize, pageSize);
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
     
@@ -137,7 +137,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.countUsuarios();
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
     

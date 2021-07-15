@@ -34,10 +34,10 @@ package io.kebblar.petstore.api.model.exceptions;
 public class MailException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
-    public MailException(String msg) {
+    public MailException(Exception e) {
         super(
             "Error en el servicio de envio de correos",
-            msg,
+            e.getMessage(),
             1011,
             "CVE_1011",
             HttpStatus.INTERNAL_SERVER_ERROR);

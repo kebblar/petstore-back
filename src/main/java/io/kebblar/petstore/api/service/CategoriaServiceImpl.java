@@ -80,7 +80,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -99,7 +99,7 @@ public class CategoriaServiceImpl implements CategoriaService {
             /**/
             return categoriaMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -111,7 +111,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.insert(categoria);
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -123,7 +123,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.update(categoria);
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -135,7 +135,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.delete(categoria.getId());
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -151,7 +151,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                 return categoriaMapper.update(categoria);
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -160,7 +160,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         try {
             return categoriaMapper.getByNombre(nombre);
         } catch (Exception e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
@@ -269,7 +269,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
             return ct;
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 }
