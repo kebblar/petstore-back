@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.mapper.GraficaTotalFechasCategoriaMapper;
 import io.kebblar.petstore.api.model.domain.GraficaTotalFechasCategoria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * Servicio asociado a la entidad 'GraficaTotalFechasCategoria'.
@@ -47,7 +48,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  *
  * @see GraficaTotalFechasCategoria
  */
-
 @Service("GraficaTotalFechasCategoriaService")
 public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFechasCategoriaService {
     private static final Logger logger = LoggerFactory.getLogger(GraficaServiceImpl.class);
@@ -61,6 +61,7 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
      */
     public GraficaTotalFechasCategoriaServiceImpl(GraficaTotalFechasCategoriaMapper graficaTotalFechasCategoriaMapper) {
+        logger.debug("Invoking GraficaTotalFechasCategoriaServiceImpl constructor");
         this.graficaTotalFechasCategoriaMapper = graficaTotalFechasCategoriaMapper;
     }
 
@@ -75,8 +76,7 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
             }
             return cadena;
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -91,8 +91,7 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
             }
             return cadena;
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -102,9 +101,9 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
             String anio = Integer.toString(datos.get(i).getAnio());
             String mes = obtenerNombreMes(datos.get(i).getMes());
             String fecha = mes+"-"+anio;
-            if (!etiquetas.contains(fecha)) {
-                etiquetas.add(fecha);
-            }
+                if (!etiquetas.contains(fecha)) {
+                    etiquetas.add(fecha);
+                }
             }
         return etiquetas;
     }

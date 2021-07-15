@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -31,9 +29,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Paqueteria;
 import io.kebblar.petstore.api.mapper.PaqueteriaMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'paqueteria'.
  *
  * <p>Implementación de la interfaz {@link PaqueteriaService}.
@@ -47,7 +45,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see  Paqueteria
  * @see  PaqueteriaService
  */
-
 @Service("paqueteriaService")
 public class PaqueteriaServiceImpl implements PaqueteriaService {
 
@@ -62,77 +59,55 @@ public class PaqueteriaServiceImpl implements PaqueteriaService {
      * @param paqueteriaMapper mapper utilizado para llamar a metodos de persistencia
      */
     public PaqueteriaServiceImpl(PaqueteriaMapper paqueteriaMapper) {
+        logger.debug("Invoking PaqueteriaServiceImpl constructor");
         this.paqueteriaMapper = paqueteriaMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Paqueteria getById(int id) throws BusinessException {
         try {
             return paqueteriaMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Paqueteria> getAll() throws BusinessException {
         try {
             return paqueteriaMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Paqueteria paqueteria) throws BusinessException {
         try {
             return paqueteriaMapper.insert(paqueteria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Paqueteria paqueteria) throws BusinessException {
         try {
             return paqueteriaMapper.update(paqueteria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(Paqueteria paqueteria) throws BusinessException {
         try {
             return paqueteriaMapper.delete(paqueteria.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Paqueteria paqueteria) throws BusinessException {
         try {
@@ -142,17 +117,16 @@ public class PaqueteriaServiceImpl implements PaqueteriaService {
                 return paqueteriaMapper.update(paqueteria);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
+    
     @Override
     public List<Paqueteria> getByNombre(String nombre) throws BusinessException {
         try {
             return paqueteriaMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 

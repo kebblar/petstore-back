@@ -29,9 +29,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.MediaTipo;
 import io.kebblar.petstore.api.mapper.MediaTipoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'media_tipo'.
  *
  * <p>Implementación de la interfaz {@link MediaTipoService}.
@@ -47,9 +47,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  */
 @Service("mediaTipoService")
 public class MediaTipoServiceImpl implements MediaTipoService {
-
     private static final Logger logger = LoggerFactory.getLogger(MediaTipoServiceImpl.class);
-
     private MediaTipoMapper mediaTipoMapper;
 
     /**
@@ -59,77 +57,55 @@ public class MediaTipoServiceImpl implements MediaTipoService {
      * @param mediaTipoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MediaTipoServiceImpl(MediaTipoMapper mediaTipoMapper) {
+        logger.debug("Invoking GraficaTotalFechasCategoriaServiceImpl constructor");
         this.mediaTipoMapper = mediaTipoMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public MediaTipo getById(int id) throws BusinessException {
         try {
             return mediaTipoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<MediaTipo> getAll() throws BusinessException {
         try {
             return mediaTipoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(MediaTipo mediaTipo) throws BusinessException {
         try {
             return mediaTipoMapper.insert(mediaTipo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(MediaTipo mediaTipo) throws BusinessException {
         try {
             return mediaTipoMapper.update(mediaTipo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(MediaTipo mediaTipo) throws BusinessException {
         try {
             return mediaTipoMapper.delete(mediaTipo.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(MediaTipo mediaTipo) throws BusinessException {
         try {
@@ -139,8 +115,7 @@ public class MediaTipoServiceImpl implements MediaTipoService {
                 return mediaTipoMapper.update(mediaTipo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -149,8 +124,8 @@ public class MediaTipoServiceImpl implements MediaTipoService {
         try {
             return mediaTipoMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new BusinessException("Error de obtención de un MediaTipo", e.getMessage());
         }
     }
+    
 }

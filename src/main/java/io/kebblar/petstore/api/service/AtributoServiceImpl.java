@@ -35,9 +35,9 @@ import io.kebblar.petstore.api.model.domain.AtributoTO;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 import io.kebblar.petstore.api.mapper.AtributoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'atributo'.
  *
  * <p>Implementación de la interfaz {@link AtributoService}.
@@ -53,7 +53,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  */
 @Service("atributoService")
 public class AtributoServiceImpl implements AtributoService {
-
     private static final Logger logger = LoggerFactory.getLogger(AtributoServiceImpl.class);
 
     private AtributoMapper atributoMapper;
@@ -68,74 +67,51 @@ public class AtributoServiceImpl implements AtributoService {
         this.atributoMapper = atributoMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Atributo getById(int id) throws BusinessException {
         try {
             return atributoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Atributo> getAll() throws BusinessException {
         try {
             return atributoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Atributo atributo) throws BusinessException {
         try {
             return atributoMapper.insert(atributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Atributo atributo) throws BusinessException {
         try {
             return atributoMapper.update(atributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(Atributo atributo) throws BusinessException {
         try {
             return atributoMapper.delete(atributo.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Atributo atributo) throws BusinessException {
         try {
@@ -145,18 +121,15 @@ public class AtributoServiceImpl implements AtributoService {
                 return atributoMapper.update(atributo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
-
 
     @Override
     public List<Atributo> getByNombre(String nombre) throws BusinessException {
         try {
             return atributoMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new BusinessException("Error de obtención de un Atributo", e.getMessage());
         }
     }
@@ -169,36 +142,31 @@ public class AtributoServiceImpl implements AtributoService {
 
             for (AtributoDetalleTO c: atributoMapper.getAllAtributoDetalle()) {
                 if(map.containsKey(c.getIdAtributo())) {
-                        try {
-                                 ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
-                                 map.get(c.getIdAtributo()).getRangos().add(auxVa);
-                        }  catch (Exception e) {
-
-                        }
-
+                    try {
+                        ValorAtributo auxVa = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
+                        map.get(c.getIdAtributo()).getRangos().add(auxVa);
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
                 } else {
                     AtributoTO a = new AtributoTO(c.getIdAtributo(),c.getNombreAtributo(),c.getEstatusAtributo());
                     List<ValorAtributo> lva = new ArrayList<>();
-                             if(c.getIdRango() > 0) {
-
-                                 ValorAtributo va = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
-                                 lva.add(va);
-                             }
-                              a.setRangos(lva);
-                             map.put(a.getId(), a);
+                    if (c.getIdRango() > 0) {
+                        ValorAtributo va = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
+                        lva.add(va);
+                    }
+                    a.setRangos(lva);
+                    map.put(a.getId(), a);
                 }
-
               }
             for (Integer key : map.keySet()) {
                 AtributoTO value = map.get(key);
-               ct.add(value);
+                ct.add(value);
             }
-
-
             return ct;
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
+    
 }

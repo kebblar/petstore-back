@@ -39,6 +39,7 @@ import io.kebblar.petstore.api.model.domain.ChartData;
 import io.kebblar.petstore.api.model.domain.ChartWrapper;
 import io.kebblar.petstore.api.model.domain.Grafica;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * Servicio asociado a la entidad 'grafica'.
@@ -56,7 +57,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see Grafica
  * @see GraficaService
  */
-
 @Service("graficaService")
 public class GraficaServiceImpl implements GraficaService {
     private static final Logger logger = LoggerFactory.getLogger(GraficaServiceImpl.class);
@@ -75,6 +75,7 @@ public class GraficaServiceImpl implements GraficaService {
             GraficaMascotaMapper graficaMapper,
             GraficaPaqueteriaMapper graficaPaqueteriaMapper,
             GraficaCompradorMapper graficaCompradorMapper) {
+        logger.debug("Invoking GraficaServiceImpl constructor");
         this.graficaMapper = graficaMapper;
         this.graficaPaqueteriaMapper = graficaPaqueteriaMapper;
         this.graficaCompradorMapper = graficaCompradorMapper;
@@ -88,8 +89,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -102,8 +102,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -116,8 +115,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -130,8 +128,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -144,8 +141,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -158,8 +154,7 @@ public class GraficaServiceImpl implements GraficaService {
                 return build2(graficas);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
         return null;
     }

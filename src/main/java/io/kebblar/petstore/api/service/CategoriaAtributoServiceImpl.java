@@ -33,7 +33,6 @@ import io.kebblar.petstore.api.mapper.CategoriaAtributoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'categoria_atributo'.
  *
  * <p>Implementación de la interfaz {@link CategoriaAtributoService}.
@@ -49,7 +48,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  */
 @Service("categoriaAtributoService")
 public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
-
     private static final Logger logger = LoggerFactory.getLogger(CategoriaAtributoServiceImpl.class);
 
     private CategoriaAtributoMapper categoriaAtributoMapper;
@@ -61,84 +59,61 @@ public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
      * @param categoriaAtributoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public CategoriaAtributoServiceImpl(CategoriaAtributoMapper categoriaAtributoMapper) {
+        logger.debug("Invoking CategoriaAtributoServiceImpl constructor");
         this.categoriaAtributoMapper = categoriaAtributoMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public CategoriaAtributo getById(int id) throws BusinessException {
         try {
             return categoriaAtributoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<CategoriaAtributo> getAll() throws BusinessException {
         try {
             return categoriaAtributoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(CategoriaAtributo categoriaAtributo) throws BusinessException {
         try {
             return categoriaAtributoMapper.insert(categoriaAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(CategoriaAtributo categoriaAtributo) throws BusinessException {
         try {
             return categoriaAtributoMapper.update(categoriaAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(CategoriaAtributo categoriaAtributo) throws BusinessException {
         try {
             return categoriaAtributoMapper.delete(categoriaAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(CategoriaAtributo categoriaAtributo) throws BusinessException {
         try {
                 return categoriaAtributoMapper.insert(categoriaAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
@@ -147,8 +122,7 @@ public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
         try {
             return categoriaAtributoMapper.getNombreAtributosByIdCategoria(categoria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 
@@ -157,8 +131,7 @@ public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
         try {
             return categoriaAtributoMapper.getAtributosFaltantesByIdCategoria(categoria);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new BusinessException(e);
         }
     }
 

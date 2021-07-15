@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.mapper.PaisMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
@@ -56,19 +57,16 @@ public class PaisServiceImpl implements PaisService {
      * @param paisMapper mapper utilizado para llamar a metodos de persistencia
      */
     public PaisServiceImpl(PaisMapper paisMapper) {
+        logger.debug("Invoking PaisServiceImpl constructor");
         this.paisMapper = paisMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Pais getById(int id) throws BusinessException {
         try {
             return paisMapper.getById(id);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -77,8 +75,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.getAll();
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -87,8 +84,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.insert(pais);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -97,8 +93,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.update(pais);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -107,7 +102,6 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.delete(pais.getId());
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new MapperCallException("Error en la eliminación del pais seleccionado ", e.getMessage());
         }
     }
@@ -121,8 +115,7 @@ public class PaisServiceImpl implements PaisService {
                 return paisMapper.update(pais);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -131,8 +124,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 

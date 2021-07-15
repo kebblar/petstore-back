@@ -31,7 +31,6 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,12 +38,22 @@ public class ControllerException extends Exception {
     private static final long serialVersionUID = -5047974256813565913L;
     private static final Logger LOGGER = LoggerFactory.getLogger(MapperCallException.class);
 
+    private Exception rootException; 
     private String shortMessage;
     private String detailedMessage;
     private int localExceptionNumber;
     private String localExceptionKey;
     private HttpStatus httpStatus = HttpStatus.ACCEPTED;
 
+    public ControllerException(Exception rootException) {
+        this.rootException = rootException;
+        this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        this.localExceptionNumber = 1000;
+        this.localExceptionKey = "cve_1000";
+        this.shortMessage = rootException.getMessage();
+        this.detailedMessage = rootException.getMessage();
+    }
+    
     public ControllerException(
             String shortMessage,
             String detailedMessage,
@@ -56,16 +65,8 @@ public class ControllerException extends Exception {
         this.localExceptionNumber = localExceptionNumber;
         this.localExceptionKey = localExceptionKey;
         this.httpStatus = httpStatus;
-        LOGGER.error(toString());
+        LOGGER.error(this.toString());
     }
-
-    @Override
-    public String toString() {
-        return "ControllerException [shortMessage=" + shortMessage + ", detailedMessage=" + detailedMessage
-                + ", localExceptionNumber=" + localExceptionNumber + ", localExceptionKey=" + localExceptionKey
-                + ", httpStatus=" + httpStatus + "]";
-    }
-
     public ControllerException(
             String shortMessage,
             String detailedMessage,
@@ -87,5 +88,16 @@ public class ControllerException extends Exception {
     }
     public HttpStatus getHttpStatus() {
         return httpStatus;
+    }
+    public Exception getRootException() {
+        return rootException;
+    }
+    public String getRootExceptionMessage() {
+        return rootException.getMessage();
+    }
+    public String toString() {
+        return "ControllerException [rootException=" + rootException + ", shortMessage=" + shortMessage
+                + ", detailedMessage=" + detailedMessage + ", localExceptionNumber=" + localExceptionNumber
+                + ", localExceptionKey=" + localExceptionKey + ", httpStatus=" + httpStatus + "]";
     }
 }

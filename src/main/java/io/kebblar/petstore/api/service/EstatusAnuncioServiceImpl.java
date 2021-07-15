@@ -29,10 +29,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 import io.kebblar.petstore.api.mapper.EstatusAnuncioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'estatus_anuncio'.
  *
  * <p>Implementación de la interfaz {@link EstatusAnuncioService}.
@@ -46,10 +45,8 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  * @see  io.kebblar.petstore.api.model.domain.EstatusAnuncio
  * @see  io.kebblar.petstore.api.service.EstatusAnuncioService
  */
-
 @Service("estatusAnuncioService")
 public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
-
     private static final Logger logger = LoggerFactory.getLogger(EstatusAnuncioServiceImpl.class);
 
     private EstatusAnuncioMapper estatusAnuncioMapper;
@@ -61,77 +58,55 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
      * @param estatusAnuncioMapper mapper utilizado para llamar a metodos de persistencia
      */
     public EstatusAnuncioServiceImpl(EstatusAnuncioMapper estatusAnuncioMapper) {
+        logger.debug("Invoking EstatusAnuncioServiceImpl constructor");
         this.estatusAnuncioMapper = estatusAnuncioMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public EstatusAnuncio getById(int id) throws BusinessException {
         try {
             return estatusAnuncioMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<EstatusAnuncio> getAll() throws BusinessException {
         try {
             return estatusAnuncioMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(EstatusAnuncio estatusAnuncio) throws BusinessException {
         try {
             return estatusAnuncioMapper.insert(estatusAnuncio);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(EstatusAnuncio estatusAnuncio) throws BusinessException {
         try {
             return estatusAnuncioMapper.update(estatusAnuncio);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(EstatusAnuncio estatusAnuncio) throws BusinessException {
         try {
             return estatusAnuncioMapper.delete(estatusAnuncio.getId());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("Error en la eliminación del estatus seleccionado ", e.getMessage());
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(EstatusAnuncio estatusAnuncio) throws BusinessException {
         try {
@@ -141,8 +116,7 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
                 return estatusAnuncioMapper.update(estatusAnuncio);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -151,8 +125,8 @@ public class EstatusAnuncioServiceImpl implements EstatusAnuncioService {
         try {
             return estatusAnuncioMapper.getByNombre(nombre);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException("Error de obtención de un EstatusAnuncio", e.getMessage());
+            throw new DatabaseException(e);
         }
     }
+    
 }

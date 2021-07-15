@@ -20,7 +20,6 @@
  * Historia:    20210624_1726 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -31,9 +30,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'rol'.
  *
  * <p>Implementación de la interfaz {@link RolService}.
@@ -50,7 +49,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 @Service("rolService")
 public class RolServiceImpl implements RolService {
-
     private static final Logger logger = LoggerFactory.getLogger(RolServiceImpl.class);
 
     private RolMapper rolMapper;
@@ -62,77 +60,55 @@ public class RolServiceImpl implements RolService {
      * @param rolMapper mapper utilizado para llamar a metodos de persistencia
      */
     public RolServiceImpl(RolMapper rolMapper) {
+        logger.debug("Invoking RolServiceImpl constructor");
         this.rolMapper = rolMapper;
     }
 
-    /*
-    * Implementación del método getById
-    */
     @Override
     public Rol getById(int id) throws BusinessException {
         try {
             return rolMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<Rol> getAll() throws BusinessException {
         try {
             return rolMapper.getAllSinFiltros();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(Rol rol) throws BusinessException {
         try {
             return rolMapper.insert(rol);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(Rol rol) throws BusinessException {
         try {
             return rolMapper.update(rol);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(Rol rol) throws BusinessException {
         try {
             return rolMapper.delete(rol.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(Rol rol) throws BusinessException {
         try {
@@ -142,8 +118,7 @@ public class RolServiceImpl implements RolService {
                 return rolMapper.update(rol);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 

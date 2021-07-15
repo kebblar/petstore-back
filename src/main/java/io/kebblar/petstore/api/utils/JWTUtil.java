@@ -136,7 +136,7 @@ public class JWTUtil {
                 throw new WrongTokenException("issuer not verfied");
             }
         } catch(Exception e) {
-            throw new WrongTokenException(e.getMessage());
+            throw new WrongTokenException(e);
         }
     }
     
@@ -161,7 +161,7 @@ public class JWTUtil {
             //showInfo(claims);
             return claims.getId();
         } catch(Exception e) {
-            throw new WrongTokenException(e.getMessage());
+            throw new WrongTokenException(e);
         }
     }
     
@@ -229,7 +229,7 @@ public class JWTUtil {
         try{
             claim = Jwts.parser().setSigningKey(encryptKey.getBytes()).parseClaimsJws(jwt).getBody();
         } catch (Exception e){
-            throw new WrongTokenException(e.getMessage());
+            throw new WrongTokenException(e);
         }
         return claim.getId();
     }

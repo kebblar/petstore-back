@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import io.kebblar.petstore.api.mapper.GraficaTipoPagoMapper;
 import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * Servicio asociado a la entidad 'grafica'.
@@ -43,7 +44,7 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
      *                              persistencia
      */
     public GraficaTipoPagoServiceImpl(GraficaTipoPagoMapper graficaTipoPagoMapper) {
-        super();
+        logger.debug("Invoking GraficaTipoPagoServiceImpl constructor");
         this.graficaTipoPagoMapper = graficaTipoPagoMapper;
     }
 
@@ -58,8 +59,7 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
             }
             return cadena;
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -74,8 +74,7 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
             }
             return cadena;
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 

@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210511_1444 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
@@ -31,9 +29,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.MetodoPago;
 import io.kebblar.petstore.api.mapper.MetodoPagoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'metodo_pago'.
  *
  * <p>Implementación de la interfaz {@link MetodoPagoService}.
@@ -47,10 +45,8 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see  MetodoPago
  * @see  MetodoPagoService
  */
-
 @Service("metodoPagoService")
 public class MetodoPagoServiceImpl implements MetodoPagoService {
-
     private static final Logger logger = LoggerFactory.getLogger(MetodoPagoServiceImpl.class);
 
     private MetodoPagoMapper metodoPagoMapper;
@@ -62,89 +58,64 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
      * @param metodoPagoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MetodoPagoServiceImpl(MetodoPagoMapper metodoPagoMapper) {
+        logger.debug("Invoking MetodoPagoServiceImpl constructor");
         this.metodoPagoMapper = metodoPagoMapper;
     }
 
-    /*
-     * Implementación del método getById.
-     */
     @Override
     public MetodoPago getById(int id) throws BusinessException {
         try {
             return metodoPagoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-     * Implementación del método getAll.
-     */
     @Override
     public List<MetodoPago> getAll() throws BusinessException {
         try {
             return metodoPagoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-     * Implementación del método insert.
-     */
     @Override
     public int insert(MetodoPago metodoPago) throws BusinessException {
         try {
             return metodoPagoMapper.insert(metodoPago);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-     * Implementación del método update.
-     */
     @Override
     public int update(MetodoPago metodoPago) throws BusinessException {
         try {
             return metodoPagoMapper.update(metodoPago);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-     * Implementación del método delete.
-     */
     @Override
     public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
             return metodoPagoMapper.delete(metodoPago.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
-    /*
-     *Retorna los pagor por usuario.
-     */
+
     @Override
     public List<MetodoPago> getByIdUser(int id) throws BusinessException {
         try {
             return metodoPagoMapper.getByIdUser(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-     * Implementación del método save.
-     */
     @Override
     public int save(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -154,8 +125,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
                 return metodoPagoMapper.update(metodoPago);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 

@@ -33,6 +33,9 @@ package io.kebblar.petstore.api.model.exceptions;
 public class TransactionException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    public TransactionException(Exception e) {
+        super(e);
+    }
     public TransactionException(String msg) {
         super(
             "Transacción fallida. Haciendo rollback del proceso.",

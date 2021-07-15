@@ -29,21 +29,23 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 import io.kebblar.petstore.api.mapper.ValorAtributoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'valor_atributo'.
  *
- * <p>Implementación de la interfaz {@link ValorAtributoService}.
+ * <p>
+ * Implementación de la interfaz {@link ValorAtributoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>
+ * Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see  io.kebblar.petstore.api.model.domain.ValorAtributo
- * @see  io.kebblar.petstore.api.service.ValorAtributoService
+ * @see io.kebblar.petstore.api.model.domain.ValorAtributo
+ * @see io.kebblar.petstore.api.service.ValorAtributoService
  */
 @Service("valorAtributoService")
 public class ValorAtributoServiceImpl implements ValorAtributoService {
@@ -53,83 +55,65 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
     private ValorAtributoMapper valorAtributoMapper;
 
     /**
-     * Constructor que realiza el setting de todos los Mappers y todos los
-     * servicios adicionales a ser empleados en esta clase.
+     * Constructor que realiza el setting de todos los Mappers y todos los servicios
+     * adicionales a ser empleados en esta clase.
      *
-     * @param valorAtributoMapper mapper utilizado para llamar a metodos de persistencia
+     * @param valorAtributoMapper mapper utilizado para llamar a metodos de
+     *                            persistencia
      */
     public ValorAtributoServiceImpl(ValorAtributoMapper valorAtributoMapper) {
+        logger.debug("Invoking ValorAtributoServiceImpl constructor");
         this.valorAtributoMapper = valorAtributoMapper;
     }
 
     /*
-    * Implementación del método getById
-    */
+     * Implementación del método getById
+     */
     @Override
     public ValorAtributo getById(int id) throws BusinessException {
         try {
             return valorAtributoMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método getAll
-    */
     @Override
     public List<ValorAtributo> getAll() throws BusinessException {
         try {
             return valorAtributoMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método insert
-    */
     @Override
     public int insert(ValorAtributo valorAtributo) throws BusinessException {
         try {
             return valorAtributoMapper.insert(valorAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método update
-    */
     @Override
     public int update(ValorAtributo valorAtributo) throws BusinessException {
         try {
             return valorAtributoMapper.update(valorAtributo);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método delete
-    */
     @Override
     public int delete(ValorAtributo valorAtributo) throws BusinessException {
         try {
             return valorAtributoMapper.delete(valorAtributo.getId());
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
-    /*
-    * Implementación del método save
-    */
     @Override
     public int save(ValorAtributo valorAtributo) throws BusinessException {
         try {
@@ -139,19 +123,17 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
                 return valorAtributoMapper.update(valorAtributo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
     @Override
     public List<ValorAtributo> getAllByIdAtributo(int id) throws BusinessException {
-          try {
-                return valorAtributoMapper.getValorAtributoByIdAtributo(id);
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                throw new BusinessException();
-            }
+        try {
+            return valorAtributoMapper.getValorAtributoByIdAtributo(id);
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
     }
 
 }

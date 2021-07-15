@@ -31,9 +31,9 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Descripción:</p>
  * Servicio asociado a la entidad 'municipio'.
  *
  * <p>Implementación de la interfaz {@link MunicipioService}.
@@ -47,7 +47,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @see  Municipio
  * @see  MunicipioService
  */
-
 @Service("municipioService")
 public class MunicipioServiceImpl implements MunicipioService {
     private static final Logger logger = LoggerFactory.getLogger(MunicipioServiceImpl.class);
@@ -60,6 +59,7 @@ public class MunicipioServiceImpl implements MunicipioService {
      * @param municipioMapper mapper utilizado para llamar a metodos de persistencia
      */
     public MunicipioServiceImpl(MunicipioMapper municipioMapper) {
+        logger.debug("Invoking MunicipioServiceImpl constructor");
         this.municipioMapper = municipioMapper;
     }
 
@@ -68,8 +68,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getById(id);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -78,8 +77,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getAll();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -88,8 +86,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.insert(municipio);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -98,8 +95,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.update(municipio);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -108,18 +104,16 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.delete(municipio.getId());
         } catch (Exception e) {
-            logger.error(e.getMessage());
             throw new MapperCallException("Error en la eliminación del Municipio seleccionado ", e.getMessage());
         }
     }
 
     @Override
     public List<Municipio> getByEstado(int id) throws BusinessException {
-        try{
+        try {
             return municipioMapper.getByEstado(id);
-        }catch (SQLException e){
-            logger.error(e.getMessage());
-            throw new BusinessException();
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
         }
     }
 
@@ -132,8 +126,7 @@ public class MunicipioServiceImpl implements MunicipioService {
                 return municipioMapper.update(municipio);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new BusinessException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -169,9 +162,9 @@ public class MunicipioServiceImpl implements MunicipioService {
     public List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException {
         try {
             if(pais > 0 && (nombre == null || nombre.trim().length()<1 )) {
-            return municipioMapper.getMunicipiosByPaisDescripcion(pais);
+                return municipioMapper.getMunicipiosByPaisDescripcion(pais);
             } else if (pais > 0 && nombre.length()>0 ) {
-            return municipioMapper.getMunicipiosByPaisNombreDescripcion(pais, nombre);
+                return municipioMapper.getMunicipiosByPaisNombreDescripcion(pais, nombre);
             } else if(nombre != null) {
                 return municipioMapper.getByNombre(nombre);
             }  else {
@@ -186,8 +179,8 @@ public class MunicipioServiceImpl implements MunicipioService {
     public List<Municipio> getMunicipiosByEstadoDescripcion(int estado, String nombre) throws BusinessException {
         try {
             if(estado > 0 ) {
-            return municipioMapper.getMunicipiosByEstadoNombreDescripcion(estado, nombre);
-            }else {
+                return municipioMapper.getMunicipiosByEstadoNombreDescripcion(estado, nombre);
+            } else {
                 return municipioMapper.getMunicipiosDescripcion();
             }
         } catch (Exception e) {
