@@ -35,12 +35,15 @@
 package io.kebblar.petstore.api.rest;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +69,7 @@ import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.service.AnuncioService;
-
+import io.kebblar.petstore.api.utils.Convert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -260,4 +263,16 @@ public class AnuncioController {
         return anuncioService.detalleAllAnuncio();
     }
 
+    @Autowired
+    private Convert convert;
+    
+    @GetMapping(
+        value = "/counter",
+        produces = "application/json; charset=utf-8")
+    public Map<String, Integer> getCounter() throws BusinessException {
+        Map<String, Integer> result = new HashMap<String, Integer>();
+        result.put("ok", convert.getContador());
+        return result;
+    }
+    
 }

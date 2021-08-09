@@ -31,12 +31,13 @@ public class Convert {
     private static final String[] CENTENAS = {"CIENTO ", "DOSCIENTOS ", "TRESCIENTOS ", "CUATROCIENTOS ", "QUINIENTOS ", "SEISCIENTOS ", "SETECIENTOS ", "OCHOCIENTOS ", "NOVECIENTOS "};
 
     /**
-         * Método para transformar cantidades a cadena  String
-         * @param cifra numerica
-         * @param valor opcional para convertir cifra a letras mayusculas
-         * @return String cadena convertida
-         */
-     public static String convertir(int n) {
+     * Método para transformar cantidades a cadena  String.
+     * 
+     * @param cifra numerica
+     * @param valor opcional para convertir cifra a letras mayusculas
+     * @return String cadena convertida
+     */
+     public String convertir(int n) {
           if (n<0) return "MENOS "+convertir(-n);
           if (n>=0 && n<21) return UNIDADES[n];
           if (n>=21 && n<100) return DECENAS[(n/10)-2] + ((n%10)==0 || (n/10)-2==0 ? "" : "Y ") + convertir(n%10);
@@ -47,4 +48,8 @@ public class Convert {
           return "to big";
       }
 
+     private int contador = 0;
+     public int getContador() {
+         return contador++;
+     }
 }

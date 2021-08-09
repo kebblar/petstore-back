@@ -67,6 +67,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     private CarritoService carritoService;
     private DireccionService direccionService;
     private SmsService smsService;
+    private CreatePDF createPDF;
     
     /*
      * Constructor con atributos mapper
@@ -79,15 +80,17 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             Environment environment,
             CarritoService carritoService,
             DireccionService direccionService,
-            SmsService smsService) {
+            SmsService smsService, 
+            CreatePDF createPDF) {
         this.ordenCompraMapper = ordenCompraMapper;
-        this.usuarioDetalleMapper=usuarioDetalleMapper;
-        this.usuarioMapper=usuarioMapper;
-        this.mailSenderService=mailSenderService;
-        this.environment=environment;
-        this.carritoService=carritoService;
-        this.direccionService=direccionService;
-        this.smsService=smsService;
+        this.usuarioDetalleMapper = usuarioDetalleMapper;
+        this.usuarioMapper = usuarioMapper;
+        this.mailSenderService = mailSenderService;
+        this.environment = environment;
+        this.carritoService = carritoService;
+        this.direccionService = direccionService;
+        this.smsService = smsService;
+        this.createPDF = createPDF;
     }
 
     @Override
@@ -117,7 +120,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             String dest= environment.getProperty( "app.destination-folder" );
             String url= environment.getProperty( "app.destination.url" );
-            String nombrePdf= CreatePDF.getNamePDF(usuarioDetalle.getId());
+            String nombrePdf= createPDF.getNamePDF(usuarioDetalle.getId());
             String pdf= nombrePdf + ".pdf";
             
             String formatDate= new SimpleDateFormat("yyyy-MM-dd").format(ordenCompra.getFecha());
@@ -137,11 +140,11 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             
             List<CarritoDatosFactura> listCarrito = carritoService.getByCveOrden(ordenCompra.getCveOrdenCompra());
             List<DireccionConNombre> direcciones= direccionService.getDireccionEnvio(ordenCompra.getIdUsuario(), ordenCompra.getIdDireccion());
-            CreatePDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito, direcciones);
+            createPDF.createPDFOrdenCompra(usuarioDetalle, usuario, ordenCompra, dest, url, nombrePdf, listCarrito, direcciones);
             
             Signer firmador =  new Signer(environment.getProperty( "app.keys" ) + "ok.key", environment.getProperty( "app.keys" ) + "ok.cer", dest+pdf);
             String signedPdf = firmador.signPdf();
-            CreatePDF.protectDocument(dest+pdf, cveSMS);
+            createPDF.protectDocument(dest+pdf, cveSMS);
             mailSenderService.sendHtmlMail2(usuario.getCorreo(), "Recibo de compra petstore", 
                     "<h1 style='text-align:center;'>¡Gracias por tu compra!</h1>" +
                     "<hr> <br>" + 

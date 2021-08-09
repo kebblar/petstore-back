@@ -68,6 +68,11 @@ public class CreatePDF {
 
     private final static String newLine = System.getProperty("line.separator");
     private static final Color headerBg = new DeviceRgb(54,120,182);
+    private Convert convert;
+    
+    public CreatePDF(Convert convert) {
+        this.convert = convert;
+    }
 
     /**
      * Método para crear una facttura con los articulos de compra. Factura en formato PDF
@@ -83,7 +88,7 @@ public class CreatePDF {
      * @return nombre del documento
      * @throws ProcessPDFException
      */
-    public static String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle, Usuario usuario,
+    public String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle, Usuario usuario,
         DatosOrden ordenCompra, String dest, String url,  String nombrePdf,
         List<CarritoDatosFactura> listCarrito, List<DireccionConNombre> direcciones) throws ProcessPDFException {
 
@@ -117,7 +122,7 @@ public class CreatePDF {
      * @return Tabla itext a ser añadida al docuento PDF
      * @throws ProcessPDFException
      */
-    private static Table getHeader() throws ProcessPDFException {
+    private Table getHeader() throws ProcessPDFException {
         Table tableHeader = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
         tableHeader.addCell(createTextCellTitles("PETSTORE", 26F, ColorConstants.BLACK, TextAlignment.LEFT, StandardFonts.COURIER_BOLD));
         tableHeader.addCell(createTextCellTitles("FACTURA", 20F, headerBg, TextAlignment.RIGHT, StandardFonts.HELVETICA_BOLD));
@@ -135,7 +140,7 @@ public class CreatePDF {
      * @return Celda itext a ser añadida al docuento PDF
      * @throws ProcessPDFException
      */
-    private static Cell createTextCellTitles(String text, float size, Color color, TextAlignment alignment, String fontType) throws ProcessPDFException {
+    private Cell createTextCellTitles(String text, float size, Color color, TextAlignment alignment, String fontType) throws ProcessPDFException {
         Cell cell = new Cell();
         try {
             PdfFont font = PdfFontFactory.createFont(fontType);
@@ -159,7 +164,7 @@ public class CreatePDF {
      * @param ordenCompra
      * @return Tabla itext a ser añadida al docuento PDF
      */
-    private static Table getTitle(DatosOrden ordenCompra) {
+    private Table getTitle(DatosOrden ordenCompra) {
         Table tablePetstore = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
         tablePetstore.addCell(createTextCellBold("Dirección:", true));
         tablePetstore.addCell(createTextCell(1, 3, "Av Revolución Col Mixcoac CDMX", TextAlignment.LEFT, true));
@@ -181,7 +186,7 @@ public class CreatePDF {
      *
      * @return Tabla itext a ser añadida al docuento PDF
      */
-    private static Table getTitulosDetalle() {
+    private Table getTitulosDetalle() {
         Table tableDetalle = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         tableDetalle.addCell(createTextCellBold("DESCRIPCIÓN",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,4));
         tableDetalle.addCell(createTextCellBold("CANT.",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,1));
@@ -199,7 +204,7 @@ public class CreatePDF {
      * @param direcciones
      * @return Tabla itext a ser añadida al docuento PDF
      */
-    private static Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, List<DireccionConNombre>direcciones) {
+    private Table getDatosFactura(UsuarioDetalle usuarioDetalle, Usuario usuario, Document doc, List<DireccionConNombre>direcciones) {
         Table table4 = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
         table4.addCell(createTextCellBold("FACTURAR A:", ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,3));
         table4.addCell(createTextCell(newLine,TextAlignment.CENTER, true));
@@ -226,7 +231,7 @@ public class CreatePDF {
      * @return Tabla itext a ser añadida al docuento PDF
      * @throws ProcessPDFException
      */
-    private static Table getBarcode(String url, String pdf, String nombrePdf, PdfDocument pdfDoc) throws ProcessPDFException {
+    private Table getBarcode(String url, String pdf, String nombrePdf, PdfDocument pdfDoc) throws ProcessPDFException {
         Table tablebc = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         tablebc.addCell(generateBarcodeQR(pdfDoc,url+pdf,tablebc,1,1));
         tablebc.addCell(generateBarcode(pdfDoc,nombrePdf,tablebc,1,4));
@@ -240,10 +245,10 @@ public class CreatePDF {
      * @param ordenCompra
      * @return Tabla itext a ser añadida al docuento PDF
      */
-    private static Table getTotal(DatosOrden ordenCompra) {
+    private Table getTotal(DatosOrden ordenCompra) {
         Table tableTotal = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         tableTotal.addCell(createTextCell(1, 3, newLine, TextAlignment.CENTER,true));
-        tableTotal.addCell(createTextCell(1, 4, Convert.convertir((int)ordenCompra.getTotal()), TextAlignment.CENTER,true));
+        tableTotal.addCell(createTextCell(1, 4, this.convert.convertir((int)ordenCompra.getTotal()), TextAlignment.CENTER,true));
         tableTotal.addCell(createTextCellBold("SUBTOTAL:",ColorConstants.WHITE, headerBg,TextAlignment.LEFT,1,1));
         tableTotal.addCell(createTextCellBold(String.valueOf(ordenCompra.getTotal()),ColorConstants.WHITE, headerBg,TextAlignment.RIGHT,1,1));
         tableTotal.addCell(createTextCell(1, 7, newLine, TextAlignment.CENTER,true));
@@ -259,7 +264,7 @@ public class CreatePDF {
      * @param listCarrito
      * @return Tabla itext a ser añadida al docuento PDF
      */
-    private static Table getDetalleFactura(DatosOrden ordenCompra, List<CarritoDatosFactura> listCarrito) {
+    private Table getDetalleFactura(DatosOrden ordenCompra, List<CarritoDatosFactura> listCarrito) {
         Table tableDetalle = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
         for (CarritoDatosFactura carrito : listCarrito) {
             tableDetalle.addCell(createTextCell(1, 4, carrito.getTitulo(),TextAlignment.LEFT, false));
@@ -280,7 +285,7 @@ public class CreatePDF {
      * @param borde en la tabla
      * @return Celda itext a ser añadido a la tabla PDF
      */
-    private static Cell createTextCell(int col1, int col2, String text, TextAlignment alight, boolean border) {
+    private Cell createTextCell(int col1, int col2, String text, TextAlignment alight, boolean border) {
         Cell cell = new Cell(col1, col2);
         if(border) {
             cell.setBorder(Border.NO_BORDER);
@@ -299,7 +304,7 @@ public class CreatePDF {
      * @param borde
      * @return Celda itext a ser añadido a la tabla PDF
      */
-    private static Cell createTextCell(String text , TextAlignment alignment, boolean border) {
+    private Cell createTextCell(String text , TextAlignment alignment, boolean border) {
         Cell cell = new Cell();
         if(border) {
             cell.setBorder(Border.NO_BORDER);
@@ -316,7 +321,7 @@ public class CreatePDF {
      * @param borde
      * @return Celda itext a ser añadido a la tabla PDF
      */
-    private static Cell createTextCellBold(String text, boolean border) {
+    private Cell createTextCellBold(String text, boolean border) {
         Cell cell = new Cell();
         if(border) {
             cell.setBorder(Border.NO_BORDER);
@@ -336,7 +341,7 @@ public class CreatePDF {
      * @param alineación
      * @return Celda itext a ser añadido a la tabla PDF
      */
-    private static Cell createTextCellBold(String text,Color color, Color colorBackground, TextAlignment alignment) {
+    private Cell createTextCellBold(String text,Color color, Color colorBackground, TextAlignment alignment) {
         Cell cell = new Cell();
         Paragraph p = new Paragraph(text);
         p.setBold();
@@ -358,7 +363,7 @@ public class CreatePDF {
      * @param columna 2
      * @return Celda itext a ser añadido a la tabla PDF
      */
-    private static Cell createTextCellBold(String text,Color color, Color colorBackground, TextAlignment alignment,int col1, int col2) {
+    private Cell createTextCellBold(String text,Color color, Color colorBackground, TextAlignment alignment,int col1, int col2) {
         Cell cell = new Cell(col1, col2);
         Paragraph p = new Paragraph(text);
         p.setBold();
@@ -375,7 +380,7 @@ public class CreatePDF {
      * @param id de usuario
      * @return nombre del pdf
      */
-    public static String getNamePDF(int id) {
+    public String getNamePDF(int id) {
         return String.valueOf(id)+UUID.randomUUID().toString();
     }
 
@@ -384,7 +389,7 @@ public class CreatePDF {
      *
      * @return fecha
      */
-    private static String getFecha(){
+    private String getFecha(){
          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
          LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
@@ -401,7 +406,7 @@ public class CreatePDF {
      * @return Celda itext a ser añadido a la tabla PDF
      * @throws ProcessPDFException
      */
-    private static Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
+    private Cell generateBarcode(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
         Cell cell = new Cell(col1, col2);
         Barcode128 code128 = new Barcode128(pdfDoc);
         code128.setCode(code);
@@ -426,7 +431,7 @@ public class CreatePDF {
      * @return Celda itext a ser añadido a la tabla PDF
      * @throws ProcessPDFException
      */
-    private static Cell generateBarcodeQR(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
+    private Cell generateBarcodeQR(PdfDocument pdfDoc, String code, Table tablebc, int col1, int col2) throws ProcessPDFException {
         Cell cell = new Cell(col1, col2);
         BarcodeQRCode qrCode = new BarcodeQRCode(code);
         PdfFormXObject barcodeObject = qrCode.createFormXObject(ColorConstants.BLACK, pdfDoc);
@@ -444,7 +449,7 @@ public class CreatePDF {
      * @param usuarioDetalle
      * @return Nombre de usuario
      */
-    private static String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
+    private String getNombreCompleto(UsuarioDetalle usuarioDetalle) {
         return usuarioDetalle.getNombre() + " " + usuarioDetalle.getApellidoPaterno() + " " + usuarioDetalle.getApellidoMaterno();
     }
 
@@ -454,7 +459,7 @@ public class CreatePDF {
      * @param direcciones
      * @return dirección del usuario
      */
-    private static String getDireccion(List<DireccionConNombre> direcciones) {
+    private String getDireccion(List<DireccionConNombre> direcciones) {
         String dir = "";
         if(direcciones.size() >0 ) {
             DireccionConNombre dirNombre= direcciones.get(0);
@@ -472,7 +477,7 @@ public class CreatePDF {
      * @param userPassword
      * @throws IOException
      */
-    public static void protectDocument(String path, String userPassword) throws IOException {
+    public void protectDocument(String path, String userPassword) throws IOException {
         File file = new File(path);
         PDDocument document = PDDocument.load(file);
         AccessPermission ap = new AccessPermission();

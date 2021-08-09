@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,6 +78,9 @@ public class AdminController {
     
     @Value("${kebblar.profile}")
     private String kebblarProfile;
+    
+    @Autowired
+    private RestTemplate restTemplate;
     /**
      * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
@@ -149,7 +153,7 @@ public class AdminController {
                 + page
                 + "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
         try {
-            RestTemplate restTemplate = new RestTemplate();
+            //RestTemplate restTemplate = new RestTemplate();
             return restTemplate.getForObject(uri, String.class);
         } catch (RuntimeException e) {
             return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");

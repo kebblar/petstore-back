@@ -40,10 +40,15 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
  */
 @Service("invokeRestService")
 public class InvokeRestServiceImpl implements InvokeRestService {
+    private RestTemplate restTemplate;
+    
+    public InvokeRestServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public String getBitsoInfo2() {
         String url = "https://api.bitso.com/v3/ticker/?book=btc_mxn";
-        RestTemplate restTemplate = new RestTemplate();
+        //RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "curl");     //"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
@@ -77,7 +82,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
         redirectUrl.append(response);
         redirectUrl.append("&remoteip=127.0.0.1");
 
-        RestTemplate restTemplate = new RestTemplate();
+        //RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/x-www-form-urlencoded");
         String body = ""; // No recibe nada en su body... lo manda como parámetros en el url
@@ -93,7 +98,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
             headers.add("credentials", credential);
             SmsRequest smsRequest = new SmsRequest(tel, msj);
             HttpEntity<SmsRequest> request = new HttpEntity<>(smsRequest, headers);
-            ResponseEntity<SmsResponse> result = new RestTemplate().postForEntity(url, request, SmsResponse.class);
+            ResponseEntity<SmsResponse> result = restTemplate.postForEntity(url, request, SmsResponse.class);
             SmsResponse resp= result.getBody();
             return resp;
         } catch (Exception e) {
