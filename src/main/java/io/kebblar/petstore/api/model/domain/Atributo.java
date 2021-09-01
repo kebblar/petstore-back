@@ -36,8 +36,8 @@ public class Atributo implements Serializable {
 
     private static final long serialVersionUID = 8063110643925882553L;
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private Integer id;
     private String nombre;
@@ -65,51 +65,36 @@ public class Atributo implements Serializable {
         this.activo = activo;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter para activo.
-     */
     public int getActivo() {
         return activo;
     }
 
-    /**
-     * Setter para activo.
-     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     *{@inheritDoc}
      */
     @Override
     public String toString() {
@@ -121,7 +106,7 @@ public class Atributo implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Atributo son iguales
+     *{@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -139,7 +124,7 @@ public class Atributo implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     *{@inheritDoc}
      */
     @Override
     public int hashCode() {

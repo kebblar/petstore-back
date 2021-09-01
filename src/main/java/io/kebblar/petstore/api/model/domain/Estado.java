@@ -36,6 +36,9 @@ import java.util.Objects;
 public class Estado implements Serializable {
     private static final long serialVersionUID = -4082525936309639098L;
 
+    /*
+     * Atributos de la clase.
+     */
     private Integer id;
     private int idPais;
     private String nombre;
@@ -73,58 +76,37 @@ public class Estado implements Serializable {
         this.nombrePais = nombrePais;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idPais.
-     */
     public int getIdPais() {
         return idPais;
     }
 
-    /**
-     * Setter para idPais.
-     */
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
 
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter para nombrePais.
-     */
     public String getNombrePais() {
         return nombrePais;
     }
 
-    /**
-     * Setter para nombrePais.
-     */
     public void setNombrePais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
@@ -132,7 +114,7 @@ public class Estado implements Serializable {
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -144,7 +126,7 @@ public class Estado implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Estado son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -162,7 +144,7 @@ public class Estado implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

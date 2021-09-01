@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,7 +19,6 @@
  * Historia:    20210608_1315 Implementación de clase
  *
  */
-
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
@@ -39,7 +37,7 @@ public class Carrito implements Serializable {
 
     private static final long serialVersionUID = 7302776955762312368L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -70,65 +68,44 @@ public class Carrito implements Serializable {
         this.cveOrdenCompra = cveOrdenCompra;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idUsuario.
-     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * Setter para idUsuario.
-     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    /**
-     * Getter para idAnuncio.
-     */
     public int getIdAnuncio() {
         return idAnuncio;
     }
 
-    /**
-     * Setter para idAnuncio.
-     */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
-    /**
-     * Getter para cveOrdenCompra.
-     */
     public String getCveOrdenCompra() {
         return cveOrdenCompra;
     }
 
-    /**
-     * Setter para cveOrdenCompra.
-     */
     public void setCveOrdenCompra(String cveOrdenCompra) {
         this.cveOrdenCompra = cveOrdenCompra;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -141,7 +118,7 @@ public class Carrito implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Carrito son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -160,7 +137,7 @@ public class Carrito implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

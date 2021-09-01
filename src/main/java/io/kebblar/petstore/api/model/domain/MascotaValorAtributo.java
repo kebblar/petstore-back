@@ -32,19 +32,32 @@ import java.io.Serializable;
  * @since 1.0-SNAPSHOT
  */
 public class MascotaValorAtributo implements Serializable {
+
     private static final long serialVersionUID = 8636526037194157358L;
 
+    /*
+     * Atributos de la clase.
+     */
     private Integer id;
     private Integer idAnuncio;
     private Integer idValorAtributo;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public MascotaValorAtributo() {
     }
 
+    /**
+     * Constructor basado en el id del objeto.
+     */
     public MascotaValorAtributo(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public MascotaValorAtributo(Integer id, Integer idAnuncio, Integer idValorAtributo) {
         this.id = id;
         this.idAnuncio = idAnuncio;

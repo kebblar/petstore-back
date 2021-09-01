@@ -42,15 +42,24 @@ public class GraficaComprador implements Serializable {
     private Long cantidad;
     private Date fecha;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public GraficaComprador() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public GraficaComprador(String comprador, Long cantidad, Date fecha) {
         this.comprador = comprador;
         this.cantidad = cantidad;
         this.fecha = fecha;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public String getComprador() {
         return comprador;
     }
@@ -79,11 +88,17 @@ public class GraficaComprador implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "GraficaComprador [comprador=" + comprador + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -94,6 +109,9 @@ public class GraficaComprador implements Serializable {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

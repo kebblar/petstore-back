@@ -39,7 +39,7 @@ public class MetodoPago implements Serializable {
 
     private static final long serialVersionUID = -8185694508799189335L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -74,93 +74,60 @@ public class MetodoPago implements Serializable {
         this.activo=activo;
     }
 
-    /**
-     * Getter para activo.
+    /*
+     * Getter y Setter.
      */
     public boolean isActivo() {
         return activo;
     }
 
-    /**
-     * Setter para activo.
-     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
-    /**
-     * Getter para id.
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idUsuario.
-     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * Setter para idUsuario.
-     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    /**
-     * Getter para tipopago.
-     */
     public int getTipopago() {
         return tipopago;
     }
 
-    /**
-     * Setter para tipopago.
-     */
     public void setTipopago(int tipopago) {
         this.tipopago = tipopago;
     }
 
-    /**
-     * Getter para numTarjetaCartera.
-     */
     public String getNumTarjetaCartera() {
         return numTarjetaCartera;
     }
 
-    /**
-     * Setter para numTarjetaCartera.
-     */
     public void setNumTarjetaCartera(String numTarjetaCartera) {
         this.numTarjetaCartera = numTarjetaCartera;
     }
 
-    /**
-     * Getter para expiracion.
-     */
     public String getExpiracion() {
         return expiracion;
     }
 
-    /**
-     * Setter para expiracion.
-     */
     public void setExpiracion(String expiracion) {
         this.expiracion = expiracion;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -175,7 +142,7 @@ public class MetodoPago implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase MetodoPago son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
@@ -185,9 +152,8 @@ public class MetodoPago implements Serializable {
         return idUsuario == that.idUsuario && tipopago == that.tipopago && activo == that.activo && Objects.equals(id, that.id) && Objects.equals(numTarjetaCartera, that.numTarjetaCartera) && Objects.equals(expiracion, that.expiracion);
     }
 
-
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

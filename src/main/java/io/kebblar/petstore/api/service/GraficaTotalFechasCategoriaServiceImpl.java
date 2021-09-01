@@ -124,7 +124,7 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
             String fecha = mes+"-"+anio;
             int indice_fecha = fechas.indexOf(fecha);
             int indice_categoria = categorias.indexOf(datos.get(i).getCategoria());
-            arregloDatos [indice_categoria][indice_fecha] = datos.get(i).getTotal_venta();
+            arregloDatos [indice_categoria][indice_fecha] = datos.get(i).getTotalVenta();
             }
         return arregloDatos;
     }

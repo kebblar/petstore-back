@@ -36,17 +36,29 @@ import java.util.List;
  */
 public class GraficaTO {
 
+    /*
+     * Atributos de la clase.
+     */
     List<ChartData> chart;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public GraficaTO() {
         super();
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public GraficaTO(List<ChartData> chart) {
         super();
         this.chart = chart;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public List<ChartData> getChart() {
         return chart;
     }
@@ -55,6 +67,9 @@ public class GraficaTO {
         this.chart = chart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -63,6 +78,9 @@ public class GraficaTO {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

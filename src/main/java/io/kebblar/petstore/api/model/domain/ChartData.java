@@ -39,13 +39,22 @@ import java.util.Set;
 public class ChartData implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
+    /*
+     * Atributos de la clase.
+     */
     private List<String> label;
     private List<Long> data;
     private Set<String> mes;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public ChartData() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public ChartData(List<String> label, List<Long> data, Set<String> mes) {
         super();
         this.label = label;
@@ -53,6 +62,9 @@ public class ChartData implements Serializable {
         this.mes = mes;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public List<String> getLabel() {
         return label;
     }
@@ -81,6 +93,9 @@ public class ChartData implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -91,6 +106,9 @@ public class ChartData implements Serializable {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -118,6 +136,9 @@ public class ChartData implements Serializable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "ChartData [label=" + label + ", data=" + data + ", mes=" + mes + "]";

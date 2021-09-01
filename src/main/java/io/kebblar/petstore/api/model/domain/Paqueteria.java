@@ -39,7 +39,7 @@ public class Paqueteria implements Serializable {
 
     private static final long serialVersionUID = 4781082860740788585L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -72,79 +72,51 @@ public class Paqueteria implements Serializable {
         this.precio = precio;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Setter y Getter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter para breveDescripcion.
-     */
     public String getBreveDescripcion() {
         return breveDescripcion;
     }
 
-    /**
-     * Setter para breveDescripcion.
-     */
     public void setBreveDescripcion(String breveDescripcion) {
         this.breveDescripcion = breveDescripcion;
     }
 
-    /**
-     * Getter para htmlDescripcion.
-     */
     public String getHtmlDescripcion() {
         return htmlDescripcion;
     }
 
-    /**
-     * Setter para htmlDescripcion.
-     */
     public void setHtmlDescripcion(String htmlDescripcion) {
         this.htmlDescripcion = htmlDescripcion;
     }
 
-    /**
-     * Getter para precio.
-     */
     public int getPrecio() {
         return precio;
     }
 
-    /**
-     * Setter para precio.
-     */
     public void setPrecio(int precio) {
         this.precio = precio;
     }
 
-
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -158,7 +130,7 @@ public class Paqueteria implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Paqueteria son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -178,7 +150,7 @@ public class Paqueteria implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

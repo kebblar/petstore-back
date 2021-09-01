@@ -27,6 +27,7 @@ package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de {@link Grafica}.
@@ -38,10 +39,16 @@ import java.util.Date;
 public class Grafica implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
+    /*
+     * Atributos de la clase.
+     */
     private String etiqueta;
     private Long cantidad;
     private Date fecha;
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Grafica(String etiqueta, Long cantidad, Date fecha) {
         super();
         this.etiqueta = etiqueta;
@@ -53,6 +60,9 @@ public class Grafica implements Serializable {
         super();
     }
 
+    /*
+     * Getter y Setter.
+     */
     public String getEtiqueta() {
         return etiqueta;
     }
@@ -81,43 +91,28 @@ public class Grafica implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Grafica)) return false;
+        Grafica grafica = (Grafica) o;
+        return Objects.equals(etiqueta, grafica.etiqueta) && Objects.equals(cantidad, grafica.cantidad) && Objects.equals(fecha, grafica.fecha);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
-        result = prime * result + ((etiqueta == null) ? 0 : etiqueta.hashCode());
-        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-        return result;
+        return Objects.hash(etiqueta, cantidad, fecha);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Grafica other = (Grafica) obj;
-        if (cantidad == null) {
-            if (other.cantidad != null)
-                return false;
-        } else if (!cantidad.equals(other.cantidad))
-            return false;
-        if (etiqueta == null) {
-            if (other.etiqueta != null)
-                return false;
-        } else if (!etiqueta.equals(other.etiqueta))
-            return false;
-        if (fecha == null) {
-            if (other.fecha != null)
-                return false;
-        } else if (!fecha.equals(other.fecha))
-            return false;
-        return true;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Grafica [etiqueta=" + etiqueta + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";

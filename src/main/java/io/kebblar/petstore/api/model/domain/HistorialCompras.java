@@ -22,6 +22,8 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Objects;
+
 /**
  * Implementacion del POJO de la entidad de {@link HistorialCompras}.
  *
@@ -31,7 +33,7 @@ package io.kebblar.petstore.api.model.domain;
  */
 public class HistorialCompras {
     /**
-     * Atributos de la clase
+     * Atributos de la clase.
      */
     private String cveOrden;
     private String fechaHoraCompra;
@@ -48,6 +50,9 @@ public class HistorialCompras {
      */
     public HistorialCompras() {}
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public HistorialCompras(String cveOrden,String fechaHoraCompra, int estadoEnvio, int idUsuario, String nombreAnuncio,
             String metodoPago, String correo, String urlPdf, String urlImagen) {
         super();
@@ -62,6 +67,9 @@ public class HistorialCompras {
         this.urlImagen = urlImagen;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public String getFechaHoraCompra() {
         return fechaHoraCompra;
     }
@@ -70,89 +78,12 @@ public class HistorialCompras {
         this.fechaHoraCompra = fechaHoraCompra;
     }
 
-
     public String getUrlPdf() {
         return urlPdf;
     }
 
     public void setUrlPdf(String urlPdf) {
         this.urlPdf = urlPdf;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "HistorialCompras [cveOrden=" + cveOrden + ", fechaHoraCompra=" + fechaHoraCompra + ", estadoEnvio="
-                + estadoEnvio + ", idUsuario=" + idUsuario + ", nombreAnuncio=" + nombreAnuncio + ", metodoPago="
-                + metodoPago + ", correo=" + correo + ", urlPdf=" + urlPdf + ", urlImagen=" + urlImagen + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((correo == null) ? 0 : correo.hashCode());
-        result = prime * result + ((cveOrden == null) ? 0 : cveOrden.hashCode());
-        result = prime * result + estadoEnvio;
-        result = prime * result + ((fechaHoraCompra == null) ? 0 : fechaHoraCompra.hashCode());
-        result = prime * result + idUsuario;
-        result = prime * result + ((metodoPago == null) ? 0 : metodoPago.hashCode());
-        result = prime * result + ((nombreAnuncio == null) ? 0 : nombreAnuncio.hashCode());
-        result = prime * result + ((urlImagen == null) ? 0 : urlImagen.hashCode());
-        result = prime * result + ((urlPdf == null) ? 0 : urlPdf.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        HistorialCompras other = (HistorialCompras) obj;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (cveOrden == null) {
-            if (other.cveOrden != null)
-                return false;
-        } else if (!cveOrden.equals(other.cveOrden))
-            return false;
-        if (estadoEnvio != other.estadoEnvio)
-            return false;
-        if (fechaHoraCompra == null) {
-            if (other.fechaHoraCompra != null)
-                return false;
-        } else if (!fechaHoraCompra.equals(other.fechaHoraCompra))
-            return false;
-        if (idUsuario != other.idUsuario)
-            return false;
-        if (metodoPago == null) {
-            if (other.metodoPago != null)
-                return false;
-        } else if (!metodoPago.equals(other.metodoPago))
-            return false;
-        if (nombreAnuncio == null) {
-            if (other.nombreAnuncio != null)
-                return false;
-        } else if (!nombreAnuncio.equals(other.nombreAnuncio))
-            return false;
-        if (urlImagen == null) {
-            if (other.urlImagen != null)
-                return false;
-        } else if (!urlImagen.equals(other.urlImagen))
-            return false;
-        if (urlPdf == null) {
-            if (other.urlPdf != null)
-                return false;
-        } else if (!urlPdf.equals(other.urlPdf))
-            return false;
-        return true;
     }
 
     public String getNombreAnuncio() {
@@ -203,4 +134,46 @@ public class HistorialCompras {
         this.cveOrden = cveOrden;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "HistorialCompras [cveOrden=" + cveOrden + ", fechaHoraCompra=" + fechaHoraCompra + ", estadoEnvio="
+                + estadoEnvio + ", idUsuario=" + idUsuario + ", nombreAnuncio=" + nombreAnuncio + ", metodoPago="
+                + metodoPago + ", correo=" + correo + ", urlPdf=" + urlPdf + ", urlImagen=" + urlImagen + "]";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+        result = prime * result + ((cveOrden == null) ? 0 : cveOrden.hashCode());
+        result = prime * result + estadoEnvio;
+        result = prime * result + ((fechaHoraCompra == null) ? 0 : fechaHoraCompra.hashCode());
+        result = prime * result + idUsuario;
+        result = prime * result + ((metodoPago == null) ? 0 : metodoPago.hashCode());
+        result = prime * result + ((nombreAnuncio == null) ? 0 : nombreAnuncio.hashCode());
+        result = prime * result + ((urlImagen == null) ? 0 : urlImagen.hashCode());
+        result = prime * result + ((urlPdf == null) ? 0 : urlPdf.hashCode());
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HistorialCompras)) return false;
+        HistorialCompras that = (HistorialCompras) o;
+        return estadoEnvio == that.estadoEnvio && idUsuario == that.idUsuario && Objects.equals(cveOrden, that.cveOrden)
+                && Objects.equals(fechaHoraCompra, that.fechaHoraCompra) && Objects.equals(nombreAnuncio, that.nombreAnuncio)
+                && Objects.equals(metodoPago, that.metodoPago) && Objects.equals(correo, that.correo) && Objects.equals(urlPdf, that.urlPdf)
+                && Objects.equals(urlImagen, that.urlImagen);
+    }
 }

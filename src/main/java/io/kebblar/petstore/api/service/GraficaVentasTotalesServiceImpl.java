@@ -143,7 +143,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             String mes = obtenerNombreMes(datos.get(i).getMes());
             String fecha = mes+"-"+anio;
             int indice_fecha = fechas.indexOf(fecha);
-            arregloDatos [0][indice_fecha] = datos.get(i).getCantidad_ordenes();
+            arregloDatos [0][indice_fecha] = datos.get(i).getCantidadOrdenes();
         }
         return arregloDatos;
     }
@@ -161,7 +161,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
             String mes = obtenerNombreMes(datos.get(i).getMes());
             String fecha = mes+"-"+anio;
             int indice_fecha = fechas.indexOf(fecha);
-            arregloDatos [0][indice_fecha] = datos.get(i).getTotal_venta();
+            arregloDatos [0][indice_fecha] = datos.get(i).getTotalVenta();
         }
         return arregloDatos;
     }

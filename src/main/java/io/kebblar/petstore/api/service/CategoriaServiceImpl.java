@@ -180,10 +180,10 @@ public class CategoriaServiceImpl implements CategoriaService {
                 if(map.containsKey(c.getIdCategoria())) {
                     //if(mapA.containsKey(c.getIdCategoria())) {
                         try {
-                            if(c.getId_atributo()>0) {
+                            if(c.getIdAtrib()>0) {
                                 //List<AtributoTO> a = mapA.get(c.getIdCategoria());
                                 List<AtributoTO> a = map.get(c.getIdCategoria()).getAtributos();
-                                AtributoTO aux = new AtributoTO(c.getId_atributo(),c.getNombreAtributo(),c.getEstatusAtributo());
+                                AtributoTO aux = new AtributoTO(c.getIdAtrib(),c.getNombreAtributo(),c.getEstatusAtributo());
                                 Boolean agregarAtributo = true;
                                 for (int i = 0; i < a.size(); i++) {
 
@@ -236,8 +236,8 @@ public class CategoriaServiceImpl implements CategoriaService {
                     List<AtributoTO> la = new ArrayList<>();
 
                     try {
-                        if (c.getId_categoria()> 0) {
-                            AtributoTO a = new AtributoTO(c.getId_atributo(),c.getNombreAtributo(),c.getEstatusAtributo());
+                        if (c.getIdCateg()> 0) {
+                            AtributoTO a = new AtributoTO(c.getIdAtrib(),c.getNombreAtributo(),c.getEstatusAtributo());
                                                         //la.add(a);
                             //mapA.put(c.getId_categoria(), la);
 

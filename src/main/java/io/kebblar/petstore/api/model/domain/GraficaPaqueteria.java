@@ -38,19 +38,31 @@ import java.util.Date;
 public class GraficaPaqueteria implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
+    /*
+     * Atributos de la clase.
+     */
     private String paqueteria;
     private Long cantidad;
     private Date fecha;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public GraficaPaqueteria() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public GraficaPaqueteria(String paqueteria, Long cantidad, Date fecha) {
         this.paqueteria = paqueteria;
         this.cantidad = cantidad;
         this.fecha = fecha;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public String getPaqueteria() {
         return paqueteria;
     }
@@ -79,11 +91,17 @@ public class GraficaPaqueteria implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "GraficaPaqueteria [paqueteria=" + paqueteria + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -94,6 +112,9 @@ public class GraficaPaqueteria implements Serializable {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

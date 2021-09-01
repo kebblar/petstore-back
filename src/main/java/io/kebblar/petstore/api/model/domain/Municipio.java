@@ -35,7 +35,7 @@ import java.util.Objects;
 public class Municipio implements Serializable {
     private static final long serialVersionUID = 5007490559310553080L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -77,76 +77,52 @@ public class Municipio implements Serializable {
         this.nombreEstado = nombreEstado;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idEstado.
-     */
     public int getIdEstado() {
         return idEstado;
     }
 
-    /**
-     * Setter para idEstado.
-     */
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
 
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter para nombrePais.
-     */
     public String getNombrePais() {
         return nombrePais;
     }
 
-    /**
-     * Setter para nombrePais.
-     */
     public void setNombrePais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
 
-    /**
-     * Getter para nombreEstado.
-     */
     public String getNombreEstado() {
         return nombreEstado;
     }
 
-    /**
-     * Setter para nombreEstado.
-     */
     public void setNombreEstado(String nombreEstado) {
         this.nombreEstado = nombreEstado;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[Municipio] : ["
@@ -159,7 +135,7 @@ public class Municipio implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Municipio son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -177,7 +153,7 @@ public class Municipio implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

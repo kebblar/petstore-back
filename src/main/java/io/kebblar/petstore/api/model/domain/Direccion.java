@@ -19,12 +19,14 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * <p>Implementacion del POJO de la entidad de {@link Direccion}.
+ * <p>Descripcion:</p>
+ * Implementacion del POJO de la entidad de {@link Direccion}.
  *
  * @author  garellano
  * @version 1.0-SNAPSHOT
@@ -33,6 +35,9 @@ import javax.validation.constraints.Size;
 public class Direccion implements Serializable {
     private static final long serialVersionUID = 147836237927646425L;
 
+    /*
+     * Atributos de la clase.
+     */
     private Integer id;
     @NotEmpty(message = "El campo Calle y número debe ser no vacio")
     @Size(max = 5, message = "La longitud máxima para el campo de Calle y número es 5")
@@ -50,9 +55,14 @@ public class Direccion implements Serializable {
     private String referencias;
     private boolean activo;
 
-    public Direccion() {
-    }
+    /**
+     * Constructor por default (sin parámetros).
+     */
+    public Direccion() {}
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Direccion(Integer id, String calleNumero, String colonia, int idPais, int idEstado, int idMunicipio,
             int idTipoDireccion, String cp, String referencias, boolean activo) {
         this.id = id;
@@ -66,75 +76,107 @@ public class Direccion implements Serializable {
         this.referencias = referencias;
         this.activo = activo;
     }
+
+    /*
+     * Setter y Getter.
+     */
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getCalleNumero() {
         return calleNumero;
     }
+
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
+
     public String getColonia() {
         return colonia;
     }
+
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
+
     public int getIdPais() {
         return idPais;
     }
+
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
+
     public int getIdEstado() {
         return idEstado;
     }
+
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
+
     public int getIdMunicipio() {
         return idMunicipio;
     }
+
     public void setIdMunicipio(int idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
+
     public int getIdTipoDireccion() {
         return idTipoDireccion;
     }
+
     public void setIdTipoDireccion(int idTipoDireccion) {
         this.idTipoDireccion = idTipoDireccion;
     }
+
     public String getCp() {
         return cp;
     }
+
     public void setCp(String cp) {
         this.cp = cp;
     }
+
     public String getReferencias() {
         return referencias;
     }
+
     public void setReferencias(String referencias) {
         this.referencias = referencias;
     }
+
     public boolean isActivo() {
         return activo;
     }
+
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Direccion [id=" + id + ", calleNumero=" + calleNumero + ", colonia=" + colonia + ", idPais=" + idPais
                 + ", idEstado=" + idEstado + ", idMunicipio=" + idMunicipio + ", idTipoDireccion=" + idTipoDireccion
                 + ", cp=" + cp + ", referencias=" + referencias + ", activo=" + activo + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -151,51 +193,18 @@ public class Direccion implements Serializable {
         result = prime * result + ((referencias == null) ? 0 : referencias.hashCode());
         return result;
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Direccion other = (Direccion) obj;
-        if (activo != other.activo)
-            return false;
-        if (calleNumero == null) {
-            if (other.calleNumero != null)
-                return false;
-        } else if (!calleNumero.equals(other.calleNumero))
-            return false;
-        if (colonia == null) {
-            if (other.colonia != null)
-                return false;
-        } else if (!colonia.equals(other.colonia))
-            return false;
-        if (cp == null) {
-            if (other.cp != null)
-                return false;
-        } else if (!cp.equals(other.cp))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (idEstado != other.idEstado)
-            return false;
-        if (idMunicipio != other.idMunicipio)
-            return false;
-        if (idPais != other.idPais)
-            return false;
-        if (idTipoDireccion != other.idTipoDireccion)
-            return false;
-        if (referencias == null) {
-            if (other.referencias != null)
-                return false;
-        } else if (!referencias.equals(other.referencias))
-            return false;
-        return true;
-    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Direccion)) return false;
+        Direccion direccion = (Direccion) o;
+        return idPais == direccion.idPais && idEstado == direccion.idEstado && idMunicipio == direccion.idMunicipio &&
+                idTipoDireccion == direccion.idTipoDireccion && activo == direccion.activo && Objects.equals(id, direccion.id) &&
+                Objects.equals(calleNumero, direccion.calleNumero) && Objects.equals(colonia, direccion.colonia) &&
+                Objects.equals(cp, direccion.cp) && Objects.equals(referencias, direccion.referencias);
+    }
 }
