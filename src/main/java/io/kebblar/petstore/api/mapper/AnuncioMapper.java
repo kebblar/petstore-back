@@ -42,8 +42,11 @@ import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ANUNCIO;
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MASCOTA_VALOR_ATRIBUTOS;
+
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio.
  *
  * @author Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -53,8 +56,6 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
  */
 @Repository
 public interface AnuncioMapper {
-    static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus, search_url ";
-    static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
 
     /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
@@ -63,7 +64,7 @@ public interface AnuncioMapper {
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO anuncio("+CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  "
+    @Insert("INSERT INTO anuncio("+ CAMPOS_ANUNCIO+") VALUES(#{idCategoria}, #{folio},  #{titulo},  #{descripcion},  "
             + " #{precio},  #{fechaInicioVigencia},  #{fechaFinVigencia},  #{fechaAlta},  #{fechaModificacion}, "
             + " #{fechaEliminacion}, #{idEstatus}, #{searchUrl} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
@@ -151,13 +152,13 @@ public interface AnuncioMapper {
             + " WHERE id = #{id} ")
     int update(Anuncio anuncio) throws SQLException;
 
-   /**
-    * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio.
-    *
-    * @param id Identificador del anuncio del cual se eliminaran los atributos
-    * @return el numero de registros actualizados.
-    * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
-    */
+    /**
+     * Elimina un objeto del tipo  'anuncio_atributo' asociados a un anuncio.
+     *
+     * @param id Identificador del anuncio del cual se eliminaran los atributos
+     * @return el numero de registros actualizados.
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
     @Delete("DELETE FROM mascota_valor_atributo WHERE id_anuncio = #{id} ")
     int deleteAtributos(int id) throws SQLException;
 

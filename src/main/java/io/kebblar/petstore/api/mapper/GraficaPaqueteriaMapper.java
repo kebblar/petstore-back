@@ -23,14 +23,17 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Grafica;
 
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad Chart
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Chart.
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT

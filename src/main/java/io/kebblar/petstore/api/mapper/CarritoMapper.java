@@ -25,13 +25,22 @@ import java.util.List;
 import java.sql.SQLException;
 
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Carrito;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CARRITO;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -41,14 +50,12 @@ import io.kebblar.petstore.api.model.domain.Carrito;
  */
 @Repository
 public interface CarritoMapper {
-    static final String CAMPOS = " id, id_usuario, id_anuncio, cve_orden_compra ";
 
     /**
      * Obtiene un objeto de tipo 'Carrito' dado su id.
      *
      * @return Carrito que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CarritoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -56,7 +63,7 @@ public interface CarritoMapper {
             @Result(property = "idAnuncio",   column = "id_anuncio"),
             @Result(property = "cveOrdenCompra",   column = "cve_orden_compra")
     })
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_CARRITO + " FROM carrito WHERE     id = #{id}     ")
     Carrito getById(int id) throws SQLException;
 
     /**
@@ -64,11 +71,10 @@ public interface CarritoMapper {
      *
      * @param id Id del usuario que posee determinado carrito.
      * @return Lista de obetos de tipo Carrito
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{id} AND cve_orden_compra is NULL")
+    @Select("SELECT " + CAMPOS_CARRITO + " FROM carrito WHERE id_usuario = #{id} AND cve_orden_compra is NULL")
     List<Carrito> getAll(int id) throws SQLException;
 
     /**
@@ -76,11 +82,10 @@ public interface CarritoMapper {
      *
      * @param idUser Id del usuario que posee determinado carrito.
      * @return Lista de obetos de tipo Carrito
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
-    @Select("SELECT " + CAMPOS + " FROM carrito WHERE id_usuario = #{idUser} AND cve_orden_compra='btcPen'")
+    @Select("SELECT " + CAMPOS_CARRITO + " FROM carrito WHERE id_usuario = #{idUser} AND cve_orden_compra='btcPen'")
     List<Carrito> getBtcCarrito(int idUser) throws SQLException;
 
     /**

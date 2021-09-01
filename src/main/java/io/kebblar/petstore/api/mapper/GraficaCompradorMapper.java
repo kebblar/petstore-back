@@ -23,13 +23,16 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Grafica;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaComprador
+ * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaComprador.
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
@@ -40,7 +43,6 @@ import io.kebblar.petstore.api.model.domain.Grafica;
 
 @Repository
 public interface GraficaCompradorMapper {
-    static final String CAMPOS = " comprador, cantidad, fecha ";
 
     /**
      * Obtiene una lista de tipo 'GraficaComprador'.

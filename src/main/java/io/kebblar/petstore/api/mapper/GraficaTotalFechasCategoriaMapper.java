@@ -23,12 +23,17 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.GraficaTotalFechasCategoria;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.*;
+
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaTotalFechasCategoria
+ * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaTotalFechasCategoria.
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
@@ -39,11 +44,6 @@ import io.kebblar.petstore.api.model.domain.GraficaTotalFechasCategoria;
 
 @Repository
 public interface GraficaTotalFechasCategoriaMapper {
-    static final String CAMPOS = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, cat.categoria as categoria, MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
-    static final String IJCarritoOrden = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  carrito.cve_orden_compra";
-    static final String IJAnuncioCarrito = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
-    static final String IJCategoriaAnuncio = " inner join petstore.categoria as cat on cat.id = anuncio.id_categoria";
-    static final String GroupCategoriaMesAnio = " group by anio, mes, categoria";
 
     /**
      * Obtiene una lista de tipo 'GraficaTotalFechasCategoria'.
@@ -58,16 +58,16 @@ public interface GraficaTotalFechasCategoriaMapper {
             @Result(property = "cantidad_ordenes", column = "cantidad_ordenes"),
             @Result(property = "mes", column = "mes"),
             @Result(property = "anio", column = "anio")})
-    @Select("SELECT "+CAMPOS+ " from petstore.orden_compra as orden "
-            +IJCarritoOrden+IJAnuncioCarrito+IJCategoriaAnuncio
-            +GroupCategoriaMesAnio)
+    @Select("SELECT "+CAMPOS_GRAFICA1+ " from petstore.orden_compra as orden "
+            +IJ_CARRITO_ORDEN+IJ_ANUNCIO_CARRITO+IJ_CATEGORIA_ANUNCIO
+            +GROUP_CATEGORIA_M_A)
     List<GraficaTotalFechasCategoria> getTotalCategoria() throws SQLException;
 
     @ResultMap("GraficaTotalFechasCategoria")
-    @Select("SELECT "+CAMPOS+ " from petstore.orden_compra as orden "
-            +IJCarritoOrden+IJAnuncioCarrito+IJCategoriaAnuncio
+    @Select("SELECT "+CAMPOS_GRAFICA1+ " from petstore.orden_compra as orden "
+            +IJ_CARRITO_ORDEN+IJ_ANUNCIO_CARRITO+IJ_CATEGORIA_ANUNCIO
             +" where orden.fecha_hora_comprar between #{fechaIni} and #{fechaFin}"
-            +GroupCategoriaMesAnio)
+            +GROUP_CATEGORIA_M_A)
     List<GraficaTotalFechasCategoria> getTotalCategoriaFiltroFechas(String fechaIni, String fechaFin) throws SQLException;
 
 }

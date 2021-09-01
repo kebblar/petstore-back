@@ -23,14 +23,23 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CATEGORIA;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Categoria
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Categoria.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -40,32 +49,29 @@ import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
  */
 @Repository
 public interface CategoriaMapper {
-    static final String CAMPOS = " id, categoria, activo ";
 
     /**
      * Obtiene un objeto de tipo 'Categoria' dado su id.
      *
      * @return Categoria que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "categoria",   column = "categoria"),
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM categoria WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_CATEGORIA + " FROM categoria WHERE     id = #{id}     ")
     Categoria getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de obetos de tipo Categoria
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria ")
+    @Select("SELECT " + CAMPOS_CATEGORIA + " FROM categoria ")
     List<Categoria> getAll() throws SQLException;
 
     /**
@@ -81,7 +87,7 @@ public interface CategoriaMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Categoria categoria) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'Categoria' con base en la infrmación dada por el objeto de tipo 'Categoria'.
      *
      * @param categoria a ser actualizado.
@@ -109,19 +115,17 @@ public interface CategoriaMapper {
      *
      * @param  String nombre de Categoria.
      * @return Lista de objetos de tipo Categoria filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria WHERE categoria LIKE '%' #{nombre} '%'")
+    @Select("SELECT " + CAMPOS_CATEGORIA + " FROM categoria WHERE categoria LIKE '%' #{nombre} '%'")
     List<Categoria> getByNombre(String nombre) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de obetos de tipo CategoriaDetallesTO
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("select c.id as idCategoria, c.categoria as categoriaNombre,"
             + " c.activo as estatusCategoria,"

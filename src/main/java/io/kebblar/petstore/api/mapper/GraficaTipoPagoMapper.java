@@ -13,7 +13,6 @@ import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 
 @Repository
 public interface GraficaTipoPagoMapper {
-    static final String CAMPOS = " cantidad_ordenes, total_venta, tipo_pago, anio, fecha ";
 
     /**
      * Obtiene una lista de tipo 'GraficaMontoTotalTipoPago'.

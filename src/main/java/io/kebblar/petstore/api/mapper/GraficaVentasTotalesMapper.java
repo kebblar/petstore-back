@@ -27,8 +27,10 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.*;
+
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaVentasTotales
+ * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaVentasTotales.
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
@@ -38,10 +40,6 @@ import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
  */
 @Repository
 public interface GraficaVentasTotalesMapper {
-    static final String CAMPOS = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
-    static final String IJCarritoOrden = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  carrito.cve_orden_compra";
-    static final String IJAnuncioCarrito = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
-    static final String GroupMesAnio = " group by anio, mes";
 
     /**
      * Obtiene una lista de tipo 'GraficaVentasTotales'.
@@ -55,15 +53,15 @@ public interface GraficaVentasTotalesMapper {
         @Result(property = "cantidad_ordenes", column = "cantidad_ordenes"),
         @Result(property = "mes", column = "mes"),
         @Result(property = "anio", column = "anio")})
-    @Select("SELECT " + CAMPOS + " from petstore.orden_compra as orden "
-        + IJCarritoOrden + IJAnuncioCarrito + GroupMesAnio)
+    @Select("SELECT " + CAMPOS_GRAFICA2 + " from petstore.orden_compra as orden "
+        + IJ_CARRITO_ORDEN + IJ_ANUNCIO_CARRITO + GROUP_MES_ANIO)
     List<GraficaVentasTotales> getTotalVentas() throws SQLException;
 
     @ResultMap("GraficaVentasTotales")
-    @Select("SELECT " + CAMPOS + " from petstore.orden_compra as orden "
-        + IJCarritoOrden + IJAnuncioCarrito
+    @Select("SELECT " + CAMPOS_GRAFICA2 + " from petstore.orden_compra as orden "
+        + IJ_CARRITO_ORDEN + IJ_ANUNCIO_CARRITO
         + " where orden.fecha_hora_comprar between #{fechaIni} and #{fechaFin}"
-        + GroupMesAnio)
+        + GROUP_MES_ANIO)
     List<GraficaVentasTotales> getTotalVentasFiltroFechas(String fechaIni, String fechaFin) throws SQLException;
 
 }

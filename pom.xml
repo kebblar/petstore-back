@@ -12,7 +12,7 @@
     <artifactId>petstore-back</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>petstore-back</name>
-    <description>Linea base del proyecyo de backend para la clase del diplomado de Ingeniería de Software</description>
+    <description>Linea base del proyecto de backend para la clase del diplomado de Ingeniería de Software</description>
 
     <properties>
         <java.version>1.8</java.version>

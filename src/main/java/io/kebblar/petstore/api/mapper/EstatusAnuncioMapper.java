@@ -23,13 +23,22 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ESTATUS_ANUNCIO;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad EstatusAnuncio
+ * Interfaz 'Mapper' MyBatis asociado a la entidad EstatusAnuncio.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -39,31 +48,28 @@ import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
  */
 @Repository
 public interface EstatusAnuncioMapper {
-    static final String CAMPOS = " id, descripcion ";
 
     /**
      * Obtiene un objeto de tipo 'EstatusAnuncio' dado su id.
      *
      * @return EstatusAnuncio que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="EstatusAnuncioMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "descripcion",   column = "descripcion")
     })
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_ESTATUS_ANUNCIO + " FROM estatus_anuncio WHERE     id = #{id}     ")
     EstatusAnuncio getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'EstatusAnuncio'.
      *
      * @return Lista de obetos de tipo EstatusAnuncio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio ")
+    @Select("SELECT " + CAMPOS_ESTATUS_ANUNCIO + " FROM estatus_anuncio ")
     List<EstatusAnuncio> getAll() throws SQLException;
 
     /**
@@ -79,7 +85,7 @@ public interface EstatusAnuncioMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(EstatusAnuncio estatusAnuncio) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'EstatusAnuncio' con base en la infrmación dada por el objeto de tipo 'EstatusAnuncio'.
      *
      * @param estatusAnuncio a ser actualizado.
@@ -105,13 +111,12 @@ public interface EstatusAnuncioMapper {
     /**
      * Obtiene una lista de objetos de tipo 'EstatusAnuncio' filtrado por el nombre ingresado.
      *
-     * @param  String nombre de EstatusAnuncio.
+     * @param  nombre de EstatusAnuncio.
      * @return Lista de objetos de tipo EstatusAnuncio filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
-    @Select("SELECT " + CAMPOS + " FROM estatus_anuncio WHERE descripcion LIKE '%' #{nombre} '%'")
+    @Select("SELECT " + CAMPOS_ESTATUS_ANUNCIO + " FROM estatus_anuncio WHERE descripcion LIKE '%' #{nombre} '%'")
     List<EstatusAnuncio> getByNombre(String nombre) throws SQLException;
 
 }

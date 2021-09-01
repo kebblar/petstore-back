@@ -66,7 +66,8 @@ public class CustomControllerAdvice {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> userErrorHandler(MethodArgumentNotValidException geEx) {
         Map<String, Object> lista = buildValidationErrorResponse(geEx);
-        logger.error(lista.toString());
+        String s = lista.toString();
+        logger.error(s);
         return new ResponseEntity<>(lista, HttpStatus.BAD_REQUEST);
     }
 
@@ -110,16 +111,18 @@ public class CustomControllerAdvice {
         for (ObjectError fe : binding.getAllErrors()) {
             FieldError error = (FieldError)fe;
             Map<String, String> err = new HashMap<>();
-                String defMess = error.getDefaultMessage();
-                String[] arr = defMess.split("\\|");
-                String index = (arr.length>1)? arr[1]:"0";
-            err.put("index", index);
-            err.put("description", arr[0]);
-            err.put("validationType", error.getCode());
-            err.put("objectName", error.getObjectName());
-            err.put("rejectedValue", error.getRejectedValue()+"");
-            err.put("fieldName", error.getField());
-            lista.add(err);
+            if(error.getDefaultMessage() != null) {
+                String[] arr = error.getDefaultMessage().split("\\|");
+                String index = (arr.length > 1) ? arr[1] : "0";
+
+                err.put("index", index);
+                err.put("description", arr[0]);
+                err.put("validationType", error.getCode());
+                err.put("objectName", error.getObjectName());
+                err.put("rejectedValue", error.getRejectedValue() + "");
+                err.put("fieldName", error.getField());
+                lista.add(err);
+            }
         }
         map.put("errorType", "3001");
         map.put("errors", lista);

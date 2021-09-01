@@ -23,15 +23,24 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CAT_ATRIBUTO;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad CategoriaAtributo
+ * Interfaz 'Mapper' MyBatis asociado a la entidad CategoriaAtributo.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -41,31 +50,28 @@ import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
  */
 @Repository
 public interface CategoriaAtributoMapper {
-    static final String CAMPOS = " id_categoria, id_atributo ";
 
     /**
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.
      *
      * @return CategoriaAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoMap", value = {
             @Result(property = "idCategoria",   column = "id_categoria"),
             @Result(property = "idAtributo",   column = "id_atributo")
     })
-    @Select("SELECT " + CAMPOS + " FROM categoria_atributo WHERE     id_categoria = #{idCategoria} ,         id_atributo = #{idAtributo}     ")
+    @Select("SELECT " + CAMPOS_CAT_ATRIBUTO + " FROM categoria_atributo WHERE     id_categoria = #{idCategoria} ,         id_atributo = #{idAtributo}     ")
     CategoriaAtributo getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'CategoriaAtributo'.
      *
      * @return Lista de obetos de tipo CategoriaAtributo
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CategoriaAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM categoria_atributo ")
+    @Select("SELECT " + CAMPOS_CAT_ATRIBUTO + " FROM categoria_atributo ")
     List<CategoriaAtributo> getAll() throws SQLException;
 
     /**
@@ -81,7 +87,7 @@ public interface CategoriaAtributoMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(CategoriaAtributo categoriaAtributo) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'CategoriaAtributo' con base en la infrmación dada por el objeto de tipo 'CategoriaAtributo'.
      *
      * @param categoriaAtributo a ser actualizado.
@@ -108,8 +114,7 @@ public interface CategoriaAtributoMapper {
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.
      *
      * @return CategoriaAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoNombreMap", value = {
             @Result(property = "idCategoria",   column = "id_categoria"),
@@ -124,8 +129,7 @@ public interface CategoriaAtributoMapper {
      * Obtiene una lista de tipo 'Atributo' dado su id.
      *
      * @return Atributo que no tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoAtributoMap", value = {
             @Result(property = "id",   column = "id"),

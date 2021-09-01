@@ -32,8 +32,10 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ANUNCIO_MEDIA;
+
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen
+ * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen.
  *
  * @author Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -43,10 +45,9 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
  */
 @Repository
 public interface AnuncioMediaMapper {
-    static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 
     /**
-     * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado.
      *
      * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
      * @return Listado de clases de tipo 'AnuncioMedia' con la informacion de las imagenes
@@ -63,9 +64,9 @@ public interface AnuncioMediaMapper {
     List<AnuncioMedia> getImagenes(int id);
 
     /**
-     * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado
+     * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado.
      *
-     * @param id Identificador de la imagen por medio del cual se realizara la busqueda de sus imagen
+     * @param uuid Identificador de la imagen por medio del cual se realizara la busqueda de sus imagen
      * @return Clase de tipo 'AnuncioImagen' con la informacion de las imagen solicitada
      * @throws SQLException Excepcion lanzada en caso de error de base de datos
      */
@@ -95,7 +96,8 @@ public interface AnuncioMediaMapper {
     int eliminarImagen(String uuid) throws SQLException;
 
     /**
-     * Metodo que permite actualizar si una imagen es principal o no,con base al uuid de la imagen
+     * Metodo que permite actualizar si una imagen es principal o no,con base al uuid de la imagen.
+     *
      * @param uuid Identificador del anuncio a actualizar
      * @param principal Indica si la imagen sera o no principal
      * @return numero de registros actualizados
