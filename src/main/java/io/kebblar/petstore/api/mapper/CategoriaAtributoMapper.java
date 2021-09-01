@@ -54,7 +54,7 @@ public interface CategoriaAtributoMapper {
     /**
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.
      *
-     * @return CategoriaAtributo que tiene asignado el id pasado como parametro
+     * @return CategoriaAtributo que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoMap", value = {
@@ -67,7 +67,7 @@ public interface CategoriaAtributoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'CategoriaAtributo'.
      *
-     * @return Lista de obetos de tipo CategoriaAtributo
+     * @return Lista de objetos de tipo CategoriaAtributo
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CategoriaAtributoMap")
@@ -88,7 +88,7 @@ public interface CategoriaAtributoMapper {
     int insert(CategoriaAtributo categoriaAtributo) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'CategoriaAtributo' con base en la infrmación dada por el objeto de tipo 'CategoriaAtributo'.
+     * Actualiza un objeto de tipo 'CategoriaAtributo' con base en la información dada por el objeto de tipo 'CategoriaAtributo'.
      *
      * @param categoriaAtributo a ser actualizado.
      * @return el numero de registros actualizados.
@@ -113,7 +113,7 @@ public interface CategoriaAtributoMapper {
     /**
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.
      *
-     * @return CategoriaAtributo que tiene asignado el id pasado como parametro
+     * @return CategoriaAtributo que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoNombreMap", value = {
@@ -128,7 +128,7 @@ public interface CategoriaAtributoMapper {
     /**
      * Obtiene una lista de tipo 'Atributo' dado su id.
      *
-     * @return Atributo que no tiene asignado el id pasado como parametro
+     * @return Atributo que no tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaAtributoAtributoMap", value = {

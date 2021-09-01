@@ -52,7 +52,7 @@ public interface EstadoMapper {
     /**
      * Obtiene un objeto de tipo 'Estado' dado su id.
      *
-     * @return Estado que tiene asignado el id pasado como parametro
+     * @return Estado que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="EstadoMap", value = {
@@ -66,7 +66,7 @@ public interface EstadoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'Estado'.
      *
-     * @return Lista de obetos de tipo Estado
+     * @return Lista de objetos de tipo Estado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstadoMap")
@@ -85,7 +85,7 @@ public interface EstadoMapper {
     int insert(Estado estado) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'Estado' con base en la infrmación dada por el objeto de tipo 'Estado'.
+     * Actualiza un objeto de tipo 'Estado' con base en la información dada por el objeto de tipo 'Estado'.
      *
      * @param estado a ser actualizado.
      * @return el numero de registros actualizados.
@@ -116,7 +116,7 @@ public interface EstadoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'estado' haciedo INNER JOIN con la tabla Pais para la obtencion del nombre del Pais.
      *
-     * @return Lista de obetos de tipo estado
+     * @return Lista de objetos de tipo estado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="EstadoNombreMap", value = {

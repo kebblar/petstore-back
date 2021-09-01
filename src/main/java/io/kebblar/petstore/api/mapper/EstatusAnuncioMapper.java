@@ -52,7 +52,7 @@ public interface EstatusAnuncioMapper {
     /**
      * Obtiene un objeto de tipo 'EstatusAnuncio' dado su id.
      *
-     * @return EstatusAnuncio que tiene asignado el id pasado como parametro
+     * @return EstatusAnuncio que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="EstatusAnuncioMap", value = {
@@ -65,7 +65,7 @@ public interface EstatusAnuncioMapper {
     /**
      * Obtiene una lista de objetos de tipo 'EstatusAnuncio'.
      *
-     * @return Lista de obetos de tipo EstatusAnuncio
+     * @return Lista de objetos de tipo EstatusAnuncio
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
@@ -86,10 +86,10 @@ public interface EstatusAnuncioMapper {
     int insert(EstatusAnuncio estatusAnuncio) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'EstatusAnuncio' con base en la infrmación dada por el objeto de tipo 'EstatusAnuncio'.
+     * Actualiza un objeto de tipo 'EstatusAnuncio' con base en la información dada por el objeto de tipo 'EstatusAnuncio'.
      *
      * @param estatusAnuncio a ser actualizado.
-     * @return el numero de registros actualizados.
+     * @return el número de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(

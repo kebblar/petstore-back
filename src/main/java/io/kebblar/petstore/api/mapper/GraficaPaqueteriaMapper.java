@@ -47,9 +47,8 @@ public interface GraficaPaqueteriaMapper {
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
-     * @return Una lista de las paqueterias mas usuadas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @return Una lista de las paqueterías más usadas
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaPaqMap", value = { @Result(property = "etiqueta", column = "paqueteria"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
@@ -59,6 +58,14 @@ public interface GraficaPaqueteriaMapper {
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")
     List<Grafica> getPaqueteria() throws SQLException;
 
+    /**
+     * Devuelve la información de compras de un las paqueterías basado en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaPaqMap")
     @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "

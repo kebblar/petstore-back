@@ -57,7 +57,7 @@ public class CustomControllerAdvice {
     }
 
     /**
-     * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
+     * Método que maneja las excepciones de {@link MethodArgumentNotValidException}.
      *
      * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
@@ -74,7 +74,7 @@ public class CustomControllerAdvice {
     /**
      * Método que maneja las exepciones de {@link ControllerException}.
      *
-     * @param geEx la excepcion que manejará (de tipo ControllerException).
+     * @param geEx la excepción que manejará (de tipo ControllerException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
      */
     @ResponseBody
@@ -101,7 +101,7 @@ public class CustomControllerAdvice {
     /**
      * Mapa de retorno para errores de tipo MethodArgumentNotValidException.
      *
-     * @param geEx la excepcion a mapear (de tipo MethodArgumentNotValidException).
+     * @param geEx la excepción a mapear (de tipo MethodArgumentNotValidException).
      * @return mapa de valores para una respuesta de validación de campos.
      */
     private Map<String, Object> buildValidationErrorResponse(MethodArgumentNotValidException geEx) {

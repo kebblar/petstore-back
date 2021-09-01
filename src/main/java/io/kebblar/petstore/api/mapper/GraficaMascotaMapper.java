@@ -46,9 +46,8 @@ public interface GraficaMascotaMapper {
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
-     * @return Una lista de las mascotas mas vendidas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @return Una lista de las mascotas más vendidas
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaMap", value = { @Result(property = "etiqueta", column = "mascota"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
@@ -60,6 +59,14 @@ public interface GraficaMascotaMapper {
             + "group by cat.categoria order by cantidad desc limit 5 ")
     List<Grafica> getAll() throws SQLException;
 
+    /**
+     * Devuelve la información de frecuencia de compra de las mascotas basándose en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaMap")
     @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "

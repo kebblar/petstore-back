@@ -18,8 +18,7 @@ public interface GraficaTipoPagoMapper {
      * Obtiene una lista de tipo 'GraficaMontoTotalTipoPago'.
      *
      * @return Una lista del monto total por tipo de pago
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
 
     @Results(id = "GraficaTipoPago", value = { @Result(property = "tipo_pago", column = "tipo_pago"),
@@ -36,6 +35,14 @@ public interface GraficaTipoPagoMapper {
             " group by tipo, mes, anio ")
     List<GraficaTipoPago> getAll() throws SQLException;
 
+    /**
+     * Devuelve la información de compras por el tipo de pago basado en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaTipoPago")
     @Select(" select count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
             " MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio from  petstore.orden_compra as orden " +

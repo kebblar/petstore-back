@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,18 +19,26 @@
  * Historia:    20210511_1444 Implementación de interface
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.MetodoPago;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAGO;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad MetodoPago
+ * Interfaz 'Mapper' MyBatis asociado a la entidad MetodoPago.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -42,14 +49,12 @@ import io.kebblar.petstore.api.model.domain.MetodoPago;
 
 @Repository
 public interface MetodoPagoMapper {
-    static final String CAMPOS = " id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MetodoPago' dado su id.
      *
-     * @return MetodoPago que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return MetodoPago que tiene asignado el id pasado como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="MetodoPagoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -59,18 +64,17 @@ public interface MetodoPagoMapper {
             @Result(property = "expiracion",   column = "expiracion")    ,
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM metodo_pago WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_PAGO + " FROM metodo_pago WHERE     id = #{id}     ")
     MetodoPago getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'MetodoPago'.
      *
-     * @return Lista de obetos de tipo MetodoPago
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Lista de objetos de tipo MetodoPago
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MetodoPagoMap")
-    @Select("SELECT " + CAMPOS + " FROM metodo_pago ")
+    @Select("SELECT " + CAMPOS_PAGO + " FROM metodo_pago ")
     List<MetodoPago> getAll() throws SQLException;
 
     /**
@@ -86,8 +90,8 @@ public interface MetodoPagoMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(MetodoPago metodoPago) throws SQLException;
 
-/**
-     * Actualiza un objeto de tipo 'MetodoPago' con base en la infrmación dada por el objeto de tipo 'MetodoPago'.
+    /**
+     * Actualiza un objeto de tipo 'MetodoPago' con base en la información dada por el objeto de tipo 'MetodoPago'.
      *
      * @param metodoPago a ser actualizado.
      * @return el numero de registros actualizados.
@@ -110,12 +114,12 @@ public interface MetodoPagoMapper {
     int delete(int id) throws SQLException;
 
     /**
-     * Regresa la lista de metodos de pago registrados con el usuario 'id'.
+     * Regresa la lista de métodos de pago registrados con el usuario 'id'.
      * @param id id del usuario buscado
-     * @return Lista de metodos de pago asociados al usuario
+     * @return Lista de métodos de pago asociados al usuario
      * @throws SQLException si ocurre un problema con el sistema o la consulta
      */
     @ResultMap("MetodoPagoMap")
-    @Select("SELECT "+ CAMPOS +" from metodo_pago WHERE id_usuario=#{id} AND activo=true")
+    @Select("SELECT "+ CAMPOS_PAGO +" from metodo_pago WHERE id_usuario=#{id} AND activo=true")
     List<MetodoPago> getByIdUser(int id) throws SQLException;
 }

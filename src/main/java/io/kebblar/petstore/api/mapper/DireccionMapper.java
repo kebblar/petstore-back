@@ -72,7 +72,7 @@ public interface DireccionMapper {
     /**
      * Obtiene una lista de objetos {@link Direccion}.
      *
-     * @return Lista de obetos de tipo usuario
+     * @return Lista de objetos de tipo usuario
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("DireccionMap")

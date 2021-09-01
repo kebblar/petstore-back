@@ -54,7 +54,7 @@ public interface AtributoMapper {
     /**
      * Obtiene un objeto de tipo 'Atributo' dado su id.
      *
-     * @return Atributo que tiene asignado el id pasado como parametro
+     * @return Atributo que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
     @Results(id="AtributoMap", value = {
@@ -68,7 +68,7 @@ public interface AtributoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'Atributo'.
      *
-     * @return Lista de obetos de tipo Atributo
+     * @return Lista de objetos de tipo Atributo
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("AtributoMap")
@@ -89,10 +89,10 @@ public interface AtributoMapper {
     int insert(Atributo atributo) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'Atributo' con base en la infrmación dada por el objeto de tipo 'Atributo'.
+     * Actualiza un objeto de tipo 'Atributo' con base en la información dada por el objeto de tipo 'Atributo'.
      *
      * @param atributo a ser actualizado.
-     * @return el numero de registros actualizados.
+     * @return el número de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
@@ -125,7 +125,7 @@ public interface AtributoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
-     * @return Lista de obetos de tipo AtributoDetallesTO
+     * @return Lista de objetos de tipo AtributoDetallesTO
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */

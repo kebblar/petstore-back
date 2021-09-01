@@ -54,7 +54,7 @@ public interface CarritoMapper {
     /**
      * Obtiene un objeto de tipo 'Carrito' dado su id.
      *
-     * @return Carrito que tiene asignado el id pasado como parametro
+     * @return Carrito que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CarritoMap", value = {
@@ -70,7 +70,7 @@ public interface CarritoMapper {
      * Obtiene una lista de objetos de tipo 'Carrito'.
      *
      * @param id Id del usuario que posee determinado carrito.
-     * @return Lista de obetos de tipo Carrito
+     * @return Lista de objetos de tipo Carrito
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
@@ -81,7 +81,7 @@ public interface CarritoMapper {
      * Obtiene una lista de objetos de tipo 'Carrito' asignados a la orden btc de un usuario.
      *
      * @param idUser Id del usuario que posee determinado carrito.
-     * @return Lista de obetos de tipo Carrito
+     * @return Lista de objetos de tipo Carrito
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CarritoMap")
@@ -100,10 +100,10 @@ public interface CarritoMapper {
     int insert(Carrito carrito) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'Carrito' con base en la infrmación dada por el objeto de tipo 'Carrito'.
+     * Actualiza un objeto de tipo 'Carrito' con base en la información dada por el objeto de tipo 'Carrito'.
      *
      * @param carrito a ser actualizado.
-     * @return el numero de registros actualizados.
+     * @return el número de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE carrito SET id_usuario = #{idUsuario}, id_anuncio = #{idAnuncio}, cve_orden_compra = #{cveOrdenCompra} WHERE id = #{id} ")
@@ -120,10 +120,10 @@ public interface CarritoMapper {
     int delete(int id) throws SQLException;
 
     /**
-     * Recupera los datos necesarios de los articulos de un carrito para generar el pdf de la compra.
+     * Recupera los datos necesarios de los artículos de un carrito para generar el pdf de la compra.
      * @param cve cadena que representa el id de la compra.
      * @return Lista de datos sobre los elementos comprados.
-     * @throws SQLException Si ocurre algun problema en la consulta.
+     * @throws SQLException Si ocurre algún problema en la consulta.
      */
     @Results(id="CarritoDatos", value = {
             @Result(property = "titulo",   column = "titulo"),

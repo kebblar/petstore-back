@@ -53,7 +53,7 @@ public interface CategoriaMapper {
     /**
      * Obtiene un objeto de tipo 'Categoria' dado su id.
      *
-     * @return Categoria que tiene asignado el id pasado como parametro
+     * @return Categoria que tiene asignado el id pasado como parámetro
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="CategoriaMap", value = {
@@ -88,10 +88,10 @@ public interface CategoriaMapper {
     int insert(Categoria categoria) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'Categoria' con base en la infrmación dada por el objeto de tipo 'Categoria'.
+     * Actualiza un objeto de tipo 'Categoria' con base en la información dada por el objeto de tipo 'Categoria'.
      *
      * @param categoria a ser actualizado.
-     * @return el numero de registros actualizados.
+     * @return el número de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
@@ -124,7 +124,7 @@ public interface CategoriaMapper {
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
-     * @return Lista de obetos de tipo CategoriaDetallesTO
+     * @return Lista de objetos de tipo CategoriaDetallesTO
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("select c.id as idCategoria, c.categoria as categoriaNombre,"

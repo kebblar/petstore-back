@@ -35,16 +35,24 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 
 import java.sql.SQLException;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_REG;
+
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad Registro
+ * Interface 'Mapper' MyBatis asociado a la entidad Registro.
  *
  * @author Gustavo A. Arellano
  * @version 0.1.1-SNAPSHOT
  */
 public interface RegistroMapper {
-    static final String CAMPOS = " id, nick, correo, clave_hash, telefono, fecha_nacimiento, random_string, instante_registro ";
 
+    /**
+     * Recupera un elemento del preregistro utilizando el correo electrónico que ingresó.
+     *
+     * @param correo mail de registro
+     * @return Objeto con la información de los datos del preregistro
+     * @throws SQLException En caso de que haya un problema con la consulta
+     */
     @Results(id="RegistroMap", value = {
             @Result(property = "id",  column = "id"),
             @Result(property = "nick",      column = "nick"),
@@ -55,13 +63,28 @@ public interface RegistroMapper {
             @Result(property = "randomString",     column = "random_string"),
             @Result(property = "instanteRegistro", column = "instante_registro")
           })
-    @Select("SELECT " + CAMPOS + " FROM preregistro WHERE correo = #{correo} ")
+    @Select("SELECT " + CAMPOS_REG + " FROM preregistro WHERE correo = #{correo} ")
     Preregistro getByMail(String correo) throws SQLException;
 
+    /**
+     * Recupera el registro por medio del código random generado.
+     *
+     * @param randomString código random generado
+     * @return Objeto con la información de los datos del preregistro
+     * @throws SQLException En caso de que haya un problema con la consulta
+     */
     @ResultMap("RegistroMap")
-    @Select("SELECT " + CAMPOS + " FROM preregistro WHERE random_string = #{randomString} ")
+    @Select("SELECT " + CAMPOS_REG + " FROM preregistro WHERE random_string = #{randomString} ")
     Preregistro getByRandomString(String randomString) throws SQLException;
 
+    /**
+     * Asocia un rol a determinado usuario.
+     *
+     * @param idUsuario id del usuario al que se le asociará el rol
+     * @param idRol id del rol a asociar
+     * @return Un entero que indica que la operación fue exitosa
+     * @throws SQLException En caso de que haya un problema con la consulta
+     */
     @Insert("INSERT into usuario_rol(id_usuario, id_rol) values(#{idUsuario}, #{idRol})")
     Integer asociateRol(int idUsuario, int idRol) throws SQLException;
 
@@ -85,13 +108,34 @@ public interface RegistroMapper {
     @Update("UPDATE usuario_detalle SET nombre=#{nombre}, telefono=#{telefono}, calle_y_numero=#{calleNumero}, fecha_nacimiento=#{fechaNacimiento}, id_estado=#{idEstado}, id_municipio=#{idMunicipio} WHERE id_usuario=#{idUsuario}")
     Integer updateUsuarioDetalles(UsuarioDetalle usuarioDetalle) throws SQLException;
 
+    /**
+     * Genera un usuario en la base de datos con los datos ya completos del preregistro.
+     *
+     * @param preregistro Datos de inscripción al sistema de un usuario
+     * @return Entero que indica que la consulta tuvo éxito
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     */
     @Insert("INSERT INTO preregistro(nick, clave_hash, correo, telefono, fecha_nacimiento, random_string, instante_registro) VALUES(#{nick}, #{claveHash}, #{correo}, #{telefono}, #{fechaNacimiento}, #{randomString}, #{instanteRegistro} ) ON DUPLICATE KEY UPDATE nick=#{nick}, telefono=#{telefono}, fecha_nacimiento=#{fechaNacimiento}, clave_hash=#{claveHash}, random_string=#{randomString}, instante_registro=#{instanteRegistro}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     Integer insertRegistro(Preregistro preregistro) throws SQLException;
 
+    /**
+     * Modifica un preregistro ya existente.
+     *
+     * @param registro Datos del registro que se desea modificar
+     * @return Entro que indica que se tuvo éxito en la modificación
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos
+     */
     @Update("UPDATE preregistro SET nick = #{nick}, telefono = #{telefono}, fecha_nacimiento = #{fechaNacimiento}, clave_hash = #{claveHash}, random_string = #{randomString}, instante_registro = #{instanteRegistro} WHERE correo = #{correo} ")
     Integer update(Preregistro registro) throws SQLException;
 
+    /**
+     * Borra un preregistro existente por medio de su código.
+     *
+     * @param randomString Clave random asociada a un registro
+     * @return Entro que indica que se tuvo éxito en la modificación
+     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos
+     */
     @Select("DELETE FROM preregistro WHERE random_string = #{randomString} ")
     Integer deleteByRandomString(String randomString) throws SQLException;
 

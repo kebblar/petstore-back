@@ -40,17 +40,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 
     /**
-     * logger.
+     * Atributos logger y jwt.
      */
     private Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
-
     private String jwtToken;
 
     /**
      * Costructor que recibe el jwtoken para validar los tokens que vienen en el header.
      * Esto facilita su posterior procesamiento
      *
-     * @param jwtToken
+     * @param jwtToken jwt token a asignar
      */
     public CustomInterceptor(String jwtToken) {
         this.jwtToken = jwtToken;
@@ -83,6 +82,12 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
+    /**
+     * Método que se encarga de construir la respuesta mostrando el código http y el mensaje.
+     *
+     * @param response código de error Http
+     * @param message corresponde al texto que explica la situación
+     */
     private void construye(HttpServletResponse response, String message) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = new HashMap<>();

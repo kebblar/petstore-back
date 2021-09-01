@@ -48,9 +48,8 @@ public interface GraficaTotalFechasCategoriaMapper {
     /**
      * Obtiene una lista de tipo 'GraficaTotalFechasCategoria'.
      *
-     * @return Una lista de las paqueterias mas usuadas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @return Una lista de las categorías más buscadas.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaTotalFechasCategoria", value = {
             @Result(property = "categoria", column = "categoria"),
@@ -63,6 +62,14 @@ public interface GraficaTotalFechasCategoriaMapper {
             +GROUP_CATEGORIA_M_A)
     List<GraficaTotalFechasCategoria> getTotalCategoria() throws SQLException;
 
+    /**
+     * Devuelve la información de compras por categoría basado en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaTotalFechasCategoria")
     @Select("SELECT "+CAMPOS_GRAFICA1+ " from petstore.orden_compra as orden "
             +IJ_CARRITO_ORDEN+IJ_ANUNCIO_CARRITO+IJ_CATEGORIA_ANUNCIO

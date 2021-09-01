@@ -49,9 +49,9 @@ public interface AnuncioMediaMapper {
     /**
      * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado.
      *
-     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
-     * @return Listado de clases de tipo 'AnuncioMedia' con la informacion de las imagenes
-     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     * @param id Identificador del anuncio por medio del cual se realizara la búsqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'AnuncioMedia' con la información de las imágenes
+     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @Results(id="AnuncioImagenMap", value = {
             @Result(property = "id",   column = "id"),
@@ -66,9 +66,9 @@ public interface AnuncioMediaMapper {
     /**
      * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado.
      *
-     * @param uuid Identificador de la imagen por medio del cual se realizara la busqueda de sus imagen
-     * @return Clase de tipo 'AnuncioImagen' con la informacion de las imagen solicitada
-     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     * @param uuid Identificador de la imagen por medio del cual se realizara la búsqueda de sus imagen
+     * @return Clase de tipo 'AnuncioImagen' con la información de las imágen solicitada
+     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioImagenMap")
     @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE uuid = #{uuid} ")
@@ -96,12 +96,12 @@ public interface AnuncioMediaMapper {
     int eliminarImagen(String uuid) throws SQLException;
 
     /**
-     * Metodo que permite actualizar si una imagen es principal o no,con base al uuid de la imagen.
+     * Metodo que permite actualizar si una imagen es principal o no, con base al uuid de la imagen.
      *
      * @param uuid Identificador del anuncio a actualizar
      * @param principal Indica si la imagen sera o no principal
      * @return numero de registros actualizados
-     * @throws SQLException Excepcion lanzada en caso de error
+     * @throws SQLException Excepción lanzada en caso de error
      */
     @Update("UPDATE anuncio_media SET principal = #{principal} WHERE uuid = #{uuid} ")
     int actualizaPrincipal(String uuid, Boolean principal) throws SQLException;

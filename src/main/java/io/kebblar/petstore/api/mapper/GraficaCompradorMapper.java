@@ -47,7 +47,7 @@ public interface GraficaCompradorMapper {
     /**
      * Obtiene una lista de tipo 'GraficaComprador'.
      *
-     * @return Una lista de los compradores mas asiduos
+     * @return Una lista de los compradores más asiduos
      * @throws SQLException Se dispara en caso de que ocurra un error en esta
      *                      operación desde la base de datos.
      */
@@ -60,6 +60,14 @@ public interface GraficaCompradorMapper {
             + "group by usu.nombre order by cantidad desc limit 5")
     List<Grafica> getComprador() throws SQLException;
 
+    /**
+     * Devuelve la información de compras de un usuario basado en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaComMap")
     @Select("SELECT usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha from orden_compra oc "
             + "inner join usuario_detalle usu on (usu.id_usuario = oc.id_usuario) "

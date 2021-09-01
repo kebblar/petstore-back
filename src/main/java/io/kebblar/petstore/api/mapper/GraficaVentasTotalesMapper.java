@@ -44,9 +44,8 @@ public interface GraficaVentasTotalesMapper {
     /**
      * Obtiene una lista de tipo 'GraficaVentasTotales'.
      *
-     * @return Una lista de las paqueterias mas usuadas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @return Una lista de las ventas totales
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaVentasTotales", value = {
         @Result(property = "total_venta", column = "total_venta"),
@@ -57,6 +56,14 @@ public interface GraficaVentasTotalesMapper {
         + IJ_CARRITO_ORDEN + IJ_ANUNCIO_CARRITO + GROUP_MES_ANIO)
     List<GraficaVentasTotales> getTotalVentas() throws SQLException;
 
+    /**
+     * Devuelve la información de ventas totales basado en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaVentasTotales")
     @Select("SELECT " + CAMPOS_GRAFICA2 + " from petstore.orden_compra as orden "
         + IJ_CARRITO_ORDEN + IJ_ANUNCIO_CARRITO

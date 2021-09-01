@@ -1,3 +1,24 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion
+ *              de "AUTOR".
+ *
+ *              ------------------------------------------------
+ *
+ * Artefacto:   CriptoMapper .java
+ * Proyecto:    petstore
+ * Tipo:        interface
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Miércoles 01 de septiembre de 2021 (13_15)
+ *
+ *              ------------------------------------------------
+ *
+ * Historia:    20210608_1315 Implementación de interface
+ *
+ */
 package io.kebblar.petstore.api.mapper;
 
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
@@ -48,7 +69,7 @@ public interface CriptoMapper {
     int insertTransaccion(TransaccionBtc transaccionBtc) throws SQLException;
 
     /**
-     * Actualiza una transaccion de bitcoin con información nueva.
+     * Actualiza una transacción de bitcoin con información nueva.
      * @param transaccionBtc objeto que simboliza una petición.
      * @return Entero si no hay ningún problema
      * @throws SQLException En caso de un problema con la consulta.
@@ -59,7 +80,7 @@ public interface CriptoMapper {
     /**
      * Regresa una lista de todos las transacciones pendientes de validación.
      * @return Lista de transacciones que aún no aparecen en la blockchain.
-     * @throws SQLException En caso que haya problemas recuperando la información.
+     * @throws SQLException En caso de que haya problemas recuperando la información.
      */
     @Results(id="TransaccionMap", value = {
             @Result(property = "id",          column = "id"),
@@ -80,7 +101,7 @@ public interface CriptoMapper {
      * Eliminba una transacción porporcionando su id.
      * @param id Id de la transacción a eliminar.
      * @return Entero si se realizo la acción.
-     * @throws SQLException En caso que haya problemas recuperando la informacion.
+     * @throws SQLException En caso de que haya problemas recuperando la información.
      */
     @Delete("DELETE from transaccion_btc WHERE id=#{id}")
     int delete(int id) throws SQLException;
