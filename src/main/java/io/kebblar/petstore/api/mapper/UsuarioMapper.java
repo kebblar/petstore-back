@@ -32,6 +32,8 @@ import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_USER;
+
 /**
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad 'Usuario'.
@@ -43,15 +45,12 @@ import io.kebblar.petstore.api.model.domain.Usuario;
  */
 @Repository
 public interface UsuarioMapper {
-    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, "
-            + "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
 
     /**
      * Obtiene una lista de objetos de tipo 'usuario'.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="UsuarioMap", value = {
         @Result(property = "id",     column = "id"),
@@ -66,32 +65,32 @@ public interface UsuarioMapper {
         @Result(property = "regeneraClaveToken",        column = "regenera_clave_token"),
         @Result(property = "regeneraClaveInstante",     column = "regenera_clave_instante")
         })
-    @Select("SELECT " + CAMPOS + " FROM usuario WHERE id = #{id} ")
+    @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE id = #{id} ")
     Usuario getById(int id) throws SQLException;
 
     @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario ")
+    @Select("SELECT " + CAMPOS_USER + " FROM usuario ")
     List<Usuario> getAll() throws SQLException;
 
     @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario order by correo asc")
+    @Select("SELECT " + CAMPOS_USER + " FROM usuario order by correo asc")
     List<Usuario> getAllAscendingByCorreo() throws SQLException;
 
     /**
      * Obtiene un objeto de tipo 'usuario' realizando la búsqueda con base en el 'mail' del Usuario.
      *
-     * @param String mail del usuario.
+     * @param correo mail del usuario.
      * @return el usuario encontrado con el criterio de búsqueda.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario WHERE correo = #{correo} ")
+    @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE correo = #{correo} ")
     Usuario getByCorreo(String correo) throws SQLException;
 
     /**
      * Inserta un objeto de tipo 'usuario' con base en la información dada por el objeto de tipo 'usuario'.
      *
-     * @param Usuario a ser insertado.
+     * @param usr a ser insertado.
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -105,7 +104,7 @@ public interface UsuarioMapper {
     /**
      * Actualiza un objeto de tipo 'usuario' con base en la infrmación dada por el objeto de tipo 'usuario'.
      *
-     * @param Usuario a ser actualizado.
+     * @param usr a ser actualizado.
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -130,7 +129,7 @@ public interface UsuarioMapper {
     int confirmaRegeneraClave(String token, String clave);
 
     @ResultMap("UsuarioMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario WHERE regenera_clave_token=#{token} ")
+    @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE regenera_clave_token=#{token} ")
     Usuario getByToken(String token);
 
 }

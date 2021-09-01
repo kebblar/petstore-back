@@ -23,13 +23,16 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
+
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 
+import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_V_A;
+
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad ValorAtributo
+ * Interfaz 'Mapper' MyBatis asociado a la entidad ValorAtributo.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -39,14 +42,12 @@ import io.kebblar.petstore.api.model.domain.ValorAtributo;
  */
 @Repository
 public interface ValorAtributoMapper {
-    static final String CAMPOS = " id, id_atributo, rango, activo ";
 
     /**
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.
      *
      * @return ValorAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="ValorAtributoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -54,18 +55,17 @@ public interface ValorAtributoMapper {
             @Result(property = "rango",   column = "rango"),
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_V_A + " FROM valor_atributo WHERE     id = #{id}     ")
     ValorAtributo getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'ValorAtributo'.
      *
      * @return Lista de obetos de tipo ValorAtributo
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("ValorAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo ")
+    @Select("SELECT " + CAMPOS_V_A + " FROM valor_atributo ")
     List<ValorAtributo> getAll() throws SQLException;
 
     /**
@@ -81,7 +81,7 @@ public interface ValorAtributoMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(ValorAtributo valorAtributo) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'ValorAtributo' con base en la infrmación dada por el objeto de tipo 'ValorAtributo'.
      *
      * @param valorAtributo a ser actualizado.
@@ -108,10 +108,9 @@ public interface ValorAtributoMapper {
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.
      *
      * @return ValorAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("ValorAtributoMap")
-    @Select("SELECT " + CAMPOS + " FROM valor_atributo WHERE  id_atributo = #{id}     ")
+    @Select("SELECT " + CAMPOS_V_A + " FROM valor_atributo WHERE  id_atributo = #{id}     ")
     List<ValorAtributo> getValorAtributoByIdAtributo(int id) throws SQLException;
 }
