@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación
+ * <p>Descripción:</p>
+ * Excepción que modela la respuesta a una petición de autenticación
  * cuyas credenciales proporcionadas fueron incorrectas.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
+ * Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
@@ -32,18 +33,29 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class BadCredentialsException extends BusinessException {
-    private static final long serialVersionUID = -7083159020205284484L;
-    private final static String mensaje = "Las credenciales proporcionadas son inválidas. Usted tiene %d intentos mas antes de que su usuario quede bloqueado.";
 
+    private static final long serialVersionUID = -7083159020205284484L;
+    private static final String MENSAJE = "Las credenciales proporcionadas son inválidas. Usted tiene %d intentos mas antes de que su usuario quede bloqueado.";
+
+    /**
+     * Excepción que al ser lanzada, adicionalmente informa sobre el número de intentos
+     * de inicio de sesión que aún tiene un usuario para ingresar sus claves de forma correcta
+     * antes de quedar bloqueado por el sistema.
+     * @param counter Número de intento actual de inicio de sesión
+     * @param maxAllowed Máximo número de intentos permitidos
+     */
     public BadCredentialsException(int counter, int maxAllowed) {
         super(
             "Las credenciales proporcionadas son inválidas",
-            String.format(mensaje, maxAllowed-counter),
+            String.format(MENSAJE, maxAllowed-counter),
             1001,
             "CVE_1001",
             HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * Informa solamente que las credenciales proporcionadas son inválidas.
+     */
     public BadCredentialsException() {
         super(
             "Las credenciales proporcionadas son inválidas",

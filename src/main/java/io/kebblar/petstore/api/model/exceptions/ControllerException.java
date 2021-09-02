@@ -36,7 +36,17 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * <p>Descripción:</p>
+ * Clase que define los componentes de los que una excepción puede estar formada.
+ *
+ * @author  fhernanda
+ * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class ControllerException extends Exception {
+
     private static final long serialVersionUID = -5047974256813565913L;
     private static final Logger LOGGER = LoggerFactory.getLogger(MapperCallException.class);
 
@@ -47,6 +57,12 @@ public class ControllerException extends Exception {
     private String localExceptionKey;
     private HttpStatus httpStatus = HttpStatus.ACCEPTED;
 
+    /**
+     * Genera una excepción por default con clave 1000, dada otra excepción pasada como parámetro.
+     * Convierte la excepción recibida en una excepción ControllerException.
+     *
+     * @param rootException excepción recibida
+     */
     public ControllerException(Exception rootException) {
         this.rootException = rootException;
         this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -55,7 +71,16 @@ public class ControllerException extends Exception {
         this.shortMessage = rootException.getMessage();
         this.detailedMessage = rootException.getMessage();
     }
-    
+
+    /**
+     * Constructor por parámetros de la clase.
+     *
+     * @param shortMessage Breve descripción del problema
+     * @param detailedMessage Descripción detallada del problema
+     * @param localExceptionNumber Clave que se le da a la excepción
+     * @param localExceptionKey Código que incluye la clave de la excepción
+     * @param httpStatus Código HTTP a lanzar
+     */
     public ControllerException(
             String shortMessage,
             String detailedMessage,
@@ -67,8 +92,17 @@ public class ControllerException extends Exception {
         this.localExceptionNumber = localExceptionNumber;
         this.localExceptionKey = localExceptionKey;
         this.httpStatus = httpStatus;
-        LOGGER.error(this.toString());
+        String str = this.toString();
+        LOGGER.error(str);
     }
+
+    /**
+     * Se sirve del constructor por parámetros, salvo a que este método siempre devuelve HttpStatus=200
+     * @param shortMessage Breve descripción del problema
+     * @param detailedMessage Descripción detallada del problema
+     * @param localExceptionNumber Clave que se le da a la excepción
+     * @param localExceptionKey Código que incluye la clave de la excepción
+     */
     public ControllerException(
             String shortMessage,
             String detailedMessage,
@@ -76,32 +110,48 @@ public class ControllerException extends Exception {
             String localExceptionKey) {
         this(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey, HttpStatus.ACCEPTED);
     }
+
+    /*
+     * Getter y Setter.
+     */
     public String getShortMessage() {
         return shortMessage;
     }
+
     public String getDetailedMessage() {
         return detailedMessage;
     }
+
     public int getLocalExceptionNumber() {
         return localExceptionNumber;
     }
+
     public String getLocalExceptionKey() {
         return localExceptionKey;
     }
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
+
     public Exception getRootException() {
         return rootException;
     }
+
     public String getRootExceptionMessage() {
         return rootException.getMessage();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return "ControllerException [rootException=" + rootException + ", shortMessage=" + shortMessage
                 + ", detailedMessage=" + detailedMessage + ", localExceptionNumber=" + localExceptionNumber
                 + ", localExceptionKey=" + localExceptionKey + ", httpStatus=" + httpStatus + "]";
     }
+
     /**
      * Construye un mensaje genérico basado en un ID de rastreo para ocultar
      * el verdadero mensaje al usuario final y dejar huella para que lo busque
