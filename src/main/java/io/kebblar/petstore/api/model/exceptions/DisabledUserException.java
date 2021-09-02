@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación
+ * <p>Descripción:</p>
+ * Excepción que modela la respuesta a una petición de autenticación
  * cuyo usuario fue deshabilitado.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
+ * Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
  * constructores con la definición necesaria, que incluye en algunos casos el
  * código HTTP que será devuelto.
  *
@@ -34,6 +35,9 @@ package io.kebblar.petstore.api.model.exceptions;
 public class DisabledUserException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * Se lanza cuando un usuario se encuentra bloqueado o deshabilitado del sistema.
+     */
     public DisabledUserException() {
         super(
             "Error de ingreso",

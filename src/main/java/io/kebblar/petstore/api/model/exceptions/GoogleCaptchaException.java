@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de Google Captcha.
+ * <p>Descripción:</p>
+ * Excepción que modela la respuesta a una petición de Google Captcha.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  garellano
@@ -33,6 +34,10 @@ package io.kebblar.petstore.api.model.exceptions;
 public class GoogleCaptchaException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * Modela la respuesta de error de una petición de Google Captcha.
+     * @param e excepción recibida desde el servicio de captcha
+     */
     public GoogleCaptchaException(Exception e) {
         super(
             "Captcha Error",

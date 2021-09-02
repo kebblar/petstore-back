@@ -243,7 +243,7 @@ public enum HttpStatus {
      * {@code 413 Request Entity Too Large}.
      * @see <a href="https://tools.ietf.org/html/rfc2616#section-10.4.14">HTTP/1.1, section 10.4.14</a>
      * @deprecated in favor of {@link #PAYLOAD_TOO_LARGE} which will be
-     * returned from {@code HttpStatus.valueOf(413)}
+     *             returned from {@code HttpStatus.valueOf(413)}
      */
     @Deprecated
     REQUEST_ENTITY_TOO_LARGE(413, "Request Entity Too Large"),
@@ -386,26 +386,26 @@ public enum HttpStatus {
      */
     HTTP_VERSION_NOT_SUPPORTED(505, "HTTP Version not supported"),
     /**
-     * {@code 506 Variant Also Negotiates}
+     * {@code 506 Variant Also Negotiates}.
      * @see <a href="https://tools.ietf.org/html/rfc2295#section-8.1">Transparent Content Negotiation</a>
      */
     VARIANT_ALSO_NEGOTIATES(506, "Variant Also Negotiates"),
     /**
-     * {@code 507 Insufficient Storage}
+     * {@code 507 Insufficient Storage}.
      * @see <a href="https://tools.ietf.org/html/rfc4918#section-11.5">WebDAV</a>
      */
     INSUFFICIENT_STORAGE(507, "Insufficient Storage"),
     /**
-     * {@code 508 Loop Detected}
+     * {@code 508 Loop Detected}.
      * @see <a href="https://tools.ietf.org/html/rfc5842#section-7.2">WebDAV Binding Extensions</a>
      */
     LOOP_DETECTED(508, "Loop Detected"),
     /**
-     * {@code 509 Bandwidth Limit Exceeded}
+     * {@code 509 Bandwidth Limit Exceeded}.
      */
     BANDWIDTH_LIMIT_EXCEEDED(509, "Bandwidth Limit Exceeded"),
     /**
-     * {@code 510 Not Extended}
+     * {@code 510 Not Extended}.
      * @see <a href="https://tools.ietf.org/html/rfc2774#section-7">HTTP Extension Framework</a>
      */
     NOT_EXTENDED(510, "Not Extended"),

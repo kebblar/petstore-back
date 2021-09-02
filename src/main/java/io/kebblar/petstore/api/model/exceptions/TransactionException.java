@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
+ * <p>Descripción</p>
+ * Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  garellano
@@ -33,10 +34,18 @@ package io.kebblar.petstore.api.model.exceptions;
 public class TransactionException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * Por medio de la excepción original se genera la nueva excepción.
+     * @param e excepción lanzada en un inicio
+     */
     public TransactionException(Exception e) {
         super(e);
     }
-    
+
+    /**
+     * Cuando ocurre un problema con una transacción o se proporciona un token incorrecto.
+     * @param msg detalles del problema
+     */
     public TransactionException(String msg) {
         super(
             "Transacción fallida. Haciendo rollback del proceso.",

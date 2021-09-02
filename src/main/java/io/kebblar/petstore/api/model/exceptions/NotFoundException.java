@@ -19,7 +19,8 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación
+ * <p>Descripción</p>
+ * Excepción que modela la respuesta a una petición de autenticación
  * cuyo usuario fue deshabilitado.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene

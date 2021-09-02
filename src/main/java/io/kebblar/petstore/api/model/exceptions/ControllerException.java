@@ -48,14 +48,14 @@ import org.slf4j.LoggerFactory;
 public class ControllerException extends Exception {
 
     private static final long serialVersionUID = -5047974256813565913L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(MapperCallException.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerException.class);
 
-    private Exception rootException; 
-    private String shortMessage;
-    private String detailedMessage;
-    private int localExceptionNumber;
-    private String localExceptionKey;
-    private HttpStatus httpStatus = HttpStatus.ACCEPTED;
+    private final Exception rootException;
+    private final String shortMessage;
+    private final String detailedMessage;
+    private final int localExceptionNumber;
+    private final String localExceptionKey;
+    private final HttpStatus httpStatus;
 
     /**
      * Genera una excepción por default con clave 1000, dada otra excepción pasada como parámetro.
@@ -94,6 +94,7 @@ public class ControllerException extends Exception {
         this.httpStatus = httpStatus;
         String str = this.toString();
         LOGGER.error(str);
+        rootException = null;
     }
 
     /**
@@ -112,7 +113,7 @@ public class ControllerException extends Exception {
     }
 
     /*
-     * Getter y Setter.
+     * Getter.
      */
     public String getShortMessage() {
         return shortMessage;
@@ -164,7 +165,7 @@ public class ControllerException extends Exception {
      */
     public static String buildMessage(String msg, String desc) {
         String uid = UUID.randomUUID().toString();
-        LOGGER.error("UID: " + uid + ". Description: " + desc);
+        LOGGER.error("UID: {} Description: {}", uid, desc);
         return String.format(msg,  uid);
     }
 }

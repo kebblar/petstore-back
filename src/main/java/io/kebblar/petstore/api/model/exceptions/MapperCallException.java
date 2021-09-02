@@ -24,13 +24,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>
+ * <p>Descripción:</p>
  * Excepción que modela la respuesta a una petición de autenticación cuyas
  * credenciales proporcionadas fueron incorrectas.
  *
- * <p>
- * Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author garellano
@@ -39,9 +38,16 @@ import org.slf4j.LoggerFactory;
  * @since 1.0-SNAPSHOT
  */
 public class MapperCallException extends BusinessException {
+
     private static final long serialVersionUID = -7083159020205284484L;
     private static final Logger logger = LoggerFactory.getLogger(MapperCallException.class);
 
+    /**
+     * Brinda la oportunidad de especificar una breve descripción y un mensaje detallado a la
+     * problemática sucedida en un mapper.
+     * @param shortMessage Breve descripción del problema
+     * @param technicalDescription Descripción específica
+     */
     public MapperCallException(String shortMessage, String technicalDescription) {
         super(
             shortMessage,
@@ -51,9 +57,14 @@ public class MapperCallException extends BusinessException {
             HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Método auxiliar para dar formato
+     * @param technicalDescription descripción específica
+     * @return cadena con la descripción técnica construida
+     */
     private static String buildMessage(String technicalDescription) {
         String uid = UUID.randomUUID().toString();
-        logger.error("UID: " + uid + ". Desc: " + technicalDescription);
+        logger.error("UID: {}. Desc: {}", uid, technicalDescription);
         return "Codigo de error: " + uid;
     }
 

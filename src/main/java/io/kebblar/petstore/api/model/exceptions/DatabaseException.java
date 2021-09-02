@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
+ * <p>Descripción:</p>
+ * Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  garellano
@@ -33,6 +34,12 @@ package io.kebblar.petstore.api.model.exceptions;
 public class DatabaseException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * Genera una excepción DatabaseException con el mensaje de la excepción que desencadenó
+     * el lanzamiento de esta excepción.
+     *
+     * @param e Excepción que desencadena la excepción actual
+     */
     public DatabaseException(Exception e) {
         super(
             "Error en el proceso de datos hacia o desde la Base de datos",
@@ -41,7 +48,11 @@ public class DatabaseException extends BusinessException {
             "CVE_1005",
             HttpStatus.INTERNAL_SERVER_ERROR);        
     }
-    
+
+    /**
+     * Genera una excepción DatabaseException con un mensaje específico.
+     * @param msg Mensaje que informa sobre el problema
+     */
     public DatabaseException(String msg) {
         super(
             "Error en el proceso de datos hacia o desde la Base de datos",
