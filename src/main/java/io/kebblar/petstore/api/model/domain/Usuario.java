@@ -18,6 +18,8 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Objects;
+
 /**
  * Implementacion del POJO de la entidad de 'Usuario'.
  *
@@ -26,6 +28,10 @@ package io.kebblar.petstore.api.model.domain;
  * @since   1.0-SNAPSHOT
  */
 public class Usuario {
+
+    /*
+     * Atributos de la clase.
+     */
     private int id;
     private String correo;
     private String clave;
@@ -38,9 +44,15 @@ public class Usuario {
     private String regeneraClaveToken;
     private long regeneraClaveInstante;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public Usuario() {
     }
 
+    /**
+     * Constructor basado en correo y clave con su id.
+     */
     public Usuario(int id, String correo, String clave) {
         this.id = id;
         this.correo = correo;
@@ -56,6 +68,9 @@ public class Usuario {
         this.regeneraClaveToken = "NA";
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Usuario(
             int id,
             String correo,
@@ -81,6 +96,9 @@ public class Usuario {
         this.regeneraClaveInstante = regeneraClaveInstante;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -98,7 +116,7 @@ public class Usuario {
     }
 
     public String getClave() {
-        return this.clave;//(calculateSHA256(clave, correo));
+        return this.clave;
     }
 
     public void setClave(String clave) {
@@ -170,12 +188,15 @@ public class Usuario {
     }
 
     /**
-     * Método especial (y adicional) de soporte al proceso de pruebas de regresión
+     * Método especial (y adicional) de soporte al proceso de pruebas de regresión.
      */
     public long getHash() {
         return this.hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", correo=" + correo + ", clave=" + clave + ", creado=" + creado + ", activo="
@@ -185,6 +206,9 @@ public class Usuario {
                 + regeneraClaveInstante + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -203,47 +227,19 @@ public class Usuario {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (accesoNegadoContador != other.accesoNegadoContador)
-            return false;
-        if (activo != other.activo)
-            return false;
-        if (clave == null) {
-            if (other.clave != null)
-                return false;
-        } else if (!clave.equals(other.clave))
-            return false;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (creado != other.creado)
-            return false;
-        if (id != other.id)
-            return false;
-        if (instanteBloqueo != other.instanteBloqueo)
-            return false;
-        if (instanteUltimoAcceso != other.instanteUltimoAcceso)
-            return false;
-        if (instanteUltimoCambioClave != other.instanteUltimoCambioClave)
-            return false;
-        if (regeneraClaveInstante != other.regeneraClaveInstante)
-            return false;
-        if (regeneraClaveToken == null) {
-            if (other.regeneraClaveToken != null)
-                return false;
-        } else if (!regeneraClaveToken.equals(other.regeneraClaveToken))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return id == usuario.id && creado == usuario.creado && activo == usuario.activo &&
+                accesoNegadoContador == usuario.accesoNegadoContador && instanteBloqueo == usuario.instanteBloqueo &&
+                instanteUltimoAcceso == usuario.instanteUltimoAcceso &&
+                instanteUltimoCambioClave == usuario.instanteUltimoCambioClave &&
+                regeneraClaveInstante == usuario.regeneraClaveInstante && Objects.equals(correo, usuario.correo) &&
+                Objects.equals(clave, usuario.clave) && Objects.equals(regeneraClaveToken, usuario.regeneraClaveToken);
     }
-
 }

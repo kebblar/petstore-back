@@ -19,6 +19,7 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de 'UsuarioDetalle'.
@@ -28,6 +29,10 @@ import java.util.Date;
  * @since   1.0-SNAPSHOT
  */
 public class UsuarioDetalle {
+
+    /*
+     * Atributos de clase.
+     */
     private int id;
     private String nombre;
     private String apellidoPaterno;
@@ -36,9 +41,15 @@ public class UsuarioDetalle {
     private String nickName;
     private String telefonoCelular;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public UsuarioDetalle() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public UsuarioDetalle(
             int id,
             String nombre,
@@ -57,6 +68,9 @@ public class UsuarioDetalle {
         this.telefonoCelular = telefonoCelular;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public int getId() {
         return id;
     }
@@ -117,6 +131,9 @@ public class UsuarioDetalle {
         return hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "UsuarioDetalle [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
@@ -124,6 +141,9 @@ public class UsuarioDetalle {
                 + nickName + ", telefonoCelular=" + telefonoCelular + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -138,48 +158,16 @@ public class UsuarioDetalle {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        UsuarioDetalle other = (UsuarioDetalle) obj;
-        if (apellidoMaterno == null) {
-            if (other.apellidoMaterno != null)
-                return false;
-        } else if (!apellidoMaterno.equals(other.apellidoMaterno))
-            return false;
-        if (apellidoPaterno == null) {
-            if (other.apellidoPaterno != null)
-                return false;
-        } else if (!apellidoPaterno.equals(other.apellidoPaterno))
-            return false;
-        if (fechaNacimiento == null) {
-            if (other.fechaNacimiento != null)
-                return false;
-        } else if (!fechaNacimiento.equals(other.fechaNacimiento))
-            return false;
-        if (id != other.id)
-            return false;
-        if (nickName == null) {
-            if (other.nickName != null)
-                return false;
-        } else if (!nickName.equals(other.nickName))
-            return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
-            return false;
-        if (telefonoCelular == null) {
-            if (other.telefonoCelular != null)
-                return false;
-        } else if (!telefonoCelular.equals(other.telefonoCelular))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UsuarioDetalle)) return false;
+        UsuarioDetalle that = (UsuarioDetalle) o;
+        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(apellidoPaterno, that.apellidoPaterno)
+                && Objects.equals(apellidoMaterno, that.apellidoMaterno) && Objects.equals(fechaNacimiento, that.fechaNacimiento)
+                && Objects.equals(nickName, that.nickName) && Objects.equals(telefonoCelular, that.telefonoCelular);
     }
-
 }

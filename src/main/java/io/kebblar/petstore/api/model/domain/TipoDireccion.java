@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
 <<<<<<< HEAD
@@ -46,7 +45,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de 'TipoDireccion'.
+ * Implementación del POJO de la entidad de 'TipoDireccion'.
  *
  * @author  garellano
  * @version 1.0-SNAPSHOT
@@ -56,8 +55,8 @@ import java.util.Objects;
 public class TipoDireccion implements Serializable {
     private static final long serialVersionUID = 6627523800922208745L;
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private Integer id;
     private String nombre;
@@ -85,6 +84,9 @@ public class TipoDireccion implements Serializable {
         this.activo = activo;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public Integer getId() {
         return id;
     }
@@ -109,9 +111,8 @@ public class TipoDireccion implements Serializable {
         this.activo = activo;
     }
 
-
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -123,7 +124,7 @@ public class TipoDireccion implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase TipoDireccion son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -141,7 +142,7 @@ public class TipoDireccion implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

@@ -34,8 +34,8 @@ import java.util.Objects;
  */
 public class TransaccionBtc {
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private int id;
     private int idUsuario;
@@ -70,148 +70,91 @@ public class TransaccionBtc {
         this.lastBalance = lastBalance;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public int getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idUsuario.
-     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * Setter para idUsuario.
-     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    /**
-     * Getter para idDireccion.
-     */
     public int getIdDireccion() {
         return idDireccion;
     }
 
-    /**
-     * Setter para idDireccion.
-     */
     public void setIdDireccion(int idDireccion) {
         this.idDireccion = idDireccion;
     }
 
-    /**
-     * Getter para wallet.
-     */
     public String getWallet() {
         return wallet;
     }
 
-    /**
-     * Setter para wallet.
-     */
     public void setWallet(String wallet) {
         this.wallet = wallet;
     }
 
-    /**
-     * Getter para idPaqueteria.
-     */
     public int getIdPaqueteria() {
         return idPaqueteria;
     }
 
-    /**
-     * Setter para idPaqueteria.
-     */
     public void setIdPaqueteria(int idPaqueteria) {
         this.idPaqueteria = idPaqueteria;
     }
 
-    /**
-     * Getter para status.
-     */
     public boolean isStatus() {
         return status;
     }
 
-    /**
-     * Setter para status.
-     */
     public void setStatus(boolean status) {
         this.status = status;
     }
 
-    /**
-     * Getter para monto.
-     */
     public double getMonto() {
         return monto;
     }
 
-    /**
-     * Setter para status.
-     */
     public void setMonto(double monto) {
         this.monto = monto;
     }
 
-    /**
-     * Getter para fecha.
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     * Setter para fecha.
-     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    /**
-     * Getter para descripción.
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Setter para descripción.
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Getter para lastBalance.
-     */
     public double getLastBalance() {
         return lastBalance;
     }
 
-    /**
-     * Setter para lastBalance.
-     */
     public void setLastBalance(double lastBalance) {
         this.lastBalance = lastBalance;
     }
 
     /**
-     * Compara si dos instancias de la clase Atributo son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
@@ -222,7 +165,7 @@ public class TransaccionBtc {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -230,7 +173,7 @@ public class TransaccionBtc {
     }
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
