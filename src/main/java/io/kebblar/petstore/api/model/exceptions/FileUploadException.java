@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   GoogleCaptchaException.java
+ * Artefacto:   FileUploadException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Martes 4 de Mayo de 2021 (17_57)

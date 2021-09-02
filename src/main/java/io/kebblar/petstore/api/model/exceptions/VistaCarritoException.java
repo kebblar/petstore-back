@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   BitcoinTransactionException.java
+ * Artefacto:   VistaCarritoException.java
  * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Martes 11 de Mayo de 2021 (17_57)

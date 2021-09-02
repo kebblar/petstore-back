@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   DisabledUserException.java
+ * Artefacto:   NotFoundException.java
  * Tipo:        Clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Jueves 6 de Mayo de 2021 (09_25)

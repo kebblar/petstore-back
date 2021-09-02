@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   WrongTokenException.java
+ * Artefacto:   StrengthException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Martes 4 de Mayo de 2021 (17_57)

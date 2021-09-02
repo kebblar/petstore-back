@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   BadCredentialsException.java
+ * Artefacto:   BlockedUserException.java
  * Tipo:        clase
  * AUTOR:       Luz Cuahonte (LC)
  * Fecha:       Jueves 6 de Mayo de 2021 (09_29)

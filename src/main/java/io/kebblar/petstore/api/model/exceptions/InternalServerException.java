@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   HttpStatus.java
+ * Artefacto:   InternatServerException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Lunes 4 de Mayo de 2021 (22_27)
