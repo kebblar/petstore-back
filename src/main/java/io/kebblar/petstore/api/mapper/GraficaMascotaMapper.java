@@ -42,6 +42,9 @@ import io.kebblar.petstore.api.model.domain.Grafica;
 
 @Repository
 public interface GraficaMascotaMapper {
+
+    String CAMPOS_GRAFICA_M = "cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha";
+
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
@@ -50,7 +53,7 @@ public interface GraficaMascotaMapper {
      */
     @Results(id = "GraficaMap", value = { @Result(property = "etiqueta", column = "mascota"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_M+" from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "
@@ -67,7 +70,7 @@ public interface GraficaMascotaMapper {
      * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaMap")
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_M+" from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "

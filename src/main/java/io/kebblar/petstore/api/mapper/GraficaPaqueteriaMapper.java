@@ -42,6 +42,8 @@ import io.kebblar.petstore.api.model.domain.Grafica;
 
 @Repository
 public interface GraficaPaqueteriaMapper {
+
+    String CAMPOS_G_P = "paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha";
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
@@ -50,7 +52,7 @@ public interface GraficaPaqueteriaMapper {
      */
     @Results(id = "GraficaPaqMap", value = { @Result(property = "etiqueta", column = "paqueteria"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
-    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
+    @Select("SELECT "+CAMPOS_G_P+" from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
             + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")
@@ -65,7 +67,7 @@ public interface GraficaPaqueteriaMapper {
      * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaPaqMap")
-    @Select("SELECT paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc  "
+    @Select("SELECT "+CAMPOS_G_P+" from orden_compra oc  "
             + "inner join paqueteria paq on (paq.id = oc.id_paqueteria) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} "
             + "group by paq.nombre, MONTH(fecha) order by cantidad desc limit 5")

@@ -43,6 +43,7 @@ import io.kebblar.petstore.api.model.domain.Grafica;
 @Repository
 public interface GraficaCompradorMapper {
 
+    String CAMPOS_GRAFICA_COMPRADOR = "usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha";
     /**
      * Obtiene una lista de tipo 'GraficaComprador'.
      *
@@ -53,7 +54,7 @@ public interface GraficaCompradorMapper {
     @Results(id = "GraficaComMap", value = { @Result(property = "etiqueta", column = "comprador"),
             @Result(property = "cantidad", column = "cantidad"),
             @Result(property = "fecha", column = "fecha")})
-    @Select("SELECT usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_COMPRADOR+" from orden_compra oc "
             + "inner join usuario_detalle usu on (usu.id_usuario = oc.id_usuario) "
             + "where YEAR(oc.fecha_hora_comprar) = YEAR(CURDATE()) "
             + "group by usu.nombre order by cantidad desc limit 5")
@@ -68,7 +69,7 @@ public interface GraficaCompradorMapper {
      * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaComMap")
-    @Select("SELECT usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_COMPRADOR+" from orden_compra oc "
             + "inner join usuario_detalle usu on (usu.id_usuario = oc.id_usuario) "
             + "where oc.fecha_hora_comprar between #{fechaIni} and #{fechaFin} " + "group by usu.nombre order by cantidad desc limit 5")
     List<Grafica> getCompradorPorRangoDeFechas(String fechaIni, String fechaFin) throws SQLException;

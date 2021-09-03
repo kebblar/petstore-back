@@ -14,6 +14,8 @@ import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 @Repository
 public interface GraficaTipoPagoMapper {
 
+    String CAMPOS_T_P = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
+            "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio ";
     /**
      * Obtiene una lista de tipo 'GraficaMontoTotalTipoPago'.
      *
@@ -27,8 +29,7 @@ public interface GraficaTipoPagoMapper {
             @Result(property = "mes", column = "mes"),
             @Result(property = "anio", column = "anio")})
 
-    @Select(" select count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
-            " MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio from  petstore.orden_compra as orden " +
+    @Select(" select "+CAMPOS_T_P+" from  petstore.orden_compra as orden " +
             " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  carrito.cve_orden_compra " +
             " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio " +
             " inner join petstore.metodo_pago as pago on pago.id = orden.id_metodo_pago " +
@@ -44,8 +45,7 @@ public interface GraficaTipoPagoMapper {
      * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaTipoPago")
-    @Select(" select count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
-            " MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio from  petstore.orden_compra as orden " +
+    @Select(" select "+CAMPOS_T_P+" from  petstore.orden_compra as orden " +
             " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  carrito.cve_orden_compra " +
             " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio " +
             " inner join petstore.metodo_pago as pago on pago.id = orden.id_metodo_pago " +
