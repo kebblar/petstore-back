@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import io.kebblar.petstore.api.config.CustomInterceptor;
 import org.apache.commons.io.FilenameUtils;
 import com.ibm.icu.text.SimpleDateFormat;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -45,6 +47,8 @@ import io.kebblar.petstore.api.model.exceptions.HttpStatus;
 import io.kebblar.petstore.api.model.request.AnuncioRequest;
 import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
 import io.kebblar.petstore.api.model.request.BusquedaRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Descripción:</p>
@@ -57,6 +61,7 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
 public class AnuncioUtil {
 
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
+    private static final Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
 
     /**
      * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
@@ -248,8 +253,8 @@ public class AnuncioUtil {
      * Metodo que permite renderizar una imagen y agregar marca de agua.
      *
      * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
-     * @param logoSistema Logotipo de la empresa que ira como marca de agua
-     * @param imagenBase Imagen que se renderizara y se agregara marca de agua
+     * @param destinationFolder Logotipo de la empresa que ira como marca de agua
+     * @param uuidImagenBase Imagen que se renderizara y se agregara marca de agua
      * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
      * @return
      */
@@ -282,7 +287,7 @@ public class AnuncioUtil {
                 ImageIO.write(bufferedImage, FilenameUtils.getExtension(uuidImagenBase), filepath.toFile());
                 bufferedImage.flush();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
     }
 

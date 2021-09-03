@@ -1,5 +1,8 @@
 package io.kebblar.petstore.api.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,6 +16,7 @@ import javax.swing.ImageIcon;
 
 public class WaterMark {
     private static final String RUTA="/Users/garellano/Desktop/pics/";
+    private static final Logger logger = LoggerFactory.getLogger(WaterMark.class);
     private static WaterMark instance =null;
     
     public static void main(String[] args) {
@@ -36,11 +40,11 @@ public class WaterMark {
         File newFile            = new File(path + newFileName);
         
         if(!origFile.exists()) {
-            System.out.println("No existe: "+origFile.getPath());
+            logger.info("No existe: {}", origFile.getPath());
             return;
         }
         if(!watermarkImageFile.exists()) {
-            System.out.println("No existe: "+watermarkImageFile.getPath());
+            logger.info("No existe: {}", watermarkImageFile.getPath());
             return;
         }
 //        if(!newFile.exists()) {
@@ -102,9 +106,9 @@ public class WaterMark {
         try {
             ImageIO.write(originalBufferedImage, "jpg", newFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info(e.getMessage());
         }
-        System.out.println(newFile.getPath() + " created successfully!");
+        logger.info("{} created successfully!", newFile.getPath());
     }
 
     public BufferedImage makeTransparent(Image originalImage, int ancho) {

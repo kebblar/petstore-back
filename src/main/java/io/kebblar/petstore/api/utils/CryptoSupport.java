@@ -37,7 +37,7 @@ public class CryptoSupport {
     private static String rootPath = "/Users/garellano/emisor/";
     private static String privateKeyFile = rootPath + "ok.key";
     private static String certificateFile = rootPath + "ok.cer";
-    private static String password = "password";
+    private static String pwd = "password";
     private static String cadenaOriginalParaFirma = "parangaricutirimicuaro";
     /**/
 
@@ -47,17 +47,17 @@ public class CryptoSupport {
 
     public void ok() throws Exception {
         prn("Cadena original para firma:"+cadenaOriginalParaFirma);
-        String cadenaFirmada = signWithPrivateKey(cadenaOriginalParaFirma, privateKeyFile, password);
+        String cadenaFirmada = signWithPrivateKey(cadenaOriginalParaFirma, privateKeyFile, pwd);
         prn("Cadena firmada:"+ cadenaFirmada);
         String data = verifySignature(cadenaFirmada, certificateFile); // Verificando con el certificado (que contiene la llave pública)
         prn("Verificación de cadena firmada: "+data);
 
         byte[] textoEncriptado = signWithCert(cadenaOriginalParaFirma, readFile(certificateFile));
-        System.out.println(textoEncriptado.length);
+        logger.info(Integer.toString(textoEncriptado.length));
 
         byte[] r = Base64.getEncoder().encode(textoEncriptado);
-        System.out.println(convert(r));
-        System.out.println(r.length);
+        logger.info(convert(r));
+        logger.info(Integer.toString(r.length));
 
         //byte[] res = cs.decodeWithPrivateKey(r, cs.getPrivateKeyFromFile(privateKeyFile, password));
         //byte[] decriptado = cs.getTextoEncriptadoFromPrivateKeyFile(new String(textoEncriptado), privateKeyFile, password);
@@ -67,7 +67,13 @@ public class CryptoSupport {
     // Usa el certificado para verifcar que cierto texto encriptado con una llave privada es válido.
     public String verifySignature(String textoEncriptado, String certificateFile) throws Exception {
         String certData = readFile(certificateFile);
-        Certificate cer = getCertificateFromString(certData);//.substring(28, certData.length()-26));//"MIIC5DCCAk2gAwIBAgIJAJ9BmcbMq9pvMA0GCSqGSIb3DQEBCwUAMIGKMQswCQYDVQQGEwJNWDELMAkGA1UECAwCREYxDzANBgNVBAcMBm1leGljbzEVMBMGA1UECgwMRW1pc29yIER1bW15MRQwEgYDVQQLDAtkZXZlbG9wbWVudDERMA8GA1UEAwwIbXgucWJpdHMxHTAbBgkqhkiG9w0BCQEWDmFkbWluQHFiaXRzLm14MB4XDTE3MDIyNDIzMzc1N1oXDTE4MDIyNDIzMzc1N1owgYoxCzAJBgNVBAYTAk1YMQswCQYDVQQIDAJERjEPMA0GA1UEBwwGbWV4aWNvMRUwEwYDVQQKDAxFbWlzb3IgRHVtbXkxFDASBgNVBAsMC2RldmVsb3BtZW50MREwDwYDVQQDDAhteC5xYml0czEdMBsGCSqGSIb3DQEJARYOYWRtaW5AcWJpdHMubXgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJ0iCj8XZ1dlL70OXZNgY0SxB3Bf2Hzi0yfVrhbpugy587Tt1T8lsNYi1mdQZ1qSKgMHmPGoWJrRgGAUrklz3waet7hh0YZQoz91ezjcS0F4o6GkvCoiz+Dw9dGC0ptCBdSZ7ZUuimMwg5UrR3ItQkcrMiJ9507hQz37/jbfkP9LAgMBAAGjUDBOMB0GA1UdDgQWBBQM6k95blp7spy9UOfEFYuJmvQ2LzAfBgNVHSMEGDAWgBQM6k95blp7spy9UOfEFYuJmvQ2LzAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GBACqt091X7t4MbH6O6KUWbOXhxOFmv++wK6ue0Qhciz8HShPOfjDd2ZYsLu2pSfnWDQrkRoTBQ1ic+dMzWqxb1yV67fKNxdn5k4eH2WcJGmfxbDYx5olFvYeR+RrSFfdjkSBjtWo5Ywb63tSsQwW66wngBpmgt3CQhD+TCTKUVGgL");//CryptoSupport.readFile(certificateFile));
+        /*
+         *.substring(28, certData.length()-26));//
+         * "MIIC5DCCAk2gAwIBAgIJAJ9BmcbMq9pvMA0GCSqGSIb3DQEBCwUAMIGKMQswCQYDVQQGEwJNWDELMAkGA1UECAwCREYxDzANBgNVBAcMBm1l
+         * eGljbzEVMBMGA1UECgwMRW1pc29yIER1bW15MRQwEgYDVQQLDAtkZXZlbG9wbWVudDERMA8GA1UEAwwIbXgucWJpdHMxHTAbBgkqhkiG9w
+         * 0BCQEWDmFkbWluQHFiaXRzLm14MB4XDTE3MDIyNDIzMzc1N1oXDTE4MDIyNDIzMzc1N1owgYoxCzAJBgNVBAYTAk1YMQswCQYDVQQIDAJERjEPMA0GA1UEBwwGbWV4aWNvMRUwEwYDVQQKDAxFbWlzb3IgRHVtbXkxFDASBgNVBAsMC2RldmVsb3BtZW50MREwDwYDVQQDDAhteC5xYml0czEdMBsGCSqGSIb3DQEJARYOYWRtaW5AcWJpdHMubXgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJ0iCj8XZ1dlL70OXZNgY0SxB3Bf2Hzi0yfVrhbpugy587Tt1T8lsNYi1mdQZ1qSKgMHmPGoWJrRgGAUrklz3waet7hh0YZQoz91ezjcS0F4o6GkvCoiz+Dw9dGC0ptCBdSZ7ZUuimMwg5UrR3ItQkcrMiJ9507hQz37/jbfkP9LAgMBAAGjUDBOMB0GA1UdDgQWBBQM6k95blp7spy9UOfEFYuJmvQ2LzAfBgNVHSMEGDAWgBQM6k95blp7spy9UOfEFYuJmvQ2LzAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GBACqt091X7t4MbH6O6KUWbOXhxOFmv++wK6ue0Qhciz8HShPOfjDd2ZYsLu2pSfnWDQrkRoTBQ1ic+dMzWqxb1yV67fKNxdn5k4eH2WcJGmfxbDYx5olFvYeR+RrSFfdjkSBjtWo5Ywb63tSsQwW66wngBpmgt3CQhD+TCTKUVGgL");//CryptoSupport.readFile(certificateFile));
+         */
+        Certificate cer = getCertificateFromString(certData);
         return decrypt(textoEncriptado.getBytes(), cer);
     }
 
@@ -84,27 +90,23 @@ public class CryptoSupport {
      *
      * @param privateKeyFile Archivo del FileSystem con el contenido de una llave privada
      * @param textoParaEncripcion Texto que será encriptado
-     * @param privateKeyFile1
-     * @param password1
-     * @param password Clave secreta asociada a la llave privada
+     * @param pwd Clave secreta asociada a la llave privada
      *
      * @return Texto encriptado
      * @throws Exception Envolvente para IOSexception y SecurityException
      *
-     * @see {@link #signWithPrivateKey2}
+     * @see {@link @signWithPrivateKey2}
      */
-    public String signWithPrivateKey(String textoParaEncripcion, String privateKeyFile, String password) throws Exception {
+    public String signWithPrivateKey(String textoParaEncripcion, String privateKeyFile, String pwd) throws Exception {
         byte[] textoEncriptadoEnBytes = getTextoEncriptadoFromPrivateKeyFile(
-                textoParaEncripcion, privateKeyFile, password);
+                textoParaEncripcion, privateKeyFile, pwd);
         return convert(textoEncriptadoEnBytes);
     }
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
-        return signWithPrivateKey(textoParaEncripcion, privateKeyFile, password) ;
+        return signWithPrivateKey(textoParaEncripcion, privateKeyFile, pwd) ;
     }
 
     /**  **/
-
-
 
 
     // Usando un certificado, se encripta un texto que luego se va a poder desencriptar

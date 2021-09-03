@@ -57,7 +57,7 @@ public class Signer {
 
     private String privateKeyFile;
     private String certificateFile;
-    private String password = "hwb4aet!$fser";
+    private String pwd = "hwb4aet!$fser";
     private String file;
 
     /*
@@ -88,7 +88,7 @@ public class Signer {
      * El hash utilizado es SHA-256.
      *
      * @return un string en hexadecimal que representa al hash del archivo.
-     * @param String fileName nombre del archivo del que qeremos su hash.
+     * @param fileName nombre del archivo del que qeremos su hash.
      * @throws Exception es disparada por un error de lectura escritura.
      */
     public String createSum(String fileName) throws NoSuchAlgorithmException, IOException {
@@ -129,10 +129,10 @@ public class Signer {
 
 
     /**
-     * Usa el certificado para verifcar que cierto texto encriptado con una
+     * Usa el certificado para verificar que cierto texto encriptado con una
      * llave privada es válido.
      *
-     * @param hash Arreglo de bytes a ser convertido a cadena.
+     * @param textoEncriptado Arreglo de bytes a ser convertido a cadena.
      *
      * @return Cadena obtenida despues de desencriptar el texto recibido como
      * parametro.
@@ -146,8 +146,8 @@ public class Signer {
     /**
      * Metodo que desencripta un texto en bytes usando una llave publica.
      *
-     * @param arreglo de byte textoEncryptadoEnBytes contiene .
-     * @param hash Arreglo de bytes a ser convertido a cadena.
+     * @param textoEncriptadoEnBytes de byte textoEncryptadoEnBytes contiene .
+     * @param publicKey Arreglo de bytes a ser convertido a cadena.
      *
      * @return Cadena asociada al arreglo dado
      */
@@ -160,13 +160,13 @@ public class Signer {
     /**
      * Metodo que encripta un texto a partir de una llave privada y un password.
      *
-     * @param arreglo de byte textoEncryptadoEnBytes contiene .
-     * @param hash Arreglo de bytes a ser convertido a cadena.
+     * @param texto de byte textoEncryptadoEnBytes contiene.
+     * @param privateKeyFile Arreglo de bytes a ser convertido a cadena.
      *
      * @return Cadena asociada al arreglo dado
      */
-    public byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, String privateKeyFile, String password) throws GeneralSecurityException, IOException {
-        PrivateKey pk = getPrivateKeyFromFile(privateKeyFile, password);
+    public byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, String privateKeyFile, String pwd) throws GeneralSecurityException, IOException {
+        PrivateKey pk = getPrivateKeyFromFile(privateKeyFile, pwd);
         Signature firma = Signature.getInstance("NONEwithRSA"); // MD5withRSA,SHA256withRSA,NONEwithRSA
         firma.initSign(pk);
         // Aqui calculo el SHA-256 en vez de usar el que me da este algoritmo
@@ -176,13 +176,8 @@ public class Signer {
 
     /**
      * Usando la llave privada y un password, se encripta un texto que luego va a poder ser
-     * desencriptado con el certificado o la llave púbkica que el certfcado tiene dentro.
-     *
-     * @param privateKeyFile Archivo del FileSystem con el contenido de una llave privada
+     * desencriptado con el certificado o la llave pública que el certificado tiene dentro.
      * @param textoParaEncripcion Texto que será encriptado
-     * @param privateKeyFile1
-     * @param password1
-     * @param password Clave secreta asociada a la llave privada
      *
      * @return Texto encriptado
      * @throws Exception Envolvente para IOSexception y SecurityException
@@ -190,7 +185,7 @@ public class Signer {
      */
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
         byte[] textoEncriptadoEnBytes = getTextoEncriptadoFromPrivateKeyFile(
-                textoParaEncripcion, this.privateKeyFile, this.password);
+                textoParaEncripcion, this.privateKeyFile, this.pwd);
         return new String(textoEncriptadoEnBytes);
     }
 
@@ -198,7 +193,7 @@ public class Signer {
      * Metodo privado que lee un archivo pdf y regresa un string que contiene el contenido
      * del archivo.
      *
-     * @param String path la ruta del archivo pdf.
+     * @param path la ruta del archivo pdf.
      *
      * @return Cadena asociada al contenido del archivo.
      */
@@ -212,9 +207,9 @@ public class Signer {
      * Metodo privado que desencripta un texto recibido como bytes con ayuda
      * de una llave piblica.
      *
-     * @param Arreglo de byte text, texto como arreglo de bytes que queremos
+     * @param text de byte text, texto como arreglo de bytes que queremos
      * desencriptar.
-     * @param llave publica con la que se va a desencriptar el texto.
+     * @param publicKey publica con la que se va a desencriptar el texto.
      *
      * @return arreglo de byte que contiene el texto desencryptado.
      */
@@ -228,7 +223,7 @@ public class Signer {
      * Metodo privado que obtiene un objeto de tipo Certificate a partir de
      * un string que contiene el certificado.
      *
-     * @param String certificateString, el certificado en forma de string.
+     * @param certificateString, el certificado en forma de string.
      *
      * @return objeto de tipo string que representa al certificado recibido
      * como parametro.
@@ -243,7 +238,7 @@ public class Signer {
      * Metodo privado que obtiene un array de bites a partir de una llave privada recibida
      * como parametro.
      *
-     * @param String certificateString, el certificado en forma de string.
+     * @param privateKeyFile, el certificado en forma de string.
      *
      * @return arreglo de byte que contiene los bytes de la llave privada
      * recibida como parametro.
@@ -257,14 +252,14 @@ public class Signer {
     /**
      * Metodo privado que obtiene una instancia de la clase PrivateKey.
      *
-     * @param String privateKeyFile, string que contiene la llave privada.
-     * @param String password, el password.
+     * @param privateKeyFile, string que contiene la llave privada.
+     * @param pwd, el password.
      *
      * @return instancia de la calse PrivateKey.
      */
-    private PrivateKey getPrivateKeyFromFile(String privateKeyFile, String password) throws GeneralSecurityException, IOException {
+    private PrivateKey getPrivateKeyFromFile(String privateKeyFile, String pwd) throws GeneralSecurityException, IOException {
         byte[] clavePrivada = getPrivateKeyBytes(privateKeyFile);
-        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, pwd.toCharArray());
         return pkcs8.getPrivateKey();
     }
 }
