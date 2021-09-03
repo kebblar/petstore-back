@@ -33,8 +33,6 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Direccion;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_DIRECCION;
-
 /**
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad 'Direccion'.
@@ -46,6 +44,9 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_DIRECCION;
  */
 @Repository
 public interface DireccionMapper {
+
+    static final String CAMPOS_DIRECCION = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, " +
+            "id_tipo_direccion, cp, referencias, activo ";
 
     /**
      * Obtiene un objeto de tipo {@link Direccion} realizando la búsqueda con base a un id en especifico.

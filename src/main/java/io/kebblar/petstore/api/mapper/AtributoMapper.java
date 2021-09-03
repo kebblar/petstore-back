@@ -36,8 +36,6 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ATRIBUTO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Atributo.
@@ -50,6 +48,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ATRIBUTO;
  */
 @Repository
 public interface AtributoMapper {
+
+    static final String CAMPOS_ATRIBUTO = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'Atributo' dado su id.

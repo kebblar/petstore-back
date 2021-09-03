@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Rol;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ROL;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Rol.
@@ -49,6 +47,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ROL;
 
 @Repository
 public interface RolMapper {
+
+    static final String CAMPOS_ROL = " id, nombre, activo ";
 
     /**
      * Retorna el rol dado su id y si este está activo.

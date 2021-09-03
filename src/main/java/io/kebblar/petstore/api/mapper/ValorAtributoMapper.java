@@ -24,11 +24,16 @@ package io.kebblar.petstore.api.mapper;
 import java.util.List;
 import java.sql.SQLException;
 
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
-
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_V_A;
 
 /**
  * <p>Descripción:</p>
@@ -42,6 +47,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_V_A;
  */
 @Repository
 public interface ValorAtributoMapper {
+
+    static final String CAMPOS_V_A = " id, id_atributo, rango, activo ";
 
     /**
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.

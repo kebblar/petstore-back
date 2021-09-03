@@ -36,8 +36,6 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Carrito;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CARRITO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Carrito.
@@ -50,6 +48,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CARRITO;
  */
 @Repository
 public interface CarritoMapper {
+
+    static final String CAMPOS_CARRITO = " id, id_usuario, id_anuncio, cve_orden_compra ";
 
     /**
      * Obtiene un objeto de tipo 'Carrito' dado su id.

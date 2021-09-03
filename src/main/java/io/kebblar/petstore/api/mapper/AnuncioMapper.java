@@ -42,9 +42,6 @@ import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ANUNCIO;
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MASCOTA_VALOR_ATRIBUTOS;
-
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Anuncio.
  *
@@ -57,10 +54,14 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MASCOTA_VAL
 @Repository
 public interface AnuncioMapper {
 
+    static final String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, " +
+            "fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus, search_url ";
+    static final String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
+
     /**
      * Inserta un objeto de tipo 'Anuncio' con base en la información dada por el objeto de tipo 'Anuncio'.
      *
-     * @param Anuncio a ser insertado.
+     * @param anuncio a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -73,7 +74,7 @@ public interface AnuncioMapper {
     /**
      * Inserta un objeto de tipo 'AnuncioAtributo' con base en la información dada por el objeto de tipo 'AnuncioAtributo'.
      *
-     * @param MascotaValorAtributo a ser insertado.
+     * @param anuncioAtributo a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -232,7 +233,7 @@ public interface AnuncioMapper {
      * Consulta por filtros para la búsqueda de usuario final.
      *
      * @param map
-     * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
+     * @return {@link DetalleAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
      */
     @Results(id="FiltroMap", value = {
@@ -251,7 +252,7 @@ public interface AnuncioMapper {
      * Consulta por filtros para la búsqueda de usuario final para obtener total de registros.
      *
      * @param map
-     * @return {@link DetallAnuncioResponse} Lista de Detalle Anuncio
+     * @return {@link DetalleAnuncioResponse} Lista de Detalle Anuncio
      * @throws SQLException
      */
     @Select("${total}")
@@ -260,7 +261,7 @@ public interface AnuncioMapper {
     /**
      * Consulta el objeto de tipo 'MascotaValorAtributo' con base al id del anuncio proporcionado.
      *
-     * @param id Identificador del anuncio por medio del cual se realizara la búsqueda de sus imagenes asociadas
+     * @param idAnuncio Identificador del anuncio por medio del cual se realizara la búsqueda de sus imagenes asociadas
      * @return Listado de clases de tipo 'ValorAtributoResponse' con la información de los atributos de un anuncio
      * @throws SQLException Excepción lanzada en caso de error de base de datos
      */

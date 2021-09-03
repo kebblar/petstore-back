@@ -36,8 +36,6 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CAT_ATRIBUTO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad CategoriaAtributo.
@@ -50,6 +48,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CAT_ATRIBUT
  */
 @Repository
 public interface CategoriaAtributoMapper {
+
+    static final String CAMPOS_CAT_ATRIBUTO = " id_categoria, id_atributo ";
 
     /**
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.
@@ -103,7 +103,7 @@ public interface CategoriaAtributoMapper {
     /**
      * Borra (de manera lógica y no física) el registro de CategoriaAtributo.
      *
-     * @param id id del CategoriaAtributo a ser borrado
+     * @param categoriaAtributo objeto a ser borrado
      * @return id del CategoriaAtributo borrado
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */

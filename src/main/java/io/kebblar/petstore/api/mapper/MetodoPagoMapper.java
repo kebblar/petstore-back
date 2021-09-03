@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.MetodoPago;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAGO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad MetodoPago.
@@ -49,6 +47,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAGO;
 
 @Repository
 public interface MetodoPagoMapper {
+
+    static final String CAMPOS_PAGO = " id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MetodoPago' dado su id.

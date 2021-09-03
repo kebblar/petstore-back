@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Paqueteria;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAQ;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria.
@@ -49,6 +47,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAQ;
 
 @Repository
 public interface PaqueteriaMapper {
+
+    static final String CAMPOS_PAQ = " id, nombre, breve_descripcion, html_descripcion, precio ";
 
     /**
      * Obtiene un objeto de tipo 'Paqueteria' dado su id.

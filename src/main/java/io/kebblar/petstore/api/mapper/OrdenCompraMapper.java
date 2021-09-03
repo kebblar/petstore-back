@@ -34,8 +34,6 @@ import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.DatosOrden;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ORDEN;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad OrdenCompra.
@@ -48,6 +46,9 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ORDEN;
  */
 @Repository
 public interface OrdenCompraMapper {
+
+    static final String CAMPOS_ORDEN = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, " +
+            "id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**
      * Obtiene un objeto de tipo 'OrdenCompra' dado su id.

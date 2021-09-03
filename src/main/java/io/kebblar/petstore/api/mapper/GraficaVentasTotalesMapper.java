@@ -23,11 +23,12 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
-
-import static io.kebblar.petstore.api.mapper.constants.Campos.*;
 
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad GraficaVentasTotales.
@@ -40,6 +41,13 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.*;
  */
 @Repository
 public interface GraficaVentasTotalesMapper {
+
+    static String CAMPOS_GRAFICA2 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
+            "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
+    static String GROUP_MES_ANIO = " group by anio, mes";
+    static String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
+            "carrito.cve_orden_compra";
+    static String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
 
     /**
      * Obtiene una lista de tipo 'GraficaVentasTotales'.

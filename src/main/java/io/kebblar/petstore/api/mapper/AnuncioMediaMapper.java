@@ -32,8 +32,6 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ANUNCIO_MEDIA;
-
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen.
  *
@@ -45,6 +43,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ANUNCIO_MED
  */
 @Repository
 public interface AnuncioMediaMapper {
+
+    static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 
     /**
      * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado.
@@ -77,7 +77,7 @@ public interface AnuncioMediaMapper {
     /**
      * Inserta un objeto de tipo 'AnuncioImagen' con base en la información dada por el objeto de tipo 'AnuncioImagen'.
      *
-     * @param AnuncioMedia a ser insertado.
+     * @param anuncioImagen a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */

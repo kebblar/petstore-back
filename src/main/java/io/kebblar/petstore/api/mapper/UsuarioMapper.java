@@ -32,8 +32,6 @@ import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_USER;
-
 /**
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad 'Usuario'.
@@ -45,6 +43,9 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_USER;
  */
 @Repository
 public interface UsuarioMapper {
+
+    static final String CAMPOS_USER = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, " +
+            "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
 
     /**
      * Obtiene una lista de objetos de tipo 'usuario'.

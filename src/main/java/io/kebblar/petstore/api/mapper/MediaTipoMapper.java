@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.MediaTipo;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MEDIA_TIPO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad MediaTipo.
@@ -48,6 +46,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MEDIA_TIPO;
  */
 @Repository
 public interface MediaTipoMapper {
+
+    static final String CAMPOS_MEDIA_TIPO = " id, descripcion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MediaTipo' dado su id.

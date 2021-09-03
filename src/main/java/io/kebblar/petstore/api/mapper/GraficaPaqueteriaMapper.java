@@ -39,7 +39,6 @@ import io.kebblar.petstore.api.model.domain.Grafica;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see ChartData
  */
 
 @Repository

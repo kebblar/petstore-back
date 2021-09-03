@@ -45,8 +45,12 @@ import java.util.Map;
  */
 @ControllerAdvice
 public class CustomControllerAdvice {
-    // Take a look at:
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+
+    /*
+     * Logger para la clase CustomControllerAdvice.
+     * Take a look at:
+     * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+     */
     private Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
     @ResponseBody

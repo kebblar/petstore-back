@@ -35,8 +35,6 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 
 import java.sql.SQLException;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_REG;
-
 /**
  * <p>Descripción:</p>
  * Interface 'Mapper' MyBatis asociado a la entidad Registro.
@@ -46,13 +44,16 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_REG;
  */
 public interface RegistroMapper {
 
-    /**
-     * Recupera un elemento del preregistro utilizando el correo electrónico que ingresó.
-     *
-     * @param correo mail de registro
-     * @return Objeto con la información de los datos del preregistro
-     * @throws SQLException En caso de que haya un problema con la consulta
-     */
+    static final String CAMPOS_REG = " id, nick, correo, clave_hash, telefono, fecha_nacimiento, random_string, " +
+            "instante_registro ";
+
+            /**
+             * Recupera un elemento del preregistro utilizando el correo electrónico que ingresó.
+             *
+             * @param correo mail de registro
+             * @return Objeto con la información de los datos del preregistro
+             * @throws SQLException En caso de que haya un problema con la consulta
+             */
     @Results(id="RegistroMap", value = {
             @Result(property = "id",  column = "id"),
             @Result(property = "nick",      column = "nick"),

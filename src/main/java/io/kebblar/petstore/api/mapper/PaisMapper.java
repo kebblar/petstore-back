@@ -35,8 +35,6 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Pais;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAIS;
-
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Pais.
  *
@@ -48,6 +46,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_PAIS;
  */
 @Repository
 public interface PaisMapper {
+
+    static final String CAMPOS_PAIS = " id, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Pais' dado su id.

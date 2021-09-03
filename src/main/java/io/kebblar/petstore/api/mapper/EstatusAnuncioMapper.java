@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ESTATUS_ANUNCIO;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad EstatusAnuncio.
@@ -48,6 +46,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_ESTATUS_ANU
  */
 @Repository
 public interface EstatusAnuncioMapper {
+
+    static final String CAMPOS_ESTATUS_ANUNCIO = " id, descripcion ";
 
     /**
      * Obtiene un objeto de tipo 'EstatusAnuncio' dado su id.

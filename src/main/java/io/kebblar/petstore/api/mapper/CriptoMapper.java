@@ -33,10 +33,11 @@ import org.springframework.stereotype.Repository;
 import java.sql.SQLException;
 import java.util.List;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_CRIPTO;
-
 @Repository
 public interface CriptoMapper {
+
+    static final String CAMPOS_CRIPTO = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, " +
+            "descripcion, last_balance";
 
     /**
      * Obtiene la dirección de la cartera digital de bitcoin del usuario cuyo id es introducido.

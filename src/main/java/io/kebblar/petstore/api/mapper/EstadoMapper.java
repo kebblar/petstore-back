@@ -35,8 +35,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Estado;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_EDO;
-
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Estado.
  *
@@ -48,6 +46,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_EDO;
  */
 @Repository
 public interface EstadoMapper {
+
+    static final String CAMPOS_EDO = " id, id_pais, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Estado' dado su id.
@@ -131,7 +131,7 @@ public interface EstadoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
      *
-     * @param  String nombre del estado.
+     * @param  nombre del estado.
      * @return Lista de objetos de tipo estado filtrado por el nombre ingresado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
@@ -142,8 +142,8 @@ public interface EstadoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el id ingresado.
      *
-     * @param  int id del estado.
-     * @return Lista de obetos de tipo estado filtrado por el id ingresado
+     * @param  idPais del pais.
+     * @return Lista de objetos de tipo estado filtrado por el id ingresado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstadoNombreMap")
@@ -153,14 +153,13 @@ public interface EstadoMapper {
     /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
      *
-     * @param  String nombre del estado.
-     * @param  int idPais del estado.
+     * @param  nombre del estado.
+     * @param  idPais del estado.
      * @return Lista de objetos de tipo estado filtrado por el nombre ingresado
      * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstadoNombreMap")
     @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais} and e.nombre LIKE '%' #{nombre} '%'")
     List<Estado> getByNombreAndIdPais(String nombre, int idPais) throws SQLException;
-
 
 }

@@ -36,8 +36,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.TipoDireccion;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_T_DIRECC;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion.
@@ -51,6 +49,8 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_T_DIRECC;
 
 @Repository
 public interface TipoDireccionMapper {
+
+    static final String CAMPOS_T_DIRECC = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'TipoDireccion' dado su id.

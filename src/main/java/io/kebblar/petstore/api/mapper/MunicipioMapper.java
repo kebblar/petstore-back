@@ -34,9 +34,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Municipio;
 
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_AUX_MUN;
-import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MUN;
-
 /**
  * <p>Descripción:</p>
  * Interfaz 'Mapper' MyBatis asociado a la entidad Municipio.
@@ -49,6 +46,9 @@ import static io.kebblar.petstore.api.mapper.constants.Campos.CAMPOS_MUN;
  */
 @Repository
 public interface MunicipioMapper {
+
+    static final String CAMPOS_MUN = " id, id_estado, nombre ";
+    static final String CAMPOS_AUX_MUN = " m.id, m.id_estado, m.nombre, e.nombre as nombre_estado , p.nombre as nombre_pais";
 
     /**
      * Obtiene un objeto de tipo 'Municipio' dado su id.
@@ -118,7 +118,7 @@ public interface MunicipioMapper {
      * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.
      *
      * @param idEstado identificador del estado
-     * @param starRow Inicio de la fila
+     * @param startRow Inicio de la fila
      * @param pageSize Número de registros por pagina
      * @return una lista de municipios encontrados con los criterios de búsqueda.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
