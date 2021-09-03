@@ -6,6 +6,10 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 public class Mascota {
+
+    /*
+     * Atributos de la clase.
+     */
     @Range(min = 1, max = 13, message = "El ID de la mascota debe ser mínimo {min} y máximo {max}")
     private int id;
 
@@ -15,35 +19,59 @@ public class Mascota {
     @NotBlank(message="La descripción de la mascota debe ser no vacia")
     private String descripcion;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public Mascota() {
     }
+
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Mascota(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public String getDescripcion() {
         return descripcion;
     }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Mascota [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -53,6 +81,10 @@ public class Mascota {
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -77,6 +109,10 @@ public class Mascota {
         return true;
     }
 
+    /**
+     * Delvuelve el hash del objeto.
+     * @return entero hash del objeto
+     */
     public int getHash() {
         return this.hashCode();
     }

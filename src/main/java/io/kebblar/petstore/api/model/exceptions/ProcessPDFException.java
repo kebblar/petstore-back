@@ -19,12 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>
- * Excepción que modela la respuesta a una petición de procesar archivo PDF
+ * <p>Descripción</p>
+ * Excepción que modela la respuesta a una petición de procesar archivo PDF.
  * 
- * <p>
- * Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  * 
  * @author dalvarez
@@ -35,6 +34,10 @@ package io.kebblar.petstore.api.model.exceptions;
 public class ProcessPDFException extends BusinessException {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Da la descripción del problema que ocurre con el procesamiento del pdf.
+     * @param technicalDescription mensaje específico del problema
+     */
     public ProcessPDFException(Exception technicalDescription) {
         super(
             "Error al generar el documento PDF",
@@ -44,7 +47,3 @@ public class ProcessPDFException extends BusinessException {
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
-
-/*
-
-*/

@@ -30,6 +30,10 @@ package io.kebblar.petstore.api.model.domain;
  * @since 1.0-SNAPSHOT
  */
 public class AtributoDetalleTO {
+
+    /*
+     * Atributos de la clase.
+     */
     private int idAtributo;
     private String nombreAtributo;
     private int estatusAtributo;
@@ -38,6 +42,9 @@ public class AtributoDetalleTO {
     private String rango;
     private int estatusRango;
 
+    /*
+     * Getter y Setter.
+     */
     public int getIdAtributo() {
         return idAtributo;
     }

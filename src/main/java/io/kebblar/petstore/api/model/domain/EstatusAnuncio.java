@@ -36,7 +36,7 @@ public class EstatusAnuncio implements Serializable {
 
     private static final long serialVersionUID = -3861741201718250311L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -63,37 +63,28 @@ public class EstatusAnuncio implements Serializable {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para descripcion.
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Setter para descripcion.
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -104,7 +95,7 @@ public class EstatusAnuncio implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase EstatusAnuncio son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -121,7 +112,7 @@ public class EstatusAnuncio implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

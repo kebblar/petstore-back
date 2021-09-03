@@ -21,6 +21,7 @@
 package io.kebblar.petstore.api.model.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * POJO asociado a la entidad 'anuncio_imagen'.
@@ -32,19 +33,32 @@ import java.io.Serializable;
 public class AnuncioMedia implements Serializable {
     private static final long serialVersionUID = -4759453261602831311L;
 
+    /*
+     * Atributos de la clase.
+     */
     private Integer id;
     private Integer idAnuncio;
     private String uuid;
     private Integer idTipo;
     private Boolean principal;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public AnuncioMedia() {
     }
 
+    /**
+     * Constructor por id.
+     * @param id
+     */
     public AnuncioMedia(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase sin id.
+     */
     public AnuncioMedia(Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         this.idAnuncio = idAnuncio;
         this.uuid = uuid;
@@ -52,6 +66,9 @@ public class AnuncioMedia implements Serializable {
         this.principal = principal;
     }
 
+    /*
+     * Constructor basado en todos los atributos de la clase con id.
+     */
     public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         super();
         this.id = id;
@@ -61,6 +78,9 @@ public class AnuncioMedia implements Serializable {
         this.principal = principal;
     }
 
+    /**
+     * Getter y Setter.
+     */
     public Integer getId() {
         return id;
     }
@@ -101,55 +121,29 @@ public class AnuncioMedia implements Serializable {
         this.principal = principal;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AnuncioMedia)) return false;
+        AnuncioMedia that = (AnuncioMedia) o;
+        return Objects.equals(id, that.id) && Objects.equals(idAnuncio, that.idAnuncio) && Objects.equals(uuid, that.uuid)
+                && Objects.equals(idTipo, that.idTipo) && Objects.equals(principal, that.principal);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((idAnuncio == null) ? 0 : idAnuncio.hashCode());
-        result = prime * result + ((idTipo == null) ? 0 : idTipo.hashCode());
-        result = prime * result + ((principal == null) ? 0 : principal.hashCode());
-        result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-        return result;
+        return Objects.hash(id, idAnuncio, uuid, idTipo, principal);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AnuncioMedia other = (AnuncioMedia) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (idAnuncio == null) {
-            if (other.idAnuncio != null)
-                return false;
-        } else if (!idAnuncio.equals(other.idAnuncio))
-            return false;
-        if (idTipo == null) {
-            if (other.idTipo != null)
-                return false;
-        } else if (!idTipo.equals(other.idTipo))
-            return false;
-        if (principal == null) {
-            if (other.principal != null)
-                return false;
-        } else if (!principal.equals(other.principal))
-            return false;
-        if (uuid == null) {
-            if (other.uuid != null)
-                return false;
-        } else if (!uuid.equals(other.uuid))
-            return false;
-        return true;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo

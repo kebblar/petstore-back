@@ -36,7 +36,7 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad OrdenCompra
+ * Interfaz 'Mapper' MyBatis asociado a la entidad OrdenCompra.
  *
  * @author Daniel Alvarez
  * @version 1.0-SNAPSHOT
@@ -47,14 +47,14 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 @Repository
 public interface OrdenCompraMapper {
 
-    static final String CAMPOS = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
+    String CAMPOS_ORDEN = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, " +
+            "id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**
      * Obtiene un objeto de tipo 'OrdenCompra' dado su id.
      *
      * @return MetodoPago que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="OrdenCompraMap", value = {
             @Result(property = "cveOrdenCompra",   column = "cve_orden_compra"),
@@ -68,25 +68,24 @@ public interface OrdenCompraMapper {
             @Result(property = "estadoEnvio",   column = "estado_envio"),
             @Result(property = "recibo",   column = "recibo")
     })
-    @Select("SELECT " + CAMPOS + " FROM orden_compra WHERE cveOrdenCompra = #{cveOrdenCompra}")
+    @Select("SELECT " + CAMPOS_ORDEN + " FROM orden_compra WHERE cveOrdenCompra = #{cveOrdenCompra}")
     DatosOrden getById(String cveOrdenCompra) throws SQLException ;
 
     /**
      * Obtiene una lista de objetos de tipo 'DatosOrden'.
      *
      * @return Lista de obetos de tipo DatosOrden
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("OrdenCompraMap")
-    @Select("SELECT " + CAMPOS + " FROM orden_compra ")
+    @Select("SELECT " + CAMPOS_ORDEN + " FROM orden_compra ")
     List<DatosOrden> getAll() throws SQLException;
 
 
     /**
      * Inserta un objeto de tipo 'DatosOrden' con base en la información dada por el objeto de tipo 'DatosOrden'.
      *
-     * @param metodoPago a ser insertado.
+     * @param datosOrden a ser insertado.
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */

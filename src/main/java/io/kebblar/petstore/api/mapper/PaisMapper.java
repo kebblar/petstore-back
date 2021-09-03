@@ -24,12 +24,19 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Pais;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad Pais
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Pais.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -39,31 +46,30 @@ import io.kebblar.petstore.api.model.domain.Pais;
  */
 @Repository
 public interface PaisMapper {
-    static final String CAMPOS = " id, nombre ";
+
+    String CAMPOS_PAIS = " id, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Pais' dado su id.
      *
-     * @return Pais que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Pais que tiene asignado el id pasado como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="PaisMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre")
     })
-    @Select("SELECT " + CAMPOS + " FROM pais WHERE id = #{id} ")
+    @Select("SELECT " + CAMPOS_PAIS + " FROM pais WHERE id = #{id} ")
     Pais getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Pais'.
      *
      * @return Lista de obetos de tipo Pais
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
-    @Select("SELECT " + CAMPOS + " FROM pais ")
+    @Select("SELECT " + CAMPOS_PAIS + " FROM pais ")
     List<Pais> getAll() throws SQLException;
 
     /**
@@ -78,7 +84,7 @@ public interface PaisMapper {
     int insert(Pais pais) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo 'Pais' con base en la infrmación dada por el objeto de tipo 'Pais'.
+     * Actualiza un objeto de tipo 'Pais' con base en la información dada por el objeto de tipo 'Pais'.
      *
      * @param pais a ser actualizado.
      * @return el numero de registros actualizados.
@@ -100,13 +106,12 @@ public interface PaisMapper {
     /**
      * Obtiene una lista de objetos de tipo 'pais' filtrado por el nombre ingresado.
      *
-     * @param  String nombre del pais.
+     * @param  nombre del pais.
      * @return Lista de objetos de tipo pais filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
-    @Select("SELECT " + CAMPOS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'")
+    @Select("SELECT " + CAMPOS_PAIS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'")
     List<Pais> getByNombre(String nombre) throws SQLException;
 
 }

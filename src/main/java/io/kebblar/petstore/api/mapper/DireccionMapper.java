@@ -23,7 +23,13 @@ import java.sql.SQLException;
 
 import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Direccion;
 
@@ -38,12 +44,14 @@ import io.kebblar.petstore.api.model.domain.Direccion;
  */
 @Repository
 public interface DireccionMapper {
-    static final String CAMPOS = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias, activo ";
+
+    String CAMPOS_DIRECCION = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, " +
+            "id_tipo_direccion, cp, referencias, activo ";
 
     /**
      * Obtiene un objeto de tipo {@link Direccion} realizando la búsqueda con base a un id en especifico.
      *
-     * @param String mail del usuario.
+     * @param direccion mail del usuario.
      * @return el {@link Direccion} encontrado con el criterio de búsqueda.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -59,24 +67,23 @@ public interface DireccionMapper {
         @Result(property = "referencias", column = "referencias"),
         @Result(property = "activo",      column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM direccion WHERE id = #{id} ")
+    @Select("SELECT " + CAMPOS_DIRECCION + " FROM direccion WHERE id = #{id} ")
     Direccion getById(Direccion direccion) throws SQLException;
 
     /**
      * Obtiene una lista de objetos {@link Direccion}.
      *
-     * @return Lista de obetos de tipo usuario
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Lista de objetos de tipo usuario
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("DireccionMap")
-    @Select("SELECT " + CAMPOS + " FROM direccion ")
+    @Select("SELECT " + CAMPOS_DIRECCION + " FROM direccion ")
     List<Direccion> getAll() throws SQLException;
 
     /**
      * Inserta un objeto de tipo {@link Direccion} con base en la información dada por el objeto de tipo {@link Direccion}.
      *
-     * @param {@link Direccion} a ser insertado.
+     * @param direccion {@link Direccion} a ser insertado.
      * @return el auto incremental asociado a esa inserción.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -87,7 +94,7 @@ public interface DireccionMapper {
     /**
      * Actualiza un objeto de tipo {@link Direccion} con base en la infrmación dada por el objeto de tipo {@link Direccion}.
      *
-     * @param {@link Direccion} a ser actualizado.
+     * @param direccion {@link Direccion} a ser actualizado.
      * @return el numero de registros actualizados.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -108,8 +115,7 @@ public interface DireccionMapper {
      * Obtiene una lista de objetos {@link Direccion}.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("DireccionMap")
     @Select("select direccion.* from direccion, usuario_direccion where direccion.id=usuario_direccion.id_direccion and direccion.activo=true and id_usuario=#{idUser}")
@@ -119,8 +125,7 @@ public interface DireccionMapper {
      * Obtiene un objeto de tipo 'DireccionConNombre' dado su id.
      *
      * @return DireccionConNombre que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="DireccionNombreMap", value = {
             @Result(property = "id",          column = "id_direccion"),
@@ -138,18 +143,17 @@ public interface DireccionMapper {
     /**
      * Agrega a la tabla de intersección de usuarios y direcciones un nuevo elemento.
      * @param ud Elemento que corresponde al id del usuario y el id de la dirección relacionados.
-     * @return Un entero si es que todo salió bien.
+     * @return Un entero si es que salió bien la consulta.
      */
 
     @Insert("INSERT INTO usuario_direccion(id_usuario, id_direccion) VALUES( #{idUsuario} , #{idDireccion} )")
     int insertUsuarioDireccion(UsuarioDireccion ud) throws SQLException;
 
     /**
-     * Obtiene un objeto de tipo 'DireccionConNombre' dado el id direccion y id usuario
+     * Obtiene un objeto de tipo 'DireccionConNombre' dado el id direccion y id usuario.
      *
-     * @return DireccionConNombre que tiene asignado el id direccion y id usuario como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return DireccionConNombre que tiene asignado el id dirección y id usuario como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="DireccionEnvioMap", value = {
             @Result(property = "id",          column = "id_direccion"),

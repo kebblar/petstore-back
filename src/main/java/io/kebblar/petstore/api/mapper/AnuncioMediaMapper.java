@@ -33,7 +33,7 @@ import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen
+ * Interfaz 'Mapper' MyBatis asociado a la entidad AnuncioImagen.
  *
  * @author Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
@@ -43,14 +43,15 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
  */
 @Repository
 public interface AnuncioMediaMapper {
-    static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
+
+    String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 
     /**
-     * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado
+     * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado.
      *
-     * @param id Identificador del anuncio por medio del cual se realizara la busqueda de sus imagenes asociadas
-     * @return Listado de clases de tipo 'AnuncioMedia' con la informacion de las imagenes
-     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     * @param id Identificador del anuncio por medio del cual se realizara la búsqueda de sus imagenes asociadas
+     * @return Listado de clases de tipo 'AnuncioMedia' con la información de las imágenes
+     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @Results(id="AnuncioImagenMap", value = {
             @Result(property = "id",   column = "id"),
@@ -63,11 +64,11 @@ public interface AnuncioMediaMapper {
     List<AnuncioMedia> getImagenes(int id);
 
     /**
-     * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado
+     * Consulta el objeto de tipo 'AnuncioImagen' con base al id proporcionado.
      *
-     * @param id Identificador de la imagen por medio del cual se realizara la busqueda de sus imagen
-     * @return Clase de tipo 'AnuncioImagen' con la informacion de las imagen solicitada
-     * @throws SQLException Excepcion lanzada en caso de error de base de datos
+     * @param uuid Identificador de la imagen por medio del cual se realizara la búsqueda de sus imagen
+     * @return Clase de tipo 'AnuncioImagen' con la información de las imágen solicitada
+     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioImagenMap")
     @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE uuid = #{uuid} ")
@@ -76,7 +77,7 @@ public interface AnuncioMediaMapper {
     /**
      * Inserta un objeto de tipo 'AnuncioImagen' con base en la información dada por el objeto de tipo 'AnuncioImagen'.
      *
-     * @param AnuncioMedia a ser insertado.
+     * @param anuncioImagen a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
@@ -95,11 +96,12 @@ public interface AnuncioMediaMapper {
     int eliminarImagen(String uuid) throws SQLException;
 
     /**
-     * Metodo que permite actualizar si una imagen es principal o no,con base al uuid de la imagen
+     * Metodo que permite actualizar si una imagen es principal o no, con base al uuid de la imagen.
+     *
      * @param uuid Identificador del anuncio a actualizar
      * @param principal Indica si la imagen sera o no principal
      * @return numero de registros actualizados
-     * @throws SQLException Excepcion lanzada en caso de error
+     * @throws SQLException Excepción lanzada en caso de error
      */
     @Update("UPDATE anuncio_media SET principal = #{principal} WHERE uuid = #{uuid} ")
     int actualizaPrincipal(String uuid, Boolean principal) throws SQLException;

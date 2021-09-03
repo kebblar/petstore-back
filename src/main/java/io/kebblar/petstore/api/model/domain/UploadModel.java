@@ -26,6 +26,10 @@ import java.util.Date;
  * @author garellano
  */
 public class UploadModel {
+
+    /*
+     * Atributos de clase.
+     */
     private int id;
     private String nombreOriginal;
     private String nuevoNombre;
@@ -34,16 +38,16 @@ public class UploadModel {
     private long peso;
     private boolean activo;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public UploadModel() {
     }
 
-    public UploadModel(int id,
-            String nombreOriginal,
-            String nuevoNombre,
-            String md5,
-            Date fechaCarga,
-            long peso,
-            boolean activo) {
+    /**
+     * Constructor basado en parámetros de la clase.
+     */
+    public UploadModel(int id, String nombreOriginal, String nuevoNombre, String md5, Date fechaCarga, long peso, boolean activo) {
         this.id = id;
         this.nombreOriginal = nombreOriginal;
         this.nuevoNombre = nuevoNombre;
@@ -52,6 +56,10 @@ public class UploadModel {
         this.peso = peso;
         this.activo = activo;
     }
+
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -94,6 +102,10 @@ public class UploadModel {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "UploadModel [id=" + id + ", nombreOriginal=" + nombreOriginal + ", nuevoNombre=" + nuevoNombre

@@ -27,6 +27,9 @@ package io.kebblar.petstore.api.model.domain;
  */
 public class TickerWrapper {
 
+    /*
+     * Atributos de la clase.
+     */
     private String symbol;
     private String priceChange;
     private String priceChangePercent;
@@ -49,6 +52,9 @@ public class TickerWrapper {
     private long lastId;
     private long count;
 
+    /*
+     * Getter y Setter.
+     */
     public String getSymbol() {
         return symbol;
     }

@@ -20,13 +20,20 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle}
+ * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle}.
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.UsuarioDetalle
@@ -36,7 +43,9 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
  */
 @Repository
 public interface UsuarioDetalleMapper {
-    static final String CAMPOS = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular ";
+
+    String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, " +
+            "fecha_nacimiento, telefono_celular ";
 
     /**
      * Obtiene un objeto de tipo '{@link UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
@@ -54,18 +63,17 @@ public interface UsuarioDetalleMapper {
         @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
         @Result(property = "telefonoCelular", column = "telefono_celular")
     })
-    @Select("SELECT " + CAMPOS + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ")
+    @Select("SELECT " + CAMPOS_USER_D + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ")
     UsuarioDetalle getById(int idUsuario) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo {@link UsuarioDetalle} .
      *
      * @return Lista de objetos de tipo {@link UsuarioDetalle}
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioDetalleMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario_detalle ")
+    @Select("SELECT " + CAMPOS_USER_D + " FROM usuario_detalle ")
     List<UsuarioDetalle> getAll() throws SQLException;
 
     /**

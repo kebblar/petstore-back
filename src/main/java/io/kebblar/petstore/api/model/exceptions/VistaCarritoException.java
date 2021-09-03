@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   BitcoinTransactionException.java
+ * Artefacto:   VistaCarritoException.java
  * Tipo:        clase
  * AUTOR:       Fhernanda Romo
  * Fecha:       Martes 11 de Mayo de 2021 (17_57)
@@ -19,11 +19,12 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que es lanzada cuando ocurre un problema al procesar la petici'on de la
+ * <p>Descripción:</p>
+ * Excepción que es lanzada cuando ocurre un problema al procesar la petición de la
  * vista hacia un carrito de compras del aplicativo.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  fhernanda
@@ -32,8 +33,13 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class VistaCarritoException extends BusinessException{
+
     private static final long serialVersionUID = 129288280347509459L;
 
+    /**
+     * Ocurrió un problema al procesar la petición del carrito de un usuario.
+     * @param clave cadena que representa la clave de orden del carrito
+     */
     public VistaCarritoException(String clave) {
         super(
             "Error al recuperar la vista del carrito",

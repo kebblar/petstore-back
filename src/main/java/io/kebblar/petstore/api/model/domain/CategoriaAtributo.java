@@ -36,8 +36,8 @@ public class CategoriaAtributo implements Serializable {
 
     private static final long serialVersionUID = 2560581152871158325L;
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private Integer idCategoria;
     private Integer idAtributo;
@@ -59,7 +59,7 @@ public class CategoriaAtributo implements Serializable {
     }
 
     /**
-     * Constructor basado en la llave primaria.
+     * Constructor basado en los atributos de la clase.
      */
     public CategoriaAtributo(Integer idCategoria, Integer idAtributo,String nombreAtributo) {
         this.idCategoria = idCategoria;
@@ -67,51 +67,35 @@ public class CategoriaAtributo implements Serializable {
         this.nombreAtributo = nombreAtributo;
     }
 
-
-    /**
-     * Getter para idCategoria.
+    /*
+     * Getter y Setter.
      */
     public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    /**
-     * Setter para idCategoria.
-     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
-    /**
-     * Getter para idAtributo.
-     */
     public Integer getIdAtributo() {
         return idAtributo;
     }
 
-    /**
-     * Setter para idAtributo.
-     */
     public void setIdAtributo(Integer idAtributo) {
         this.idAtributo = idAtributo;
     }
 
-    /**
-     * Getter para nombreAtributo.
-     */
     public String getNombreAtributo() {
         return nombreAtributo;
     }
 
-    /**
-     * setter para nombreAtributo.
-     */
     public void setNombreAtributo(String nombreAtributo) {
         this.nombreAtributo = nombreAtributo;
     }
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -123,7 +107,7 @@ public class CategoriaAtributo implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase CategoriaAtributo son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -140,7 +124,7 @@ public class CategoriaAtributo implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

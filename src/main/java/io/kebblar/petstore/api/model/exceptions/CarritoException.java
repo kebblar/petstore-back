@@ -19,11 +19,12 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que es lanzada cuando ocurre un problema al procesar la actualización
+ * <p>Descripción:</p>
+ * Excepción que es lanzada cuando ocurre un problema al procesar la actualización
  * de un carrito de compras del aplicativo.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  fhernanda
@@ -33,12 +34,18 @@ package io.kebblar.petstore.api.model.exceptions;
  */
 public class CarritoException extends BusinessException {
     private static final long serialVersionUID = -2374644132039662770L;
-    private static final String detailedMessage = "No pudo actualizarse la orden compra del carrito del usuario %d";
+    private static final String DETAILED_MESSAGE = "No pudo actualizarse la orden compra del carrito del usuario %d";
 
+    /**
+     * Dado el id del usuario a quien corresponde el carrito, lanza una excepción informando que
+     * determinada compra no pudo ser asociada a los items que este usuario agregó a su carrito.
+     *
+     * @param idUser id del usuario afectado
+     */
     public CarritoException(int idUser) {
         super(
             "Error al asociar el carrito a una compra",
-            String.format(detailedMessage, idUser),
+            String.format(DETAILED_MESSAGE, idUser),
             1004,
             "CVE-1004",
             HttpStatus.BAD_REQUEST);

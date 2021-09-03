@@ -25,6 +25,8 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Objects;
+
 /**
  * Implementacion del POJO de la entidad de {@link ChartWrapper}.
  *
@@ -34,15 +36,28 @@ package io.kebblar.petstore.api.model.domain;
  */
 
 public class ChartWrapper {
+
+    /*
+     * Atributos de la clase.
+     */
     private ChartData chart;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public ChartWrapper() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public ChartWrapper(ChartData chart) {
         this.chart = chart;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public ChartData getChart() {
         return chart;
     }
@@ -51,34 +66,30 @@ public class ChartWrapper {
         this.chart = chart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Chart [chart=" + chart + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChartWrapper)) return false;
+        ChartWrapper that = (ChartWrapper) o;
+        return Objects.equals(chart, that.chart);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((chart == null) ? 0 : chart.hashCode());
-        return result;
+        return Objects.hash(chart);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ChartWrapper other = (ChartWrapper) obj;
-        if (chart == null) {
-            if (other.chart != null)
-                return false;
-        } else if (!chart.equals(other.chart))
-            return false;
-        return true;
-    }
-
 }

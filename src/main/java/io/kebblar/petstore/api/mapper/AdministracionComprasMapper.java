@@ -60,8 +60,8 @@ public interface AdministracionComprasMapper {
     /**
      * Actualiza el estado de una compra de en camino a enviado.
      *
-     * @param estadoEnvio, el estado al que se va a actualizar la compra.
-     * @param cveCompra, la compra que queremos actualizar.
+     * @param estadoEnvio el estado al que se va a actualizar la compra.
+     * @param cveCompra la compra que queremos actualizar.
      * @return un entero en caso de que la operacion fue exitosa.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */

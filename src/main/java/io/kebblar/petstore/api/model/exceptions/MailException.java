@@ -19,11 +19,12 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de envio de correos
- * cuya salida no tuvo exito.
+ * <p>Descripción:</p>
+ * Excepción que modela la respuesta a una petición de envío de correos
+ * cuya salida no tuvo éxito.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  garellano
@@ -34,9 +35,13 @@ package io.kebblar.petstore.api.model.exceptions;
 public class MailException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * Se lanza al ocurrir un problema con el envío de correos.
+     * @param e excepción atrapada
+     */
     public MailException(Exception e) {
         super(
-            "Error en el servicio de envio de correos",
+            "Error en el servicio de envío de correos",
             e.getMessage(),
             1011,
             "CVE_1011",

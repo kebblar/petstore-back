@@ -23,14 +23,18 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad UsuarioCompleto 
+ * Interfaz 'Mapper' MyBatis asociado a la entidad UsuarioCompleto.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -40,14 +44,14 @@ import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
  */
 @Repository
 public interface UsuarioCompletoMapper {
-    static final String CAMPOS = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
+
+    String CAMPOS_USER_C = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
 
     /**
      * Obtiene un objeto de tipo 'UsuarioCompleto' dado su id.
      *
      * @return UsuarioCompleto que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="UsuarioCompletoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -68,25 +72,24 @@ public interface UsuarioCompletoMapper {
             @Result(property = "nickName",   column = "nick_name"),
             @Result(property = "telefonoCelular",   column = "telefono_celular")    
     })
-    @Select("SELECT " + CAMPOS + " FROM usuario_completo WHERE id=#{id}") 
+    @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo WHERE id=#{id}")
     UsuarioCompleto getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'UsuarioCompleto'.
      *
      * @return Lista de obetos de tipo UsuarioCompleto
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioCompletoMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario_completo ") 
+    @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo ")
     List<UsuarioCompleto> getAll() throws SQLException;
 
     /**
      * OJO : Actualiza un objeto de tipo 'Usuario' con base en la 
      * infrmación dada por el objeto de tipo 'UsuarioCompleto'.
      *
-     * @param usuarioCompleto a ser actualizado.
+     * @param usuario a ser actualizado.
      * @return el numero de registros actualizados.
      * 
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
@@ -97,10 +100,22 @@ public interface UsuarioCompletoMapper {
     + " WHERE id = #{id}")
     int updateUsuarioPlano(Usuario usuario) throws SQLException;
 
+    /**
+     * Cuenta el número de usuarios.
+     * @return Entero representando el número de usuarios
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     */
     @Select("SELECT count(*) from usuario_completo ")
     int countUsuarios() throws SQLException;
-    
+
+    /**
+     *
+     * @param startRow
+     * @param pageSize
+     * @return
+     * @throws SQLException
+     */
     @ResultMap("UsuarioCompletoMap")
-    @Select("SELECT " + CAMPOS + " FROM usuario_completo LIMIT #{startRow},#{pageSize}") 
+    @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo LIMIT #{startRow},#{pageSize}")
     List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;    
 }

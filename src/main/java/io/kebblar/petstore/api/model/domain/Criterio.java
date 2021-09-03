@@ -18,6 +18,8 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
+import java.util.Objects;
+
 /**
  * Implementacion del POJO de la entidad de 'Criterio'.
  *
@@ -27,16 +29,29 @@ package io.kebblar.petstore.api.model.domain;
  */
 public class Criterio {
 
+    /*
+     * Atributos de la clase.
+     */
     private int idCategoria;
     private int valor;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public Criterio() {
     }
+
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Criterio(int idCategoria, int valor) {
         this.idCategoria = idCategoria;
         this.valor = valor;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getIdCategoria() {
         return idCategoria;
     }
@@ -49,30 +64,29 @@ public class Criterio {
     public void setValor(int valor) {
         this.valor = valor;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idCategoria;
-        result = prime * result + valor;
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Criterio other = (Criterio) obj;
-        if (idCategoria != other.idCategoria)
-            return false;
-        if (valor != other.valor)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Criterio)) return false;
+        Criterio criterio = (Criterio) o;
+        return idCategoria == criterio.idCategoria && valor == criterio.valor;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCategoria, valor);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Criterio [idCategoria=" + idCategoria + ", valor=" + valor + "]";

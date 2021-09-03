@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   DisabledUserException.java
+ * Artefacto:   NotFoundException.java
  * Tipo:        Clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Jueves 6 de Mayo de 2021 (09_25)
@@ -19,7 +19,8 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición de autenticación
+ * <p>Descripción</p>
+ * Excepción que modela la respuesta a una petición de autenticación
  * cuyo usuario fue deshabilitado.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene

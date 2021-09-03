@@ -25,13 +25,20 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.TipoDireccion;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion
+ * Interfaz 'Mapper' MyBatis asociado a la entidad TipoDireccion.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -42,32 +49,31 @@ import io.kebblar.petstore.api.model.domain.TipoDireccion;
 
 @Repository
 public interface TipoDireccionMapper {
-    static final String CAMPOS = " id, nombre, activo ";
+
+    String CAMPOS_T_DIRECC = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'TipoDireccion' dado su id.
      *
-     * @return TipoDireccion que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return TipoDireccion que tiene asignado el id pasado como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="TipoDireccionMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_T_DIRECC + " FROM tipo_direccion WHERE     id = #{id}     ")
     TipoDireccion getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'TipoDireccion'.
      *
      * @return Lista de obetos de tipo TipoDireccion
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("TipoDireccionMap")
-    @Select("SELECT " + CAMPOS + " FROM tipo_direccion ")
+    @Select("SELECT " + CAMPOS_T_DIRECC + " FROM tipo_direccion ")
     List<TipoDireccion> getAll() throws SQLException;
 
     /**
@@ -83,8 +89,8 @@ public interface TipoDireccionMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(TipoDireccion tipoDireccion) throws SQLException;
 
-/**
-     * Actualiza un objeto de tipo 'TipoDireccion' con base en la infrmación dada por el objeto de tipo 'TipoDireccion'.
+    /**
+     * Actualiza un objeto de tipo 'TipoDireccion' con base en la información dada por el objeto de tipo 'TipoDireccion'.
      *
      * @param tipoDireccion a ser actualizado.
      * @return el numero de registros actualizados.

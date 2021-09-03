@@ -31,13 +31,15 @@ package io.kebblar.petstore.api.model.exceptions;
  * @since   1.0-SNAPSHOT
  */
 public class WrongTokenException extends BusinessException {
+
     private static final long serialVersionUID = -7083159020205284484L;
 
     public WrongTokenException(Exception e) {
         super(e);
     }
     
-    //TODO: Aqui igualmente puede proceder tener varias especializacones de esta clase... para evitar el "msg"
+    //TODO: Aquí igualmente puede proceder tener varias especializaciones de esta clase... para evitar el "msg"
+    //Podría ser que esté duplicada esta custom exception @TokenNotExistException
     public WrongTokenException(String msg) {
         super(
             "El token que se ha proporcionado es incorrecto.",
@@ -46,5 +48,4 @@ public class WrongTokenException extends BusinessException {
             "CVE_1025",
             HttpStatus.FORBIDDEN);
     }
-
 }

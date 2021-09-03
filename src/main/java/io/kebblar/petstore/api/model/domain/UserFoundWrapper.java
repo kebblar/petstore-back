@@ -3,15 +3,26 @@ package io.kebblar.petstore.api.model.domain;
 import java.util.List;
 
 public class UserFoundWrapper {
+
+    /*
+     * Atributos de clase.
+     */
     private List<Rol> roles;
     private UsuarioDetalle usuarioDetalle;
     private String jwt;
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public UserFoundWrapper(List<Rol> roles, UsuarioDetalle usuarioDetalle, String jwt) {
         this.roles = roles;
         this.usuarioDetalle = usuarioDetalle;
         this.jwt = jwt;
     }
+
+    /*
+     * Getter y Setter.
+     */
     public List<Rol> getRoles() {
         return roles;
     }
@@ -30,11 +41,19 @@ public class UserFoundWrapper {
     public void setJwt(String jwt) {
         this.jwt = jwt;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "UserFoundWrapper [roles=" + roles +  ", usuarioDetalle="
                 + usuarioDetalle + ", jwt=" + jwt + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -44,6 +63,10 @@ public class UserFoundWrapper {
         result = prime * result + ((usuarioDetalle == null) ? 0 : usuarioDetalle.hashCode());
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

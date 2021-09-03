@@ -36,7 +36,7 @@ public class UsuarioCompleto implements Serializable {
 
     private static final long serialVersionUID = 2323351447441561757L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private int id;
@@ -62,7 +62,6 @@ public class UsuarioCompleto implements Serializable {
      */
     public UsuarioCompleto() {
     }
-
 
     /**
      * Constructor basado en todos los atributos de la clase.
@@ -104,247 +103,148 @@ public class UsuarioCompleto implements Serializable {
         this.telefonoCelular = telefonoCelular;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Setter y Getter.
      */
     public int getId() {
         return id;
     }
-    
-    /**
-     * Setter para id.
-     */
+
     public void setId(int id) {
         this.id = id;
     }
-    
-    /**
-     * Getter para correo.
-     */
+
     public String getCorreo() {
         return correo;
     }
-    
-    /**
-     * Setter para correo.
-     */
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
-    /**
-     * Getter para clave.
-     */
+
     public String getClave() {
         return clave;
     }
-    
-    /**
-     * Setter para clave.
-     */
+
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    /**
-     * Getter para creado.
-     */
+
     public long getCreado() {
         return creado;
     }
-    
-    /**
-     * Setter para creado.
-     */
+
     public void setCreado(long creado) {
         this.creado = creado;
     }
-    
-    /**
-     * Getter para activo.
-     */
+
     public boolean isActivo() {
         return activo;
     }
-    
-    /**
-     * Setter para activo.
-     */
+
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-    /**
-     * Getter para accesoNegadoContador.
-     */
+
     public int getAccesoNegadoContador() {
         return accesoNegadoContador;
     }
-    
-    /**
-     * Setter para accesoNegadoContador.
-     */
+
     public void setAccesoNegadoContador(int accesoNegadoContador) {
         this.accesoNegadoContador = accesoNegadoContador;
     }
-    
-    /**
-     * Getter para instanteBloqueo.
-     */
+
     public long getInstanteBloqueo() {
         return instanteBloqueo;
     }
-    
-    /**
-     * Setter para instanteBloqueo.
-     */
+
     public void setInstanteBloqueo(long instanteBloqueo) {
         this.instanteBloqueo = instanteBloqueo;
     }
-    
-    /**
-     * Getter para instanteUltimoAcceso.
-     */
+
     public long getInstanteUltimoAcceso() {
         return instanteUltimoAcceso;
     }
-    
-    /**
-     * Setter para instanteUltimoAcceso.
-     */
+
     public void setInstanteUltimoAcceso(long instanteUltimoAcceso) {
         this.instanteUltimoAcceso = instanteUltimoAcceso;
     }
-    
-    /**
-     * Getter para instanteUltimoCambioClave.
-     */
+
     public long getInstanteUltimoCambioClave() {
         return instanteUltimoCambioClave;
     }
-    
-    /**
-     * Setter para instanteUltimoCambioClave.
-     */
+
     public void setInstanteUltimoCambioClave(long instanteUltimoCambioClave) {
         this.instanteUltimoCambioClave = instanteUltimoCambioClave;
     }
-    
-    /**
-     * Getter para regeneraClaveToken.
-     */
+
     public String getRegeneraClaveToken() {
         return regeneraClaveToken;
     }
-    
-    /**
-     * Setter para regeneraClaveToken.
-     */
+
     public void setRegeneraClaveToken(String regeneraClaveToken) {
         this.regeneraClaveToken = regeneraClaveToken;
     }
-    
-    /**
-     * Getter para regeneraClaveInstante.
-     */
+
     public long getRegeneraClaveInstante() {
         return regeneraClaveInstante;
     }
-    
-    /**
-     * Setter para regeneraClaveInstante.
-     */
+
     public void setRegeneraClaveInstante(long regeneraClaveInstante) {
         this.regeneraClaveInstante = regeneraClaveInstante;
     }
-    
-    /**
-     * Getter para nombre.
-     */
+
     public String getNombre() {
         return nombre;
     }
-    
-    /**
-     * Setter para nombre.
-     */
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    /**
-     * Getter para apellidoPaterno.
-     */
+
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
-    
-    /**
-     * Setter para apellidoPaterno.
-     */
+
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
-    
-    /**
-     * Getter para apellidoMaterno.
-     */
+
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
-    
-    /**
-     * Setter para apellidoMaterno.
-     */
+
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
-    
-    /**
-     * Getter para fechaNacimiento.
-     */
+
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
-    
-    /**
-     * Setter para fechaNacimiento.
-     */
+
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    /**
-     * Getter para nickName.
-     */
+
     public String getNickName() {
         return nickName;
     }
-    
-    /**
-     * Setter para nickName.
-     */
+
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
-    
-    /**
-     * Getter para telefonoCelular.
-     */
+
     public String getTelefonoCelular() {
         return telefonoCelular;
     }
-    
-    /**
-     * Setter para telefonoCelular.
-     */
+
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
     
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -370,7 +270,7 @@ public class UsuarioCompleto implements Serializable {
     }
     
     /**
-     * Compara si dos instancias de la clase UsuarioCompleto son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -402,7 +302,7 @@ public class UsuarioCompleto implements Serializable {
     }
     
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

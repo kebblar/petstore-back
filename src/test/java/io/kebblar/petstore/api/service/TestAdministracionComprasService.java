@@ -45,6 +45,6 @@ public class TestAdministracionComprasService {
         AdministracionCompras compra = new AdministracionCompras(true,"cve_orden","nueva colonia","mascota foo","foo.com","2020-10-10","calle goo numero 80", "84444");
         getLista.add(compra);
         when(historialMapper.getAll()).thenReturn(getLista);
-        assert(historialService.getAll().get(0).getCve_orden() == "foo.com");
+        assert(historialService.getAll().get(0).getCveOrden() == "foo.com");
     }
 }

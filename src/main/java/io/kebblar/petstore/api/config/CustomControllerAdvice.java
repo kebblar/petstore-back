@@ -45,8 +45,12 @@ import java.util.Map;
  */
 @ControllerAdvice
 public class CustomControllerAdvice {
-    // Take a look at:
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+
+    /*
+     * Logger para la clase CustomControllerAdvice.
+     * Take a look at:
+     * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+     */
     private Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
     @ResponseBody
@@ -57,7 +61,7 @@ public class CustomControllerAdvice {
     }
 
     /**
-     * Método que maneja las exepciones de {@link MethodArgumentNotValidException}.
+     * Método que maneja las excepciones de {@link MethodArgumentNotValidException}.
      *
      * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
@@ -66,14 +70,15 @@ public class CustomControllerAdvice {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> userErrorHandler(MethodArgumentNotValidException geEx) {
         Map<String, Object> lista = buildValidationErrorResponse(geEx);
-        logger.error(lista.toString());
+        String s = lista.toString();
+        logger.error(s);
         return new ResponseEntity<>(lista, HttpStatus.BAD_REQUEST);
     }
 
     /**
      * Método que maneja las exepciones de {@link ControllerException}.
      *
-     * @param geEx la excepcion que manejará (de tipo ControllerException).
+     * @param geEx la excepción que manejará (de tipo ControllerException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
      */
     @ResponseBody
@@ -100,7 +105,7 @@ public class CustomControllerAdvice {
     /**
      * Mapa de retorno para errores de tipo MethodArgumentNotValidException.
      *
-     * @param geEx la excepcion a mapear (de tipo MethodArgumentNotValidException).
+     * @param geEx la excepción a mapear (de tipo MethodArgumentNotValidException).
      * @return mapa de valores para una respuesta de validación de campos.
      */
     private Map<String, Object> buildValidationErrorResponse(MethodArgumentNotValidException geEx) {
@@ -110,16 +115,18 @@ public class CustomControllerAdvice {
         for (ObjectError fe : binding.getAllErrors()) {
             FieldError error = (FieldError)fe;
             Map<String, String> err = new HashMap<>();
-                String defMess = error.getDefaultMessage();
-                String[] arr = defMess.split("\\|");
-                String index = (arr.length>1)? arr[1]:"0";
-            err.put("index", index);
-            err.put("description", arr[0]);
-            err.put("validationType", error.getCode());
-            err.put("objectName", error.getObjectName());
-            err.put("rejectedValue", error.getRejectedValue()+"");
-            err.put("fieldName", error.getField());
-            lista.add(err);
+            if(error.getDefaultMessage() != null) {
+                String[] arr = error.getDefaultMessage().split("\\|");
+                String index = (arr.length > 1) ? arr[1] : "0";
+
+                err.put("index", index);
+                err.put("description", arr[0]);
+                err.put("validationType", error.getCode());
+                err.put("objectName", error.getObjectName());
+                err.put("rejectedValue", error.getRejectedValue() + "");
+                err.put("fieldName", error.getField());
+                lista.add(err);
+            }
         }
         map.put("errorType", "3001");
         map.put("errors", lista);

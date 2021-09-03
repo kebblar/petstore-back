@@ -23,33 +23,37 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Grafica;
 
 /**
- * Interfaz 'Mapper' MyBatis asociado a la entidad Chart
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Chart.
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  *
- * @see ChartData
  */
 
 @Repository
 public interface GraficaMascotaMapper {
+
+    String CAMPOS_GRAFICA_M = "cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha";
+
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
-     * @return Una lista de las mascotas mas vendidas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     *                      operación desde la base de datos.
+     * @return Una lista de las mascotas más vendidas
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaMap", value = { @Result(property = "etiqueta", column = "mascota"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_M+" from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "
@@ -57,8 +61,16 @@ public interface GraficaMascotaMapper {
             + "group by cat.categoria order by cantidad desc limit 5 ")
     List<Grafica> getAll() throws SQLException;
 
+    /**
+     * Devuelve la información de frecuencia de compra de las mascotas basándose en un rango de fechas.
+     *
+     * @param fechaIni cota inferior del rango de fechas
+     * @param fechaFin cota superior del rango de fechas
+     * @return Lista con la información deseada
+     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     */
     @ResultMap("GraficaMap")
-    @Select("SELECT cat.categoria as mascota,count(*) as cantidad, oc.fecha_hora_comprar as fecha from orden_compra oc "
+    @Select("SELECT "+CAMPOS_GRAFICA_M+" from orden_compra oc "
             + "inner join carrito car on (car.cve_orden_compra= oc.cve_orden_compra) "
             + "inner join anuncio anun on (anun.id = car.id_anuncio) "
             + "inner join categoria cat on (cat.id = anun.id_categoria) "

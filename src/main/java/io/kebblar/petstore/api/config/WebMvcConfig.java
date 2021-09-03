@@ -34,7 +34,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
     
     @Value("${jwt.encryptor.password}")
-    private String ENCRYPT_KEY;
+    private String encryptKey;
     
     /**
      * {@inheritDoc}
@@ -51,7 +51,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CustomInterceptor(ENCRYPT_KEY));
+        registry.addInterceptor(new CustomInterceptor(encryptKey));
     }
 
     /**

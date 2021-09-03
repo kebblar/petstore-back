@@ -43,7 +43,7 @@ public interface HistorialComprasMapper {
     /**
      * Obtiene todas las compras hechas por un usuario.
      *
-     * @param int idUsuario el id del usuario del que queremos saber sus compras.
+     * @param idUsuario el id del usuario del que queremos saber sus compras.
      * @return Una lista de las compras hechas por un usuario.
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */

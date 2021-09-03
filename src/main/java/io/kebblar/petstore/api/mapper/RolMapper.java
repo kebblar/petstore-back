@@ -23,13 +23,20 @@ package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Rol;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Rol
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Rol.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -40,45 +47,63 @@ import io.kebblar.petstore.api.model.domain.Rol;
 
 @Repository
 public interface RolMapper {
-    static final String CAMPOS = " id, nombre, activo ";
 
-    @Select("SELECT id, nombre, activo FROM rol")
-    List<Rol> getAll() throws SQLException;
+    String CAMPOS_ROL = " id, nombre, activo ";
 
+    /**
+     * Retorna el rol dado su id y si este está activo.
+     * @param id id del rol buscado
+     * @return Rol correspondiente al id del parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     */
     @Select("SELECT id, nombre, activo FROM rol WHERE id = #{id} and activo=true")
     Rol getRol(int id) throws SQLException;
 
+    /**
+     * Dado el id de un usuario, la función nos devuelve la lista de roles que este tiene.
+     * @param idUser id del usuario buscado
+     * @return Lista de roles asociados a esta cuenta
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     */
     @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
     List<Rol> getUserRoles(int idUser) throws SQLException;
 
+    /**
+     * Inserta un usuario y su rol en una tabla que relaciona ambas características.
+     * @param idUsuario id del usuario
+     * @param idRol id del rol asociado al usuario
+     * @return Entero que indica que la operación salió bien
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     */
     @Insert("INSERT INTO usuario_rol VALUES(#{idUsuario}, #{idRol})")
     int insertUserRol(int idUsuario, int idRol) throws SQLException;
 
     /**
      * Obtiene un objeto de tipo 'Rol' dado su id.
      *
-     * @return Rol que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Rol que tiene asignado el id pasado como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="RolMap", value = {
             @Result(property = "id",   column = "id"),
             @Result(property = "nombre",   column = "nombre"),
             @Result(property = "activo",   column = "activo")
     })
-    @Select("SELECT " + CAMPOS + " FROM rol WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_ROL + " FROM rol WHERE id = #{id} ")
     Rol getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Rol'.
      *
-     * @return Lista de obetos de tipo Rol
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Lista de objetos de tipo Rol
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("RolMap")
-    @Select("SELECT " + CAMPOS + " FROM rol ")
+    @Select("SELECT " + CAMPOS_ROL + " FROM rol ")
     List<Rol> getAllSinFiltros() throws SQLException;
+
+    @Select("SELECT id, nombre, activo FROM rol")
+    List<Rol> getAll() throws SQLException;
 
     /**
      * Inserta un objeto de tipo 'Rol' con base en la información dada por el objeto de tipo 'Rol'.
@@ -93,8 +118,8 @@ public interface RolMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Rol rol) throws SQLException;
 
-/**
-     * Actualiza un objeto de tipo 'Rol' con base en la infrmación dada por el objeto de tipo 'Rol'.
+    /**
+     * Actualiza un objeto de tipo 'Rol' con base en la información dada por el objeto de tipo 'Rol'.
      *
      * @param rol a ser actualizado.
      * @return el numero de registros actualizados.

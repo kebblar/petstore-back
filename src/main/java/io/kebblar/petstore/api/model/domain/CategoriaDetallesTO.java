@@ -32,11 +32,15 @@ package io.kebblar.petstore.api.model.domain;
  * @since 1.0-SNAPSHOT
  */
 public class CategoriaDetallesTO {
+
+    /*
+     * Atributos de la clase.
+     */
     private Integer idCategoria;
     private String categoriaNombre;
     private int estatusCategoria;
-    private int id_categoria;
-    private int id_atributo;
+    private int idCateg;
+    private int idAtrib;
     private int idAtributo;
     private String nombreAtributo;
     private int estatusAtributo;
@@ -45,6 +49,9 @@ public class CategoriaDetallesTO {
     private String rango;
     private int estatusRango;
 
+    /*
+     * Setter y getter.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
@@ -69,20 +76,20 @@ public class CategoriaDetallesTO {
         this.estatusCategoria = estatusCategoria;
     }
 
-    public int getId_categoria() {
-        return id_categoria;
+    public int getIdCateg() {
+        return idCateg;
     }
 
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setIdCateg(int idCateg) {
+        this.idCateg = idCateg;
     }
 
-    public int getId_atributo() {
-        return id_atributo;
+    public int getIdAtrib() {
+        return idAtrib;
     }
 
-    public void setId_atributo(int id_atributo) {
-        this.id_atributo = id_atributo;
+    public void setIdAtrib(int idAtrib) {
+        this.idAtrib = idAtrib;
     }
 
     public int getIdAtributo() {
@@ -141,11 +148,14 @@ public class CategoriaDetallesTO {
         this.estatusRango = estatusRango;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "CategoriaDetallesTO [idCategoria=" + idCategoria + ", categoriaNombre=" + categoriaNombre
-                + ", estatusCategoria=" + estatusCategoria + ", id_categoria=" + id_categoria + ", id_atributo="
-                + id_atributo + ", idAtributo=" + idAtributo + ", nombreAtributo=" + nombreAtributo
+                + ", estatusCategoria=" + estatusCategoria + ", id_categoria=" + idCateg + ", id_atributo="
+                + idAtrib + ", idAtributo=" + idAtributo + ", nombreAtributo=" + nombreAtributo
                 + ", estatusAtributo=" + estatusAtributo + ", idRango=" + idRango + ", rangoIdAtributo="
                 + rangoIdAtributo + ", rango=" + rango + ", estatusRango=" + estatusRango + "]";
     }

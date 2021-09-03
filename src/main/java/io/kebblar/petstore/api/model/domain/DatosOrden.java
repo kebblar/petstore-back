@@ -33,8 +33,12 @@ import java.util.Objects;
  * @since 1.0-SNAPSHOT
  */
 public class DatosOrden implements Serializable {
+
     private static final long serialVersionUID = -6032711964621903590L;
 
+    /*
+     * Atributos de la clase.
+     */
     private int idUsuario;
     private int idDireccion;
     private int idPaqueteria;
@@ -53,6 +57,9 @@ public class DatosOrden implements Serializable {
     public DatosOrden() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public DatosOrden(int idUsuario, int idDireccion, int idPaqueteria, int idMetodoPago, int idMoneda, String cveOrdenCompra, Date fecha, boolean estadoEnvio, long total, String descripcion, String recibo) {
         this.idUsuario = idUsuario;
         this.idDireccion = idDireccion;
@@ -67,6 +74,9 @@ public class DatosOrden implements Serializable {
         this.recibo = recibo;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -155,6 +165,9 @@ public class DatosOrden implements Serializable {
         this.total = total;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -163,11 +176,17 @@ public class DatosOrden implements Serializable {
         return idUsuario == that.idUsuario && idDireccion == that.idDireccion && idPaqueteria == that.idPaqueteria && idMetodoPago == that.idMetodoPago && idMoneda == that.idMoneda && estadoEnvio == that.estadoEnvio && total == that.total && cveOrdenCompra.equals(that.cveOrdenCompra) && fecha.equals(that.fecha) && descripcion.equals(that.descripcion) && recibo.equals(that.recibo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idUsuario, idDireccion, idPaqueteria, idMetodoPago, idMoneda, cveOrdenCompra, fecha, estadoEnvio, total, descripcion, recibo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "DatosOrden{" +

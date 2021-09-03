@@ -38,13 +38,22 @@ import java.util.Date;
 public class GraficaMascota implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
+    /*
+     * Atributos de la clase.
+     */
     private String mascota;
     private Long cantidad;
     private Date fecha;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public GraficaMascota() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public GraficaMascota(String mascota, Long cantidad, Date fecha) {
         super();
         this.mascota = mascota;
@@ -52,6 +61,9 @@ public class GraficaMascota implements Serializable {
         this.fecha = fecha;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public String getMascota() {
         return mascota;
     }
@@ -80,6 +92,9 @@ public class GraficaMascota implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -90,6 +105,9 @@ public class GraficaMascota implements Serializable {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -117,6 +135,9 @@ public class GraficaMascota implements Serializable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "GraficaMascota [mascota=" + mascota + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";

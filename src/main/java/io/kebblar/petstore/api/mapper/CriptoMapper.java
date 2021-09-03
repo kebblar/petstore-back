@@ -1,7 +1,33 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para copiarlo,  distribuirlo o modificarlo total
+ *              o  parcialmente siempre y cuando  mantenga  este
+ *              aviso y  reconozca la  autoría del  código al no
+ *              modificar  los datos establecidos en  la mencion
+ *              de "AUTOR".
+ *
+ *              ------------------------------------------------
+ *
+ * Artefacto:   CriptoMapper .java
+ * Proyecto:    petstore
+ * Tipo:        interface
+ * AUTOR:       Fhernanda Romo
+ * Fecha:       Miércoles 01 de septiembre de 2021 (13_15)
+ *
+ *              ------------------------------------------------
+ *
+ * Historia:    20210608_1315 Implementación de interface
+ *
+ */
 package io.kebblar.petstore.api.mapper;
 
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -9,13 +35,15 @@ import java.util.List;
 
 @Repository
 public interface CriptoMapper {
-    static final String CAMPOS = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, descripcion, last_balance";
+
+    String CAMPOS_CRIPTO = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, " +
+            "descripcion, last_balance";
 
     /**
-     * Obtiene la direccion de la cartera digital de bitcoin del usuario cuyo id es introducido.
+     * Obtiene la dirección de la cartera digital de bitcoin del usuario cuyo id es introducido.
      * @param id Id del usuario del que se desea recuperar la cartera.
      * @return Cartera en forma de cadena
-     * @throws SQLException Si hay un error en la recuperaci'on de esta.
+     * @throws SQLException Si hay un error en la recuperación de esta.
      */
     @Results(id="CriptoMap", value = {
     @Result(property = "address", column = "address")
@@ -24,10 +52,10 @@ public interface CriptoMapper {
     String getByUser(int id) throws SQLException;
 
     /**
-     * Nos da el usuario al que est'a asociada una cartera bitcoin.
-     * @param address Direccion de la cartera.
-     * @return el id del usuario al que le pertenece la cartera.
-     * @throws SQLException Si ocurre un problema en el proceso de recuperacion.
+     * Nos da el usuario al que está asociada una cartera bitcoin.
+     * @param address Dirección de la cartera.
+     * @return El id del usuario al que le pertenece la cartera.
+     * @throws SQLException Si ocurre un problema en el proceso de recuperación.
      */
     @Select("SELECT id_user FROM btc_wallet WHERE address = #{address} ")
     int getUserByAddress(String address) throws SQLException;
@@ -35,25 +63,25 @@ public interface CriptoMapper {
     /**
      * Inserta una nueva solicitud de orden a pagar con bitcoin en la base de datos.
      * @param transaccionBtc objeto con los datos de la orden si esta se genera.
-     * @return entero si se inserta con 'exito el objeto.
-     * @throws SQLException Si ocurre un problema de inserci'on.
+     * @return entero si se inserta con éxito el objeto.
+     * @throws SQLException Si ocurre un problema de inserción.
      */
     @Insert("Insert into transaccion_btc(id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, descripcion, last_balance) VALUES (#{idUsuario}, #{idDireccion}, #{wallet}, #{idPaqueteria}, #{status}, #{monto}, #{fecha}, #{descripcion}, #{lastBalance})")
     int insertTransaccion(TransaccionBtc transaccionBtc) throws SQLException;
 
     /**
-     * Actualiza una transaccion de bitcoin con informacion nueva.
-     * @param transaccionBtc objeto que simboliza una peticion.
-     * @return entero si todo sale bien.
+     * Actualiza una transacción de bitcoin con información nueva.
+     * @param transaccionBtc objeto que simboliza una petición.
+     * @return Entero si no hay ningún problema
      * @throws SQLException En caso de un problema con la consulta.
      */
     @Update("UPDATE transaccion_btc SET id_usuario = #{idUsuario}, id_direccion = #{idDireccion}, wallet = #{wallet}, id_paqueteria = #{idPaqueteria}, status = #{status}, monto = #{monto}, fecha = #{fecha}, descripcion = #{descripcion}, last_balance = #{lastBalance}")
     int updateTransaccion(TransaccionBtc transaccionBtc) throws  SQLException;
 
     /**
-     * Regresa una lista de todos las transacciones pendientes de validacion.
-     * @return Lista de transacciones que aun no aparecen en la blockchain.
-     * @throws SQLException En caso que haya problemas recuperando la informacion.
+     * Regresa una lista de todos las transacciones pendientes de validación.
+     * @return Lista de transacciones que aún no aparecen en la blockchain.
+     * @throws SQLException En caso de que haya problemas recuperando la información.
      */
     @Results(id="TransaccionMap", value = {
             @Result(property = "id",          column = "id"),
@@ -67,14 +95,14 @@ public interface CriptoMapper {
             @Result(property = "descripcion", column = "descripcion"),
             @Result(property = "lastBalance", column = "last_balance")
     })
-    @Select("SELECT " +CAMPOS+ " FROM transaccion_btc WHERE status=false")
+    @Select("SELECT " +CAMPOS_CRIPTO+ " FROM transaccion_btc WHERE status=false")
     List<TransaccionBtc> getAll() throws SQLException;
 
     /**
-     * Eliminba una transaccion porporcionando su id.
-     * @param id Id de la transaccion a eliminar.
-     * @return Entero si se realizo la accion.
-     * @throws SQLException En caso que haya problemas recuperando la informacion.
+     * Eliminba una transacción porporcionando su id.
+     * @param id Id de la transacción a eliminar.
+     * @return Entero si se realizo la acción.
+     * @throws SQLException En caso de que haya problemas recuperando la información.
      */
     @Delete("DELETE from transaccion_btc WHERE id=#{id}")
     int delete(int id) throws SQLException;

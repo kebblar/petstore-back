@@ -32,9 +32,16 @@ import java.util.List;
  * @since 1.0-SNAPSHOT
  */
 public class CategoriaTO {
+
+    /*
+     * Atributos de la clase.
+     */
     Categoria categoria;
     List<AtributoTO> atributos;
 
+    /*
+     * Setter y getter.
+     */
     public Categoria getCategoria() {
         return categoria;
     }

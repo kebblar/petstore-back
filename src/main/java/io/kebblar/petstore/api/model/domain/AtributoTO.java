@@ -38,7 +38,7 @@ public class AtributoTO implements Serializable {
 
     private static final long serialVersionUID = 8063110643925882553L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -46,12 +46,18 @@ public class AtributoTO implements Serializable {
     private int activo;
     private List<ValorAtributo> rangos;
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
     public AtributoTO(int id, String nombre, int activo) {
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public Integer getId() {
         return id;
     }

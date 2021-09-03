@@ -106,8 +106,8 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
             String mes = obtenerNombreMes(datos.get(i).getMes());
             String fecha = mes+"-"+anio;
             int indice_fecha = fechas.indexOf(fecha);
-            int indice_tipoPago = tipoPago.indexOf(datos.get(i).getTipo_pago());
-            arregloDatos [indice_tipoPago][indice_fecha] = datos.get(i).getTotal_venta();
+            int indice_tipoPago = tipoPago.indexOf(datos.get(i).getTipoPago());
+            arregloDatos [indice_tipoPago][indice_fecha] = datos.get(i).getTotalVenta();
             }
         return arregloDatos;
     }

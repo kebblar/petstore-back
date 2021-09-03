@@ -1,19 +1,32 @@
 package io.kebblar.petstore.api.model.domain;
 
 public class Rol {
+
+    /*
+     * Atributos de la clase.
+     */
     private int id;
     private String nombre;
     private boolean activo;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public Rol() {
     }
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
     public Rol(int id, String nombre, boolean activo) {
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -38,11 +51,17 @@ public class Rol {
         this.activo = activo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Rol [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -53,6 +72,9 @@ public class Rol {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -74,6 +96,10 @@ public class Rol {
         return true;
     }
 
+    /**
+     * Devuelve el hash de un objeto Rol.
+     * @return entero representando el hash
+     */
     public long getHash() {
         return hashCode();
     }

@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
@@ -34,6 +35,9 @@ import java.util.Date;
 public class Anuncio implements Serializable {
     private static final long serialVersionUID = -143592035892511227L;
 
+    /*
+     * Atributos de la clase.
+     */
     private Integer id;
     private Integer idCategoria;
     private String folio;
@@ -48,13 +52,23 @@ public class Anuncio implements Serializable {
     private short idEstatus;
     private String searchUrl;
 
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public Anuncio() {
     }
 
+    /**
+     * Constructor por id.
+     * @param id
+     */
     public Anuncio(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase con id.
+     */
     public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
             Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
             Date fechaEliminacion, short idEstatus, String searchUrl) {
@@ -73,6 +87,9 @@ public class Anuncio implements Serializable {
         this.searchUrl= searchUrl;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public Integer getId() {
         return id;
     }
@@ -177,6 +194,9 @@ public class Anuncio implements Serializable {
         this.searchUrl = searchUrl;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
@@ -186,98 +206,29 @@ public class Anuncio implements Serializable {
                 + ", searchUrl=" + searchUrl + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Anuncio)) return false;
+        Anuncio anuncio = (Anuncio) o;
+        return idEstatus == anuncio.idEstatus && Objects.equals(id, anuncio.id) &&
+                Objects.equals(idCategoria, anuncio.idCategoria) && Objects.equals(folio, anuncio.folio) &&
+                Objects.equals(titulo, anuncio.titulo) && Objects.equals(descripcion, anuncio.descripcion) &&
+                Objects.equals(precio, anuncio.precio) && Objects.equals(fechaInicioVigencia, anuncio.fechaInicioVigencia) &&
+                Objects.equals(fechaFinVigencia, anuncio.fechaFinVigencia) && Objects.equals(fechaAlta, anuncio.fechaAlta) &&
+                Objects.equals(fechaModificacion, anuncio.fechaModificacion) && Objects.equals(fechaEliminacion, anuncio.fechaEliminacion) &&
+                Objects.equals(searchUrl, anuncio.searchUrl);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
-        result = prime * result + ((fechaEliminacion == null) ? 0 : fechaEliminacion.hashCode());
-        result = prime * result + ((fechaFinVigencia == null) ? 0 : fechaFinVigencia.hashCode());
-        result = prime * result + ((fechaInicioVigencia == null) ? 0 : fechaInicioVigencia.hashCode());
-        result = prime * result + ((fechaModificacion == null) ? 0 : fechaModificacion.hashCode());
-        result = prime * result + ((folio == null) ? 0 : folio.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
-        result = prime * result + idEstatus;
-        result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-        result = prime * result + ((searchUrl == null) ? 0 : searchUrl.hashCode());
-        result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-        return result;
+        return Objects.hash(id, idCategoria, folio, titulo, descripcion, precio, fechaInicioVigencia, fechaFinVigencia,
+                fechaAlta, fechaModificacion, fechaEliminacion, idEstatus, searchUrl);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Anuncio other = (Anuncio) obj;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (fechaAlta == null) {
-            if (other.fechaAlta != null)
-                return false;
-        } else if (!fechaAlta.equals(other.fechaAlta))
-            return false;
-        if (fechaEliminacion == null) {
-            if (other.fechaEliminacion != null)
-                return false;
-        } else if (!fechaEliminacion.equals(other.fechaEliminacion))
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (fechaModificacion == null) {
-            if (other.fechaModificacion != null)
-                return false;
-        } else if (!fechaModificacion.equals(other.fechaModificacion))
-            return false;
-        if (folio == null) {
-            if (other.folio != null)
-                return false;
-        } else if (!folio.equals(other.folio))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (idCategoria == null) {
-            if (other.idCategoria != null)
-                return false;
-        } else if (!idCategoria.equals(other.idCategoria))
-            return false;
-        if (idEstatus != other.idEstatus)
-            return false;
-        if (precio == null) {
-            if (other.precio != null)
-                return false;
-        } else if (!precio.equals(other.precio))
-            return false;
-        if (searchUrl == null) {
-            if (other.searchUrl != null)
-                return false;
-        } else if (!searchUrl.equals(other.searchUrl))
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
-    }
-
 }

@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -20,18 +19,24 @@
  * Historia:    20210511_1444 Implementación de interface
  *
  */
-
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 import io.kebblar.petstore.api.model.domain.Paqueteria;
 
 /**
  * <p>Descripción:</p>
- * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria
+ * Interfaz 'Mapper' MyBatis asociado a la entidad Paqueteria.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -42,14 +47,14 @@ import io.kebblar.petstore.api.model.domain.Paqueteria;
 
 @Repository
 public interface PaqueteriaMapper {
-    static final String CAMPOS = " id, nombre, breve_descripcion, html_descripcion, precio ";
+
+    String CAMPOS_PAQ = " id, nombre, breve_descripcion, html_descripcion, precio ";
 
     /**
      * Obtiene un objeto de tipo 'Paqueteria' dado su id.
      *
-     * @return Paqueteria que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @return Paqueteria que tiene asignado el id pasado como parámetro
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id="PaqueteriaMap", value = {
             @Result(property = "id",   column = "id"),
@@ -58,18 +63,17 @@ public interface PaqueteriaMapper {
             @Result(property = "htmlDescripcion",   column = "html_descripcion"),
             @Result(property = "precio",   column = "precio")
     })
-    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE     id = #{id}     ")
+    @Select("SELECT " + CAMPOS_PAQ + " FROM paqueteria WHERE     id = #{id}     ")
     Paqueteria getById(int id) throws SQLException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Paqueteria'.
      *
      * @return Lista de obetos de tipo Paqueteria
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
-    @Select("SELECT " + CAMPOS + " FROM paqueteria ")
+    @Select("SELECT " + CAMPOS_PAQ + " FROM paqueteria ")
     List<Paqueteria> getAll() throws SQLException;
 
     /**
@@ -85,7 +89,7 @@ public interface PaqueteriaMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
     int insert(Paqueteria paqueteria) throws SQLException;
 
-/**
+    /**
      * Actualiza un objeto de tipo 'Paqueteria' con base en la infrmación dada por el objeto de tipo 'Paqueteria'.
      *
      * @param paqueteria a ser actualizado.
@@ -111,13 +115,12 @@ public interface PaqueteriaMapper {
     /**
      * Obtiene una lista de objetos de tipo 'paqueteria' filtrado por el nombre ingresado.
      *
-     * @param  String nombre la paqueteria.
+     * @param nombre la paqueteria.
      * @return Lista de objetos de tipo paqueteria filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
-    @Select("SELECT " + CAMPOS + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'")
+    @Select("SELECT " + CAMPOS_PAQ + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'")
     List<Paqueteria> getByNombre(String nombre) throws SQLException;
 
 }

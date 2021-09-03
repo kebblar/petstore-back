@@ -36,11 +36,11 @@ public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 7174821499103256578L;
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private Integer id;
-    private String categoria;
+    private String categ;
     private int activo;
 
     /**
@@ -61,67 +61,52 @@ public class Categoria implements Serializable {
      */
     public Categoria(Integer id, String categoria, int activo) {
         this.id = id;
-        this.categoria = categoria;
+        this.categ = categoria;
         this.activo = activo;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para categoria.
-     */
     public String getCategoria() {
-        return categoria;
+        return categ;
     }
 
-    /**
-     * Setter para categoria.
-     */
     public void setCategoria(String categoria) {
-        this.categoria = categoria;
+        this.categ = categoria;
     }
 
-    /**
-     * Getter para activo.
-     */
     public int getActivo() {
         return activo;
     }
 
-    /**
-     * Setter para activo.
-     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
         return "[Categoria] : ["
                 + " id =" + this.id
-                + " categoria =" + this.categoria
+                + " categoria =" + this.categ
                 + " activo =" + this.activo
                 + "]";
     }
 
     /**
-     * Compara si dos instancias de la clase Categoria son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -134,18 +119,18 @@ public class Categoria implements Serializable {
         Categoria other = (Categoria) obj;
         return
                id == other.id &&
-               categoria == other.categoria &&
+               categ == other.categ &&
                activo == other.activo;
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
         return Objects.hash(
             id,
-            categoria,
+            categ,
             activo
         );
     }

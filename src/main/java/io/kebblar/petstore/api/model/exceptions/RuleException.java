@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   WrongTokenException.java
+ * Artefacto:   RuleException.java
  * Tipo:        clase
  * AUTOR:       Gustavo A. Arellano (GAA)
  * Fecha:       Martes 4 de Mayo de 2021 (17_57)
@@ -19,10 +19,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
+ * <p>Descripción</p>
+ * Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  garellano
@@ -33,15 +34,22 @@ package io.kebblar.petstore.api.model.exceptions;
 public class RuleException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
-    //TODO: esta es una fuente de conflictos en el proceso de internacionalización
+    /*
+     * TODO: esta es una fuente de conflictos en el proceso de internacionalización.
+     * Quizá convenga tener subclases de esta con la especialización en los
+     * mensajes; algo similar a lo que se hace con UserAlreadyExistsException.
+     */
+
+    /**
+     * Generalización de una violación a las reglas de negocio.
+     * @param msg mensaje descriptivo
+     */
     public RuleException(String msg) {
         super(
-            "Se ha detectado una violación a aguna regla de negocio.",
+            "Se ha detectado una violación a alguna regla de negocio.",
             msg,
             1015,
             "CVE_1015",
             HttpStatus.PRECONDITION_FAILED);
     }
-    // Quiza convenga tener subclases de esta con la especialización en los 
-    // mensajes; algo similar a lo que se hace con UserAlreadyExistsException
 }

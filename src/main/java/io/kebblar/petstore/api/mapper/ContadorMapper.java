@@ -20,7 +20,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.sql.SQLException;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**

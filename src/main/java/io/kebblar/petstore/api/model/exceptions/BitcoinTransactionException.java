@@ -19,11 +19,12 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que es lanzada cuando ocurre un problema al procesar una orden de compra
+ * <p>Descripción:</p>
+ * Excepción que es lanzada cuando ocurre un problema al procesar una orden de compra
  * pagada con bitcoin.
  *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
+ * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
  *
  * @author  fhernanda
@@ -34,11 +35,14 @@ package io.kebblar.petstore.api.model.exceptions;
 public class BitcoinTransactionException extends BusinessException {
     private static final long serialVersionUID = -4440655023335060611L;
 
-    // Esra es de las pocas excepciones de que manera genuina 
-    // recibe un argumento de tipo string en su constructor
+    /**
+     * Define que ha ocurrido un error al momento de intentar pagar con bitcoin una compra.
+     *
+     * @param msg Mensaje que describe el problema
+     */
     public BitcoinTransactionException(String msg) {
         super(
-            "Error al procesar bitcoin como metodo de pago",
+            "Error al procesar bitcoin como método de pago",
             msg,
             1002,
             "CVE-1002",

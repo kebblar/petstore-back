@@ -36,8 +36,8 @@ public class ValorAtributo implements Serializable {
 
     private static final long serialVersionUID = -2847669026644607055L;
 
-    /**
-     * Atributos de la clase
+    /*
+     * Atributos de la clase.
      */
     private Integer id;
     private int idAtributo;
@@ -67,65 +67,43 @@ public class ValorAtributo implements Serializable {
         this.activo = activo;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y Setter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para idAtributo.
-     */
     public int getIdAtributo() {
         return idAtributo;
     }
 
-    /**
-     * Setter para idAtributo.
-     */
     public void setIdAtributo(int idAtributo) {
         this.idAtributo = idAtributo;
     }
 
-    /**
-     * Getter para rango.
-     */
     public String getRango() {
         return rango;
     }
 
-    /**
-     * Setter para rango.
-     */
     public void setRango(String rango) {
         this.rango = rango;
     }
 
-    /**
-     * Getter para activo.
-     */
     public int getActivo() {
         return activo;
     }
 
-    /**
-     * Setter para activo.
-     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
-
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -138,7 +116,7 @@ public class ValorAtributo implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase ValorAtributo son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -157,7 +135,7 @@ public class ValorAtributo implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

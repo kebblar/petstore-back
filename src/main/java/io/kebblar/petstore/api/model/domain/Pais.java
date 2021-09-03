@@ -56,7 +56,7 @@ import java.util.Objects;
 public class Pais implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private Integer id;
@@ -83,37 +83,28 @@ public class Pais implements Serializable {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Setter y Getter.
      */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Getter para nombre.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter para nombre.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -124,7 +115,7 @@ public class Pais implements Serializable {
     }
 
     /**
-     * Compara si dos instancias de la clase Pais son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -141,7 +132,7 @@ public class Pais implements Serializable {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
