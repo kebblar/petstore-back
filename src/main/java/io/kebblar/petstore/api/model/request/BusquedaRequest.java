@@ -19,6 +19,7 @@ package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.constraints.Min;
 
 /**
@@ -29,6 +30,10 @@ import javax.validation.constraints.Min;
  * @since   1.0-SNAPSHOT
  */
 public class BusquedaRequest {
+
+    /*
+     * Atributos de clase.
+     */
     private BigDecimal precio;
     private Long idCategoria;
     private List<Integer> atributos;
@@ -37,6 +42,27 @@ public class BusquedaRequest {
     @Min(value = 1, message = "{min.tamano.paginas}")
     private int tamPaginas;
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
+    public BusquedaRequest(BigDecimal precio, Long idCategoria, List<Integer> atributos,
+                           @Min(value = 1, message = "{min.paginado}") int numPaginas,
+                           @Min(value = 1, message = "{min.tamano.paginas}") int tamPaginas) {
+        this.precio = precio;
+        this.idCategoria = idCategoria;
+        this.atributos = atributos;
+        this.numPaginas = numPaginas;
+        this.tamPaginas = tamPaginas;
+    }
+
+    /**
+     * Constructor por defecto.
+     */
+    public BusquedaRequest() {}
+
+    /*
+     * Getter y Setter.
+     */
     public BigDecimal getPrecio() {
         return precio;
     }
@@ -67,6 +93,10 @@ public class BusquedaRequest {
     public void setTamPaginas(int tamPaginas) {
         this.tamPaginas = tamPaginas;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -78,51 +108,26 @@ public class BusquedaRequest {
         result = prime * result + tamPaginas;
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaRequest other = (BusquedaRequest) obj;
-        if (atributos == null) {
-            if (other.atributos != null)
-                return false;
-        } else if (!atributos.equals(other.atributos))
-            return false;
-        if (idCategoria == null) {
-            if (other.idCategoria != null)
-                return false;
-        } else if (!idCategoria.equals(other.idCategoria))
-            return false;
-        if (numPaginas != other.numPaginas)
-            return false;
-        if (precio == null) {
-            if (other.precio != null)
-                return false;
-        } else if (!precio.equals(other.precio))
-            return false;
-        if (tamPaginas != other.tamPaginas)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaRequest)) return false;
+        BusquedaRequest that = (BusquedaRequest) o;
+        return numPaginas == that.numPaginas && tamPaginas == that.tamPaginas && Objects.equals(precio, that.precio)
+                && Objects.equals(idCategoria, that.idCategoria) && Objects.equals(atributos, that.atributos);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "BusquedaRequest [precio=" + precio + ", idCategoria=" + idCategoria + ", atributos=" + atributos
                 + ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
-    }
-    public BusquedaRequest(BigDecimal precio, Long idCategoria, List<Integer> atributos,
-            @Min(value = 1, message = "{min.paginado}") int numPaginas,
-            @Min(value = 1, message = "{min.tamano.paginas}") int tamPaginas) {
-        this.precio = precio;
-        this.idCategoria = idCategoria;
-        this.atributos = atributos;
-        this.numPaginas = numPaginas;
-        this.tamPaginas = tamPaginas;
-    }
-    public BusquedaRequest() {
     }
 
 }

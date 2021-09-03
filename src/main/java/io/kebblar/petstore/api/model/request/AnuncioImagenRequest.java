@@ -17,18 +17,40 @@
  */
 package io.kebblar.petstore.api.model.request;
 
+import java.util.Objects;
+
+/**
+ * Implementación del POJO de la entidad de 'AnuncioImagenRequest'.
+ *
+ * @author  Isabel Contreras
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class AnuncioImagenRequest {
+
+    /*
+     * Atributos de la clase.
+     */
     private int idAnuncio;
     private String uuid;
 
+    /**
+     * Constructor por defecto.
+     */
     public AnuncioImagenRequest() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase con id único.
+     */
     public AnuncioImagenRequest(int idAnuncio, String uuid) {
         this.idAnuncio = idAnuncio;
         this.uuid = uuid;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getIdAnuncio() {
         return idAnuncio;
     }
@@ -45,6 +67,9 @@ public class AnuncioImagenRequest {
         this.uuid = uuid;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -54,25 +79,20 @@ public class AnuncioImagenRequest {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AnuncioImagenRequest other = (AnuncioImagenRequest) obj;
-        if (idAnuncio != other.idAnuncio)
-            return false;
-        if (uuid == null) {
-            if (other.uuid != null)
-                return false;
-        } else if (!uuid.equals(other.uuid))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AnuncioImagenRequest)) return false;
+        AnuncioImagenRequest that = (AnuncioImagenRequest) o;
+        return idAnuncio == that.idAnuncio && Objects.equals(uuid, that.uuid);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "AnuncioImagenRequest [idAnuncio=" + idAnuncio + ", uuid=" + uuid + "]";

@@ -30,17 +30,29 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ImagenRequest {
 
+    /*
+     * Atributos de la clase.
+     */
     private int id;//Identificador del anuncio
     private MultipartFile[] files;
 
+    /**
+     * Constructor por defecto.
+     */
     public ImagenRequest() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
     public ImagenRequest(int id, MultipartFile[] files) {
         this.id = id;
         this.files = files;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -54,6 +66,9 @@ public class ImagenRequest {
         this.files = files;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "ImagenRequest [id=" + id + ", files=" + Arrays.toString(files) + "]";

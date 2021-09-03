@@ -1,4 +1,3 @@
-
 /*
  * Licencia:    Usted  puede  utilizar  libremente  este  código
  *              para copiarlo,  distribuirlo o modificarlo total
@@ -39,7 +38,7 @@ public class DireccionConNombre implements Serializable {
 
     private static final long serialVersionUID = 6990145017462317631L;
 
-    /**
+    /*
      * Atributos de la clase
      */
     private int id;
@@ -50,13 +49,11 @@ public class DireccionConNombre implements Serializable {
     private String estadoNombre;
     private String paisNombre;
 
-
     /**
      * Constructor por default (sin parámetros).
      */
     public DireccionConNombre() {
     }
-
 
     /**
      * Constructor basado en todos los atributos de la clase.
@@ -71,107 +68,68 @@ public class DireccionConNombre implements Serializable {
         this.paisNombre = paisNombre;
     }
 
-    /**
-     * Getter para id.
+    /*
+     * Getter y setter.
      */
     public int getId() {
         return id;
     }
 
-    /**
-     * Setter para id.
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * Getter para calleNumero.
-     */
     public String getCalleNumero() {
         return calleNumero;
     }
 
-    /**
-     * Setter para calleNumero.
-     */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
 
-    /**
-     * Getter para colonia.
-     */
     public String getColonia() {
         return colonia;
     }
 
-    /**
-     * Setter para colonia.
-     */
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
 
-    /**
-     * Getter para cp.
-     */
     public String getCp() {
         return cp;
     }
 
-    /**
-     * Setter para cp.
-     */
     public void setCp(String cp) {
         this.cp = cp;
     }
 
-    /**
-     * Getter para municipioNombre.
-     */
     public String getMunicipioNombre() {
         return municipioNombre;
     }
 
-    /**
-     * Setter para municipioNombre.
-     */
     public void setMunicipioNombre(String municipioNombre) {
         this.municipioNombre = municipioNombre;
     }
 
-    /**
-     * Getter para estadoNombre.
-     */
     public String getEstadoNombre() {
         return estadoNombre;
     }
 
-    /**
-     * Setter para estadoNombre.
-     */
     public void setEstadoNombre(String estadoNombre) {
         this.estadoNombre = estadoNombre;
     }
 
-    /**
-     * Getter para paisNombre.
-     */
     public String getPaisNombre() {
         return paisNombre;
     }
 
-    /**
-     * Setter para paisNombre.
-     */
     public void setPaisNombre(String paisNombre) {
         this.paisNombre = paisNombre;
     }
 
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -186,6 +144,9 @@ public class DireccionConNombre implements Serializable {
                 '}';
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -194,6 +155,9 @@ public class DireccionConNombre implements Serializable {
         return id == that.id && Objects.equals(calleNumero, that.calleNumero) && Objects.equals(colonia, that.colonia) && Objects.equals(cp, that.cp) && Objects.equals(municipioNombre, that.municipioNombre) && Objects.equals(estadoNombre, that.estadoNombre) && Objects.equals(paisNombre, that.paisNombre);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, calleNumero, colonia, cp, municipioNombre, estadoNombre, paisNombre);

@@ -33,7 +33,7 @@ import java.util.Objects;
  */
 public class CarritoVista {
 
-    /**
+    /*
      * Atributos de la clase
      */
     private int idCarrito;
@@ -58,78 +58,51 @@ public class CarritoVista {
         this.precio = precio;
     }
 
-    /**
-     * Getter para idCarrito.
+    /*
+     * Getter y setter.
      */
     public int getIdCarrito() {
         return idCarrito;
     }
 
-    /**
-     * Setter para idCarrito.
-     */
     public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
     }
 
-    /**
-     * Getter para urlImagen.
-     */
     public String getUrlImagen() {
         return urlImagen;
     }
 
-    /**
-     * Setter para urlImagen.
-     */
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
 
-    /**
-     * Getter para titulo.
-     */
     public String getTitulo() {
         return titulo;
     }
 
-    /**
-     * Setter para titulo.
-     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    /**
-     * Getter para idAnuncio.
-     */
     public int getIdAnuncio() {
         return idAnuncio;
     }
 
-    /**
-     * Setter para idAnuncio.
-     */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
-    /**
-     * Getter para precio.
-     */
     public double getPrecio() {
         return precio;
     }
 
-    /**
-     * Setter para precio.
-     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
     /**
-     * Compara si dos instancias de la clase Atributo son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
@@ -140,7 +113,7 @@ public class CarritoVista {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -148,7 +121,7 @@ public class CarritoVista {
     }
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

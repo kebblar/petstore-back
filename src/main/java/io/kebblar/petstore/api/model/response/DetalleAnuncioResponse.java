@@ -21,6 +21,7 @@ package io.kebblar.petstore.api.model.response;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * POJO asociado a la entidad 'anuncio' para mostrar su detalle.
@@ -30,6 +31,10 @@ import java.util.List;
  * @since 1.0-SNAPSHOT
  */
 public class DetalleAnuncioResponse {
+
+    /*
+     * Atributos de clase.
+     */
     private Integer id;
     private Integer idCategoria;
     private String descCategoria;
@@ -45,9 +50,15 @@ public class DetalleAnuncioResponse {
     private List<MascotaValorAtributoResponse> atributos;
     private List<AnuncioImagenResponse> imagenes;
 
+    /**
+     * Constructor por defecto.
+     */
     public DetalleAnuncioResponse() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
     public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
             String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
             String descEstatus, String searchUrl, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
@@ -67,6 +78,9 @@ public class DetalleAnuncioResponse {
         this.searchUrl = searchUrl;
     }
 
+    /*
+     * Setters y getters.
+     */
     public Integer getId() {
         return id;
     }
@@ -179,6 +193,9 @@ public class DetalleAnuncioResponse {
         this.searchUrl = searchUrl;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
@@ -188,6 +205,9 @@ public class DetalleAnuncioResponse {
                 + ", atributos=" + atributos + ", imagenes=" + imagenes + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -209,83 +229,20 @@ public class DetalleAnuncioResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        DetalleAnuncioResponse other = (DetalleAnuncioResponse) obj;
-        if (atributos == null) {
-            if (other.atributos != null)
-                return false;
-        } else if (!atributos.equals(other.atributos))
-            return false;
-        if (descCategoria == null) {
-            if (other.descCategoria != null)
-                return false;
-        } else if (!descCategoria.equals(other.descCategoria))
-            return false;
-        if (descEstatus == null) {
-            if (other.descEstatus != null)
-                return false;
-        } else if (!descEstatus.equals(other.descEstatus))
-            return false;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (folio == null) {
-            if (other.folio != null)
-                return false;
-        } else if (!folio.equals(other.folio))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (idCategoria == null) {
-            if (other.idCategoria != null)
-                return false;
-        } else if (!idCategoria.equals(other.idCategoria))
-            return false;
-        if (idEstatus != other.idEstatus)
-            return false;
-        if (imagenes == null) {
-            if (other.imagenes != null)
-                return false;
-        } else if (!imagenes.equals(other.imagenes))
-            return false;
-        if (precio == null) {
-            if (other.precio != null)
-                return false;
-        } else if (!precio.equals(other.precio))
-            return false;
-        if (searchUrl == null) {
-            if (other.searchUrl != null)
-                return false;
-        } else if (!searchUrl.equals(other.searchUrl))
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DetalleAnuncioResponse)) return false;
+        DetalleAnuncioResponse that = (DetalleAnuncioResponse) o;
+        return idEstatus == that.idEstatus && Objects.equals(id, that.id) && Objects.equals(idCategoria, that.idCategoria)
+                && Objects.equals(descCategoria, that.descCategoria) && Objects.equals(folio, that.folio) &&
+                Objects.equals(titulo, that.titulo) && Objects.equals(descripcion, that.descripcion) &&
+                Objects.equals(precio, that.precio) && Objects.equals(fechaInicioVigencia, that.fechaInicioVigencia) &&
+                Objects.equals(fechaFinVigencia, that.fechaFinVigencia) && Objects.equals(descEstatus, that.descEstatus) &&
+                Objects.equals(searchUrl, that.searchUrl) && Objects.equals(atributos, that.atributos) &&
+                Objects.equals(imagenes, that.imagenes);
     }
-
 }

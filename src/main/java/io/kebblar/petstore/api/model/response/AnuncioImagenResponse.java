@@ -18,6 +18,8 @@
  */
 package io.kebblar.petstore.api.model.response;
 
+import java.util.Objects;
+
 /**
  * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen.
  *
@@ -26,15 +28,25 @@ package io.kebblar.petstore.api.model.response;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioImagenResponse {
+
+    /*
+     * Atributos de clase.
+     */
     private Integer idImagen;
     private Integer idAnuncio;
     private String uuid;
     private Integer idTipo;
     private Boolean principal;
 
+    /**
+     * Constructor por defecto (sin parámetros).
+     */
     public AnuncioImagenResponse() {
     }
 
+    /**
+     * Constructos basado en los atributos de la clase.
+     */
     public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         this.idImagen = idImagen;
         this.idAnuncio = idAnuncio;
@@ -43,6 +55,9 @@ public class AnuncioImagenResponse {
         this.principal = principal;
     }
 
+    /*
+     * Setter y getter.
+     */
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
@@ -83,6 +98,9 @@ public class AnuncioImagenResponse {
         this.principal = principal;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -95,43 +113,22 @@ public class AnuncioImagenResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AnuncioImagenResponse other = (AnuncioImagenResponse) obj;
-        if (idAnuncio == null) {
-            if (other.idAnuncio != null)
-                return false;
-        } else if (!idAnuncio.equals(other.idAnuncio))
-            return false;
-        if (idImagen == null) {
-            if (other.idImagen != null)
-                return false;
-        } else if (!idImagen.equals(other.idImagen))
-            return false;
-        if (idTipo == null) {
-            if (other.idTipo != null)
-                return false;
-        } else if (!idTipo.equals(other.idTipo))
-            return false;
-        if (principal == null) {
-            if (other.principal != null)
-                return false;
-        } else if (!principal.equals(other.principal))
-            return false;
-        if (uuid == null) {
-            if (other.uuid != null)
-                return false;
-        } else if (!uuid.equals(other.uuid))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AnuncioImagenResponse)) return false;
+        AnuncioImagenResponse that = (AnuncioImagenResponse) o;
+        return Objects.equals(idImagen, that.idImagen) && Objects.equals(idAnuncio, that.idAnuncio) &&
+                Objects.equals(uuid, that.uuid) && Objects.equals(idTipo, that.idTipo) &&
+                Objects.equals(principal, that.principal);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "AnuncioImagenResponse [idImagen=" + idImagen + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid

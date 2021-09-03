@@ -28,10 +28,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since   1.0-SNAPSHOT
  */
 public class MascotaValorAtributoRequest {
+
+    /*
+     * Atributos de la clase.
+     */
     private int id;
     @JsonProperty("valor")
     private int idValorAtributo;
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
+    public MascotaValorAtributoRequest(int id, int idValorAtributo) {
+        this.id = id;
+        this.idValorAtributo = idValorAtributo;
+    }
+
+    /**
+     * Constructor por defecto.
+     */
+    public MascotaValorAtributoRequest() {
+    }
+
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -48,6 +69,9 @@ public class MascotaValorAtributoRequest {
         this.idValorAtributo = idValorAtributo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -57,33 +81,23 @@ public class MascotaValorAtributoRequest {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        MascotaValorAtributoRequest other = (MascotaValorAtributoRequest) obj;
-        if (id != other.id)
-            return false;
-        if (idValorAtributo != other.idValorAtributo)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MascotaValorAtributoRequest)) return false;
+        MascotaValorAtributoRequest that = (MascotaValorAtributoRequest) o;
+        return id == that.id && idValorAtributo == that.idValorAtributo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "MascotaValorAtributoRequest [id=" + id + ", idValorAtributo=" + idValorAtributo + "]";
-    }
-
-    public MascotaValorAtributoRequest(int id, int idValorAtributo) {
-        this.id = id;
-        this.idValorAtributo = idValorAtributo;
-    }
-
-    public MascotaValorAtributoRequest() {
     }
 
 }

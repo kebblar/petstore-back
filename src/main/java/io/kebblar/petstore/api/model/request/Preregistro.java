@@ -1,17 +1,52 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Anuncio.java
+ * Tipo:        clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_28)
+ *
+ * Historia:    .
+ *              20210518_2028 Creación de éste POJO
+ *              20210604_1314 Modificacion de 'sku' por 'folio'
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'Preregistro'.
+ *
+ * @author Javier Chávez Barrios
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class Preregistro {
+
+    /*
+     * Atributos de clase.
+     */
     private int id;
     private String nick;
+    private Date fechaNacimiento;
+    private String randomString;
+    private long instanteRegistro;
 
     @ApiModelProperty(example = "example@hotmail.com")
     @NotBlank(message = "Llénalo, por favor")
@@ -29,15 +64,15 @@ public class Preregistro {
     @Pattern(regexp="^\\d{10}$", message = "Teléfono inválido, deben ser exactamente 10 números sin expacios")
     private String telefono;
 
-    private Date fechaNacimiento;
-
-    private String randomString;
-
-    private long instanteRegistro;
-
+    /**
+     * Constructor por default.
+     */
     public Preregistro() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase con id.
+     */
     public Preregistro(
             int id, 
             String nick,
@@ -57,6 +92,9 @@ public class Preregistro {
         this.instanteRegistro = instanteRegistro;
     }
 
+    /*
+     * Setter y Getter.
+     */
     public int getId() {
         return id;
     }
@@ -121,6 +159,9 @@ public class Preregistro {
         this.instanteRegistro = instanteRegistro;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "PreRegistroRequest [id=" + id + ", nick=" + nick + ", correo=" + correo + ", claveHash=" + claveHash
@@ -128,6 +169,9 @@ public class Preregistro {
                 + ", instanteRegistro=" + instanteRegistro + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -143,50 +187,16 @@ public class Preregistro {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Preregistro other = (Preregistro) obj;
-        if (claveHash == null) {
-            if (other.claveHash != null)
-                return false;
-        } else if (!claveHash.equals(other.claveHash))
-            return false;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (fechaNacimiento == null) {
-            if (other.fechaNacimiento != null)
-                return false;
-        } else if (!fechaNacimiento.equals(other.fechaNacimiento))
-            return false;
-        if (id != other.id)
-            return false;
-        if (instanteRegistro != other.instanteRegistro)
-            return false;
-        if (nick == null) {
-            if (other.nick != null)
-                return false;
-        } else if (!nick.equals(other.nick))
-            return false;
-        if (randomString == null) {
-            if (other.randomString != null)
-                return false;
-        } else if (!randomString.equals(other.randomString))
-            return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Preregistro)) return false;
+        Preregistro that = (Preregistro) o;
+        return id == that.id && instanteRegistro == that.instanteRegistro && Objects.equals(nick, that.nick) &&
+                Objects.equals(fechaNacimiento, that.fechaNacimiento) && Objects.equals(randomString, that.randomString) &&
+                Objects.equals(correo, that.correo) && Objects.equals(claveHash, that.claveHash) && Objects.equals(telefono, that.telefono);
     }
-
 }

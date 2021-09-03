@@ -1,3 +1,22 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Anuncio.java
+ * Tipo:        clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_28)
+ *
+ * Historia:    .
+ *              20210518_2028 Creación de éste POJO
+ *              20210604_1314 Modificacion de 'sku' por 'folio'
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -9,9 +28,25 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'PreregistroRequest'.
+ *
+ * @author Javier Chávez Barrios
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class PreregistroRequest {
+
+    /*
+     * Atributos de clase.
+     */
     private int id;
+    private String randomString;
+    private long instanteRegistro;
+
     @ApiModelProperty(example = "superboy")
     @Size(message = "El nick debe medir entre 3 y 15 caracteres", min=3, max=15)
     private String nick;
@@ -31,10 +66,6 @@ public class PreregistroRequest {
     @ApiModelProperty(example = "5543562126")
     //@Pattern(regexp="^\\d{10}$", message = "Teléfono inválido, deben ser exactamente 10 números sin expacios")
     private String telefono;
-
-    private String randomString;
-
-    private long instanteRegistro;
     
     @ApiModelProperty(example = "1997")
     @Max(message = "El año debe ser menor o igual a 2001", value = 2001)
@@ -51,9 +82,15 @@ public class PreregistroRequest {
     @Min(message = "El dia debe ser mayor o igual a 1", value = 1)
     private int day;
 
+    /**
+     * Constructor por default.
+     */
     public PreregistroRequest() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
     public PreregistroRequest(
             int id, 
             @Size(message = "El nick debe medir entre 3 y 15 caracteres", min=3, max=15) String nick,
@@ -77,6 +114,9 @@ public class PreregistroRequest {
         this.day = day;
     }
 
+    /*
+     * Setter y getter.
+     */
     public int getId() {
         return id;
     }
@@ -157,6 +197,9 @@ public class PreregistroRequest {
         this.day = day;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "PreregistroRequest [id=" + id + ", nick=" + nick + ", correo=" + correo + ", claveHash=" + claveHash
@@ -164,6 +207,9 @@ public class PreregistroRequest {
                 + ", year=" + year + ", month=" + month + ", day=" + day + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -181,51 +227,16 @@ public class PreregistroRequest {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        PreregistroRequest other = (PreregistroRequest) obj;
-        if (claveHash == null) {
-            if (other.claveHash != null)
-                return false;
-        } else if (!claveHash.equals(other.claveHash))
-            return false;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (day != other.day)
-            return false;
-        if (id != other.id)
-            return false;
-        if (instanteRegistro != other.instanteRegistro)
-            return false;
-        if (month != other.month)
-            return false;
-        if (nick == null) {
-            if (other.nick != null)
-                return false;
-        } else if (!nick.equals(other.nick))
-            return false;
-        if (randomString == null) {
-            if (other.randomString != null)
-                return false;
-        } else if (!randomString.equals(other.randomString))
-            return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
-            return false;
-        if (year != other.year)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PreregistroRequest)) return false;
+        PreregistroRequest that = (PreregistroRequest) o;
+        return id == that.id && instanteRegistro == that.instanteRegistro && year == that.year && month == that.month
+                && day == that.day && Objects.equals(randomString, that.randomString) && Objects.equals(nick, that.nick)
+                && Objects.equals(correo, that.correo) && Objects.equals(claveHash, that.claveHash) && Objects.equals(telefono, that.telefono);
     }
-    
 }

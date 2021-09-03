@@ -18,6 +18,7 @@
 package io.kebblar.petstore.api.model.request;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de 'BusquedaAdministracionRequest'.
@@ -27,6 +28,10 @@ import java.time.LocalDate;
  * @since   1.0-SNAPSHOT
  */
 public class BusquedaAdministracionRequest {
+
+    /*
+     * Atributos de clase.
+     */
     private String folio;
     private String titulo;
     private LocalDate fechaInicioVigencia;
@@ -36,6 +41,14 @@ public class BusquedaAdministracionRequest {
     private int numPaginas;
     private int tamPaginas;
 
+    /**
+     * Constructor por defecto.
+     */
+    public BusquedaAdministracionRequest() {}
+
+    /*
+     * Getter y Setter.
+     */
     public String getFolio() {
         return folio;
     }
@@ -84,6 +97,10 @@ public class BusquedaAdministracionRequest {
     public void setTamPaginas(int tamPaginas) {
         this.tamPaginas = tamPaginas;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -98,42 +115,23 @@ public class BusquedaAdministracionRequest {
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaAdministracionRequest other = (BusquedaAdministracionRequest) obj;
-        if (estatus != other.estatus)
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (folio != other.folio)
-            return false;
-        if (idCategoria != other.idCategoria)
-            return false;
-        if (numPaginas != other.numPaginas)
-            return false;
-        if (tamPaginas != other.tamPaginas)
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaAdministracionRequest)) return false;
+        BusquedaAdministracionRequest that = (BusquedaAdministracionRequest) o;
+        return estatus == that.estatus && idCategoria == that.idCategoria && numPaginas == that.numPaginas &&
+                tamPaginas == that.tamPaginas && Objects.equals(folio, that.folio) && Objects.equals(titulo, that.titulo) &&
+                Objects.equals(fechaInicioVigencia, that.fechaInicioVigencia) && Objects.equals(fechaFinVigencia, that.fechaFinVigencia);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "BusquedaAdministracionRequest [folio=" + folio + ", titulo=" + titulo + ", fechaInicioVigencia="
@@ -150,8 +148,6 @@ public class BusquedaAdministracionRequest {
         this.idCategoria = idCategoria;
         this.numPaginas = numPaginas;
         this.tamPaginas = tamPaginas;
-    }
-    public BusquedaAdministracionRequest() {
     }
 
 }

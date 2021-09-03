@@ -19,31 +19,38 @@
 package io.kebblar.petstore.api.model.response;
 
 /**
- * POJO asociado a la entidad 'anuncio' para mostrar la informacion base.
+ * POJO asociado a la entidad 'anuncio' para mostrar la información base.
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioResponse {
+
+    /*
+     * Atributos de clase.
+     */
     private int id;
     private String folio;
     private String info;
 
+    /**
+     * Constructor por defecto (sin parámetros).
+     */
     public AnuncioResponse() {
     }
 
+    /**
+     * Constructos basado en los atributos de la clase.
+     */
     public AnuncioResponse(int id, String folio) {
         this.id = id;
         this.folio = folio;
     }
 
-    public AnuncioResponse(int id, String folio, String info) {
-        this.id = id;
-        this.folio = folio;
-        this.info = info;
-    }
-
+    /*
+     * Getter y setter.
+     */
     public int getId() {
         return id;
     }
@@ -68,6 +75,9 @@ public class AnuncioResponse {
         this.info = info;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -78,6 +88,9 @@ public class AnuncioResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -102,10 +115,17 @@ public class AnuncioResponse {
         return true;
     }
 
+    /**
+     * Método útil en pruebas de regresión.
+     * @return Hashcode del objeto
+     */
     public long getHash() {
         return this.hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "AnuncioResponse [id=" + id + ", folio=" + folio + ", info=" + info + "]";

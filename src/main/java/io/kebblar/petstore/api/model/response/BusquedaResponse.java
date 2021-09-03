@@ -28,9 +28,30 @@ import java.util.List;
  * @since 1.0-SNAPSHOT
  */
 public class BusquedaResponse {
+
+    /*
+     * Atributos de clase.
+     */
     private int totalAnuncios;
     private List<DetalleAnuncioResponse> listaAnuncios;
 
+    /**
+     * Constructor basado en los atributos de la clase.
+     */
+    public BusquedaResponse(int totalAnuncios, List<DetalleAnuncioResponse> listaAnuncios) {
+        this.totalAnuncios = totalAnuncios;
+        this.listaAnuncios = listaAnuncios;
+    }
+
+    /**
+     * Constructor por defecto.
+     */
+    public BusquedaResponse() {
+    }
+
+    /*
+     * Getter y setter.
+     */
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
@@ -47,6 +68,9 @@ public class BusquedaResponse {
         this.listaAnuncios = listaAnuncios;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -56,6 +80,9 @@ public class BusquedaResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -75,17 +102,12 @@ public class BusquedaResponse {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "BusquedaResponse [totalAnuncios=" + totalAnuncios + ", listaAnuncios=" + listaAnuncios + "]";
-    }
-
-    public BusquedaResponse(int totalAnuncios, List<DetalleAnuncioResponse> listaAnuncios) {
-        this.totalAnuncios = totalAnuncios;
-        this.listaAnuncios = listaAnuncios;
-    }
-
-    public BusquedaResponse() {
     }
 
 }

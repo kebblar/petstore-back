@@ -26,14 +26,24 @@ package io.kebblar.petstore.api.model.response;
  * @since   1.0-SNAPSHOT
  */
 public class ProcesaMascotaResponse {
+
+    /*
+     * Atributos de la clase.
+     */
     private String mensaje;
     private int id;
 
+    /**
+     * Constructor por atributos de la clase.
+     */
     public ProcesaMascotaResponse(String mensaje, int id) {
         this.mensaje = mensaje;
         this.id = id;
     }
 
+    /*
+     * Getter y setter.
+     */
     public String getMensaje() {
         return mensaje;
     }
@@ -41,10 +51,17 @@ public class ProcesaMascotaResponse {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "InsertaMascotaResponse [mensaje=" + mensaje + ", id=" + id + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -53,6 +70,10 @@ public class ProcesaMascotaResponse {
         result = prime * result + ((mensaje == null) ? 0 : mensaje.hashCode());
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -71,7 +92,13 @@ public class ProcesaMascotaResponse {
             return false;
         return true;
     }
+
+    /**
+     * Para las pruebas de regresion.
+     * @return hashcode del objeto
+     */
     public int getHash() {
         return this.hashCode();
     }
+
 }

@@ -33,7 +33,7 @@ import java.util.Objects;
  */
 public class CarritoDatosFactura {
 
-    /**
+    /*
      * Atributos de la clase
      */
     private String titulo;
@@ -54,50 +54,35 @@ public class CarritoDatosFactura {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Getter para titulo.
+    /*
+     * Getter y setter.
      */
     public String getTitulo() {
         return titulo;
     }
 
-    /**
-     * Setter para titulo.
-     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    /**
-     * Getter para precio.
-     */
     public double getPrecio() {
         return precio;
     }
 
-    /**
-     * Setter para precio.
-     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
-    /**
-     * Getter para descripción.
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Setter para descripción.
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * Compara si dos instancias de la clase Atributo son iguales
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
@@ -108,7 +93,7 @@ public class CarritoDatosFactura {
     }
 
     /**
-     * Genera un hash del objeto
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -116,7 +101,7 @@ public class CarritoDatosFactura {
     }
 
     /**
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -126,4 +111,5 @@ public class CarritoDatosFactura {
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
+
 }

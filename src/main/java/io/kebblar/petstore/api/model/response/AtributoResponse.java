@@ -28,19 +28,31 @@ package io.kebblar.petstore.api.model.response;
  */
 public class AtributoResponse {
 
+    /*
+     * Atributos de clase.
+     */
     private int id;
     private String descAtributo;
     private int valor;
     private String descValor;
 
+    /**
+     * Constructor por defecto.
+     */
     public AtributoResponse() {
     }
 
+    /**
+     * Contructor por id, valor.
+     */
     public AtributoResponse(int id, int valor) {
         this.id = id;
         this.valor = valor;
     }
 
+    /**
+     * Constructos basado en todos los atributos de la clase.
+     */
     public AtributoResponse(int id, String descAtributo, int valor, String descValor) {
         super();
         this.id = id;
@@ -49,6 +61,9 @@ public class AtributoResponse {
         this.descValor = descValor;
     }
 
+    /*
+     * Getter y setter.
+     */
     public int getId() {
         return id;
     }
@@ -81,6 +96,9 @@ public class AtributoResponse {
         this.descValor = descValor;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -92,6 +110,9 @@ public class AtributoResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -118,6 +139,9 @@ public class AtributoResponse {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "AtributoResponse [id=" + id + ", descAtributo=" + descAtributo + ", valor=" + valor + ", descValor="

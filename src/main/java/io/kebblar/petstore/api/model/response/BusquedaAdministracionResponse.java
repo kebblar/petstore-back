@@ -19,6 +19,7 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * POJO asociado a la entidad 'anuncio' para realizar la busqueda.
@@ -28,6 +29,10 @@ import java.util.Date;
  * @since 1.0-SNAPSHOT
  */
 public class BusquedaAdministracionResponse {
+
+    /*
+     * Atributos de la clase.
+     */
     private int id;
     private String folio;
     private String titulo;
@@ -40,6 +45,35 @@ public class BusquedaAdministracionResponse {
     private String descripcionEstatus;
     private String descripcionCategoria;
 
+    /**
+     * Constructos basado en todos los atributos de la clase.
+     */
+    public BusquedaAdministracionResponse(int id, String folio, String titulo, Date fechaInicioVigencia,
+                                          Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
+                                          String descripcionEstatus, String descripcionCategoria) {
+        super();
+        this.id = id;
+        this.folio = folio;
+        this.titulo = titulo;
+        this.fechaInicioVigencia = fechaInicioVigencia;
+        this.fechaFinVigencia = fechaFinVigencia;
+        this.estatus = estatus;
+        this.idCategoria = idCategoria;
+        this.descripcion = descripcion;
+        this.idEstatus = idEstatus;
+        this.descripcionEstatus = descripcionEstatus;
+        this.descripcionCategoria = descripcionCategoria;
+    }
+
+    /**
+     * Constructor por default.
+     */
+    public BusquedaAdministracionResponse() {
+    }
+
+     /*
+      * Getter y setter.
+      */
     public int getId() {
         return id;
     }
@@ -107,6 +141,9 @@ public class BusquedaAdministracionResponse {
         this.descripcionCategoria = descripcionCategoria;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -125,67 +162,24 @@ public class BusquedaAdministracionResponse {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaAdministracionResponse other = (BusquedaAdministracionResponse) obj;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (descripcionCategoria == null) {
-            if (other.descripcionCategoria != null)
-                return false;
-        } else if (!descripcionCategoria.equals(other.descripcionCategoria))
-            return false;
-        if (descripcionEstatus == null) {
-            if (other.descripcionEstatus != null)
-                return false;
-        } else if (!descripcionEstatus.equals(other.descripcionEstatus))
-            return false;
-        if (estatus == null) {
-            if (other.estatus != null)
-                return false;
-        } else if (!estatus.equals(other.estatus))
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (folio == null) {
-            if (other.folio != null)
-                return false;
-        } else if (!folio.equals(other.folio))
-            return false;
-        if (id != other.id)
-            return false;
-        if (idCategoria == null) {
-            if (other.idCategoria != null)
-                return false;
-        } else if (!idCategoria.equals(other.idCategoria))
-            return false;
-        if (idEstatus != other.idEstatus)
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaAdministracionResponse)) return false;
+        BusquedaAdministracionResponse that = (BusquedaAdministracionResponse) o;
+        return id == that.id && idEstatus == that.idEstatus && Objects.equals(folio, that.folio) &&
+                Objects.equals(titulo, that.titulo) && Objects.equals(fechaInicioVigencia, that.fechaInicioVigencia) &&
+                Objects.equals(fechaFinVigencia, that.fechaFinVigencia) && Objects.equals(estatus, that.estatus) &&
+                Objects.equals(idCategoria, that.idCategoria) && Objects.equals(descripcion, that.descripcion) &&
+                Objects.equals(descripcionEstatus, that.descripcionEstatus) && Objects.equals(descripcionCategoria, that.descripcionCategoria);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
@@ -193,26 +187,6 @@ public class BusquedaAdministracionResponse {
                 + ", estatus=" + estatus + ", idCategoria=" + idCategoria + ", descripcion=" + descripcion
                 + ", idEstatus=" + idEstatus + ", descripcionEstatus=" + descripcionEstatus + ", descripcionCategoria="
                 + descripcionCategoria + "]";
-    }
-
-    public BusquedaAdministracionResponse(int id, String folio, String titulo, Date fechaInicioVigencia,
-            Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
-            String descripcionEstatus, String descripcionCategoria) {
-        super();
-        this.id = id;
-        this.folio = folio;
-        this.titulo = titulo;
-        this.fechaInicioVigencia = fechaInicioVigencia;
-        this.fechaFinVigencia = fechaFinVigencia;
-        this.estatus = estatus;
-        this.idCategoria = idCategoria;
-        this.descripcion = descripcion;
-        this.idEstatus = idEstatus;
-        this.descripcionEstatus = descripcionEstatus;
-        this.descripcionCategoria = descripcionCategoria;
-    }
-
-    public BusquedaAdministracionResponse() {
     }
 
 }

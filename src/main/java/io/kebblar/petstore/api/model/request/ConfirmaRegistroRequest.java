@@ -1,3 +1,22 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   Anuncio.java
+ * Tipo:        clase
+ * AUTOR:       Javier Chávez Barrios (JCHB)
+ * Fecha:       Martes 18 de Mayo de 2021 (20_28)
+ *
+ * Historia:    .
+ *              20210518_2028 Creación de éste POJO
+ *              20210604_1314 Modificacion de 'sku' por 'folio'
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -8,8 +27,19 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
+/**
+ * <p>Descripción:</p>
+ * POJO asociado a la entidad 'ConfirmaRegistroRequest'.
+ *
+ * @author Javier Chávez Barrios
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class ConfirmaRegistroRequest {
 
+    /*
+     * Atributos de la clase.
+     */
     @ApiModelProperty(example = "xSw312")
     @NotBlank(message = "El token no puede ser null ni vacio")
     @Pattern(regexp = "\\p{Alnum}{6}",message = "El token debe tener 6 caracteres alfanuméricos")
@@ -28,9 +58,15 @@ public class ConfirmaRegistroRequest {
     @NotNull(message = "La fecha de nacimiendo no puede ser null")
     private Date fNacimiento;
 
+    /**
+     * Constructor por defecto.
+     */
     public ConfirmaRegistroRequest() {
     }
 
+    /**
+     * Constructor basado en todos los atributos de la clase.
+     */
     public ConfirmaRegistroRequest(String token, String calleNumero, int idMunicipio, Date fNacimiento) {
         this.token = token;
         this.calleNumero = calleNumero;
@@ -38,6 +74,9 @@ public class ConfirmaRegistroRequest {
         this.fNacimiento = fNacimiento;
     }
 
+    /*
+     * Getter y Setter.
+     */
     public String getToken() {
         return token;
     }
