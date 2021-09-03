@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.domain.Paqueteria;
 @Repository
 public interface PaqueteriaMapper {
 
-    static final String CAMPOS_PAQ = " id, nombre, breve_descripcion, html_descripcion, precio ";
+    String CAMPOS_PAQ = " id, nombre, breve_descripcion, html_descripcion, precio ";
 
     /**
      * Obtiene un objeto de tipo 'Paqueteria' dado su id.

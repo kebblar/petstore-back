@@ -43,13 +43,13 @@ import io.kebblar.petstore.api.model.domain.GraficaTotalFechasCategoria;
 @Repository
 public interface GraficaTotalFechasCategoriaMapper {
 
-    static final String CAMPOS_GRAFICA1 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
+    String CAMPOS_GRAFICA1 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
             "cat.categoria as categoria, MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
-    static final String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
+    String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
             "carrito.cve_orden_compra";
-    static final String IJ_CATEGORIA_ANUNCIO = " inner join petstore.categoria as cat on cat.id = anuncio.id_categoria";
-    static final String GROUP_CATEGORIA_M_A = " group by anio, mes, categoria";
-    static final String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
+    String IJ_CATEGORIA_ANUNCIO = " inner join petstore.categoria as cat on cat.id = anuncio.id_categoria";
+    String GROUP_CATEGORIA_M_A = " group by anio, mes, categoria";
+    String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
 
     /**
      * Obtiene una lista de tipo 'GraficaTotalFechasCategoria'.

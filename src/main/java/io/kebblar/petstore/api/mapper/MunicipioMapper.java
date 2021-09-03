@@ -47,8 +47,8 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 @Repository
 public interface MunicipioMapper {
 
-    static final String CAMPOS_MUN = " id, id_estado, nombre ";
-    static final String CAMPOS_AUX_MUN = " m.id, m.id_estado, m.nombre, e.nombre as nombre_estado , p.nombre as nombre_pais";
+    String CAMPOS_MUN = " id, id_estado, nombre ";
+    String CAMPOS_AUX_MUN = " m.id, m.id_estado, m.nombre, e.nombre as nombre_estado , p.nombre as nombre_pais";
 
     /**
      * Obtiene un objeto de tipo 'Municipio' dado su id.

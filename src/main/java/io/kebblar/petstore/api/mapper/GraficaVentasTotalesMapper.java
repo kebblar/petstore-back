@@ -42,12 +42,12 @@ import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
 @Repository
 public interface GraficaVentasTotalesMapper {
 
-    static String CAMPOS_GRAFICA2 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
+    String CAMPOS_GRAFICA2 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
             "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
-    static String GROUP_MES_ANIO = " group by anio, mes";
-    static String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
+    String GROUP_MES_ANIO = " group by anio, mes";
+    String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
             "carrito.cve_orden_compra";
-    static String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
+    String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
 
     /**
      * Obtiene una lista de tipo 'GraficaVentasTotales'.

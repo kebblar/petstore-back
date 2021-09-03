@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.domain.MetodoPago;
 @Repository
 public interface MetodoPagoMapper {
 
-    static final String CAMPOS_PAGO = " id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo ";
+    String CAMPOS_PAGO = " id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MetodoPago' dado su id.

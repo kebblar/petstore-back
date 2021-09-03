@@ -49,7 +49,7 @@ import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
 @Repository
 public interface AtributoMapper {
 
-    static final String CAMPOS_ATRIBUTO = " id, nombre, activo ";
+    String CAMPOS_ATRIBUTO = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'Atributo' dado su id.

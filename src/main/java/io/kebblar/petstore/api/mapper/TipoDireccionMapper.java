@@ -50,7 +50,7 @@ import io.kebblar.petstore.api.model.domain.TipoDireccion;
 @Repository
 public interface TipoDireccionMapper {
 
-    static final String CAMPOS_T_DIRECC = " id, nombre, activo ";
+    String CAMPOS_T_DIRECC = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'TipoDireccion' dado su id.

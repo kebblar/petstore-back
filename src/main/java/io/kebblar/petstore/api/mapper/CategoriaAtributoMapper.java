@@ -49,7 +49,7 @@ import io.kebblar.petstore.api.model.domain.CategoriaAtributo;
 @Repository
 public interface CategoriaAtributoMapper {
 
-    static final String CAMPOS_CAT_ATRIBUTO = " id_categoria, id_atributo ";
+    String CAMPOS_CAT_ATRIBUTO = " id_categoria, id_atributo ";
 
     /**
      * Obtiene un objeto de tipo 'CategoriaAtributo' dado su id.

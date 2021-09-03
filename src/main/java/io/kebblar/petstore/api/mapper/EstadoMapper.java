@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.domain.Estado;
 @Repository
 public interface EstadoMapper {
 
-    static final String CAMPOS_EDO = " id, id_pais, nombre ";
+    String CAMPOS_EDO = " id, id_pais, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Estado' dado su id.

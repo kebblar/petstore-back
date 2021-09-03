@@ -39,14 +39,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 
-    /**
+    /*
      * Atributos logger y jwt.
      */
     private Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
     private String jwtToken;
 
     /**
-     * Costructor que recibe el jwtoken para validar los tokens que vienen en el header.
+     * Constructor que recibe el jwtoken para validar los tokens que vienen en el header.
      * Esto facilita su posterior procesamiento
      *
      * @param jwtToken jwt token a asignar

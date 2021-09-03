@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 @Repository
 public interface AnuncioMediaMapper {
 
-    static final String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
+    String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 
     /**
      * Consulta el objeto de tipo 'AnuncioMedia' con base al id del anuncio proporcionado.

@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.domain.MediaTipo;
 @Repository
 public interface MediaTipoMapper {
 
-    static final String CAMPOS_MEDIA_TIPO = " id, descripcion, activo ";
+    String CAMPOS_MEDIA_TIPO = " id, descripcion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MediaTipo' dado su id.

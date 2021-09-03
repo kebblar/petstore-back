@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
 @Repository
 public interface RolMapper {
 
-    static final String CAMPOS_ROL = " id, nombre, activo ";
+    String CAMPOS_ROL = " id, nombre, activo ";
 
     /**
      * Retorna el rol dado su id y si este está activo.

@@ -49,7 +49,7 @@ import io.kebblar.petstore.api.model.domain.Carrito;
 @Repository
 public interface CarritoMapper {
 
-    static final String CAMPOS_CARRITO = " id, id_usuario, id_anuncio, cve_orden_compra ";
+    String CAMPOS_CARRITO = " id, id_usuario, id_anuncio, cve_orden_compra ";
 
     /**
      * Obtiene un objeto de tipo 'Carrito' dado su id.

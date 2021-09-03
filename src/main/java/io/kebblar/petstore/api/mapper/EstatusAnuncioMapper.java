@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
 @Repository
 public interface EstatusAnuncioMapper {
 
-    static final String CAMPOS_ESTATUS_ANUNCIO = " id, descripcion ";
+    String CAMPOS_ESTATUS_ANUNCIO = " id, descripcion ";
 
     /**
      * Obtiene un objeto de tipo 'EstatusAnuncio' dado su id.

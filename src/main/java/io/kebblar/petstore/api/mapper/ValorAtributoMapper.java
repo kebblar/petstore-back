@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.domain.ValorAtributo;
 @Repository
 public interface ValorAtributoMapper {
 
-    static final String CAMPOS_V_A = " id, id_atributo, rango, activo ";
+    String CAMPOS_V_A = " id, id_atributo, rango, activo ";
 
     /**
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.

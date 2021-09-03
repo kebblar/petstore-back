@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 @Repository
 public interface UsuarioMapper {
 
-    static final String CAMPOS_USER = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, " +
+    String CAMPOS_USER = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, " +
             "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
 
     /**

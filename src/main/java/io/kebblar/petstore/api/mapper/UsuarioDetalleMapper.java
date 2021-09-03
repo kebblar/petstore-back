@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 @Repository
 public interface UsuarioDetalleMapper {
 
-    static final String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, " +
+    String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, " +
             "fecha_nacimiento, telefono_celular ";
 
     /**

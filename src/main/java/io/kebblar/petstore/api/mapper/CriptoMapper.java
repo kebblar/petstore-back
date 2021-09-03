@@ -36,7 +36,7 @@ import java.util.List;
 @Repository
 public interface CriptoMapper {
 
-    static final String CAMPOS_CRIPTO = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, " +
+    String CAMPOS_CRIPTO = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, " +
             "descripcion, last_balance";
 
     /**

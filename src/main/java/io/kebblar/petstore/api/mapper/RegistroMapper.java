@@ -44,7 +44,7 @@ import java.sql.SQLException;
  */
 public interface RegistroMapper {
 
-    static final String CAMPOS_REG = " id, nick, correo, clave_hash, telefono, fecha_nacimiento, random_string, " +
+    String CAMPOS_REG = " id, nick, correo, clave_hash, telefono, fecha_nacimiento, random_string, " +
             "instante_registro ";
 
             /**

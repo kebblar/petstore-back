@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.domain.Pais;
 @Repository
 public interface PaisMapper {
 
-    static final String CAMPOS_PAIS = " id, nombre ";
+    String CAMPOS_PAIS = " id, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Pais' dado su id.

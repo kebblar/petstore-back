@@ -31,7 +31,6 @@ import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.Grafica;
 
-
 /**
  * Interfaz 'Mapper' MyBatis asociado a la entidad Chart.
  *
