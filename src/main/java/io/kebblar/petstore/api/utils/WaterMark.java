@@ -11,7 +11,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WaterMark {
+    private Logger logger = LoggerFactory.getLogger(WaterMark.class);
+    
     private static final String RUTA="/Users/garellano/Desktop/pics/";
     private static WaterMark instance =null;
     
@@ -102,7 +107,7 @@ public class WaterMark {
         try {
             ImageIO.write(originalBufferedImage, "jpg", newFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
         System.out.println(newFile.getPath() + " created successfully!");
     }

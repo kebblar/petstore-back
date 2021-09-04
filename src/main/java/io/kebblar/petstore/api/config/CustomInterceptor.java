@@ -97,7 +97,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
         try {
             response.getWriter().write(mapper.writeValueAsString(map));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

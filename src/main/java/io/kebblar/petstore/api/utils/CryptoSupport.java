@@ -37,7 +37,7 @@ public class CryptoSupport {
     private static String rootPath = "/Users/garellano/emisor/";
     private static String privateKeyFile = rootPath + "ok.key";
     private static String certificateFile = rootPath + "ok.cer";
-    private static String password = "password";
+    private static String pass = "password";
     private static String cadenaOriginalParaFirma = "parangaricutirimicuaro";
     /**/
 
@@ -47,7 +47,7 @@ public class CryptoSupport {
 
     public void ok() throws Exception {
         prn("Cadena original para firma:"+cadenaOriginalParaFirma);
-        String cadenaFirmada = signWithPrivateKey(cadenaOriginalParaFirma, privateKeyFile, password);
+        String cadenaFirmada = signWithPrivateKey(cadenaOriginalParaFirma, privateKeyFile, pass);
         prn("Cadena firmada:"+ cadenaFirmada);
         String data = verifySignature(cadenaFirmada, certificateFile); // Verificando con el certificado (que contiene la llave pública)
         prn("Verificación de cadena firmada: "+data);
@@ -59,8 +59,8 @@ public class CryptoSupport {
         System.out.println(convert(r));
         System.out.println(r.length);
 
-        //byte[] res = cs.decodeWithPrivateKey(r, cs.getPrivateKeyFromFile(privateKeyFile, password));
-        //byte[] decriptado = cs.getTextoEncriptadoFromPrivateKeyFile(new String(textoEncriptado), privateKeyFile, password);
+        //byte[] res = cs.decodeWithPrivateKey(r, cs.getPrivateKeyFromFile(privateKeyFile, pass));
+        //byte[] decriptado = cs.getTextoEncriptadoFromPrivateKeyFile(new String(textoEncriptado), privateKeyFile, pass);
         //System.out.println(cs.convert(decriptado));
     }
 
@@ -79,14 +79,14 @@ public class CryptoSupport {
 
     /**   **/
     /**
-     * Usando la llave privada y un password, se encripta un texto que luego va a poder ser
+     * Usando la llave privada y un pass, se encripta un texto que luego va a poder ser
      * desencriptado con el certificado o la llave púbkica que el certfcado tiene dentro.
      *
      * @param privateKeyFile Archivo del FileSystem con el contenido de una llave privada
      * @param textoParaEncripcion Texto que será encriptado
      * @param privateKeyFile1
      * @param password1
-     * @param password Clave secreta asociada a la llave privada
+     * @param pass Clave secreta asociada a la llave privada
      *
      * @return Texto encriptado
      * @throws Exception Envolvente para IOSexception y SecurityException
@@ -99,7 +99,7 @@ public class CryptoSupport {
         return convert(textoEncriptadoEnBytes);
     }
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
-        return signWithPrivateKey(textoParaEncripcion, privateKeyFile, password) ;
+        return signWithPrivateKey(textoParaEncripcion, privateKeyFile, pass) ;
     }
 
     /**  **/
@@ -108,7 +108,7 @@ public class CryptoSupport {
 
 
     // Usando un certificado, se encripta un texto que luego se va a poder desencriptar
-    // con una llave privada y el password de esa lave privada
+    // con una llave privada y el pass de esa lave privada
     public byte[] signWithCert(String text, String certificateString) throws Exception {
         X509Certificate cert =  (X509Certificate)getCertificateFromString(certificateString);
         PublicKey publicKey = cert.getPublicKey();
@@ -225,8 +225,8 @@ public class CryptoSupport {
         return IOUtils.toByteArray(privateKeyInputStream);
     }
     /*
-    private byte[] getTextoEncriptadoFromPrivateKeyFileXXX(String texto, byte[] clavePrivada, String password) throws GeneralSecurityException {
-        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+    private byte[] getTextoEncriptadoFromPrivateKeyFileXXX(String texto, byte[] clavePrivada, String pass) throws GeneralSecurityException {
+        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, pass.toCharArray());
         PrivateKey pk = pkcs8.getPrivateKey();
         // http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#Signature
         Signature firma = Signature.getInstance("NONEwithRSA"); // MD5withRSA,SHA256withRSA,NONEwithRSA

@@ -39,6 +39,9 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ibm.icu.text.SimpleDateFormat;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.HttpStatus;
@@ -55,6 +58,7 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
+    private static Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
 
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
 
@@ -282,7 +286,7 @@ public class AnuncioUtil {
                 ImageIO.write(bufferedImage, FilenameUtils.getExtension(uuidImagenBase), filepath.toFile());
                 bufferedImage.flush();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             }
     }
 

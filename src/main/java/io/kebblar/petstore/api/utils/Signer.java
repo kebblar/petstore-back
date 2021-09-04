@@ -57,7 +57,7 @@ public class Signer {
 
     private String privateKeyFile;
     private String certificateFile;
-    private String password = "hwb4aet!$fser";
+    private String pass = "hwb4aet!$fser";
     private String file;
 
     /*
@@ -158,7 +158,7 @@ public class Signer {
     }
 
     /**
-     * Metodo que encripta un texto a partir de una llave privada y un password.
+     * Metodo que encripta un texto a partir de una llave privada y un pass.
      *
      * @param arreglo de byte textoEncryptadoEnBytes contiene .
      * @param hash Arreglo de bytes a ser convertido a cadena.
@@ -175,14 +175,14 @@ public class Signer {
     }
 
     /**
-     * Usando la llave privada y un password, se encripta un texto que luego va a poder ser
+     * Usando la llave privada y un pass, se encripta un texto que luego va a poder ser
      * desencriptado con el certificado o la llave púbkica que el certfcado tiene dentro.
      *
      * @param privateKeyFile Archivo del FileSystem con el contenido de una llave privada
      * @param textoParaEncripcion Texto que será encriptado
      * @param privateKeyFile1
      * @param password1
-     * @param password Clave secreta asociada a la llave privada
+     * @param pass Clave secreta asociada a la llave privada
      *
      * @return Texto encriptado
      * @throws Exception Envolvente para IOSexception y SecurityException
@@ -190,7 +190,7 @@ public class Signer {
      */
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
         byte[] textoEncriptadoEnBytes = getTextoEncriptadoFromPrivateKeyFile(
-                textoParaEncripcion, this.privateKeyFile, this.password);
+                textoParaEncripcion, this.privateKeyFile, this.pass);
         return new String(textoEncriptadoEnBytes);
     }
 
@@ -258,7 +258,7 @@ public class Signer {
      * Metodo privado que obtiene una instancia de la clase PrivateKey.
      *
      * @param String privateKeyFile, string que contiene la llave privada.
-     * @param String password, el password.
+     * @param String pass, el pass.
      *
      * @return instancia de la calse PrivateKey.
      */
