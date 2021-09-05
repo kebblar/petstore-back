@@ -36,7 +36,7 @@ public class AnuncioRequest {
 
     @NotBlank(message = "{notblank.anuncio.titulo}")
     @NotNull(message = "{notnull.anuncio.titulo}")
-    private String titulo;
+    private String titulo = "";
     @NotBlank(message = "{notblank.anuncio.descripcion}")
     @NotNull(message = "{notnull.anuncio.descripcion}")
     private String descripcion;

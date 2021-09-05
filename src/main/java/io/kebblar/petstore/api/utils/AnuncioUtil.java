@@ -61,6 +61,8 @@ public class AnuncioUtil {
     private static Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
 
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
+    
+    private static Random random = new Random();
 
     /**
      * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
@@ -72,7 +74,6 @@ public class AnuncioUtil {
      */
     public static String generaFolio() {
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
-        Random random = new Random();
         String folio=dateFormat.format(new Date());
         return folio+String.format("%04d", random.nextInt(10000));
     }
@@ -162,7 +163,7 @@ public class AnuncioUtil {
         if (filtros.getEstatus() != 0) {
             consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
         }
-        if (filtros.getTitulo() != null && filtros.getTitulo() != "") {
+        if (filtros.getTitulo() != null && !filtros.getTitulo().equals("")) {
             consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
         }
         if (filtros.getFechaFinVigencia() != null && !filtros.getFechaFinVigencia().toString().isEmpty() ) {

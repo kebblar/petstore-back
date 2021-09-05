@@ -21,7 +21,7 @@ public class ConfirmaRegistroRequest {
 
     @ApiModelProperty(notes = "No es necesario especificar el estado pues internamente cada municipio ya tiene un estado relacionado",example = "1")
     @NotNull(message = "El id del municipio no puede ser null ni vacio")
-    private int idMunicipio;
+    private int idMunicipio = 1;
 
     @ApiModelProperty(example = "2000-07-24")
     @Past(message = "La fecha de nacimiendo no valida, debe de ser una fecha en el pasado")

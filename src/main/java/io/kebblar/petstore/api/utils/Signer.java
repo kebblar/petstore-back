@@ -91,24 +91,26 @@ public class Signer {
      * @param String fileName nombre del archivo del que qeremos su hash.
      * @throws Exception es disparada por un error de lectura escritura.
      */
-    public String createSum(String fileName) throws NoSuchAlgorithmException, IOException {
-        InputStream fis =  new FileInputStream(fileName);
+    public String createSum(String fileName) {
+        try (InputStream fis =  new FileInputStream(fileName)) {
+            byte[] buffer = new byte[1024];
+            MessageDigest complete = MessageDigest.getInstance("SHA-256");
+            int numRead;
 
-        byte[] buffer = new byte[1024];
-        MessageDigest complete = MessageDigest.getInstance("SHA-256");
-        int numRead;
+            do {
+                numRead = fis.read(buffer);
+                if (numRead > 0) {
+                    complete.update(buffer, 0, numRead);
+                }
+            } while (numRead != -1);
 
-        do {
-            numRead = fis.read(buffer);
-            if (numRead > 0) {
-                complete.update(buffer, 0, numRead);
-            }
-        } while (numRead != -1);
+            //fis.close();
+            byte[] digestion = complete.digest();
 
-        fis.close();
-        byte[] digestion = complete.digest();
-
-        return toHexString(digestion);
+            return toHexString(digestion);
+          } catch(NoSuchAlgorithmException | IOException e) {
+              return "";
+          }
     }
 
     /**

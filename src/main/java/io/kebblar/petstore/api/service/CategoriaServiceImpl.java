@@ -187,7 +187,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                                 Boolean agregarAtributo = true;
                                 for (int i = 0; i < a.size(); i++) {
 
-                                    if(a.get(i).getId() == aux.getId() ) {
+                                    if(a.get(i).getId().intValue() == aux.getId().intValue() ) {
                                         agregarAtributo = false;
                                         ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
                                         a.get(i).getRangos().add(auxVa);

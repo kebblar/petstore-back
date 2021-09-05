@@ -329,7 +329,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             rollbackFor = TransactionException.class)
     public Usuario confirmaPreregistro(String token) throws BusinessException {
         // El token sirve sólo 10 minutes:
-        long DELTA = 1000*60*10;
+        long DELTA = 1000*60*10L;
 
         // Obtén la túpla asociada al token de confirmación
         Preregistro preregistro = getPreregistroByRandomString(token);
@@ -467,7 +467,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
         ValidadorClave.validate(clave);
-        long UNA_HORA = 1000*60*60;
+        long UNA_HORA = 1000*60*60L;
         Usuario usuario = usuarioMapper.getByToken(token);
         if(usuario==null) throw new TokenNotExistException();
         long remaining = System.currentTimeMillis()-usuario.getRegeneraClaveInstante();

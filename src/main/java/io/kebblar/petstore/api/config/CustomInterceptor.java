@@ -1,19 +1,20 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o parcialmente  siempre y cuando  mantenga  este
+ *              aviso y reconozca  la  autoría  del código al no
+ *              modificar  los datos  establecidos en la mención 
+ *              de "AUTOR".
+ *              ------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.config
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      CustomInterceptor
+ * Autor:       garellano
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.config
- * Modulo:      cinepolis
- * Tipo:        clase
- * Autor:       Gustavo Adolfo Arellano Sandoval (garellanos)
- * Fecha:       28 de Marzo de 2020
- * Version:     0.0.2-SNAPSHOT
- * .
- * Clase encargada de ...
+ * Historia: 
+ *              Creación: 4 Sep 2021 @ 14:29:48
  */
 package io.kebblar.petstore.api.config;
 
@@ -35,7 +36,36 @@ import io.kebblar.petstore.api.utils.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Clase CustomInterceptor.
+ * The {@code String} class represents character strings. All
+ * string literals in Java programs, such as {@code "abc"}, are
+ * implemented as instances of this class.
+ * <p>
+ * Strings are constant; their values cannot be changed after they
+ * Because String objects are immutable they can be shared. For example:
+ * <blockquote><pre>
+ *     String str = "abc";
+ * </pre></blockquote><p>
+ * is equivalent to:
+ * <blockquote><pre>
+ *     char data[] = {'a', 'b', 'c'};
+ *     String str = new String(data);
+ * </pre></blockquote><p>
+ * Here are some more examples of how strings can be used:
+ * <blockquote><pre>
+ *     System.out.println("abc");
+ *     String cde = "cde";
+ *     System.out.println("abc" + cde);
+ *     String c = "abc".substring(2,3);
+ *     String d = cde.substring(1, 2);
+ * </pre></blockquote>
+ * <p>
+ * The class {@code String} includes methods for examining
+ * lowercase. Case mapping is based on the Unicode Standard version
+ * specified by the {@link java.lang.Character Character} class.
+ *
+ * @author  garellano
+ * @see     java.lang.Object#toString()
+ * @since   0.0.1-SNAPSHOT
  */
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 

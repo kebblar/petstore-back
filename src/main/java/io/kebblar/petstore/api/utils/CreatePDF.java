@@ -92,14 +92,13 @@ public class CreatePDF {
         DatosOrden ordenCompra, String dest, String url,  String nombrePdf,
         List<CarritoDatosFactura> listCarrito, List<DireccionConNombre> direcciones) throws ProcessPDFException {
 
-        String pdf="";
+        String pdf= nombrePdf + ".pdf";
+        PageSize pageSize = PageSize.A4.rotate();
 
-        try {
-            pdf= nombrePdf + ".pdf";
-            PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
-            PageSize pageSize = PageSize.A4.rotate();
-            Document doc = new Document(pdfDoc, pageSize);
-
+        try (
+             PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest+pdf));
+             Document doc = new Document(pdfDoc, pageSize);
+            ) {
             doc.add(getHeader());
             doc.add(getTitle(ordenCompra));
             doc.add(getDatosFactura(usuarioDetalle, usuario, doc, direcciones));

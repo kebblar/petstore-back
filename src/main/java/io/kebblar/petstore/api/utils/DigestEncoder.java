@@ -44,24 +44,23 @@ public class DigestEncoder  {
     private DigestEncoder() {
     }
 
-    public static String createChecksum(String filename) throws Exception {
-        InputStream fis =  new FileInputStream(filename);
-
-        byte[] buffer = new byte[1024];
-        MessageDigest complete = MessageDigest.getInstance("SHA-256");
-        int numRead;
-
-        do {
-            numRead = fis.read(buffer);
-            if (numRead > 0) {
-                complete.update(buffer, 0, numRead);
-            }
-        } while (numRead != -1);
-
-        fis.close();
-        byte[] digestion = complete.digest();
-
-        return toHexString(digestion);
+    public static String createChecksum(String filename) {
+        try (InputStream fis =  new FileInputStream(filename)) {
+            byte[] buffer = new byte[1024];
+            MessageDigest complete = MessageDigest.getInstance("SHA-256");
+            int numRead;
+            do {
+                numRead = fis.read(buffer);
+                if (numRead > 0) {
+                    complete.update(buffer, 0, numRead);
+                }
+            } while (numRead != -1);
+            //fis.close();
+            byte[] digestion = complete.digest();
+            return toHexString(digestion);
+        } catch(Exception e) {
+            return "";
+        }
     }
 
     public static String digest(String source, String salt) {
