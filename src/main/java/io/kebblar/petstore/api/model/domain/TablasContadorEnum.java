@@ -20,12 +20,6 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
-/**
- * <p>TablasContadorEnum class.</p>
- *
- * @author garellano
- * @version $Id: $Id
- */
 public enum TablasContadorEnum {
 
     /*
@@ -35,16 +29,6 @@ public enum TablasContadorEnum {
     ESTADOS("estado"),
     MUNICIPIOS("municipio");
 
-package io.kebblar.petstore.api.model.domain;
-
-public enum TablasContadorEnum {
-
-    /*
-     * Enums.
-     */
-    PAISES("pais"),
-    ESTADOS("estado"),
-    MUNICIPIOS("municipio");
     private final String tabla;
 
     /**
@@ -56,8 +40,6 @@ public enum TablasContadorEnum {
 
     /**
      * Getter.
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getTabla() {
         return tabla;

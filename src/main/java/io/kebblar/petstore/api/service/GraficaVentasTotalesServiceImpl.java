@@ -29,7 +29,6 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.GraficaVentasTotalesMapper;
 import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
