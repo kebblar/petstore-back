@@ -1,23 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
- *              de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.service
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      UsuarioCompletoServiceImpl
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * 
- * Artefacto:   UsuarioCompletoServiceImpl .java
- * Proyecto:    petstore
- * Tipo:        clase 
- * AUTOR:       Fhernanda Romo
- * Fecha:       Sunday 06 de June de 2021 (09_35)
- * 
- *              ------------------------------------------------
- *
- * Historia:    20210627_0935 Implementación de clase 
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 09:23:38
  */
 package io.kebblar.petstore.api.service;
 
@@ -36,10 +35,10 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * Servicio asociado a la entidad 'usuario_completo'. 
+ * Servicio asociado a la entidad 'usuario_completo'.
  *
  * <p>Implementación de la interfaz {@link UsuarioCompletoService}.
- * 
+ *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author Fhernanda Romo
@@ -54,13 +53,13 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioCompletoServiceImpl.class);
 
-    private UsuarioCompletoMapper usuarioCompletoMapper;    
+    private UsuarioCompletoMapper usuarioCompletoMapper;
     private UsuarioDetalleMapper usuarioDetalleMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param usuarioCompletoMapper mapper utilizado para llamar a metodos de persistencia
      */
     public UsuarioCompletoServiceImpl(
@@ -93,25 +92,25 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
     @Override
     public int update(UsuarioCompleto usuarioCompleto) throws BusinessException {
         Usuario u = new Usuario(
-                usuarioCompleto.getId(), 
-                "", // el correo no se actualiza aqui 
+                usuarioCompleto.getId(),
+                "", // el correo no se actualiza aqui
                 "", // la clave no se actualiza aqui
-                -1L, // la fecha de creación debe ser incambiable 
-                usuarioCompleto.isActivo(), 
-                usuarioCompleto.getAccesoNegadoContador(), 
-                usuarioCompleto.getInstanteBloqueo(), 
-                usuarioCompleto.getInstanteUltimoAcceso(), 
-                usuarioCompleto.getInstanteUltimoCambioClave(), 
-                usuarioCompleto.getRegeneraClaveToken(), 
+                -1L, // la fecha de creación debe ser incambiable
+                usuarioCompleto.isActivo(),
+                usuarioCompleto.getAccesoNegadoContador(),
+                usuarioCompleto.getInstanteBloqueo(),
+                usuarioCompleto.getInstanteUltimoAcceso(),
+                usuarioCompleto.getInstanteUltimoCambioClave(),
+                usuarioCompleto.getRegeneraClaveToken(),
                 usuarioCompleto.getRegeneraClaveInstante()
                 );
         UsuarioDetalle ud = new UsuarioDetalle(
-                usuarioCompleto.getId(), 
-                usuarioCompleto.getNombre(), 
-                usuarioCompleto.getApellidoPaterno(), 
-                usuarioCompleto.getApellidoMaterno(), 
-                usuarioCompleto.getNickName(), 
-                usuarioCompleto.getFechaNacimiento(), 
+                usuarioCompleto.getId(),
+                usuarioCompleto.getNombre(),
+                usuarioCompleto.getApellidoPaterno(),
+                usuarioCompleto.getApellidoMaterno(),
+                usuarioCompleto.getNickName(),
+                usuarioCompleto.getFechaNacimiento(),
                 usuarioCompleto.getTelefonoCelular()
                 );
         try {
@@ -131,7 +130,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
             throw new DatabaseException(e);
         }
     }
-    
+
     @Override
     public int countUsuarios() throws BusinessException {
         try {
@@ -140,5 +139,5 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
             throw new DatabaseException(e);
         }
     }
-    
+
 }

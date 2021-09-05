@@ -1,44 +1,22 @@
-
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
-<<<<<<< HEAD
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion
- *              de "AUTOR".
-=======
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
->>>>>>> refs/heads/develop
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.domain
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      Pais
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
-<<<<<<< HEAD
- *
- * Artefacto:   Pais .java
- * Proyecto:    petstore
- * Tipo:        clase
- * AUTOR:       Fhernanda Romo
- * Fecha:       Tuesday 05 de May de 2021 (14_44)
- *
- *              ------------------------------------------------
-=======
- * Artefacto:   Pais.java
- * Tipo:        clase
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 3 de Mayo de 2021 (23_21)
->>>>>>> refs/heads/develop
- *
-<<<<<<< HEAD
- * Historia:    20210511_1444 Implementación de clase
-=======
- * Historia:    .
- *              20210503_2321 Creación de éste POJO
->>>>>>> refs/heads/develop
- *
+ * Historia:
+ *              Creación: 5 Sep 2021 @ 07:50:35
  */
 package io.kebblar.petstore.api.model.domain;
 

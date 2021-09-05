@@ -157,10 +157,10 @@ public class ControllerException extends Exception {
      * Construye un mensaje genérico basado en un ID de rastreo para ocultar
      * el verdadero mensaje al usuario final y dejar huella para que lo busque
      * y gestione un administrador con acceso al log de transacciones.
-     * 
+     *
      * @param msg Cadena con un mensaje genérico.
      * @param desc Mensaje real a ocultar.
-     * 
+     *
      * @return Cadena con el ID genérico
      */
     public static String buildMessage(String msg, String desc) {

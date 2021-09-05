@@ -1,22 +1,24 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioUtil.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.utils
+ * Proyecto:    petstore-back
  * Tipo:        Clase
- * AUTOR:       Maria Isabel Contreras Garcia
- * Fecha:       Jueves 20 de Mayo de 2021 (22_03)
+ * Nombre:      AnuncioUtil
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
  * Historia:    .
  *              20210520_2203 Creación de esta utileroa
  *              20210520_2203 Se  agregan  metodos de  marca  de
  *              agua y renderizado de imagen
- *
  */
 package io.kebblar.petstore.api.utils;
 
@@ -61,7 +63,7 @@ public class AnuncioUtil {
     private static Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
 
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
-    
+
     private static Random random = new Random();
 
     /**

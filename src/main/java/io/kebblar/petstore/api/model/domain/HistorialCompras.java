@@ -1,24 +1,22 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mencion de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.domain
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      HistorialCompras
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Proyecto:    petstore
- * Paquete:     io.kebblar.petstore.api.model
- * Modulo:      HistorialCompras
- * Tipo:        clase
- * Autor:       Luis Martinez
- * Fecha:       Thursday 10 June 2021 (09_35)
- * Version:     1.0-SNAPSHOT
- * .
- * POJO asociado a la entidad 'HistorialCompras'.
- *
- * Historia:    .
- *              20210519_0935 Generado por LMtz
- *              20210610_0935 Actualizado por LMtz
- *
+ * Historia:
+ *              Creación: 5 Sep 2021 @ 07:49:24
  */
 package io.kebblar.petstore.api.model.domain;
 

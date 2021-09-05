@@ -9,52 +9,39 @@
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.model.domain
  * Proyecto:    petstore-back
- * Tipo:        Clase
- * Nombre:      CategoriaTO
+ * Tipo:        ENUM
+ * Nombre:      TablasContadorEnum
  * Autor:       Gustavo Adolfo Arellano (GAA)
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
  * Historia:
- *              Creación: 4 Sep 2021 @ 20:17:14
+ *              Creación: 5 Sep 2021 @ 07:51:25
  */
 package io.kebblar.petstore.api.model.domain;
 
-import java.util.List;
-
-/**
- * <p>Descripción:</p>
- * POJO asociado a la entidad 'categoria'.
- *
- * @author Fhernanda Romo
- * @version 1.0-SNAPSHOT
- * @since 1.0-SNAPSHOT
- */
-public class CategoriaTO {
+public enum TablasContadorEnum {
 
     /*
-     * Atributos de la clase.
+     * Enums.
      */
-    Categoria categoria;
-    List<AtributoTO> atributos;
+    PAISES("pais"),
+    ESTADOS("estado"),
+    MUNICIPIOS("municipio");
 
-    /*
-     * Setter y getter.
+    private final String tabla;
+
+    /**
+     * Constructor.
      */
-    public Categoria getCategoria() {
-        return categoria;
+    TablasContadorEnum(String tabla) {
+        this.tabla = tabla;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    /**
+     * Getter.
+     */
+    public String getTabla() {
+        return tabla;
     }
-
-    public List<AtributoTO> getAtributos() {
-        return atributos;
-    }
-
-    public void setAtributos(List<AtributoTO> atributos) {
-        this.atributos = atributos;
-    }
-
 }

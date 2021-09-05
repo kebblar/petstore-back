@@ -1,19 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.request
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      AnuncioImagenRequest
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * Artefacto:   AnuncioImagenRequest.java
- * Tipo:        clase
- * AUTOR:       Isabel Contreras (IC)
- * Fecha:       Miercoles 9 de Junio de 2021 (20_05)
- *
- * Historia:    20210609_2005 Creación de éste POJO
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 07:59:54
  */
 package io.kebblar.petstore.api.model.request;
 

@@ -46,7 +46,7 @@ public class DatabaseException extends BusinessException {
             e.getMessage(),
             1005,
             "CVE_1005",
-            HttpStatus.INTERNAL_SERVER_ERROR);        
+            HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**

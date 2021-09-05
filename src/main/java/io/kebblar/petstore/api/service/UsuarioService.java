@@ -1,20 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.service
+ * Proyecto:    petstore-back
+ * Tipo:        Interface
+ * Nombre:      UsuarioService
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * Artefacto:   UsuarioService.java
- * Tipo:        interface
- * AUTOR:       Gustavo A. Arellano (GAA)
- * Fecha:       Lunes 3 de Mayo de 2021 (16_00)
- *
- * Historia:    .
- *              20210503_1600 Creación
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 09:23:46
  */
 package io.kebblar.petstore.api.service;
 
@@ -147,14 +149,14 @@ public interface UsuarioService {
      * @throws BusinessException
      */
     Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException;
-    
+
     /**
-     * Similar a preRegistro. La diferencia es que PreregistroRequest no tiene Date y a cambio, 
+     * Similar a preRegistro. La diferencia es que PreregistroRequest no tiene Date y a cambio,
      * tiene tres campos numéricos: year, month y day
-     * 
+     *
      * @param preRegistroRequest
      * @return Retorna la estructura de datos que recive transformada en un objeto de tipo Preregistro
-     * 
+     *
      * @throws BusinessException
      */
     Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException;

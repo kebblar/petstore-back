@@ -1,3 +1,23 @@
+/*
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.utils
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      WaterMark
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
+ *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:36:42
+ */
 package io.kebblar.petstore.api.utils;
 
 import java.awt.AlphaComposite;
@@ -16,10 +36,10 @@ import org.slf4j.LoggerFactory;
 
 public class WaterMark {
     private Logger logger = LoggerFactory.getLogger(WaterMark.class);
-    
+
     private static final String RUTA="/Users/garellano/Desktop/pics/";
     private static WaterMark instance =null;
-    
+
     public static void main(String[] args) {
         new WaterMark().addWatermarkOnImage();
     }
@@ -39,7 +59,7 @@ public class WaterMark {
         File origFile           = new File(path + origFileName);
         File watermarkImageFile = new File(path + watermarkImageFileName);
         File newFile            = new File(path + newFileName);
-        
+
         if(!origFile.exists()) {
             System.out.println("No existe: "+origFile.getPath());
             return;
@@ -80,25 +100,25 @@ public class WaterMark {
         int hOrig = originalBufferedImage.getHeight();
 
         int impresionesH = (hOrig<=wOrig)?4:3;
-        int impresionesV = (hOrig<=wOrig)?3:4; 
-        
+        int impresionesV = (hOrig<=wOrig)?3:4;
+
         int cuadrosH=2*impresionesH+1;
         int cuadrosV=2*impresionesV+1;
-        
+
         int minWater = (cuadrosH>cuadrosV)?cuadrosV:cuadrosH;
-        
+
         int wWater = watermarkBufferedImage.getWidth();
         int hWater = watermarkBufferedImage.getHeight();
-        
+
         int factor = wOrig/minWater;
-        
+
         for(int y=1; y<cuadrosV; y=y+2) {
             for(int x=1; x<cuadrosH; x=x+2) {
-                graphics.drawImage(watermarkBufferedImage, 
-                    (wOrig/cuadrosH)*x, 
-                    (hOrig/cuadrosV)*y, 
-                    factor, 
-                    hWater*factor/wWater, 
+                graphics.drawImage(watermarkBufferedImage,
+                    (wOrig/cuadrosH)*x,
+                    (hOrig/cuadrosV)*y,
+                    factor,
+                    hWater*factor/wWater,
                     null);
             }
         }

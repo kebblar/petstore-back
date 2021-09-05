@@ -1,23 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
- *              de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.rest
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      UsuarioCompletoController
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * 
- * Artefacto:   UsuarioCompletoController .java
- * Proyecto:    petstore
- * Tipo:        clase 
- * AUTOR:       Fhernanda Romo
- * Fecha:       Sunday 06 de June de 2021 (09_35)
- * 
- *              ------------------------------------------------
- *
- * Historia:    20210627_0935 Implementación de clase 
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:27:25
  */
 package io.kebblar.petstore.api.rest;
 
@@ -40,11 +39,11 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'usuario_completo'. 
+ * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'usuario_completo'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
- * 
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido 
+ *
+ * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
  *
  * @author Fhernanda Romo
@@ -62,9 +61,9 @@ public class UsuarioCompletoController {
     private UsuarioCompletoService usuarioCompletoService;
 
     /**
-     * Constructor que realiza el setting de los servicios que serán 
+     * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
-     * 
+     *
      * @param usuarioCompletoService Servicios de usuario
      */
     public UsuarioCompletoController(UsuarioCompletoService usuarioCompletoService) {

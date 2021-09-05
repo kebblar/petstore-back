@@ -1,24 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioMapper.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.mapper
+ * Proyecto:    petstore-back
  * Tipo:        Interface
- * AUTOR:       Maria Isabel Contreras Garcia (MICG)
- * Fecha:       Jueves 20 de Mayo de 2021 (01_05)
+ * Nombre:      AnuncioMapper
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Historia:    .
- *              20210510_0105 Creación de ésta interfaz
- *              20210523_2034 Se  agrega  el  método  de  elimado
- *              logico
- *              20210524_1800 Se  agrega  el  método  de consulta
- *              de atributos del anunio
- *
+ * Historia:
+ *              Creación: 4 Sep 2021 @ 20:03:19
  */
 package io.kebblar.petstore.api.mapper;
 
@@ -127,7 +125,7 @@ public interface AnuncioMapper {
     @ResultMap("AnuncioMap")
     @Select("SELECT id, " + CAMPOS_ANUNCIO + " FROM anuncio WHERE search_url like #{searchUrl} and (id_estatus=2 or id_estatus=3)")
     List<Anuncio> getBySearchUrl(String searchUrl) throws SQLException; // estos paréntesis --> ^ que se usan en el query--> ^ son MUY importantes !!!!
-    
+
     /**
      * Método que permite actualizar el estatus de un anuncio, con base al identificador del anuncio.
      *
@@ -318,7 +316,7 @@ public interface AnuncioMapper {
             + " JOIN categoria cat ON a.id_categoria=cat.id "
             + " WHERE a.id = #{id} ")
     DetalleAnuncioResponse getAnuncioDetalle(int id) throws SQLException;
-    
+
     @ResultMap("AnuncioDetalleMap")
     @Select("SELECT a.id, a.folio, a.titulo, a.descripcion AS descripcion_anuncio, a.precio, "
             + " a.fecha_inicio_vigencia, a.fecha_fin_vigencia,"
@@ -330,7 +328,7 @@ public interface AnuncioMapper {
 
     /**
      * Método que permite consultar los anuncios con base a un esatus y unas fechas de inicio y fin.
-     * 
+     *
      * @param fechaInicio - Filtro de fecha de inicio con la que se comparara la fecha de inicio vigencia
      * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
      * @param estatus - Estatus mediante el cual se filtraran los anuncios
@@ -343,7 +341,7 @@ public interface AnuncioMapper {
 
     /**
      * Metodo que permite consultar los anuncios con base a un estatus y unas fechas de inicio y fin.
-     * 
+     *
      * @param fechaFin - Filtro de fecha de fin con la que se comparara la fecha de inicio vigencia
      * @param estatus - Estatus mediante el cual se filtraran los anuncios
      * @return Listado de clases de tipo 'Anuncio' con la información de los anuncios

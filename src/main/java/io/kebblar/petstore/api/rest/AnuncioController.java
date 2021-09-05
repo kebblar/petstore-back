@@ -1,16 +1,19 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioController.java
- * Tipo:        clase
- * AUTOR:       Javier Chávez Barrios (JCHB)
- * Fecha:       Martes 18 de Mayo de 2021 (20_08)
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.rest
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      AnuncioController
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
  * Historia:    .
  *              20210518_2028 Creación de  éste  controlador  REST
@@ -21,8 +24,8 @@
  *              Producto
  *              20210523_2020 Se  agrega  el  metodo  de  eliminado
  *              logico
- *                20210523_2232 Se agrega  el rest del detalle del
- *                producto
+ *              20210523_2232 Se agrega  el rest del detalle del
+ *              producto
  *              20210525_1532 Se agrega el llamado a los servicios
  *              para  el  registro  y  eliminado  de  imagenes  de
  *              anuncios
@@ -30,7 +33,6 @@
  *              Producto
  *              20210528_1142 Creacion de endpoint para Busqueda
  *              de usuario final
- *
  */
 package io.kebblar.petstore.api.rest;
 
@@ -180,7 +182,7 @@ public class AnuncioController {
         return anuncioService.guardarImagen(idAnuncio, file);
     }
 
-    
+
     @ApiOperation(
     value = "AnuncioController::Registro",
     notes = "Recibe una imagen que sera asociada a un anuncio")
@@ -194,9 +196,9 @@ public class AnuncioController {
     @RequestParam("file") MultipartFile[] files) throws BusinessException {
         return anuncioService.guardarImagen(idAnuncio, files);
     }
-    
-    
-    
+
+
+
     @ApiOperation(
         value = "AnuncioController::Eliminar",
         notes = "Elimina la imagen asociada a un anuncio con base al identificador de la imagen")
@@ -242,7 +244,7 @@ public class AnuncioController {
     @RequestBody AnuncioImagenRequest imagenRequest) throws BusinessException {
         anuncioService.imagenPrincipal(imagenRequest);
     }
-    
+
     @ApiOperation(
             value = "AnuncioController::getBySearchUrl",
             notes = "Regesa la lista de anuncios activos de entre todos los que coinciden con la busqueda dada")
@@ -252,7 +254,7 @@ public class AnuncioController {
     public List<DetalleAnuncioResponse> getBySearchUrl(@PathVariable(required = true) String description) throws BusinessException {
         return anuncioService.getBySearchUrl(description); // lista NO nula con al menos 1 elemento
     }
-    
+
     @ApiOperation(
             value = "AnuncioController::getDetalleAllAnuncio",
             notes = "Regesa la lista de TODOS los anuncios activos")
@@ -265,7 +267,7 @@ public class AnuncioController {
 
     @Autowired
     private Convert convert;
-    
+
     @GetMapping(
         value = "/counter",
         produces = "application/json; charset=utf-8")
@@ -274,5 +276,5 @@ public class AnuncioController {
         result.put("ok", convert.getContador());
         return result;
     }
-    
+
 }

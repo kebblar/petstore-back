@@ -1,20 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioMediaMapper.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.mapper
+ * Proyecto:    petstore-back
  * Tipo:        Interface
- * AUTOR:       Maria Isabel Contreras Garcia (MICG)
- * Fecha:       Jueves 25 de Mayo de 2021 (17_58)
+ * Nombre:      AnuncioMediaMapper
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Historia:    .
- *              20210525_1758 Creación de ésta interfaz
- *
+ * Historia:
+ *              Creación: 4 Sep 2021 @ 20:03:55
  */
 package io.kebblar.petstore.api.mapper;
 

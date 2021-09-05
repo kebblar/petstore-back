@@ -1,21 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   HistorialComprasMapper.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.mapper
+ * Proyecto:    petstore-back
  * Tipo:        Interface
- * AUTOR:       Luis Martinez (LMtz)
- * Fecha:       Jueves 10 de Junio de 2021 (09_25)
+ * Nombre:      HistorialComprasMapper
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Historia:    .
- *              0210519_0925 Creación de éste Mapper
- *              0210610_0925 Actualizacion de éste Mapper
- *
+ * Historia:
+ *              Creación: 4 Sep 2021 @ 20:09:26
  */
 package io.kebblar.petstore.api.mapper;
 

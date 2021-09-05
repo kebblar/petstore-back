@@ -1,27 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion
- *              de "AUTOR".
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.domain
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      GraficaPaqueteria
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- *
- * Artefacto:   GraficaPaqueteria .java
- * Proyecto:    petstore
- * Tipo:        clase
- * AUTOR:       ULises López
- * Fecha:       Tuesday 10 de Jun de 2021 (14_44)
- *
- *              ------------------------------------------------
- *
- * Historia:    20210610_1444 Implementación de clase
+ * Historia:
+ *              Creación: 4 Sep 2021 @ 20:23:53
  */
 package io.kebblar.petstore.api.model.domain;
 

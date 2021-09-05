@@ -1,19 +1,22 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      App
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              --------------------------------------------------
- * Paquete:     mx.qbits.unam.proyecto.config
- * Modulo:      petstore
- * Tipo:        clase
- * Autor:       Gustavo Adolfo Arellano Sandoval (garellanos)
- * Fecha:       31 de agosto 2021
- * Version:     0.0.2-SNAPSHOT
- * .
- * Clase encargada de ...
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:36:54
  */
 package io.kebblar.petstore;
 

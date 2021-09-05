@@ -1,20 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.response
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      BusquedaResponse
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * Artefacto:   BusquedaResponse.java
- * Tipo:        clase
- * AUTOR:       Edgar Uribe Mendez (EUM)
- * Fecha:       Martes 29 de Mayo de 2021 (22_30)
- *
- * Historia:    .
- *              20210529_2230 Creación de éste POJO
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:02:42
  */
 package io.kebblar.petstore.api.model.response;
 

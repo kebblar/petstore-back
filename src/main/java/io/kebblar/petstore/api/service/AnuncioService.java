@@ -1,26 +1,27 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioService.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.service
+ * Proyecto:    petstore-back
  * Tipo:        Interface
- * AUTOR:       Maria Isabel Contreras Garcia (MICG)
- * Fecha:       Jueves 20 de Mayo de 2021 (23_39)
+ * Nombre:      AnuncioService
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Historia:    .
+ * Historia: 
  *              20210510_2339 Creación de ésta interfaz
  *              20210523_2025 Se  agrega  el  metodo  de  elimado
  *              logico
  *              20210525_1806 Se  agrega  el  metodo  de consulta
  *              detalle de un anuncio
- *              20210528_1157 Se agrega el metodo BusquedaAdministracion
- *
- */
+ *              20210528_1157 Se agrega el metodo BusquedaAdministracion */
 package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
@@ -110,7 +111,7 @@ public interface AnuncioService {
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException;
-    
+
     AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException;
 
     /**
@@ -165,15 +166,15 @@ public interface AnuncioService {
      * @throws BusinessException En caso que la url no retorne resultados.
      */
     List<DetalleAnuncioResponse> getBySearchUrl(String searchUrl) throws BusinessException;
-    
+
     /**
      * Auxiliar que actualiza los url's de búsqueda de los anuncios
      */
     void updateSearchUrl();
-    
+
     /**
      * Regresa un anuncio con todos sus detalles
-     * 
+     *
      * @return lista de objetos de tipo 'DetalleAnuncioResponse'
      * @throws BusinessException
      */

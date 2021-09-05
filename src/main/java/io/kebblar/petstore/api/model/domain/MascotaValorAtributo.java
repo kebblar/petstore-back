@@ -1,24 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.domain
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      MascotaValorAtributo
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * Artefacto:   MascotaValorAtributo.java
- * Tipo:        clase
- * AUTOR:       Javier Chávez Barrios (JCHB)
- * Fecha:       Martes 18 de Mayo de 2021 (20_28)
- *
- * Historia:    .
- *              20210518_2028 Creación de éste POJO
- *              20210604_2028 Se  modificar  para  agregar  los
- *              nuevos campos
- *              202106041315 Se renombra de la clase y se quitan
- *              campos que ya no son necesarios
- *
+ * Historia:
+ *              Creación: 5 Sep 2021 @ 07:49:48
  */
 package io.kebblar.petstore.api.model.domain;
 

@@ -1,23 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
- *              de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.mapper
+ * Proyecto:    petstore-back
+ * Tipo:        Interface
+ * Nombre:      UsuarioCompletoMapper
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * 
- * Artefacto:   UsuarioCompletoMapper .java
- * Proyecto:    petstore
- * Tipo:        interface 
- * AUTOR:       Fhernanda Romo
- * Fecha:       Sunday 06 de June de 2021 (09_35)
- * 
- *              ------------------------------------------------
- *
- * Historia:    20210627_0935 Implementación de interface 
- *
+ * Historia:
+ *              Creación: 4 Sep 2021 @ 20:11:11
  */
 package io.kebblar.petstore.api.mapper;
 
@@ -70,7 +69,7 @@ public interface UsuarioCompletoMapper {
             @Result(property = "apellidoMaterno",   column = "apellido_materno"),
             @Result(property = "fechaNacimiento",   column = "fecha_nacimiento"),
             @Result(property = "nickName",   column = "nick_name"),
-            @Result(property = "telefonoCelular",   column = "telefono_celular")    
+            @Result(property = "telefonoCelular",   column = "telefono_celular")
     })
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo WHERE id=#{id}")
     UsuarioCompleto getById(int id) throws SQLException;
@@ -86,16 +85,16 @@ public interface UsuarioCompletoMapper {
     List<UsuarioCompleto> getAll() throws SQLException;
 
     /**
-     * OJO : Actualiza un objeto de tipo 'Usuario' con base en la 
+     * OJO : Actualiza un objeto de tipo 'Usuario' con base en la
      * infrmación dada por el objeto de tipo 'UsuarioCompleto'.
      *
      * @param usuario a ser actualizado.
      * @return el numero de registros actualizados.
-     * 
+     *
      * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
-    "UPDATE usuario" 
+    "UPDATE usuario"
     + " SET activo = #{activo}, acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante}"
     + " WHERE id = #{id}")
     int updateUsuarioPlano(Usuario usuario) throws SQLException;
@@ -117,5 +116,5 @@ public interface UsuarioCompletoMapper {
      */
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo LIMIT #{startRow},#{pageSize}")
-    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;    
+    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;
 }

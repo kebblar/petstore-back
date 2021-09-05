@@ -1,3 +1,23 @@
+/*
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.utils
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      LimpiaTest
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
+ *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:39:30
+ */
 package io.kebblar.petstore.api.utils;
 
 import org.junit.Test;
@@ -11,37 +31,37 @@ public class LimpiaTest {
 
     @Test
     public void pba() {
-        prueba("hola",                             
+        prueba("hola",
                 "hola");
-        
-        prueba("ñ",                             
+
+        prueba("ñ",
                 "n");
 
-        prueba("       gús ta  v&o   lanñd o", 
+        prueba("       gús ta  v&o   lanñd o",
                "gus-ta-v-o-lannd-o");
-        
-        prueba("",                             
+
+        prueba("",
                "");
-        
-        prueba("           ",                  
+
+        prueba("           ",
                "");
-        
-        prueba("      ñ    ñ    ",             
+
+        prueba("      ñ    ñ    ",
                "n-n");
-        
-        prueba("       &",                     
+
+        prueba("       &",
                "-");
-        
-        prueba("      $   $    ",              
+
+        prueba("      $   $    ",
                "-");
-        
-        prueba("       áéíóúñ   ",             
+
+        prueba("       áéíóúñ   ",
                "aeioun");
-        
-        prueba("      ÁÉÍÓÚÑ     ",            
+
+        prueba("      ÁÉÍÓÚÑ     ",
                "aeioun");
-        
-        prueba("      ÁÉÍ ÓÚÑ     ",           
+
+        prueba("      ÁÉÍ ÓÚÑ     ",
                "aei-oun");
     }
 

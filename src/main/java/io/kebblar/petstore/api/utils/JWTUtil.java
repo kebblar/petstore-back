@@ -1,22 +1,22 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.utils
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      JWTUtil
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              --------------------------------------------------
- * Modulo:      JWTUtil
- * Tipo:        clase
- * Autor:       Gustavo A. Arellano (GAA)
- * Fecha:       Jueves 2 de Abril de 2020 (22_29)
- * Version:     1.0-SNAPSHOT
- * .
- * Implementacion del Servicio de informe de salud
- *
- * Historia:    .
- *              20200402_2229 Creación del tipo
- *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:36:01
  */
 package io.kebblar.petstore.api.utils;
 
@@ -48,7 +48,7 @@ public class JWTUtil {
 
     private JWTUtil() {
     }
-    
+
     public static JWTUtil getInstance() {
         if(instance==null) {
             instance = new JWTUtil();
@@ -64,7 +64,7 @@ public class JWTUtil {
             return null;
         }
     }
-    
+
     /**
      * Regresa un arreglo de bytes que es la digestión de un input dado y un 'salt' dado.
      * Generalmente, el 'salt' va a ser el usuario, para este caso de uso. (Auth)
@@ -110,11 +110,11 @@ public class JWTUtil {
         // Show me the result, baby
         return hexString.toString();
     }
-    
+
     /**
-     * Verifica que un token sea válido y que le pertenezca al usuario 
+     * Verifica que un token sea válido y que le pertenezca al usuario
      * que le es pasado como parámetro.
-     * 
+     *
      * @param jwt
      * @param user
      * @param encryptKey
@@ -139,15 +139,15 @@ public class JWTUtil {
             throw new WrongTokenException(e);
         }
     }
-    
+
     /**
      * Segunda versión de verifyToken que regresa el ID dentro del token o bien
      * dispara una excepción en caso de que el token o sea inválido.
-     * 
+     *
      * @param jwt
      * @param encryptKey
      * @param ahorita
-     * 
+     *
      * @return Cadena con el ID contenido en un Token válido
      * @throws BusinessException
      */
@@ -164,7 +164,7 @@ public class JWTUtil {
             throw new WrongTokenException(e);
         }
     }
-    
+
     public void showInfo(Claims claims) {
         logger.info("ID: " + claims.getId());
         logger.info("Subject: " + claims.getSubject());
@@ -172,7 +172,7 @@ public class JWTUtil {
         logger.info("Expiration: " + claims.getExpiration());
         logger.info("IssuedAt: " + claims.getIssuedAt());
     }
-    
+
     public void valida(String token, String encryptKey, long currentTime) throws Exception {
         if(token==null || token.trim().length()<1) return;
         String estructuraInvalida = "El token posee una estructra inválida: --->"+token+"<---";
@@ -181,7 +181,7 @@ public class JWTUtil {
         String[] chunks = token.split("\\.");
         if(chunks.length<2) throw new Exception(estructuraInvalida);
         String payload = new String(decoder.decode(chunks[1]));
-        
+
         if(!payload.contains("\"exp\":")) throw new Exception(estructuraInvalida);
         Long inst = 0L;
         String instante = "";
@@ -197,13 +197,13 @@ public class JWTUtil {
             }
         }
     }
-    
+
 //    public static void main(String...argv) {
 //        String token="eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjcnlwdG8tZXhlY3V0b3Itand0TWFuYWdlciIsImlhdCI6MTYyNTUyMTYyNiwic3ViIjoiQ29vbCBqd3QgVG9rZW4gb246IDE2MjU1MjE2MjYyMTIiLCJqdGkiOiJndXN0YXZvLWFyZWxsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTYyNTUyMzQyNn0._Omitk0L5XDduhPGaWcmvWBArimQw4lE8qthXK6q1Ys";
 //        boolean res = isExpired(token);
 //        System.out.println(res);
 //    }
-    
+
     public String createToken(final String username, int securityTokenLasts, String encryptKey) {
         byte[] key = encryptKey.getBytes();
 
@@ -223,7 +223,7 @@ public class JWTUtil {
         logger.debug("Token for '"+username+"' has been created: " + token);
         return token;
     }
-    
+
     public String getMail(String jwt, String encryptKey) throws BusinessException {
         Claims claim;
         try{

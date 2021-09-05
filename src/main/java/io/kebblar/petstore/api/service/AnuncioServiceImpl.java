@@ -1,26 +1,28 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para  copiarlo, distribuirlo o modificarlo total
- *              o  parcialmente  siempre y cuando  mantenga este
- *              aviso y reconozca la  autoría  del  código al no
- *              modificar los  datos  establecidos en la mención
- *              de: "AUTOR".
- *
- *              ------------------------------------------------
- * Artefacto:   AnuncioServiceImpl.java
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.service
+ * Proyecto:    petstore-back
  * Tipo:        Clase
- * AUTOR:       Maria Isabel Contreras Garcia (MICG)
- * Fecha:       Jueves 20 de Mayo de 2021 (23_39)
+ * Nombre:      AnuncioServiceImpl
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- * Historia:    .
+ * Historia: 
  *              20210510_0050 Creación de éste servicio
  *              20210523_2030 Se  agrega  el  metodo  de  elimado
  *              logico
  *              20210528_1159 Se agrega el metodo de busqueda
  *              administracion
  *              20210608_1930 Se agrega  renderizado de imagenes
- *              del servicio de guardado
- *
+ *              del servicio de guardado               
  */
 package io.kebblar.petstore.api.service;
 
@@ -93,7 +95,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Value("${app.destination-folder}")
     private String destinationFolder;
-    
+
     @Value("${app.destination-folder-video}")
     private String destinationFolderVideo;
 
@@ -112,14 +114,14 @@ public class AnuncioServiceImpl implements AnuncioService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
-     * 
+     *
      * @param anuncioMapper
      * @param uploadService
      * @param anuncioImagenMapper
      */
     public AnuncioServiceImpl(
-            AnuncioMapper anuncioMapper, 
-            UploadService uploadService, 
+            AnuncioMapper anuncioMapper,
+            UploadService uploadService,
             AnuncioMediaMapper anuncioImagenMapper) {
         this.anuncioMapper = anuncioMapper;
         this.uploadService = uploadService;
@@ -171,13 +173,13 @@ public class AnuncioServiceImpl implements AnuncioService {
                 anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
                 anuncioMapper.insert(anuncioAlta);
             }
-            
+
             // Actualiza el search_url en todo caso
             Integer idGenerado = anuncioAlta.getId();
             anuncioAlta.setSearchUrl(idGenerado + "-" + limpia(request.getTitulo()));
             anuncioMapper.update(anuncioAlta);
             // fin actualiza search url
-            
+
             for(MascotaValorAtributoRequest ar : request.getMascotaValorAtributo()) {
                 MascotaValorAtributo aa =  new MascotaValorAtributo();
                 aa.setIdAnuncio(anuncioAlta.getId());
@@ -190,12 +192,12 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
         }
     }
-    
+
     /**
-     * Limpia una cadena de caracteres "raras" y regresa la misma 
+     * Limpia una cadena de caracteres "raras" y regresa la misma
      * cadena (en minúsculas) sustituyendo las letras "raras" por guiones medios.
-     * 
-     * @param original Cadena original de tipo String 
+     *
+     * @param original Cadena original de tipo String
      * @return  Cadena limpia
      */
     public static String limpia(String original) {
@@ -214,10 +216,10 @@ public class AnuncioServiceImpl implements AnuncioService {
             i = source.indexOf(DOS_ESPACIOS);
             source = source.replace(DOS_ESPACIOS, UN_ESPACIO);
         } while (i>0);
-        
+
         // Cambia especios simpes restantes por guion medio
         source = source.replace(UN_ESPACIO, GUION_MEDIO);
-        
+
         // Cambia minúsculas acentuadas por minúsculas sin acento
         // No necsito cambiar las mayúsculas porque la cadena está en lowercase
         source = source.replace('á', 'a');
@@ -226,7 +228,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         source = source.replace('ó', 'o');
         source = source.replace('ú', 'u');
         source = source.replace('ñ', 'n');
-        
+
         // Cambia todo lo que NO esté en "LETRAS_VALIDAS" por -
         i = source.length();
         StringBuilder result = new StringBuilder();
@@ -234,7 +236,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             char test = source.charAt(j);
             result = (LETRAS_VALIDAS.indexOf(test)<1)?result.append(GUION_MEDIO):result.append(test);
         }
-        
+
         // elimina repeticiones de guiones mendios consecutivos
         source = result.toString();
         i=0;
@@ -242,8 +244,8 @@ public class AnuncioServiceImpl implements AnuncioService {
             i = source.indexOf(DOS_GUIONES_MEDIOS);
             source = source.replace(DOS_GUIONES_MEDIOS, GUION_MEDIO);
         } while (i>=0);
-        
-        
+
+
         return source;
     }
 
@@ -315,7 +317,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
         return response;
     }
-    
+
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException {
         AnuncioImagenResponse air = null;
@@ -337,12 +339,12 @@ public class AnuncioServiceImpl implements AnuncioService {
         } catch (IOException e) {
             throw new InternalServerException("Error al leer el archivo", e.toString());
         }
-        
+
         long size = file.getSize();
         if (size > max) {
             throw new FileUploadException(size, max);
         }
-        
+
         try {
             int tipoMedia=0;
             String carpetaDestino=destinationFolder;
@@ -387,7 +389,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new DatabaseException(e);
         }
     }
-    
+
     @Override
     public List<DetalleAnuncioResponse> detalleAllAnuncio() throws BusinessException {
         try {
@@ -408,7 +410,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             throw new DatabaseException(e);
         }
     }
-    
+
     @Override
     public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
         try {
@@ -590,7 +592,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             logger.error(e.getMessage());
         }
     }
-    
+
     @Override
     public List<DetalleAnuncioResponse> getBySearchUrl(String searchUrl) throws BusinessException {
         if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";

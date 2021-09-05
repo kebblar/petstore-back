@@ -1,3 +1,23 @@
+/*
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.request
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      PreregistroRequest
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
+ *
+ * Historia: 
+ *              Creación: 5 Sep 2021 @ 08:01:44
+ */
 package io.kebblar.petstore.api.model.request;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -35,17 +55,17 @@ public class PreregistroRequest {
     private String randomString;
 
     private long instanteRegistro;
-    
+
     @ApiModelProperty(example = "1997")
     @Max(message = "El año debe ser menor o igual a 2001", value = 2001)
     @Min(message = "El año debe ser mayor o igual a 1900", value = 1900)
     private int year;
-    
+
     @ApiModelProperty(example = "10")
     @Max(message = "El mes debe ser menor o igual a 12", value = 12)
     @Min(message = "El mes debe ser mayor o igual a 1", value = 1)
     private int month;
-    
+
     @ApiModelProperty(example = "23")
     @Max(message = "El dia debe ser menor o igual a 31", value = 31)
     @Min(message = "El dia debe ser mayor o igual a 1", value = 1)
@@ -55,12 +75,12 @@ public class PreregistroRequest {
     }
 
     public PreregistroRequest(
-            int id, 
+            int id,
             @Size(message = "El nick debe medir entre 3 y 15 caracteres", min=3, max=15) String nick,
             @NotBlank(message = "El correo es un dato requerido") @Email(message = "El correo electrónico proporcionado es inválido") String correo,
             @NotNull(message = "La clave no puede ser nula") @Pattern(regexp = "^(?=.*\\d)(?!.* )(?=.*[a-z])(?=.*[A-Z]).{8,30}$", message = "La clave debe tener al menos 1 número, 1 letra minuscula y una letra mayucula y no debe de contener espacios. Además debe tener de 8 a 30 caracteres") String claveHash,
             @Pattern(regexp = "^\\d{10}$", message = "Teléfono inválido, deben ser exactamente 10 números sin expacios") String telefono,
-            String randomString, 
+            String randomString,
             long instanteRegistro,
             @Max(message = "El año debe ser menor a 2021", value = 2001) int year,
             @Max(message = "El mes debe ser menor a 12", value = 12) int month,
@@ -132,7 +152,7 @@ public class PreregistroRequest {
     public void setInstanteRegistro(long instanteRegistro) {
         this.instanteRegistro = instanteRegistro;
     }
-    
+
     public int getYear() {
         return year;
     }
@@ -227,5 +247,5 @@ public class PreregistroRequest {
             return false;
         return true;
     }
-    
+
 }

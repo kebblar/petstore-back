@@ -1,23 +1,22 @@
 /*
- * Licencia:    Usted  puede  utilizar  libremente  este  código
- *              para copiarlo,  distribuirlo o modificarlo total
- *              o  parcialmente siempre y cuando  mantenga  este
- *              aviso y  reconozca la  autoría del  código al no
- *              modificar  los datos establecidos en  la mencion 
- *              de "AUTOR".
+ * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
+ *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
+ *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo  todo  criterio, el único  dueño de la  totalidad  de este
+ *              código y cualquier derivado de el.
+ *              ---------------------------------------------------------------
+ * Paquete:     io.kebblar.petstore.api.model.domain
+ * Proyecto:    petstore-back
+ * Tipo:        Clase
+ * Nombre:      UsuarioCompleto
+ * Autor:       Gustavo Adolfo Arellano (GAA)
+ * Correo:      gustavo.arellano@metasoft.com.mx
+ * Versión:     0.0.1-SNAPSHOT
  *
- *              ------------------------------------------------
- * 
- * Artefacto:   UsuarioCompleto .java
- * Proyecto:    petstore
- * Tipo:        clase 
- * AUTOR:       Fhernanda Romo
- * Fecha:       Sunday 06 de June de 2021 (09_35)
- * 
- *              ------------------------------------------------
- *
- * Historia:    20210627_0935 Implementación de clase 
- *
+ * Historia:
+ *              Creación: 5 Sep 2021 @ 07:53:30
  */
 package io.kebblar.petstore.api.model.domain;
 
@@ -26,7 +25,7 @@ import java.util.Objects;
 import java.util.Date;
 
 /**
- * POJO asociado a la entidad 'usuario_completo'. 
+ * POJO asociado a la entidad 'usuario_completo'.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -67,22 +66,22 @@ public class UsuarioCompleto implements Serializable {
      * Constructor basado en todos los atributos de la clase.
      */
     public UsuarioCompleto(
-            int id, 
-            String correo, 
-            String clave, 
-            long creado, 
-            boolean activo, 
-            int accesoNegadoContador, 
-            long instanteBloqueo, 
-            long instanteUltimoAcceso, 
-            long instanteUltimoCambioClave, 
-            String regeneraClaveToken, 
-            long regeneraClaveInstante, 
-            String nombre, 
-            String apellidoPaterno, 
-            String apellidoMaterno, 
-            Date fechaNacimiento, 
-            String nickName, 
+            int id,
+            String correo,
+            String clave,
+            long creado,
+            boolean activo,
+            int accesoNegadoContador,
+            long instanteBloqueo,
+            long instanteUltimoAcceso,
+            long instanteUltimoCambioClave,
+            String regeneraClaveToken,
+            long regeneraClaveInstante,
+            String nombre,
+            String apellidoPaterno,
+            String apellidoMaterno,
+            Date fechaNacimiento,
+            String nickName,
             String telefonoCelular) {
         this.id = id;
         this.correo = correo;
@@ -241,7 +240,7 @@ public class UsuarioCompleto implements Serializable {
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
-    
+
 
     /**
      * {@inheritDoc}
@@ -268,7 +267,7 @@ public class UsuarioCompleto implements Serializable {
                 + " telefonoCelular =" + this.telefonoCelular
                 + "]";
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -282,47 +281,47 @@ public class UsuarioCompleto implements Serializable {
         }
         UsuarioCompleto other = (UsuarioCompleto) obj;
         return
-               id == other.id && 
-               correo == other.correo && 
-               clave == other.clave && 
-               creado == other.creado && 
-               activo == other.activo && 
-               accesoNegadoContador == other.accesoNegadoContador && 
-               instanteBloqueo == other.instanteBloqueo && 
-               instanteUltimoAcceso == other.instanteUltimoAcceso && 
-               instanteUltimoCambioClave == other.instanteUltimoCambioClave && 
-               regeneraClaveToken == other.regeneraClaveToken && 
-               regeneraClaveInstante == other.regeneraClaveInstante && 
-               nombre == other.nombre && 
-               apellidoPaterno == other.apellidoPaterno && 
-               apellidoMaterno == other.apellidoMaterno && 
-               fechaNacimiento == other.fechaNacimiento && 
-               nickName == other.nickName && 
-               telefonoCelular == other.telefonoCelular; 
+               id == other.id &&
+               correo == other.correo &&
+               clave == other.clave &&
+               creado == other.creado &&
+               activo == other.activo &&
+               accesoNegadoContador == other.accesoNegadoContador &&
+               instanteBloqueo == other.instanteBloqueo &&
+               instanteUltimoAcceso == other.instanteUltimoAcceso &&
+               instanteUltimoCambioClave == other.instanteUltimoCambioClave &&
+               regeneraClaveToken == other.regeneraClaveToken &&
+               regeneraClaveInstante == other.regeneraClaveInstante &&
+               nombre == other.nombre &&
+               apellidoPaterno == other.apellidoPaterno &&
+               apellidoMaterno == other.apellidoMaterno &&
+               fechaNacimiento == other.fechaNacimiento &&
+               nickName == other.nickName &&
+               telefonoCelular == other.telefonoCelular;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public int hashCode() {
         return Objects.hash(
-            id, 
-            correo, 
-            clave, 
-            creado, 
-            activo, 
-            accesoNegadoContador, 
-            instanteBloqueo, 
-            instanteUltimoAcceso, 
-            instanteUltimoCambioClave, 
-            regeneraClaveToken, 
-            regeneraClaveInstante, 
-            nombre, 
-            apellidoPaterno, 
-            apellidoMaterno, 
-            fechaNacimiento, 
-            nickName, 
+            id,
+            correo,
+            clave,
+            creado,
+            activo,
+            accesoNegadoContador,
+            instanteBloqueo,
+            instanteUltimoAcceso,
+            instanteUltimoCambioClave,
+            regeneraClaveToken,
+            regeneraClaveInstante,
+            nombre,
+            apellidoPaterno,
+            apellidoMaterno,
+            fechaNacimiento,
+            nickName,
             telefonoCelular
         );
     }
