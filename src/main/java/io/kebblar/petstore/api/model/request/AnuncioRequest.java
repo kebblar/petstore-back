@@ -45,7 +45,7 @@ public class AnuncioRequest {
     @Min(value = 1, message = "{min.anuncio.idcategoria}")
     private int idCategoria;
     @NotNull(message = "{notnull.anuncio.precio}")
-    private BigDecimal precio;
+    private BigDecimal precio = new BigDecimal(0);
     private List <MascotaValorAtributoRequest> mascotaValorAtributo;
 
     public AnuncioRequest() {
