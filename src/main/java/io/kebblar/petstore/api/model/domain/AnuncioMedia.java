@@ -50,7 +50,8 @@ public class AnuncioMedia implements Serializable {
 
     /**
      * Constructor por id.
-     * @param id
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public AnuncioMedia(Integer id) {
         this.id = id;
@@ -58,6 +59,11 @@ public class AnuncioMedia implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase sin id.
+     *
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     * @param uuid a {@link java.lang.String} object.
+     * @param idTipo a {@link java.lang.Integer} object.
+     * @param principal a {@link java.lang.Boolean} object.
      */
     public AnuncioMedia(Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         this.idAnuncio = idAnuncio;
@@ -68,6 +74,15 @@ public class AnuncioMedia implements Serializable {
 
     /*
      * Constructor basado en todos los atributos de la clase con id.
+     */
+    /**
+     * <p>Constructor for AnuncioMedia.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     * @param uuid a {@link java.lang.String} object.
+     * @param idTipo a {@link java.lang.Integer} object.
+     * @param principal a {@link java.lang.Boolean} object.
      */
     public AnuncioMedia(Integer id, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         super();
@@ -80,50 +95,95 @@ public class AnuncioMedia implements Serializable {
 
     /**
      * Getter y Setter.
+     *
+     * @return a {@link java.lang.Integer} object.
      */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idAnuncio</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>idAnuncio</code>.</p>
+     *
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     */
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>uuid</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * <p>Setter for the field <code>uuid</code>.</p>
+     *
+     * @param uuid a {@link java.lang.String} object.
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
+    /**
+     * <p>Getter for the field <code>idTipo</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdTipo() {
         return idTipo;
     }
 
+    /**
+     * <p>Setter for the field <code>idTipo</code>.</p>
+     *
+     * @param idTipo a {@link java.lang.Integer} object.
+     */
     public void setIdTipo(Integer idTipo) {
         this.idTipo = idTipo;
     }
 
+    /**
+     * <p>Getter for the field <code>principal</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getPrincipal() {
         return principal;
     }
 
+    /**
+     * <p>Setter for the field <code>principal</code>.</p>
+     *
+     * @param principal a {@link java.lang.Boolean} object.
+     */
     public void setPrincipal(Boolean principal) {
         this.principal = principal;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,17 +193,13 @@ public class AnuncioMedia implements Serializable {
                 && Objects.equals(idTipo, that.idTipo) && Objects.equals(principal, that.principal);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, idAnuncio, uuid, idTipo, principal);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AnuncioMedia [id=" + id + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid + ", idTipo=" + idTipo

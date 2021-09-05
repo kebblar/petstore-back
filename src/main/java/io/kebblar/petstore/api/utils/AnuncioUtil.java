@@ -85,9 +85,9 @@ public class AnuncioUtil {
      * <p>1. Valida que el periodo inicial sea posterior o igual a la fecha actual</p>
      * <p>2. Valida que la fecha de inicio no sea posterior a la fecha final</p>
      *
-     * @param fechaInicioVigencia
-     * @param fechaFinVigencia
-     * @return
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     * @return a boolean.
      */
     public static boolean validaFechasPeriodo(Date fechaInicioVigencia, Date fechaFinVigencia){
         try {
@@ -145,7 +145,7 @@ public class AnuncioUtil {
     /**
      * Método que concatena las condiciones de consulta a la cadena SQL.
      *
-     * @param filtros
+     * @param filtros a {@link io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest} object.
      * @return String que contiene toda la cadena para la sentencia SQL
      */
     public static List<String> busquedaFiltros(BusquedaAdministracionRequest filtros) {
@@ -185,7 +185,7 @@ public class AnuncioUtil {
     /**
      * Filtra la búsqueda de usuario final.
      *
-     * @param filtros
+     * @param filtros a {@link io.kebblar.petstore.api.model.request.BusquedaRequest} object.
      * @return Lista de strings
      */
     public static List<String> busqueda(BusquedaRequest filtros) {
@@ -229,7 +229,7 @@ public class AnuncioUtil {
      * Método privado que permite realizar validaciones de negocio para confirmar el guardado.
      *
      * @param request Clase que contiene los campos a validar
-     * @throws BusinessException - xcepcion lanzada con el mensaje de error correspondiente
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException - xcepcion lanzada con el mensaje de error correspondiente
      */
     public static void validaCampos(AnuncioRequest request) throws BusinessException {
         //Validacion de campos obligatorios
@@ -255,10 +255,9 @@ public class AnuncioUtil {
      * Metodo que permite renderizar una imagen y agregar marca de agua.
      *
      * @param nomEmpresa Nombre de la empresa o cadena que acompañara a la marca de agua
-     * @param logoSistema Logotipo de la empresa que ira como marca de agua
-     * @param imagenBase Imagen que se renderizara y se agregara marca de agua
      * @param altoImagen Altura de las imagenes a la que se realizara el renderizado
-     * @return
+     * @param destinationFolder a {@link java.lang.String} object.
+     * @param uuidImagenBase a {@link java.lang.String} object.
      */
     public static void renderizarYMarcaDeAgua(String destinationFolder, String nomEmpresa, String uuidImagenBase, int altoImagen) {
             ImageIcon logoSistema=new ImageIcon(destinationFolder+File.separator+"logo.png");

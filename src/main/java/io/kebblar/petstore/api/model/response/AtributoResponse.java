@@ -35,14 +35,31 @@ public class AtributoResponse {
     private int valor;
     private String descValor;
 
+    /**
+     * <p>Constructor for AtributoResponse.</p>
+     */
     public AtributoResponse() {
     }
 
+    /**
+     * <p>Constructor for AtributoResponse.</p>
+     *
+     * @param id a int.
+     * @param valor a int.
+     */
     public AtributoResponse(int id, int valor) {
         this.id = id;
         this.valor = valor;
     }
 
+    /**
+     * <p>Constructor for AtributoResponse.</p>
+     *
+     * @param id a int.
+     * @param descAtributo a {@link java.lang.String} object.
+     * @param valor a int.
+     * @param descValor a {@link java.lang.String} object.
+     */
     public AtributoResponse(int id, String descAtributo, int valor, String descValor) {
         super();
         this.id = id;
@@ -51,38 +68,79 @@ public class AtributoResponse {
         this.descValor = descValor;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>valor</code>.</p>
+     *
+     * @return a int.
+     */
     public int getValor() {
         return valor;
     }
 
+    /**
+     * <p>Setter for the field <code>valor</code>.</p>
+     *
+     * @param valor a int.
+     */
     public void setValor(int valor) {
         this.valor = valor;
     }
 
+    /**
+     * <p>Getter for the field <code>descAtributo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescAtributo() {
         return descAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>descAtributo</code>.</p>
+     *
+     * @param descAtributo a {@link java.lang.String} object.
+     */
     public void setDescAtributo(String descAtributo) {
         this.descAtributo = descAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>descValor</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescValor() {
         return descValor;
     }
 
+    /**
+     * <p>Setter for the field <code>descValor</code>.</p>
+     *
+     * @param descValor a {@link java.lang.String} object.
+     */
     public void setDescValor(String descValor) {
         this.descValor = descValor;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -94,6 +152,7 @@ public class AtributoResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -120,6 +179,7 @@ public class AtributoResponse {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AtributoResponse [id=" + id + ", descAtributo=" + descAtributo + ", valor=" + valor + ", descValor="

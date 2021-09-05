@@ -40,19 +40,20 @@ import io.kebblar.petstore.api.model.domain.EstatusAnuncio;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.EstatusAnuncio
  */
 @Repository
 public interface EstatusAnuncioMapper {
 
+    /** Constant <code>CAMPOS_ESTATUS_ANUNCIO=" id, descripcion "</code> */
     String CAMPOS_ESTATUS_ANUNCIO = " id, descripcion ";
 
     /**
      * Obtiene un objeto de tipo 'EstatusAnuncio' dado su id.
      *
      * @return EstatusAnuncio que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="EstatusAnuncioMap", value = {
             @Result(property = "id",   column = "id"),
@@ -65,7 +66,7 @@ public interface EstatusAnuncioMapper {
      * Obtiene una lista de objetos de tipo 'EstatusAnuncio'.
      *
      * @return Lista de objetos de tipo EstatusAnuncio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
     @Select("SELECT " + CAMPOS_ESTATUS_ANUNCIO + " FROM estatus_anuncio ")
@@ -76,7 +77,7 @@ public interface EstatusAnuncioMapper {
      *
      * @param estatusAnuncio a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO estatus_anuncio(id, descripcion) "
@@ -89,7 +90,7 @@ public interface EstatusAnuncioMapper {
      *
      * @param estatusAnuncio a ser actualizado.
      * @return el número de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE estatus_anuncio"
@@ -102,7 +103,7 @@ public interface EstatusAnuncioMapper {
      *
      * @param id id del EstatusAnuncio a ser borrado
      * @return id del EstatusAnuncio borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM estatus_anuncio WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -112,7 +113,7 @@ public interface EstatusAnuncioMapper {
      *
      * @param  nombre de EstatusAnuncio.
      * @return Lista de objetos de tipo EstatusAnuncio filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("EstatusAnuncioMap")
     @Select("SELECT " + CAMPOS_ESTATUS_ANUNCIO + " FROM estatus_anuncio WHERE descripcion LIKE '%' #{nombre} '%'")

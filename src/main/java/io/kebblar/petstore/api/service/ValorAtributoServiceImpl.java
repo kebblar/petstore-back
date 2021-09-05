@@ -34,15 +34,14 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
  * Servicio asociado a la entidad 'valor_atributo'.
  *
  * <p>
- * Implementación de la interfaz {@link ValorAtributoService}.
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.service.ValorAtributoService}.
  *
  * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.ValorAtributo
  * @see io.kebblar.petstore.api.service.ValorAtributoService
  */
@@ -68,6 +67,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
     /*
      * Implementación del método getById
      */
+    /** {@inheritDoc} */
     @Override
     public ValorAtributo getById(int id) throws BusinessException {
         try {
@@ -77,6 +77,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<ValorAtributo> getAll() throws BusinessException {
         try {
@@ -86,6 +87,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(ValorAtributo valorAtributo) throws BusinessException {
         try {
@@ -95,6 +97,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(ValorAtributo valorAtributo) throws BusinessException {
         try {
@@ -104,6 +107,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(ValorAtributo valorAtributo) throws BusinessException {
         try {
@@ -113,6 +117,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(ValorAtributo valorAtributo) throws BusinessException {
         try {
@@ -126,6 +131,7 @@ public class ValorAtributoServiceImpl implements ValorAtributoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<ValorAtributo> getAllByIdAtributo(int id) throws BusinessException {
         try {

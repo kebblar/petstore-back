@@ -26,6 +26,9 @@ import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * Interface JasperService.
+ *
+ * @author garellano
+ * @version $Id: $Id
  */
 public interface JasperService {
 
@@ -43,8 +46,8 @@ public interface JasperService {
      * @param dataFile       String Nombre del archivo de datos json
      * @param outputFileName String Nombre del archivo pdf resultante
      * @return String El md5 del pdf generado
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws JRException the JR exception
+     * @throws java.io.IOException Signals that an I/O exception has occurred.
+     * @throws net.sf.jasperreports.engine.JRException the JR exception
      */
     String generatePdfFromCompiledJrxmlFilename(String inputFileName, String dataFile, String outputFileName)
             throws IOException, JRException;
@@ -59,8 +62,8 @@ public interface JasperService {
      * @param dataFile       String Nombre del archivo de datos json
      * @param outputFileName String Nombre del archivo pdf resultante
      * @return String El md5 del pdf generado
-     * @throws IOException Se dispara cuando 'inputFileName' no existe
-     * @throws JRException the JR exception
+     * @throws java.io.IOException Se dispara cuando 'inputFileName' no existe
+     * @throws net.sf.jasperreports.engine.JRException the JR exception
      */
     String generatePdfFromCompiledJasperFilename(String inputFileName, String dataFile, String outputFileName)
             throws IOException, JRException;
@@ -74,8 +77,8 @@ public interface JasperService {
      * @param dataFile       String Nombre del archivo de datos json
      * @param outputFileName String Nombre del archivo pdf resultante
      * @return String El md5 del pdf generado
-     * @throws IOException Se dispara cuando 'inputFileName' no existe
-     * @throws JRException the JR exception
+     * @throws java.io.IOException Se dispara cuando 'inputFileName' no existe
+     * @throws net.sf.jasperreports.engine.JRException the JR exception
      */
     String generatePdfFromCompiledJasperObject(JasperReport jasperReport, String dataFile, String outputFileName)
             throws IOException, JRException;

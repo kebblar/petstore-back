@@ -30,9 +30,9 @@ import io.kebblar.petstore.api.model.domain.Mascota;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * <p>Implementación de la interfaz {@link MascotaService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.MascotaService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Mascota
@@ -44,9 +44,13 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public class MascotaServiceImpl implements MascotaService {
 
 
+    /**
+     * <p>Constructor for MascotaServiceImpl.</p>
+     */
     public MascotaServiceImpl() {
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Mascota> getAll() throws BusinessException {
         Mascota mascota1 = new Mascota(1, "Perico", "Ave parlanchina");
@@ -57,6 +61,7 @@ public class MascotaServiceImpl implements MascotaService {
         return lista;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Integer> getByCriteria(List<Criterio> criterios) {
         List<Integer> lista = new ArrayList<>();
@@ -66,27 +71,32 @@ public class MascotaServiceImpl implements MascotaService {
         return lista;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Mascota getById(int id) throws BusinessException {
         Mascota mascota = new Mascota(id, "Perico", "Ave parlanchina");
         return mascota;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(Mascota mascota) {
         return 172;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(Mascota mascota) {
         return 321;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(int id) {
         return id;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int suma(int a, int b) {
         int res=0;

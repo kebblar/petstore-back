@@ -26,10 +26,21 @@ import java.util.Map;
 
 import io.kebblar.petstore.api.model.domain.Criterio;
 
+/**
+ * <p>CriteriaBuilder class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class CriteriaBuilder {
     private static final String TEMPLATE = "select id_mascota from data where id_categoria=%d and valor=%d";
     private List<Criterio> criterios = null;
 
+    /**
+     * <p>Constructor for CriteriaBuilder.</p>
+     *
+     * @param criterios a {@link java.util.List} object.
+     */
     public CriteriaBuilder(List<Criterio> criterios) {
         this.criterios = criterios;
     }
@@ -47,6 +58,11 @@ public class CriteriaBuilder {
         return sb.toString();
     }
 
+    /**
+     * <p>produceMap.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<String, String> produceMap() {
         Map<String, String> map = new HashMap<>();
         map.put("goose", buildSql());

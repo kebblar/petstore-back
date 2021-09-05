@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.io.Serializable;
 
 /**
- * Implementacion del POJO de la entidad de {@link GraficaVentasTotales}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.GraficaVentasTotales}.
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
@@ -48,6 +48,11 @@ public class GraficaVentasTotales implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param totalVenta a {@link java.lang.Long} object.
+     * @param cantidadOrdenes a int.
+     * @param mes a int.
+     * @param anio a int.
      */
     public GraficaVentasTotales(Long totalVenta, int cantidadOrdenes, int mes, int anio) {
         this.totalVenta = totalVenta;
@@ -59,50 +64,86 @@ public class GraficaVentasTotales implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>totalVenta</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object.
+     */
     public Long getTotalVenta() {
         return totalVenta;
     }
 
+    /**
+     * <p>Setter for the field <code>totalVenta</code>.</p>
+     *
+     * @param totalVenta a {@link java.lang.Long} object.
+     */
     public void setTotalVenta(Long totalVenta) {
         this.totalVenta = totalVenta;
     }
 
+    /**
+     * <p>Getter for the field <code>cantidadOrdenes</code>.</p>
+     *
+     * @return a int.
+     */
     public int getCantidadOrdenes() {
         return cantidadOrdenes;
     }
 
+    /**
+     * <p>Setter for the field <code>cantidadOrdenes</code>.</p>
+     *
+     * @param cantidadOrdenes a int.
+     */
     public void setCantidadOrdenes(int cantidadOrdenes) {
         this.cantidadOrdenes = cantidadOrdenes;
     }
 
+    /**
+     * <p>Getter for the field <code>mes</code>.</p>
+     *
+     * @return a int.
+     */
     public int getMes() {
         return mes;
     }
 
+    /**
+     * <p>Setter for the field <code>mes</code>.</p>
+     *
+     * @param mes a int.
+     */
     public void setMes(int mes) {
         this.mes = mes;
     }
 
+    /**
+     * <p>Getter for the field <code>anio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getAnio() {
         return anio;
     }
 
+    /**
+     * <p>Setter for the field <code>anio</code>.</p>
+     *
+     * @param anio a int.
+     */
     public void setAnio(int anio) {
         this.anio = anio;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "GraficaVentasTotales [total_venta=" + totalVenta + ", cantidad_ordenes=" + cantidadOrdenes + ", mes="
             + mes + ", anio=" + anio + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -114,9 +155,7 @@ public class GraficaVentasTotales implements Serializable {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

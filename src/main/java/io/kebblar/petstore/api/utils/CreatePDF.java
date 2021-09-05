@@ -59,7 +59,7 @@ import io.kebblar.petstore.api.model.response.DireccionConNombre;
 /**
  * Implementación Metodos para crear una factura en PDF
  *
- * Todos los métodos de esta clase disparan {@link ProcessPDFException}
+ * Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.ProcessPDFException}
  *
  * @author dalvarez
  * @see io.kebblar.petstore.api.service.OrdenCompraServiceImpl
@@ -72,23 +72,28 @@ public class CreatePDF {
     private static final Color headerBg = new DeviceRgb(54,120,182);
     private Convert convert;
 
+    /**
+     * <p>Constructor for CreatePDF.</p>
+     *
+     * @param convert a {@link io.kebblar.petstore.api.utils.Convert} object.
+     */
     public CreatePDF(Convert convert) {
         this.convert = convert;
     }
 
     /**
      * Método para crear una facttura con los articulos de compra. Factura en formato PDF
-     * @param usuarioDetalle
-     * @param usuario
-     * @param ordenCompra
-     * @param ubicación del documento
-     * @param url
-     * @param nombrePdf
-     * @param listCarrito
-     * @param direcciones
-     * @param cveSMS
+     *
+     * @param usuarioDetalle a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     * @param usuario a {@link io.kebblar.petstore.api.model.domain.Usuario} object.
+     * @param ordenCompra a {@link io.kebblar.petstore.api.model.domain.DatosOrden} object.
+     * @param url a {@link java.lang.String} object.
+     * @param nombrePdf a {@link java.lang.String} object.
+     * @param listCarrito a {@link java.util.List} object.
+     * @param direcciones a {@link java.util.List} object.
      * @return nombre del documento
-     * @throws ProcessPDFException
+     * @throws io.kebblar.petstore.api.model.exceptions.ProcessPDFException
+     * @param dest a {@link java.lang.String} object.
      */
     public String createPDFOrdenCompra(UsuarioDetalle usuarioDetalle, Usuario usuario,
         DatosOrden ordenCompra, String dest, String url,  String nombrePdf,
@@ -475,8 +480,8 @@ public class CreatePDF {
      * Método para proteger archivo PDF.
      *
      * @param path de la ubicación del documento pdf
-     * @param userPassword
-     * @throws IOException
+     * @param userPassword a {@link java.lang.String} object.
+     * @throws java.io.IOException
      */
     public void protectDocument(String path, String userPassword) throws IOException {
         File file = new File(path);

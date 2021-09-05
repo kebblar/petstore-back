@@ -68,6 +68,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author  garellano
  * @see     java.lang.Object#toString()
  * @since   0.0.1-SNAPSHOT
+ * @version $Id: $Id
  */
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 
@@ -87,9 +88,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
         this.jwtToken = jwtToken;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();

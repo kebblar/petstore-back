@@ -22,6 +22,12 @@ package io.kebblar.petstore.api.model.request;
 
 import java.util.Objects;
 
+/**
+ * <p>NuevaDireccion class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class NuevaDireccion {
 
     /**
@@ -44,6 +50,21 @@ public class NuevaDireccion {
      */
     public NuevaDireccion() {}
 
+    /**
+     * <p>Constructor for NuevaDireccion.</p>
+     *
+     * @param id a int.
+     * @param idUsuario a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param tipo a int.
+     * @param calleNumero a {@link java.lang.String} object.
+     * @param colonia a {@link java.lang.String} object.
+     * @param referencias a {@link java.lang.String} object.
+     * @param cp a {@link java.lang.String} object.
+     * @param idPais a int.
+     * @param idEstado a int.
+     * @param idMunicipio a int.
+     */
     public NuevaDireccion(int id, int idUsuario, String nombre, int tipo, String calleNumero, String colonia, String referencias, String cp, int idPais, int idEstado, int idMunicipio) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -60,6 +81,7 @@ public class NuevaDireccion {
 
     /**
      * Getter para id.
+     *
      * @return id del objeto
      */
     public int getId() {
@@ -68,6 +90,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para id.
+     *
      * @param id id que será insertado
      */
     public void setId(int id) {
@@ -75,6 +98,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para el id del usuario.
+     *
      * @return id del usuario asociado
      */
     public int getIdUsuario() {
@@ -82,6 +106,7 @@ public class NuevaDireccion {
     }
     /**
      * Setter para idUsuario.
+     *
      * @param idUsuario id del usuario que será insertado
      */
     public void setIdUsuario(int idUsuario) {
@@ -89,6 +114,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para nombre del destinatario.
+     *
      * @return nombre del destinatario
      */
     public String getNombre() {
@@ -97,6 +123,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para nombre.
+     *
      * @param nombre nombre insertado
      */
     public void setNombre(String nombre) {
@@ -104,6 +131,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para tipo.
+     *
      * @return id del tipo de direccion
      */
     public int getTipo() {
@@ -112,6 +140,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para tipo.
+     *
      * @param tipo representa el id del tipo de direccion
      */
     public void setTipo(int tipo) {
@@ -119,6 +148,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para calle y numero.
+     *
      * @return cadena que representa a la calle y numero
      */
     public String getCalleNumero() {
@@ -127,6 +157,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para calle y número.
+     *
      * @param calleNumero representan la calle y el número
      */
     public void setCalleNumero(String calleNumero) {
@@ -134,6 +165,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para colonia.
+     *
      * @return cadena que representa la colonia
      */
     public String getColonia() {
@@ -142,6 +174,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para colonia.
+     *
      * @param colonia Representa la colonia
      */
     public void setColonia(String colonia) {
@@ -149,6 +182,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para referencias.
+     *
      * @return cadena que representa las referencias
      */
     public String getReferencias() {
@@ -157,6 +191,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para referencias.
+     *
      * @param referencias Representa las referencias de entrega
      */
     public void setReferencias(String referencias) {
@@ -164,6 +199,7 @@ public class NuevaDireccion {
     }
     /**
      * Getter para código postal.
+     *
      * @return cadena que representa el código postal
      */
     public String getCp() {
@@ -172,6 +208,7 @@ public class NuevaDireccion {
 
     /**
      * Setter para cp.
+     *
      * @param cp Es el código postal
      */
     public void setCp(String cp) {
@@ -180,6 +217,7 @@ public class NuevaDireccion {
 
     /**
      * Regresa el id del país de la dirección.
+     *
      * @return id del pais.
      */
     public int getIdPais() {
@@ -188,28 +226,41 @@ public class NuevaDireccion {
 
     /**
      * Setter para pais.
+     *
      * @param idPais inserta el id de un país.
      */
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
 
+    /**
+     * <p>Getter for the field <code>idEstado</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdEstado() {
         return idEstado;
     }
     /**
      * Setter para estado.
+     *
      * @param idEstado inserta el id de un estado.
      */
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
 
+    /**
+     * <p>Getter for the field <code>idMunicipio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdMunicipio() {
         return idMunicipio;
     }
     /**
      * Setter para municipio.
+     *
      * @param idMunicipio inserta el id de un municipio.
      */
     public void setIdMunicipio(int idMunicipio) {
@@ -217,9 +268,9 @@ public class NuevaDireccion {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Compara dos objetos de tipo nueva dirección.
-     * @param o objeto con el que será comparado.
-     * @return true si son iguales
      */
     @Override
     public boolean equals(Object o) {
@@ -230,6 +281,8 @@ public class NuevaDireccion {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Método hash
      */
     @Override
@@ -238,6 +291,8 @@ public class NuevaDireccion {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Genera la representación de cadena del objeto
      */
     @Override

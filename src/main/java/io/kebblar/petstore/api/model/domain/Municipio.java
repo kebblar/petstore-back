@@ -50,6 +50,8 @@ public class Municipio implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Municipio(Integer id) {
         this.id = id;
@@ -57,6 +59,10 @@ public class Municipio implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idEstado a int.
+     * @param nombre a {@link java.lang.String} object.
      */
     public Municipio(Integer id, int idEstado, String nombre) {
         this.id = id;
@@ -66,6 +72,12 @@ public class Municipio implements Serializable {
 
     /**
      * Constructor basado en atributos temporales para el nombre del Estado.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idEstado a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param nombrePais a {@link java.lang.String} object.
+     * @param nombreEstado a {@link java.lang.String} object.
      */
     public Municipio(Integer id, int idEstado, String nombre, String nombrePais, String nombreEstado) {
         this.id = id;
@@ -78,49 +90,97 @@ public class Municipio implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idEstado</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdEstado() {
         return idEstado;
     }
 
+    /**
+     * <p>Setter for the field <code>idEstado</code>.</p>
+     *
+     * @param idEstado a int.
+     */
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>nombrePais</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombrePais() {
         return nombrePais;
     }
 
+    /**
+     * <p>Setter for the field <code>nombrePais</code>.</p>
+     *
+     * @param nombrePais a {@link java.lang.String} object.
+     */
     public void setNombrePais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
 
+    /**
+     * <p>Getter for the field <code>nombreEstado</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombreEstado() {
         return nombreEstado;
     }
 
+    /**
+     * <p>Setter for the field <code>nombreEstado</code>.</p>
+     *
+     * @param nombreEstado a {@link java.lang.String} object.
+     */
     public void setNombreEstado(String nombreEstado) {
         this.nombreEstado = nombreEstado;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Municipio] : ["
@@ -132,9 +192,7 @@ public class Municipio implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -150,9 +208,7 @@ public class Municipio implements Serializable {
                nombre == other.nombre;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

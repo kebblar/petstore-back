@@ -20,6 +20,12 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
+/**
+ * <p>BlockedUserException class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class BlockedUserException extends BusinessException{
 
     /**
@@ -36,6 +42,7 @@ public class BlockedUserException extends BusinessException{
 
     /**
      * Excepción lazada para informar a un usuario que está bloqueado.
+     *
      * @param intentos Cantidad de intentos de inicio de sesión
      */
     public BlockedUserException(int intentos) {

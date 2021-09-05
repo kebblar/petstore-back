@@ -23,13 +23,12 @@ package io.kebblar.petstore.api.model.domain;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link ChartWrapper}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.ChartWrapper}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class ChartWrapper {
 
     /*
@@ -45,6 +44,8 @@ public class ChartWrapper {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param chart a {@link io.kebblar.petstore.api.model.domain.ChartData} object.
      */
     public ChartWrapper(ChartData chart) {
         this.chart = chart;
@@ -53,25 +54,31 @@ public class ChartWrapper {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>chart</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.model.domain.ChartData} object.
+     */
     public ChartData getChart() {
         return chart;
     }
 
+    /**
+     * <p>Setter for the field <code>chart</code>.</p>
+     *
+     * @param chart a {@link io.kebblar.petstore.api.model.domain.ChartData} object.
+     */
     public void setChart(ChartData chart) {
         this.chart = chart;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Chart [chart=" + chart + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,9 +87,7 @@ public class ChartWrapper {
         return Objects.equals(chart, that.chart);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(chart);

@@ -37,14 +37,13 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 /**
  * Servicio asociado a la entidad 'GraficaTotalFechasCategoria'.
  *
- * <p>Implementación de la interfaz {@link GraficaTotalFechasCategoriaService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.GraficaTotalFechasCategoriaService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see GraficaTotalFechasCategoria
  */
 @Service("GraficaTotalFechasCategoriaService")
@@ -57,13 +56,14 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
      * Constructor que realiza el setting de todos los Mappers y todos los servicios
      * adicionales a ser empleados en esta clase.
      *
-     * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
+     * @param graficaTotalFechasCategoriaMapper a {@link io.kebblar.petstore.api.mapper.GraficaTotalFechasCategoriaMapper} object.
      */
     public GraficaTotalFechasCategoriaServiceImpl(GraficaTotalFechasCategoriaMapper graficaTotalFechasCategoriaMapper) {
         logger.debug("Invoking GraficaTotalFechasCategoriaServiceImpl constructor");
         this.graficaTotalFechasCategoriaMapper = graficaTotalFechasCategoriaMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getTotalPorCategoria() throws BusinessException {
         try {
@@ -79,6 +79,7 @@ public class GraficaTotalFechasCategoriaServiceImpl implements GraficaTotalFecha
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getTotalPorCategoriaFiltroFechas(String fechaIni, String fechaFin) throws BusinessException {
         try {

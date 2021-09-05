@@ -33,7 +33,6 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class UploadException extends BusinessException {
 
     private static final long serialVersionUID = -7083159020205284484L;
@@ -41,6 +40,7 @@ public class UploadException extends BusinessException {
 
     /**
      * Toma la excepción que se lanzó originalmente y reutiliza su mensaje.
+     *
      * @param e excepción atrapada por el constructor
      */
     public UploadException(Exception e) {
@@ -54,6 +54,7 @@ public class UploadException extends BusinessException {
 
     /**
      * Es lanzado cuando hay un problema con la talla del archivo.
+     *
      * @param max máximo peso permitido
      * @param peso peso del archivo que se quiso cargar
      */

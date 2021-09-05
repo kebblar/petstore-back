@@ -35,49 +35,74 @@ public class SmsRequest {
     private String telefono;
     private String mensaje;
 
-       /**
-        * Constructor por default (sin parámetros).
-        */
+    /**
+     * Constructor por default (sin parámetros).
+     */
     public SmsRequest() {
     }
 
     /**
      * Constructor basado en todos los atributos de la clase.
-     * @param telefono
-     * @param mensaje
+     *
+     * @param telefono a {@link java.lang.String} object.
+     * @param mensaje a {@link java.lang.String} object.
      */
     public SmsRequest(String telefono, String mensaje) {
         this.telefono = telefono;
         this.mensaje = mensaje;
     }
 
+    /**
+     * <p>Getter for the field <code>telefono</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTelefono() {
         return telefono;
     }
 
+    /**
+     * <p>Setter for the field <code>telefono</code>.</p>
+     *
+     * @param telefono a {@link java.lang.String} object.
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    /**
+     * <p>Getter for the field <code>mensaje</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMensaje() {
         return mensaje;
     }
 
+    /**
+     * <p>Setter for the field <code>mensaje</code>.</p>
+     *
+     * @param mensaje a {@link java.lang.String} object.
+     */
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
 
-       /**
-        * Método toString para el pojo, representa al objeto en forma de cadena
-        */
+    /**
+     * {@inheritDoc}
+     *
+     * Método toString para el pojo, representa al objeto en forma de cadena
+     */
     @Override
     public String toString() {
         return "SmsRequest [telefono=" + telefono + ", mensaje=" + mensaje + "]";
     }
 
-       /**
-        * Genera un hash del objeto
-        */
+    /**
+     * {@inheritDoc}
+     *
+     * Genera un hash del objeto
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -87,9 +112,11 @@ public class SmsRequest {
         return result;
     }
 
-       /**
-        * Compara si dos instancias de la clase son iguales
-        */
+    /**
+     * {@inheritDoc}
+     *
+     * Compara si dos instancias de la clase son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -64,6 +64,24 @@ public class UsuarioCompleto implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a int.
+     * @param correo a {@link java.lang.String} object.
+     * @param clave a {@link java.lang.String} object.
+     * @param creado a long.
+     * @param activo a boolean.
+     * @param accesoNegadoContador a int.
+     * @param instanteBloqueo a long.
+     * @param instanteUltimoAcceso a long.
+     * @param instanteUltimoCambioClave a long.
+     * @param regeneraClaveToken a {@link java.lang.String} object.
+     * @param regeneraClaveInstante a long.
+     * @param nombre a {@link java.lang.String} object.
+     * @param apellidoPaterno a {@link java.lang.String} object.
+     * @param apellidoMaterno a {@link java.lang.String} object.
+     * @param fechaNacimiento a {@link java.util.Date} object.
+     * @param nickName a {@link java.lang.String} object.
+     * @param telefonoCelular a {@link java.lang.String} object.
      */
     public UsuarioCompleto(
             int id,
@@ -105,146 +123,314 @@ public class UsuarioCompleto implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>correo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * <p>Setter for the field <code>correo</code>.</p>
+     *
+     * @param correo a {@link java.lang.String} object.
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * <p>Getter for the field <code>clave</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getClave() {
         return clave;
     }
 
+    /**
+     * <p>Setter for the field <code>clave</code>.</p>
+     *
+     * @param clave a {@link java.lang.String} object.
+     */
     public void setClave(String clave) {
         this.clave = clave;
     }
 
+    /**
+     * <p>Getter for the field <code>creado</code>.</p>
+     *
+     * @return a long.
+     */
     public long getCreado() {
         return creado;
     }
 
+    /**
+     * <p>Setter for the field <code>creado</code>.</p>
+     *
+     * @param creado a long.
+     */
     public void setCreado(long creado) {
         this.creado = creado;
     }
 
+    /**
+     * <p>isActivo.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a boolean.
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * <p>Getter for the field <code>accesoNegadoContador</code>.</p>
+     *
+     * @return a int.
+     */
     public int getAccesoNegadoContador() {
         return accesoNegadoContador;
     }
 
+    /**
+     * <p>Setter for the field <code>accesoNegadoContador</code>.</p>
+     *
+     * @param accesoNegadoContador a int.
+     */
     public void setAccesoNegadoContador(int accesoNegadoContador) {
         this.accesoNegadoContador = accesoNegadoContador;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteBloqueo</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteBloqueo() {
         return instanteBloqueo;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteBloqueo</code>.</p>
+     *
+     * @param instanteBloqueo a long.
+     */
     public void setInstanteBloqueo(long instanteBloqueo) {
         this.instanteBloqueo = instanteBloqueo;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteUltimoAcceso</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteUltimoAcceso() {
         return instanteUltimoAcceso;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteUltimoAcceso</code>.</p>
+     *
+     * @param instanteUltimoAcceso a long.
+     */
     public void setInstanteUltimoAcceso(long instanteUltimoAcceso) {
         this.instanteUltimoAcceso = instanteUltimoAcceso;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteUltimoCambioClave</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteUltimoCambioClave() {
         return instanteUltimoCambioClave;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteUltimoCambioClave</code>.</p>
+     *
+     * @param instanteUltimoCambioClave a long.
+     */
     public void setInstanteUltimoCambioClave(long instanteUltimoCambioClave) {
         this.instanteUltimoCambioClave = instanteUltimoCambioClave;
     }
 
+    /**
+     * <p>Getter for the field <code>regeneraClaveToken</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRegeneraClaveToken() {
         return regeneraClaveToken;
     }
 
+    /**
+     * <p>Setter for the field <code>regeneraClaveToken</code>.</p>
+     *
+     * @param regeneraClaveToken a {@link java.lang.String} object.
+     */
     public void setRegeneraClaveToken(String regeneraClaveToken) {
         this.regeneraClaveToken = regeneraClaveToken;
     }
 
+    /**
+     * <p>Getter for the field <code>regeneraClaveInstante</code>.</p>
+     *
+     * @return a long.
+     */
     public long getRegeneraClaveInstante() {
         return regeneraClaveInstante;
     }
 
+    /**
+     * <p>Setter for the field <code>regeneraClaveInstante</code>.</p>
+     *
+     * @param regeneraClaveInstante a long.
+     */
     public void setRegeneraClaveInstante(long regeneraClaveInstante) {
         this.regeneraClaveInstante = regeneraClaveInstante;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>apellidoPaterno</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
+    /**
+     * <p>Setter for the field <code>apellidoPaterno</code>.</p>
+     *
+     * @param apellidoPaterno a {@link java.lang.String} object.
+     */
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
+    /**
+     * <p>Getter for the field <code>apellidoMaterno</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
 
+    /**
+     * <p>Setter for the field <code>apellidoMaterno</code>.</p>
+     *
+     * @param apellidoMaterno a {@link java.lang.String} object.
+     */
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaNacimiento</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaNacimiento</code>.</p>
+     *
+     * @param fechaNacimiento a {@link java.util.Date} object.
+     */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * <p>Getter for the field <code>nickName</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNickName() {
         return nickName;
     }
 
+    /**
+     * <p>Setter for the field <code>nickName</code>.</p>
+     *
+     * @param nickName a {@link java.lang.String} object.
+     */
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
+    /**
+     * <p>Getter for the field <code>telefonoCelular</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTelefonoCelular() {
         return telefonoCelular;
     }
 
+    /**
+     * <p>Setter for the field <code>telefonoCelular</code>.</p>
+     *
+     * @param telefonoCelular a {@link java.lang.String} object.
+     */
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[UsuarioCompleto] : ["
@@ -268,9 +454,7 @@ public class UsuarioCompleto implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -300,9 +484,7 @@ public class UsuarioCompleto implements Serializable {
                telefonoCelular == other.telefonoCelular;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

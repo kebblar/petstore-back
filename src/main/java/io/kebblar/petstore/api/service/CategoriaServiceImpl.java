@@ -42,14 +42,13 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
  * <p>Descripción:</p>
  * Servicio asociado a la entidad 'categoria'.
  *
- * <p>Implementación de la interfaz {@link CategoriaService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.CategoriaService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  io.kebblar.petstore.api.model.domain.Categoria
  * @see  io.kebblar.petstore.api.service.CategoriaService
  */
@@ -74,6 +73,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método getById
     */
+    /** {@inheritDoc} */
     @Override
     public Categoria getById(int id) throws BusinessException {
         try {
@@ -86,6 +86,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método getAll
     */
+    /** {@inheritDoc} */
     @Override
     public List<Categoria> getAll() throws BusinessException {
         try {
@@ -105,6 +106,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método insert
     */
+    /** {@inheritDoc} */
     @Override
     public int insert(Categoria categoria) throws BusinessException {
         try {
@@ -117,6 +119,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método update
     */
+    /** {@inheritDoc} */
     @Override
     public int update(Categoria categoria) throws BusinessException {
         try {
@@ -129,6 +132,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método delete
     */
+    /** {@inheritDoc} */
     @Override
     public int delete(Categoria categoria) throws BusinessException {
         try {
@@ -141,6 +145,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método save
     */
+    /** {@inheritDoc} */
     @Override
     public int save(Categoria categoria) throws BusinessException {
         try {
@@ -154,6 +159,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Categoria> getByNombre(String nombre) throws BusinessException {
         try {
@@ -166,6 +172,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     /*
     * Implementación del método getAll
     */
+    /** {@inheritDoc} */
     @Override
     public List<CategoriaTO> getAllCategoriaDetalles() throws BusinessException {
         try {

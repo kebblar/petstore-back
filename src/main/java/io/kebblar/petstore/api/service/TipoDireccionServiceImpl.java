@@ -31,14 +31,13 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
- * <p>Implementación de la interfaz {@link TipoDireccionService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.TipoDireccionService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author luz
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  TipoDireccion
  * @see  TipoDireccionService
  */
@@ -59,6 +58,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         this.tipoDireccionMapper = tipoDireccionMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public TipoDireccion getById(int id) throws BusinessException {
         try {
@@ -68,6 +68,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<TipoDireccion> getAll() throws BusinessException {
         try {
@@ -77,6 +78,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(TipoDireccion tipoDireccion) throws BusinessException {
         try {
@@ -86,6 +88,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(TipoDireccion tipoDireccion) throws BusinessException {
         try {
@@ -95,6 +98,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(TipoDireccion tipoDireccion) throws BusinessException {
         try {
@@ -104,6 +108,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(TipoDireccion tipoDireccion) throws BusinessException {
         try {

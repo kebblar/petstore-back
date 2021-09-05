@@ -34,22 +34,43 @@ public class MascotaValorAtributoRequest {
     @JsonProperty("valor")
     private int idValorAtributo;
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idValorAtributo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdValorAtributo() {
         return idValorAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>idValorAtributo</code>.</p>
+     *
+     * @param idValorAtributo a int.
+     */
     public void setIdValorAtributo(int idValorAtributo) {
         this.idValorAtributo = idValorAtributo;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -59,6 +80,7 @@ public class MascotaValorAtributoRequest {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -75,16 +97,26 @@ public class MascotaValorAtributoRequest {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "MascotaValorAtributoRequest [id=" + id + ", idValorAtributo=" + idValorAtributo + "]";
     }
 
+    /**
+     * <p>Constructor for MascotaValorAtributoRequest.</p>
+     *
+     * @param id a int.
+     * @param idValorAtributo a int.
+     */
     public MascotaValorAtributoRequest(int id, int idValorAtributo) {
         this.id = id;
         this.idValorAtributo = idValorAtributo;
     }
 
+    /**
+     * <p>Constructor for MascotaValorAtributoRequest.</p>
+     */
     public MascotaValorAtributoRequest() {
     }
 

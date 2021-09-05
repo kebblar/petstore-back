@@ -41,19 +41,20 @@ import io.kebblar.petstore.api.model.domain.CategoriaDetallesTO;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.Categoria
  */
 @Repository
 public interface CategoriaMapper {
 
+    /** Constant <code>CAMPOS_CATEGORIA=" id, categoria, activo "</code> */
     String CAMPOS_CATEGORIA = " id, categoria, activo ";
 
     /**
      * Obtiene un objeto de tipo 'Categoria' dado su id.
      *
      * @return Categoria que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="CategoriaMap", value = {
             @Result(property = "id",   column = "id"),
@@ -67,7 +68,7 @@ public interface CategoriaMapper {
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de obetos de tipo Categoria
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
     @Select("SELECT " + CAMPOS_CATEGORIA + " FROM categoria ")
@@ -78,7 +79,7 @@ public interface CategoriaMapper {
      *
      * @param categoria a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO categoria(id, categoria, activo) "
@@ -91,7 +92,7 @@ public interface CategoriaMapper {
      *
      * @param categoria a ser actualizado.
      * @return el número de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE categoria"
@@ -104,7 +105,7 @@ public interface CategoriaMapper {
      *
      * @param id id del Categoria a ser borrado
      * @return id del Categoria borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM categoria WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -112,9 +113,9 @@ public interface CategoriaMapper {
     /**
      * Obtiene una lista de objetos de tipo 'Categoria' filtrado por el nombre ingresado.
      *
-     * @param  String nombre de Categoria.
      * @return Lista de objetos de tipo Categoria filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param nombre a {@link java.lang.String} object.
      */
     @ResultMap("CategoriaMap")
     @Select("SELECT " + CAMPOS_CATEGORIA + " FROM categoria WHERE categoria LIKE '%' #{nombre} '%'")
@@ -124,7 +125,7 @@ public interface CategoriaMapper {
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de objetos de tipo CategoriaDetallesTO
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("select c.id as idCategoria, c.categoria as categoriaNombre,"
             + " c.activo as estatusCategoria,"

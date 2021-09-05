@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Implementacion del POJO de la entidad de {@link GraficaPaqueteria}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.GraficaPaqueteria}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -48,6 +48,10 @@ public class GraficaPaqueteria implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param paqueteria a {@link java.lang.String} object.
+     * @param cantidad a {@link java.lang.Long} object.
+     * @param fecha a {@link java.util.Date} object.
      */
     public GraficaPaqueteria(String paqueteria, Long cantidad, Date fecha) {
         this.paqueteria = paqueteria;
@@ -58,45 +62,76 @@ public class GraficaPaqueteria implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>paqueteria</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPaqueteria() {
         return paqueteria;
     }
 
+    /**
+     * <p>Setter for the field <code>paqueteria</code>.</p>
+     *
+     * @param paqueteria a {@link java.lang.String} object.
+     */
     public void setPaqueteria(String paqueteria) {
         this.paqueteria = paqueteria;
     }
 
+    /**
+     * <p>Getter for the field <code>cantidad</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object.
+     */
     public Long getCantidad() {
         return cantidad;
     }
 
+    /**
+     * <p>Setter for the field <code>cantidad</code>.</p>
+     *
+     * @param cantidad a {@link java.lang.Long} object.
+     */
     public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * <p>Getter for the field <code>fecha</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * <p>Setter for the field <code>fecha</code>.</p>
+     *
+     * @param fecha a {@link java.util.Date} object.
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "GraficaPaqueteria [paqueteria=" + paqueteria + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -107,9 +142,7 @@ public class GraficaPaqueteria implements Serializable {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

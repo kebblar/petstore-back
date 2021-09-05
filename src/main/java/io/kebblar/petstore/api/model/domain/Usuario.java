@@ -54,6 +54,10 @@ public class Usuario {
 
     /**
      * Constructor basado en correo y clave con su id.
+     *
+     * @param id a int.
+     * @param correo a {@link java.lang.String} object.
+     * @param clave a {@link java.lang.String} object.
      */
     public Usuario(int id, String correo, String clave) {
         this.id = id;
@@ -72,6 +76,18 @@ public class Usuario {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param id a int.
+     * @param correo a {@link java.lang.String} object.
+     * @param clave a {@link java.lang.String} object.
+     * @param creado a long.
+     * @param activo a boolean.
+     * @param accesoNegadoContador a int.
+     * @param instanteBloqueo a long.
+     * @param instanteUltimoAcceso a long.
+     * @param instanteUltimoCambioClave a long.
+     * @param regeneraClaveToken a {@link java.lang.String} object.
+     * @param regeneraClaveInstante a long.
      */
     public Usuario(
             int id,
@@ -101,104 +117,214 @@ public class Usuario {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>correo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * <p>Setter for the field <code>correo</code>.</p>
+     *
+     * @param correo a {@link java.lang.String} object.
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * <p>Getter for the field <code>clave</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getClave() {
         return this.clave;
     }
 
+    /**
+     * <p>Setter for the field <code>clave</code>.</p>
+     *
+     * @param clave a {@link java.lang.String} object.
+     */
     public void setClave(String clave) {
         this.clave = clave;
     }
 
+    /**
+     * <p>Getter for the field <code>creado</code>.</p>
+     *
+     * @return a long.
+     */
     public long getCreado() {
         return creado;
     }
 
+    /**
+     * <p>Setter for the field <code>creado</code>.</p>
+     *
+     * @param creado a long.
+     */
     public void setCreado(long creado) {
         this.creado = creado;
     }
 
+    /**
+     * <p>isActivo.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a boolean.
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * <p>Getter for the field <code>accesoNegadoContador</code>.</p>
+     *
+     * @return a int.
+     */
     public int getAccesoNegadoContador() {
         return accesoNegadoContador;
     }
 
+    /**
+     * <p>Setter for the field <code>accesoNegadoContador</code>.</p>
+     *
+     * @param accesoNegadoContador a int.
+     */
     public void setAccesoNegadoContador(int accesoNegadoContador) {
         this.accesoNegadoContador = accesoNegadoContador;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteBloqueo</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteBloqueo() {
         return instanteBloqueo;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteBloqueo</code>.</p>
+     *
+     * @param instanteBloqueo a long.
+     */
     public void setInstanteBloqueo(long instanteBloqueo) {
         this.instanteBloqueo = instanteBloqueo;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteUltimoAcceso</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteUltimoAcceso() {
         return instanteUltimoAcceso;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteUltimoAcceso</code>.</p>
+     *
+     * @param instanteUltimoAcceso a long.
+     */
     public void setInstanteUltimoAcceso(long instanteUltimoAcceso) {
         this.instanteUltimoAcceso = instanteUltimoAcceso;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteUltimoCambioClave</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteUltimoCambioClave() {
         return instanteUltimoCambioClave;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteUltimoCambioClave</code>.</p>
+     *
+     * @param instanteUltimoCambioClave a long.
+     */
     public void setInstanteUltimoCambioClave(long instanteUltimoCambioClave) {
         this.instanteUltimoCambioClave = instanteUltimoCambioClave;
     }
 
+    /**
+     * <p>Getter for the field <code>regeneraClaveToken</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRegeneraClaveToken() {
         return regeneraClaveToken;
     }
 
+    /**
+     * <p>Setter for the field <code>regeneraClaveToken</code>.</p>
+     *
+     * @param regeneraClaveToken a {@link java.lang.String} object.
+     */
     public void setRegeneraClaveToken(String regeneraClaveToken) {
         this.regeneraClaveToken = regeneraClaveToken;
     }
 
+    /**
+     * <p>Getter for the field <code>regeneraClaveInstante</code>.</p>
+     *
+     * @return a long.
+     */
     public long getRegeneraClaveInstante() {
         return regeneraClaveInstante;
     }
 
+    /**
+     * <p>Setter for the field <code>regeneraClaveInstante</code>.</p>
+     *
+     * @param regeneraClaveInstante a long.
+     */
     public void setRegeneraClaveInstante(long regeneraClaveInstante) {
         this.regeneraClaveInstante = regeneraClaveInstante;
     }
 
     /**
      * Método especial (y adicional) de soporte al proceso de pruebas de regresión.
+     *
+     * @return a long.
      */
     public long getHash() {
         return this.hashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", correo=" + correo + ", clave=" + clave + ", creado=" + creado + ", activo="
@@ -208,9 +334,7 @@ public class Usuario {
                 + regeneraClaveInstante + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -229,9 +353,7 @@ public class Usuario {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

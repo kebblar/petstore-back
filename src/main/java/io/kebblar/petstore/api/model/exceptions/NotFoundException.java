@@ -37,6 +37,11 @@ package io.kebblar.petstore.api.model.exceptions;
 public class NotFoundException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * <p>Constructor for NotFoundException.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     */
     public NotFoundException(String resource) {
         super(
             "Recurso no encontrado. Error 404",

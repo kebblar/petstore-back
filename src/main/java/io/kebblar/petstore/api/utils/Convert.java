@@ -32,13 +32,12 @@ public class Convert {
     private static final String[] DECENAS  = {"VENTI", "TREINTA ", "CUARENTA ", "CINCUENTA ", "SESENTA ", "SETENTA ", "OCHENTA ", "NOVENTA ", "CIEN "};
     private static final String[] CENTENAS = {"CIENTO ", "DOSCIENTOS ", "TRESCIENTOS ", "CUATROCIENTOS ", "QUINIENTOS ", "SEISCIENTOS ", "SETECIENTOS ", "OCHOCIENTOS ", "NOVECIENTOS "};
 
-    /**
-     * Método para transformar cantidades a cadena  String.
-     *
-     * @param cifra numerica
-     * @param valor opcional para convertir cifra a letras mayusculas
-     * @return String cadena convertida
-     */
+     /**
+      * Método para transformar cantidades a cadena  String.
+      *
+      * @return String cadena convertida
+      * @param n a int.
+      */
      public String convertir(int n) {
           if (n<0) return "MENOS "+convertir(-n);
           if (n>=0 && n<21) return UNIDADES[n];
@@ -51,6 +50,11 @@ public class Convert {
       }
 
      private int contador = 0;
+     /**
+      * <p>Getter for the field <code>contador</code>.</p>
+      *
+      * @return a int.
+      */
      public int getContador() {
          return contador++;
      }

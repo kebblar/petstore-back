@@ -36,18 +36,18 @@ import io.kebblar.petstore.api.model.domain.Grafica;
  * @author Ulises López
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  */
 
 @Repository
 public interface GraficaCompradorMapper {
 
+    /** Constant <code>CAMPOS_GRAFICA_COMPRADOR="usu.nombre as comprador,count(*) as can"{trunked}</code> */
     String CAMPOS_GRAFICA_COMPRADOR = "usu.nombre as comprador,count(*) as cantidad , oc.fecha_hora_comprar as fecha";
     /**
      * Obtiene una lista de tipo 'GraficaComprador'.
      *
      * @return Una lista de los compradores más asiduos
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta
      *                      operación desde la base de datos.
      */
     @Results(id = "GraficaComMap", value = { @Result(property = "etiqueta", column = "comprador"),
@@ -65,7 +65,7 @@ public interface GraficaCompradorMapper {
      * @param fechaIni cota inferior del rango de fechas
      * @param fechaFin cota superior del rango de fechas
      * @return Lista con la información deseada
-     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     * @throws java.sql.SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaComMap")
     @Select("SELECT "+CAMPOS_GRAFICA_COMPRADOR+" from orden_compra oc "

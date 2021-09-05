@@ -51,6 +51,9 @@ public class CategoriaAtributo implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     * @param idAtributo a {@link java.lang.Integer} object.
      */
     public CategoriaAtributo(Integer idCategoria, Integer idAtributo) {
         this.idCategoria = idCategoria;
@@ -59,6 +62,10 @@ public class CategoriaAtributo implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     * @param idAtributo a {@link java.lang.Integer} object.
+     * @param nombreAtributo a {@link java.lang.String} object.
      */
     public CategoriaAtributo(Integer idCategoria, Integer idAtributo,String nombreAtributo) {
         this.idCategoria = idCategoria;
@@ -69,33 +76,61 @@ public class CategoriaAtributo implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>idAtributo</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdAtributo() {
         return idAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>idAtributo</code>.</p>
+     *
+     * @param idAtributo a {@link java.lang.Integer} object.
+     */
     public void setIdAtributo(Integer idAtributo) {
         this.idAtributo = idAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>nombreAtributo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombreAtributo() {
         return nombreAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>nombreAtributo</code>.</p>
+     *
+     * @param nombreAtributo a {@link java.lang.String} object.
+     */
     public void setNombreAtributo(String nombreAtributo) {
         this.nombreAtributo = nombreAtributo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[CategoriaAtributo] : ["
@@ -105,9 +140,7 @@ public class CategoriaAtributo implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -122,9 +155,7 @@ public class CategoriaAtributo implements Serializable {
                idAtributo == other.idAtributo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

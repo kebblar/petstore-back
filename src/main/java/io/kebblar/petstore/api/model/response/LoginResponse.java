@@ -26,6 +26,12 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
+/**
+ * <p>LoginResponse class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class LoginResponse {
     private UsuarioDetalle usuarioDetalle;
     private String correo;
@@ -33,9 +39,21 @@ public class LoginResponse {
     private Date ultimoAcceso;
     private List<Rol> roles;
 
+    /**
+     * <p>Constructor for LoginResponse.</p>
+     */
     public LoginResponse() {
     }
 
+    /**
+     * <p>Constructor for LoginResponse.</p>
+     *
+     * @param usuarioDetalle a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     * @param ultimoAcceso a {@link java.util.Date} object.
+     * @param correo a {@link java.lang.String} object.
+     * @param jwt a {@link java.lang.String} object.
+     * @param roles a {@link java.util.List} object.
+     */
     public LoginResponse(
             UsuarioDetalle usuarioDetalle,
             Date ultimoAcceso,
@@ -49,52 +67,104 @@ public class LoginResponse {
         this.roles = roles;
     }
 
+    /**
+     * <p>Getter for the field <code>usuarioDetalle</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     */
     public UsuarioDetalle getUsuarioDetalle() {
         return usuarioDetalle;
     }
 
+    /**
+     * <p>Setter for the field <code>usuarioDetalle</code>.</p>
+     *
+     * @param usuarioDetalle a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     */
     public void setUsuarioDetalle(UsuarioDetalle usuarioDetalle) {
         this.usuarioDetalle = usuarioDetalle;
     }
 
+    /**
+     * <p>Getter for the field <code>correo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * <p>Setter for the field <code>correo</code>.</p>
+     *
+     * @param correo a {@link java.lang.String} object.
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * <p>Getter for the field <code>jwt</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getJwt() {
         return jwt;
     }
 
+    /**
+     * <p>Setter for the field <code>jwt</code>.</p>
+     *
+     * @param jwt a {@link java.lang.String} object.
+     */
     public void setJwt(String jwt) {
         this.jwt = jwt;
     }
 
+    /**
+     * <p>Getter for the field <code>ultimoAcceso</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getUltimoAcceso() {
         return ultimoAcceso;
     }
 
+    /**
+     * <p>Setter for the field <code>ultimoAcceso</code>.</p>
+     *
+     * @param ultimoAcceso a {@link java.util.Date} object.
+     */
     public void setUltimoAcceso(Date ultimoAcceso) {
         this.ultimoAcceso = ultimoAcceso;
     }
 
+    /**
+     * <p>Getter for the field <code>roles</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<Rol> getRoles() {
         return roles;
     }
 
+    /**
+     * <p>Setter for the field <code>roles</code>.</p>
+     *
+     * @param roles a {@link java.util.List} object.
+     */
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "LoginResponse [usuarioDetalle=" + usuarioDetalle + ", correo=" + correo + ", jwt=" + jwt
                 + ", ultimoAcceso=" + ultimoAcceso + ", roles=" + roles + "]";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -105,6 +175,7 @@ public class LoginResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -132,6 +203,11 @@ public class LoginResponse {
         return true;
     }
 
+    /**
+     * <p>getHash.</p>
+     *
+     * @return a long.
+     */
     public long getHash() {
         return this.hashCode();
     }

@@ -49,6 +49,8 @@ public class EstatusAnuncio implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public EstatusAnuncio(Integer id) {
         this.id = id;
@@ -56,6 +58,9 @@ public class EstatusAnuncio implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param descripcion a {@link java.lang.String} object.
      */
     public EstatusAnuncio(Integer id, String descripcion) {
         this.id = id;
@@ -65,26 +70,44 @@ public class EstatusAnuncio implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[EstatusAnuncio] : ["
@@ -93,9 +116,7 @@ public class EstatusAnuncio implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -110,9 +131,7 @@ public class EstatusAnuncio implements Serializable {
                descripcion == other.descripcion;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

@@ -45,6 +45,9 @@ public class MontoBitcoin {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param monto a double.
+     * @param cambio a double.
      */
     public MontoBitcoin(double monto, double cambio) {
         this.monto = monto;
@@ -53,6 +56,8 @@ public class MontoBitcoin {
 
     /**
      * Getter para monto.
+     *
+     * @return a double.
      */
     public double getMonto() {
         return monto;
@@ -60,6 +65,8 @@ public class MontoBitcoin {
 
     /**
      * Setter para monto.
+     *
+     * @param monto a double.
      */
     public void setMonto(double monto) {
         this.monto = monto;
@@ -67,6 +74,8 @@ public class MontoBitcoin {
 
     /**
      * Getter para cambio.
+     *
+     * @return a double.
      */
     public double getCambio() {
         return cambio;
@@ -74,12 +83,16 @@ public class MontoBitcoin {
 
     /**
      * Setter para cambio.
+     *
+     * @param cambio a double.
      */
     public void setCambio(double cambio) {
         this.cambio = cambio;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Método equals para el pojo, para saber si dos objetos son iguales.
      */
     @Override
@@ -91,6 +104,8 @@ public class MontoBitcoin {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Genera un hash del objeto
      */
     @Override
@@ -99,6 +114,8 @@ public class MontoBitcoin {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override

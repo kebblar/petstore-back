@@ -20,6 +20,12 @@
  */
 package io.kebblar.petstore.api.model.domain;
 
+/**
+ * <p>Rol class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class Rol {
 
     /*
@@ -37,6 +43,10 @@ public class Rol {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param id a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param activo a boolean.
      */
     public Rol(int id, String nombre, boolean activo) {
         this.id = id;
@@ -47,41 +57,67 @@ public class Rol {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>isActivo.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a boolean.
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Rol [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -92,9 +128,7 @@ public class Rol {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -118,6 +152,7 @@ public class Rol {
 
     /**
      * Devuelve el hash de un objeto Rol.
+     *
      * @return entero representando el hash
      */
     public long getHash() {

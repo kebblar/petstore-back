@@ -33,7 +33,6 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class UserNotExistsException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
@@ -42,6 +41,7 @@ public class UserNotExistsException extends BusinessException {
 
     /**
      * Indica que el nombre de usuario introducido no existe en el sistema.
+     *
      * @param user cadena del usuario introducido
      */
     public UserNotExistsException(String user) {

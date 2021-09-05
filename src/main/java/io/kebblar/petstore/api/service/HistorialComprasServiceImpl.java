@@ -42,10 +42,16 @@ public class HistorialComprasServiceImpl implements HistorialComprasService{
     private static final Logger logger = LoggerFactory.getLogger(HistorialComprasServiceImpl.class);
     private HistorialComprasMapper historialMapper;
 
+    /**
+     * <p>Constructor for HistorialComprasServiceImpl.</p>
+     *
+     * @param historialMapper a {@link io.kebblar.petstore.api.mapper.HistorialComprasMapper} object.
+     */
     public HistorialComprasServiceImpl(HistorialComprasMapper historialMapper) {
         this.historialMapper = historialMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<HistorialCompras> getAll(int idUsuario) throws BusinessException {
         try {

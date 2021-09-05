@@ -53,6 +53,13 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
+/**
+ * <p>TestCatalogos class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestCatalogos {
     private static final Logger logger = LoggerFactory.getLogger(TestCatalogos.class);
@@ -120,6 +127,11 @@ public class TestCatalogos {
     private Atributo atributo;
     private ValorAtributo valorAtributo;
 
+    /**
+     * <p>prepare.</p>
+     *
+     * @throws java.lang.Exception if any.
+     */
     @Before
     public void prepare() throws Exception {
 
@@ -155,6 +167,9 @@ public class TestCatalogos {
 
     }
 
+    /**
+     * <p>getEstadosByPaisTest.</p>
+     */
     @Test
     public void getEstadosByPaisTest() {
         try {
@@ -164,6 +179,9 @@ public class TestCatalogos {
         }
     }
 
+    /**
+     * <p>getMunicipiosByEstadoTest.</p>
+     */
     @Test
     public void getMunicipiosByEstadoTest() {
         try {
@@ -173,6 +191,9 @@ public class TestCatalogos {
         }
     }
 
+    /**
+     * <p>getPaisById.</p>
+     */
     @Test
     public void getPaisById() {
         try {
@@ -182,6 +203,9 @@ public class TestCatalogos {
         }
     }
 
+   /**
+    * <p>getEstatusById.</p>
+    */
    @Test
     public void getEstatusById() {
         try {
@@ -191,6 +215,9 @@ public class TestCatalogos {
         }
     }
 
+   /**
+    * <p>getMediatipoById.</p>
+    */
    @Test
    public void getMediatipoById() {
        try {
@@ -200,6 +227,9 @@ public class TestCatalogos {
        }
    }
 
+   /**
+    * <p>getCategoriaById.</p>
+    */
    @Test
    public void getCategoriaById() {
        try {
@@ -209,6 +239,9 @@ public class TestCatalogos {
        }
    }
 
+   /**
+    * <p>getAtributoById.</p>
+    */
    @Test
    public void getAtributoById() {
        try {
@@ -218,6 +251,9 @@ public class TestCatalogos {
        }
    }
 
+   /**
+    * <p>getValorAtributoyId.</p>
+    */
    @Test
    public void getValorAtributoyId() {
        try {

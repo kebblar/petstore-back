@@ -38,15 +38,14 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
  * Servicio asociado a la entidad 'grafica'.
  *
  * <p>
- * Implementación de la interfaz {@link GraficaTipoPagoService}.
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.service.GraficaTipoPagoService}.
  *
  * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Diego González
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see GraficaTipoPago
  * @see GraficaTipoPagoService
  */
@@ -68,6 +67,7 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
         this.graficaTipoPagoMapper = graficaTipoPagoMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getMontoTotalTipoPago() throws BusinessException {
         try {
@@ -83,6 +83,7 @@ public class GraficaTipoPagoServiceImpl implements GraficaTipoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getMontoTipoPagoRango(String fechaIni, String fechaFin) throws BusinessException {
         try {

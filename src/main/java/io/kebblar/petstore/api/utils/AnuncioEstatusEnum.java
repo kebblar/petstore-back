@@ -43,14 +43,30 @@ public enum AnuncioEstatusEnum {
         this.desEstatus = desEstatus;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a short.
+     */
     public short getId() {
         return id;
     }
 
+    /**
+     * <p>Getter for the field <code>desEstatus</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDesEstatus() {
         return desEstatus;
     }
 
+    /**
+     * <p>getDescripcion.</p>
+     *
+     * @param idEnum a short.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getDescripcion(short idEnum){
         for(AnuncioEstatusEnum eu:AnuncioEstatusEnum.values()){
             if(eu.getId() == idEnum){

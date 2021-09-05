@@ -40,20 +40,21 @@ import io.kebblar.petstore.api.model.domain.Paqueteria;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see Paqueteria
  */
 
 @Repository
 public interface PaqueteriaMapper {
 
+    /** Constant <code>CAMPOS_PAQ=" id, nombre, breve_descripcion, html_de"{trunked}</code> */
     String CAMPOS_PAQ = " id, nombre, breve_descripcion, html_descripcion, precio ";
 
     /**
      * Obtiene un objeto de tipo 'Paqueteria' dado su id.
      *
      * @return Paqueteria que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="PaqueteriaMap", value = {
             @Result(property = "id",   column = "id"),
@@ -69,7 +70,7 @@ public interface PaqueteriaMapper {
      * Obtiene una lista de objetos de tipo 'Paqueteria'.
      *
      * @return Lista de obetos de tipo Paqueteria
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
     @Select("SELECT " + CAMPOS_PAQ + " FROM paqueteria ")
@@ -80,7 +81,7 @@ public interface PaqueteriaMapper {
      *
      * @param paqueteria a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO paqueteria(id, nombre, breve_descripcion, html_descripcion, precio) "
@@ -93,7 +94,7 @@ public interface PaqueteriaMapper {
      *
      * @param paqueteria a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE paqueteria"
@@ -106,7 +107,7 @@ public interface PaqueteriaMapper {
      *
      * @param id id del Paqueteria a ser borrado
      * @return id del Paqueteria borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM paqueteria WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -116,7 +117,7 @@ public interface PaqueteriaMapper {
      *
      * @param nombre la paqueteria.
      * @return Lista de objetos de tipo paqueteria filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaqueteriaMap")
     @Select("SELECT " + CAMPOS_PAQ + " FROM paqueteria WHERE nombre LIKE '%' #{nombre} '%'")

@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link Grafica}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.Grafica}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -43,6 +43,10 @@ public class Grafica implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param etiqueta a {@link java.lang.String} object.
+     * @param cantidad a {@link java.lang.Long} object.
+     * @param fecha a {@link java.util.Date} object.
      */
     public Grafica(String etiqueta, Long cantidad, Date fecha) {
         super();
@@ -51,6 +55,9 @@ public class Grafica implements Serializable {
         this.fecha = fecha;
     }
 
+    /**
+     * <p>Constructor for Grafica.</p>
+     */
     public Grafica() {
         super();
     }
@@ -58,37 +65,70 @@ public class Grafica implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>etiqueta</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getEtiqueta() {
         return etiqueta;
     }
 
+    /**
+     * <p>Setter for the field <code>etiqueta</code>.</p>
+     *
+     * @param etiqueta a {@link java.lang.String} object.
+     */
     public void setEtiqueta(String etiqueta) {
         this.etiqueta = etiqueta;
     }
 
+    /**
+     * <p>Getter for the field <code>cantidad</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object.
+     */
     public Long getCantidad() {
         return cantidad;
     }
 
+    /**
+     * <p>Setter for the field <code>cantidad</code>.</p>
+     *
+     * @param cantidad a {@link java.lang.Long} object.
+     */
     public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * <p>Getter for the field <code>fecha</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * <p>Setter for the field <code>fecha</code>.</p>
+     *
+     * @param fecha a {@link java.util.Date} object.
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,17 +137,13 @@ public class Grafica implements Serializable {
         return Objects.equals(etiqueta, grafica.etiqueta) && Objects.equals(cantidad, grafica.cantidad) && Objects.equals(fecha, grafica.fecha);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(etiqueta, cantidad, fecha);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Grafica [etiqueta=" + etiqueta + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";

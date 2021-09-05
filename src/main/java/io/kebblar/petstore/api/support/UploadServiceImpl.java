@@ -46,6 +46,7 @@ import io.kebblar.petstore.api.utils.WaterMark;
  * Clase encargada de gestionar los archivos que se suben desde el cliente web.
  *
  * @author garellano
+ * @version $Id: $Id
  */
 @Service
 public class UploadServiceImpl implements UploadService {
@@ -55,9 +56,7 @@ public class UploadServiceImpl implements UploadService {
     /** tika. */
     private Tika tika = new Tika();
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws UploadException {
         List<UploadModel> lista = new ArrayList<>();
@@ -92,11 +91,9 @@ public class UploadServiceImpl implements UploadService {
     }
 
     /**
-     * Store one.
+     * {@inheritDoc}
      *
-     * @param mpf the mpf
-     * @return the upload model
-     * @throws UploadException the upload exception
+     * Store one.
      */
     public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException {
         UUID uuid = UUID.randomUUID();

@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link AdministracionCompras}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.AdministracionCompras}.
  *
  * @author  LMtz
  * @version 1.0-SNAPSHOT
@@ -45,6 +45,15 @@ public class AdministracionCompras {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param estadoEnvio a {@link java.lang.Boolean} object.
+     * @param calleNumero a {@link java.lang.String} object.
+     * @param colonia a {@link java.lang.String} object.
+     * @param cp a {@link java.lang.String} object.
+     * @param cveOrden a {@link java.lang.String} object.
+     * @param nombreAnuncio a {@link java.lang.String} object.
+     * @param urlFactura a {@link java.lang.String} object.
+     * @param fechaCompra a {@link java.lang.String} object.
      */
     public AdministracionCompras(Boolean estadoEnvio, String calleNumero, String colonia, String cp, String cveOrden, String nombreAnuncio,
             String urlFactura, String fechaCompra) {
@@ -61,73 +70,151 @@ public class AdministracionCompras {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>cveOrden</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCveOrden() {
         return cveOrden;
     }
 
+    /**
+     * <p>Setter for the field <code>cveOrden</code>.</p>
+     *
+     * @param cveOrden a {@link java.lang.String} object.
+     */
     public void setCveOrden(String cveOrden) {
         this.cveOrden = cveOrden;
     }
 
+    /**
+     * <p>Getter for the field <code>nombreAnuncio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombreAnuncio() {
         return nombreAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>nombreAnuncio</code>.</p>
+     *
+     * @param nombreAnuncio a {@link java.lang.String} object.
+     */
     public void setNombreAnuncio(String nombreAnuncio) {
         this.nombreAnuncio = nombreAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>urlFactura</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUrlFactura() {
         return urlFactura;
     }
 
+    /**
+     * <p>Setter for the field <code>urlFactura</code>.</p>
+     *
+     * @param urlFactura a {@link java.lang.String} object.
+     */
     public void setUrlFactura(String urlFactura) {
         this.urlFactura = urlFactura;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaCompra</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFechaCompra() {
         return fechaCompra;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaCompra</code>.</p>
+     *
+     * @param fechaCompra a {@link java.lang.String} object.
+     */
     public void setFechaCompra(String fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
+    /**
+     * <p>Getter for the field <code>calleNumero</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCalleNumero() {
         return calleNumero;
     }
 
+    /**
+     * <p>Setter for the field <code>calleNumero</code>.</p>
+     *
+     * @param calleNumero a {@link java.lang.String} object.
+     */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
 
+    /**
+     * <p>Getter for the field <code>cp</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCp() {
         return cp;
     }
 
+    /**
+     * <p>Setter for the field <code>cp</code>.</p>
+     *
+     * @param cp a {@link java.lang.String} object.
+     */
     public void setCp(String cp) {
         this.cp = cp;
     }
 
+    /**
+     * <p>Getter for the field <code>colonia</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getColonia() {
         return colonia;
     }
 
+    /**
+     * <p>Setter for the field <code>colonia</code>.</p>
+     *
+     * @param colonia a {@link java.lang.String} object.
+     */
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
 
+    /**
+     * <p>Getter for the field <code>estadoEnvio</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getEstadoEnvio() {
         return estadoEnvio;
     }
 
+    /**
+     * <p>Setter for the field <code>estadoEnvio</code>.</p>
+     *
+     * @param estadoEnvio a {@link java.lang.Boolean} object.
+     */
     public void setEstadoEnvio(Boolean estadoEnvio) {
         this.estadoEnvio = estadoEnvio;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AdministracionCompras [estadoEnvio=" + estadoEnvio + ", cveOrden=" + cveOrden + ", nombreAnuncio="
@@ -135,9 +222,7 @@ public class AdministracionCompras {
                 + calleNumero + ", colonia=" + colonia + ", cp=" + cp + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,9 +234,7 @@ public class AdministracionCompras {
                 Objects.equals(colonia, that.colonia) && Objects.equals(cp, that.cp);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(estadoEnvio, cveOrden, nombreAnuncio, urlFactura, fechaCompra, calleNumero, colonia, cp);

@@ -33,22 +33,43 @@ public class BusquedaResponse {
     private int totalAnuncios;
     private List<DetalleAnuncioResponse> listaAnuncios;
 
+    /**
+     * <p>Getter for the field <code>totalAnuncios</code>.</p>
+     *
+     * @return a int.
+     */
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
 
+    /**
+     * <p>Setter for the field <code>totalAnuncios</code>.</p>
+     *
+     * @param totalAnuncios a int.
+     */
     public void setTotalAnuncios(int totalAnuncios) {
         this.totalAnuncios = totalAnuncios;
     }
 
+    /**
+     * <p>Getter for the field <code>listaAnuncios</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<DetalleAnuncioResponse> getListaAnuncios() {
         return listaAnuncios;
     }
 
+    /**
+     * <p>Setter for the field <code>listaAnuncios</code>.</p>
+     *
+     * @param listaAnuncios a {@link java.util.List} object.
+     */
     public void setListaAnuncios(List<DetalleAnuncioResponse> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -58,6 +79,7 @@ public class BusquedaResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -77,16 +99,26 @@ public class BusquedaResponse {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "BusquedaResponse [totalAnuncios=" + totalAnuncios + ", listaAnuncios=" + listaAnuncios + "]";
     }
 
+    /**
+     * <p>Constructor for BusquedaResponse.</p>
+     *
+     * @param totalAnuncios a int.
+     * @param listaAnuncios a {@link java.util.List} object.
+     */
     public BusquedaResponse(int totalAnuncios, List<DetalleAnuncioResponse> listaAnuncios) {
         this.totalAnuncios = totalAnuncios;
         this.listaAnuncios = listaAnuncios;
     }
 
+    /**
+     * <p>Constructor for BusquedaResponse.</p>
+     */
     public BusquedaResponse() {
     }
 

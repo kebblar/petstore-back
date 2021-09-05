@@ -40,19 +40,20 @@ import io.kebblar.petstore.api.model.domain.MediaTipo;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.MediaTipo
  */
 @Repository
 public interface MediaTipoMapper {
 
+    /** Constant <code>CAMPOS_MEDIA_TIPO=" id, descripcion, activo "</code> */
     String CAMPOS_MEDIA_TIPO = " id, descripcion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MediaTipo' dado su id.
      *
      * @return MediaTipo que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="MediaTipoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -66,7 +67,7 @@ public interface MediaTipoMapper {
      * Obtiene una lista de objetos de tipo 'MediaTipo'.
      *
      * @return Lista de objetos de tipo MediaTipo
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MediaTipoMap")
     @Select("SELECT " + CAMPOS_MEDIA_TIPO + " FROM media_tipo ")
@@ -77,7 +78,7 @@ public interface MediaTipoMapper {
      *
      * @param mediaTipo a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO media_tipo(id, descripcion, activo) "
@@ -90,7 +91,7 @@ public interface MediaTipoMapper {
      *
      * @param mediaTipo a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE media_tipo"
@@ -103,7 +104,7 @@ public interface MediaTipoMapper {
      *
      * @param id id del MediaTipo a ser borrado
      * @return id del MediaTipo borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM media_tipo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -113,7 +114,7 @@ public interface MediaTipoMapper {
      *
      * @param  nombre de MediaTipo.
      * @return Lista de objetos de tipo MediaTipo filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MediaTipoMap")
     @Select("SELECT " + CAMPOS_MEDIA_TIPO + " FROM media_tipo WHERE descripcion LIKE '%' #{nombre} '%'")

@@ -41,6 +41,7 @@ public class WaitLoginException extends BusinessException {
 
     /**
      * Indica cuánto tiempo debe de esperar antes de poder volver a intentar el ingreso al sistema.
+     *
      * @param seconds segundos restantes
      */
     public WaitLoginException(long seconds) {

@@ -75,9 +75,7 @@ public class MailSenderServiceImpl implements MailSenderService {
         this.javaMailSender = javaMailSender;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String sendMail2(String to, String subject, String body) {
         SimpleMailMessage mail = new SimpleMailMessage();
@@ -90,9 +88,7 @@ public class MailSenderServiceImpl implements MailSenderService {
         return "";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     @Async
     public String sendHtmlMail(String to, String subject, String body) {
@@ -110,9 +106,7 @@ public class MailSenderServiceImpl implements MailSenderService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     @Async
     public String sendHtmlMail(HelperConfig helperConfig) throws BusinessException {
@@ -127,9 +121,7 @@ public class MailSenderServiceImpl implements MailSenderService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     @Async
     public String sendHtmlMail2(String to, String subject, String body, File file) {
@@ -148,9 +140,7 @@ public class MailSenderServiceImpl implements MailSenderService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String sendASynchronousHtmlMail(String to, String subject, String body) {
         logger.debug("inside sendASynchronousMail method");

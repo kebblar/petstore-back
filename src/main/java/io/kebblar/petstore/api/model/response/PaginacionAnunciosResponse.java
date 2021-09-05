@@ -22,20 +22,34 @@ package io.kebblar.petstore.api.model.response;
 
 import java.util.List;
 
+/**
+ * <p>PaginacionAnunciosResponse class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class PaginacionAnunciosResponse {
     private int totalAnuncios;
     private List<BusquedaAdministracionResponse> listaAnuncios;
 
+    /**
+     * <p>Constructor for PaginacionAnunciosResponse.</p>
+     *
+     * @param totalAnuncios a int.
+     * @param listaAnuncios a {@link java.util.List} object.
+     */
     public PaginacionAnunciosResponse(int totalAnuncios, List<BusquedaAdministracionResponse> listaAnuncios) {
         this.totalAnuncios = totalAnuncios;
         this.listaAnuncios = listaAnuncios;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "PaginacionAnunciosResponse [totalAnuncios=" + totalAnuncios + ", listaAnuncios=" + listaAnuncios + "]";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -45,6 +59,7 @@ public class PaginacionAnunciosResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -64,18 +79,38 @@ public class PaginacionAnunciosResponse {
         return true;
     }
 
+    /**
+     * <p>Getter for the field <code>totalAnuncios</code>.</p>
+     *
+     * @return a int.
+     */
     public int getTotalAnuncios() {
         return totalAnuncios;
     }
 
+    /**
+     * <p>Setter for the field <code>totalAnuncios</code>.</p>
+     *
+     * @param totalAnuncios a int.
+     */
     public void setTotalAnuncios(int totalAnuncios) {
         this.totalAnuncios = totalAnuncios;
     }
 
+    /**
+     * <p>Getter for the field <code>listaAnuncios</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<BusquedaAdministracionResponse> getListaAnuncios() {
         return listaAnuncios;
     }
 
+    /**
+     * <p>Setter for the field <code>listaAnuncios</code>.</p>
+     *
+     * @param listaAnuncios a {@link java.util.List} object.
+     */
     public void setListaAnuncios(List<BusquedaAdministracionResponse> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
     }

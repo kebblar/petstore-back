@@ -31,6 +31,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Clase WebMvcConfig.
+ *
+ * @author garellano
+ * @version $Id: $Id
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -39,9 +42,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Value("${jwt.encryptor.password}")
     private String encryptKey;
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
@@ -49,17 +50,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
             .addResourceLocations("classpath:/public/error/clouds-404/");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CustomInterceptor(encryptKey));
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         /**/

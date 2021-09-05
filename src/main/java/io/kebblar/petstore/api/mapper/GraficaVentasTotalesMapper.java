@@ -35,24 +35,27 @@ import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see GraficaVentasTotales
  */
 @Repository
 public interface GraficaVentasTotalesMapper {
 
     String CAMPOS_GRAFICA2 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
+            /** Constant <code>CAMPOS_GRAFICA2="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
             "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
+    /** Constant <code>GROUP_MES_ANIO=" group by anio, mes"</code> */
     String GROUP_MES_ANIO = " group by anio, mes";
     String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
+            /** Constant <code>IJ_CARRITO_ORDEN=" inner join petstore.carrito as carrito"{trunked}</code> */
             "carrito.cve_orden_compra";
+    /** Constant <code>IJ_ANUNCIO_CARRITO=" inner join petstore.anuncio as anuncio"{trunked}</code> */
     String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";
 
     /**
      * Obtiene una lista de tipo 'GraficaVentasTotales'.
      *
      * @return Una lista de las ventas totales
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaVentasTotales", value = {
         @Result(property = "total_venta", column = "total_venta"),
@@ -69,7 +72,7 @@ public interface GraficaVentasTotalesMapper {
      * @param fechaIni cota inferior del rango de fechas
      * @param fechaFin cota superior del rango de fechas
      * @return Lista con la información deseada
-     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     * @throws java.sql.SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaVentasTotales")
     @Select("SELECT " + CAMPOS_GRAFICA2 + " from petstore.orden_compra as orden "

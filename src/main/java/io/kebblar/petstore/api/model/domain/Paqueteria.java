@@ -31,7 +31,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class Paqueteria implements Serializable {
 
     private static final long serialVersionUID = 4781082860740788585L;
@@ -53,6 +52,8 @@ public class Paqueteria implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Paqueteria(Integer id) {
         this.id = id;
@@ -60,6 +61,12 @@ public class Paqueteria implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param nombre a {@link java.lang.String} object.
+     * @param breveDescripcion a {@link java.lang.String} object.
+     * @param htmlDescripcion a {@link java.lang.String} object.
+     * @param precio a int.
      */
     public Paqueteria(Integer id, String nombre, String breveDescripcion, String htmlDescripcion, int precio) {
         this.id = id;
@@ -72,49 +79,97 @@ public class Paqueteria implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>breveDescripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBreveDescripcion() {
         return breveDescripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>breveDescripcion</code>.</p>
+     *
+     * @param breveDescripcion a {@link java.lang.String} object.
+     */
     public void setBreveDescripcion(String breveDescripcion) {
         this.breveDescripcion = breveDescripcion;
     }
 
+    /**
+     * <p>Getter for the field <code>htmlDescripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getHtmlDescripcion() {
         return htmlDescripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>htmlDescripcion</code>.</p>
+     *
+     * @param htmlDescripcion a {@link java.lang.String} object.
+     */
     public void setHtmlDescripcion(String htmlDescripcion) {
         this.htmlDescripcion = htmlDescripcion;
     }
 
+    /**
+     * <p>Getter for the field <code>precio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getPrecio() {
         return precio;
     }
 
+    /**
+     * <p>Setter for the field <code>precio</code>.</p>
+     *
+     * @param precio a int.
+     */
     public void setPrecio(int precio) {
         this.precio = precio;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Paqueteria] : ["
@@ -126,9 +181,7 @@ public class Paqueteria implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -146,9 +199,7 @@ public class Paqueteria implements Serializable {
                precio == other.precio;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

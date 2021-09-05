@@ -30,7 +30,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class BtcWallet {
 
     /*
@@ -48,6 +47,10 @@ public class BtcWallet {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param idUser a int.
+     * @param address a {@link java.lang.String} object.
+     * @param privateKey a {@link java.lang.String} object.
      */
     public BtcWallet(int idUser, String address, String privateKey) {
         this.idUser = idUser;
@@ -58,33 +61,61 @@ public class BtcWallet {
     /*
      * getter y setter.
      */
+    /**
+     * <p>Getter for the field <code>idUser</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdUser() {
         return idUser;
     }
 
+    /**
+     * <p>Setter for the field <code>idUser</code>.</p>
+     *
+     * @param idUser a int.
+     */
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
+    /**
+     * <p>Getter for the field <code>address</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * <p>Setter for the field <code>address</code>.</p>
+     *
+     * @param address a {@link java.lang.String} object.
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * <p>Getter for the field <code>privateKey</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPrivateKey() {
         return privateKey;
     }
 
+    /**
+     * <p>Setter for the field <code>privateKey</code>.</p>
+     *
+     * @param privateKey a {@link java.lang.String} object.
+     */
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,17 +124,13 @@ public class BtcWallet {
         return idUser == btcWallet.idUser && address.equals(btcWallet.address) && privateKey.equals(btcWallet.privateKey);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(idUser, address, privateKey);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "BtcWallet{" +

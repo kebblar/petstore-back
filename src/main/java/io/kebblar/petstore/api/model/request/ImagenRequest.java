@@ -36,27 +36,57 @@ public class ImagenRequest {
     private int id;//Identificador del anuncio
     private MultipartFile[] files;
 
+    /**
+     * <p>Constructor for ImagenRequest.</p>
+     */
     public ImagenRequest() {
     }
 
+    /**
+     * <p>Constructor for ImagenRequest.</p>
+     *
+     * @param id a int.
+     * @param files an array of {@link org.springframework.web.multipart.MultipartFile} objects.
+     */
     public ImagenRequest(int id, MultipartFile[] files) {
         this.id = id;
         this.files = files;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
+    /**
+     * <p>Getter for the field <code>files</code>.</p>
+     *
+     * @return an array of {@link org.springframework.web.multipart.MultipartFile} objects.
+     */
     public MultipartFile[] getFiles() {
         return files;
     }
+    /**
+     * <p>Setter for the field <code>files</code>.</p>
+     *
+     * @param files an array of {@link org.springframework.web.multipart.MultipartFile} objects.
+     */
     public void setFiles(MultipartFile[] files) {
         this.files = files;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "ImagenRequest [id=" + id + ", files=" + Arrays.toString(files) + "]";

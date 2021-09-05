@@ -31,16 +31,23 @@ import org.springframework.stereotype.Repository;
 
 import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 
+/**
+ * <p>GraficaTipoPagoMapper interface.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 @Repository
 public interface GraficaTipoPagoMapper {
 
     String CAMPOS_T_P = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
+            /** Constant <code>CAMPOS_T_P="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
             "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio ";
     /**
      * Obtiene una lista de tipo 'GraficaMontoTotalTipoPago'.
      *
      * @return Una lista del monto total por tipo de pago
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
 
     @Results(id = "GraficaTipoPago", value = { @Result(property = "tipo_pago", column = "tipo_pago"),
@@ -62,7 +69,7 @@ public interface GraficaTipoPagoMapper {
      * @param fechaIni cota inferior del rango de fechas
      * @param fechaFin cota superior del rango de fechas
      * @return Lista con la información deseada
-     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     * @throws java.sql.SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaTipoPago")
     @Select(" select "+CAMPOS_T_P+" from  petstore.orden_compra as orden " +

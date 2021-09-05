@@ -40,6 +40,7 @@ public class VistaCarritoException extends BusinessException{
 
     /**
      * Ocurrió un problema al procesar la petición del carrito de un usuario.
+     *
      * @param clave cadena que representa la clave de orden del carrito
      */
     public VistaCarritoException(String clave) {

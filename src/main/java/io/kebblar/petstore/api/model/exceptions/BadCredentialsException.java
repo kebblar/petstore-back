@@ -43,6 +43,7 @@ public class BadCredentialsException extends BusinessException {
      * Excepción que al ser lanzada, adicionalmente informa sobre el número de intentos
      * de inicio de sesión que aún tiene un usuario para ingresar sus claves de forma correcta
      * antes de quedar bloqueado por el sistema.
+     *
      * @param counter Número de intento actual de inicio de sesión
      * @param maxAllowed Máximo número de intentos permitidos
      */

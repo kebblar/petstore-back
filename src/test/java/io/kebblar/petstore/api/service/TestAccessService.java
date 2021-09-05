@@ -36,6 +36,13 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 
+/**
+ * <p>TestAccessService class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestAccessService {
     @Mock
@@ -50,12 +57,18 @@ public class TestAccessService {
             "399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4",
             1875437L, true, 3, 0, 0, 0, "regenra-clave-token", 0);
 
+    /**
+     * <p>prepara.</p>
+     */
     @Before
     public void prepara() {
         when(jwtManagerService.createToken(Mockito.any())).thenReturn("token-bxcdhjbshjc7382gyd");
         this.accessService = new AccessServiceImpl(usuarioService, jwtManagerService);
     }
 
+    /**
+     * <p>loginOkTest.</p>
+     */
     @Test
     public void loginOkTest() {
         try {
@@ -106,6 +119,9 @@ public class TestAccessService {
         }
     }
 
+    /**
+     * <p>login2OkUserTest.</p>
+     */
     @Test
     public void login2OkUserTest() {
         this.usuario.setAccesoNegadoContador(5);
@@ -119,6 +135,9 @@ public class TestAccessService {
         }
     }
 
+    /**
+     * <p>loginVeryBadTest.</p>
+     */
     @Test
     public void loginVeryBadTest() {
         this.usuario.setAccesoNegadoContador(5);
@@ -132,6 +151,9 @@ public class TestAccessService {
             assert(true);
         }
     }
+    /**
+     * <p>DateTest.</p>
+     */
     @Test
     public void DateTest() {
         long oneday = 1000*60*60*24;

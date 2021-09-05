@@ -42,6 +42,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+/**
+ * <p>TestCriptomonedas class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestCriptomonedas {
     private static final Logger logger = LoggerFactory.getLogger(TestCriptomonedas.class);
@@ -63,6 +70,11 @@ public class TestCriptomonedas {
 
     List<Carrito> c = new ArrayList<>();
 
+    /**
+     * <p>prepare.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     */
     @Before
     public void prepare() throws SQLException {
         criptoService = new CriptoServiceImpl(carritoMapper,criptoMapper, remote, ordenCompraService);
@@ -79,6 +91,9 @@ public class TestCriptomonedas {
         when(carritoMapper.update(Mockito.any())).thenReturn(1);
     }
 
+    /**
+     * <p>getByUserTest.</p>
+     */
     @Test
     public void getByUserTest() {
         try {
@@ -93,6 +108,9 @@ public class TestCriptomonedas {
         }
     }
 
+    /**
+     * <p>insertTransactionTest.</p>
+     */
     @Test
     public void insertTransactionTest() {
         try {

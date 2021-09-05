@@ -41,6 +41,9 @@ import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
 
 /**
  * Clase JWTUtil.
+ *
+ * @author garellano
+ * @version $Id: $Id
  */
 public class JWTUtil {
     private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
@@ -49,6 +52,11 @@ public class JWTUtil {
     private JWTUtil() {
     }
 
+    /**
+     * <p>Getter for the field <code>instance</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.utils.JWTUtil} object.
+     */
     public static JWTUtil getInstance() {
         if(instance==null) {
             instance = new JWTUtil();
@@ -56,6 +64,13 @@ public class JWTUtil {
         return instance;
     }
 
+    /**
+     * <p>digest.</p>
+     *
+     * @param source a {@link java.lang.String} object.
+     * @param salt a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String digest(String source, String salt) {
         try {
             return toHexString(getSHA256(source, salt));
@@ -71,10 +86,8 @@ public class JWTUtil {
      *
      * @param source Cadena a digestar (Generalmente el password)
      * @param salt Cadena a incluir como 'salt' (Generalmente el Usuaio)
-     *
      * @return Areeglo de bytes con la composición digestada
-     *
-     * @throws NoSuchAlgorithmException No va a pasar nunca, ya que el SHA-256 siempre exste
+     * @throws java.security.NoSuchAlgorithmException No va a pasar nunca, ya que el SHA-256 siempre exste
      */
     public byte[] getSHA256(String source, String salt) throws NoSuchAlgorithmException {
         // Create the 'input' String with a 'salt', generally,
@@ -92,7 +105,6 @@ public class JWTUtil {
      * Convierte un arreglo de bytes en una cadena hexadecimal.
      *
      * @param hash Arreglo de bytes a ser convertido a cadena.
-     *
      * @return Cadena asociada al arreglo dado
      */
     public String toHexString(byte[] hash) {
@@ -115,10 +127,10 @@ public class JWTUtil {
      * Verifica que un token sea válido y que le pertenezca al usuario
      * que le es pasado como parámetro.
      *
-     * @param jwt
-     * @param user
-     * @param encryptKey
-     * @throws BusinessException
+     * @param jwt a {@link java.lang.String} object.
+     * @param user a {@link java.lang.String} object.
+     * @param encryptKey a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
      */
     public void verifyToken(String jwt, String user, String encryptKey) throws BusinessException {
         try {
@@ -144,12 +156,11 @@ public class JWTUtil {
      * Segunda versión de verifyToken que regresa el ID dentro del token o bien
      * dispara una excepción en caso de que el token o sea inválido.
      *
-     * @param jwt
-     * @param encryptKey
-     * @param ahorita
-     *
+     * @param jwt a {@link java.lang.String} object.
+     * @param encryptKey a {@link java.lang.String} object.
+     * @param ahorita a long.
      * @return Cadena con el ID contenido en un Token válido
-     * @throws BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
      */
     public String verifyToken(String jwt, String encryptKey, long ahorita) throws BusinessException {
         try {
@@ -165,6 +176,11 @@ public class JWTUtil {
         }
     }
 
+    /**
+     * <p>showInfo.</p>
+     *
+     * @param claims a {@link io.jsonwebtoken.Claims} object.
+     */
     public void showInfo(Claims claims) {
         logger.info("ID: " + claims.getId());
         logger.info("Subject: " + claims.getSubject());
@@ -173,6 +189,14 @@ public class JWTUtil {
         logger.info("IssuedAt: " + claims.getIssuedAt());
     }
 
+    /**
+     * <p>valida.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     * @param encryptKey a {@link java.lang.String} object.
+     * @param currentTime a long.
+     * @throws java.lang.Exception if any.
+     */
     public void valida(String token, String encryptKey, long currentTime) throws Exception {
         if(token==null || token.trim().length()<1) return;
         String estructuraInvalida = "El token posee una estructra inválida: --->"+token+"<---";
@@ -204,6 +228,14 @@ public class JWTUtil {
 //        System.out.println(res);
 //    }
 
+    /**
+     * <p>createToken.</p>
+     *
+     * @param username a {@link java.lang.String} object.
+     * @param securityTokenLasts a int.
+     * @param encryptKey a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String createToken(final String username, int securityTokenLasts, String encryptKey) {
         byte[] key = encryptKey.getBytes();
 
@@ -224,6 +256,14 @@ public class JWTUtil {
         return token;
     }
 
+    /**
+     * <p>getMail.</p>
+     *
+     * @param jwt a {@link java.lang.String} object.
+     * @param encryptKey a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     public String getMail(String jwt, String encryptKey) throws BusinessException {
         Claims claim;
         try{

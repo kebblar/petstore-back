@@ -61,6 +61,7 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
  * <p>Inspirado en: https://www.wavemaker.com/learn/how-tos/generate-pdf-file-using-jasper-reports/
  *
  * @author garellanos
+ * @version $Id: $Id
  */
 public class JasperServiceImpl implements JasperService {
 
@@ -79,9 +80,7 @@ public class JasperServiceImpl implements JasperService {
     /** Constante OWNER_PSWD. */
     private static final String OWNER_PSWD = "reports";
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String generatePdfFromCompiledJrxmlFilename(String inputFileName, String dataFile, String outputFileName) throws IOException, JRException {
         InputStream inputStream = getStream(inputFileName + JRXML_EXT);
@@ -125,9 +124,7 @@ public class JasperServiceImpl implements JasperService {
         return inputStream;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String generatePdfFromCompiledJasperFilename(String inputFileName, String dataFile, String outputFileName) throws IOException, JRException {
         logger.debug("Get the jasper file as stream");
@@ -140,9 +137,7 @@ public class JasperServiceImpl implements JasperService {
         return generatePdfFromCompiledJasperObject(jasperReport, dataFile, outputFileName);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String generatePdfFromCompiledJasperObject(JasperReport jasperReport, String dataFile, String outputFileName) throws IOException, JRException {
         logger.debug("Load the data");
@@ -197,7 +192,7 @@ public class JasperServiceImpl implements JasperService {
      *
      * @param filename String Ruta competa del archivo dado
      * @return String md5 del archivo dado
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws java.io.IOException Signals that an I/O exception has occurred.
      */
     public String md5(String filename) throws IOException {
         File file = new File(filename);

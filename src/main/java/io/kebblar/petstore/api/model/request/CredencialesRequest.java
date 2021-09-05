@@ -30,28 +30,59 @@ package io.kebblar.petstore.api.model.request;
 public class CredencialesRequest {
     private String usuario;
     private String clave;
+    /**
+     * <p>Constructor for CredencialesRequest.</p>
+     */
     public CredencialesRequest() {
     }
+    /**
+     * <p>Constructor for CredencialesRequest.</p>
+     *
+     * @param usuario a {@link java.lang.String} object.
+     * @param clave a {@link java.lang.String} object.
+     */
     public CredencialesRequest(String usuario, String clave) {
         this.usuario = usuario;
         this.clave = clave;
     }
+    /**
+     * <p>Getter for the field <code>usuario</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUsuario() {
         return usuario;
     }
+    /**
+     * <p>Setter for the field <code>usuario</code>.</p>
+     *
+     * @param usuario a {@link java.lang.String} object.
+     */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+    /**
+     * <p>Getter for the field <code>clave</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getClave() {
         return clave;
     }
+    /**
+     * <p>Setter for the field <code>clave</code>.</p>
+     *
+     * @param clave a {@link java.lang.String} object.
+     */
     public void setClave(String clave) {
         this.clave = clave;
     }
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "CredencialesRequest [usuario=" + usuario + ", clave=" + clave + "]";
     }
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -60,6 +91,7 @@ public class CredencialesRequest {
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         return result;
     }
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

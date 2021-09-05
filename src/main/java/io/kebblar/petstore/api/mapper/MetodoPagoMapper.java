@@ -40,20 +40,21 @@ import io.kebblar.petstore.api.model.domain.MetodoPago;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see MetodoPago
  */
 
 @Repository
 public interface MetodoPagoMapper {
 
+    /** Constant <code>CAMPOS_PAGO=" id, id_usuario, tipopago, num_tarjeta_"{trunked}</code> */
     String CAMPOS_PAGO = " id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo ";
 
     /**
      * Obtiene un objeto de tipo 'MetodoPago' dado su id.
      *
      * @return MetodoPago que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="MetodoPagoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -70,7 +71,7 @@ public interface MetodoPagoMapper {
      * Obtiene una lista de objetos de tipo 'MetodoPago'.
      *
      * @return Lista de objetos de tipo MetodoPago
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MetodoPagoMap")
     @Select("SELECT " + CAMPOS_PAGO + " FROM metodo_pago ")
@@ -81,7 +82,7 @@ public interface MetodoPagoMapper {
      *
      * @param metodoPago a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO metodo_pago(id, id_usuario, tipopago, num_tarjeta_cartera, expiracion, activo) "
@@ -94,7 +95,7 @@ public interface MetodoPagoMapper {
      *
      * @param metodoPago a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE metodo_pago"
@@ -107,16 +108,17 @@ public interface MetodoPagoMapper {
      *
      * @param id id del MetodoPago a ser borrado
      * @return id del MetodoPago borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("UPDATE metodo_pago SET activo=false WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
      * Regresa la lista de métodos de pago registrados con el usuario 'id'.
+     *
      * @param id id del usuario buscado
      * @return Lista de métodos de pago asociados al usuario
-     * @throws SQLException si ocurre un problema con el sistema o la consulta
+     * @throws java.sql.SQLException si ocurre un problema con el sistema o la consulta
      */
     @ResultMap("MetodoPagoMap")
     @Select("SELECT "+ CAMPOS_PAGO +" from metodo_pago WHERE id_usuario=#{id} AND activo=true")

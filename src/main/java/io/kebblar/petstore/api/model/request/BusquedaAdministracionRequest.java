@@ -39,54 +39,135 @@ public class BusquedaAdministracionRequest {
     private int numPaginas;
     private int tamPaginas;
 
+    /**
+     * <p>Getter for the field <code>folio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFolio() {
         return folio;
     }
+    /**
+     * <p>Setter for the field <code>folio</code>.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
+    /**
+     * <p>Getter for the field <code>titulo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitulo() {
         return titulo;
     }
+    /**
+     * <p>Setter for the field <code>titulo</code>.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+    /**
+     * <p>Getter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
+    /**
+     * <p>Setter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @param fechaInicioVigencia a {@link java.time.LocalDate} object.
+     */
     public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
+    /**
+     * <p>Getter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getFechaFinVigencia() {
         return fechaFinVigencia;
     }
+    /**
+     * <p>Setter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @param fechaFinVigencia a {@link java.time.LocalDate} object.
+     */
     public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
+    /**
+     * <p>Getter for the field <code>estatus</code>.</p>
+     *
+     * @return a int.
+     */
     public int getEstatus() {
         return estatus;
     }
+    /**
+     * <p>Setter for the field <code>estatus</code>.</p>
+     *
+     * @param estatus a int.
+     */
     public void setEstatus(int estatus) {
         this.estatus = estatus;
     }
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdCategoria() {
         return idCategoria;
     }
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a int.
+     */
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
+    /**
+     * <p>Getter for the field <code>numPaginas</code>.</p>
+     *
+     * @return a int.
+     */
     public int getNumPaginas() {
         return numPaginas;
     }
+    /**
+     * <p>Setter for the field <code>numPaginas</code>.</p>
+     *
+     * @param numPaginas a int.
+     */
     public void setNumPaginas(int numPaginas) {
         this.numPaginas = numPaginas;
     }
+    /**
+     * <p>Getter for the field <code>tamPaginas</code>.</p>
+     *
+     * @return a int.
+     */
     public int getTamPaginas() {
         return tamPaginas;
     }
+    /**
+     * <p>Setter for the field <code>tamPaginas</code>.</p>
+     *
+     * @param tamPaginas a int.
+     */
     public void setTamPaginas(int tamPaginas) {
         this.tamPaginas = tamPaginas;
     }
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -101,6 +182,7 @@ public class BusquedaAdministracionRequest {
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -137,12 +219,25 @@ public class BusquedaAdministracionRequest {
             return false;
         return true;
     }
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "BusquedaAdministracionRequest [folio=" + folio + ", titulo=" + titulo + ", fechaInicioVigencia="
                 + fechaInicioVigencia + ", fechaFinVigencia=" + fechaFinVigencia + ", estatus=" + estatus
                 + ", idCategoria=" + idCategoria + ", numPaginas=" + numPaginas + ", tamPaginas=" + tamPaginas + "]";
     }
+    /**
+     * <p>Constructor for BusquedaAdministracionRequest.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     * @param titulo a {@link java.lang.String} object.
+     * @param fechaInicioVigencia a {@link java.time.LocalDate} object.
+     * @param fechaFinVigencia a {@link java.time.LocalDate} object.
+     * @param estatus a int.
+     * @param idCategoria a int.
+     * @param numPaginas a int.
+     * @param tamPaginas a int.
+     */
     public BusquedaAdministracionRequest(String folio, String titulo, LocalDate fechaInicioVigencia,
             LocalDate fechaFinVigencia, int estatus, int idCategoria, int numPaginas, int tamPaginas) {
         this.folio = folio;
@@ -154,6 +249,9 @@ public class BusquedaAdministracionRequest {
         this.numPaginas = numPaginas;
         this.tamPaginas = tamPaginas;
     }
+    /**
+     * <p>Constructor for BusquedaAdministracionRequest.</p>
+     */
     public BusquedaAdministracionRequest() {
     }
 

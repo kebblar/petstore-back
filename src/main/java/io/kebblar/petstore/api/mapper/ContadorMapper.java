@@ -35,6 +35,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ContadorMapper {
+    /**
+     * <p>getTableCount.</p>
+     *
+     * @param databaseName a {@link java.lang.String} object.
+     * @param tableName a {@link java.lang.String} object.
+     * @return a int.
+     * @throws java.sql.SQLException if any.
+     */
     @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{databaseName} AND table_name = #{tableName}")
     int getTableCount(String databaseName, String tableName) throws SQLException;
 

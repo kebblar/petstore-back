@@ -51,6 +51,7 @@ public class DatabaseException extends BusinessException {
 
     /**
      * Genera una excepción DatabaseException con un mensaje específico.
+     *
      * @param msg Mensaje que informa sobre el problema
      */
     public DatabaseException(String msg) {

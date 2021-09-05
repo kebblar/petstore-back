@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link Estado}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.Estado}.
  *
  * @author  garellano
  * @version 1.0-SNAPSHOT
@@ -49,6 +49,8 @@ public class Estado implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Estado(Integer id) {
         this.id = id;
@@ -56,6 +58,10 @@ public class Estado implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idPais a int.
+     * @param nombre a {@link java.lang.String} object.
      */
     public Estado(Integer id, int idPais, String nombre) {
         this.id = id;
@@ -65,6 +71,11 @@ public class Estado implements Serializable {
 
     /**
      * Constructor basado en atributos temporales para el nombre del Pais.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idPais a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param nombrePais a {@link java.lang.String} object.
      */
     public Estado(Integer id, int idPais, String nombre, String nombrePais) {
         this.id = id;
@@ -76,43 +87,81 @@ public class Estado implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idPais</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdPais() {
         return idPais;
     }
 
+    /**
+     * <p>Setter for the field <code>idPais</code>.</p>
+     *
+     * @param idPais a int.
+     */
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>nombrePais</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombrePais() {
         return nombrePais;
     }
 
+    /**
+     * <p>Setter for the field <code>nombrePais</code>.</p>
+     *
+     * @param nombrePais a {@link java.lang.String} object.
+     */
     public void setNombrePais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
 
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Estado] : ["
@@ -122,9 +171,7 @@ public class Estado implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -140,9 +187,7 @@ public class Estado implements Serializable {
                nombre == other.nombre;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

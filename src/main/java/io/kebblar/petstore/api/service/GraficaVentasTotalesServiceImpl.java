@@ -35,14 +35,13 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 /**
  * Servicio asociado a la entidad 'GraficaVentasTotales'.
  *
- * <p>Implementación de la interfaz {@link GraficaVentasTotalesService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.GraficaVentasTotalesService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see GraficaVentasTotales
  */
 @Service("GraficaVentasTotalesService")
@@ -60,6 +59,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         this.graficaVentasTotalesMapper = graficaVentasTotalesMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getTotalImporteVentas() throws DatabaseException {
         try {
@@ -74,6 +74,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getTotalImporteVentasFiltroFechas(String fechaIni, String fechaFin) throws DatabaseException {
         try {
@@ -88,6 +89,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getNumeroOrdenesTotalVentas() throws DatabaseException {
         try {
@@ -102,6 +104,7 @@ public class GraficaVentasTotalesServiceImpl implements GraficaVentasTotalesServ
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getNumeroOrdenesTotalVentasFiltroFechas(String fechaIni, String fechaFin) throws DatabaseException {
         try {

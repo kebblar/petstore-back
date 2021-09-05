@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Implementacion del POJO de la entidad de {@link GraficaMascota}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.GraficaMascota}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -48,6 +48,10 @@ public class GraficaMascota implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param mascota a {@link java.lang.String} object.
+     * @param cantidad a {@link java.lang.Long} object.
+     * @param fecha a {@link java.util.Date} object.
      */
     public GraficaMascota(String mascota, Long cantidad, Date fecha) {
         super();
@@ -59,37 +63,70 @@ public class GraficaMascota implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>mascota</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMascota() {
         return mascota;
     }
 
+    /**
+     * <p>Setter for the field <code>mascota</code>.</p>
+     *
+     * @param mascota a {@link java.lang.String} object.
+     */
     public void setMascota(String mascota) {
         this.mascota = mascota;
     }
 
+    /**
+     * <p>Getter for the field <code>cantidad</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object.
+     */
     public Long getCantidad() {
         return cantidad;
     }
 
+    /**
+     * <p>Setter for the field <code>cantidad</code>.</p>
+     *
+     * @param cantidad a {@link java.lang.Long} object.
+     */
     public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * <p>Getter for the field <code>fecha</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * <p>Setter for the field <code>fecha</code>.</p>
+     *
+     * @param fecha a {@link java.util.Date} object.
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -100,9 +137,7 @@ public class GraficaMascota implements Serializable {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -130,9 +165,7 @@ public class GraficaMascota implements Serializable {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "GraficaMascota [mascota=" + mascota + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";

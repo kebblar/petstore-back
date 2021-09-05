@@ -20,34 +20,70 @@
  */
 package io.kebblar.petstore.api.model.request;
 
+/**
+ * <p>AnuncioImagenRequest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class AnuncioImagenRequest {
     private int idAnuncio;
     private String uuid;
 
+    /**
+     * <p>Constructor for AnuncioImagenRequest.</p>
+     */
     public AnuncioImagenRequest() {
     }
 
+    /**
+     * <p>Constructor for AnuncioImagenRequest.</p>
+     *
+     * @param idAnuncio a int.
+     * @param uuid a {@link java.lang.String} object.
+     */
     public AnuncioImagenRequest(int idAnuncio, String uuid) {
         this.idAnuncio = idAnuncio;
         this.uuid = uuid;
     }
 
+    /**
+     * <p>Getter for the field <code>idAnuncio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdAnuncio() {
         return idAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>idAnuncio</code>.</p>
+     *
+     * @param idAnuncio a int.
+     */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>uuid</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * <p>Setter for the field <code>uuid</code>.</p>
+     *
+     * @param uuid a {@link java.lang.String} object.
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -57,6 +93,7 @@ public class AnuncioImagenRequest {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -76,6 +113,7 @@ public class AnuncioImagenRequest {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AnuncioImagenRequest [idAnuncio=" + idAnuncio + ", uuid=" + uuid + "]";

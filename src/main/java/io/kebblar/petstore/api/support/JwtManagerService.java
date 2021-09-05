@@ -32,6 +32,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public interface JwtManagerService {
     /**
      * Crea el JWT para el usuario solicitado
+     *
      * @param username Cadena con el nombre de usuario
      *                 para el que se le genera el JWT
      * @return Cadena con el JSON Web Token
@@ -41,13 +42,19 @@ public interface JwtManagerService {
     /**
      * Verifica que el JWT que se recibe correnponde con
      * el usuario que se quiere autorizar
-     * @param jwt
-     * @param user
+     *
+     * @param jwt a {@link java.lang.String} object.
+     * @param user a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     void verifyToken(String jwt, String user) throws BusinessException;
 
-    /** Devuelve el correo electrónico de un usuario pasado una cadena jwt
-     * @param jwt
+    /**
+     * Devuelve el correo electrónico de un usuario pasado una cadena jwt
+     *
+     * @param jwt a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     String getMail(String jwt) throws BusinessException;
 }

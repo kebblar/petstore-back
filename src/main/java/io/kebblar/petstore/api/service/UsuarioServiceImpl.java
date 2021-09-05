@@ -66,9 +66,9 @@ import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
 
 /**
- * <p>Implementación de la interfaz {@link UsuarioService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.UsuarioService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
@@ -93,10 +93,12 @@ public class UsuarioServiceImpl implements UsuarioService {
      * los Mappers y todos los servicios adicionales
      * a ser empleados en esta clase.
      *
-     * @param usuarioMapper
-     * @param rolMapper
-     * @param direccionMapper
-     * @param usuarioDetalleMapper
+     * @param usuarioMapper a {@link io.kebblar.petstore.api.mapper.UsuarioMapper} object.
+     * @param rolMapper a {@link io.kebblar.petstore.api.mapper.RolMapper} object.
+     * @param direccionMapper a {@link io.kebblar.petstore.api.mapper.DireccionMapper} object.
+     * @param usuarioDetalleMapper a {@link io.kebblar.petstore.api.mapper.UsuarioDetalleMapper} object.
+     * @param registroMapper a {@link io.kebblar.petstore.api.mapper.RegistroMapper} object.
+     * @param mailSenderService a {@link io.kebblar.petstore.api.support.MailSenderService} object.
      */
     public UsuarioServiceImpl(
             UsuarioMapper usuarioMapper,
@@ -112,6 +114,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.mailSenderService = mailSenderService;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
         Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
@@ -123,6 +126,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario creaUsuario(Usuario usuario) throws BusinessException {
         try {
@@ -133,6 +137,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
@@ -143,6 +148,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario obtenUsuarioPorId(int id) throws BusinessException {
         try {
@@ -152,6 +158,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Usuario> obtenTodosUsuarios() throws BusinessException {
         try {
@@ -161,6 +168,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario eliminaUsuario(int id) throws BusinessException {
         try {
@@ -171,6 +179,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
         try {
@@ -180,6 +189,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Rol> obtenRolesDeUsuario(int id) throws BusinessException {
         try {
@@ -198,6 +208,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 //        }
 //    }
 
+    /** {@inheritDoc} */
     @Override
     public UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException {
         try {
@@ -207,6 +218,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
@@ -216,6 +228,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
     
+    /**
+     * <p>daysBetweenDates.</p>
+     *
+     * @param startDate a {@link java.util.Date} object.
+     * @param endDate a {@link java.util.Date} object.
+     * @return a int.
+     */
     public int daysBetweenDates(Date startDate, Date endDate) {
         long diff = endDate.getTime() - startDate.getTime();
         int diffDays = (int) (diff / (24 * 60 * 60 * 1000));            
@@ -239,6 +258,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException {
         int edadMinima=21;
@@ -323,6 +343,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return preRegistroRequest;
     }
 
+    /** {@inheritDoc} */
     @Override
     @Transactional(
             propagation = Propagation.REQUIRED,
@@ -448,6 +469,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario solicitaRegeneracionClave(String correo) {
         Usuario dummyUser = new Usuario(0, "err","err");
@@ -466,6 +488,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
         ValidadorClave.validate(clave);
@@ -482,6 +505,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Usuario cambiaClave(String correo, String clave) throws BusinessException {
         // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede 
@@ -507,6 +531,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
         try {

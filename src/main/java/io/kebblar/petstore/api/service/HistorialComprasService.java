@@ -37,9 +37,9 @@ public interface HistorialComprasService {
     /**
      * Método utilizado para obtener todas las compras hechas por un usuario.
      *
-     * @param int idUsuario contiene el id del usuario a buscar.
      * @return Lista de compras hechas por el usuario pasado como parametro.
-     * @throws BusinessException es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
+     * @param idUsuario a int.
      */
     List<HistorialCompras> getAll(int idUsuario) throws BusinessException;
 

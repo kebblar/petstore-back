@@ -32,7 +32,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface MetodoPagoService {
 
     /**
@@ -41,6 +40,7 @@ public interface MetodoPagoService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase MetodoPago
      * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     MetodoPago getById(int id) throws BusinessException;
 
@@ -48,6 +48,7 @@ public interface MetodoPagoService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'metodo_pago'.
      *
      * @return Lista con todos los elementos de la tabla 'metodo_pago'.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<MetodoPago> getAll() throws BusinessException;
 
@@ -56,7 +57,7 @@ public interface MetodoPagoService {
      *
      * @param metodoPago objeto de tipo 'MetodoPago'.
      * @return int numero de registros insertados en la tabla'metodo_pago'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int insert(MetodoPago metodoPago) throws BusinessException;
 
@@ -65,7 +66,7 @@ public interface MetodoPagoService {
      *
      * @param  metodoPago objeto de tipo 'MetodoPago'.
      * @return int numero de registros actualizados en la tabla'metodo_pago'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int update(MetodoPago metodoPago) throws BusinessException;
 
@@ -74,7 +75,8 @@ public interface MetodoPagoService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param metodoPago Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException En caso un error al momento de guardar los datos.
+     * @return a int.
      */
     int save(MetodoPago metodoPago) throws BusinessException;
 
@@ -83,7 +85,7 @@ public interface MetodoPagoService {
      *
      * @param metodoPago objeto de tipo 'MetodoPago'.
      * @return int numero de registros eliminados en la tabla'metodo_pago'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int delete(MetodoPago metodoPago) throws BusinessException;
 
@@ -93,6 +95,7 @@ public interface MetodoPagoService {
      * @param id Id del usuario
      * @return La información del elemento recuperado en un listado de objetos de la clase MetodoPago
      * o la lista vacia si no hay elementos.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<MetodoPago> getByIdUser(int id) throws BusinessException;
 }

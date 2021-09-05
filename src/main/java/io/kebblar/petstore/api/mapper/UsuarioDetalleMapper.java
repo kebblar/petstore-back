@@ -35,26 +35,26 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 
 /**
  * <p>Descripción:</p>
- * Interface 'Mapper' MyBatis asociado a la entidad {@link UsuarioDetalle}.
+ * Interface 'Mapper' MyBatis asociado a la entidad {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle}.
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.UsuarioDetalle
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
- *
  */
 @Repository
 public interface UsuarioDetalleMapper {
 
     String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, " +
+            /** Constant <code>CAMPOS_USER_D=" id_usuario, nombre, apellido_paterno, "{trunked}</code> */
             "fecha_nacimiento, telefono_celular ";
 
     /**
-     * Obtiene un objeto de tipo '{@link UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
+     * Obtiene un objeto de tipo '{@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
      *
-     * @param idUsuario representa el identificador de un objeto {@link UsuarioDetalle} .
-     * @return el {@link UsuarioDetalle}  encontrado con el criterio de búsqueda.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @param idUsuario representa el identificador de un objeto {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} .
+     * @return el {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle}  encontrado con el criterio de búsqueda.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="UsuarioDetalleMap", value = {
         @Result(property = "id", column = "id_usuario"),
@@ -69,41 +69,41 @@ public interface UsuarioDetalleMapper {
     UsuarioDetalle getById(int idUsuario) throws SQLException;
 
     /**
-     * Obtiene una lista de objetos de tipo {@link UsuarioDetalle} .
+     * Obtiene una lista de objetos de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} .
      *
-     * @return Lista de objetos de tipo {@link UsuarioDetalle}
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @return Lista de objetos de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle}
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioDetalleMap")
     @Select("SELECT " + CAMPOS_USER_D + " FROM usuario_detalle ")
     List<UsuarioDetalle> getAll() throws SQLException;
 
     /**
-     * Inserta un objeto de tipo {@link UsuarioDetalle}  con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
+     * Inserta un objeto de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle}  con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
      *
-     * @param usuarioDetalle objeto de tipo {@link UsuarioDetalle} a ser insertado.
+     * @param usuarioDetalle objeto de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular) VALUES(#{id}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular} )")
     Integer insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
-     * Actualiza un objeto de tipo {@link UsuarioDetalle} con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
+     * Actualiza un objeto de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} con base en la información dada por el objeto de tipo 'UsuarioDetalle'.
      *
-     * @param usuarioDetalle objeto de tipo {@link UsuarioDetalle} a ser actualizado.
+     * @param usuarioDetalle objeto de tipo {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} a ser actualizado.
      * @return el número de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{id} ")
     Integer update(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
-     * Borra (de manera lógica y no física) el registro de {@link UsuarioDetalle}.
+     * Borra (de manera lógica y no física) el registro de {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle}.
      *
      * @param id que representa el identificador del usuario a borrar
      * @return id del usuario borrado
-     * @throws SQLException dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{id} ")
     Integer delete(int id) throws SQLException;

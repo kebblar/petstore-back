@@ -24,13 +24,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Implementacion del POJO de la entidad de {@link Pais}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.Pais}.
  *
  * @author  garellano
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class Pais implements Serializable {
     private static final long serialVersionUID = 4897377279463910357L;
 
@@ -48,6 +47,8 @@ public class Pais implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Pais(Integer id) {
         this.id = id;
@@ -55,6 +56,9 @@ public class Pais implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param nombre a {@link java.lang.String} object.
      */
     public Pais(Integer id, String nombre) {
         this.id = id;
@@ -64,26 +68,44 @@ public class Pais implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Pais] : ["
@@ -92,9 +114,7 @@ public class Pais implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -109,9 +129,7 @@ public class Pais implements Serializable {
                nombre == other.nombre;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

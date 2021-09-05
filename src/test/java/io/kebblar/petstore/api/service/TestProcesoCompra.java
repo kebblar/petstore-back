@@ -44,6 +44,13 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
+/**
+ * <p>TestProcesoCompra class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestProcesoCompra {
     private static final Logger logger = LoggerFactory.getLogger(TestProcesoCompra.class);
@@ -72,6 +79,11 @@ public class TestProcesoCompra {
     private List<Estado> edos = new ArrayList<>();
     private List<Municipio> muns = new ArrayList<>();
 
+    /**
+     * <p>prepare.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     */
     @Before
     public void prepare() throws SQLException {
         direccionService = new DireccionServiceImpl(direccionMapper);
@@ -91,6 +103,9 @@ public class TestProcesoCompra {
         muns.add(new Municipio(1,2, "Mun 2"));
     }
 
+    /**
+     * <p>direccionesConNombreTest.</p>
+     */
     @Test
     public void direccionesConNombreTest() {
         List<DireccionConNombre> dir;
@@ -110,6 +125,9 @@ public class TestProcesoCompra {
       }
     }
 
+    /**
+     * <p>agregaDireccionTest.</p>
+     */
     @Test
     public void agregaDireccionTest(){
         try {
@@ -125,6 +143,9 @@ public class TestProcesoCompra {
         }
     }
 
+    /**
+     * <p>getByPaisTest.</p>
+     */
     @Test
     public void getByPaisTest() {
         try {
@@ -134,6 +155,9 @@ public class TestProcesoCompra {
         }
     }
 
+    /**
+     * <p>getByEstadoTest.</p>
+     */
     @Test
     public void getByEstadoTest() {
         try {

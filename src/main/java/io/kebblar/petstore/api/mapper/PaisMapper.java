@@ -39,19 +39,20 @@ import io.kebblar.petstore.api.model.domain.Pais;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see Pais
  */
 @Repository
 public interface PaisMapper {
 
+    /** Constant <code>CAMPOS_PAIS=" id, nombre "</code> */
     String CAMPOS_PAIS = " id, nombre ";
 
     /**
      * Obtiene un objeto de tipo 'Pais' dado su id.
      *
      * @return Pais que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="PaisMap", value = {
             @Result(property = "id",   column = "id"),
@@ -64,7 +65,7 @@ public interface PaisMapper {
      * Obtiene una lista de objetos de tipo 'Pais'.
      *
      * @return Lista de obetos de tipo Pais
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS_PAIS + " FROM pais ")
@@ -75,7 +76,7 @@ public interface PaisMapper {
      *
      * @param pais a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO pais(id, nombre) VALUES(#{id}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
@@ -86,7 +87,7 @@ public interface PaisMapper {
      *
      * @param pais a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE pais SET nombre = #{nombre} WHERE id = #{id} ")
     int update(Pais pais) throws SQLException;
@@ -96,7 +97,7 @@ public interface PaisMapper {
      *
      * @param id id del Pais a ser borrado
      * @return id del Pais borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM pais WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -106,7 +107,7 @@ public interface PaisMapper {
      *
      * @param  nombre del pais.
      * @return Lista de objetos de tipo pais filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS_PAIS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'")

@@ -38,6 +38,7 @@ public class GoogleCaptchaException extends BusinessException {
 
     /**
      * Modela la respuesta de error de una petición de Google Captcha.
+     *
      * @param e excepción recibida desde el servicio de captcha
      */
     public GoogleCaptchaException(Exception e) {

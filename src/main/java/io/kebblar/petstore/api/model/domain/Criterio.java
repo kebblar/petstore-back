@@ -45,6 +45,9 @@ public class Criterio {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param idCategoria a int.
+     * @param valor a int.
      */
     public Criterio(int idCategoria, int valor) {
         this.idCategoria = idCategoria;
@@ -54,22 +57,40 @@ public class Criterio {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdCategoria() {
         return idCategoria;
     }
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a int.
+     */
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
+    /**
+     * <p>Getter for the field <code>valor</code>.</p>
+     *
+     * @return a int.
+     */
     public int getValor() {
         return valor;
     }
+    /**
+     * <p>Setter for the field <code>valor</code>.</p>
+     *
+     * @param valor a int.
+     */
     public void setValor(int valor) {
         this.valor = valor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,17 +99,13 @@ public class Criterio {
         return idCategoria == criterio.idCategoria && valor == criterio.valor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(idCategoria, valor);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Criterio [idCategoria=" + idCategoria + ", valor=" + valor + "]";

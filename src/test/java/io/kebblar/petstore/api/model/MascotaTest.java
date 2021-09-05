@@ -27,10 +27,20 @@ import org.mockito.junit.MockitoJUnitRunner;
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.MascotaServiceImpl;
 
+/**
+ * <p>MascotaTest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class MascotaTest {
     private MascotaService ms = new MascotaServiceImpl();
 
+    /**
+     * <p>pruebaSuma.</p>
+     */
     @Test
     public void pruebaSuma() {
         int res=0;

@@ -25,7 +25,7 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
- * Interface para el servicio asociado a la entidad {@link Municipio}.
+ * Interface para el servicio asociado a la entidad {@link io.kebblar.petstore.api.model.domain.Municipio}.
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -39,6 +39,7 @@ public interface MunicipioService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase Municipio
      * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     Municipio getById(int id) throws BusinessException;
 
@@ -46,6 +47,7 @@ public interface MunicipioService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'municipio'.
      *
      * @return Lista con todos los elementos de la tabla 'municipio'.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Municipio> getAll() throws BusinessException;
 
@@ -54,7 +56,7 @@ public interface MunicipioService {
      *
      * @param municipio objeto de tipo 'Municipio'.
      * @return int numero de registros insertados en la tabla'municipio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int insert(Municipio municipio) throws BusinessException;
 
@@ -63,7 +65,7 @@ public interface MunicipioService {
      *
      * @param  municipio objeto de tipo 'Municipio'.
      * @return int numero de registros actualizados en la tabla'municipio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int update(Municipio municipio) throws BusinessException;
 
@@ -72,7 +74,8 @@ public interface MunicipioService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param municipio Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException En caso un error al momento de guardar los datos.
+     * @return a int.
      */
     int save(Municipio municipio) throws BusinessException;
 
@@ -81,7 +84,7 @@ public interface MunicipioService {
      *
      * @param municipio objeto de tipo 'Municipio'.
      * @return int numero de registros eliminados en la tabla 'municipio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int delete(Municipio municipio) throws BusinessException;
 
@@ -91,18 +94,18 @@ public interface MunicipioService {
      * @param idEstado Estado del que retoraremos el conjunto de municipios paginados
      * @param pageNumber Número de página (empieza en la 1)
      * @param pageSize Tamaño de la página
-     *
      * @return  Lista paginada de objetos de tipo Municipio
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     List<Municipio> getPaginatedMunicipios(int idEstado, int pageNumber, int pageSize) throws BusinessException;
 
     /**
      * Retorna la lista de municipios de determinado estado. Dado el id del estado, los
      * municipios contenidos dentro de este serán devueltos.
+     *
      * @param id id del estado
      * @return Lista de municipios pertenecientes al estado ingresado
-     * @throws BusinessException En caso de cualquier error lógico o físico.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException En caso de cualquier error lógico o físico.
      */
     List<Municipio> getByEstado(int id) throws BusinessException;
 
@@ -110,6 +113,7 @@ public interface MunicipioService {
      * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
      *
      * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Municipio> getMunicipiosDescripcion() throws BusinessException;
 
@@ -118,22 +122,27 @@ public interface MunicipioService {
      *
      * @param nombre Nombre del que retoraremos el conjunto de municipios paginados
      * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException;
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
      *
-     * @param id id del pais
      * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     * @param pais a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException;
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'municipio', con el nombre del pais y del estado
      *
-     * @param id id del estado
      * @return La información del elemento recuperado en una instacia de la clase Municipio o nulo si no se encuentra ese elemento en la tabla.
+     * @param estado a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Municipio> getMunicipiosByEstadoDescripcion(int estado, String nombre) throws BusinessException;
 

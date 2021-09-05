@@ -27,37 +27,37 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * <p>Definición de la interfaz de servicios para 'ordenCompra'.
- * 
+ *
  * @author  dalvarez
  * @see     io.kebblar.petstore.api.model.domain.DatosOrden
  * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT 
+ * @since   1.0-SNAPSHOT
  */
 public interface OrdenCompraService {
 
-   /**
-    * <p>Método utilizado para procesar, crear y almacenar PDF con la factura de la compra
-    * 
-    * @param Objeto de tipo DatosOrden con la información de la factura.
-    * @return DatosOrden que contiene la información de la factura.
-    * @throws BusinessException
-    */
+    /**
+     * <p>Método utilizado para procesar, crear y almacenar PDF con la factura de la compra
+     *
+     * @return DatosOrden que contiene la información de la factura.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @param datosOrden a {@link io.kebblar.petstore.api.model.domain.DatosOrden} object.
+     */
     DatosOrden procesarOrdenCompra(DatosOrden datosOrden) throws BusinessException;
 
-   /**
-    * <p>Método utilizado para consultar todas las ordenes de compra
-    * 
-    * @param Objeto de tipo {@link DatosOrden} con la información de la factura.
-    * @throws BusinessException
-    */
+    /**
+     * <p>Método utilizado para consultar todas las ordenes de compra
+     *
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @return a {@link java.util.List} object.
+     */
     List<DatosOrden> getAll() throws BusinessException;
 
-   /**
-    * <p>Método utilizado para agregar una orden de compra en BD
-    * 
-    * @param Objeto de tipo datosOrden con la información de la factura.
-    * @return id con el valor de número de la transacción insertada en bd.
-    * @throws BusinessException
-    */
+    /**
+     * <p>Método utilizado para agregar una orden de compra en BD
+     *
+     * @return id con el valor de número de la transacción insertada en bd.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @param datosOrden a {@link io.kebblar.petstore.api.model.domain.DatosOrden} object.
+     */
     int insert(DatosOrden datosOrden) throws BusinessException;
 }

@@ -35,17 +35,21 @@ public class SmsResponse {
     private boolean exito;
     private String resultMsg;
 
+    /**
+     * <p>Constructor for SmsResponse.</p>
+     */
     public SmsResponse() {
     }
 
     /**
      * Constructor basado en todos los atributos de la clase.
-     * @param ipCaller
-     * @param fechaInvocacon
-     * @param mensajeDado
-     * @param telefonoDado
-     * @param exito
-     * @param resultMsg
+     *
+     * @param ipCaller a {@link java.lang.String} object.
+     * @param fechaInvocacon a {@link java.lang.String} object.
+     * @param mensajeDado a {@link java.lang.String} object.
+     * @param telefonoDado a {@link java.lang.String} object.
+     * @param exito a boolean.
+     * @param resultMsg a {@link java.lang.String} object.
      */
     public SmsResponse(String ipCaller, String fechaInvocacon, String mensajeDado, String telefonoDado, boolean exito,
             String resultMsg) {
@@ -57,54 +61,115 @@ public class SmsResponse {
         this.resultMsg = resultMsg;
     }
 
+    /**
+     * <p>Getter for the field <code>ipCaller</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getIpCaller() {
         return ipCaller;
     }
 
+    /**
+     * <p>Setter for the field <code>ipCaller</code>.</p>
+     *
+     * @param ipCaller a {@link java.lang.String} object.
+     */
     public void setIpCaller(String ipCaller) {
         this.ipCaller = ipCaller;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaInvocacon</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFechaInvocacon() {
         return fechaInvocacon;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaInvocacon</code>.</p>
+     *
+     * @param fechaInvocacon a {@link java.lang.String} object.
+     */
     public void setFechaInvocacon(String fechaInvocacon) {
         this.fechaInvocacon = fechaInvocacon;
     }
 
+    /**
+     * <p>Getter for the field <code>mensajeDado</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMensajeDado() {
         return mensajeDado;
     }
 
+    /**
+     * <p>Setter for the field <code>mensajeDado</code>.</p>
+     *
+     * @param mensajeDado a {@link java.lang.String} object.
+     */
     public void setMensajeDado(String mensajeDado) {
         this.mensajeDado = mensajeDado;
     }
 
+    /**
+     * <p>Getter for the field <code>telefonoDado</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTelefonoDado() {
         return telefonoDado;
     }
 
+    /**
+     * <p>Setter for the field <code>telefonoDado</code>.</p>
+     *
+     * @param telefonoDado a {@link java.lang.String} object.
+     */
     public void setTelefonoDado(String telefonoDado) {
         this.telefonoDado = telefonoDado;
     }
 
+    /**
+     * <p>isExito.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isExito() {
         return exito;
     }
 
+    /**
+     * <p>Setter for the field <code>exito</code>.</p>
+     *
+     * @param exito a boolean.
+     */
     public void setExito(boolean exito) {
         this.exito = exito;
     }
 
+    /**
+     * <p>Getter for the field <code>resultMsg</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getResultMsg() {
         return resultMsg;
     }
 
+    /**
+     * <p>Setter for the field <code>resultMsg</code>.</p>
+     *
+     * @param resultMsg a {@link java.lang.String} object.
+     */
     public void setResultMsg(String resultMsg) {
         this.resultMsg = resultMsg;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "SmsResponse [ipCaller=" + ipCaller + ", fechaInvocacon=" + fechaInvocacon + ", mensajeDado="
@@ -112,6 +177,7 @@ public class SmsResponse {
                 + "]";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -125,6 +191,7 @@ public class SmsResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -47,6 +47,7 @@ public class MapperCallException extends BusinessException {
     /**
      * Brinda la oportunidad de especificar una breve descripción y un mensaje detallado a la
      * problemática sucedida en un mapper.
+     *
      * @param shortMessage Breve descripción del problema
      * @param technicalDescription Descripción específica
      */

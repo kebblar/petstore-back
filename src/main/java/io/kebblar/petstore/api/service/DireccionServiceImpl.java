@@ -34,9 +34,9 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
- * <p>Implementación de la interfaz {@link DireccionService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.DireccionService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Direccion
@@ -53,12 +53,13 @@ public class DireccionServiceImpl implements DireccionService {
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los servicios adicionales a ser empleados en esta clase.
      *
-     * @param direccionMapper
+     * @param direccionMapper a {@link io.kebblar.petstore.api.mapper.DireccionMapper} object.
      */
     public DireccionServiceImpl(DireccionMapper direccionMapper) {
         this.direccionMapper = direccionMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Direccion getById(Direccion direccion) throws BusinessException {
         try {
@@ -69,6 +70,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Direccion> getAll() throws BusinessException {
         try {
@@ -79,6 +81,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(Direccion direccion) throws BusinessException {
         try {
@@ -88,6 +91,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(Direccion direccion) throws BusinessException {
         try {
@@ -98,6 +102,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(Direccion direccion) throws BusinessException {
         try {
@@ -108,6 +113,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(Direccion direccion) throws BusinessException {
         try {
@@ -122,6 +128,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
         try {
@@ -132,6 +139,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException {
         try {
@@ -142,6 +150,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException {
         int idDireccion;

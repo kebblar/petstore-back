@@ -42,73 +42,184 @@ public class BusquedaAdministracionResponse {
     private String descripcionEstatus;
     private String descripcionCategoria;
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
+    /**
+     * <p>Getter for the field <code>folio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFolio() {
         return folio;
     }
+    /**
+     * <p>Setter for the field <code>folio</code>.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
+    /**
+     * <p>Getter for the field <code>titulo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitulo() {
         return titulo;
     }
+    /**
+     * <p>Setter for the field <code>titulo</code>.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+    /**
+     * <p>Getter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
+    /**
+     * <p>Setter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     */
     public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
+    /**
+     * <p>Getter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
+    /**
+     * <p>Setter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     */
     public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
+    /**
+     * <p>Getter for the field <code>estatus</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getEstatus() {
         return estatus;
     }
+    /**
+     * <p>Setter for the field <code>estatus</code>.</p>
+     *
+     * @param estatus a {@link java.lang.String} object.
+     */
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    /**
+     * <p>Getter for the field <code>idEstatus</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdEstatus() {
         return idEstatus;
     }
+    /**
+     * <p>Setter for the field <code>idEstatus</code>.</p>
+     *
+     * @param idEstatus a int.
+     */
     public void setIdEstatus(int idEstatus) {
         this.idEstatus = idEstatus;
     }
+    /**
+     * <p>Getter for the field <code>descripcionEstatus</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcionEstatus() {
         return descripcionEstatus;
     }
+    /**
+     * <p>Setter for the field <code>descripcionEstatus</code>.</p>
+     *
+     * @param descripcionEstatus a {@link java.lang.String} object.
+     */
     public void setDescripcionEstatus(String descripcionEstatus) {
         this.descripcionEstatus = descripcionEstatus;
     }
+    /**
+     * <p>Getter for the field <code>descripcionCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcionCategoria() {
         return descripcionCategoria;
     }
+    /**
+     * <p>Setter for the field <code>descripcionCategoria</code>.</p>
+     *
+     * @param descripcionCategoria a {@link java.lang.String} object.
+     */
     public void setDescripcionCategoria(String descripcionCategoria) {
         this.descripcionCategoria = descripcionCategoria;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -127,6 +238,7 @@ public class BusquedaAdministracionResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -188,6 +300,7 @@ public class BusquedaAdministracionResponse {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "BusquedaAdministracionResponse [id=" + id + ", folio=" + folio + ", titulo=" + titulo
@@ -197,6 +310,21 @@ public class BusquedaAdministracionResponse {
                 + descripcionCategoria + "]";
     }
 
+    /**
+     * <p>Constructor for BusquedaAdministracionResponse.</p>
+     *
+     * @param id a int.
+     * @param folio a {@link java.lang.String} object.
+     * @param titulo a {@link java.lang.String} object.
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     * @param estatus a {@link java.lang.String} object.
+     * @param idCategoria a {@link java.lang.Integer} object.
+     * @param descripcion a {@link java.lang.String} object.
+     * @param idEstatus a int.
+     * @param descripcionEstatus a {@link java.lang.String} object.
+     * @param descripcionCategoria a {@link java.lang.String} object.
+     */
     public BusquedaAdministracionResponse(int id, String folio, String titulo, Date fechaInicioVigencia,
             Date fechaFinVigencia, String estatus, Integer idCategoria, String descripcion, int idEstatus,
             String descripcionEstatus, String descripcionCategoria) {
@@ -214,6 +342,9 @@ public class BusquedaAdministracionResponse {
         this.descripcionCategoria = descripcionCategoria;
     }
 
+    /**
+     * <p>Constructor for BusquedaAdministracionResponse.</p>
+     */
     public BusquedaAdministracionResponse() {
     }
 

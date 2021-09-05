@@ -40,20 +40,21 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
  * @author Daniel Alvarez
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see DatosOrden
  */
 @Repository
 public interface OrdenCompraMapper {
 
     String CAMPOS_ORDEN = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, " +
+            /** Constant <code>CAMPOS_ORDEN=" id, id_usuario, id_direccion_envio, id"{trunked}</code> */
             "id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**
      * Obtiene un objeto de tipo 'OrdenCompra' dado su id.
      *
      * @return MetodoPago que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param cveOrdenCompra a {@link java.lang.String} object.
      */
     @Results(id="OrdenCompraMap", value = {
             @Result(property = "cveOrdenCompra",   column = "cve_orden_compra"),
@@ -74,7 +75,7 @@ public interface OrdenCompraMapper {
      * Obtiene una lista de objetos de tipo 'DatosOrden'.
      *
      * @return Lista de obetos de tipo DatosOrden
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("OrdenCompraMap")
     @Select("SELECT " + CAMPOS_ORDEN + " FROM orden_compra ")
@@ -86,7 +87,7 @@ public interface OrdenCompraMapper {
      *
      * @param datosOrden a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO orden_compra(cve_orden_compra, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, id_moneda, importe_total, fecha_hora_comprar, estado_envio, recibo) "

@@ -20,12 +20,19 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
+/**
+ * <p>InternalServerException class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class InternalServerException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
     private static final String MSG = "Ha ocurrido un error interno. Favor de notificar al administrador el código de error: %s";
 
     /**
      * Indica que hay un error del lado del servidor.
+     *
      * @param shortMessage Breve descripción del problema
      * @param longMessage Descripción específica
      */

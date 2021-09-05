@@ -45,6 +45,9 @@ import java.util.Map;
 /**
  * Controlador que manejara las excepciones lanzadas por los demas
  * controladores.
+ *
+ * @author garellano
+ * @version $Id: $Id
  */
 @ControllerAdvice
 public class CustomControllerAdvice {
@@ -56,6 +59,12 @@ public class CustomControllerAdvice {
      */
     private Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
+    /**
+     * <p>userErrorHandler.</p>
+     *
+     * @param geEx a {@link io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException} object.
+     * @return a {@link org.springframework.http.ResponseEntity} object.
+     */
     @ResponseBody
     @ExceptionHandler(value = StrengthPasswordValidatorException.class)
     public ResponseEntity<Map<String, Object>> userErrorHandler(StrengthPasswordValidatorException geEx) {
@@ -64,7 +73,7 @@ public class CustomControllerAdvice {
     }
 
     /**
-     * Método que maneja las excepciones de {@link MethodArgumentNotValidException}.
+     * Método que maneja las excepciones de {@link org.springframework.web.bind.MethodArgumentNotValidException}.
      *
      * @param geEx la excepcion que manejará (de tipo MethodArgumentNotValidException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.
@@ -79,7 +88,7 @@ public class CustomControllerAdvice {
     }
 
     /**
-     * Método que maneja las exepciones de {@link ControllerException}.
+     * Método que maneja las exepciones de {@link io.kebblar.petstore.api.model.exceptions.ControllerException}.
      *
      * @param geEx la excepción que manejará (de tipo ControllerException).
      * @return un ResponseEntity con los valores a mostrarse en el JSON de salida.

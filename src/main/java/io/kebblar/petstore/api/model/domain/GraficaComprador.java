@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Implementacion del POJO de la entidad de {@link GraficaComprador}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.GraficaComprador}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -45,6 +45,10 @@ public class GraficaComprador implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param comprador a {@link java.lang.String} object.
+     * @param cantidad a {@link java.lang.Long} object.
+     * @param fecha a {@link java.util.Date} object.
      */
     public GraficaComprador(String comprador, Long cantidad, Date fecha) {
         this.comprador = comprador;
@@ -55,45 +59,76 @@ public class GraficaComprador implements Serializable {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>comprador</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getComprador() {
         return comprador;
     }
 
+    /**
+     * <p>Setter for the field <code>comprador</code>.</p>
+     *
+     * @param comprador a {@link java.lang.String} object.
+     */
     public void setComprador(String comprador) {
         this.comprador = comprador;
     }
 
+    /**
+     * <p>Getter for the field <code>cantidad</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object.
+     */
     public Long getCantidad() {
         return cantidad;
     }
 
+    /**
+     * <p>Setter for the field <code>cantidad</code>.</p>
+     *
+     * @param cantidad a {@link java.lang.Long} object.
+     */
     public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
+    /**
+     * <p>Getter for the field <code>fecha</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * <p>Setter for the field <code>fecha</code>.</p>
+     *
+     * @param fecha a {@link java.util.Date} object.
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "GraficaComprador [comprador=" + comprador + ", cantidad=" + cantidad + ", fecha=" + fecha + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -104,9 +139,7 @@ public class GraficaComprador implements Serializable {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

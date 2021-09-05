@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.model.domain;
 import java.util.List;
 
 /**
- * Implementacion del POJO de la entidad de {@link GraficaTO}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.GraficaTO}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -45,6 +45,8 @@ public class GraficaTO {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param chart a {@link java.util.List} object.
      */
     public GraficaTO(List<ChartData> chart) {
         super();
@@ -54,17 +56,25 @@ public class GraficaTO {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>chart</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<ChartData> getChart() {
         return chart;
     }
 
+    /**
+     * <p>Setter for the field <code>chart</code>.</p>
+     *
+     * @param chart a {@link java.util.List} object.
+     */
     public void setChart(List<ChartData> chart) {
         this.chart = chart;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -73,9 +83,7 @@ public class GraficaTO {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

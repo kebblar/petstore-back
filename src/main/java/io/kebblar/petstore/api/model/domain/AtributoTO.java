@@ -47,6 +47,10 @@ public class AtributoTO implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param activo a int.
      */
     public AtributoTO(int id, String nombre, int activo) {
         this.id = id;
@@ -57,38 +61,83 @@ public class AtributoTO implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>activo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a int.
+     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
+    /**
+     * <p>Getter for the field <code>rangos</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<ValorAtributo> getRangos() {
         return rangos;
     }
 
+    /**
+     * <p>Setter for the field <code>rangos</code>.</p>
+     *
+     * @param rangos a {@link java.util.List} object.
+     */
     public void setRangos(List<ValorAtributo> rangos) {
         this.rangos = rangos;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }

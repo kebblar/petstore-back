@@ -36,6 +36,13 @@ import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+/**
+ * <p>TestHistorialComprasService class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestHistorialComprasService {
     @Mock
@@ -43,11 +50,20 @@ public class TestHistorialComprasService {
 
     private HistorialComprasService historialService;
 
+    /**
+     * <p>prepara.</p>
+     */
     @Before
     public void prepara() {
         this.historialService = new HistorialComprasServiceImpl(historialMapper);
     }
 
+    /**
+     * <p>Test.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     @Test
     public void Test() throws SQLException, BusinessException{
         List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();

@@ -30,6 +30,12 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.utils.JWTUtil;
 
+/**
+ * <p>JwtManagerServiceImpl class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 @Service
 public class JwtManagerServiceImpl implements JwtManagerService {
     private Logger logger = LoggerFactory.getLogger(JwtManagerServiceImpl.class);
@@ -43,9 +49,15 @@ public class JwtManagerServiceImpl implements JwtManagerService {
     private String ENCRYPT_KEY;
     private int securityTokenLasts;
 
+    /**
+     * <p>Constructor for JwtManagerServiceImpl.</p>
+     */
     public JwtManagerServiceImpl() {
     }
 
+    /**
+     * <p>init.</p>
+     */
     @PostConstruct
     public void init() {
         // es obvio que estos valores los tengo hasta después de
@@ -61,16 +73,19 @@ public class JwtManagerServiceImpl implements JwtManagerService {
         logger.info("Llave de encripción para el token JWT: >>>"+ENCRYPT_KEY+"<<<");
     }
 
+    /** {@inheritDoc} */
     @Override
     public String createToken(final String username) {
         return jwUtil.createToken(username, securityTokenLasts, ENCRYPT_KEY);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void verifyToken(String jwt, String user) throws BusinessException {
         jwUtil.verifyToken(jwt, user, ENCRYPT_KEY);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getMail(String jwt) throws BusinessException {
         return jwUtil.getMail(jwt, ENCRYPT_KEY);

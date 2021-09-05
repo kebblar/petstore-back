@@ -48,6 +48,12 @@ public class CarritoVista {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param idCarrito a int.
+     * @param urlImagen a {@link java.lang.String} object.
+     * @param titulo a {@link java.lang.String} object.
+     * @param idAnuncio a int.
+     * @param precio a double.
      */
     public CarritoVista(int idCarrito, String urlImagen, String titulo, int idAnuncio, double precio) {
         this.idCarrito = idCarrito;
@@ -59,6 +65,8 @@ public class CarritoVista {
 
     /**
      * Getter para idCarrito.
+     *
+     * @return a int.
      */
     public int getIdCarrito() {
         return idCarrito;
@@ -66,6 +74,8 @@ public class CarritoVista {
 
     /**
      * Setter para idCarrito.
+     *
+     * @param idCarrito a int.
      */
     public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
@@ -73,6 +83,8 @@ public class CarritoVista {
 
     /**
      * Getter para urlImagen.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getUrlImagen() {
         return urlImagen;
@@ -80,6 +92,8 @@ public class CarritoVista {
 
     /**
      * Setter para urlImagen.
+     *
+     * @param urlImagen a {@link java.lang.String} object.
      */
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
@@ -87,6 +101,8 @@ public class CarritoVista {
 
     /**
      * Getter para titulo.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getTitulo() {
         return titulo;
@@ -94,6 +110,8 @@ public class CarritoVista {
 
     /**
      * Setter para titulo.
+     *
+     * @param titulo a {@link java.lang.String} object.
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -101,6 +119,8 @@ public class CarritoVista {
 
     /**
      * Getter para idAnuncio.
+     *
+     * @return a int.
      */
     public int getIdAnuncio() {
         return idAnuncio;
@@ -108,6 +128,8 @@ public class CarritoVista {
 
     /**
      * Setter para idAnuncio.
+     *
+     * @param idAnuncio a int.
      */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
@@ -115,6 +137,8 @@ public class CarritoVista {
 
     /**
      * Getter para precio.
+     *
+     * @return a double.
      */
     public double getPrecio() {
         return precio;
@@ -122,12 +146,16 @@ public class CarritoVista {
 
     /**
      * Setter para precio.
+     *
+     * @param precio a double.
      */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Compara si dos instancias de la clase Atributo son iguales
      */
     @Override
@@ -139,6 +167,8 @@ public class CarritoVista {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Genera un hash del objeto
      */
     @Override
@@ -147,6 +177,8 @@ public class CarritoVista {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override

@@ -29,7 +29,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class UsuarioDireccion {
 
     /*
@@ -46,6 +45,9 @@ public class UsuarioDireccion {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param idUsuario a int.
+     * @param idDireccion a int.
      */
     public UsuarioDireccion(int idUsuario, int idDireccion) {
         this.idUsuario = idUsuario;
@@ -55,25 +57,43 @@ public class UsuarioDireccion {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>idUsuario</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
+    /**
+     * <p>Setter for the field <code>idUsuario</code>.</p>
+     *
+     * @param idUsuario a int.
+     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
+    /**
+     * <p>Getter for the field <code>idDireccion</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdDireccion() {
         return idDireccion;
     }
 
+    /**
+     * <p>Setter for the field <code>idDireccion</code>.</p>
+     *
+     * @param idDireccion a int.
+     */
     public void setIdDireccion(int idDireccion) {
         this.idDireccion = idDireccion;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,17 +102,13 @@ public class UsuarioDireccion {
         return idUsuario == that.idUsuario && idDireccion == that.idDireccion;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(idUsuario, idDireccion);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "UsuarioDireccion{" +

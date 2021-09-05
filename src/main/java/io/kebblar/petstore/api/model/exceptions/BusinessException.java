@@ -34,12 +34,22 @@ public class BusinessException extends ControllerException {
 
     /**
      * Constructor basado en una excepción.
+     *
      * @param e excepción usada por el constructor
      */
     public BusinessException(Exception e) {
         super(e);
     }
 
+    /**
+     * <p>Constructor for BusinessException.</p>
+     *
+     * @param shortMessage a {@link java.lang.String} object.
+     * @param detailedMessage a {@link java.lang.String} object.
+     * @param localExceptionNumber a int.
+     * @param localExceptionKey a {@link java.lang.String} object.
+     * @param httpStatus a {@link io.kebblar.petstore.api.model.exceptions.HttpStatus} object.
+     */
     public BusinessException(
             String shortMessage,
             String detailedMessage,
@@ -49,6 +59,14 @@ public class BusinessException extends ControllerException {
         super(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey, httpStatus);
     }
 
+    /**
+     * <p>Constructor for BusinessException.</p>
+     *
+     * @param shortMessage a {@link java.lang.String} object.
+     * @param detailedMessage a {@link java.lang.String} object.
+     * @param localExceptionNumber a int.
+     * @param localExceptionKey a {@link java.lang.String} object.
+     */
     public BusinessException(
             String shortMessage,
             String detailedMessage,
@@ -57,6 +75,12 @@ public class BusinessException extends ControllerException {
         super(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey);
     }
 
+    /**
+     * <p>Constructor for BusinessException.</p>
+     *
+     * @param shortMessage a {@link java.lang.String} object.
+     * @param detailedMessage a {@link java.lang.String} object.
+     */
     public BusinessException(
             String shortMessage,
             String detailedMessage) {

@@ -35,14 +35,13 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 /**
  * Servicio asociado a la entidad 'municipio'.
  *
- * <p>Implementación de la interfaz {@link MunicipioService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.MunicipioService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  Municipio
  * @see  MunicipioService
  */
@@ -62,6 +61,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         this.municipioMapper = municipioMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Municipio getById(int id) throws BusinessException {
         try {
@@ -71,6 +71,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getAll() throws BusinessException {
         try {
@@ -80,6 +81,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(Municipio municipio) throws BusinessException {
         try {
@@ -89,6 +91,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(Municipio municipio) throws BusinessException {
         try {
@@ -98,6 +101,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(Municipio municipio) throws BusinessException {
         try {
@@ -107,6 +111,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getByEstado(int id) throws BusinessException {
         try {
@@ -116,6 +121,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(Municipio municipio) throws BusinessException {
         try {
@@ -129,6 +135,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getPaginatedMunicipios(int idEstado, int pageNumber, int pageSize) throws BusinessException {
         try {
@@ -138,6 +145,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getMunicipiosDescripcion() throws BusinessException {
         try {
@@ -148,6 +156,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getMunicipiosDescripcionByNombre(String nombre) throws BusinessException {
         try {
@@ -157,6 +166,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getMunicipiosByPaisDescripcion(int pais, String nombre) throws BusinessException {
         try {
@@ -174,6 +184,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Municipio> getMunicipiosByEstadoDescripcion(int estado, String nombre) throws BusinessException {
         try {

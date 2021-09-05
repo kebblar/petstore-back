@@ -40,9 +40,19 @@ import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * <p>TestGrafcasPie class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestGrafcasPie {
 
+    /**
+     * <p>main.</p>
+     */
     @Test
     public void main() {
         // Gson convierte objetos en cadenas Json y viciversa

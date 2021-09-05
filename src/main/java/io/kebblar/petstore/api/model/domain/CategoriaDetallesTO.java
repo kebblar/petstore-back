@@ -51,105 +51,223 @@ public class CategoriaDetallesTO {
     /*
      * Setter y getter.
      */
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>categoriaNombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategoriaNombre() {
         return categoriaNombre;
     }
 
+    /**
+     * <p>Setter for the field <code>categoriaNombre</code>.</p>
+     *
+     * @param categoriaNombre a {@link java.lang.String} object.
+     */
     public void setCategoriaNombre(String categoriaNombre) {
         this.categoriaNombre = categoriaNombre;
     }
 
+    /**
+     * <p>Getter for the field <code>estatusCategoria</code>.</p>
+     *
+     * @return a int.
+     */
     public int getEstatusCategoria() {
         return estatusCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>estatusCategoria</code>.</p>
+     *
+     * @param estatusCategoria a int.
+     */
     public void setEstatusCategoria(int estatusCategoria) {
         this.estatusCategoria = estatusCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>idCateg</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdCateg() {
         return idCateg;
     }
 
+    /**
+     * <p>Setter for the field <code>idCateg</code>.</p>
+     *
+     * @param idCateg a int.
+     */
     public void setIdCateg(int idCateg) {
         this.idCateg = idCateg;
     }
 
+    /**
+     * <p>Getter for the field <code>idAtrib</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdAtrib() {
         return idAtrib;
     }
 
+    /**
+     * <p>Setter for the field <code>idAtrib</code>.</p>
+     *
+     * @param idAtrib a int.
+     */
     public void setIdAtrib(int idAtrib) {
         this.idAtrib = idAtrib;
     }
 
+    /**
+     * <p>Getter for the field <code>idAtributo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdAtributo() {
         return idAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>idAtributo</code>.</p>
+     *
+     * @param idAtributo a int.
+     */
     public void setIdAtributo(int idAtributo) {
         this.idAtributo = idAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>nombreAtributo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombreAtributo() {
         return nombreAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>nombreAtributo</code>.</p>
+     *
+     * @param nombreAtributo a {@link java.lang.String} object.
+     */
     public void setNombreAtributo(String nombreAtributo) {
         this.nombreAtributo = nombreAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>estatusAtributo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getEstatusAtributo() {
         return estatusAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>estatusAtributo</code>.</p>
+     *
+     * @param estatusAtributo a int.
+     */
     public void setEstatusAtributo(int estatusAtributo) {
         this.estatusAtributo = estatusAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>idRango</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdRango() {
         return idRango;
     }
 
+    /**
+     * <p>Setter for the field <code>idRango</code>.</p>
+     *
+     * @param idRango a int.
+     */
     public void setIdRango(int idRango) {
         this.idRango = idRango;
     }
 
+    /**
+     * <p>Getter for the field <code>rangoIdAtributo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getRangoIdAtributo() {
         return rangoIdAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>rangoIdAtributo</code>.</p>
+     *
+     * @param rangoIdAtributo a int.
+     */
     public void setRangoIdAtributo(int rangoIdAtributo) {
         this.rangoIdAtributo = rangoIdAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>rango</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRango() {
         return rango;
     }
 
+    /**
+     * <p>Setter for the field <code>rango</code>.</p>
+     *
+     * @param rango a {@link java.lang.String} object.
+     */
     public void setRango(String rango) {
         this.rango = rango;
     }
 
+    /**
+     * <p>Getter for the field <code>estatusRango</code>.</p>
+     *
+     * @return a int.
+     */
     public int getEstatusRango() {
         return estatusRango;
     }
 
+    /**
+     * <p>Setter for the field <code>estatusRango</code>.</p>
+     *
+     * @param estatusRango a int.
+     */
     public void setEstatusRango(int estatusRango) {
         this.estatusRango = estatusRango;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "CategoriaDetallesTO [idCategoria=" + idCategoria + ", categoriaNombre=" + categoriaNombre

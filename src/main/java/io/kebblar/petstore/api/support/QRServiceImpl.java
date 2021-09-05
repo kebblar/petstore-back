@@ -37,10 +37,17 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+/**
+ * <p>QRServiceImpl class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 @Service
 public class QRServiceImpl implements QRService {
     private Logger logger = LoggerFactory.getLogger(QRServiceImpl.class);
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage generateQRCodeImage(String barcodeText) throws BusinessException {
         try {
@@ -53,6 +60,7 @@ public class QRServiceImpl implements QRService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public byte[] getQRBytes(String text) throws BusinessException {
         try {
@@ -63,6 +71,7 @@ public class QRServiceImpl implements QRService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getQRBytesBase64(String textToEncode) throws BusinessException {
         try {

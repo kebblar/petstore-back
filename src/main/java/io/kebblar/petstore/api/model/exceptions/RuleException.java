@@ -44,6 +44,7 @@ public class RuleException extends BusinessException {
 
     /**
      * Generalización de una violación a las reglas de negocio.
+     *
      * @param msg mensaje descriptivo
      */
     public RuleException(String msg) {

@@ -46,6 +46,10 @@ public class CarritoDatosFactura {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param titulo a {@link java.lang.String} object.
+     * @param precio a double.
+     * @param descripcion a {@link java.lang.String} object.
      */
     public CarritoDatosFactura(String titulo, double precio, String descripcion) {
         this.titulo = titulo;
@@ -55,6 +59,8 @@ public class CarritoDatosFactura {
 
     /**
      * Getter para titulo.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getTitulo() {
         return titulo;
@@ -62,6 +68,8 @@ public class CarritoDatosFactura {
 
     /**
      * Setter para titulo.
+     *
+     * @param titulo a {@link java.lang.String} object.
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -69,6 +77,8 @@ public class CarritoDatosFactura {
 
     /**
      * Getter para precio.
+     *
+     * @return a double.
      */
     public double getPrecio() {
         return precio;
@@ -76,6 +86,8 @@ public class CarritoDatosFactura {
 
     /**
      * Setter para precio.
+     *
+     * @param precio a double.
      */
     public void setPrecio(double precio) {
         this.precio = precio;
@@ -83,6 +95,8 @@ public class CarritoDatosFactura {
 
     /**
      * Getter para descripción.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getDescripcion() {
         return descripcion;
@@ -90,12 +104,16 @@ public class CarritoDatosFactura {
 
     /**
      * Setter para descripción.
+     *
+     * @param descripcion a {@link java.lang.String} object.
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Compara si dos instancias de la clase Atributo son iguales
      */
     @Override
@@ -107,6 +125,8 @@ public class CarritoDatosFactura {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Genera un hash del objeto
      */
     @Override
@@ -115,6 +135,8 @@ public class CarritoDatosFactura {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override

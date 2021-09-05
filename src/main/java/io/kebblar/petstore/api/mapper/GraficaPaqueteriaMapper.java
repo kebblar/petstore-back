@@ -36,18 +36,18 @@ import io.kebblar.petstore.api.model.domain.Grafica;
  * @author Ulises López
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  */
 
 @Repository
 public interface GraficaPaqueteriaMapper {
 
+    /** Constant <code>CAMPOS_G_P="paq.nombre as paqueteria,count(*) as ca"{trunked}</code> */
     String CAMPOS_G_P = "paq.nombre as paqueteria,count(*) as cantidad, oc.fecha_hora_comprar as fecha";
     /**
      * Obtiene una lista de tipo 'Chart'.
      *
      * @return Una lista de las paqueterías más usadas
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Results(id = "GraficaPaqMap", value = { @Result(property = "etiqueta", column = "paqueteria"),
             @Result(property = "cantidad", column = "cantidad"), @Result(property = "fecha", column = "fecha") })
@@ -63,7 +63,7 @@ public interface GraficaPaqueteriaMapper {
      * @param fechaIni cota inferior del rango de fechas
      * @param fechaFin cota superior del rango de fechas
      * @return Lista con la información deseada
-     * @throws SQLException En caso de que ocurra algún error al momento de realizar la consulta
+     * @throws java.sql.SQLException En caso de que ocurra algún error al momento de realizar la consulta
      */
     @ResultMap("GraficaPaqMap")
     @Select("SELECT "+CAMPOS_G_P+" from orden_compra oc  "

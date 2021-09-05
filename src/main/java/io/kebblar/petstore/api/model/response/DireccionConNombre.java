@@ -31,7 +31,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class DireccionConNombre implements Serializable {
 
     private static final long serialVersionUID = 6990145017462317631L;
@@ -57,6 +56,14 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a int.
+     * @param calleNumero a {@link java.lang.String} object.
+     * @param colonia a {@link java.lang.String} object.
+     * @param cp a {@link java.lang.String} object.
+     * @param municipioNombre a {@link java.lang.String} object.
+     * @param estadoNombre a {@link java.lang.String} object.
+     * @param paisNombre a {@link java.lang.String} object.
      */
     public DireccionConNombre(int id, String calleNumero, String colonia, String cp, String municipioNombre, String estadoNombre, String paisNombre) {
         this.id = id;
@@ -70,6 +77,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para id.
+     *
+     * @return a int.
      */
     public int getId() {
         return id;
@@ -77,6 +86,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para id.
+     *
+     * @param id a int.
      */
     public void setId(int id) {
         this.id = id;
@@ -84,6 +95,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para calleNumero.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getCalleNumero() {
         return calleNumero;
@@ -91,6 +104,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para calleNumero.
+     *
+     * @param calleNumero a {@link java.lang.String} object.
      */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
@@ -98,6 +113,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para colonia.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getColonia() {
         return colonia;
@@ -105,6 +122,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para colonia.
+     *
+     * @param colonia a {@link java.lang.String} object.
      */
     public void setColonia(String colonia) {
         this.colonia = colonia;
@@ -112,6 +131,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para cp.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getCp() {
         return cp;
@@ -119,6 +140,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para cp.
+     *
+     * @param cp a {@link java.lang.String} object.
      */
     public void setCp(String cp) {
         this.cp = cp;
@@ -126,6 +149,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para municipioNombre.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getMunicipioNombre() {
         return municipioNombre;
@@ -133,6 +158,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para municipioNombre.
+     *
+     * @param municipioNombre a {@link java.lang.String} object.
      */
     public void setMunicipioNombre(String municipioNombre) {
         this.municipioNombre = municipioNombre;
@@ -140,6 +167,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para estadoNombre.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getEstadoNombre() {
         return estadoNombre;
@@ -147,6 +176,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para estadoNombre.
+     *
+     * @param estadoNombre a {@link java.lang.String} object.
      */
     public void setEstadoNombre(String estadoNombre) {
         this.estadoNombre = estadoNombre;
@@ -154,6 +185,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Getter para paisNombre.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getPaisNombre() {
         return paisNombre;
@@ -161,6 +194,8 @@ public class DireccionConNombre implements Serializable {
 
     /**
      * Setter para paisNombre.
+     *
+     * @param paisNombre a {@link java.lang.String} object.
      */
     public void setPaisNombre(String paisNombre) {
         this.paisNombre = paisNombre;
@@ -168,6 +203,8 @@ public class DireccionConNombre implements Serializable {
 
 
     /**
+     * {@inheritDoc}
+     *
      * Método toString para el pojo, representa al objeto en forma de cadena
      */
     @Override
@@ -183,6 +220,7 @@ public class DireccionConNombre implements Serializable {
                 '}';
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -191,6 +229,7 @@ public class DireccionConNombre implements Serializable {
         return id == that.id && Objects.equals(calleNumero, that.calleNumero) && Objects.equals(colonia, that.colonia) && Objects.equals(cp, that.cp) && Objects.equals(municipioNombre, that.municipioNombre) && Objects.equals(estadoNombre, that.estadoNombre) && Objects.equals(paisNombre, that.paisNombre);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, calleNumero, colonia, cp, municipioNombre, estadoNombre, paisNombre);

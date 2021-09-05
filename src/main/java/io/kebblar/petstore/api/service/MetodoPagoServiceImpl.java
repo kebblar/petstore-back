@@ -33,14 +33,13 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 /**
  * Servicio asociado a la entidad 'metodo_pago'.
  *
- * <p>Implementación de la interfaz {@link MetodoPagoService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.MetodoPagoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  MetodoPago
  * @see  MetodoPagoService
  */
@@ -61,6 +60,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         this.metodoPagoMapper = metodoPagoMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public MetodoPago getById(int id) throws BusinessException {
         try {
@@ -70,6 +70,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<MetodoPago> getAll() throws BusinessException {
         try {
@@ -79,6 +80,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -88,6 +90,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -97,6 +100,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(MetodoPago metodoPago) throws BusinessException {
         try {
@@ -106,6 +110,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<MetodoPago> getByIdUser(int id) throws BusinessException {
         try {
@@ -115,6 +120,7 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(MetodoPago metodoPago) throws BusinessException {
         try {

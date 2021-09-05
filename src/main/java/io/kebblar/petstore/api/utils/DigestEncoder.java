@@ -42,6 +42,12 @@ public class DigestEncoder  {
     private DigestEncoder() {
     }
 
+    /**
+     * <p>createChecksum.</p>
+     *
+     * @param filename a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String createChecksum(String filename) {
         try (InputStream fis =  new FileInputStream(filename)) {
             byte[] buffer = new byte[1024];
@@ -61,6 +67,13 @@ public class DigestEncoder  {
         }
     }
 
+    /**
+     * <p>digest.</p>
+     *
+     * @param source a {@link java.lang.String} object.
+     * @param salt a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String digest(String source, String salt) {
         try {
             return toHexString(getSHA256(source, salt));

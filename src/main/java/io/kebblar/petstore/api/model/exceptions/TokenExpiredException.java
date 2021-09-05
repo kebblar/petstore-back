@@ -33,7 +33,6 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class TokenExpiredException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 

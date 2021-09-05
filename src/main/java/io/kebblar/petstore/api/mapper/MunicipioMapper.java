@@ -40,20 +40,22 @@ import io.kebblar.petstore.api.model.domain.Municipio;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see Municipio
  */
 @Repository
 public interface MunicipioMapper {
 
+    /** Constant <code>CAMPOS_MUN=" id, id_estado, nombre "</code> */
     String CAMPOS_MUN = " id, id_estado, nombre ";
+    /** Constant <code>CAMPOS_AUX_MUN=" m.id, m.id_estado, m.nombre, e.nombre "{trunked}</code> */
     String CAMPOS_AUX_MUN = " m.id, m.id_estado, m.nombre, e.nombre as nombre_estado , p.nombre as nombre_pais";
 
     /**
      * Obtiene un objeto de tipo 'Municipio' dado su id.
      *
      * @return Municipio que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="MunicipioMap", value = {
             @Result(property = "id",   column = "id"),
@@ -67,7 +69,7 @@ public interface MunicipioMapper {
      * Obtiene una lista de objetos de tipo 'Municipio'.
      *
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MunicipioMap")
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio ")
@@ -78,7 +80,7 @@ public interface MunicipioMapper {
      *
      * @param municipio a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO municipio(id, id_estado, nombre) VALUES(#{id}, #{idEstado}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
@@ -89,7 +91,7 @@ public interface MunicipioMapper {
      *
      * @param municipio a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE municipio SET id_estado = #{idEstado}, nombre = #{nombre} WHERE id = #{id} ")
     int update(Municipio municipio) throws SQLException;
@@ -99,16 +101,17 @@ public interface MunicipioMapper {
      *
      * @param id id del Municipio a ser borrado
      * @return id del Municipio borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM municipio WHERE id = #{id} ")
     int delete(int id) throws SQLException;
 
     /**
      * Dado determinado estado, el método retorna los municipios pertenecientes a este.
+     *
      * @param id id del estado que contiene a los municipios.
      * @return Lista con los municipios de determinado estado.
-     * @throws SQLException en caso de un error en el servidor o en la consulta.
+     * @throws java.sql.SQLException en caso de un error en el servidor o en la consulta.
      */
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio WHERE id_estado=#{id}" )
     List<Municipio> getByEstado(int id) throws SQLException;
@@ -120,7 +123,6 @@ public interface MunicipioMapper {
      * @param startRow Inicio de la fila
      * @param pageSize Número de registros por pagina
      * @return una lista de municipios encontrados con los criterios de búsqueda.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @ResultMap("MunicipioMap")
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio WHERE id_estado=#{idEstado} LIMIT #{startRow},#{pageSize}")
@@ -131,7 +133,8 @@ public interface MunicipioMapper {
      * y el nombre del estado filtrando el nombre del municipio.
      *
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param nombre a {@link java.lang.String} object.
      */
     @Results(id="PaisEstadoMunicipioMap", value = {
             @Result(property = "id", column = "id"),
@@ -151,7 +154,6 @@ public interface MunicipioMapper {
      * y el nombre del estado.
      *
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + CAMPOS_AUX_MUN + " FROM municipio m "
@@ -165,7 +167,6 @@ public interface MunicipioMapper {
      *
      * @param  idPais identificador del pais
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + CAMPOS_AUX_MUN + " FROM municipio m "
@@ -179,7 +180,7 @@ public interface MunicipioMapper {
      *
      * @param idPais identificador del pais
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param nombre a {@link java.lang.String} object.
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + CAMPOS_AUX_MUN + " FROM municipio m "
@@ -193,7 +194,7 @@ public interface MunicipioMapper {
      *
      * @param idEstado identificador del pais
      * @return Lista de objetos de tipo Municipio
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param nombre a {@link java.lang.String} object.
      */
     @ResultMap("PaisEstadoMunicipioMap")
     @Select("SELECT " + CAMPOS_AUX_MUN + " FROM municipio m "

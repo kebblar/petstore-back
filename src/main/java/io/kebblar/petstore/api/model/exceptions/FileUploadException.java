@@ -55,6 +55,7 @@ public class FileUploadException extends BusinessException {
 
     /**
      * Se lanza en caso de que se quiera subir un archivo de un tamaño mayor al permitido.
+     *
      * @param msg Mensaje explicativo del problema
      */
     public FileUploadException(String msg) {

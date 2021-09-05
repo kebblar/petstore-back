@@ -26,10 +26,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.apache.tika.Tika;
 
+/**
+ * <p>QuickTest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 public class QuickTest {
     private static Tika tika = new Tika();
     private static final String base="/Users/garellano/tempito/fher/entrada/";
 
+    /**
+     * <p>main.</p>
+     *
+     * @param argv a {@link java.lang.String} object.
+     * @throws java.lang.Exception if any.
+     */
     public static void main(String...argv) throws Exception {
         detecta("FLV","in_01.flv");
         detecta("MP4","in_02.mp4");

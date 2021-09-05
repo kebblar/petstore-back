@@ -28,6 +28,12 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
+/**
+ * <p>ConfirmaRegistroRequest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class ConfirmaRegistroRequest {
 
     @ApiModelProperty(example = "xSw312")
@@ -48,9 +54,20 @@ public class ConfirmaRegistroRequest {
     @NotNull(message = "La fecha de nacimiendo no puede ser null")
     private Date fNacimiento = new Date();
 
+    /**
+     * <p>Constructor for ConfirmaRegistroRequest.</p>
+     */
     public ConfirmaRegistroRequest() {
     }
 
+    /**
+     * <p>Constructor for ConfirmaRegistroRequest.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     * @param calleNumero a {@link java.lang.String} object.
+     * @param idMunicipio a int.
+     * @param fNacimiento a {@link java.util.Date} object.
+     */
     public ConfirmaRegistroRequest(String token, String calleNumero, int idMunicipio, Date fNacimiento) {
         this.token = token;
         this.calleNumero = calleNumero;
@@ -58,34 +75,74 @@ public class ConfirmaRegistroRequest {
         this.fNacimiento = fNacimiento;
     }
 
+    /**
+     * <p>Getter for the field <code>token</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getToken() {
         return token;
     }
 
+    /**
+     * <p>Setter for the field <code>token</code>.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     */
     public void setToken(String token) {
         this.token = token;
     }
 
+    /**
+     * <p>Getter for the field <code>calleNumero</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCalleNumero() {
         return calleNumero;
     }
 
+    /**
+     * <p>Setter for the field <code>calleNumero</code>.</p>
+     *
+     * @param calleNumero a {@link java.lang.String} object.
+     */
     public void setCalleNumero(String calleNumero) {
         this.calleNumero = calleNumero;
     }
 
+    /**
+     * <p>Getter for the field <code>idMunicipio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdMunicipio() {
         return idMunicipio;
     }
 
+    /**
+     * <p>Setter for the field <code>idMunicipio</code>.</p>
+     *
+     * @param idMunicipio a int.
+     */
     public void setIdMunicipio(int idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
 
+    /**
+     * <p>Getter for the field <code>fNacimiento</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getfNacimiento() {
         return fNacimiento;
     }
 
+    /**
+     * <p>Setter for the field <code>fNacimiento</code>.</p>
+     *
+     * @param fNacimiento a {@link java.util.Date} object.
+     */
     public void setfNacimiento(Date fNacimiento) {
         this.fNacimiento = fNacimiento;
     }

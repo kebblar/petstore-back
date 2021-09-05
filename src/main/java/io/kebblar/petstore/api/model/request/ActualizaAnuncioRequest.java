@@ -38,27 +38,58 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
     @Min(value = 1, message = "{min.anuncio.id}")
     private int id;
 
+    /**
+     * <p>Constructor for ActualizaAnuncioRequest.</p>
+     */
     public ActualizaAnuncioRequest() {
     }
 
+    /**
+     * <p>Constructor for ActualizaAnuncioRequest.</p>
+     *
+     * @param id a int.
+     */
     public ActualizaAnuncioRequest(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Constructor for ActualizaAnuncioRequest.</p>
+     *
+     * @param id a int.
+     * @param titulo a {@link java.lang.String} object.
+     * @param descripcion a {@link java.lang.String} object.
+     * @param fechaInicioVigencia a {@link java.time.LocalDate} object.
+     * @param fechaFinVigencia a {@link java.time.LocalDate} object.
+     * @param idCategoria a int.
+     * @param precio a {@link java.math.BigDecimal} object.
+     * @param atributos a {@link java.util.List} object.
+     */
     public ActualizaAnuncioRequest(int id,String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
             int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> atributos) {
         super(titulo, descripcion, fechaInicioVigencia, fechaFinVigencia, idCategoria, precio, atributos);
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -67,6 +98,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -81,6 +113,7 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "ActualizaAnuncioRequest [id=" + id + "]";

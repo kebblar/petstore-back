@@ -42,6 +42,7 @@ public interface CategoriaAtributoService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase CategoriaAtributo
      * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     CategoriaAtributo getById(int id) throws BusinessException;
 
@@ -49,6 +50,7 @@ public interface CategoriaAtributoService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'categoria_atributo'.
      *
      * @return Lista con todos los elementos de la tabla 'categoria_atributo'.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<CategoriaAtributo> getAll() throws BusinessException;
 
@@ -57,7 +59,7 @@ public interface CategoriaAtributoService {
      *
      * @param categoriaAtributo objeto de tipo 'CategoriaAtributo'.
      * @return int numero de registros insertados en la tabla'categoria_atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int insert(CategoriaAtributo categoriaAtributo) throws BusinessException;
 
@@ -66,7 +68,7 @@ public interface CategoriaAtributoService {
      *
      * @param  categoriaAtributo objeto de tipo 'CategoriaAtributo'.
      * @return int numero de registros actualizados en la tabla'categoria_atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int update(CategoriaAtributo categoriaAtributo) throws BusinessException;
 
@@ -75,7 +77,8 @@ public interface CategoriaAtributoService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param categoriaAtributo Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException En caso un error al momento de guardar los datos.
+     * @return a int.
      */
     int save(CategoriaAtributo categoriaAtributo) throws BusinessException;
 
@@ -84,7 +87,7 @@ public interface CategoriaAtributoService {
      *
      * @param categoriaAtributo objeto de tipo 'CategoriaAtributo'.
      * @return int numero de registros eliminados en la tabla'categoria_atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int delete(CategoriaAtributo categoriaAtributo) throws BusinessException;
 
@@ -92,6 +95,8 @@ public interface CategoriaAtributoService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'categoria_atributo'.
      *
      * @return Lista con todos los elementos de la tabla 'categoria_atributo'.
+     * @param categoria a int.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<CategoriaAtributo> getAllAtributoByCategoria(int categoria) throws BusinessException;
 
@@ -100,6 +105,8 @@ public interface CategoriaAtributoService {
      * Método utilizado para obtener una lista con todos los elementos faltantes de la tabla 'atributo'.
      *
      * @return Lista con todos los elementos de la tabla 'atributo' que no se agregaron a la categoria.
+     * @param categoria a int.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<Atributo> getAllAtributosFaltantesByCategoria(int categoria) throws BusinessException;
 

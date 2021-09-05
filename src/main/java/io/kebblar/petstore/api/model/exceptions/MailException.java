@@ -39,6 +39,7 @@ public class MailException extends BusinessException {
 
     /**
      * Se lanza al ocurrir un problema con el envío de correos.
+     *
      * @param e excepción atrapada
      */
     public MailException(Exception e) {

@@ -41,9 +41,11 @@ import org.slf4j.LoggerFactory;
  * Clase que define los componentes de los que una excepción puede estar formada.
  *
  * @author  fhernanda
- * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @version 1.0-SNAPSHOT
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
  */
 public class ControllerException extends Exception {
 
@@ -99,6 +101,7 @@ public class ControllerException extends Exception {
 
     /**
      * Se sirve del constructor por parámetros, salvo a que este método siempre devuelve HttpStatus=200
+     *
      * @param shortMessage Breve descripción del problema
      * @param detailedMessage Descripción detallada del problema
      * @param localExceptionNumber Clave que se le da a la excepción
@@ -115,37 +118,70 @@ public class ControllerException extends Exception {
     /*
      * Getter.
      */
+    /**
+     * <p>Getter for the field <code>shortMessage</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getShortMessage() {
         return shortMessage;
     }
 
+    /**
+     * <p>Getter for the field <code>detailedMessage</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDetailedMessage() {
         return detailedMessage;
     }
 
+    /**
+     * <p>Getter for the field <code>localExceptionNumber</code>.</p>
+     *
+     * @return a int.
+     */
     public int getLocalExceptionNumber() {
         return localExceptionNumber;
     }
 
+    /**
+     * <p>Getter for the field <code>localExceptionKey</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getLocalExceptionKey() {
         return localExceptionKey;
     }
 
+    /**
+     * <p>Getter for the field <code>httpStatus</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.model.exceptions.HttpStatus} object.
+     */
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
+    /**
+     * <p>Getter for the field <code>rootException</code>.</p>
+     *
+     * @return a {@link java.lang.Exception} object.
+     */
     public Exception getRootException() {
         return rootException;
     }
 
+    /**
+     * <p>getRootExceptionMessage.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRootExceptionMessage() {
         return rootException.getMessage();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "ControllerException [rootException=" + rootException + ", shortMessage=" + shortMessage
@@ -160,7 +196,6 @@ public class ControllerException extends Exception {
      *
      * @param msg Cadena con un mensaje genérico.
      * @param desc Mensaje real a ocultar.
-     *
      * @return Cadena con el ID genérico
      */
     public static String buildMessage(String msg, String desc) {

@@ -23,11 +23,11 @@ package io.kebblar.petstore.api.model.exceptions;
 /**
  * <p>Descripción</p>
  * Excepción que modela la respuesta a una petición de procesar archivo PDF.
- * 
+ *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
  * código HTTP que será devuelto.
- * 
+ *
  * @author dalvarez
  * @see io.kebblar.petstore.api.model.exceptions.BusinessException
  * @version 1.0-SNAPSHOT
@@ -38,6 +38,7 @@ public class ProcessPDFException extends BusinessException {
 
     /**
      * Da la descripción del problema que ocurre con el procesamiento del pdf.
+     *
      * @param technicalDescription mensaje específico del problema
      */
     public ProcessPDFException(Exception technicalDescription) {

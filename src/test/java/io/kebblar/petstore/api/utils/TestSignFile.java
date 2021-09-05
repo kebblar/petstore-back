@@ -24,9 +24,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * <p>TestSignFile class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestSignFile {
 
+    /**
+     * <p>Test.</p>
+     *
+     * @throws java.lang.Exception if any.
+     */
     @Test
     public void Test() throws Exception{
         String currentDirectory = System.getProperty("user.dir");

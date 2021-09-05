@@ -34,14 +34,13 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 /**
  * Servicio asociado a la entidad 'estado'.
  *
- * <p>Implementación de la interfaz {@link EstadoService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.EstadoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  Estado
  * @see  EstadoService
  */
@@ -61,6 +60,7 @@ public class EstadoServiceImpl implements EstadoService {
         this.estadoMapper = estadoMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Estado getById(int id) throws BusinessException {
         try {
@@ -70,6 +70,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Estado> getAll() throws BusinessException {
         try {
@@ -79,6 +80,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(Estado estado) throws BusinessException {
         try {
@@ -88,6 +90,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(Estado estado) throws BusinessException {
         try {
@@ -97,6 +100,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(Estado estado) throws BusinessException {
         try {
@@ -106,6 +110,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Estado> getByPais(int id) throws BusinessException {
         try{
@@ -115,6 +120,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(Estado estado) throws BusinessException {
         try {
@@ -128,6 +134,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Estado> getByNombre(String nombre, int idPais) throws BusinessException {
         try {
@@ -141,6 +148,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
         try {
@@ -150,6 +158,7 @@ public class EstadoServiceImpl implements EstadoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Estado> getAllNombrePais() throws BusinessException {
         try {

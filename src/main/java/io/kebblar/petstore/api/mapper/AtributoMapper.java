@@ -42,19 +42,20 @@ import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.Atributo
  */
 @Repository
 public interface AtributoMapper {
 
+    /** Constant <code>CAMPOS_ATRIBUTO=" id, nombre, activo "</code> */
     String CAMPOS_ATRIBUTO = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'Atributo' dado su id.
      *
      * @return Atributo que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     * @param id a int.
      */
     @Results(id="AtributoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -68,7 +69,7 @@ public interface AtributoMapper {
      * Obtiene una lista de objetos de tipo 'Atributo'.
      *
      * @return Lista de objetos de tipo Atributo
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("AtributoMap")
     @Select("SELECT " + CAMPOS_ATRIBUTO + " FROM atributo ")
@@ -79,7 +80,7 @@ public interface AtributoMapper {
      *
      * @param atributo a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO atributo(id, nombre, activo) "
@@ -92,7 +93,7 @@ public interface AtributoMapper {
      *
      * @param atributo a ser actualizado.
      * @return el número de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE atributo"
@@ -105,7 +106,7 @@ public interface AtributoMapper {
      *
      * @param id id del Atributo a ser borrado
      * @return id del Atributo borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM atributo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -115,7 +116,7 @@ public interface AtributoMapper {
      *
      * @param  nombre nombre de atributo.
      * @return Lista de objetos de tipo Atributo filtrado por el nombre ingresado
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("AtributoMap")
     @Select("SELECT " + CAMPOS_ATRIBUTO + " FROM atributo WHERE nombre LIKE '%' #{nombre} '%'")
@@ -125,7 +126,7 @@ public interface AtributoMapper {
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de objetos de tipo AtributoDetallesTO
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @Select("select a.id as idAtributo, a.nombre as nombreAtributo, a.activo as estatusAtributo, va.id as idRango, va.id_atributo as rangoIdAtributo, va.rango as rango, va.activo as estatusRango  from  atributo a left join valor_atributo va on va.id_atributo = a.id order by a.id, va.id")

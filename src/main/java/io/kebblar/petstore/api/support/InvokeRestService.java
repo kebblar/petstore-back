@@ -33,26 +33,31 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
  * @since   1.0-SNAPSHOT
  */
 public interface InvokeRestService {
-  /**
-    * <p>Método utilizado para procesar validación por captcha
-    *
-    * @param Objeto de tipo GoogleCaptcha.
-    * @return Cadena con el resultado de la validación captcha.
-    * @throws GoogleCaptchaException
-    */
+    /**
+     * <p>Método utilizado para procesar validación por captcha
+     *
+     * @return Cadena con el resultado de la validación captcha.
+     * @throws io.kebblar.petstore.api.model.exceptions.GoogleCaptchaException
+     * @param googleCaptcha a {@link io.kebblar.petstore.api.model.request.GoogleCaptcha} object.
+     */
     String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException;
 
+    /**
+     * <p>getBitsoInfo2.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getBitsoInfo2();
 
     /**
      * <p>Método utilizado para envio de mensajes SMS
      *
-     * @param URL del servicio REST para envio de mensajes SMS.
-     * @param Credenciales para utilizar el servicio de envio SMS
-     * @param Telefóno al cual se enviara el SMS
-     * @param Mensaje de texto el cual se enviara en el SMS
      * @return SmsResponse que contiene la información de  respuesta del servicio.
-     * @throws ProcessPDFException
+     * @throws io.kebblar.petstore.api.model.exceptions.ProcessPDFException
+     * @param url a {@link java.lang.String} object.
+     * @param credential a {@link java.lang.String} object.
+     * @param tel a {@link java.lang.String} object.
+     * @param msj a {@link java.lang.String} object.
      */
     SmsResponse smsSend(String url, String credential, String tel, String msj) throws ProcessPDFException;
 }

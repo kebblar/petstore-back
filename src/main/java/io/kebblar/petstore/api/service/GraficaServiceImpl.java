@@ -44,15 +44,14 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
  * Servicio asociado a la entidad 'grafica'.
  *
  * <p>
- * Implementación de la interfaz {@link GraficaService}.
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.service.GraficaService}.
  *
  * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see Grafica
  * @see GraficaService
  */
@@ -69,6 +68,8 @@ public class GraficaServiceImpl implements GraficaService {
      * adicionales a ser empleados en esta clase.
      *
      * @param graficaMapper mapper utilizado para llamar a metodos de persistencia
+     * @param graficaPaqueteriaMapper a {@link io.kebblar.petstore.api.mapper.GraficaPaqueteriaMapper} object.
+     * @param graficaCompradorMapper a {@link io.kebblar.petstore.api.mapper.GraficaCompradorMapper} object.
      */
     public GraficaServiceImpl(
             GraficaMascotaMapper graficaMapper,
@@ -80,6 +81,7 @@ public class GraficaServiceImpl implements GraficaService {
         this.graficaCompradorMapper = graficaCompradorMapper;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getMascotaMasVendida() throws BusinessException {
         try {
@@ -93,6 +95,7 @@ public class GraficaServiceImpl implements GraficaService {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getMascotaMasVendidaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -106,6 +109,7 @@ public class GraficaServiceImpl implements GraficaService {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getPaqueteria() throws BusinessException {
         try {
@@ -119,6 +123,7 @@ public class GraficaServiceImpl implements GraficaService {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getPaqueteriaRango(String fechaIni, String fechaFin) throws BusinessException {
         try {
@@ -132,6 +137,7 @@ public class GraficaServiceImpl implements GraficaService {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getCompradorAsiduo() throws BusinessException {
         try {
@@ -145,6 +151,7 @@ public class GraficaServiceImpl implements GraficaService {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ChartWrapper getCompradorAsiduoRango(String fechaIni, String fechaFin) throws BusinessException {
         try {

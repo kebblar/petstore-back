@@ -30,7 +30,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-
 public class TipoDireccion implements Serializable {
     private static final long serialVersionUID = 6627523800922208745L;
 
@@ -49,6 +48,8 @@ public class TipoDireccion implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public TipoDireccion(Integer id) {
         this.id = id;
@@ -56,6 +57,10 @@ public class TipoDireccion implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param nombre a {@link java.lang.String} object.
+     * @param activo a boolean.
      */
     public TipoDireccion(Integer id, String nombre, boolean activo) {
         this.id = id;
@@ -66,33 +71,61 @@ public class TipoDireccion implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>activo</code>.</p>
+     *
+     * @return a boolean.
+     */
     public boolean getActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a boolean.
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[TipoDireccion] : ["
@@ -102,9 +135,7 @@ public class TipoDireccion implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -120,9 +151,7 @@ public class TipoDireccion implements Serializable {
                activo == other.activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

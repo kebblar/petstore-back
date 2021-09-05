@@ -41,18 +41,38 @@ public class CategoriaTO {
     /*
      * Setter y getter.
      */
+    /**
+     * <p>Getter for the field <code>categoria</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.model.domain.Categoria} object.
+     */
     public Categoria getCategoria() {
         return categoria;
     }
 
+    /**
+     * <p>Setter for the field <code>categoria</code>.</p>
+     *
+     * @param categoria a {@link io.kebblar.petstore.api.model.domain.Categoria} object.
+     */
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
+    /**
+     * <p>Getter for the field <code>atributos</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<AtributoTO> getAtributos() {
         return atributos;
     }
 
+    /**
+     * <p>Setter for the field <code>atributos</code>.</p>
+     *
+     * @param atributos a {@link java.util.List} object.
+     */
     public void setAtributos(List<AtributoTO> atributos) {
         this.atributos = atributos;
     }

@@ -38,6 +38,7 @@ public class TransactionException extends BusinessException {
 
     /**
      * Por medio de la excepción original se genera la nueva excepción.
+     *
      * @param e excepción lanzada en un inicio
      */
     public TransactionException(Exception e) {
@@ -46,6 +47,7 @@ public class TransactionException extends BusinessException {
 
     /**
      * Cuando ocurre un problema con una transacción o se proporciona un token incorrecto.
+     *
      * @param msg detalles del problema
      */
     public TransactionException(String msg) {

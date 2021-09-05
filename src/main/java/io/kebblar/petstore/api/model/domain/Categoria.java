@@ -50,6 +50,8 @@ public class Categoria implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Categoria(Integer id) {
         this.id = id;
@@ -57,6 +59,10 @@ public class Categoria implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param categoria a {@link java.lang.String} object.
+     * @param activo a int.
      */
     public Categoria(Integer id, String categoria, int activo) {
         this.id = id;
@@ -67,34 +73,62 @@ public class Categoria implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>getCategoria.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategoria() {
         return categ;
     }
 
+    /**
+     * <p>setCategoria.</p>
+     *
+     * @param categoria a {@link java.lang.String} object.
+     */
     public void setCategoria(String categoria) {
         this.categ = categoria;
     }
 
+    /**
+     * <p>Getter for the field <code>activo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a int.
+     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Categoria] : ["
@@ -104,9 +138,7 @@ public class Categoria implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -122,9 +154,7 @@ public class Categoria implements Serializable {
                activo == other.activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

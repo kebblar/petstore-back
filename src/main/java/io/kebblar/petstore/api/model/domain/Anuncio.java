@@ -61,7 +61,8 @@ public class Anuncio implements Serializable {
 
     /**
      * Constructor por id.
-     * @param id
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Anuncio(Integer id) {
         this.id = id;
@@ -69,6 +70,20 @@ public class Anuncio implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase con id.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idCategoria a {@link java.lang.Integer} object.
+     * @param folio a {@link java.lang.String} object.
+     * @param titulo a {@link java.lang.String} object.
+     * @param descripcion a {@link java.lang.String} object.
+     * @param precio a {@link java.math.BigDecimal} object.
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     * @param fechaAlta a {@link java.util.Date} object.
+     * @param fechaModificacion a {@link java.util.Date} object.
+     * @param fechaEliminacion a {@link java.util.Date} object.
+     * @param idEstatus a short.
+     * @param searchUrl a {@link java.lang.String} object.
      */
     public Anuncio(Integer id, Integer idCategoria, String folio, String titulo, String descripcion, BigDecimal precio,
             Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaAlta, Date fechaModificacion,
@@ -91,113 +106,241 @@ public class Anuncio implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>folio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFolio() {
         return folio;
     }
 
+    /**
+     * <p>Setter for the field <code>folio</code>.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
 
+    /**
+     * <p>Getter for the field <code>titulo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * <p>Setter for the field <code>titulo</code>.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    /**
+     * <p>Getter for the field <code>precio</code>.</p>
+     *
+     * @return a {@link java.math.BigDecimal} object.
+     */
     public BigDecimal getPrecio() {
         return precio;
     }
 
+    /**
+     * <p>Setter for the field <code>precio</code>.</p>
+     *
+     * @param precio a {@link java.math.BigDecimal} object.
+     */
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     */
     public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     */
     public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaAlta</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaAlta() {
         return fechaAlta;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaAlta</code>.</p>
+     *
+     * @param fechaAlta a {@link java.util.Date} object.
+     */
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaModificacion</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaModificacion</code>.</p>
+     *
+     * @param fechaModificacion a {@link java.util.Date} object.
+     */
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaEliminacion</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaEliminacion() {
         return fechaEliminacion;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaEliminacion</code>.</p>
+     *
+     * @param fechaEliminacion a {@link java.util.Date} object.
+     */
     public void setFechaEliminacion(Date fechaEliminacion) {
         this.fechaEliminacion = fechaEliminacion;
     }
 
+    /**
+     * <p>Getter for the field <code>idEstatus</code>.</p>
+     *
+     * @return a short.
+     */
     public short getIdEstatus() {
         return idEstatus;
     }
 
+    /**
+     * <p>Setter for the field <code>idEstatus</code>.</p>
+     *
+     * @param idEstatus a short.
+     */
     public void setIdEstatus(short idEstatus) {
         this.idEstatus = idEstatus;
     }
 
+    /**
+     * <p>Getter for the field <code>searchUrl</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSearchUrl() {
         return searchUrl;
     }
 
+    /**
+     * <p>Setter for the field <code>searchUrl</code>.</p>
+     *
+     * @param searchUrl a {@link java.lang.String} object.
+     */
     public void setSearchUrl(String searchUrl) {
         this.searchUrl = searchUrl;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Anuncio [id=" + id + ", idCategoria=" + idCategoria + ", folio=" + folio + ", titulo=" + titulo
@@ -207,9 +350,7 @@ public class Anuncio implements Serializable {
                 + ", searchUrl=" + searchUrl + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -224,9 +365,7 @@ public class Anuncio implements Serializable {
                 Objects.equals(searchUrl, anuncio.searchUrl);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, idCategoria, folio, titulo, descripcion, precio, fechaInicioVigencia, fechaFinVigencia,

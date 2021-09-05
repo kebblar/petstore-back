@@ -34,9 +34,21 @@ public class AnuncioImagenResponse {
     private Integer idTipo;
     private Boolean principal;
 
+    /**
+     * <p>Constructor for AnuncioImagenResponse.</p>
+     */
     public AnuncioImagenResponse() {
     }
 
+    /**
+     * <p>Constructor for AnuncioImagenResponse.</p>
+     *
+     * @param idImagen a {@link java.lang.Integer} object.
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     * @param uuid a {@link java.lang.String} object.
+     * @param idTipo a {@link java.lang.Integer} object.
+     * @param principal a {@link java.lang.Boolean} object.
+     */
     public AnuncioImagenResponse(Integer idImagen, Integer idAnuncio, String uuid, Integer idTipo, Boolean principal) {
         this.idImagen = idImagen;
         this.idAnuncio = idAnuncio;
@@ -45,46 +57,97 @@ public class AnuncioImagenResponse {
         this.principal = principal;
     }
 
+    /**
+     * <p>Getter for the field <code>idAnuncio</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>idAnuncio</code>.</p>
+     *
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     */
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>idImagen</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdImagen() {
         return idImagen;
     }
 
+    /**
+     * <p>Setter for the field <code>idImagen</code>.</p>
+     *
+     * @param idImagen a {@link java.lang.Integer} object.
+     */
     public void setIdImagen(Integer idImagen) {
         this.idImagen = idImagen;
     }
 
+    /**
+     * <p>Getter for the field <code>uuid</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * <p>Setter for the field <code>uuid</code>.</p>
+     *
+     * @param uuid a {@link java.lang.String} object.
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
+    /**
+     * <p>Getter for the field <code>idTipo</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdTipo() {
         return idTipo;
     }
 
+    /**
+     * <p>Setter for the field <code>idTipo</code>.</p>
+     *
+     * @param idTipo a {@link java.lang.Integer} object.
+     */
     public void setIdTipo(Integer idTipo) {
         this.idTipo = idTipo;
     }
 
+    /**
+     * <p>Getter for the field <code>principal</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getPrincipal() {
         return principal;
     }
 
+    /**
+     * <p>Setter for the field <code>principal</code>.</p>
+     *
+     * @param principal a {@link java.lang.Boolean} object.
+     */
     public void setPrincipal(Boolean principal) {
         this.principal = principal;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -97,6 +160,7 @@ public class AnuncioImagenResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -134,6 +198,7 @@ public class AnuncioImagenResponse {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AnuncioImagenResponse [idImagen=" + idImagen + ", idAnuncio=" + idAnuncio + ", uuid=" + uuid

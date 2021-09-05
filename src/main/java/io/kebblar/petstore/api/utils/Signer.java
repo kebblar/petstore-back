@@ -64,6 +64,13 @@ public class Signer {
     /*
      * Constructor unico de la clase
      */
+    /**
+     * <p>Constructor for Signer.</p>
+     *
+     * @param privateKeyFile a {@link java.lang.String} object.
+     * @param certFile a {@link java.lang.String} object.
+     * @param file a {@link java.lang.String} object.
+     */
     public Signer(String privateKeyFile, String certFile, String file) {
         this.privateKeyFile = privateKeyFile;
         this.certificateFile = certFile;
@@ -75,7 +82,7 @@ public class Signer {
      * intervienen en el firmado de un archivo.
      *
      * @return un string que representa al pdf firmado.
-     * @throws Exception es disparada por un error de lectura escritura.
+     * @throws java.lang.Exception es disparada por un error de lectura escritura.
      */
     public String signPdf() throws Exception{
         String hash = createSum(this.file);
@@ -89,8 +96,7 @@ public class Signer {
      * El hash utilizado es SHA-256.
      *
      * @return un string en hexadecimal que representa al hash del archivo.
-     * @param String fileName nombre del archivo del que qeremos su hash.
-     * @throws Exception es disparada por un error de lectura escritura.
+     * @param fileName a {@link java.lang.String} object.
      */
     public String createSum(String fileName) {
         try (InputStream fis =  new FileInputStream(fileName)) {
@@ -135,10 +141,10 @@ public class Signer {
      * Usa el certificado para verifcar que cierto texto encriptado con una
      * llave privada es válido.
      *
-     * @param hash Arreglo de bytes a ser convertido a cadena.
-     *
      * @return Cadena obtenida despues de desencriptar el texto recibido como
      * parametro.
+     * @param textoEncriptado a {@link java.lang.String} object.
+     * @throws java.lang.Exception if any.
      */
     public String verifySignature(String textoEncriptado) throws Exception {
         String certData = readFile(this.certificateFile);
@@ -163,10 +169,12 @@ public class Signer {
     /**
      * Metodo que encripta un texto a partir de una llave privada y un pass.
      *
-     * @param arreglo de byte textoEncryptadoEnBytes contiene .
-     * @param hash Arreglo de bytes a ser convertido a cadena.
-     *
      * @return Cadena asociada al arreglo dado
+     * @param texto a {@link java.lang.String} object.
+     * @param privateKeyFile a {@link java.lang.String} object.
+     * @param password a {@link java.lang.String} object.
+     * @throws java.security.GeneralSecurityException if any.
+     * @throws java.io.IOException if any.
      */
     public byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         PrivateKey pk = getPrivateKeyFromFile(privateKeyFile, password);
@@ -181,15 +189,9 @@ public class Signer {
      * Usando la llave privada y un pass, se encripta un texto que luego va a poder ser
      * desencriptado con el certificado o la llave púbkica que el certfcado tiene dentro.
      *
-     * @param privateKeyFile Archivo del FileSystem con el contenido de una llave privada
      * @param textoParaEncripcion Texto que será encriptado
-     * @param privateKeyFile1
-     * @param password1
-     * @param pass Clave secreta asociada a la llave privada
-     *
      * @return Texto encriptado
-     * @throws Exception Envolvente para IOSexception y SecurityException
-     *
+     * @throws java.lang.Exception Envolvente para IOSexception y Securityjava.lang.Exception
      */
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
         byte[] textoEncriptadoEnBytes = getTextoEncriptadoFromPrivateKeyFile(

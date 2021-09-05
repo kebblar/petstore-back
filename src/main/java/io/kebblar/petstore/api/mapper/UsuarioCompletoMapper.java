@@ -38,19 +38,20 @@ import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.UsuarioCompleto
  */
 @Repository
 public interface UsuarioCompletoMapper {
 
+    /** Constant <code>CAMPOS_USER_C=" id, correo, clave, creado, activo, acc"{trunked}</code> */
     String CAMPOS_USER_C = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
 
     /**
      * Obtiene un objeto de tipo 'UsuarioCompleto' dado su id.
      *
      * @return UsuarioCompleto que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="UsuarioCompletoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -78,7 +79,7 @@ public interface UsuarioCompletoMapper {
      * Obtiene una lista de objetos de tipo 'UsuarioCompleto'.
      *
      * @return Lista de obetos de tipo UsuarioCompleto
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo ")
@@ -90,8 +91,7 @@ public interface UsuarioCompletoMapper {
      *
      * @param usuario a ser actualizado.
      * @return el numero de registros actualizados.
-     *
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE usuario"
@@ -101,18 +101,20 @@ public interface UsuarioCompletoMapper {
 
     /**
      * Cuenta el número de usuarios.
+     *
      * @return Entero representando el número de usuarios
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("SELECT count(*) from usuario_completo ")
     int countUsuarios() throws SQLException;
 
     /**
+     * <p>getAllPaginated.</p>
      *
-     * @param startRow
-     * @param pageSize
-     * @return
-     * @throws SQLException
+     * @param startRow a int.
+     * @param pageSize a int.
+     * @throws java.sql.SQLException
+     * @return a {@link java.util.List} object.
      */
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo LIMIT #{startRow},#{pageSize}")

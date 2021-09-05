@@ -29,7 +29,7 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
 import io.kebblar.petstore.api.support.InvokeRestService;
 
 /**
- * Implementación de la interfaz {@link SmsService}.
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.service.SmsService}.
  *
  * @author dalvarez
  * @see io.kebblar.petstore.api.service.SmsService
@@ -43,11 +43,18 @@ public class SmsServiceImpl implements SmsService {
     private Environment environment;
     private InvokeRestService invokeRestSMSService;
 
+    /**
+     * <p>Constructor for SmsServiceImpl.</p>
+     *
+     * @param environment a {@link org.springframework.core.env.Environment} object.
+     * @param invokeRestSMSService a {@link io.kebblar.petstore.api.support.InvokeRestService} object.
+     */
     public SmsServiceImpl(Environment environment, InvokeRestService invokeRestSMSService) {
         this.environment=environment;
         this.invokeRestSMSService=invokeRestSMSService;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void envioSms(String numero, String msj) throws ProcessPDFException {
         logger.info("Inicia envio SMS");
@@ -57,6 +64,7 @@ public class SmsServiceImpl implements SmsService {
             logger.info("Response:"+responseSMS.isExito());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getCveSMS() {
         double cve = 10000 + Math.random() * 90000;

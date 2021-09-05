@@ -41,19 +41,20 @@ import io.kebblar.petstore.api.model.domain.ValorAtributo;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.ValorAtributo
  */
 @Repository
 public interface ValorAtributoMapper {
 
+    /** Constant <code>CAMPOS_V_A=" id, id_atributo, rango, activo "</code> */
     String CAMPOS_V_A = " id, id_atributo, rango, activo ";
 
     /**
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.
      *
      * @return ValorAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="ValorAtributoMap", value = {
             @Result(property = "id",   column = "id"),
@@ -68,7 +69,7 @@ public interface ValorAtributoMapper {
      * Obtiene una lista de objetos de tipo 'ValorAtributo'.
      *
      * @return Lista de obetos de tipo ValorAtributo
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("ValorAtributoMap")
     @Select("SELECT " + CAMPOS_V_A + " FROM valor_atributo ")
@@ -79,7 +80,7 @@ public interface ValorAtributoMapper {
      *
      * @param valorAtributo a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO valor_atributo(id, id_atributo, rango, activo) "
@@ -92,7 +93,7 @@ public interface ValorAtributoMapper {
      *
      * @param valorAtributo a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE valor_atributo"
@@ -105,7 +106,7 @@ public interface ValorAtributoMapper {
      *
      * @param id id del ValorAtributo a ser borrado
      * @return id del ValorAtributo borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM valor_atributo WHERE id = #{id} ")
     int delete(int id) throws SQLException;
@@ -114,7 +115,8 @@ public interface ValorAtributoMapper {
      * Obtiene un objeto de tipo 'ValorAtributo' dado su id.
      *
      * @return ValorAtributo que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @ResultMap("ValorAtributoMap")
     @Select("SELECT " + CAMPOS_V_A + " FROM valor_atributo WHERE  id_atributo = #{id}     ")

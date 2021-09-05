@@ -34,16 +34,34 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * <p>EncryptPdf class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 public class EncryptPdf {
     private static final String base = "/Users/garellano/Desktop/";
     private static final String path = base + "archivo-pdf-generado.pdf";
     private static final String imagen = base + "work/hola/logo.png";
 
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     * @throws java.lang.Exception if any.
+     */
     public static void main(String[] args) throws Exception {
         EncryptPdf enc = new EncryptPdf();
         enc.ok();
     }
+    /**
+     * <p>ok.</p>
+     *
+     * @throws java.lang.Exception if any.
+     */
     public void ok() throws Exception {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
@@ -82,6 +100,13 @@ public class EncryptPdf {
         //System.out.println(decrypted);
     }
 
+    /**
+     * <p>protectDocument.</p>
+     *
+     * @param path a {@link java.lang.String} object.
+     * @param userPassword a {@link java.lang.String} object.
+     * @throws java.io.IOException if any.
+     */
     public static void protectDocument(String path, String userPassword) throws IOException {
         File file = new File(path);
         PDDocument document = PDDocument.load(file);

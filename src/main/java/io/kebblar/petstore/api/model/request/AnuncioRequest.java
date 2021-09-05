@@ -51,9 +51,23 @@ public class AnuncioRequest {
     private BigDecimal precio = new BigDecimal(0);
     private List <MascotaValorAtributoRequest> mascotaValorAtributo;
 
+    /**
+     * <p>Constructor for AnuncioRequest.</p>
+     */
     public AnuncioRequest() {
     }
 
+    /**
+     * <p>Constructor for AnuncioRequest.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     * @param descripcion a {@link java.lang.String} object.
+     * @param fechaInicioVigencia a {@link java.time.LocalDate} object.
+     * @param fechaFinVigencia a {@link java.time.LocalDate} object.
+     * @param idCategoria a int.
+     * @param precio a {@link java.math.BigDecimal} object.
+     * @param mascotaValorAtributo a {@link java.util.List} object.
+     */
     public AnuncioRequest(String titulo, String descripcion, LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia,
             int idCategoria, BigDecimal precio, List<MascotaValorAtributoRequest> mascotaValorAtributo) {
         this.titulo = titulo;
@@ -65,63 +79,134 @@ public class AnuncioRequest {
         this.mascotaValorAtributo = mascotaValorAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>titulo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * <p>Setter for the field <code>titulo</code>.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @param fechaInicioVigencia a {@link java.time.LocalDate} object.
+     */
     public void setFechaInicioVigencia(LocalDate fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @param fechaFinVigencia a {@link java.time.LocalDate} object.
+     */
     public void setFechaFinVigencia(LocalDate fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdCategoria() {
         return idCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a int.
+     */
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>precio</code>.</p>
+     *
+     * @return a {@link java.math.BigDecimal} object.
+     */
     public BigDecimal getPrecio() {
         return precio;
     }
 
+    /**
+     * <p>Setter for the field <code>precio</code>.</p>
+     *
+     * @param precio a {@link java.math.BigDecimal} object.
+     */
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
+    /**
+     * <p>Getter for the field <code>mascotaValorAtributo</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<MascotaValorAtributoRequest> getMascotaValorAtributo() {
         return mascotaValorAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>mascotaValorAtributo</code>.</p>
+     *
+     * @param mascotaValorAtributo a {@link java.util.List} object.
+     */
     public void setMascotaValorAtributo(List<MascotaValorAtributoRequest> mascotaValorAtributo) {
         this.mascotaValorAtributo = mascotaValorAtributo;
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -136,6 +221,7 @@ public class AnuncioRequest {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -180,6 +266,7 @@ public class AnuncioRequest {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AnuncioRequest [titulo=" + titulo + ", descripcion=" + descripcion + ", fechaInicioVigencia="

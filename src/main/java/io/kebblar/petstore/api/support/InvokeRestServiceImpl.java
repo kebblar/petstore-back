@@ -34,7 +34,7 @@ import io.kebblar.petstore.api.model.request.SmsRequest;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 
 /**
- * Implementación de la interfaz {@link InvokeRestService}.
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.support.InvokeRestService}.
  *
  * @author dalvarez
  * @version 1.0-SNAPSHOT
@@ -44,10 +44,20 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
 public class InvokeRestServiceImpl implements InvokeRestService {
     private RestTemplate restTemplate;
 
+    /**
+     * <p>Constructor for InvokeRestServiceImpl.</p>
+     *
+     * @param restTemplate a {@link org.springframework.web.client.RestTemplate} object.
+     */
     public InvokeRestServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * <p>getBitsoInfo2.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBitsoInfo2() {
         String url = "https://api.bitso.com/v3/ticker/?book=btc_mxn";
         //RestTemplate restTemplate = new RestTemplate();
@@ -62,6 +72,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
         //return restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException {
         try {
@@ -92,6 +103,7 @@ public class InvokeRestServiceImpl implements InvokeRestService {
         return restTemplate.postForObject(redirectUrl.toString(), entity, String.class);
     }
 
+    /** {@inheritDoc} */
     @Override
     public SmsResponse smsSend(String url, String credential, String tel, String msj) throws ProcessPDFException {
         try {

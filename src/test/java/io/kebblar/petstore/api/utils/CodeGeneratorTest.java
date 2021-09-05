@@ -32,13 +32,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mx.com.ultrasist.ci.generator.GenCode;
 import mx.com.ultrasist.ci.generator.model.Entidad;
 
+/**
+ * <p>CodeGeneratorTest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 public class CodeGeneratorTest {
     private static Log logger = LogFactory.getLog(CodeGeneratorTest.class);
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args a {@link java.lang.String} object.
+     * @throws java.io.IOException if any.
+     */
     public static void main(String... args) throws IOException {
         new CodeGeneratorTest();
     }
 
+    /**
+     * <p>Constructor for CodeGeneratorTest.</p>
+     *
+     * @throws java.io.IOException if any.
+     */
     public CodeGeneratorTest() throws IOException {
         List<Entidad> listaCompleta =  GenCode.pop(
                 "jdbc:mariadb://localhost:3306/petstore",

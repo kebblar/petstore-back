@@ -32,7 +32,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public interface EstatusAnuncioService {
 
     /**
@@ -41,6 +40,7 @@ public interface EstatusAnuncioService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase EstatusAnuncio
      * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     EstatusAnuncio getById(int id) throws BusinessException;
 
@@ -48,6 +48,7 @@ public interface EstatusAnuncioService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estatus_anuncio'.
      *
      * @return Lista con todos los elementos de la tabla 'estatus_anuncio'.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<EstatusAnuncio> getAll() throws BusinessException;
 
@@ -56,7 +57,7 @@ public interface EstatusAnuncioService {
      *
      * @param estatusAnuncio objeto de tipo 'EstatusAnuncio'.
      * @return int numero de registros insertados en la tabla'estatus_anuncio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int insert(EstatusAnuncio estatusAnuncio) throws BusinessException;
 
@@ -65,7 +66,7 @@ public interface EstatusAnuncioService {
      *
      * @param  estatusAnuncio objeto de tipo 'EstatusAnuncio'.
      * @return int numero de registros actualizados en la tabla'estatus_anuncio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int update(EstatusAnuncio estatusAnuncio) throws BusinessException;
 
@@ -74,7 +75,8 @@ public interface EstatusAnuncioService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param estatusAnuncio Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException En caso un error al momento de guardar los datos.
+     * @return a int.
      */
     int save(EstatusAnuncio estatusAnuncio) throws BusinessException;
 
@@ -83,7 +85,7 @@ public interface EstatusAnuncioService {
      *
      * @param estatusAnuncio objeto de tipo 'EstatusAnuncio'.
      * @return int numero de registros eliminados en la tabla'estatus_anuncio'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
      */
     int delete(EstatusAnuncio estatusAnuncio) throws BusinessException;
 
@@ -92,6 +94,7 @@ public interface EstatusAnuncioService {
      *
      * @param nombre Nombre de EstatusAnuncio.
      * @return La información del elemento recuperado en una instacia de la clase EstatusAnuncio o nulo si no se encuentra ese elemento en la tabla.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     List<EstatusAnuncio> getByNombre(String nombre) throws BusinessException;
 }

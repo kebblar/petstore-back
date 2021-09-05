@@ -20,11 +20,28 @@
  */
 package io.kebblar.petstore.api.utils;
 
+/**
+ * <p>StringUtils class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class StringUtils {
+    /**
+     * <p>main.</p>
+     *
+     * @param s a {@link java.lang.String} object.
+     */
     public static void main(String...s) {
         System.out.println(limpia("+82 (54) 16@91-3070#"));
     }
 
+    /**
+     * <p>limpia.</p>
+     *
+     * @param s a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String limpia(String s) {
         String result = "";
         int len = s.length();

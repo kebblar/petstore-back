@@ -47,10 +47,10 @@ import io.kebblar.petstore.api.utils.CreatePDF;
 import io.kebblar.petstore.api.utils.Signer;
 
 /**
- * Implementación de la interfaz {@link OrdenCompraService}.
- * 
- * Todos los métodos de esta clase disparan {@link BusinessException}
- * 
+ * Implementación de la interfaz {@link io.kebblar.petstore.api.service.OrdenCompraService}.
+ *
+ * Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
+ *
  * @author dalvarez
  * @see io.kebblar.petstore.api.model.domain.DatosOrden
  * @see io.kebblar.petstore.api.service.OrdenCompraService
@@ -74,6 +74,19 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
     /*
      * Constructor con atributos mapper
      */
+    /**
+     * <p>Constructor for OrdenCompraServiceImpl.</p>
+     *
+     * @param ordenCompraMapper a {@link io.kebblar.petstore.api.mapper.OrdenCompraMapper} object.
+     * @param usuarioDetalleMapper a {@link io.kebblar.petstore.api.mapper.UsuarioDetalleMapper} object.
+     * @param usuarioMapper a {@link io.kebblar.petstore.api.mapper.UsuarioMapper} object.
+     * @param mailSenderService a {@link io.kebblar.petstore.api.support.MailSenderService} object.
+     * @param environment a {@link org.springframework.core.env.Environment} object.
+     * @param carritoService a {@link io.kebblar.petstore.api.service.CarritoService} object.
+     * @param direccionService a {@link io.kebblar.petstore.api.service.DireccionService} object.
+     * @param smsService a {@link io.kebblar.petstore.api.service.SmsService} object.
+     * @param createPDF a {@link io.kebblar.petstore.api.utils.CreatePDF} object.
+     */
     public OrdenCompraServiceImpl(
         OrdenCompraMapper ordenCompraMapper, 
             UsuarioDetalleMapper usuarioDetalleMapper,
@@ -95,6 +108,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         this.createPDF = createPDF;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<DatosOrden> getAll() throws BusinessException {
         try {
@@ -104,6 +118,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public int insert(DatosOrden datosOrden) throws BusinessException {
         try {
@@ -113,6 +128,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public DatosOrden procesarOrdenCompra(DatosOrden ordenCompra) throws BusinessException {
         logger.debug("Procesando una orden de compra");

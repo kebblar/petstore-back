@@ -40,39 +40,42 @@ import io.kebblar.petstore.api.model.domain.Rol;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see io.kebblar.petstore.api.model.domain.Rol
  */
 
 @Repository
 public interface RolMapper {
 
+    /** Constant <code>CAMPOS_ROL=" id, nombre, activo "</code> */
     String CAMPOS_ROL = " id, nombre, activo ";
 
     /**
      * Retorna el rol dado su id y si este está activo.
+     *
      * @param id id del rol buscado
      * @return Rol correspondiente al id del parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
     @Select("SELECT id, nombre, activo FROM rol WHERE id = #{id} and activo=true")
     Rol getRol(int id) throws SQLException;
 
     /**
      * Dado el id de un usuario, la función nos devuelve la lista de roles que este tiene.
+     *
      * @param idUser id del usuario buscado
      * @return Lista de roles asociados a esta cuenta
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
     @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
     List<Rol> getUserRoles(int idUser) throws SQLException;
 
     /**
      * Inserta un usuario y su rol en una tabla que relaciona ambas características.
+     *
      * @param idUsuario id del usuario
      * @param idRol id del rol asociado al usuario
      * @return Entero que indica que la operación salió bien
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
     @Insert("INSERT INTO usuario_rol VALUES(#{idUsuario}, #{idRol})")
     int insertUserRol(int idUsuario, int idRol) throws SQLException;
@@ -81,7 +84,8 @@ public interface RolMapper {
      * Obtiene un objeto de tipo 'Rol' dado su id.
      *
      * @return Rol que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="RolMap", value = {
             @Result(property = "id",   column = "id"),
@@ -95,12 +99,18 @@ public interface RolMapper {
      * Obtiene una lista de objetos de tipo 'Rol'.
      *
      * @return Lista de objetos de tipo Rol
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("RolMap")
     @Select("SELECT " + CAMPOS_ROL + " FROM rol ")
     List<Rol> getAllSinFiltros() throws SQLException;
 
+    /**
+     * <p>getAll.</p>
+     *
+     * @return a {@link java.util.List} object.
+     * @throws java.sql.SQLException if any.
+     */
     @Select("SELECT id, nombre, activo FROM rol")
     List<Rol> getAll() throws SQLException;
 
@@ -109,7 +119,7 @@ public interface RolMapper {
      *
      * @param rol a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO rol(id, nombre, activo) "
@@ -122,7 +132,7 @@ public interface RolMapper {
      *
      * @param rol a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE rol"
@@ -135,7 +145,7 @@ public interface RolMapper {
      *
      * @param id id del Rol a ser borrado
      * @return id del Rol borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM rol WHERE id = #{id} ")
     int delete(int id) throws SQLException;

@@ -44,7 +44,7 @@ public interface AdministracionComprasMapper {
      * Obtiene todas las compras hechas por los usuarios.
      *
      * @return Una lista de las compras hechas por los usuarios.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="AministracionComprasMap", value = {
             @Result(property = "estadoEnvio", column = "estado_envio"),
@@ -65,7 +65,7 @@ public interface AdministracionComprasMapper {
      * @param estadoEnvio el estado al que se va a actualizar la compra.
      * @param cveCompra la compra que queremos actualizar.
      * @return un entero en caso de que la operacion fue exitosa.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE orden_compra SET estado_envio = ${estadoEnvio} WHERE cve_orden_compra = #{cveCompra};")
     int sent(int estadoEnvio, String cveCompra) throws SQLException;

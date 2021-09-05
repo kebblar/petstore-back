@@ -31,7 +31,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class Carrito implements Serializable {
 
     private static final long serialVersionUID = 7302776955762312368L;
@@ -52,6 +51,8 @@ public class Carrito implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public Carrito(Integer id) {
         this.id = id;
@@ -59,6 +60,11 @@ public class Carrito implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idUsuario a int.
+     * @param idAnuncio a int.
+     * @param cveOrdenCompra a {@link java.lang.String} object.
      */
     public Carrito(Integer id, int idUsuario, int idAnuncio, String cveOrdenCompra) {
         this.id = id;
@@ -70,42 +76,80 @@ public class Carrito implements Serializable {
     /*
      * Getter y setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idUsuario</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
+    /**
+     * <p>Setter for the field <code>idUsuario</code>.</p>
+     *
+     * @param idUsuario a int.
+     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
+    /**
+     * <p>Getter for the field <code>idAnuncio</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdAnuncio() {
         return idAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>idAnuncio</code>.</p>
+     *
+     * @param idAnuncio a int.
+     */
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>cveOrdenCompra</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCveOrdenCompra() {
         return cveOrdenCompra;
     }
 
+    /**
+     * <p>Setter for the field <code>cveOrdenCompra</code>.</p>
+     *
+     * @param cveOrdenCompra a {@link java.lang.String} object.
+     */
     public void setCveOrdenCompra(String cveOrdenCompra) {
         this.cveOrdenCompra = cveOrdenCompra;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Carrito] : ["
@@ -116,9 +160,7 @@ public class Carrito implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -135,9 +177,7 @@ public class Carrito implements Serializable {
                cveOrdenCompra == other.cveOrdenCompra;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

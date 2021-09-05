@@ -43,6 +43,7 @@ public interface MailSenderService {
      *                que genera el chatbot
      * @param subject Cadena con el titulo del correo electronico
      * @param body    Cadena con el cuerpo del mensaje que se envia desde el chatbot
+     * @return a {@link java.lang.String} object.
      */
     String sendMail2(String to, String subject, String body);
 
@@ -53,6 +54,7 @@ public interface MailSenderService {
      *                el correo generado
      * @param subject Cadena con el titulo del correo electronico
      * @param body    Cadena con el cuerpodo del mensaje de correo
+     * @return a {@link java.lang.String} object.
      */
     String sendHtmlMail(String to, String subject, String body);
 
@@ -64,6 +66,7 @@ public interface MailSenderService {
      * @param subject Cadena con el titulo del correo electronico
      * @param body    Cadena con el cuerpodo del mensaje de correo
      * @param file    the file
+     * @return a {@link java.lang.String} object.
      */
     String sendHtmlMail2(String to, String subject, String body, File file);
 
@@ -74,6 +77,7 @@ public interface MailSenderService {
      * @param to      the to
      * @param subject the subject
      * @param body    the body
+     * @return a {@link java.lang.String} object.
      */
     String sendASynchronousHtmlMail(String to, String subject, String body);
 
@@ -82,7 +86,8 @@ public interface MailSenderService {
      * mensaje.
      *
      * @param helperConfig Helper que recibe el objeto MimeMessageHelper
-     * @throws GenericaException En caso de error al enviar el correo.
+     * @return a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
      */
     String sendHtmlMail(HelperConfig helperConfig) throws BusinessException;
 

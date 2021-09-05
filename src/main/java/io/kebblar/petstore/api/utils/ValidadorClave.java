@@ -31,10 +31,24 @@ import org.passay.*;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 
+/**
+ * <p>ValidadorClave class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class ValidadorClave {
 
     private ValidadorClave() {}
 
+    /**
+     * <p>validate.</p>
+     *
+     * @param clave a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.InternalServerException if any.
+     */
     public static boolean validate(String clave) throws StrengthPasswordValidatorException, InternalServerException {
         List<Rule> rules = new ArrayList<>();
         //Rule 1: Password length should be in between

@@ -47,13 +47,15 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 public interface UsuarioMapper {
 
     String CAMPOS_USER = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, " +
+            /** Constant <code>CAMPOS_USER=" id, correo, clave, creado, activo, acc"{trunked}</code> */
             "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante ";
 
     /**
      * Obtiene una lista de objetos de tipo 'usuario'.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="UsuarioMap", value = {
         @Result(property = "id",     column = "id"),
@@ -71,10 +73,22 @@ public interface UsuarioMapper {
     @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE id = #{id} ")
     Usuario getById(int id) throws SQLException;
 
+    /**
+     * <p>getAll.</p>
+     *
+     * @return a {@link java.util.List} object.
+     * @throws java.sql.SQLException if any.
+     */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario ")
     List<Usuario> getAll() throws SQLException;
 
+    /**
+     * <p>getAllAscendingByCorreo.</p>
+     *
+     * @return a {@link java.util.List} object.
+     * @throws java.sql.SQLException if any.
+     */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario order by correo asc")
     List<Usuario> getAllAscendingByCorreo() throws SQLException;
@@ -84,7 +98,7 @@ public interface UsuarioMapper {
      *
      * @param correo mail del usuario.
      * @return el usuario encontrado con el criterio de búsqueda.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE correo = #{correo} ")
@@ -95,7 +109,7 @@ public interface UsuarioMapper {
      *
      * @param usr a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO usuario(correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, "
             + "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante) "
@@ -109,7 +123,7 @@ public interface UsuarioMapper {
      *
      * @param usr a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE usuario SET correo = #{correo}, clave = #{clave}, creado = #{creado}, activo = #{activo}, "
             + "acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, "
@@ -123,14 +137,27 @@ public interface UsuarioMapper {
      *
      * @param id id del usuario a ser borrado
      * @return id del usuario borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("Update usuario SET actvo=false where id=#{id}")
     int delete(int id) throws SQLException;
 
+    /**
+     * <p>confirmaRegeneraClave.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     * @param clave a {@link java.lang.String} object.
+     * @return a int.
+     */
     @Update("Update usuario SET clave=#{clave} where regenera_clave_token=#{token}")
     int confirmaRegeneraClave(String token, String clave);
 
+    /**
+     * <p>getByToken.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     * @return a {@link io.kebblar.petstore.api.model.domain.Usuario} object.
+     */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE regenera_clave_token=#{token} ")
     Usuario getByToken(String token);

@@ -36,12 +36,22 @@ public class WrongTokenException extends BusinessException {
 
     private static final long serialVersionUID = -7083159020205284484L;
 
+    /**
+     * <p>Constructor for WrongTokenException.</p>
+     *
+     * @param e a {@link java.lang.Exception} object.
+     */
     public WrongTokenException(Exception e) {
         super(e);
     }
 
     //TODO: Aquí igualmente puede proceder tener varias especializaciones de esta clase... para evitar el "msg"
     //Podría ser que esté duplicada esta custom exception @TokenNotExistException
+    /**
+     * <p>Constructor for WrongTokenException.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     */
     public WrongTokenException(String msg) {
         super(
             "El token que se ha proporcionado es incorrecto.",

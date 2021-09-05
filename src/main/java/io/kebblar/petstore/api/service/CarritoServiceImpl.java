@@ -43,14 +43,13 @@ import org.springframework.stereotype.Service;
 /**
  * Servicio asociado a la entidad 'carrito'.
  *
- * <p>Implementación de la interfaz {@link CarritoService}.
+ * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.CarritoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see  Carrito
  * @see  CarritoService
  */
@@ -66,6 +65,7 @@ public class CarritoServiceImpl implements CarritoService {
      * servicios adicionales a ser empleados en esta clase.
      *
      * @param carritoMapper mapper utilizado para llamar a metodos de persistencia
+     * @param anuncioService a {@link io.kebblar.petstore.api.service.AnuncioService} object.
      */
     public CarritoServiceImpl(CarritoMapper carritoMapper, AnuncioService anuncioService) {
         logger.info("CarritoServiceImpl constructor invoked");
@@ -73,6 +73,7 @@ public class CarritoServiceImpl implements CarritoService {
         this.anuncioService = anuncioService;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Carrito getById(int id) throws BusinessException {
         try {
@@ -82,6 +83,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<CarritoDatosFactura> getByCveOrden(String cve) throws BusinessException {
         List<CarritoDatosFactura> carro;
@@ -94,6 +96,7 @@ public class CarritoServiceImpl implements CarritoService {
         return carro;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Carrito> getCarritoByUserId(int id) throws BusinessException {
         try {
@@ -103,6 +106,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int insert(Carrito carrito) throws BusinessException {
         try {
@@ -112,6 +116,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int update(Carrito carrito) throws BusinessException {
         try {
@@ -121,6 +126,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int delete(int id) throws BusinessException {
         try {
@@ -130,6 +136,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<CarritoVista> getCarritoView(int id) throws BusinessException {
         List<CarritoVista> lista = new ArrayList<>();
@@ -146,6 +153,7 @@ public class CarritoServiceImpl implements CarritoService {
         return lista;
     }
 
+    /** {@inheritDoc} */
     public void updateCarritoCompra(String cveCompra, int idUser) throws BusinessException {
         List<Carrito> carritos = getCarritoByUserId(idUser);
         for (Carrito carrito : carritos) {
@@ -158,6 +166,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void updateCarritoCompraBtc(String cveOrdenCompra, int idUser) throws BusinessException {
         try {
@@ -171,6 +180,7 @@ public class CarritoServiceImpl implements CarritoService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int save(Carrito carrito) throws BusinessException {
         try {

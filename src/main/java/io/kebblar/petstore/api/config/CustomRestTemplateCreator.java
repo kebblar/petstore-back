@@ -30,18 +30,37 @@ import io.kebblar.petstore.api.utils.CreatePDF;
 
 /**
  * Esta clase auxiliar me permitirá invocar servicios REST de otras fuentes.
+ *
  * @author garellano
+ * @version $Id: $Id
  */
 @Configuration
 public class CustomRestTemplateCreator {
+    /**
+     * <p>restTemplate.</p>
+     *
+     * @param builder a {@link org.springframework.boot.web.client.RestTemplateBuilder} object.
+     * @return a {@link org.springframework.web.client.RestTemplate} object.
+     */
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
        return builder.build();
     }
+    /**
+     * <p>createConvert.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.utils.Convert} object.
+     */
     @Bean
     public Convert createConvert() {
         return new Convert();
     }
+    /**
+     * <p>createPDF.</p>
+     *
+     * @param convert a {@link io.kebblar.petstore.api.utils.Convert} object.
+     * @return a {@link io.kebblar.petstore.api.utils.CreatePDF} object.
+     */
     @Bean
     public CreatePDF createPDF(Convert convert) {
         return new CreatePDF(convert);

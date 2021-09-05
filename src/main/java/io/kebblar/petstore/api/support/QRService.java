@@ -24,8 +24,35 @@ import java.awt.image.BufferedImage;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+/**
+ * <p>QRService interface.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public interface QRService {
+    /**
+     * <p>generateQRCodeImage.</p>
+     *
+     * @param barcodeText a {@link java.lang.String} object.
+     * @return a {@link java.awt.image.BufferedImage} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     BufferedImage generateQRCodeImage(String barcodeText) throws BusinessException;
+    /**
+     * <p>getQRBytes.</p>
+     *
+     * @param text a {@link java.lang.String} object.
+     * @return an array of {@link byte} objects.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     byte[] getQRBytes(String text) throws BusinessException ;
+    /**
+     * <p>getQRBytesBase64.</p>
+     *
+     * @param textToEncode a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     String getQRBytesBase64(String textToEncode) throws BusinessException;
 }

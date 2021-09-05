@@ -26,9 +26,19 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.service.AnuncioServiceImpl;
 
+/**
+ * <p>LimpiaTest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class LimpiaTest {
 
+    /**
+     * <p>pba.</p>
+     */
     @Test
     public void pba() {
         prueba("hola",

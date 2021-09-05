@@ -34,26 +34,53 @@ import javax.swing.ImageIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * <p>WaterMark class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class WaterMark {
     private Logger logger = LoggerFactory.getLogger(WaterMark.class);
 
     private static final String RUTA="/Users/garellano/Desktop/pics/";
     private static WaterMark instance =null;
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main(String[] args) {
         new WaterMark().addWatermarkOnImage();
     }
     private WaterMark() {
     }
+    /**
+     * <p>Getter for the field <code>instance</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.utils.WaterMark} object.
+     */
     public static WaterMark getInstance() {
         if(instance==null) {
             instance = new WaterMark();
         }
         return instance;
     }
+    /**
+     * <p>addWatermarkOnImage.</p>
+     */
     public void addWatermarkOnImage() {
         addWatermarkOnImage(RUTA, "out_ok.jpg", "logo.png", "out_ok.jpg");
     }
+    /**
+     * <p>addWatermarkOnImage.</p>
+     *
+     * @param path a {@link java.lang.String} object.
+     * @param origFileName a {@link java.lang.String} object.
+     * @param watermarkImageFileName a {@link java.lang.String} object.
+     * @param newFileName a {@link java.lang.String} object.
+     */
     public void addWatermarkOnImage(String path, String origFileName, String watermarkImageFileName, String newFileName) {
         if(!path.endsWith("/")) path = path + File.separator;
         File origFile           = new File(path + origFileName);
@@ -74,6 +101,13 @@ public class WaterMark {
 //        }
         addWatermarkOnImage(origFile, watermarkImageFile, newFile);
     }
+    /**
+     * <p>addWatermarkOnImage.</p>
+     *
+     * @param originalFile a {@link java.io.File} object.
+     * @param watermarkImageFile a {@link java.io.File} object.
+     * @param newFile a {@link java.io.File} object.
+     */
     public void addWatermarkOnImage(File originalFile, File watermarkImageFile, File newFile) {
         ImageIcon watermarkImage = new ImageIcon(watermarkImageFile.getPath());
         BufferedImage watermarkBufferedImage = makeTransparent(watermarkImage.getImage(), watermarkImage.getIconWidth());
@@ -132,6 +166,13 @@ public class WaterMark {
         System.out.println(newFile.getPath() + " created successfully!");
     }
 
+    /**
+     * <p>makeTransparent.</p>
+     *
+     * @param originalImage a {@link java.awt.Image} object.
+     * @param ancho a int.
+     * @return a {@link java.awt.image.BufferedImage} object.
+     */
     public BufferedImage makeTransparent(Image originalImage, int ancho) {
         double h = originalImage.getHeight(null);
         double w = originalImage.getWidth(null);

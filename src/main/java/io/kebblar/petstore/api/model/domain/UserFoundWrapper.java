@@ -22,6 +22,12 @@ package io.kebblar.petstore.api.model.domain;
 
 import java.util.List;
 
+/**
+ * <p>UserFoundWrapper class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class UserFoundWrapper {
 
     /*
@@ -33,6 +39,10 @@ public class UserFoundWrapper {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param roles a {@link java.util.List} object.
+     * @param usuarioDetalle a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     * @param jwt a {@link java.lang.String} object.
      */
     public UserFoundWrapper(List<Rol> roles, UsuarioDetalle usuarioDetalle, String jwt) {
         this.roles = roles;
@@ -43,37 +53,63 @@ public class UserFoundWrapper {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>roles</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<Rol> getRoles() {
         return roles;
     }
+    /**
+     * <p>Setter for the field <code>roles</code>.</p>
+     *
+     * @param roles a {@link java.util.List} object.
+     */
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
+    /**
+     * <p>Getter for the field <code>usuarioDetalle</code>.</p>
+     *
+     * @return a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     */
     public UsuarioDetalle getUsuarioDetalle() {
         return usuarioDetalle;
     }
+    /**
+     * <p>Setter for the field <code>usuarioDetalle</code>.</p>
+     *
+     * @param usuarioDetalle a {@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} object.
+     */
     public void setUsuarioDetalle(UsuarioDetalle usuarioDetalle) {
         this.usuarioDetalle = usuarioDetalle;
     }
+    /**
+     * <p>Getter for the field <code>jwt</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getJwt() {
         return jwt;
     }
+    /**
+     * <p>Setter for the field <code>jwt</code>.</p>
+     *
+     * @param jwt a {@link java.lang.String} object.
+     */
     public void setJwt(String jwt) {
         this.jwt = jwt;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "UserFoundWrapper [roles=" + roles +  ", usuarioDetalle="
                 + usuarioDetalle + ", jwt=" + jwt + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -84,9 +120,7 @@ public class UserFoundWrapper {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

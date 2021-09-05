@@ -48,6 +48,8 @@ public class MascotaValorAtributo implements Serializable {
 
     /**
      * Constructor basado en el id del objeto.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public MascotaValorAtributo(Integer id) {
         this.id = id;
@@ -55,6 +57,10 @@ public class MascotaValorAtributo implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     * @param idValorAtributo a {@link java.lang.Integer} object.
      */
     public MascotaValorAtributo(Integer id, Integer idAnuncio, Integer idValorAtributo) {
         this.id = id;
@@ -62,30 +68,61 @@ public class MascotaValorAtributo implements Serializable {
         this.idValorAtributo = idValorAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idAnuncio</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdAnuncio() {
         return idAnuncio;
     }
 
+    /**
+     * <p>Setter for the field <code>idAnuncio</code>.</p>
+     *
+     * @param idAnuncio a {@link java.lang.Integer} object.
+     */
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
     }
 
+    /**
+     * <p>Getter for the field <code>idValorAtributo</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdValorAtributo() {
         return idValorAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>idValorAtributo</code>.</p>
+     *
+     * @param idValorAtributo a {@link java.lang.Integer} object.
+     */
     public void setIdValorAtributo(Integer idValorAtributo) {
         this.idValorAtributo = idValorAtributo;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -96,6 +133,7 @@ public class MascotaValorAtributo implements Serializable {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -123,6 +161,7 @@ public class MascotaValorAtributo implements Serializable {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "MascotaValorAtributo [id=" + id + ", idAnuncio=" + idAnuncio + ", idValorAtributo=" + idValorAtributo + "]";

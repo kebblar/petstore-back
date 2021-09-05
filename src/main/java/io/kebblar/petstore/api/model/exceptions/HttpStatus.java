@@ -32,6 +32,7 @@ package io.kebblar.petstore.api.model.exceptions;
  * @see HttpStatus.Series
  * @see <a href="https://www.iana.org/assignments/http-status-codes">HTTP Status Code Registry</a>
  * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">List of HTTP status codes - Wikipedia</a>
+ * @version $Id: $Id
  */
 public enum HttpStatus {
 
@@ -431,6 +432,8 @@ public enum HttpStatus {
 
     /**
      * Return the integer value of this status code.
+     *
+     * @return a int.
      */
     public int value() {
         return this.value;
@@ -438,6 +441,8 @@ public enum HttpStatus {
 
     /**
      * Return the reason phrase of this status code.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getReasonPhrase() {
         return this.reasonPhrase;
@@ -445,7 +450,9 @@ public enum HttpStatus {
 
     /**
      * Return the HTTP status series of this status code.
+     *
      * @see HttpStatus.Series
+     * @return a {@link io.kebblar.petstore.api.model.exceptions.HttpStatus.Series} object.
      */
     public Series series() {
         return Series.valueOf(this);
@@ -455,8 +462,10 @@ public enum HttpStatus {
      * Whether this status code is in the HTTP series
      * {@link org.springframework.http.HttpStatus.Series#INFORMATIONAL}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 4.0
      * @see #series()
+     * @return a boolean.
      */
     public boolean is1xxInformational() {
         return (series() == Series.INFORMATIONAL);
@@ -466,8 +475,10 @@ public enum HttpStatus {
      * Whether this status code is in the HTTP series
      * {@link org.springframework.http.HttpStatus.Series#SUCCESSFUL}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 4.0
      * @see #series()
+     * @return a boolean.
      */
     public boolean is2xxSuccessful() {
         return (series() == Series.SUCCESSFUL);
@@ -477,8 +488,10 @@ public enum HttpStatus {
      * Whether this status code is in the HTTP series
      * {@link org.springframework.http.HttpStatus.Series#REDIRECTION}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 4.0
      * @see #series()
+     * @return a boolean.
      */
     public boolean is3xxRedirection() {
         return (series() == Series.REDIRECTION);
@@ -488,8 +501,10 @@ public enum HttpStatus {
      * Whether this status code is in the HTTP series
      * {@link org.springframework.http.HttpStatus.Series#CLIENT_ERROR}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 4.0
      * @see #series()
+     * @return a boolean.
      */
     public boolean is4xxClientError() {
         return (series() == Series.CLIENT_ERROR);
@@ -499,8 +514,10 @@ public enum HttpStatus {
      * Whether this status code is in the HTTP series
      * {@link org.springframework.http.HttpStatus.Series#SERVER_ERROR}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 4.0
      * @see #series()
+     * @return a boolean.
      */
     public boolean is5xxServerError() {
         return (series() == Series.SERVER_ERROR);
@@ -511,15 +528,19 @@ public enum HttpStatus {
      * {@link org.springframework.http.HttpStatus.Series#CLIENT_ERROR} or
      * {@link org.springframework.http.HttpStatus.Series#SERVER_ERROR}.
      * This is a shortcut for checking the value of {@link #series()}.
+     *
      * @since 5.0
      * @see #is4xxClientError()
      * @see #is5xxServerError()
+     * @return a boolean.
      */
     public boolean isError() {
         return (is4xxClientError() || is5xxServerError());
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return a string representation of this status code.
      */
     @Override
@@ -530,9 +551,10 @@ public enum HttpStatus {
 
     /**
      * Return the enum constant of this type with the specified numeric value.
+     *
      * @param statusCode the numeric value of the enum to be returned
      * @return the enum constant with the specified numeric value
-     * @throws IllegalArgumentException if this enum has no constant for the specified numeric value
+     * @throws java.lang.IllegalArgumentException if this enum has no constant for the specified numeric value
      */
     public static HttpStatus valueOf(int statusCode) {
         HttpStatus status = resolve(statusCode);
@@ -544,6 +566,7 @@ public enum HttpStatus {
 
     /**
      * Resolve the given status code to an {@code HttpStatus}, if possible.
+     *
      * @param statusCode the HTTP status code (potentially non-standard)
      * @return the corresponding {@code HttpStatus}, or {@code null} if not found
      * @since 5.0

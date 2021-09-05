@@ -30,6 +30,12 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+/**
+ * <p>PreregistroRequest class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class PreregistroRequest {
     private int id;
     @ApiModelProperty(example = "superboy")
@@ -71,9 +77,26 @@ public class PreregistroRequest {
     @Min(message = "El dia debe ser mayor o igual a 1", value = 1)
     private int day;
 
+    /**
+     * <p>Constructor for PreregistroRequest.</p>
+     */
     public PreregistroRequest() {
     }
 
+    /**
+     * <p>Constructor for PreregistroRequest.</p>
+     *
+     * @param id a int.
+     * @param nick a {@link java.lang.String} object.
+     * @param correo a {@link java.lang.String} object.
+     * @param claveHash a {@link java.lang.String} object.
+     * @param telefono a {@link java.lang.String} object.
+     * @param randomString a {@link java.lang.String} object.
+     * @param instanteRegistro a long.
+     * @param year a int.
+     * @param month a int.
+     * @param day a int.
+     */
     public PreregistroRequest(
             int id,
             @Size(message = "El nick debe medir entre 3 y 15 caracteres", min=3, max=15) String nick,
@@ -97,86 +120,187 @@ public class PreregistroRequest {
         this.day = day;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nick</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNick() {
         return nick;
     }
 
+    /**
+     * <p>Setter for the field <code>nick</code>.</p>
+     *
+     * @param nick a {@link java.lang.String} object.
+     */
     public void setNick(String nick) {
         this.nick = nick;
     }
 
+    /**
+     * <p>Getter for the field <code>correo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * <p>Setter for the field <code>correo</code>.</p>
+     *
+     * @param correo a {@link java.lang.String} object.
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * <p>Getter for the field <code>claveHash</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getClaveHash() {
         return claveHash;
     }
 
+    /**
+     * <p>Setter for the field <code>claveHash</code>.</p>
+     *
+     * @param claveHash a {@link java.lang.String} object.
+     */
     public void setClaveHash(String claveHash) {
         this.claveHash = claveHash;
     }
 
+    /**
+     * <p>Getter for the field <code>telefono</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTelefono() {
         return telefono;
     }
 
+    /**
+     * <p>Setter for the field <code>telefono</code>.</p>
+     *
+     * @param telefono a {@link java.lang.String} object.
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    /**
+     * <p>Getter for the field <code>randomString</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRandomString() {
         return randomString;
     }
 
+    /**
+     * <p>Setter for the field <code>randomString</code>.</p>
+     *
+     * @param randomString a {@link java.lang.String} object.
+     */
     public void setRandomString(String randomString) {
         this.randomString = randomString;
     }
 
+    /**
+     * <p>Getter for the field <code>instanteRegistro</code>.</p>
+     *
+     * @return a long.
+     */
     public long getInstanteRegistro() {
         return instanteRegistro;
     }
 
+    /**
+     * <p>Setter for the field <code>instanteRegistro</code>.</p>
+     *
+     * @param instanteRegistro a long.
+     */
     public void setInstanteRegistro(long instanteRegistro) {
         this.instanteRegistro = instanteRegistro;
     }
 
+    /**
+     * <p>Getter for the field <code>year</code>.</p>
+     *
+     * @return a int.
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * <p>Setter for the field <code>year</code>.</p>
+     *
+     * @param year a int.
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a int.
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a int.
+     */
     public void setMonth(int month) {
         this.month = month;
     }
 
+    /**
+     * <p>Getter for the field <code>day</code>.</p>
+     *
+     * @return a int.
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     * <p>Setter for the field <code>day</code>.</p>
+     *
+     * @param day a int.
+     */
     public void setDay(int day) {
         this.day = day;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "PreregistroRequest [id=" + id + ", nick=" + nick + ", correo=" + correo + ", claveHash=" + claveHash
@@ -184,6 +308,7 @@ public class PreregistroRequest {
                 + ", year=" + year + ", month=" + month + ", day=" + day + "]";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -201,6 +326,7 @@ public class PreregistroRequest {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

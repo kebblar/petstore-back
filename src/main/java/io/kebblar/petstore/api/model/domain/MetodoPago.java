@@ -31,7 +31,6 @@ import java.util.Objects;
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-
 public class MetodoPago implements Serializable {
 
     private static final long serialVersionUID = -8185694508799189335L;
@@ -54,6 +53,8 @@ public class MetodoPago implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public MetodoPago(Integer id) {
         this.id = id;
@@ -61,6 +62,13 @@ public class MetodoPago implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idUsuario a int.
+     * @param tipopago a int.
+     * @param numTarjetaCartera a {@link java.lang.String} object.
+     * @param expiracion a {@link java.lang.String} object.
+     * @param activo a boolean.
      */
     public MetodoPago(Integer id, int idUsuario, int tipopago, String numTarjetaCartera, String expiracion, boolean activo) {
         this.id = id;
@@ -74,58 +82,116 @@ public class MetodoPago implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>isActivo.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a boolean.
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idUsuario</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdUsuario() {
         return idUsuario;
     }
 
+    /**
+     * <p>Setter for the field <code>idUsuario</code>.</p>
+     *
+     * @param idUsuario a int.
+     */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
+    /**
+     * <p>Getter for the field <code>tipopago</code>.</p>
+     *
+     * @return a int.
+     */
     public int getTipopago() {
         return tipopago;
     }
 
+    /**
+     * <p>Setter for the field <code>tipopago</code>.</p>
+     *
+     * @param tipopago a int.
+     */
     public void setTipopago(int tipopago) {
         this.tipopago = tipopago;
     }
 
+    /**
+     * <p>Getter for the field <code>numTarjetaCartera</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNumTarjetaCartera() {
         return numTarjetaCartera;
     }
 
+    /**
+     * <p>Setter for the field <code>numTarjetaCartera</code>.</p>
+     *
+     * @param numTarjetaCartera a {@link java.lang.String} object.
+     */
     public void setNumTarjetaCartera(String numTarjetaCartera) {
         this.numTarjetaCartera = numTarjetaCartera;
     }
 
+    /**
+     * <p>Getter for the field <code>expiracion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getExpiracion() {
         return expiracion;
     }
 
+    /**
+     * <p>Setter for the field <code>expiracion</code>.</p>
+     *
+     * @param expiracion a {@link java.lang.String} object.
+     */
     public void setExpiracion(String expiracion) {
         this.expiracion = expiracion;
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[MetodoPago] : ["
@@ -138,9 +204,7 @@ public class MetodoPago implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,9 +213,7 @@ public class MetodoPago implements Serializable {
         return idUsuario == that.idUsuario && tipopago == that.tipopago && activo == that.activo && Objects.equals(id, that.id) && Objects.equals(numTarjetaCartera, that.numTarjetaCartera) && Objects.equals(expiracion, that.expiracion);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, idUsuario, tipopago, numTarjetaCartera, expiracion, activo);

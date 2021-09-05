@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Implementacion del POJO de la entidad de {@link ChartData}.
+ * Implementacion del POJO de la entidad de {@link io.kebblar.petstore.api.model.domain.ChartData}.
  *
  * @author ulopez
  * @version 1.0-SNAPSHOT
@@ -49,6 +49,10 @@ public class ChartData implements Serializable {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param label a {@link java.util.List} object.
+     * @param data a {@link java.util.List} object.
+     * @param mes a {@link java.util.Set} object.
      */
     public ChartData(List<String> label, List<Long> data, Set<String> mes) {
         super();
@@ -60,37 +64,70 @@ public class ChartData implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>label</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getLabel() {
         return label;
     }
 
+    /**
+     * <p>Setter for the field <code>label</code>.</p>
+     *
+     * @param label a {@link java.util.List} object.
+     */
     public void setLabel(List<String> label) {
         this.label = label;
     }
 
+    /**
+     * <p>Getter for the field <code>data</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<Long> getData() {
         return data;
     }
 
+    /**
+     * <p>Setter for the field <code>data</code>.</p>
+     *
+     * @param data a {@link java.util.List} object.
+     */
     public void setData(List<Long> data) {
         this.data = data;
     }
 
+    /**
+     * <p>Getter for the field <code>mes</code>.</p>
+     *
+     * @return a {@link java.util.Set} object.
+     */
     public Set<String> getMes() {
         return mes;
     }
 
+    /**
+     * <p>Setter for the field <code>mes</code>.</p>
+     *
+     * @param mes a {@link java.util.Set} object.
+     */
     public void setMes(Set<String> mes) {
         this.mes = mes;
     }
 
+    /**
+     * <p>getSerialversionuid.</p>
+     *
+     * @return a long.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -101,9 +138,7 @@ public class ChartData implements Serializable {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -131,9 +166,7 @@ public class ChartData implements Serializable {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "ChartData [label=" + label + ", data=" + data + ", mes=" + mes + "]";

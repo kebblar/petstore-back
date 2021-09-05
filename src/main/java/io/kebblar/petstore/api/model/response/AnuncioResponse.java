@@ -33,44 +33,91 @@ public class AnuncioResponse {
     private String folio;
     private String info;
 
+    /**
+     * <p>Constructor for AnuncioResponse.</p>
+     */
     public AnuncioResponse() {
     }
 
+    /**
+     * <p>Constructor for AnuncioResponse.</p>
+     *
+     * @param id a int.
+     * @param folio a {@link java.lang.String} object.
+     */
     public AnuncioResponse(int id, String folio) {
         this.id = id;
         this.folio = folio;
     }
 
+    /**
+     * <p>Constructor for AnuncioResponse.</p>
+     *
+     * @param id a int.
+     * @param folio a {@link java.lang.String} object.
+     * @param info a {@link java.lang.String} object.
+     */
     public AnuncioResponse(int id, String folio, String info) {
         this.id = id;
         this.folio = folio;
         this.info = info;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>folio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFolio() {
         return folio;
     }
 
+    /**
+     * <p>Setter for the field <code>folio</code>.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
 
+    /**
+     * <p>Getter for the field <code>info</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getInfo() {
         return info;
     }
 
+    /**
+     * <p>Setter for the field <code>info</code>.</p>
+     *
+     * @param info a {@link java.lang.String} object.
+     */
     public void setInfo(String info) {
         this.info = info;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -81,6 +128,7 @@ public class AnuncioResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -105,10 +153,16 @@ public class AnuncioResponse {
         return true;
     }
 
+    /**
+     * <p>getHash.</p>
+     *
+     * @return a long.
+     */
     public long getHash() {
         return this.hashCode();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "AnuncioResponse [id=" + id + ", folio=" + folio + ", info=" + info + "]";

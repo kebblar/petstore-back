@@ -40,12 +40,12 @@ import io.kebblar.petstore.api.model.domain.AnuncioMedia;
  * @author Isabel Contreras Garcia
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see AnuncioMapper
  */
 @Repository
 public interface AnuncioMediaMapper {
 
+    /** Constant <code>CAMPOS_ANUNCIO_MEDIA=" id_anuncio, uuid, id_tipo, principal "</code> */
     String CAMPOS_ANUNCIO_MEDIA = " id_anuncio, uuid, id_tipo, principal ";
 
     /**
@@ -53,7 +53,6 @@ public interface AnuncioMediaMapper {
      *
      * @param id Identificador del anuncio por medio del cual se realizara la búsqueda de sus imagenes asociadas
      * @return Listado de clases de tipo 'AnuncioMedia' con la información de las imágenes
-     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @Results(id="AnuncioImagenMap", value = {
             @Result(property = "id",   column = "id"),
@@ -70,7 +69,6 @@ public interface AnuncioMediaMapper {
      *
      * @param uuid Identificador de la imagen por medio del cual se realizara la búsqueda de sus imagen
      * @return Clase de tipo 'AnuncioImagen' con la información de las imágen solicitada
-     * @throws SQLException Excepción lanzada en caso de error de base de datos
      */
     @ResultMap("AnuncioImagenMap")
     @Select("SELECT id," + CAMPOS_ANUNCIO_MEDIA + " FROM anuncio_media WHERE uuid = #{uuid} ")
@@ -81,7 +79,7 @@ public interface AnuncioMediaMapper {
      *
      * @param anuncioImagen a ser insertado.
      * @return identificador en base de datos del registro dado de alta.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO anuncio_media("+CAMPOS_ANUNCIO_MEDIA+") VALUES(#{idAnuncio}, #{uuid}, #{idTipo}, #{principal} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
@@ -92,7 +90,7 @@ public interface AnuncioMediaMapper {
      *
      * @param uuid identificador del anuncio a ser eliminado
      * @return identificador en base de datos del registro eliminado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM anuncio_media WHERE uuid = #{uuid} ")
     int eliminarImagen(String uuid) throws SQLException;
@@ -103,7 +101,7 @@ public interface AnuncioMediaMapper {
      * @param uuid Identificador del anuncio a actualizar
      * @param principal Indica si la imagen sera o no principal
      * @return numero de registros actualizados
-     * @throws SQLException Excepción lanzada en caso de error
+     * @throws java.sql.SQLException Excepción lanzada en caso de error
      */
     @Update("UPDATE anuncio_media SET principal = #{principal} WHERE uuid = #{uuid} ")
     int actualizaPrincipal(String uuid, Boolean principal) throws SQLException;

@@ -47,9 +47,30 @@ public class DetalleAnuncioResponse {
     private List<MascotaValorAtributoResponse> atributos;
     private List<AnuncioImagenResponse> imagenes;
 
+    /**
+     * <p>Constructor for DetalleAnuncioResponse.</p>
+     */
     public DetalleAnuncioResponse() {
     }
 
+    /**
+     * <p>Constructor for DetalleAnuncioResponse.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idCategoria a {@link java.lang.Integer} object.
+     * @param descCategoria a {@link java.lang.String} object.
+     * @param folio a {@link java.lang.String} object.
+     * @param titulo a {@link java.lang.String} object.
+     * @param descripcion a {@link java.lang.String} object.
+     * @param precio a {@link java.math.BigDecimal} object.
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     * @param idEstatus a short.
+     * @param descEstatus a {@link java.lang.String} object.
+     * @param searchUrl a {@link java.lang.String} object.
+     * @param atributos a {@link java.util.List} object.
+     * @param imagenes a {@link java.util.List} object.
+     */
     public DetalleAnuncioResponse(Integer id, Integer idCategoria, String descCategoria, String folio, String titulo,
             String descripcion, BigDecimal precio, Date fechaInicioVigencia, Date fechaFinVigencia, short idEstatus,
             String descEstatus, String searchUrl, List<MascotaValorAtributoResponse> atributos, List<AnuncioImagenResponse> imagenes) {
@@ -69,118 +90,259 @@ public class DetalleAnuncioResponse {
         this.searchUrl = searchUrl;
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getIdCategoria() {
         return idCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>idCategoria</code>.</p>
+     *
+     * @param idCategoria a {@link java.lang.Integer} object.
+     */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>descCategoria</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescCategoria() {
         return descCategoria;
     }
 
+    /**
+     * <p>Setter for the field <code>descCategoria</code>.</p>
+     *
+     * @param descCategoria a {@link java.lang.String} object.
+     */
     public void setDescCategoria(String descCategoria) {
         this.descCategoria = descCategoria;
     }
 
+    /**
+     * <p>Getter for the field <code>folio</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFolio() {
         return folio;
     }
 
+    /**
+     * <p>Setter for the field <code>folio</code>.</p>
+     *
+     * @param folio a {@link java.lang.String} object.
+     */
     public void setFolio(String folio) {
         this.folio = folio;
     }
 
+    /**
+     * <p>Getter for the field <code>titulo</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * <p>Setter for the field <code>titulo</code>.</p>
+     *
+     * @param titulo a {@link java.lang.String} object.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    /**
+     * <p>Getter for the field <code>precio</code>.</p>
+     *
+     * @return a {@link java.math.BigDecimal} object.
+     */
     public BigDecimal getPrecio() {
         return precio;
     }
 
+    /**
+     * <p>Setter for the field <code>precio</code>.</p>
+     *
+     * @param precio a {@link java.math.BigDecimal} object.
+     */
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaInicioVigencia</code>.</p>
+     *
+     * @param fechaInicioVigencia a {@link java.util.Date} object.
+     */
     public void setFechaInicioVigencia(Date fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaFinVigencia</code>.</p>
+     *
+     * @param fechaFinVigencia a {@link java.util.Date} object.
+     */
     public void setFechaFinVigencia(Date fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
+    /**
+     * <p>Getter for the field <code>idEstatus</code>.</p>
+     *
+     * @return a short.
+     */
     public short getIdEstatus() {
         return idEstatus;
     }
 
+    /**
+     * <p>Setter for the field <code>idEstatus</code>.</p>
+     *
+     * @param idEstatus a short.
+     */
     public void setIdEstatus(short idEstatus) {
         this.idEstatus = idEstatus;
     }
 
+    /**
+     * <p>Getter for the field <code>descEstatus</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescEstatus() {
         return descEstatus;
     }
 
+    /**
+     * <p>Setter for the field <code>descEstatus</code>.</p>
+     *
+     * @param descEstatus a {@link java.lang.String} object.
+     */
     public void setDescEstatus(String descEstatus) {
         this.descEstatus = descEstatus;
     }
 
+    /**
+     * <p>Getter for the field <code>atributos</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<MascotaValorAtributoResponse> getAtributos() {
         return atributos;
     }
 
+    /**
+     * <p>Setter for the field <code>atributos</code>.</p>
+     *
+     * @param atributos a {@link java.util.List} object.
+     */
     public void setAtributos(List<MascotaValorAtributoResponse> atributos) {
         this.atributos = atributos;
     }
 
+    /**
+     * <p>Getter for the field <code>imagenes</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<AnuncioImagenResponse> getImagenes() {
         return imagenes;
     }
 
+    /**
+     * <p>Setter for the field <code>imagenes</code>.</p>
+     *
+     * @param imagenes a {@link java.util.List} object.
+     */
     public void setImagenes(List<AnuncioImagenResponse> imagenes) {
         this.imagenes = imagenes;
     }
 
+    /**
+     * <p>Getter for the field <code>searchUrl</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSearchUrl() {
         return searchUrl;
     }
 
+    /**
+     * <p>Setter for the field <code>searchUrl</code>.</p>
+     *
+     * @param searchUrl a {@link java.lang.String} object.
+     */
     public void setSearchUrl(String searchUrl) {
         this.searchUrl = searchUrl;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "DetalleAnuncioResponse [id=" + id + ", idCategoria=" + idCategoria + ", descCategoria=" + descCategoria
@@ -190,6 +352,7 @@ public class DetalleAnuncioResponse {
                 + ", atributos=" + atributos + ", imagenes=" + imagenes + "]";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -211,6 +374,7 @@ public class DetalleAnuncioResponse {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

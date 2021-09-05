@@ -25,6 +25,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+/**
+ * <p>Mascota class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ */
 public class Mascota {
 
     /*
@@ -47,6 +53,10 @@ public class Mascota {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param id a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param descripcion a {@link java.lang.String} object.
      */
     public Mascota(int id, String nombre, String descripcion) {
         this.id = id;
@@ -57,41 +67,67 @@ public class Mascota {
     /*
      * Setter y Getter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>descripcion</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * <p>Setter for the field <code>descripcion</code>.</p>
+     *
+     * @param descripcion a {@link java.lang.String} object.
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Mascota [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -102,9 +138,7 @@ public class Mascota {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -131,6 +165,7 @@ public class Mascota {
 
     /**
      * Delvuelve el hash del objeto.
+     *
      * @return entero hash del objeto
      */
     public int getHash() {

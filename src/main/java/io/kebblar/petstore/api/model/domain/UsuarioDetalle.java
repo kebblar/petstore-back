@@ -51,6 +51,14 @@ public class UsuarioDetalle {
 
     /**
      * Constructor basado en los atributos de la clase.
+     *
+     * @param id a int.
+     * @param nombre a {@link java.lang.String} object.
+     * @param apellidoPaterno a {@link java.lang.String} object.
+     * @param apellidoMaterno a {@link java.lang.String} object.
+     * @param nickName a {@link java.lang.String} object.
+     * @param fechaNacimiento a {@link java.util.Date} object.
+     * @param telefonoCelular a {@link java.lang.String} object.
      */
     public UsuarioDetalle(
             int id,
@@ -73,69 +81,142 @@ public class UsuarioDetalle {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>nombre</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * <p>Setter for the field <code>nombre</code>.</p>
+     *
+     * @param nombre a {@link java.lang.String} object.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * <p>Getter for the field <code>apellidoPaterno</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
+    /**
+     * <p>Setter for the field <code>apellidoPaterno</code>.</p>
+     *
+     * @param apellidoPaterno a {@link java.lang.String} object.
+     */
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
+    /**
+     * <p>Getter for the field <code>apellidoMaterno</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
 
+    /**
+     * <p>Setter for the field <code>apellidoMaterno</code>.</p>
+     *
+     * @param apellidoMaterno a {@link java.lang.String} object.
+     */
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    /**
+     * <p>Getter for the field <code>fechaNacimiento</code>.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * <p>Setter for the field <code>fechaNacimiento</code>.</p>
+     *
+     * @param fechaNacimiento a {@link java.util.Date} object.
+     */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * <p>Getter for the field <code>nickName</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNickName() {
         return nickName;
     }
 
+    /**
+     * <p>Setter for the field <code>nickName</code>.</p>
+     *
+     * @param nickName a {@link java.lang.String} object.
+     */
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
+    /**
+     * <p>Getter for the field <code>telefonoCelular</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTelefonoCelular() {
         return telefonoCelular;
     }
 
+    /**
+     * <p>Setter for the field <code>telefonoCelular</code>.</p>
+     *
+     * @param telefonoCelular a {@link java.lang.String} object.
+     */
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
 
+    /**
+     * <p>getHash.</p>
+     *
+     * @return a long.
+     */
     public long getHash() {
         return hashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "UsuarioDetalle [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
@@ -143,9 +224,7 @@ public class UsuarioDetalle {
                 + nickName + ", telefonoCelular=" + telefonoCelular + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -160,9 +239,7 @@ public class UsuarioDetalle {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

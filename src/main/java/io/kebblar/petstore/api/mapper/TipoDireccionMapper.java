@@ -40,20 +40,21 @@ import io.kebblar.petstore.api.model.domain.TipoDireccion;
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
- *
  * @see TipoDireccion
  */
 
 @Repository
 public interface TipoDireccionMapper {
 
+    /** Constant <code>CAMPOS_T_DIRECC=" id, nombre, activo "</code> */
     String CAMPOS_T_DIRECC = " id, nombre, activo ";
 
     /**
      * Obtiene un objeto de tipo 'TipoDireccion' dado su id.
      *
      * @return TipoDireccion que tiene asignado el id pasado como parámetro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @param id a int.
      */
     @Results(id="TipoDireccionMap", value = {
             @Result(property = "id",   column = "id"),
@@ -67,7 +68,7 @@ public interface TipoDireccionMapper {
      * Obtiene una lista de objetos de tipo 'TipoDireccion'.
      *
      * @return Lista de obetos de tipo TipoDireccion
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("TipoDireccionMap")
     @Select("SELECT " + CAMPOS_T_DIRECC + " FROM tipo_direccion ")
@@ -78,7 +79,7 @@ public interface TipoDireccionMapper {
      *
      * @param tipoDireccion a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO tipo_direccion(id, nombre, activo) "
@@ -91,7 +92,7 @@ public interface TipoDireccionMapper {
      *
      * @param tipoDireccion a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE tipo_direccion"
@@ -104,7 +105,7 @@ public interface TipoDireccionMapper {
      *
      * @param id id del TipoDireccion a ser borrado
      * @return id del TipoDireccion borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ")
     int delete(int id) throws SQLException;

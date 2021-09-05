@@ -51,6 +51,8 @@ public class ValorAtributo implements Serializable {
 
     /**
      * Constructor basado en la llave primaria.
+     *
+     * @param id a {@link java.lang.Integer} object.
      */
     public ValorAtributo(Integer id) {
         this.id = id;
@@ -58,6 +60,11 @@ public class ValorAtributo implements Serializable {
 
     /**
      * Constructor basado en todos los atributos de la clase.
+     *
+     * @param id a {@link java.lang.Integer} object.
+     * @param idAtributo a int.
+     * @param rango a {@link java.lang.String} object.
+     * @param activo a int.
      */
     public ValorAtributo(Integer id, int idAtributo, String rango, int activo) {
         this.id = id;
@@ -69,41 +76,79 @@ public class ValorAtributo implements Serializable {
     /*
      * Getter y Setter.
      */
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a {@link java.lang.Integer} object.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * <p>Getter for the field <code>idAtributo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getIdAtributo() {
         return idAtributo;
     }
 
+    /**
+     * <p>Setter for the field <code>idAtributo</code>.</p>
+     *
+     * @param idAtributo a int.
+     */
     public void setIdAtributo(int idAtributo) {
         this.idAtributo = idAtributo;
     }
 
+    /**
+     * <p>Getter for the field <code>rango</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getRango() {
         return rango;
     }
 
+    /**
+     * <p>Setter for the field <code>rango</code>.</p>
+     *
+     * @param rango a {@link java.lang.String} object.
+     */
     public void setRango(String rango) {
         this.rango = rango;
     }
 
+    /**
+     * <p>Getter for the field <code>activo</code>.</p>
+     *
+     * @return a int.
+     */
     public int getActivo() {
         return activo;
     }
 
+    /**
+     * <p>Setter for the field <code>activo</code>.</p>
+     *
+     * @param activo a int.
+     */
     public void setActivo(int activo) {
         this.activo = activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[ValorAtributo] : ["
@@ -114,9 +159,7 @@ public class ValorAtributo implements Serializable {
                 + "]";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -133,9 +176,7 @@ public class ValorAtributo implements Serializable {
                activo == other.activo;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(

@@ -56,6 +56,13 @@ import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.support.UploadService;
 
+/**
+ * <p>TestAnuncioService class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 @TestMethodOrder(OrderAnnotation.class)
 public class TestAnuncioService {
@@ -73,16 +80,21 @@ public class TestAnuncioService {
     private List<MascotaValorAtributoRequest> atributos;
     private ActualizaAnuncioRequest actualizaAnuncioRequest;
 
+    /**
+     * <p>pedro.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     */
     @Before
     public void pedro() throws SQLException {
         this.anuncioService= new AnuncioServiceImpl(anuncioMapper, uploadService, anuncioImagenMapper);
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio existente.
-    *
-    * @throws Exception
-    */
+     * Escenario donde se trata de actualizar un anuncio existente.
+     *
+     * @throws java.lang.Exception
+     */
     @Test()
     public void actualizacion() throws Exception{
       when(anuncioMapper.getAnuncioById(1)).thenReturn(
@@ -100,12 +112,10 @@ public class TestAnuncioService {
     }
 
     /**
-    * Escenario donde se trata de actualizar un anuncio que no existe.
-    *
-    * @throws SQLException
-    * @throws BusinessException
-    * @throws Exception
-    */
+     * Escenario donde se trata de actualizar un anuncio que no existe.
+     *
+     * @throws java.lang.Exception
+     */
     @Test
     public void noExisteAnuncio() throws Exception{
         try {
@@ -123,6 +133,12 @@ public class TestAnuncioService {
             }
     }
 
+    /**
+     * <p>busqueda.</p>
+     *
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws java.sql.SQLException if any.
+     */
     @Test
     public void busqueda() throws BusinessException, SQLException {
         List<BusquedaAdministracionResponse> anuncios = new ArrayList<>();
@@ -148,6 +164,12 @@ public class TestAnuncioService {
         assertEquals(response.getListaAnuncios().size(),10);
     }
 
+    /**
+     * <p>busquedaUsuario.</p>
+     *
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws java.sql.SQLException if any.
+     */
     @Test
     public void busquedaUsuario() throws BusinessException, SQLException{
         try {
@@ -188,6 +210,12 @@ public class TestAnuncioService {
         }
     }
 
+    /**
+     * <p>detalleAnuncio.</p>
+     *
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws java.sql.SQLException if any.
+     */
     @Test
     public void detalleAnuncio() throws BusinessException, SQLException{
         try {

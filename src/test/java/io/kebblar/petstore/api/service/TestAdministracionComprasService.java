@@ -37,6 +37,13 @@ import io.kebblar.petstore.api.model.domain.AdministracionCompras;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+/**
+ * <p>TestAdministracionComprasService class.</p>
+ *
+ * @author garellano
+ * @version $Id: $Id
+ * @since 1.0
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TestAdministracionComprasService {
     @Mock
@@ -44,11 +51,20 @@ public class TestAdministracionComprasService {
 
     private AdministracionComprasService historialService;
 
+    /**
+     * <p>prepara.</p>
+     */
     @Before
     public void prepara() {
         this.historialService = new AdministracionComprasServiceImpl(historialMapper);
     }
 
+    /**
+     * <p>testSent.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     @Test
     public void testSent() throws SQLException, BusinessException{
         List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();
@@ -59,6 +75,12 @@ public class TestAdministracionComprasService {
         assert(historialService.sent(1,"abc").equals("{\"succed\": \"true\"}"));
     }
 
+    /**
+     * <p>testGetAll.</p>
+     *
+     * @throws java.sql.SQLException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     */
     @Test
     public void testGetAll() throws SQLException, BusinessException{
         List<AdministracionCompras> getLista = new ArrayList<AdministracionCompras>();
