@@ -4,7 +4,7 @@
  *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
  *              mostrado  a ninguna persona o institución sin el permiso explí-
  *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo  todo  criterio, el único  dueño de la  totalidad  de este 
+ *              bajo cualquier criterio, el único dueño de la totalidad de este 
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.model.exceptions
