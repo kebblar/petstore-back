@@ -26,7 +26,7 @@ public class PreregistroRequest {
     @Pattern(regexp = "^(?=.*\\d)(?!.* )(?=.*[a-z])(?=.*[A-Z]).{8,30}$",
             message = "La clave debe tener al menos 1 número, 1 letra minuscula y una letra mayucula y no debe de " +
                     "contener espacios. Además debe tener de 8 a 30 caracteres")
-    private String claveHash;
+    private String claveHash = "";
 
     @ApiModelProperty(example = "5543562126")
     //@Pattern(regexp="^\\d{10}$", message = "Teléfono inválido, deben ser exactamente 10 números sin expacios")

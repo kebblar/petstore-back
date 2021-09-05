@@ -39,7 +39,7 @@ public class AnuncioRequest {
     private String titulo = "";
     @NotBlank(message = "{notblank.anuncio.descripcion}")
     @NotNull(message = "{notnull.anuncio.descripcion}")
-    private String descripcion;
+    private String descripcion = "";
     private LocalDate fechaInicioVigencia;
     private LocalDate fechaFinVigencia;
     @Min(value = 1, message = "{min.anuncio.idcategoria}")

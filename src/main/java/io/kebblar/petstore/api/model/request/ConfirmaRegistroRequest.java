@@ -26,7 +26,7 @@ public class ConfirmaRegistroRequest {
     @ApiModelProperty(example = "2000-07-24")
     @Past(message = "La fecha de nacimiendo no valida, debe de ser una fecha en el pasado")
     @NotNull(message = "La fecha de nacimiendo no puede ser null")
-    private Date fNacimiento;
+    private Date fNacimiento = new Date();
 
     public ConfirmaRegistroRequest() {
     }
