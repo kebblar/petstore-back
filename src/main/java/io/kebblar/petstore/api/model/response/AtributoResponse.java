@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   AtributoResponse.java
  * Tipo:        clase
  * AUTOR:       Javier Chávez Barrios (JCHB)
  * Fecha:       Martes 18 de Mayo de 2021 (20_45)
@@ -17,6 +17,8 @@
  *
  */
 package io.kebblar.petstore.api.model.response;
+
+import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
@@ -114,29 +116,12 @@ public class AtributoResponse {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AtributoResponse other = (AtributoResponse) obj;
-        if (descAtributo == null) {
-            if (other.descAtributo != null)
-                return false;
-        } else if (!descAtributo.equals(other.descAtributo))
-            return false;
-        if (descValor == null) {
-            if (other.descValor != null)
-                return false;
-        } else if (!descValor.equals(other.descValor))
-            return false;
-        if (id != other.id)
-            return false;
-        if (valor != other.valor)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AtributoResponse)) return false;
+        AtributoResponse that = (AtributoResponse) o;
+        return id == that.id && valor == that.valor && Objects.equals(descAtributo, that.descAtributo) &&
+                Objects.equals(descValor, that.descValor);
     }
 
     /**

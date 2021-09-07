@@ -8,7 +8,7 @@
  *
  *              ------------------------------------------------
  *
- * Artefacto:   DireccionConNombre .java
+ * Artefacto:   LoginResponse .java
  * Proyecto:    petstore
  * Tipo:        clase
  * AUTOR:       Fhernanda Romo

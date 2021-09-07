@@ -7,7 +7,7 @@
  *              de: "AUTOR".
  *
  *              ------------------------------------------------
- * Artefacto:   AnuncioImagenResponse.java
+ * Artefacto:   DetalleAnuncioResponse.java
  * Tipo:        clase
  * AUTOR:       Edgar Uribe Mendez (EUM)
  * Fecha:       Martes 24 de Mayo de 2021 (21_30)

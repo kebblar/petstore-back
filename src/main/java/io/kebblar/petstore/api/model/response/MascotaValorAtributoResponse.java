@@ -8,7 +8,7 @@
  *
  *              ------------------------------------------------
  *
- * Artefacto:   DireccionConNombre .java
+ * Artefacto:   MascotaValorAtributoResponse.java
  * Proyecto:    petstore
  * Tipo:        clase
  * AUTOR:       Fhernanda Romo

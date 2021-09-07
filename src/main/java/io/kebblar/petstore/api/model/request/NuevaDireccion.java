@@ -1,7 +1,32 @@
+/*
+ * Licencia:    Usted  puede  utilizar  libremente  este  código
+ *              para  copiarlo, distribuirlo o modificarlo total
+ *              o  parcialmente  siempre y cuando  mantenga este
+ *              aviso y reconozca la  autoría  del  código al no
+ *              modificar los  datos  establecidos en la mención
+ *              de: "AUTOR".
+ *
+ *              ------------------------------------------------
+ * Artefacto:   NuevaDireccion.java
+ * Tipo:        clase
+ * AUTOR:       Fhernanda
+ * Fecha:       Jueves 6 de Mayo de 2021 (10_40)
+ *
+ * Historia:    20210506_1040 Creación de éste POJO
+ *              20210604_1540 Se renombran las propiedades.
+ *
+ */
 package io.kebblar.petstore.api.model.request;
 
 import java.util.Objects;
 
+/**
+ * Implementacion del POJO de la entidad de 'NuevaDireccion'.
+ *
+ * @author Fhernanda
+ * @version 1.0-SNAPSHOT
+ * @since   1.0-SNAPSHOT
+ */
 public class NuevaDireccion {
 
     /*

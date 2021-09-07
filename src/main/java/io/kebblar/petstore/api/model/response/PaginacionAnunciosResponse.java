@@ -8,7 +8,7 @@
  *
  *              ------------------------------------------------
  *
- * Artefacto:   MontoBitcoin.java
+ * Artefacto:   PaginacionAnunciosResponse.java
  * Proyecto:    petstore
  * Tipo:        clase
  * AUTOR:       Fhernanda Romo
@@ -22,6 +22,7 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Descripción:</p>
@@ -90,22 +91,10 @@ public class PaginacionAnunciosResponse {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        PaginacionAnunciosResponse other = (PaginacionAnunciosResponse) obj;
-        if (listaAnuncios == null) {
-            if (other.listaAnuncios != null)
-                return false;
-        } else if (!listaAnuncios.equals(other.listaAnuncios))
-            return false;
-        if (totalAnuncios != other.totalAnuncios)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaginacionAnunciosResponse)) return false;
+        PaginacionAnunciosResponse that = (PaginacionAnunciosResponse) o;
+        return totalAnuncios == that.totalAnuncios && Objects.equals(listaAnuncios, that.listaAnuncios);
     }
-
 }
