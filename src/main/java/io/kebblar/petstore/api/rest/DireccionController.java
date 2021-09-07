@@ -26,17 +26,28 @@ import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.domain.*;
-import io.kebblar.petstore.api.service.*;
+import io.kebblar.petstore.api.model.domain.Direccion;
+import io.kebblar.petstore.api.service.DireccionService;
 
 @RestController
 @RequestMapping(value = "/api")
 public class DireccionController {
 
-    private DireccionService servicio;
+    private final DireccionService servicio;
 
+    /**
+     * Constructor que realiza el setting de los servicios que serán
+     * utilizados en este controlador.
+     *
+     * @param direccionService Servicios de usuario
+     */
     public DireccionController(DireccionService direccionService){
         this.servicio=direccionService;
     }

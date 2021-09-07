@@ -79,10 +79,10 @@ import io.swagger.annotations.ApiParam;
 /**
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'anuncio'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
- *                     a que la  documentación Swagger API cumple con ese objetivo.
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Javier Chávez Barrios
  * @version 1.0-SNAPSHOT
@@ -95,7 +95,11 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class AnuncioController {
-    private AnuncioService anuncioService;
+
+    @Autowired
+    private Convert convert;
+
+    private final AnuncioService anuncioService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -182,7 +186,6 @@ public class AnuncioController {
         return anuncioService.guardarImagen(idAnuncio, file);
     }
 
-
     @ApiOperation(
     value = "AnuncioController::Registro",
     notes = "Recibe una imagen que sera asociada a un anuncio")
@@ -196,8 +199,6 @@ public class AnuncioController {
     @RequestParam("file") MultipartFile[] files) throws BusinessException {
         return anuncioService.guardarImagen(idAnuncio, files);
     }
-
-
 
     @ApiOperation(
         value = "AnuncioController::Eliminar",
@@ -265,14 +266,11 @@ public class AnuncioController {
         return anuncioService.detalleAllAnuncio();
     }
 
-    @Autowired
-    private Convert convert;
-
     @GetMapping(
         value = "/counter",
         produces = "application/json; charset=utf-8")
-    public Map<String, Integer> getCounter() throws BusinessException {
-        Map<String, Integer> result = new HashMap<String, Integer>();
+    public Map<String, Integer> getCounter(){
+        Map<String, Integer> result = new HashMap<>();
         result.put("ok", convert.getContador());
         return result;
     }

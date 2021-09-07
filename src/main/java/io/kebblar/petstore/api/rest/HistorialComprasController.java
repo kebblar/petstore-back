@@ -32,14 +32,14 @@ import io.kebblar.petstore.api.service.HistorialComprasService;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementacion  del controlador REST asociado a los endpoints
  * de gestión de las compras hechas por un usuario.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  LMtz
  * @see     io.kebblar.petstore.api.service.historialComprasService

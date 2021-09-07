@@ -21,11 +21,11 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 /**
- * <p>Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
+ * Excepción que modela la respuesta a una petición cuyo token fue incorrecto.
  *
  * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
- * código HTTP que será devuelto.
+ * constructores con la definición necesaria, que incluye en algunos caos el
+ * código HTTP que será devuelto.</p>
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException

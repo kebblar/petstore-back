@@ -25,9 +25,9 @@ package io.kebblar.petstore.api.model.exceptions;
  * Excepción que es lanzada cuando ocurre un problema al procesar la actualización
  * de un carrito de compras del aplicativo.
  *
- * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
- * código HTTP que será devuelto.
+ * código HTTP que será devuelto.</p>
  *
  * @author  fhernanda
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException

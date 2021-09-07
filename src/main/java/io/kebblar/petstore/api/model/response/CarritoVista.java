@@ -33,7 +33,7 @@ import java.util.Objects;
 public class CarritoVista {
 
     /**
-     * Atributos de la clase
+     * Atributos de la clase.
      */
     private int idCarrito;
     private String urlImagen;
@@ -156,7 +156,7 @@ public class CarritoVista {
     /**
      * {@inheritDoc}
      *
-     * Compara si dos instancias de la clase Atributo son iguales
+     * <p>Compara si dos instancias de la clase Atributo son iguales.</p>
      */
     @Override
     public boolean equals(Object o) {
@@ -169,7 +169,7 @@ public class CarritoVista {
     /**
      * {@inheritDoc}
      *
-     * Genera un hash del objeto
+     * <p>Genera un hash del objeto</p>
      */
     @Override
     public int hashCode() {
@@ -179,7 +179,7 @@ public class CarritoVista {
     /**
      * {@inheritDoc}
      *
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * <p>Método toString para el pojo, representa al objeto en forma de cadena.</p>
      */
     @Override
     public String toString() {

@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.response;
 
+import java.util.Objects;
+
 /**
  * POJO asociado a la entidad 'anuncio_imagen' para mostrar el detalle de la imagen.
  *
@@ -28,6 +30,10 @@ package io.kebblar.petstore.api.model.response;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioImagenResponse {
+
+    /**
+     * Atributos de clase.
+     */
     private Integer idImagen;
     private Integer idAnuncio;
     private String uuid;
@@ -162,40 +168,13 @@ public class AnuncioImagenResponse {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AnuncioImagenResponse other = (AnuncioImagenResponse) obj;
-        if (idAnuncio == null) {
-            if (other.idAnuncio != null)
-                return false;
-        } else if (!idAnuncio.equals(other.idAnuncio))
-            return false;
-        if (idImagen == null) {
-            if (other.idImagen != null)
-                return false;
-        } else if (!idImagen.equals(other.idImagen))
-            return false;
-        if (idTipo == null) {
-            if (other.idTipo != null)
-                return false;
-        } else if (!idTipo.equals(other.idTipo))
-            return false;
-        if (principal == null) {
-            if (other.principal != null)
-                return false;
-        } else if (!principal.equals(other.principal))
-            return false;
-        if (uuid == null) {
-            if (other.uuid != null)
-                return false;
-        } else if (!uuid.equals(other.uuid))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AnuncioImagenResponse)) return false;
+        AnuncioImagenResponse that = (AnuncioImagenResponse) o;
+        return Objects.equals(idImagen, that.idImagen) && Objects.equals(idAnuncio, that.idAnuncio) &&
+                Objects.equals(uuid, that.uuid) && Objects.equals(idTipo, that.idTipo) &&
+                Objects.equals(principal, that.principal);
     }
 
     /** {@inheritDoc} */

@@ -23,6 +23,7 @@ package io.kebblar.petstore.api.model.request;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -223,47 +224,14 @@ public class AnuncioRequest {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AnuncioRequest other = (AnuncioRequest) obj;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (idCategoria != other.idCategoria)
-            return false;
-        if (mascotaValorAtributo == null) {
-            if (other.mascotaValorAtributo != null)
-                return false;
-        } else if (!mascotaValorAtributo.equals(other.mascotaValorAtributo))
-            return false;
-        if (precio == null) {
-            if (other.precio != null)
-                return false;
-        } else if (!precio.equals(other.precio))
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AnuncioRequest)) return false;
+        AnuncioRequest that = (AnuncioRequest) o;
+        return idCategoria == that.idCategoria && Objects.equals(titulo, that.titulo) &&
+                Objects.equals(descripcion, that.descripcion) && Objects.equals(fechaInicioVigencia, that.fechaInicioVigencia) &&
+                Objects.equals(fechaFinVigencia, that.fechaFinVigencia) && Objects.equals(precio, that.precio) &&
+                Objects.equals(mascotaValorAtributo, that.mascotaValorAtributo);
     }
 
     /** {@inheritDoc} */

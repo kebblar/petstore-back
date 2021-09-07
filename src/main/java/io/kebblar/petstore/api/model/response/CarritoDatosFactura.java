@@ -114,7 +114,7 @@ public class CarritoDatosFactura {
     /**
      * {@inheritDoc}
      *
-     * Compara si dos instancias de la clase Atributo son iguales
+     * <p>Compara si dos instancias de la clase Atributo son iguales.</p>
      */
     @Override
     public boolean equals(Object o) {
@@ -127,7 +127,7 @@ public class CarritoDatosFactura {
     /**
      * {@inheritDoc}
      *
-     * Genera un hash del objeto
+     * <p>Genera un hash del objeto.</p>
      */
     @Override
     public int hashCode() {
@@ -137,7 +137,7 @@ public class CarritoDatosFactura {
     /**
      * {@inheritDoc}
      *
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * <p>Método toString para el pojo, representa al objeto en forma de cadena.</p>
      */
     @Override
     public String toString() {

@@ -25,9 +25,9 @@ package io.kebblar.petstore.api.model.exceptions;
  * Excepción que es lanzada cuando ocurre un problema al procesar una orden de compra
  * pagada con bitcoin.
  *
- * Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions", solo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
- * código HTTP que será devuelto.
+ * código HTTP que será devuelto.</p>
  *
  * @author  fhernanda
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException

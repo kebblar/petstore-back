@@ -540,7 +540,6 @@ public enum HttpStatus {
 
     /**
      * {@inheritDoc}
-     *
      * Return a string representation of this status code.
      */
     @Override
@@ -583,7 +582,8 @@ public enum HttpStatus {
 
     /**
      * Enumeration of HTTP status series.
-     * <p>Retrievable via {@link HttpStatus#series()}.
+     *
+     * <p>Retrievable via {@link HttpStatus#series()}.</p>
      */
     public enum Series {
 

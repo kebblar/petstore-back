@@ -25,9 +25,9 @@ package io.kebblar.petstore.api.model.exceptions;
  * Excepción que modela la respuesta a una petición de autenticación
  * cuyas credenciales proporcionadas fueron incorrectas.
  *
- * Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
+ * <p>Tal y como ocurre en la mayoría de "custom exceptions",  sólo contiene
  * constructores con la definición necesaria, que incluye en algunos caos el
- * código HTTP que será devuelto.
+ * código HTTP que será devuelto.</p>
  *
  * @author  luz
  * @see     io.kebblar.petstore.api.model.exceptions.BusinessException

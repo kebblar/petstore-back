@@ -41,8 +41,8 @@ import java.util.List;
 @Repository
 public interface CriptoMapper {
 
+    /** Constant <code>CAMPOS_CRIPTO="id, id_usuario, id_direccion, wallet, i"{trunked}</code> */
     String CAMPOS_CRIPTO = "id, id_usuario, id_direccion, wallet, id_paqueteria, status, monto, fecha, " +
-            /** Constant <code>CAMPOS_CRIPTO="id, id_usuario, id_direccion, wallet, i"{trunked}</code> */
             "descripcion, last_balance";
 
     /**

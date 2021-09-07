@@ -31,7 +31,7 @@ import java.util.Objects;
  */
 public class UsuarioDireccion {
 
-    /*
+     /*
      * Atributos de la clase.
      */
      private int idUsuario;

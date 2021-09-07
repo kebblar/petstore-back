@@ -270,7 +270,7 @@ public class NuevaDireccion {
     /**
      * {@inheritDoc}
      *
-     * Compara dos objetos de tipo nueva dirección.
+     * <p>Compara dos objetos de tipo nueva dirección.</p>
      */
     @Override
     public boolean equals(Object o) {
@@ -283,7 +283,7 @@ public class NuevaDireccion {
     /**
      * {@inheritDoc}
      *
-     * Método hash
+     * <p>Método hash</p>
      */
     @Override
     public int hashCode() {
@@ -293,7 +293,7 @@ public class NuevaDireccion {
     /**
      * {@inheritDoc}
      *
-     * Genera la representación de cadena del objeto
+     * <p>Genera la representación de cadena del objeto</p>
      */
     @Override
     public String toString() {
