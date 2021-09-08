@@ -41,7 +41,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementacion  del controlador REST asociado a los endpoints
  * de gestión del POJO Usuario.
  *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}

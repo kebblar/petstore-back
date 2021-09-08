@@ -27,7 +27,12 @@ import io.kebblar.petstore.api.service.CriptoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @Api(value = "pagos")
@@ -36,6 +41,12 @@ public class CriptoController {
 
     private CriptoService criptoService;
 
+    /**
+     * Constructor que realiza el setting de los servicios que serán
+     * utilizados en este controlador.
+     *
+     * @param criptoService Servicios de usuario
+     */
     public CriptoController(CriptoService criptoService){
         this.criptoService=criptoService;
     }

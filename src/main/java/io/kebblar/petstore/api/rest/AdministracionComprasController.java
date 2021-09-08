@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,14 +34,14 @@ import io.kebblar.petstore.api.service.AdministracionComprasService;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementacion  del controlador REST asociado a los endpoints
  * de gestión de todas las compras hechas por los usuario.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  LMtz
  * @see     io.kebblar.petstore.api.service.AdministracionComprasController
@@ -56,17 +57,24 @@ public class AdministracionComprasController {
      * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
      *
-     * @param AdministracionComprasService Servicios de administracion de compras
+     * @param admini Servicios de administracion de compras.
      */
     public AdministracionComprasController(AdministracionComprasService admini) {
         this.admini = admini;
     }
 
+    @ApiOperation(
+            value = "AdministracionComprasController::administracionCompras",
+            notes = "Retorna las compras del sistema para que puedan ser gestionadas por un" +
+                    "administrador.")
     @GetMapping(path = "/administracion-compras.json", produces = "application/json; charset=utf-8")
     public List<AdministracionCompras> getCompras() throws BusinessException {
         return admini.getAll();
     }
 
+    @ApiOperation(
+            value = "AdministracionComprasController::administracionComprasUpdate",
+            notes = "Actualiza el status de una compra dada su numero de orden de compra.")
     @PostMapping(path = "/administracion-compras-update.json/{estado}/{cveCompra}", produces = "application/json; charset=utf-8")
     public String updateEstado(
             @ApiParam(name = "estado", value = "el nuevo estado de la compra.")

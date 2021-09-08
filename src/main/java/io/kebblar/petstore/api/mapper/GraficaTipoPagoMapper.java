@@ -40,8 +40,8 @@ import io.kebblar.petstore.api.model.domain.GraficaTipoPago;
 @Repository
 public interface GraficaTipoPagoMapper {
 
+    /** Constant <code>CAMPOS_T_P="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
     String CAMPOS_T_P = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, pago.tipo as tipo_pago, " +
-            /** Constant <code>CAMPOS_T_P="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
             "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio ";
     /**
      * Obtiene una lista de tipo 'GraficaMontoTotalTipoPago'.

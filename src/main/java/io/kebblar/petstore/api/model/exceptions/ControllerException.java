@@ -19,20 +19,6 @@
 package io.kebblar.petstore.api.model.exceptions;
 
 import java.util.UUID;
-
-/**
- * <p>Excepción que modela las propiedades que definen una excepción
- * y es utilizada por el {@link CustomControllerAdvice} para manipular la información
- * en la excepción.
- *
- * <p>Tal y como ocurre en la mayoría de "custom exceptions", sólo contiene
- * constructorescon la definición necesaria, que incluye en algunos caos el
- * código HTTP que será devuelto.
- *
- * @author  garellano
- * @version 1.0-SNAPSHOT
- * @since   1.0-SNAPSHOT
- */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

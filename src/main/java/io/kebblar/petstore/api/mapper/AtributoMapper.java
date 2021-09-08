@@ -126,8 +126,7 @@ public interface AtributoMapper {
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de objetos de tipo AtributoDetallesTO
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta
-     * operación desde la base de datos.
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("select a.id as idAtributo, a.nombre as nombreAtributo, a.activo as estatusAtributo, va.id as idRango, va.id_atributo as rangoIdAtributo, va.rango as rango, va.activo as estatusRango  from  atributo a left join valor_atributo va on va.id_atributo = a.id order by a.id, va.id")
     List<AtributoDetalleTO> getAllAtributoDetalle() throws SQLException;

@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.model.request;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.constraints.Min;
 
 /**
@@ -134,35 +135,14 @@ public class BusquedaRequest {
     }
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaRequest other = (BusquedaRequest) obj;
-        if (atributos == null) {
-            if (other.atributos != null)
-                return false;
-        } else if (!atributos.equals(other.atributos))
-            return false;
-        if (idCategoria == null) {
-            if (other.idCategoria != null)
-                return false;
-        } else if (!idCategoria.equals(other.idCategoria))
-            return false;
-        if (numPaginas != other.numPaginas)
-            return false;
-        if (precio == null) {
-            if (other.precio != null)
-                return false;
-        } else if (!precio.equals(other.precio))
-            return false;
-        if (tamPaginas != other.tamPaginas)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaRequest)) return false;
+        BusquedaRequest that = (BusquedaRequest) o;
+        return numPaginas == that.numPaginas && tamPaginas == that.tamPaginas && Objects.equals(precio, that.precio) &&
+                Objects.equals(idCategoria, that.idCategoria) && Objects.equals(atributos, that.atributos);
     }
+
     /** {@inheritDoc} */
     @Override
     public String toString() {

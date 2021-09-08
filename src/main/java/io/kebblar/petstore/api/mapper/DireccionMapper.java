@@ -47,8 +47,8 @@ import io.kebblar.petstore.api.model.domain.Direccion;
 @Repository
 public interface DireccionMapper {
 
+    /** Constant <code>CAMPOS_DIRECCION=" id, calle_numero, colonia, id_pais, id"{trunked}</code> */
     String CAMPOS_DIRECCION = " id, calle_numero, colonia, id_pais, id_estado, id_municipio, " +
-            /** Constant <code>CAMPOS_DIRECCION=" id, calle_numero, colonia, id_pais, id"{trunked}</code> */
             "id_tipo_direccion, cp, referencias, activo ";
 
     /**

@@ -20,6 +20,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +33,14 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.support.QRService;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementacion  del controlador REST asociado a los endpoints
  * de gestión del POJO Direcciones.
  *
- * <p>Todos los métodos de esta clase disparan {@link ControllerException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  luz
  * @see     io.kebblar.petstore.api.service.DireccionService
@@ -63,7 +64,7 @@ public class QRController {
     @GetMapping(
             value = "/qr-base64/{data}",
             produces = "image/jpg")
-    public @ResponseBody String generateQRBytesBase64(@PathVariable("data") String data) throws Exception  {
+    public @ResponseBody String generateQRBytesBase64(@PathVariable("data") String data) throws BusinessException {
         return qrService.getQRBytesBase64(data);
     }
 

@@ -21,6 +21,7 @@
 package io.kebblar.petstore.api.model.request;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Implementacion del POJO de la entidad de 'BusquedaAdministracionRequest'.
@@ -184,41 +185,15 @@ public class BusquedaAdministracionRequest {
     }
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaAdministracionRequest other = (BusquedaAdministracionRequest) obj;
-        if (estatus != other.estatus)
-            return false;
-        if (fechaFinVigencia == null) {
-            if (other.fechaFinVigencia != null)
-                return false;
-        } else if (!fechaFinVigencia.equals(other.fechaFinVigencia))
-            return false;
-        if (fechaInicioVigencia == null) {
-            if (other.fechaInicioVigencia != null)
-                return false;
-        } else if (!fechaInicioVigencia.equals(other.fechaInicioVigencia))
-            return false;
-        if (folio != other.folio)
-            return false;
-        if (idCategoria != other.idCategoria)
-            return false;
-        if (numPaginas != other.numPaginas)
-            return false;
-        if (tamPaginas != other.tamPaginas)
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaAdministracionRequest)) return false;
+        BusquedaAdministracionRequest that = (BusquedaAdministracionRequest) o;
+        return estatus == that.estatus && idCategoria == that.idCategoria && numPaginas == that.numPaginas &&
+                tamPaginas == that.tamPaginas && Objects.equals(folio, that.folio) && Objects.equals(titulo, that.titulo) &&
+                Objects.equals(fechaInicioVigencia, that.fechaInicioVigencia) && Objects.equals(fechaFinVigencia, that.fechaFinVigencia);
     }
+
     /** {@inheritDoc} */
     @Override
     public String toString() {

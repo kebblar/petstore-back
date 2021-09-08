@@ -23,6 +23,7 @@ package io.kebblar.petstore.api.model.request;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -268,49 +269,13 @@ public class Preregistro {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Preregistro other = (Preregistro) obj;
-        if (claveHash == null) {
-            if (other.claveHash != null)
-                return false;
-        } else if (!claveHash.equals(other.claveHash))
-            return false;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (fechaNacimiento == null) {
-            if (other.fechaNacimiento != null)
-                return false;
-        } else if (!fechaNacimiento.equals(other.fechaNacimiento))
-            return false;
-        if (id != other.id)
-            return false;
-        if (instanteRegistro != other.instanteRegistro)
-            return false;
-        if (nick == null) {
-            if (other.nick != null)
-                return false;
-        } else if (!nick.equals(other.nick))
-            return false;
-        if (randomString == null) {
-            if (other.randomString != null)
-                return false;
-        } else if (!randomString.equals(other.randomString))
-            return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Preregistro)) return false;
+        Preregistro that = (Preregistro) o;
+        return id == that.id && instanteRegistro == that.instanteRegistro && Objects.equals(nick, that.nick) &&
+                Objects.equals(correo, that.correo) && Objects.equals(claveHash, that.claveHash) &&
+                Objects.equals(telefono, that.telefono) && Objects.equals(fechaNacimiento, that.fechaNacimiento) &&
+                Objects.equals(randomString, that.randomString);
     }
-
 }
