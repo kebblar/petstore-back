@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class HistorialComprasController {
-    private HistorialComprasService historialComprasService;
+    private final HistorialComprasService historialComprasService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -61,6 +62,8 @@ public class HistorialComprasController {
         this.historialComprasService = historialComprasService;
     }
 
+    @ApiOperation(value = "HistorialComprasController::getCompras",
+            notes = "Otorga el historial de compras de un usuario dado su id.")
     @GetMapping(path = "/historial-compras.json/{idUsuario}", produces = "application/json; charset=utf-8")
     public List<HistorialCompras> getCompras(
             @ApiParam(name = "idUsuario", value = "id del usuario que queremos saber sus compras")

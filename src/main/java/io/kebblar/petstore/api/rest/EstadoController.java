@@ -42,7 +42,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'.
+ * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
@@ -60,7 +60,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class EstadoController {
-    private EstadoService estadoService;
+    private final EstadoService estadoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

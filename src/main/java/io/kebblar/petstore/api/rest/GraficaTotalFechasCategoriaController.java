@@ -37,10 +37,10 @@ import io.swagger.annotations.ApiOperation;
  * Implementacion del REST Controller asociado a los endpoints de gestión del
  * POJO 'GraficaTotalFechasCategoria'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
- * debido a que la documentación Swagger API cumple con ese objetivo.
+ * debido a que la documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author FranciscoEspinosa
  * @version 1.0-SNAPSHOT
@@ -54,7 +54,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "GraficaTotalFechasCategoria")
 @RequestMapping(value = "/api")
 public class GraficaTotalFechasCategoriaController {
-    private GraficaTotalFechasCategoriaService graficaTotalFechasCategoriaService;
+    private final GraficaTotalFechasCategoriaService graficaTotalFechasCategoriaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán utilizados en

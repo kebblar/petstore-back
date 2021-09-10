@@ -25,7 +25,6 @@ import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.swagger.annotations.Api;
 
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,15 +33,30 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Router para interfases del front.
+ * <p>Descripción:</p>
+ * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'rol'.
+ *
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}</p>
+ *
+ * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
+ *
+ * @author Fhernanda Romo
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ *
  */
 @RestController
 @Api(value = "router")
 @RequestMapping(value = "/")
+//TODO: clase que tambien tiene algunos m'etodos extranos
 public class RouterController {
 
-    @Autowired
-    private RemoteRestCallService remoteRestCallService;
+    private final RemoteRestCallService remoteRestCallService;
+
+    public RouterController (RemoteRestCallService remoteRestCallService){
+        this.remoteRestCallService = remoteRestCallService;
+    }
 
     @GetMapping(value = "/ui/**")
     public ModelAndView redirectWithUsingForwardPrefix(ModelMap model) {

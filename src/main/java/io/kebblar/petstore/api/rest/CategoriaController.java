@@ -63,7 +63,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class CategoriaController {
 
-    private CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

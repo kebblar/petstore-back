@@ -29,7 +29,7 @@ package io.kebblar.petstore.api.model.request;
  */
 public class SmsRequest {
 
-   /**
+    /**
     * Atributos de la clase.
     */
     private String telefono;

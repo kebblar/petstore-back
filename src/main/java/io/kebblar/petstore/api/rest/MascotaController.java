@@ -23,6 +23,7 @@ package io.kebblar.petstore.api.rest;
 import java.util.List;
 import javax.validation.Valid;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,14 +43,14 @@ import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementación del controlador REST asociado a los endpoints
  * de gestión del POJO {@link Mascota}.
  *
- * <p>Todos los métodos de esta clase disparan {@link ControllerException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Mascota
@@ -61,15 +62,15 @@ import io.kebblar.petstore.api.service.RemoteRestCallService;
 @RestController
 @RequestMapping(value = "/api")
 public class MascotaController {
-    private MascotaService mascotaService;
-    private RemoteRestCallService remoteRestCallService;
+    private final MascotaService mascotaService;
+    private final RemoteRestCallService remoteRestCallService;
 
+    //TODO: Hay verios metodos hardcodeados en esta clase, revisarlos
     /**
      * Constructor que realiza el setting de los servicios que serán
      * utilizados en este controlador.
      *
      * @param mascotaService Servicio de Mascota
-     * @param mailSenderService Serivico de mailSender
      * @param remoteRestCallService Servicio de remoteRestCall
      */
     public MascotaController(MascotaService mascotaService, RemoteRestCallService remoteRestCallService) {
@@ -77,6 +78,9 @@ public class MascotaController {
         this.remoteRestCallService=remoteRestCallService;
     }
 
+    @ApiOperation(value="MascotaController::getAll",
+            notes = "Regresa la lista con todas las mascotas registradas " +
+                    "dentro del sistema.")
     @GetMapping(
         path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
@@ -84,10 +88,12 @@ public class MascotaController {
         return mascotaService.getAll();
     }
 
+
+    @ApiOperation(value = "MascotaController::getByCriteria")
     @PostMapping(
         path = "/mascotas/filtro.json",
         produces = "application/json; charset=utf-8")
-    public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) throws ControllerException {
+    public List<Integer> getByCriteria(@RequestBody List<Criterio> criterios) {
         return mascotaService.getByCriteria(criterios);
     }
 
@@ -101,7 +107,7 @@ public class MascotaController {
     @PostMapping(
         path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
+    public ProcesaMascotaResponse insertaMascota(@Valid @RequestBody Mascota mascota) {
         int id = mascotaService.insert(mascota);
         return new ProcesaMascotaResponse("La mascota fué insertada correctamente", id);
     }
@@ -109,7 +115,7 @@ public class MascotaController {
     @PutMapping(
         path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) throws ControllerException {
+    public ProcesaMascotaResponse actualizaMascota(@Valid @RequestBody Mascota mascota) {
         int id = mascotaService.update(mascota);
         return new ProcesaMascotaResponse("La mascota fué actualizada correctamente", id);
     }
@@ -117,7 +123,7 @@ public class MascotaController {
     @DeleteMapping(
         path = "/mascotas.json",
         produces = "application/json; charset=utf-8")
-    public ProcesaMascotaResponse borraMascota(@RequestParam int id) throws ControllerException {
+    public ProcesaMascotaResponse borraMascota(@RequestParam int id) {
         int result = mascotaService.delete(id);
         return new ProcesaMascotaResponse("La mascota fué borrada correctamente", result);
     }
@@ -125,7 +131,7 @@ public class MascotaController {
     @GetMapping(
         path = "/tickers.json",
         produces = "application/json; charset=utf-8")
-    public TickerWrapper getTicker() throws ControllerException {
+    public TickerWrapper getTicker() {
         return remoteRestCallService.callTickerMicroservice();
     }
 

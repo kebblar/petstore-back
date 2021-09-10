@@ -63,7 +63,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class MetodoPagoController {
 
-    private MetodoPagoService metodoPagoService;
+    private final MetodoPagoService metodoPagoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
