@@ -44,9 +44,9 @@ public interface AdministracionComprasService {
     /**
      * Método utilizado para actualizar el estado de una compra.
      *
-     * @param int estadoEnvio, el nuevo estado que queremos colocar.
-     * @param String cveCompra, el cveCompra de la compra que queremos actualizar.
-     * @return String que contiene un JSON que indica si todo salio bien o no.
+     * @param estadoEnvio, el nuevo estado que queremos colocar.
+     * @param cveCompra, el cveCompra de la compra que queremos actualizar.
+     * @return String que contiene un JSON que indica si salió bien o no.
      * @throws BusinessException es disparada por una regla de negocio
      */
     String sent(int estadoEnvio, String cveCompra) throws BusinessException;

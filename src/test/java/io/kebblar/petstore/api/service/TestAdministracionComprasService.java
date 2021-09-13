@@ -26,8 +26,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -67,12 +69,22 @@ public class TestAdministracionComprasService {
      */
     @Test
     public void testSent() throws SQLException, BusinessException{
-        List<HistorialCompras> getLista = new ArrayList<HistorialCompras>();
+        // Cuando sale bien la prueba
+        List<HistorialCompras> getLista = new ArrayList<>();
         HistorialCompras compra = new HistorialCompras("abc","2020-10-10",0,1,"foo","paypal","gus@aol.com",
                 "foo.com","goo.com");
         getLista.add(compra);
         when(historialMapper.sent(1,"abc")).thenReturn(1);
         assert(historialService.sent(1,"abc").equals("{\"succed\": \"true\"}"));
+
+    }
+
+    @Test(expected = BusinessException.class)
+    public void testSentFailed() throws SQLException, BusinessException{
+        // cuando ocurre un problema
+        when(historialMapper.sent(0, "yyy")).thenThrow(new SQLException());
+        historialService.sent(0, "yyy");
+
     }
 
     /**
@@ -88,5 +100,11 @@ public class TestAdministracionComprasService {
         getLista.add(compra);
         when(historialMapper.getAll()).thenReturn(getLista);
         assert(historialService.getAll().get(0).getCveOrden() == "foo.com");
+    }
+
+    @Test(expected = BusinessException.class)
+    public void testGetAllFailed() throws SQLException, BusinessException{
+        when(historialMapper.getAll()).thenThrow(new SQLException());
+        historialService.getAll();
     }
 }

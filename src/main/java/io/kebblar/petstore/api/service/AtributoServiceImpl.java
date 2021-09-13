@@ -39,9 +39,9 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 /**
  * Servicio asociado a la entidad 'atributo'.
  *
- * <p>Implementación de la interfaz {@link AtributoService}.
+ * <p>Implementación de la interfaz {@link AtributoService}.</p>
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT

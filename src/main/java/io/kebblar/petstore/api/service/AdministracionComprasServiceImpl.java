@@ -33,16 +33,25 @@ import io.kebblar.petstore.api.model.exceptions.HttpStatus;
  *
  * @author Luis Mtz
  * @version 1.0-SNAPSHOT
+ *
+ * @see AdministracionComprasService
+ * @see AdministracionCompras
  */
 @Service
 public class AdministracionComprasServiceImpl implements AdministracionComprasService{
-    private static final Logger logger = LoggerFactory.getLogger(AdministracionComprasServiceImpl.class);
-    private AdministracionComprasMapper mapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(AdministracionComprasServiceImpl.class);
+    private final AdministracionComprasMapper mapper;
+
+    /**
+     * Constructor de la clase, inicializa el objeto {@link AdministracionComprasMapper}.
+     * @param mapper Objeto de la clase {@link AdministracionComprasMapper}.
+     */
     public AdministracionComprasServiceImpl(AdministracionComprasMapper mapper) {
         this.mapper = mapper;
     }
 
+    /** {@inheritDoc}*/
     @Override
     public List<AdministracionCompras> getAll() throws BusinessException {
         try {
@@ -50,11 +59,12 @@ public class AdministracionComprasServiceImpl implements AdministracionComprasSe
         }catch(Exception sql) {
             logger.error(sql.getMessage());
             throw new BusinessException("error de base de datos",
-                    "ocurrio un error al acceder a la base de datos",500,"500",
+                    "ocurrió un error al acceder a la base de datos",500,"500",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String sent(int estadoEnvio, String cveCompra) throws BusinessException {
         try {
@@ -62,8 +72,8 @@ public class AdministracionComprasServiceImpl implements AdministracionComprasSe
             return "{\"succed\": \"true\"}";
         }catch(Exception sql) {
             logger.error(sql.getMessage());
-            throw new BusinessException("cve no encontrado o estado del envio invalido",
-                    "ocurrio un error al actualizar el estado del envio porque el cve no existe o porque el estado envio no es valido",500,"500",
+            throw new BusinessException("cve no encontrado o estado del envío invalido",
+                    "ocurrio un error al actualizar el estado del envío porque el cve no existe o porque el estado envio no es valido",500,"500",
                     HttpStatus.NOT_FOUND);
         }
 

@@ -25,7 +25,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 
 /**
- * <p>Definición de la interfaz de servicios para 'Usuario'.
+ * Definición de la interfaz de servicios para 'Usuario'.
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
