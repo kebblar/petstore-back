@@ -38,7 +38,7 @@ import java.util.List;
 public class StrengthPasswordValidatorException extends BusinessException {
 
     private static final long serialVersionUID = -1222301152057974505L;
-    private List<String> messages = null;
+    private final List<String> messages;
 
     /**
      * Se lanza cuando existe una clave que no cumple con los lineamientos de seguridad

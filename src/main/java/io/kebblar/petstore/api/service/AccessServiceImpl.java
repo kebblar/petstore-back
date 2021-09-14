@@ -32,11 +32,30 @@ import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.*;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.BadCredentialsException;
+import io.kebblar.petstore.api.model.exceptions.DisabledUserException;
+import io.kebblar.petstore.api.model.exceptions.WaitLoginException;
+import io.kebblar.petstore.api.model.exceptions.BlockedUserException;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 
+/**
+ * Servicio asociado a la funcionalidad de ingreso al sistema.
+ *
+ * <p>Implementación de la interfaz {@link AccessService}.</p>
+ *
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
+ *
+ * @author Fhernanda Romo
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ *
+ * @see Usuario
+ * @see AccessService
+ * @see UserFoundWrapper
+ */
 @Service
 public class AccessServiceImpl implements AccessService {
     private static final Logger logger = LoggerFactory.getLogger(AccessServiceImpl.class);
@@ -44,9 +63,14 @@ public class AccessServiceImpl implements AccessService {
     @Value("${proyecto.message}")
     private String message;
 
-    private UsuarioService usuarioService;
-    private JwtManagerService jwtManagerService;
+    private final UsuarioService usuarioService;
+    private final JwtManagerService jwtManagerService;
 
+    /**
+     * Constructor encargado de inicializar los servicios.
+     * @param usuarioService Instancia de servicio de la administración de usuarios.
+     * @param jwtManagerService Instancia del servicio que verifica y gestiona tokens JWT.
+     */
     public AccessServiceImpl(
             UsuarioService usuarioService,
             JwtManagerService jwtManagerService) {
@@ -54,6 +78,7 @@ public class AccessServiceImpl implements AccessService {
         this.jwtManagerService = jwtManagerService;
     }
 
+    /** {@inheritDoc} */
     @Override
     public LoginResponse login(String usr, String clave) throws BusinessException {
         logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
@@ -65,6 +90,7 @@ public class AccessServiceImpl implements AccessService {
         return login(usuario, clave, delta, maximoNumeroIntentosConcedidos, instanteActual);
     }
 
+    /** {@inheritDoc} */
     @Override
     public LoginResponse login(
             Usuario usuario,
@@ -103,9 +129,11 @@ public class AccessServiceImpl implements AccessService {
             // Si no se disparó la Notificación anterior, de todas formas notifica un intento
             // fallido de ingreso al sistema:
             throw new BadCredentialsException(numeroDeIntentosFallidos, maximoNumeroIntentosConcedidos);
-        } else { // Credenciales CORRECTAS
+
+        } else {
+            // Credenciales CORRECTAS
             long ultimoIngresoExitoso = usuario.getInstanteUltimoAcceso();
-            logger.info("Ingreso exitoso al sistema del usuario: " + usuario.getCorreo());
+            logger.info("Ingreso exitoso al sistema del usuario: {}", usuario.getCorreo());
             // Resetea todoas las banderas de advertencia y bloqueo. Luego, actualiza y retorna el usuario:
             usuario.setAccesoNegadoContador(0);
             usuario.setInstanteBloqueo(0);
@@ -124,19 +152,36 @@ public class AccessServiceImpl implements AccessService {
         }
     }
 
+    /**
+     * Método auxiliar que valida si se ingreso alguna credencial vacía.
+     * @param usr corresponde al usuariuo de inicio de sesión.
+     * @param clave corresponde a la clave de inicio de sesión.
+     * @throws BusinessException
+     */
     private void valida(String usr, String clave) throws BusinessException {
         if(usr.trim().length()<1 || clave.trim().length()<1) throw new BadCredentialsException();
     }
 
+    /**
+     * Método privado para actualizar la información de un usuario en el sistema.
+     * @param usuario objeto usuario a actualizar.
+     * @throws BusinessException En caso que ocurra algún problema con la actualización.
+     */
     private void update(Usuario usuario) throws BusinessException {
         usuarioService.actualizaUsuario(usuario);
     }
 
+    /**
+     * Método auxiliar para obtener un objeto con todos los datos y detalles de un usuario dentro del sistema.
+     * @param idUsuario entero que representa al identificador único del usuario.
+     * @param correo correo electrónico o usuario.
+     * @return Regresa el objeto {@link UserFoundWrapper}, conjunto de la lista de roles, detalles e información interna de un usuario.
+     * @throws BusinessException En caso que el onjeto no pueda ser devuelto.
+     */
     private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
-        List<Rol> roles               = usuarioService.obtenRolesDeUsuario(idUsuario);
-        //List<Direccion> direcciones   = usuarioService.obtenDireccionesDeUsuario(idUsuario);
+        List<Rol> roles = usuarioService.obtenRolesDeUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = usuarioService.obtenDetallesDeUsuario(idUsuario);
-        String jwt                    = jwtManagerService.createToken(correo);
+        String jwt = jwtManagerService.createToken(correo);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 

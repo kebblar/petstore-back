@@ -60,7 +60,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class MunicipioController {
-    private MunicipioService municipioService;
+    private final MunicipioService municipioService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

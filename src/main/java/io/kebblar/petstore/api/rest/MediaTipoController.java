@@ -61,7 +61,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class MediaTipoController {
 
-    private MediaTipoService mediaTipoService;
+    private final MediaTipoService mediaTipoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

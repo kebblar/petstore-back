@@ -22,7 +22,6 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
-import io.kebblar.petstore.api.config.CustomInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -85,9 +85,15 @@ import io.kebblar.petstore.api.utils.AnuncioUtil;
  * Implementación de la interfaz de servicios para 'Anuncio'.
  *
  * @author  Maria Isabel Contreras Garcia
- * @see     io.kebblar.petstore.api.model.domain.Anuncio
+ *
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
+ *
+ *
+ * @see     io.kebblar.petstore.api.model.domain.Anuncio
+ * @see     UploadService
+ * @see     AnuncioMapper
+ * @see     AnuncioMediaMapper
  */
 @Service
 public class AnuncioServiceImpl implements AnuncioService {
@@ -105,19 +111,19 @@ public class AnuncioServiceImpl implements AnuncioService {
     @Value("${app.imagen-tam}")
     private int imagenAltura;
 
-    private UploadService uploadService;
-    private AnuncioMapper anuncioMapper;
-    private AnuncioMediaMapper anuncioImagenMapper;
+    private final UploadService uploadService;
+    private final AnuncioMapper anuncioMapper;
+    private final AnuncioMediaMapper anuncioImagenMapper;
 
-    private Tika tika = new Tika();
+    private final Tika tika = new Tika();
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
      *
-     * @param anuncioMapper
-     * @param uploadService
-     * @param anuncioImagenMapper
+     * @param anuncioMapper Instancia del mapper de la entidad anuncio.
+     * @param uploadService Instancia del servicio para subir archivos al sistema.
+     * @param anuncioImagenMapper Instancia del mapper que intersecta anuncios con las imagenes que les corresponden.
      */
     public AnuncioServiceImpl(
             AnuncioMapper anuncioMapper,
@@ -128,6 +134,9 @@ public class AnuncioServiceImpl implements AnuncioService {
         this.anuncioImagenMapper = anuncioImagenMapper;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(
                 propagation = Propagation.REQUIRED,
@@ -135,9 +144,10 @@ public class AnuncioServiceImpl implements AnuncioService {
                 timeout = 36000,
                 rollbackFor = TransactionException.class)
     public AnuncioResponse guardar(AnuncioRequest request) throws BusinessException {
-        logger.info(request.toString());
+        String s = request.toString();
+        logger.info(s);
         AnuncioUtil.validaCampos(request);
-        Anuncio anuncioBase = null;
+        Anuncio anuncioBase;
         //Se valida si los estatus son correctos
         if(request instanceof ActualizaAnuncioRequest) {
             try {
@@ -174,7 +184,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 anuncioMapper.insert(anuncioAlta);
             }
 
-            // Actualiza el search_url en todo caso
+            // Actualiza el search_url
             Integer idGenerado = anuncioAlta.getId();
             anuncioAlta.setSearchUrl(idGenerado + "-" + limpia(request.getTitulo()));
             anuncioMapper.update(anuncioAlta);
@@ -186,7 +196,7 @@ public class AnuncioServiceImpl implements AnuncioService {
                 aa.setIdValorAtributo(ar.getIdValorAtributo());
                 anuncioMapper.insertAtributo(aa);
                 }
-            logger.info("Anuncio guardado correctamente, id asociado: "+anuncioAlta.getId());
+            logger.info("Anuncio guardado correctamente, id asociado: {}", anuncioAlta.getId());
             return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
         }catch (Exception e) {
             throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
@@ -201,24 +211,24 @@ public class AnuncioServiceImpl implements AnuncioService {
      * @return  Cadena limpia
      */
     public static String limpia(String original) {
-        String UN_ESPACIO = " ";
-        String DOS_ESPACIOS = "  ";
-        String GUION_MEDIO = "-";
-        String DOS_GUIONES_MEDIOS = "--";
-        String LETRAS_VALIDAS = "0123456789abcdefghijklmnopqrstuvwxyz-";
+        String unEspacio = " ";
+        String dosEspacios = "  ";
+        String guionMedio = "-";
+        String dosGuionesMedios = "--";
+        String letrasValidas = "0123456789abcdefghijklmnopqrstuvwxyz-";
 
-        // Quita espacios al inicio y al final. Además, manda todo a minusculas
+        // Quita espacios al inicio y al final. Además, manda a minusculas
         String source = original.trim().toLowerCase();
 
-        int i = 1;
+        int i;
         // Colapsa espacios juntos en un solo espacio
         do {
-            i = source.indexOf(DOS_ESPACIOS);
-            source = source.replace(DOS_ESPACIOS, UN_ESPACIO);
+            i = source.indexOf(dosEspacios);
+            source = source.replace(dosEspacios, unEspacio);
         } while (i>0);
 
         // Cambia especios simpes restantes por guion medio
-        source = source.replace(UN_ESPACIO, GUION_MEDIO);
+        source = source.replace(unEspacio, guionMedio);
 
         // Cambia minúsculas acentuadas por minúsculas sin acento
         // No necsito cambiar las mayúsculas porque la cadena está en lowercase
@@ -229,26 +239,26 @@ public class AnuncioServiceImpl implements AnuncioService {
         source = source.replace('ú', 'u');
         source = source.replace('ñ', 'n');
 
-        // Cambia todo lo que NO esté en "LETRAS_VALIDAS" por -
+        // Cambia lo que NO esté en "letrasValidas" por -
         i = source.length();
         StringBuilder result = new StringBuilder();
         for(int j=0; j<i; j++) {
             char test = source.charAt(j);
-            result = (LETRAS_VALIDAS.indexOf(test)<1)?result.append(GUION_MEDIO):result.append(test);
+            result = (letrasValidas.indexOf(test)<1)?result.append(guionMedio):result.append(test);
         }
 
         // elimina repeticiones de guiones mendios consecutivos
         source = result.toString();
-        i=0;
         do {
-            i = source.indexOf(DOS_GUIONES_MEDIOS);
-            source = source.replace(DOS_GUIONES_MEDIOS, GUION_MEDIO);
+            i = source.indexOf(dosGuionesMedios);
+            source = source.replace(dosGuionesMedios, guionMedio);
         } while (i>=0);
 
 
         return source;
     }
 
+    /** {@inheritDoc} */
     @Override
     public AnuncioResponse confirmarAnuncio(int id) throws BusinessException {
         AnuncioResponse response = new AnuncioResponse();
@@ -296,6 +306,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         return response;
     }
 
+    /** {@inheritDoc} */
     @Override
     public AnuncioResponse eliminarAnuncio(int id) throws BusinessException {
         AnuncioResponse response = new AnuncioResponse();
@@ -318,6 +329,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         return response;
     }
 
+    /** {@inheritDoc} */
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile[] files) throws BusinessException {
         AnuncioImagenResponse air = null;
@@ -325,12 +337,13 @@ public class AnuncioServiceImpl implements AnuncioService {
             try {
                 air = guardarImagen(idAnuncio, mpf);
             } catch (BusinessException e) {
-                System.out.println(e.getDetailedMessage());
+                logger.info(e.getDetailedMessage());
             }
         }
         return air;
     }
 
+    /** {@inheritDoc} */
     @Override
     public AnuncioImagenResponse guardarImagen(int idAnuncio, MultipartFile file) throws BusinessException {
         String contentType = "no-pude-detectar-el-tipo-mime";
@@ -380,6 +393,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void eliminarImagen(String idImagen) throws BusinessException {
         try {
@@ -390,6 +404,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<DetalleAnuncioResponse> detalleAllAnuncio() throws BusinessException {
         try {
@@ -421,7 +436,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             }
             short status = detalleResponse.getIdEstatus();
             if( AnuncioEstatusEnum.ELIMINADO.getId()==status) {
-                logger.error("Este anuncio (folio: "+detalleResponse.getFolio()+") NO se encuentra ni ACTIVO ni PUBLICADO id: " + id);
+                logger.error("Este anuncio (folio: {}) NO se encuentra ni ACTIVO ni PUBLICADO id: {}", detalleResponse.getFolio(), id);
                 throw new RuleException("Anuncio no disponible");
             }
             //Se consulta la informacion de los atributos del anuncio
@@ -445,9 +460,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     /**
-     * Metodo que permite realizar la busqueda de productos por medio de filtros, asi como tambien devuelve la paginacion
-     * @param filtros permite utilizar los campos como filtros en la sentencia SQL
-     * @throws BusinessException, SQLException
+     * {@inheritDoc}
      */
     @Override
     public PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException {
@@ -461,14 +474,14 @@ public class AnuncioServiceImpl implements AnuncioService {
         PaginacionAnunciosResponse response = new PaginacionAnunciosResponse(totalAnuncios != null ? totalAnuncios.size() : 0, anuncios);
 
         for (BusquedaAdministracionResponse anuncio:anuncios) {
-            Categoria objetoCategoria = new Categoria();
             anuncio.setDescripcionEstatus(anuncioMapper.obtieneDescPorId(anuncio.getIdEstatus()));
-            objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
+            Categoria objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
             anuncio.setDescripcionCategoria(objetoCategoria.getCategoria());
         }
         return response;
     }
 
+    /** {@inheritDoc} */
     @Override
     public BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException {
         BusquedaResponse  response = new BusquedaResponse();
@@ -480,8 +493,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         List<DetalleAnuncioResponse> totalAnuncios = anuncioMapper.totalAnuncioFiltro(mapSql);
 
         for (DetalleAnuncioResponse anuncio : anuncios) {
-            Categoria objetoCategoria = new Categoria();
-            objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
+            Categoria objetoCategoria = anuncioMapper.obtieneCategoria(anuncio.getIdCategoria());
             anuncio.setDescCategoria(objetoCategoria.getCategoria());
             List<AnuncioMedia> imagenes = anuncioImagenMapper.getImagenes(anuncio.getId());
             List<AnuncioImagenResponse> imagenesResponse = null;
@@ -500,6 +512,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         return response;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException {
         try {
@@ -525,12 +538,13 @@ public class AnuncioServiceImpl implements AnuncioService {
                 }
             }
         } catch (SQLException e) {
-            logger.info("Error: "+e.getMessage());
+            logger.info("Error: {}", e.getMessage());
             throw new RuleException("No se pudo validar el estatus del anuncio");
 
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     @Scheduled(cron = "0 0 2 * * ?") //Se invoca el metodo cada dia
     public void schedulerPublicarAnuncio() throws BusinessException {
@@ -542,19 +556,19 @@ public class AnuncioServiceImpl implements AnuncioService {
             String fechaBase=dateFormat.format(calendar.getTime());
             String fechaInicio=fechaBase+" 00:00:00";
             String fechaFin=fechaBase+" 23:59:59";
-            logger.info("====> Periodo de busqueda: "+fechaInicio+" - "+fechaFin);
+            logger.info("====> Periodo de busqueda: {}, {} ", fechaInicio, fechaFin);
             List<Anuncio> anuncios = anuncioMapper.anunciosPorPublicar(fechaInicio, fechaFin, AnuncioEstatusEnum.ACTIVO.getId());
             //2. Se cambia el estatus a PUBLICADO
             if(anuncios!=null && !anuncios.isEmpty()) {
                 for(Anuncio a:anuncios) {
                      anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.PUBLICADO.getId());
                 }
-                logger.info("====> Total de anuncios que pasaron a PUBLICADOS del dia "+anuncios.size());
+                logger.info("====> Total de anuncios que pasaron a PUBLICADOS del dia {}",anuncios.size());
             }else {
-                 logger.info("====> No se encontraron anuncios para pasar a PUBLICAR del periodo "+fechaInicio+" al "+fechaFin);
+                 logger.info("====> No se encontraron anuncios para pasar a PUBLICAR del periodo {} al {}", fechaInicio,fechaFin);
             }
         } catch (SQLException e) {
-             logger.error("====>Ocurrio un error durante el proceso de PUBLICAR anuncios: "+e.getMessage());
+             logger.error("====>Ocurrio un error durante el proceso de PUBLICAR anuncios: {}", e.getMessage());
         }
 
         logger.info("Llamando servicio de cambiar estatus a VENCIDO los anuncios cuya fecha fin de publicacion fue el dia de ayer");
@@ -562,22 +576,23 @@ public class AnuncioServiceImpl implements AnuncioService {
             calendar.add(Calendar.DATE,-1);
             //1. Se consultan los anuncios con estatus PUBLICADO con fecha de publicacion final al día de ayer
             String fechaFin=dateFormat.format(calendar.getTime())+" 23:59:59";
-            logger.info("====> Fecha fin de publicacion: "+fechaFin);
+            logger.info("====> Fecha fin de publicacion: {}", fechaFin);
             List<Anuncio> anuncios = anuncioMapper.anunciosPorVencer(fechaFin, AnuncioEstatusEnum.PUBLICADO.getId());
              //2. Se cambia el estatus a VENCIDO
             if(anuncios!=null && !anuncios.isEmpty()) {
                 for(Anuncio a:anuncios) {
                      anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.VENCIDO.getId());
                 }
-                logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia "+anuncios.size());
+                logger.info("====> Total de anuncios que pasaron a VENCIDOS del dia {}", anuncios.size());
             }else {
-                logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia "+fechaFin);
+                logger.info("====> No se encontraron anuncios de VENCIMIENTO del dia {}", fechaFin);
             }
         } catch (SQLException e) {
-             logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: "+e.getMessage());
+             logger.error("====>Ocurrio un error durante el proceso de VENCIMIENTO de anuncios: {}", e.getMessage());
         }
     }
 
+    /** {@inheritDoc} */
     public void updateSearchUrl() {
         try {
             List<Anuncio> anuncios = anuncioMapper.getAll();
@@ -586,19 +601,20 @@ public class AnuncioServiceImpl implements AnuncioService {
                 Integer id = anuncio.getId();
                 anuncio.setSearchUrl(id+"-"+limpia);
                 anuncioMapper.update(anuncio);
-                logger.info("actualizando el searchurl del anuncio "+anuncio.getId()+" con la info:" +limpia);
+                logger.info("actualizando el searchurl del anuncio {} con la info: {}", anuncio.getId(), limpia);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<DetalleAnuncioResponse> getBySearchUrl(String searchUrl) throws BusinessException {
         if(searchUrl==null || searchUrl.trim().length()<1 || "all".equals(searchUrl)) searchUrl="%";
         try {
             List<Anuncio> lista = anuncioMapper.getBySearchUrl(searchUrl);
-            if(lista==null || lista.size()<1) {
+            if(lista==null || lista.isEmpty()) {
                 throw new NotFoundException(searchUrl);
             }
             List<DetalleAnuncioResponse> respuesta = new ArrayList<>();

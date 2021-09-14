@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping(value = "/api")
 public class CriptoController {
 
-    private CriptoService criptoService;
+    private final CriptoService criptoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
