@@ -26,10 +26,21 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.RuleException;
+import io.kebblar.petstore.api.model.exceptions.TransactionException;
+import io.kebblar.petstore.api.model.request.*;
+import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
+import io.kebblar.petstore.api.utils.AnuncioUtil;
+import org.apache.commons.lang.time.DateUtils;
+import org.assertj.core.util.DateUtil;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -45,16 +56,14 @@ import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.request.ActualizaAnuncioRequest;
-import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
-import io.kebblar.petstore.api.model.request.BusquedaRequest;
-import io.kebblar.petstore.api.model.request.MascotaValorAtributoRequest;
 import io.kebblar.petstore.api.model.response.AnuncioResponse;
 import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
 import io.kebblar.petstore.api.model.response.BusquedaResponse;
 import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
 import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.support.UploadService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>TestAnuncioService class.</p>
@@ -79,7 +88,9 @@ public class TestAnuncioService {
     private AnuncioService anuncioService;
     private List<MascotaValorAtributoRequest> atributos;
     private ActualizaAnuncioRequest actualizaAnuncioRequest;
-
+    private static final Logger logger = LoggerFactory.getLogger(TestAnuncioService.class);
+    private Anuncio a;
+    private Anuncio anuncio;
     /**
      * <p>pedro.</p>
      *
@@ -88,33 +99,60 @@ public class TestAnuncioService {
     @Before
     public void pedro() throws SQLException {
         this.anuncioService= new AnuncioServiceImpl(anuncioMapper, uploadService, anuncioImagenMapper);
+        this.atributos = new ArrayList<>();
+        this.atributos.add(new MascotaValorAtributoRequest(1,1));
+        this.a = new Anuncio();
+        this.actualizaAnuncioRequest = new ActualizaAnuncioRequest(1,
+                "Titulo","descripcion", null, null,
+                1, BigDecimal.ONE, atributos);
+        this.anuncio = new Anuncio(1, 2, "21062317310001", "Galas verdes", "Bonitos Weimaraner verdes",
+                new BigDecimal(234), new Date(), new Date(), DateUtils.addMonths(new Date(), 1), new Date(), null, (short) 1, "url-search");
     }
 
     /**
      * Escenario donde se trata de actualizar un anuncio existente.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception Cuando ocurre una excepción en el método guardar de {@link AnuncioService}.
      */
-    @Test()
+    @Test
     public void actualizacion() throws Exception{
       when(anuncioMapper.getAnuncioById(1)).thenReturn(
             new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
-            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3, "url-search")
-      );
-        this.atributos = new ArrayList<>();
-        this.atributos.add(new MascotaValorAtributoRequest(1,1));
-        this.actualizaAnuncioRequest = new ActualizaAnuncioRequest(1,
-          "Titulo","descripcion", null, null,
-              1, BigDecimal.ONE, atributos
-        );
-        AnuncioResponse response = anuncioService.guardar(actualizaAnuncioRequest);
-           assertTrue(response.getHash() == 30752);
+            new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 3, "url-search"));
+        AnuncioResponse response = anuncioService.guardar(actualizaAnuncioRequest,a);
+        assertEquals(30752, response.getHash());
+    }
+
+    /**
+     * Escenario donde se crea un anuncio nuevo.
+     * @throws Exception No se lanzan excepciones
+     */
+    @Test
+    public void testNuevoAnuncio() throws Exception{
+        AnuncioRequest ar = new AnuncioRequest("Bonitas Galas moradas", "Galas pintadas de morado",
+                LocalDate.now(), LocalDate.now().plusMonths(2), 1, BigDecimal.ONE, atributos);
+        a.setId(1);
+        assertEquals(1, anuncioService.guardar(ar, a).getId());
+    }
+
+    /**
+     * Escenario donde el id que se pasa para ser actualizado no es valido.
+     * @throws Exception Se espera una excepcion {@link DataBaseException}
+     */
+    @Test
+    public void testNuevoAnuncioFailed() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenThrow(SQLException.class);
+        try{
+            anuncioService.guardar(actualizaAnuncioRequest,a);
+        }catch (DatabaseException e){
+            assertTrue(true);
+        }
     }
 
     /**
      * Escenario donde se trata de actualizar un anuncio que no existe.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception Se espera {@link BusinessException}
      */
     @Test
     public void noExisteAnuncio() throws Exception{
@@ -127,7 +165,7 @@ public class TestAnuncioService {
               "Titulo","descripcion", null, null,
                   1, BigDecimal.ONE, atributos
             );
-                anuncioService.guardar(actualizaAnuncioRequest);
+                anuncioService.guardar(actualizaAnuncioRequest,a);
             }catch (BusinessException e) {
                 assertEquals(e.getLocalExceptionNumber() , 1013);
             }
@@ -156,7 +194,6 @@ public class TestAnuncioService {
         when(anuncioMapper.obtieneDescPorId(Mockito.anyInt())).thenReturn("Activo");
         when(anuncioMapper.obtieneCategoria(1)).thenReturn(new Categoria(1,"Caninos",1));
 
-
         BusquedaAdministracionRequest busqueda = new BusquedaAdministracionRequest();
         busqueda.setNumPaginas(1);
         busqueda.setTamPaginas(10);
@@ -171,43 +208,67 @@ public class TestAnuncioService {
      * @throws java.sql.SQLException if any.
      */
     @Test
-    public void busquedaUsuario() throws BusinessException, SQLException{
+    public void busquedaUsuario() throws BusinessException, SQLException {
         try {
-             List<DetalleAnuncioResponse> anuncios = new ArrayList<>();
-                for(int a=0;a<10;a++) {
-                    DetalleAnuncioResponse anuncio = new DetalleAnuncioResponse();
-                    anuncio.setId(a);
-                    anuncio.setFolio("Folio"+a);
-                    anuncio.setDescripcion("Descricpion"+a);
-                    anuncio.setIdCategoria(1);
-                    anuncios.add(anuncio);
-                }
-                Categoria categoria = new Categoria();
-                categoria.setActivo(1);
-                categoria.setCategoria("Canino");
-                categoria.setId(1);
-                List<AnuncioMedia> media = new ArrayList<>();
-                for (int i = 0; i < 2; i++) {
-                    AnuncioMedia foto = new AnuncioMedia();
-                    foto.setId(1);
-                    foto.setIdAnuncio(1);
-                    foto.setIdTipo(3);
-                    foto.setPrincipal(true);
-                    foto.setUuid("23423gf34g34");
-                }
-                when(anuncioMapper.busquedaFiltro(Mockito.any())).thenReturn(anuncios);
-                when(anuncioMapper.totalAnuncioFiltro(Mockito.any())).thenReturn(anuncios);
-                when(anuncioMapper.obtieneCategoria(Mockito.anyInt())).thenReturn(categoria);
-                when(anuncioImagenMapper.getImagenes(Mockito.anyInt())).thenReturn(media);
+            List<DetalleAnuncioResponse> anuncios = new ArrayList<>();
+            for (int a = 0; a < 10; a++) {
+                DetalleAnuncioResponse anuncio = new DetalleAnuncioResponse();
+                anuncio.setId(a);
+                anuncio.setFolio("Folio" + a);
+                anuncio.setDescripcion("Descricpion" + a);
+                anuncio.setIdCategoria(1);
+                anuncios.add(anuncio);
+            }
+            Categoria categoria = new Categoria();
+            categoria.setActivo(1);
+            categoria.setCategoria("Canino");
+            categoria.setId(1);
+            List<AnuncioMedia> media = new ArrayList<>();
+            for (int i = 0; i < 2; i++) {
+                AnuncioMedia foto = new AnuncioMedia();
+                foto.setId(1);
+                foto.setIdAnuncio(1);
+                foto.setIdTipo(3);
+                foto.setPrincipal(true);
+                foto.setUuid("23423gf34g34");
+            }
+            when(anuncioMapper.busquedaFiltro(Mockito.any())).thenReturn(anuncios);
+            when(anuncioMapper.totalAnuncioFiltro(Mockito.any())).thenReturn(anuncios);
+            when(anuncioMapper.obtieneCategoria(Mockito.anyInt())).thenReturn(categoria);
+            when(anuncioImagenMapper.getImagenes(Mockito.anyInt())).thenReturn(media);
 
-                BusquedaRequest busqueda = new BusquedaRequest();
-                busqueda.setNumPaginas(1);
-                busqueda.setTamPaginas(10);
-                BusquedaResponse response = anuncioService.busqueda(busqueda);
-                assertEquals(response.getListaAnuncios().size(),10);
+            BusquedaRequest busqueda = new BusquedaRequest();
+            busqueda.setNumPaginas(1);
+            busqueda.setTamPaginas(10);
+            BusquedaResponse response = anuncioService.busqueda(busqueda);
+            assertEquals(response.getListaAnuncios().size(), 10);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Caso en el que el anuncio fue encontrado, pero se encuentra eliminado.
+     * @throws Exception Se espera {@link RuleException} cuando el anuncio ya se ha eliminado.
+     */
+    @Test(expected = RuleException.class)
+    public void testAnuncioEliminado() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(
+                new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
+                        new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 5, "url-search"));
+        anuncioService.guardar(actualizaAnuncioRequest,a);
+    }
+
+    /**
+     * Caso en el que el anuncio fue encontrado, pero se encuentra vencido.
+     * @throws Exception Se espera {@link RuleException} cuando el anuncio ya se ha vencido.
+     */
+    @Test(expected = RuleException.class)
+    public void testAnuncioVencido() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(
+                new Anuncio(1, 2, "21062317310001", "Gato de colores", "Gato que se despinto con cloro",
+                        new BigDecimal(234), new Date(), new Date(), new Date(), new Date(), null, (short) 4, "url-search"));
+        anuncioService.guardar(actualizaAnuncioRequest,a);
     }
 
     /**
@@ -249,4 +310,112 @@ public class TestAnuncioService {
         }
     }
 
+    /**
+     * Caso en el que el anuncio se encuentra en un status invalido.
+     * @throws Exception RuleException, pues los status son invalidos.
+     */
+    @Test
+    public void testConfirmarAnuncioFailed() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+        try {
+            anuncio.setIdEstatus(AnuncioEstatusEnum.ELIMINADO.getId());
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        }catch (RuleException r){
+            assertTrue(true);
+        }try {
+            anuncio.setIdEstatus(AnuncioEstatusEnum.VENCIDO.getId());
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        }catch (RuleException r){
+            assertTrue(true);
+        }try {
+            anuncio.setIdEstatus(AnuncioEstatusEnum.CANCELADO.getId());
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        }catch (RuleException r){
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Verifica que si un anuncio cuenta con los estatus validos este es actualizado correctamente
+     * @throws Exception No se lanza
+     */
+    @Test
+    public void testConfirmaAnuncio() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+        List<AnuncioMedia> imagenes = new ArrayList<>();
+        imagenes.add(new AnuncioMedia());
+        when(anuncioImagenMapper.getImagenes(1)).thenReturn(imagenes);
+        anuncio.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
+        AnuncioResponse ar = new AnuncioResponse();
+        assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
+        anuncio.setIdEstatus(AnuncioEstatusEnum.PUBLICADO.getId());
+        assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
+        anuncio.setIdEstatus(AnuncioEstatusEnum.ACTIVO.getId());
+        assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
+    }
+
+    /**
+     * Se cubren los casos en los que la asignacion de confirmacion de un anuncio puede llegar a fallar.
+     * @throws Exception Se lanzan en caso de fallas en el flujo del algoritmo.
+     */
+    @Test
+    public void testFallaConfirmacion() throws Exception{
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+        try {
+            //Caso en el que el anuncio no tiene imagenes (es nulo).
+            when(anuncioImagenMapper.getImagenes(1)).thenReturn(null);
+            anuncio.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        } catch (RuleException r){
+            assertTrue(true);
+        }
+        //Caso en el que el anuncio no tiene imagenes (es vacio).
+        List<AnuncioMedia> imagenes = new ArrayList<>();
+        when(anuncioImagenMapper.getImagenes(1)).thenReturn(imagenes);
+        anuncio.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
+        try {
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        } catch (RuleException r){
+            assertTrue(true);
+        }
+        //Caso en el que hay fechas incorrectas
+        anuncio.setFechaInicioVigencia(DateUtils.addMonths(new Date(), 1));
+        anuncio.setFechaFinVigencia(new Date());
+        try {
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        } catch (RuleException r){
+            assertTrue(true);
+        } try {
+            // Caso en el que ocurre un error en la consulta al mapper
+            when(anuncioMapper.getAnuncioById(1)).thenThrow(SQLException.class);
+            anuncioService.confirmarAnuncio(1, new AnuncioResponse());
+        } catch (DatabaseException e) {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Cubre los casos en los que se preveen fechas a futuro para la publicacion de un anuncio.
+     * @throws Exception No falla este test.
+     */
+    @Test
+    public void testConfirmarFuturo() throws Exception {
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+        List<AnuncioMedia> imagenes = new ArrayList<>();
+        imagenes.add(new AnuncioMedia());
+        when(anuncioImagenMapper.getImagenes(1)).thenReturn(imagenes);
+        // Caso en el que el anuncio tiene una fecha de publicacion programada
+        anuncio.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
+        anuncio.setFechaInicioVigencia(DateUtils.addMonths(new Date(), 1));
+        anuncio.setFechaFinVigencia(DateUtils.addMonths(new Date(), 2));
+        AnuncioResponse ar = new AnuncioResponse();
+        assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
+        // Caso en el que la fecha de inicio es nula
+        anuncio.setFechaInicioVigencia(null);
+        assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
+
+    }
+
 }
+
+
