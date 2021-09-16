@@ -37,10 +37,6 @@
            <url>http://nexus.ci.ultrasist.net/repository/all/</url>
            <name>Kebblar Repository</name>
        </repository>
-<repository>
-   <id>jaspersoft-third-party</id>
-   <url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
-</repository>
        
     <!--
        
