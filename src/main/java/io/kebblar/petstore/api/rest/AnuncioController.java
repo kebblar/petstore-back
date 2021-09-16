@@ -159,7 +159,7 @@ public class AnuncioController {
     public AnuncioResponse eliminar(
         @ApiParam(name="id", value="Identificador del anuncio que será removido del sistema.")
         @RequestParam int id ) throws BusinessException {
-        return anuncioService.eliminarAnuncio(id);
+        return anuncioService.eliminarAnuncio(id, new AnuncioResponse());
     }
 
     @ApiOperation(

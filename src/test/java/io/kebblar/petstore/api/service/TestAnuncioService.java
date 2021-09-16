@@ -25,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.RuleException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.*;
+import io.kebblar.petstore.api.model.response.*;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
 import io.kebblar.petstore.api.utils.AnuncioUtil;
 import org.apache.commons.lang.time.DateUtils;
@@ -56,14 +59,11 @@ import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.response.AnuncioResponse;
-import io.kebblar.petstore.api.model.response.BusquedaAdministracionResponse;
-import io.kebblar.petstore.api.model.response.BusquedaResponse;
-import io.kebblar.petstore.api.model.response.DetalleAnuncioResponse;
-import io.kebblar.petstore.api.model.response.PaginacionAnunciosResponse;
 import io.kebblar.petstore.api.support.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>TestAnuncioService class.</p>
@@ -224,6 +224,7 @@ public class TestAnuncioService {
             categoria.setCategoria("Canino");
             categoria.setId(1);
             List<AnuncioMedia> media = new ArrayList<>();
+            media.add(new AnuncioMedia(1, "str", 1, true));
             for (int i = 0; i < 2; i++) {
                 AnuncioMedia foto = new AnuncioMedia();
                 foto.setId(1);
@@ -278,7 +279,8 @@ public class TestAnuncioService {
      * @throws java.sql.SQLException if any.
      */
     @Test
-    public void detalleAnuncio() throws BusinessException, SQLException{
+    public void detalleAnuncio() throws Exception {
+        // Happy path
         try {
             DetalleAnuncioResponse anuncioResponse1= new DetalleAnuncioResponse();
             anuncioResponse1.setTitulo("Titulos");
@@ -300,6 +302,7 @@ public class TestAnuncioService {
                 foto.setPrincipal(true);
                 foto.setUuid("23423gf34g34");
             }
+            media.add(new AnuncioMedia(1, "str", 1, true));
             when(anuncioMapper.getAnuncioDetalle(Mockito.anyInt())).thenReturn(anuncioResponse1);
             when(anuncioImagenMapper.getImagenes(Mockito.anyInt())).thenReturn(media);
             DetalleAnuncioResponse detalleAnuncioResponse = anuncioService.detalleAnuncio(1);
@@ -307,6 +310,21 @@ public class TestAnuncioService {
             assert(true);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        try {
+            // Cuando el id no existe
+            when(anuncioMapper.getAnuncioDetalle(1)).thenReturn(null);
+            anuncioService.detalleAnuncio(1);
+        } catch (RuleException r) {
+            assertTrue(true);
+        }
+        // Cuando ocurre error con la DB
+        try {
+            when(anuncioMapper.getAnuncioDetalle(1)).thenThrow(SQLException.class);
+            anuncioService.detalleAnuncio(1);
+        } catch (DatabaseException b) {
+            assertTrue(true);
         }
     }
 
@@ -414,6 +432,108 @@ public class TestAnuncioService {
         anuncio.setFechaInicioVigencia(null);
         assertEquals(1, anuncioService.confirmarAnuncio(1, ar).getId());
 
+    }
+
+    /**
+     * Prueba los casos en los que elimina puede fallar.
+     * @throws Exception Se lanza cuando hay un problema en la eliminacion.
+     */
+    @Test
+    public void testEliminaAnuncio() throws Exception{
+        try {
+            // El anuncio no existe
+            when(anuncioMapper.getAnuncioById(1)).thenReturn(null);
+            anuncioService.eliminarAnuncio(1, new AnuncioResponse());
+        } catch (RuleException r){
+            assertTrue(true);
+        }
+        try {
+            // El anuncio existe, pero ya se elimino
+            when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+            anuncio.setIdEstatus(AnuncioEstatusEnum.ELIMINADO.getId());
+            anuncioService.eliminarAnuncio(1, new AnuncioResponse());
+        } catch (RuleException r){
+            assertTrue(true);
+        }
+        try {
+            // Cuando no se puede conectar con la DB
+            when(anuncioMapper.getAnuncioById(1)).thenThrow(SQLException.class);
+            anuncioService.eliminarAnuncio(1, new AnuncioResponse());
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Cuando si se puede eliminar el anuncio.
+     * @throws Exception No es lanzada.
+     */
+    @Test
+    public void testEliminaHappyPath() throws Exception {
+        when(anuncioMapper.getAnuncioById(1)).thenReturn(anuncio);
+        AnuncioResponse ar = new AnuncioResponse();
+        anuncioService.eliminarAnuncio(1, ar);
+        assertEquals(anuncio.getFolio(), ar.getFolio());
+    }
+
+    @Test
+    public void testEliminarImagen() throws Exception {
+        try {
+            when(anuncioImagenMapper.eliminarImagen("aaaa")).thenReturn(0);
+            anuncioService.eliminarImagen("aaaa");
+        } catch (RuleException e) {
+            assertTrue(true);
+        }
+        try {
+            when(anuncioImagenMapper.eliminarImagen("aaaa")).thenThrow(SQLException.class);
+            anuncioService.eliminarImagen("aaaa");
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void eliminaImagen() throws Exception {
+        try {
+            when(anuncioImagenMapper.eliminarImagen("x")).thenReturn(0);
+            anuncioService.eliminarImagen("x");
+        } catch (RuleException t){
+            assertTrue(true);
+        }
+        try {
+            when(anuncioImagenMapper.eliminarImagen("x")).thenThrow(SQLException.class);
+            anuncioService.eliminarImagen("x");
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testDetalleAllAnuncio() throws Exception {
+        DetalleAnuncioResponse d = new DetalleAnuncioResponse();
+        d.setId(1);
+
+        List<MascotaValorAtributoResponse> mvr = new ArrayList<>();
+        mvr.add(new MascotaValorAtributoResponse(1,1,"abc", 1, "atributo"));
+        List<AnuncioMedia> am = new ArrayList<>();
+        am.add(new AnuncioMedia(1, "str", 1, true));
+        List<DetalleAnuncioResponse> ld = new ArrayList<>();
+        ld.add(d);
+
+        // HappyPath
+        when(anuncioMapper.valorAtributosPorAnuncio(1)).thenReturn(mvr);
+        when(anuncioImagenMapper.getImagenes(1)).thenReturn(am);
+        when(anuncioMapper.getAllAnuncioDetalle()).thenReturn(ld);
+        anuncioService.detalleAllAnuncio();
+        assertTrue(true);
+
+        //Cuando hay error en el mapper
+        try {
+            when(anuncioMapper.getAllAnuncioDetalle()).thenThrow(SQLException.class);
+            anuncioService.detalleAllAnuncio();
+        } catch (DatabaseException v) {
+            assertTrue(true);
+        }
     }
 
 }

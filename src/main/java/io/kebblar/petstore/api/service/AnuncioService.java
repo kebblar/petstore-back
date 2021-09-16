@@ -91,11 +91,12 @@ public interface AnuncioService {
      * Método que permite eliminar logicamente un producto con base al identificador proporcionado
      * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
      *
+     * @param ar TODO
      * @param id Identificador del anuncio que será removido del sistema.
      * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
      * @throws BusinessException Excepcion lanzada en caso de error
      */
-    AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
+    AnuncioResponse eliminarAnuncio(int id, AnuncioResponse ar) throws BusinessException;
 
     /**
      * Método que permite obtener el detalle de un anuncio con base al identificador.

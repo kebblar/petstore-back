@@ -314,8 +314,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     /** {@inheritDoc} */
     @Override
-    public AnuncioResponse eliminarAnuncio(int id) throws BusinessException {
-        AnuncioResponse response = new AnuncioResponse();
+    public AnuncioResponse eliminarAnuncio(int id, AnuncioResponse response) throws BusinessException {
         try {
             //Se consulta la informacion del anuncio, para validar estatus
             Anuncio anuncio = anuncioMapper.getAnuncioById(id);
