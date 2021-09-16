@@ -48,18 +48,16 @@ import org.slf4j.LoggerFactory;
 import javax.crypto.Cipher;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.ssl.PKCS8Key;
+//import org.apache.commons.ssl.PKCS8Key;
 
 public class CryptoSupport {
     private static final Logger logger = LoggerFactory.getLogger(CryptoSupport.class);
 
-    /**/
     private static String rootPath = "/Users/garellano/emisor/";
     private static String privateKeyFile = rootPath + "ok.key";
     private static String certificateFile = rootPath + "ok.cer";
     private static String pass = "password";
     private static String cadenaOriginalParaFirma = "parangaricutirimicuaro";
-    /**/
 
     public static void main(String...argv) throws Exception {
         new CryptoSupport().ok();
@@ -258,8 +256,9 @@ public class CryptoSupport {
     */
     private PrivateKey getPrivateKeyFromFile(String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         byte[] clavePrivada = getPrivateKeyBytes(privateKeyFile);
-        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
-        return pkcs8.getPrivateKey();
+        //PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+        //return pkcs8.getPrivateKey();
+        return null;
     }
     public byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         PrivateKey pk = getPrivateKeyFromFile(privateKeyFile, password);

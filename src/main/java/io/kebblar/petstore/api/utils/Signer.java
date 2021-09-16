@@ -46,7 +46,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.ssl.PKCS8Key;
+//import org.apache.commons.ssl.PKCS8Key;
 /**
  * <p>Descripción:</p>
  * Clase que sirve para firmar archivos y verificar la firma de estos.
@@ -269,7 +269,7 @@ public class Signer {
      */
     private PrivateKey getPrivateKeyFromFile(String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         byte[] clavePrivada = getPrivateKeyBytes(privateKeyFile);
-        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
-        return pkcs8.getPrivateKey();
+        //PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+        return null;//pkcs8.getPrivateKey();
     }
 }
