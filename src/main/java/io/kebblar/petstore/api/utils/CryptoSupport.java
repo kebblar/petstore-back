@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 import javax.crypto.Cipher;
 
 import org.apache.commons.io.IOUtils;
-//import org.apache.commons.ssl.PKCS8Key;
+import org.apache.commons.ssl.PKCS8Key;
 
 public class CryptoSupport {
     private static final Logger logger = LoggerFactory.getLogger(CryptoSupport.class);
@@ -256,9 +256,8 @@ public class CryptoSupport {
     */
     private PrivateKey getPrivateKeyFromFile(String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         byte[] clavePrivada = getPrivateKeyBytes(privateKeyFile);
-        //PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
-        //return pkcs8.getPrivateKey();
-        return null;
+        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+        return pkcs8.getPrivateKey();
     }
     public byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, String privateKeyFile, String password) throws GeneralSecurityException, IOException {
         PrivateKey pk = getPrivateKeyFromFile(privateKeyFile, password);

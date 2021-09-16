@@ -43,7 +43,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 
 import org.apache.commons.io.IOUtils;
-//import org.apache.commons.ssl.PKCS8Key;
+import org.apache.commons.ssl.PKCS8Key;
 
 /**
  * <p>Crypt class.</p>
@@ -146,8 +146,8 @@ public class Crypt {
         return IOUtils.toByteArray(privateKeyInputStream);
     }
     private byte[] getTextoEncriptadoFromPrivateKeyFile(String texto, byte[] clavePrivada, String password) throws GeneralSecurityException {
-        //PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
-        PrivateKey pk = null;//pkcs8.getPrivateKey();
+        PKCS8Key pkcs8 = new PKCS8Key(clavePrivada, password.toCharArray());
+        PrivateKey pk = pkcs8.getPrivateKey();
         // http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#Signature
         Signature firma = Signature.getInstance("NONEwithRSA"); // MD5withRSA,SHA256withRSA,NONEwithRSA
         firma.initSign(pk);
