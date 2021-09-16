@@ -44,12 +44,12 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'atributo'.
+ * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'atributo'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
- *                     a que la  documentación Swagger API cumple con ese objetivo.
+ * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -152,6 +152,9 @@ public class AtributoController {
         return atributoService.delete(atributo);
     }
 
+    @ApiOperation(
+            value = "AtributoController::getAtributo",
+            notes = "Devuelve un atributo dado su nombre.")
     @GetMapping(path = "/atributos/list/{nombre}.json", produces = "application/json; charset=utf-8")
     public List<Atributo> getAtributo(
             @ApiParam(name = "nombre", value = "Nombre del Atributo", defaultValue = "PESO")

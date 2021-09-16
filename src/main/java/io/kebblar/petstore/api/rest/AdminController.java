@@ -48,14 +48,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementacion  del controlador REST asociado a los endpoints
  * de gestión por HealthService.
  *
- * <p>Todos los métodos de esta clase disparan {@link ControllerException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.service.HealthService
@@ -93,23 +93,23 @@ public class AdminController {
         this.healthService = healthService;
     }
 
+    @ApiOperation( value = "AdminController::UploadPictures")
     @PostMapping(path="/UploadPictures", produces = "application/json; charset=utf-8")
     public String upload(
         @ApiParam(name = "request", value = "MultipartFile del archivo")
         MultipartHttpServletRequest request,
-        HttpServletResponse response
-    ) throws IOException {
+        HttpServletResponse response){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         while(parameterNames.hasMoreElements()) {
             String name = parameterNames.nextElement();
             String value = request.getParameter(name);
-            System.out.println(name + ":"+ value);
+            logger.info("{} : {}", name, value);
         }
 
         Map<String, MultipartFile> fileMap = request.getFileMap();
         for (MultipartFile multipartFile : fileMap.values()) {
-            System.out.println(multipartFile.getOriginalFilename());
+            logger.info(multipartFile.getOriginalFilename());
         }
         return "ok";
     }
@@ -129,7 +129,7 @@ public class AdminController {
             @ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls")
             @RequestParam String inputData, HttpServletRequest request
         ) throws IOException {
-        logger.info("*** Application Profile Identifier: "+appProfileIdentifier);
+        logger.info("*** Application Profile Identifier: {}", appProfileIdentifier);
         Map<String, String> result = healthService.getInfo(inputData);
         result.put("app.profile.identifier", appProfileIdentifier);
         result.put("spring.datasource.url", springDatasourceUrl);
@@ -155,7 +155,6 @@ public class AdminController {
                 + page
                 + "&componentKeys=mx.gob.impi.chatbot.persistence:chatbot-persistence-layer";
         try {
-            //RestTemplate restTemplate = new RestTemplate();
             return restTemplate.getForObject(uri, String.class);
         } catch (RuntimeException e) {
             return "{'error':'" + e.getMessage() + "', 'uri':'" + uri + "'}".replace("'", "\"");

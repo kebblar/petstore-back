@@ -45,10 +45,10 @@ import io.swagger.annotations.ApiOperation;
  * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'categoria_atributo'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
- *                     a que la  documentación Swagger API cumple con ese objetivo.
+ * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -62,7 +62,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class CategoriaAtributoController {
 
-    private CategoriaAtributoService categoriaAtributoService;
+    private final CategoriaAtributoService categoriaAtributoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

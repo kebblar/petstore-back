@@ -41,12 +41,12 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'.
+ * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
- * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
- *                     a que la  documentación Swagger API cumple con ese objetivo.
+ * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -59,7 +59,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "administracion")
 @RequestMapping(value = "/api")
 public class PaisController {
-    private PaisService paisService;
+    private final PaisService paisService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

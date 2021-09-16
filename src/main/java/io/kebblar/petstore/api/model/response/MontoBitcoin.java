@@ -33,7 +33,7 @@ import java.util.Objects;
 public class MontoBitcoin {
 
     /**
-     * Atributos de clase
+     * Atributos de clase.
      */
     private double monto;
     private double cambio;
@@ -93,7 +93,7 @@ public class MontoBitcoin {
     /**
      * {@inheritDoc}
      *
-     * Método equals para el pojo, para saber si dos objetos son iguales.
+     * <p>Método equals para el pojo, para saber si dos objetos son iguales.</p>
      */
     @Override
     public boolean equals(Object o) {
@@ -106,7 +106,7 @@ public class MontoBitcoin {
     /**
      * {@inheritDoc}
      *
-     * Genera un hash del objeto
+     * <p>Genera un hash del objeto.</p>
      */
     @Override
     public int hashCode() {
@@ -116,7 +116,7 @@ public class MontoBitcoin {
     /**
      * {@inheritDoc}
      *
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * <p>Método toString para el pojo, representa al objeto en forma de cadena.</p>
      */
     @Override
     public String toString() {

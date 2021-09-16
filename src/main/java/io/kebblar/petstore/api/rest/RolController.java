@@ -63,7 +63,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class RolController {
 
-    private RolService rolService;
+    private final RolService rolService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

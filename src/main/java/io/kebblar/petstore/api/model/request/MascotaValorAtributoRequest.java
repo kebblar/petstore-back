@@ -82,19 +82,11 @@ public class MascotaValorAtributoRequest {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        MascotaValorAtributoRequest other = (MascotaValorAtributoRequest) obj;
-        if (id != other.id)
-            return false;
-        if (idValorAtributo != other.idValorAtributo)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MascotaValorAtributoRequest)) return false;
+        MascotaValorAtributoRequest that = (MascotaValorAtributoRequest) o;
+        return id == that.id && idValorAtributo == that.idValorAtributo;
     }
 
     /** {@inheritDoc} */

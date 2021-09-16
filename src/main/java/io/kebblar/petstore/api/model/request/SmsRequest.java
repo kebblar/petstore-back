@@ -29,9 +29,9 @@ package io.kebblar.petstore.api.model.request;
  */
 public class SmsRequest {
 
-       /**
-        * Atributos de la clase
-        */
+    /**
+    * Atributos de la clase.
+    */
     private String telefono;
     private String mensaje;
 
@@ -91,7 +91,7 @@ public class SmsRequest {
     /**
      * {@inheritDoc}
      *
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * <p>Método toString para el pojo, representa al objeto en forma de cadena.</p>
      */
     @Override
     public String toString() {
@@ -101,7 +101,7 @@ public class SmsRequest {
     /**
      * {@inheritDoc}
      *
-     * Genera un hash del objeto
+     * <p>Genera un hash del objeto.</p>
      */
     @Override
     public int hashCode() {
@@ -115,7 +115,7 @@ public class SmsRequest {
     /**
      * {@inheritDoc}
      *
-     * Compara si dos instancias de la clase son iguales
+     * <p>Compara si dos instancias de la clase son iguales.</p>
      */
     @Override
     public boolean equals(Object obj) {

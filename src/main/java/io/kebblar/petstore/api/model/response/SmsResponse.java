@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.response;
 
+import java.util.Objects;
+
 /**
  * Implementacion del POJO de la entidad de 'SmsResponse'.
  *
@@ -28,6 +30,9 @@ package io.kebblar.petstore.api.model.response;
  * @since   1.0-SNAPSHOT
  */
 public class SmsResponse {
+    /**
+     * Atributos de clase.
+     */
     private String ipCaller;
     private String fechaInvocacon;
     private String mensajeDado;
@@ -193,41 +198,13 @@ public class SmsResponse {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        SmsResponse other = (SmsResponse) obj;
-        if (exito != other.exito)
-            return false;
-        if (fechaInvocacon == null) {
-            if (other.fechaInvocacon != null)
-                return false;
-        } else if (!fechaInvocacon.equals(other.fechaInvocacon))
-            return false;
-        if (ipCaller == null) {
-            if (other.ipCaller != null)
-                return false;
-        } else if (!ipCaller.equals(other.ipCaller))
-            return false;
-        if (mensajeDado == null) {
-            if (other.mensajeDado != null)
-                return false;
-        } else if (!mensajeDado.equals(other.mensajeDado))
-            return false;
-        if (resultMsg == null) {
-            if (other.resultMsg != null)
-                return false;
-        } else if (!resultMsg.equals(other.resultMsg))
-            return false;
-        if (telefonoDado == null) {
-            if (other.telefonoDado != null)
-                return false;
-        } else if (!telefonoDado.equals(other.telefonoDado))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SmsResponse)) return false;
+        SmsResponse that = (SmsResponse) o;
+        return exito == that.exito && Objects.equals(ipCaller, that.ipCaller) && Objects.equals(fechaInvocacon, that.fechaInvocacon)
+                && Objects.equals(mensajeDado, that.mensajeDado) && Objects.equals(telefonoDado, that.telefonoDado)
+                && Objects.equals(resultMsg, that.resultMsg);
     }
+
 }

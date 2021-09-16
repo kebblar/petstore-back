@@ -36,7 +36,7 @@ public class DireccionConNombre implements Serializable {
     private static final long serialVersionUID = 6990145017462317631L;
 
     /**
-     * Atributos de la clase
+     * Atributos de la clase.
      */
     private int id;
     private String calleNumero;
@@ -205,7 +205,7 @@ public class DireccionConNombre implements Serializable {
     /**
      * {@inheritDoc}
      *
-     * Método toString para el pojo, representa al objeto en forma de cadena
+     * <p>Método toString para el pojo, representa al objeto en forma de cadena.</p>
      */
     @Override
     public String toString() {

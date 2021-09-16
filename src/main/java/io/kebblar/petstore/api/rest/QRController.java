@@ -20,7 +20,9 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,14 +34,14 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.support.QRService;
 
 /**
- * <p>Implementacion  del controlador REST asociado a los endpoints
+ * Implementación  del controlador REST asociado a los endpoints
  * de gestión del POJO Direcciones.
  *
- * <p>Todos los métodos de esta clase disparan {@link ControllerException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
- * cumple con ese objetivo.
+ * cumple con ese objetivo.</p>
  *
  * @author  luz
  * @see     io.kebblar.petstore.api.service.DireccionService
@@ -50,20 +52,38 @@ import io.kebblar.petstore.api.support.QRService;
 @RequestMapping(value = "/api")
 public class QRController {
 
-    @Autowired
-    private QRService qrService;
+    private final QRService qrService;
 
+    /**
+     * Constructor que realiza el setting de los servicios que serán
+     * utilizados en este controlador.
+     *
+     * @param qrService Servicios de QR
+     */
+    public QRController(QRService qrService){
+        this.qrService = qrService;
+    }
+
+    @ApiOperation(value = "QRController::testphoto",
+                notes = "Dada una entrada de datos, este endpoint transforma dicha entrada" +
+                        "en una imagen QR.")
     @GetMapping(
             value = "/qr/{data}",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] testphoto(@PathVariable String data) throws ControllerException {
+    public byte[] testphoto(
+            @ApiParam(name = "data", value = "Información a convertir a QR")
+            @PathVariable String data) throws ControllerException {
         return qrService.getQRBytes(data);
     }
 
+    @ApiOperation(value = "QRController::generateQRBytesBase64",
+                notes = "Devuelve el base 64 de la imagen de qr")
     @GetMapping(
             value = "/qr-base64/{data}",
             produces = "image/jpg")
-    public @ResponseBody String generateQRBytesBase64(@PathVariable("data") String data) throws Exception  {
+    public @ResponseBody String generateQRBytesBase64(
+            @ApiParam(name = "Informacion con la que se genera el QR")
+            @PathVariable("data") String data) throws BusinessException {
         return qrService.getQRBytesBase64(data);
     }
 

@@ -45,8 +45,8 @@ import io.kebblar.petstore.api.model.domain.DatosOrden;
 @Repository
 public interface OrdenCompraMapper {
 
+    /** Constant <code>CAMPOS_ORDEN=" id, id_usuario, id_direccion_envio, id"{trunked}</code> */
     String CAMPOS_ORDEN = " id, id_usuario, id_direccion_envio, id_paqueteria, id_metodo_pago, " +
-            /** Constant <code>CAMPOS_ORDEN=" id, id_usuario, id_direccion_envio, id"{trunked}</code> */
             "id_moneda, id_anuncio, cve_orden_compra, importe_total, fecha_hora_comprar, estado_envio, recibo ";
 
     /**

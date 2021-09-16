@@ -35,12 +35,12 @@ import io.swagger.annotations.ApiParam;
 
 /**
  * <p>Descripción:</p>
- * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'DatosOrden'.
+ * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'DatosOrden'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
- *                     a que la  documentación Swagger API cumple con ese objetivo.
+ *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Fhernanda Romo, Daniel Alvarez
  * @version 1.0-SNAPSHOT
@@ -54,7 +54,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value="/api")
 public class OrdenCompraController {
 
-    private OrdenCompraService ordenCompraService;
+    private final OrdenCompraService ordenCompraService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

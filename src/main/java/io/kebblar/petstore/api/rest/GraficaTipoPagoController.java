@@ -34,13 +34,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * Implementacion del REST Controller asociado a los endpoints de gestión del
+ * Implementación del REST Controller asociado a los endpoints de gestión del
  * POJO 'Gráfica'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc
- * debido a que la documentación Swagger API cumple con ese objetivo.
+ * debido a que la documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Diego González Sánchez
  * @version 1.0-SNAPSHOT
@@ -54,7 +54,7 @@ import io.swagger.annotations.ApiParam;
 @Api(value = "graficaTipoPago")
 @RequestMapping(value = "/api")
 public class GraficaTipoPagoController {
-    private GraficaTipoPagoService graficaTipoPagoService;
+    private final GraficaTipoPagoService graficaTipoPagoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán utilizados en
@@ -79,6 +79,8 @@ public class GraficaTipoPagoController {
         return graficaTipoPagoService.getMontoTotalTipoPago();
     }
 
+    @ApiOperation(value = "GraficaController::getMontoTipoPagoRango",notes = "Dado un rango de fechas, este metodo permite que verificar" +
+            "los tipos de pago mas utilizados en este rango.")
     @GetMapping(path = "/grafica-tipo-pago-rango.json", produces = "application/json; charset=utf-8")
     public String getMontoTipoPagoRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio") @RequestParam String fechaInicio,

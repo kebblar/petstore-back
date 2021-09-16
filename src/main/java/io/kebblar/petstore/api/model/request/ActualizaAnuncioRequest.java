@@ -100,17 +100,12 @@ public class ActualizaAnuncioRequest extends AnuncioRequest {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ActualizaAnuncioRequest other = (ActualizaAnuncioRequest) obj;
-        if (id != other.id)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ActualizaAnuncioRequest)) return false;
+        if (!super.equals(o)) return false;
+        ActualizaAnuncioRequest that = (ActualizaAnuncioRequest) o;
+        return id == that.id;
     }
 
     /** {@inheritDoc} */

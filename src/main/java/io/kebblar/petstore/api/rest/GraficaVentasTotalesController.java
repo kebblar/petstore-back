@@ -53,7 +53,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "GraficaVentasTotales")
 @RequestMapping(value = "/api")
 public class GraficaVentasTotalesController {
-    private GraficaVentasTotalesService graficaVentasTotalesService;
+    private final GraficaVentasTotalesService graficaVentasTotalesService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán utilizados en

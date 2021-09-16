@@ -41,18 +41,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * The {@code String} class represents character strings. All
  * string literals in Java programs, such as {@code "abc"}, are
  * implemented as instances of this class.
- * <p>
- * Strings are constant; their values cannot be changed after they
- * Because String objects are immutable they can be shared. For example:
+ *
+ * <p>Strings are constant; their values cannot be changed after they
+ * Because String objects are immutable they can be shared.</p>
+ *
+ * <p>For example:</p>
  * <blockquote><pre>
  *     String str = "abc";
- * </pre></blockquote><p>
+ * </pre></blockquote>
  * is equivalent to:
  * <blockquote><pre>
  *     char data[] = {'a', 'b', 'c'};
  *     String str = new String(data);
- * </pre></blockquote><p>
- * Here are some more examples of how strings can be used:
+ * </pre></blockquote>
+ * <p>Here are some more examples of how strings can be used:</p>
  * <blockquote><pre>
  *     System.out.println("abc");
  *     String cde = "cde";
@@ -60,10 +62,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *     String c = "abc".substring(2,3);
  *     String d = cde.substring(1, 2);
  * </pre></blockquote>
- * <p>
- * The class {@code String} includes methods for examining
+ *
+ * <p>The class {@code String} includes methods for examining
  * lowercase. Case mapping is based on the Unicode Standard version
- * specified by the {@link java.lang.Character Character} class.
+ * specified by the {@link java.lang.Character Character} class.</p>
  *
  * @author  garellano
  * @see     java.lang.Object#toString()
@@ -75,8 +77,8 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     /*
      * Atributos logger y jwt.
      */
-    private Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
-    private String jwtToken;
+    private final Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
+    private final String jwtToken;
 
     /**
      * Constructor que recibe el jwtoken para validar los tokens que vienen en el header.

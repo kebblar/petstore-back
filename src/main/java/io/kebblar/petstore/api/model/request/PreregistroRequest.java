@@ -29,6 +29,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * <p>PreregistroRequest class.</p>
@@ -328,50 +329,13 @@ public class PreregistroRequest {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        PreregistroRequest other = (PreregistroRequest) obj;
-        if (claveHash == null) {
-            if (other.claveHash != null)
-                return false;
-        } else if (!claveHash.equals(other.claveHash))
-            return false;
-        if (correo == null) {
-            if (other.correo != null)
-                return false;
-        } else if (!correo.equals(other.correo))
-            return false;
-        if (day != other.day)
-            return false;
-        if (id != other.id)
-            return false;
-        if (instanteRegistro != other.instanteRegistro)
-            return false;
-        if (month != other.month)
-            return false;
-        if (nick == null) {
-            if (other.nick != null)
-                return false;
-        } else if (!nick.equals(other.nick))
-            return false;
-        if (randomString == null) {
-            if (other.randomString != null)
-                return false;
-        } else if (!randomString.equals(other.randomString))
-            return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
-            return false;
-        if (year != other.year)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PreregistroRequest)) return false;
+        PreregistroRequest that = (PreregistroRequest) o;
+        return id == that.id && instanteRegistro == that.instanteRegistro && year == that.year && month == that.month &&
+                day == that.day && Objects.equals(nick, that.nick) && Objects.equals(correo, that.correo) &&
+                Objects.equals(claveHash, that.claveHash) && Objects.equals(telefono, that.telefono) &&
+                Objects.equals(randomString, that.randomString);
     }
-
 }

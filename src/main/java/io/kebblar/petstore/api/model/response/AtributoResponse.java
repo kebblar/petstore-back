@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.response;
 
+import java.util.Objects;
+
 /**
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'atributo' para mostrar el detalle.
@@ -154,29 +156,12 @@ public class AtributoResponse {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AtributoResponse other = (AtributoResponse) obj;
-        if (descAtributo == null) {
-            if (other.descAtributo != null)
-                return false;
-        } else if (!descAtributo.equals(other.descAtributo))
-            return false;
-        if (descValor == null) {
-            if (other.descValor != null)
-                return false;
-        } else if (!descValor.equals(other.descValor))
-            return false;
-        if (id != other.id)
-            return false;
-        if (valor != other.valor)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AtributoResponse)) return false;
+        AtributoResponse that = (AtributoResponse) o;
+        return id == that.id && valor == that.valor && Objects.equals(descAtributo, that.descAtributo) &&
+                Objects.equals(descValor, that.descValor);
     }
 
     /** {@inheritDoc} */
@@ -185,6 +170,5 @@ public class AtributoResponse {
         return "AtributoResponse [id=" + id + ", descAtributo=" + descAtributo + ", valor=" + valor + ", descValor="
                 + descValor + "]";
     }
-
 
 }

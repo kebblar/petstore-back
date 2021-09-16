@@ -21,6 +21,7 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * POJO asociado a la entidad 'anuncio' para realizar la busqueda.
@@ -30,6 +31,10 @@ import java.util.List;
  * @since 1.0-SNAPSHOT
  */
 public class BusquedaResponse {
+
+    /**
+     * Atributos de clase.
+     */
     private int totalAnuncios;
     private List<DetalleAnuncioResponse> listaAnuncios;
 
@@ -81,22 +86,11 @@ public class BusquedaResponse {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BusquedaResponse other = (BusquedaResponse) obj;
-        if (listaAnuncios == null) {
-            if (other.listaAnuncios != null)
-                return false;
-        } else if (!listaAnuncios.equals(other.listaAnuncios))
-            return false;
-        if (totalAnuncios != other.totalAnuncios)
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusquedaResponse)) return false;
+        BusquedaResponse that = (BusquedaResponse) o;
+        return totalAnuncios == that.totalAnuncios && Objects.equals(listaAnuncios, that.listaAnuncios);
     }
 
     /** {@inheritDoc} */

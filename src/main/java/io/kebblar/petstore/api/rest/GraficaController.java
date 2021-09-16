@@ -35,15 +35,13 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Implementacion del REST Controller asociado a los endpoints de gestión del
+ * Implementación del REST Controller asociado a los endpoints de gestión del
  * POJO 'ChartWrapper'.
  *
- * <p>
- * Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p> Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
- * <p>
- * NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
- * debido a que la documentación Swagger API cumple con ese objetivo.
+ * <p> NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc
+ * debido a que la documentación Swagger API cumple con ese objetivo.</p>
  *
  * @author Ulises López
  * @version 1.0-SNAPSHOT
@@ -57,7 +55,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "grafica")
 @RequestMapping(value = "/api")
 public class GraficaController {
-    private GraficaService graficaService;
+    private final GraficaService graficaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán utilizados en
@@ -81,6 +79,9 @@ public class GraficaController {
         return graficaService.getMascotaMasVendida();
     }
 
+    @ApiOperation(value = "GraficaController::getMascotaMasVendidaRango",
+                  notes = "Dado un rango de fechas, este método devuelve a la mascota que más" +
+                          "se vendió en dicho momento.")
     @GetMapping(path = "/grafica-mascota-mas-vendida-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
     public ChartWrapper getMascotaMasVendidaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
@@ -101,6 +102,9 @@ public class GraficaController {
         return graficaService.getPaqueteria();
     }
 
+    @ApiOperation(value = "GraficaController::getPaqueteriaRango",
+            notes = "Dado un rango de fechas, este método devuelve a la paquetería de envío más" +
+                    "solicitada en dicho momento.")
     @GetMapping(path = "/grafica-paqueteria-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
     public ChartWrapper getPaqueteriaRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,
@@ -121,6 +125,9 @@ public class GraficaController {
         return graficaService.getCompradorAsiduo();
     }
 
+    @ApiOperation(value = "GraficaController::getCompradorAsiduoRango",
+                  notes = "Dado un rango de fechas devuelve al usuario que más compras" +
+                          "realizó en dicho rango.")
     @GetMapping(path = "/grafica-comprador-asiduo-rango/{fechaInicio}/{fechaFin}.json", produces = "application/json; charset=utf-8")
     public ChartWrapper getCompradorAsiduoRango(
             @ApiParam(name = "fechaInicio", value = "La fechaInicio de busqueda") @PathVariable String fechaInicio,

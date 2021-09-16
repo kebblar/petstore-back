@@ -21,7 +21,8 @@
  *              logico
  *              20210525_1806 Se  agrega  el  metodo  de consulta
  *              detalle de un anuncio
- *              20210528_1157 Se agrega el metodo BusquedaAdministracion */
+ *              20210528_1157 Se agrega el metodo BusquedaAdministracion
+ * */
 package io.kebblar.petstore.api.service;
 
 import java.sql.SQLException;
@@ -54,12 +55,13 @@ public interface AnuncioService {
 
     /**
      * Método que permite realizar el registro de un producto.
-     * <p>Se guardan los datos generales y atributos del producto,
+     *
+     * <p>Se guardan los datos generales y atributos del producto.
      * en este punto el anuncio tendrá un estatus de 1= En edición {@link AnuncioEstatusEnum}</p>
      *
-     * @param {@link AnuncioRequest}  Clase que contiene la información del {@link Anuncio} que se dara de alta
-     * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
-     * @throws BusinessException
+     * @param request {@link AnuncioRequest} Clase que contiene la información del {@link Anuncio} que se dara de alta
+     * @return {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
+     * @throws BusinessException cuando ocurre un problema en el guardado.
      */
     AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
 
@@ -117,15 +119,15 @@ public interface AnuncioService {
     /**
      * Método que permite el eliminado de las imagenes de un anuncio.
      *
-     * @param idImagen Identificador de la imagen que sera eliminada
+     * @param uuid Identificador de la imagen que sera eliminada
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void eliminarImagen(String uuid) throws BusinessException;
 
     /**
-     * Método que permite la búsqueda de productos para búsqueda de aministracion (ABC).
+     * Método que permite la búsqueda de productos para búsqueda de administracion (ABC).
      *
-     * @param {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
+     * @param filtros {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
      * @return {@link PaginacionAnunciosResponse}
      * @throws BusinessException, SQLException
      */
@@ -134,7 +136,7 @@ public interface AnuncioService {
     /**
      * Método que permite la búsqueda de productos para búsqueda de usuario final.
      *
-     * @param {@link BusquedaRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
+     * @param filtros {@link BusquedaRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
      * @return {@link BusquedaResponse}
      * @throws BusinessException, SQLException
      */
@@ -143,8 +145,8 @@ public interface AnuncioService {
     /**
      * Método que permite asignar como principal la imagen del anuncio proporcionado.
      *
-     * <p>El servicio validará que la imagen no haya sido eliminado previamente y que exista</p>
-     * @param {@link AnuncioImagenRequest} Clase que conetiene la informacion de la imagen que será principal
+     * <p>El servicio validará que la imagen no haya sido eliminado previamente y que exista.</p>
+     * @param imagenRequest {@link AnuncioImagenRequest} Clase que conetiene la informacion de la imagen que será principal
      * @throws BusinessException Excepcion lanzada en caso de error
      */
     void imagenPrincipal(AnuncioImagenRequest imagenRequest) throws BusinessException;

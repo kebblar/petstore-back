@@ -74,9 +74,7 @@ public class PaginacionAnunciosResponse {
                 return false;
         } else if (!listaAnuncios.equals(other.listaAnuncios))
             return false;
-        if (totalAnuncios != other.totalAnuncios)
-            return false;
-        return true;
+        return (totalAnuncios == other.totalAnuncios);
     }
 
     /**

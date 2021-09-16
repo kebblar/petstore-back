@@ -40,13 +40,13 @@ import io.kebblar.petstore.api.model.domain.GraficaVentasTotales;
 @Repository
 public interface GraficaVentasTotalesMapper {
 
+    /** Constant <code>CAMPOS_GRAFICA2="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
     String CAMPOS_GRAFICA2 = "count(*) as cantidad_ordenes, sum(orden.importe_total) as total_venta, " +
-            /** Constant <code>CAMPOS_GRAFICA2="count(*) as cantidad_ordenes, sum(orden"{trunked}</code> */
             "MONTH(orden.fecha_hora_comprar) as mes, YEAR(orden.fecha_hora_comprar) as anio";
     /** Constant <code>GROUP_MES_ANIO=" group by anio, mes"</code> */
     String GROUP_MES_ANIO = " group by anio, mes";
+    /** Constant <code>IJ_CARRITO_ORDEN=" inner join petstore.carrito as carrito"{trunked}</code> */
     String IJ_CARRITO_ORDEN = " inner join petstore.carrito as carrito on  orden.cve_orden_compra =  " +
-            /** Constant <code>IJ_CARRITO_ORDEN=" inner join petstore.carrito as carrito"{trunked}</code> */
             "carrito.cve_orden_compra";
     /** Constant <code>IJ_ANUNCIO_CARRITO=" inner join petstore.anuncio as anuncio"{trunked}</code> */
     String IJ_ANUNCIO_CARRITO = " inner join petstore.anuncio as anuncio on anuncio.id =  carrito.id_anuncio";

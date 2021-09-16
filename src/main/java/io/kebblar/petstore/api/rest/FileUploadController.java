@@ -22,6 +22,8 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,6 +57,7 @@ public class FileUploadController {
     private long max;
 
     private final UploadService uploadService;
+    private final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     /**
      * Constructor para la inyeccion de dependencias.
@@ -70,7 +73,7 @@ public class FileUploadController {
      * Recibe un(os) archivo(s) del front y lo almacena en la carpeta y almacena una copia en
      * ${app.destination-folder}/kdm y otra copia en ${application.properties}/kdm.
      *
-     * @param files archivo a almacenar
+     * @param file archivo a almacenar
      * @return lista que contiene el modelo de donde se almaceno el archivo
      * @throws UploadException si hay algun error
      */
@@ -84,12 +87,13 @@ public class FileUploadController {
             @RequestParam("dos") String dos,
             @RequestParam("file") MultipartFile file
             ) throws UploadException {
-        System.out.println(jwt);
-        System.out.println(uno);
-        System.out.println(dos);
-        UploadModel upload = uploadService.storeOne(file, destinationFolder, max);
-        return upload;
-    } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
+        logger.info(jwt);
+        String s = String.valueOf(uno);
+        logger.info(s);
+        logger.info(dos);
+        return uploadService.storeOne(file, destinationFolder, max);
+    }
+    // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
     // https://github.com/ozkanpakdil/spring-examples/tree/master/demoMultiFileUpload
     // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
 
@@ -99,9 +103,9 @@ public class FileUploadController {
             consumes = { "multipart/*" }
             )
     public List<UploadModel> handleFileUploadWithKDMCopyPut(@RequestParam("files") MultipartFile[] files) throws UploadException {
-        List<UploadModel> listaUpload = uploadService.store(files, destinationFolder, max);
-        return listaUpload;
-    } // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
+        return uploadService.store(files, destinationFolder, max);
+    }
+    // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
 
     @PutMapping(
             path = "/upload2.json",
@@ -109,10 +113,8 @@ public class FileUploadController {
             consumes = { "multipart/*" }
             )
     public UploadModel upload2(@RequestParam("files") MultipartFile files) throws UploadException {
-        UploadModel upload = uploadService.storeOne(files, destinationFolder, max);
-        return upload;
+        return uploadService.storeOne(files, destinationFolder, max);
     }
-
 
     @ApiOperation(
     value = "AnuncioController::Registro",

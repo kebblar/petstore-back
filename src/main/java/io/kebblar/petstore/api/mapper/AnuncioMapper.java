@@ -51,8 +51,8 @@ import io.kebblar.petstore.api.model.response.MascotaValorAtributoResponse;
 @Repository
 public interface AnuncioMapper {
 
+    /** Constant <code>CAMPOS_ANUNCIO=" id_categoria, folio, titulo, descripci"{trunked}</code> */
     String CAMPOS_ANUNCIO = " id_categoria, folio, titulo, descripcion, precio, fecha_inicio_vigencia, " +
-            /** Constant <code>CAMPOS_ANUNCIO=" id_categoria, folio, titulo, descripci"{trunked}</code> */
             "fecha_fin_vigencia, fecha_alta, fecha_modificacion, fecha_eliminacion, id_estatus, search_url ";
     /** Constant <code>CAMPOS_MASCOTA_VALOR_ATRIBUTOS=" id_anuncio, id_valor_atributo "</code> */
     String CAMPOS_MASCOTA_VALOR_ATRIBUTOS = " id_anuncio, id_valor_atributo ";
