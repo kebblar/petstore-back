@@ -37,13 +37,13 @@
            <url>http://nexus.ci.ultrasist.net/repository/all/</url>
            <name>Kebblar Repository</name>
        </repository>
-       <!---->
+       <!--
         <repository>
             <id>redhat</id>
             <name>rh</name>
             <url>https://maven.repository.redhat.com</url>
         </repository>
-        
+        -->
     </repositories>
 
     <!--
@@ -79,13 +79,13 @@
             <artifactId>layout</artifactId>
             <version>7.1.13</version>
         </dependency>
-
+<!-- 
         <dependency>
             <groupId>org.apache.commons.ssl</groupId>
             <artifactId>not-yet-commons-ssl</artifactId>
             <version>0.3.11-redhat-2</version>
         </dependency>
-
+-->
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io   -->
         <dependency>
             <groupId>commons-io</groupId>
