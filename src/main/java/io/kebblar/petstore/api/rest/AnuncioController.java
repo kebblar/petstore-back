@@ -37,12 +37,14 @@
 package io.kebblar.petstore.api.rest;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
+import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +123,7 @@ public class AnuncioController {
     public AnuncioResponse registro(
         @ApiParam(name="anuncio", value="Anuncio que será registrado en el sistema.")
         @RequestBody @Valid AnuncioRequest anuncio) throws BusinessException {
-        return anuncioService.guardar(anuncio);
+        return anuncioService.guardar(anuncio, new Anuncio());
     }
 
     @ApiOperation(
@@ -133,7 +135,7 @@ public class AnuncioController {
     public AnuncioResponse actualizar(
         @ApiParam(name="anuncio", value="Anuncio que será actualizado en el sistema.")
         @RequestBody @Valid ActualizaAnuncioRequest anuncio) throws BusinessException {
-        return anuncioService.guardar(anuncio);
+        return anuncioService.guardar(anuncio, new Anuncio());
     }
 
     @ApiOperation(
@@ -145,7 +147,7 @@ public class AnuncioController {
     public AnuncioResponse confirmarAnuncio(
         @ApiParam(name="id", value="Identificador del anuncio.")
         @PathVariable int id) throws BusinessException {
-        return anuncioService.confirmarAnuncio(id);
+        return anuncioService.confirmarAnuncio(id, new AnuncioResponse());
     }
 
     @ApiOperation(
@@ -157,7 +159,7 @@ public class AnuncioController {
     public AnuncioResponse eliminar(
         @ApiParam(name="id", value="Identificador del anuncio que será removido del sistema.")
         @RequestParam int id ) throws BusinessException {
-        return anuncioService.eliminarAnuncio(id);
+        return anuncioService.eliminarAnuncio(id, new AnuncioResponse());
     }
 
     @ApiOperation(

@@ -143,52 +143,62 @@ public class AnuncioServiceImpl implements AnuncioService {
                 isolation = Isolation.DEFAULT,
                 timeout = 36000,
                 rollbackFor = TransactionException.class)
-    public AnuncioResponse guardar(AnuncioRequest request) throws BusinessException {
+    public AnuncioResponse guardar(AnuncioRequest request, Anuncio anuncioAlta) throws BusinessException {
         String s = request.toString();
         logger.info(s);
         AnuncioUtil.validaCampos(request);
+        logger.info("Campos del anuncio correctos");
         Anuncio anuncioBase;
-        //Se valida si los estatus son correctos
+        logger.info("Se validará si los estatus son correctos");
         if(request instanceof ActualizaAnuncioRequest) {
+            logger.info("Se trata de una actualización de anuncio");
             try {
+                logger.info("Buscando el anuncio en la base de datos");
                 anuncioBase = anuncioMapper.getAnuncioById(((ActualizaAnuncioRequest)request).getId());
             } catch (SQLException e) {
                 throw new DatabaseException("No se pudo validar el estatus del anuncio");
             }
             if(anuncioBase == null) {
+                logger.info("Anuncio no encontrado");
                 throw new NotFoundException("El anuncio solicitado no existe");
             }
             if(AnuncioEstatusEnum.ELIMINADO.getId()==anuncioBase.getIdEstatus() || AnuncioEstatusEnum.VENCIDO.getId()==anuncioBase.getIdEstatus()) {
+                logger.info("Anuncio se encuentra elminado o vencido");
                 throw new RuleException("El anuncio no se encuentra en un estatus valido o ha sido eliminado");
             }
-         }
-        Anuncio anuncioAlta= new Anuncio();
+         } else {
+            logger.info("Se trata de un nuevo anuncio");
+        }
         anuncioAlta.setTitulo(request.getTitulo());
         anuncioAlta.setPrecio(request.getPrecio());
         anuncioAlta.setIdCategoria(request.getIdCategoria());
         anuncioAlta.setDescripcion(request.getDescripcion());
         anuncioAlta.setIdEstatus(AnuncioEstatusEnum.EN_EDICION.getId());
-        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ?java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
-        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ?java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
+        anuncioAlta.setFechaInicioVigencia(request.getFechaInicioVigencia() != null ? java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
+        anuncioAlta.setFechaFinVigencia(request.getFechaFinVigencia() != null ? java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.of(("America/Mexico_City"))).toInstant()):null);
+        String k = anuncioAlta.toString();
+        logger.info("Asignando valores al nuevo anuncio: {} ", k);
         try {
-            //Si los datos son correctos, se procede con el guardado o actualizacion
+            //Si los datos son correctos, se procede con el guardado o actualización
             if(request instanceof ActualizaAnuncioRequest) {
+                logger.info("Se trata de una actualización");
                 anuncioAlta.setId(((ActualizaAnuncioRequest)request).getId());
                 anuncioAlta.setFechaModificacion(new Date());
                 anuncioMapper.update(anuncioAlta);
                 anuncioMapper.deleteAtributos(anuncioAlta.getId());
             } else {
+                logger.info("Se trata de un nuevo anuncio");
                 anuncioAlta.setFolio(AnuncioUtil.generaFolio());
                 anuncioAlta.setFechaAlta(new Date());
                 anuncioAlta.setFechaModificacion(anuncioAlta.getFechaAlta());
                 anuncioMapper.insert(anuncioAlta);
             }
 
-            // Actualiza el search_url
+            logger.info("Se actualiza el search_url");
             Integer idGenerado = anuncioAlta.getId();
             anuncioAlta.setSearchUrl(idGenerado + "-" + limpia(request.getTitulo()));
             anuncioMapper.update(anuncioAlta);
-            // fin actualiza search url
+            logger.info("fin actualiza search url");
 
             for(MascotaValorAtributoRequest ar : request.getMascotaValorAtributo()) {
                 MascotaValorAtributo aa =  new MascotaValorAtributo();
@@ -199,7 +209,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             logger.info("Anuncio guardado correctamente, id asociado: {}", anuncioAlta.getId());
             return new AnuncioResponse(anuncioAlta.getId(),anuncioAlta.getFolio());
         }catch (Exception e) {
-            throw new TransactionException("Registro fallido. Ocurrio un error durante el guardado de informacion");
+            throw new TransactionException("Registro fallido. Ocurrió un error durante el guardado de información");
         }
     }
 
@@ -227,11 +237,11 @@ public class AnuncioServiceImpl implements AnuncioService {
             source = source.replace(dosEspacios, unEspacio);
         } while (i>0);
 
-        // Cambia especios simpes restantes por guion medio
+        // Cambia espacios simples restantes por guion medio
         source = source.replace(unEspacio, guionMedio);
 
         // Cambia minúsculas acentuadas por minúsculas sin acento
-        // No necsito cambiar las mayúsculas porque la cadena está en lowercase
+        // No necesito cambiar las mayúsculas porque la cadena está en lowercase
         source = source.replace('á', 'a');
         source = source.replace('é', 'e');
         source = source.replace('í', 'i');
@@ -246,22 +256,18 @@ public class AnuncioServiceImpl implements AnuncioService {
             char test = source.charAt(j);
             result = (letrasValidas.indexOf(test)<1)?result.append(guionMedio):result.append(test);
         }
-
         // elimina repeticiones de guiones mendios consecutivos
         source = result.toString();
         do {
             i = source.indexOf(dosGuionesMedios);
             source = source.replace(dosGuionesMedios, guionMedio);
         } while (i>=0);
-
-
         return source;
     }
 
     /** {@inheritDoc} */
     @Override
-    public AnuncioResponse confirmarAnuncio(int id) throws BusinessException {
-        AnuncioResponse response = new AnuncioResponse();
+    public AnuncioResponse confirmarAnuncio(int id, AnuncioResponse response) throws BusinessException {
         try {
             //Si los datos son correctos, se procede con el guardado
             Anuncio anuncio = anuncioMapper.getAnuncioById(id);
@@ -308,8 +314,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     /** {@inheritDoc} */
     @Override
-    public AnuncioResponse eliminarAnuncio(int id) throws BusinessException {
-        AnuncioResponse response = new AnuncioResponse();
+    public AnuncioResponse eliminarAnuncio(int id, AnuncioResponse response) throws BusinessException {
         try {
             //Se consulta la informacion del anuncio, para validar estatus
             Anuncio anuncio = anuncioMapper.getAnuncioById(id);

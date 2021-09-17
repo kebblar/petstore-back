@@ -81,7 +81,6 @@
             <artifactId>layout</artifactId>
             <version>7.1.13</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons.ssl</groupId>
             <artifactId>not-yet-commons-ssl</artifactId>
@@ -272,6 +271,26 @@
                         </replacement>
                     </replacements>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
