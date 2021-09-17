@@ -61,7 +61,8 @@ public interface AnuncioService {
      * en este punto el anuncio tendrá un estatus de 1= En edición {@link AnuncioEstatusEnum}</p>
      *
      * @param request {@link AnuncioRequest} Clase que contiene la información del {@link Anuncio} que se dara de alta
-     * @param anuncio //TODO
+     * @param anuncio anuncio vacío que utiliza el método para generar y guardar una solicitud de creación
+     *                o actualización de un anuncio.
      * @return {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException cuando ocurre un problema en el guardado.
      */
@@ -81,7 +82,7 @@ public interface AnuncioService {
      *  el anuncio pasa a estatus ACTIVO</p>
      *
      * @param id Identificador del anuncio que confirma su registro
-     * @param response TODO
+     * @param response objeto sobre el cual se devolverá el resultado.
      * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' que confirma su registro
      * @throws BusinessException Excepcion lanzada en caso de error
      */
@@ -91,7 +92,7 @@ public interface AnuncioService {
      * Método que permite eliminar logicamente un producto con base al identificador proporcionado
      * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
      *
-     * @param ar TODO
+     * @param ar Objeto sobre el que es construida la respuesta.
      * @param id Identificador del anuncio que será removido del sistema.
      * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
      * @throws BusinessException Excepcion lanzada en caso de error
@@ -133,7 +134,7 @@ public interface AnuncioService {
      *
      * @param filtros {@link BusquedaAdministracionRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
      * @return {@link PaginacionAnunciosResponse}
-     * @throws BusinessException, SQLException
+     * @throws BusinessException en caso que ocurra algun problema
      */
     PaginacionAnunciosResponse busquedaAdministracion(BusquedaAdministracionRequest filtros) throws BusinessException, SQLException;
 
@@ -142,7 +143,7 @@ public interface AnuncioService {
      *
      * @param filtros {@link BusquedaRequest} Clase que contiene los filtros necesarios para poder realizar las consultas
      * @return {@link BusquedaResponse}
-     * @throws BusinessException, SQLException
+     * @throws BusinessException cuando ocurre algun problema
      */
     BusquedaResponse busqueda(BusquedaRequest filtros) throws BusinessException, SQLException;
 

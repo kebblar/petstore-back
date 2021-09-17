@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -34,9 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
-import io.kebblar.petstore.api.model.exceptions.RuleException;
-import io.kebblar.petstore.api.model.exceptions.TransactionException;
+import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.request.*;
 import io.kebblar.petstore.api.model.response.*;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
@@ -58,7 +57,6 @@ import io.kebblar.petstore.api.mapper.AnuncioMediaMapper;
 import io.kebblar.petstore.api.model.domain.Anuncio;
 import io.kebblar.petstore.api.model.domain.AnuncioMedia;
 import io.kebblar.petstore.api.model.domain.Categoria;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.support.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,7 +165,7 @@ public class TestAnuncioService {
             );
                 anuncioService.guardar(actualizaAnuncioRequest,a);
             }catch (BusinessException e) {
-                assertEquals(e.getLocalExceptionNumber() , 1013);
+                assertEquals(1013, e.getLocalExceptionNumber());
             }
     }
 
@@ -198,7 +196,7 @@ public class TestAnuncioService {
         busqueda.setNumPaginas(1);
         busqueda.setTamPaginas(10);
         PaginacionAnunciosResponse response = anuncioService.busquedaAdministracion(busqueda);
-        assertEquals(response.getListaAnuncios().size(),10);
+        assertEquals(10, response.getListaAnuncios().size());
     }
 
     /**
@@ -242,7 +240,7 @@ public class TestAnuncioService {
             busqueda.setNumPaginas(1);
             busqueda.setTamPaginas(10);
             BusquedaResponse response = anuncioService.busqueda(busqueda);
-            assertEquals(response.getListaAnuncios().size(), 10);
+            assertEquals(10, response.getListaAnuncios().size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -534,6 +532,92 @@ public class TestAnuncioService {
         } catch (DatabaseException v) {
             assertTrue(true);
         }
+    }
+
+    /**
+     * Se prueba el metodo que actualiza las url de los anuncios.
+     * @throws Exception Cuando no recuperamos la informacion del mapper.
+     */
+    @Test
+    public void testUpdateSearch () throws Exception {
+        // Happy path
+        try {
+            List<Anuncio> lista = new ArrayList<>();
+            anuncio.setTitulo("Perros_bonitos_");
+            String url = anuncio.getSearchUrl();
+            lista.add(anuncio);
+            when(anuncioMapper.getAll()).thenReturn(lista);
+            when(anuncioMapper.update(Mockito.any())).thenReturn(1);
+            logger.info(anuncio.getSearchUrl());
+            anuncioService.updateSearchUrl();
+            assertFalse(url.equals(anuncio.getSearchUrl()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Falla el servicio de mapper
+        try {
+            when(anuncioMapper.getAll()).thenThrow(SQLException.class);
+            anuncioService.updateSearchUrl();
+        } catch (Exception e){
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Metodo que prueba los casos de falla de getBySearchUrl.
+     * @throws Exception siempre que algo sale mal.
+     */
+    @Test
+    public void testGetByUrl () throws Exception{
+        try{
+            when(anuncioMapper.getBySearchUrl("perritos")).thenReturn(new ArrayList<>());
+            anuncioService.getBySearchUrl("perritos");
+        } catch (NotFoundException f) {
+            assertTrue(true);
+        }
+        try {
+            String searchUrl = "";
+            anuncioService.getBySearchUrl(searchUrl);
+            assertEquals("%", searchUrl);
+            searchUrl = null;
+            anuncioService.getBySearchUrl(searchUrl);
+            assertEquals("%", searchUrl);
+        } catch (BusinessException b) {
+            b.printStackTrace();
+        }
+        try {
+            when(anuncioMapper.getBySearchUrl("x")).thenThrow(SQLException.class);
+            anuncioService.getBySearchUrl("x");
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testHappyPathGetByUrl () throws Exception {
+        DetalleAnuncioResponse anuncioResponse1= new DetalleAnuncioResponse();
+        anuncioResponse1.setTitulo(anuncio.getTitulo());
+        anuncioResponse1.setPrecio(anuncio.getPrecio());
+        anuncioResponse1.setId(anuncio.getId());
+        anuncioResponse1.setDescEstatus("Activo");
+        List<AnuncioMedia> media = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            AnuncioMedia foto = new AnuncioMedia();
+            foto.setId(1);
+            foto.setIdAnuncio(1);
+            foto.setIdTipo(3);
+            foto.setPrincipal(true);
+            foto.setUuid("23423gf34g34");
+        }
+        media.add(new AnuncioMedia(1, "str", 1, true));
+        when(anuncioMapper.getAnuncioDetalle(Mockito.anyInt())).thenReturn(anuncioResponse1);
+        when(anuncioImagenMapper.getImagenes(Mockito.anyInt())).thenReturn(media);
+        List<Anuncio> lista = new ArrayList<>();
+        lista.add(anuncio);
+        when(anuncioMapper.getBySearchUrl("perritos")).thenReturn(lista);
+        List<DetalleAnuncioResponse> d = anuncioService.getBySearchUrl("perritos");
+        assertEquals(anuncio.getTitulo(), d.get(0).getTitulo());
+
     }
 
 }
