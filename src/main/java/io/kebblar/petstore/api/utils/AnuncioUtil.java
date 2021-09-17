@@ -81,7 +81,7 @@ public class AnuncioUtil {
     public static String generaFolio() {
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
         String folio=dateFormat.format(new Date());
-        return folio+String.format("%04d", random.nextInt(10000))
+        return folio+String.format("%04d", random.nextInt(10000));
     }
 
     /**
