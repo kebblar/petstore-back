@@ -56,14 +56,16 @@ public interface AnuncioService {
     /**
      * Método que permite realizar el registro de un producto.
      *
-     * <p>Se guardan los datos generales y atributos del producto.
+     * <p>Se guardan los datos generales y atributos del producto, valida que la información sea correcta
+     * y dado el caso, actualiza o crean un nuevo anuncio.
      * en este punto el anuncio tendrá un estatus de 1= En edición {@link AnuncioEstatusEnum}</p>
      *
      * @param request {@link AnuncioRequest} Clase que contiene la información del {@link Anuncio} que se dara de alta
+     * @param anuncio //TODO
      * @return {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' registrado o actualizado
      * @throws BusinessException cuando ocurre un problema en el guardado.
      */
-    AnuncioResponse guardar(AnuncioRequest request) throws BusinessException;
+    AnuncioResponse guardar(AnuncioRequest request, Anuncio anuncio) throws BusinessException;
 
     /**
      * Método que permite confirmar el registro de un producto {@link AnuncioEstatusEnum}
@@ -79,20 +81,22 @@ public interface AnuncioService {
      *  el anuncio pasa a estatus ACTIVO</p>
      *
      * @param id Identificador del anuncio que confirma su registro
+     * @param response TODO
      * @return Objeto {@link AnuncioResponse} retornará el id y sku del objeto 'anuncio' que confirma su registro
      * @throws BusinessException Excepcion lanzada en caso de error
      */
-    AnuncioResponse confirmarAnuncio(int id) throws BusinessException;
+    AnuncioResponse confirmarAnuncio(int id, AnuncioResponse response) throws BusinessException;
 
     /**
      * Método que permite eliminar logicamente un producto con base al identificador proporcionado
      * <p>El servicio validará que el producto no haya sido eliminado previamente y que exista</p>
      *
+     * @param ar TODO
      * @param id Identificador del anuncio que será removido del sistema.
      * @return {@link AnuncioResponse} clase que contiene id y sku del producto eliminado
      * @throws BusinessException Excepcion lanzada en caso de error
      */
-    AnuncioResponse eliminarAnuncio(int id) throws BusinessException;
+    AnuncioResponse eliminarAnuncio(int id, AnuncioResponse ar) throws BusinessException;
 
     /**
      * Método que permite obtener el detalle de un anuncio con base al identificador.

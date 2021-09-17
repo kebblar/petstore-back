@@ -60,11 +60,15 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
  * @since 1.0-SNAPSHOT
  */
 public class AnuncioUtil {
-    private static Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
+    private static final Random random = new Random();
 
-    private static Random random = new Random();
+    /**
+     * Constructor sin parámetros.
+     */
+    public AnuncioUtil(){}
 
     /**
      * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
