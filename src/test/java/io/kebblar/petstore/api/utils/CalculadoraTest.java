@@ -1,5 +1,7 @@
 package io.kebblar.petstore.api.utils;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -14,13 +16,13 @@ public class CalculadoraTest {
     public void pba() {
         Calculadora c = new Calculadora();
         int r = c.sum(2, 3);
-        assert (r == 5);
+        assertTrue(r == 5);
     }
     @Test
     public void pba2() {
         Environment dato = null;
         HealthServiceImpl hsi = new HealthServiceImpl(dato );
         int r = hsi.max(5, 3);
-        assert (r == 5);
+        assertTrue(r == 5);
     }
 }
