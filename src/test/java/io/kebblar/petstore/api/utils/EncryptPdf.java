@@ -20,9 +20,9 @@
  */
 package io.kebblar.petstore.api.utils;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
-import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+//import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Image;
@@ -108,19 +108,19 @@ public class EncryptPdf {
      * @throws java.io.IOException if any.
      */
     public static void protectDocument(String path, String userPassword) throws IOException {
-        File file = new File(path);
-        PDDocument document = PDDocument.load(file);
-
-        AccessPermission ap = new AccessPermission();
-        StandardProtectionPolicy spp = new StandardProtectionPolicy("1234", userPassword, ap);
-        spp.setEncryptionKeyLength(128);
-        spp.setPermissions(ap);
-        document.protect(spp);
-
-        System.out.println("PDF Document encrypted Successfully.");
-
-        document.save(path);
-        document.close();
+//        File file = new File(path);
+//        PDDocument document = PDDocument.load(file);
+//
+//        AccessPermission ap = new AccessPermission();
+//        StandardProtectionPolicy spp = new StandardProtectionPolicy("1234", userPassword, ap);
+//        spp.setEncryptionKeyLength(128);
+//        spp.setPermissions(ap);
+//        document.protect(spp);
+//
+//        System.out.println("PDF Document encrypted Successfully.");
+//
+//        document.save(path);
+//        document.close();
     }
 
 }

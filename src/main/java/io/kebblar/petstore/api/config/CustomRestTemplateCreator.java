@@ -63,6 +63,6 @@ public class CustomRestTemplateCreator {
      */
     @Bean
     public CreatePDF createPDF(Convert convert) {
-        return new CreatePDF(convert);
+        return null;
     }
 }
