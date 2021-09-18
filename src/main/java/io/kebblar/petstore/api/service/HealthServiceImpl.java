@@ -2,7 +2,7 @@
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
  *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
- *              mostrado  a ninguna persona o institución sin el permiso explí-
+ *              mostrado  a ninguna persona o institución sin el permiso expli-
  *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
  *              bajo cualquier criterio, el único dueño de la totalidad de este 
  *              código y cualquier derivado de el.
@@ -152,7 +152,7 @@ public class HealthServiceImpl implements HealthService {
             if (last < 1) {
                 return allLines;
             }
-            for (int i = Math.max(0, len - last); i < len; i++) {
+            for (int i = max(0, len - last); i < len; i++) {
                 lista.add(allLines.get(i));
             }
             return lista;
@@ -160,5 +160,9 @@ public class HealthServiceImpl implements HealthService {
             lista.add(e.getMessage());
             return lista;
         }
+    }
+    private int max(int a, int b) {
+        if(a>b) return a;
+        return b;
     }
 }
