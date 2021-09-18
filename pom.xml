@@ -15,16 +15,33 @@
     <description>Linea base del proyecto de backend para la clase del diplomado de Ingeniería de Software Ciencias</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mavencompiler.version>3.2</mavencompiler.version>
+        <java.version>1.8</java.version>
 
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <java.el.api.version>3.0.0</java.el.api.version>
         <java.el.impl.version>2.2.6</java.el.impl.version>
-
+        
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <java.version>1.8</java.version>
+        <jacoco.version>0.8.3</jacoco.version>
+        <!--sonar.junit.reportPaths>${project.basedir}/target/surefire-reports</sonar.junit.reportPaths -->
+        <!--sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath -->
+        <!--sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis-->
+        <sonar.jacoco.reportPaths>${project.basedir}/target/coverage-reports/jacoco-unit.exec</sonar.jacoco.reportPaths>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <junit.jupiter.version>5.3.2</junit.jupiter.version>
+        
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.language>java</sonar.language>   
+        
+        <sonar.host.url>https://sonar.ci.ultrasist.net</sonar.host.url>    
+        <sonar.sources>${project.basedir}/src/main/java</sonar.sources>
+        <sonar.test.sources>${project.basedir}/src/test/java</sonar.test.sources>
+        <sonar.binaries>${project.basedir}/target/classes</sonar.binaries>
+        <sonar.test.binaries>${project.basedir}/target/test-classes</sonar.test.binaries>
     </properties>
+
 
     <repositories>
         <repository>
@@ -160,10 +177,7 @@
         </dependency>
 
         <!-- General purpose libs not only for Spring -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -220,6 +234,40 @@
             <artifactId>petstore-front</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>        
+        
     </dependencies>
 
 
@@ -242,6 +290,41 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.6.0.1398</version>
+          </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+        <executions>
+          <execution>
+            <id>jacoco-initialize</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-site</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+          <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+          <output>file</output>
+          <append>true</append>
+          <excludes>
+            <exclude>*MethodAccess</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>

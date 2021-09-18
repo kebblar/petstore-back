@@ -22,14 +22,14 @@ package io.kebblar.petstore.api.service;
 
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
+
+import java.util.Date;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -43,7 +43,6 @@ import io.kebblar.petstore.api.support.JwtManagerService;
  * @version $Id: $Id
  * @since 1.0
  */
-@RunWith(MockitoJUnitRunner.class)
 public class TestAccessService {
     @Mock
     private UsuarioService usuarioService;
@@ -62,6 +61,7 @@ public class TestAccessService {
      */
     @Before
     public void prepara() {
+        MockitoAnnotations.initMocks(this);
         when(jwtManagerService.createToken(Mockito.any())).thenReturn("token-bxcdhjbshjc7382gyd");
         this.accessService = new AccessServiceImpl(usuarioService, jwtManagerService);
     }

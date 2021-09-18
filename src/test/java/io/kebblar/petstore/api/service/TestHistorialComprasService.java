@@ -22,15 +22,14 @@ package io.kebblar.petstore.api.service;
 
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.mapper.HistorialComprasMapper;
 import io.kebblar.petstore.api.model.domain.HistorialCompras;
@@ -43,7 +42,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
  * @version $Id: $Id
  * @since 1.0
  */
-@RunWith(MockitoJUnitRunner.class)
 public class TestHistorialComprasService {
     @Mock
     private HistorialComprasMapper historialMapper;
@@ -55,6 +53,8 @@ public class TestHistorialComprasService {
      */
     @Before
     public void prepara() {
+        MockitoAnnotations.initMocks(this);
+        
         this.historialService = new HistorialComprasServiceImpl(historialMapper);
     }
 

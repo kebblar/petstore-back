@@ -20,38 +20,29 @@
  */
 package io.kebblar.petstore.api.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.RuleException;
-import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.request.*;
 import io.kebblar.petstore.api.model.response.*;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
-import io.kebblar.petstore.api.utils.AnuncioUtil;
 import org.apache.commons.lang.time.DateUtils;
-import org.assertj.core.util.DateUtil;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.mapper.AnuncioMapper;
 import io.kebblar.petstore.api.mapper.AnuncioMediaMapper;
@@ -62,8 +53,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.support.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>TestAnuncioService class.</p>
@@ -72,8 +61,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @version $Id: $Id
  * @since 1.0
  */
-@RunWith(MockitoJUnitRunner.class)
-@TestMethodOrder(OrderAnnotation.class)
 public class TestAnuncioService {
 
     @Mock
@@ -98,6 +85,8 @@ public class TestAnuncioService {
      */
     @Before
     public void pedro() throws SQLException {
+        MockitoAnnotations.initMocks(this);
+
         this.anuncioService= new AnuncioServiceImpl(anuncioMapper, uploadService, anuncioImagenMapper);
         this.atributos = new ArrayList<>();
         this.atributos.add(new MascotaValorAtributoRequest(1,1));
