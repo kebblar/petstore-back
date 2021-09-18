@@ -20,14 +20,6 @@
  */
 package io.kebblar.petstore.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import io.kebblar.petstore.api.mapper.AtributoMapper;
 import io.kebblar.petstore.api.mapper.CategoriaAtributoMapper;
 import io.kebblar.petstore.api.mapper.CategoriaMapper;
@@ -46,11 +38,20 @@ import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.model.domain.ValorAtributo;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 /**
  * <p>TestCatalogos class.</p>
@@ -59,6 +60,7 @@ import java.util.List;
  * @version $Id: $Id
  * @since 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestCatalogos {
     private static final Logger logger = LoggerFactory.getLogger(TestCatalogos.class);
 
@@ -132,7 +134,6 @@ public class TestCatalogos {
      */
     @Before
     public void prepare() throws Exception {
-        MockitoAnnotations.initMocks(this);
 
         paisService = new PaisServiceImpl(paisMapper);
         estadoService = new EstadoServiceImpl(estadoMapper);

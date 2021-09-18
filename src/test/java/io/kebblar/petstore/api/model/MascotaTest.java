@@ -21,6 +21,8 @@
 package io.kebblar.petstore.api.model;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import io.kebblar.petstore.api.service.MascotaService;
 import io.kebblar.petstore.api.service.MascotaServiceImpl;
@@ -32,6 +34,7 @@ import io.kebblar.petstore.api.service.MascotaServiceImpl;
  * @version $Id: $Id
  * @since 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class MascotaTest {
     private MascotaService ms = new MascotaServiceImpl();
 

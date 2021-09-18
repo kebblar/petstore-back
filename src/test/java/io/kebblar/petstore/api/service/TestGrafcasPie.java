@@ -20,14 +20,16 @@
  */
 package io.kebblar.petstore.api.service;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.gson.Gson;
 
@@ -36,6 +38,8 @@ import io.kebblar.petstore.api.model.domain.ChartWrapper;
 import io.kebblar.petstore.api.model.domain.GraficaMascota;
 import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * <p>TestGrafcasPie class.</p>
  *
@@ -43,6 +47,7 @@ import io.kebblar.petstore.api.model.domain.GraficaPaqueteria;
  * @version $Id: $Id
  * @since 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestGrafcasPie {
 
     /**

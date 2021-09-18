@@ -21,6 +21,8 @@
 package io.kebblar.petstore.api.utils;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * <p>TestSignFile class.</p>
@@ -29,6 +31,7 @@ import org.junit.Test;
  * @version $Id: $Id
  * @since 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestSignFile {
 
     /**

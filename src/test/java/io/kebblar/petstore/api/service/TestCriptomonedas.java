@@ -20,21 +20,17 @@
  */
 package io.kebblar.petstore.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
 import io.kebblar.petstore.api.mapper.CarritoMapper;
 import io.kebblar.petstore.api.mapper.CriptoMapper;
 import io.kebblar.petstore.api.model.domain.Carrito;
 import io.kebblar.petstore.api.model.domain.TransaccionBtc;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -42,6 +38,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * <p>TestCriptomonedas class.</p>
@@ -50,6 +49,7 @@ import java.util.List;
  * @version $Id: $Id
  * @since 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestCriptomonedas {
     private static final Logger logger = LoggerFactory.getLogger(TestCriptomonedas.class);
 
@@ -77,8 +77,6 @@ public class TestCriptomonedas {
      */
     @Before
     public void prepare() throws SQLException {
-        MockitoAnnotations.initMocks(this);
-        
         criptoService = new CriptoServiceImpl(carritoMapper,criptoMapper, remote, ordenCompraService);
 
         c.add(new Carrito(1,1,1,"abc"));
