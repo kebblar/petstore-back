@@ -161,7 +161,7 @@ public class HealthServiceImpl implements HealthService {
             return lista;
         }
     }
-    private int max(int a, int b) {
+    public int max(int a, int b) {
         if(a>b) return a;
         return b;
     }
