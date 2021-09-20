@@ -357,7 +357,6 @@ public class AnuncioServiceImpl implements AnuncioService {
         } catch (IOException e) {
             throw new InternalServerException("Error al leer el archivo", e.toString());
         }
-
         long size = file.getSize();
         if (size > max) {
             throw new FileUploadException(size, max);
@@ -431,6 +430,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public DetalleAnuncioResponse detalleAnuncio(int id) throws BusinessException {
         try {
@@ -583,7 +583,7 @@ public class AnuncioServiceImpl implements AnuncioService {
             String fechaFin=dateFormat.format(calendar.getTime())+" 23:59:59";
             logger.info("====> Fecha fin de publicacion: {}", fechaFin);
             List<Anuncio> anuncios = anuncioMapper.anunciosPorVencer(fechaFin, AnuncioEstatusEnum.PUBLICADO.getId());
-             //2. Se cambia el estatus a VENCIDO
+            //2. Se cambia el estatus a VENCIDO
             if(anuncios!=null && !anuncios.isEmpty()) {
                 for(Anuncio a:anuncios) {
                      anuncioMapper.actualizaEstatus(a.getId(), AnuncioEstatusEnum.VENCIDO.getId());

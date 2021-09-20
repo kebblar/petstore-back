@@ -41,6 +41,8 @@ public class AtributoDetalleTO {
     private String rango;
     private int estatusRango;
 
+    public AtributoDetalleTO(){}
+
     /*
      * Getter y Setter.
      */

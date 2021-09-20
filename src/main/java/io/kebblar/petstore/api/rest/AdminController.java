@@ -93,7 +93,8 @@ public class AdminController {
         this.healthService = healthService;
     }
 
-    @ApiOperation( value = "AdminController::UploadPictures")
+    @ApiOperation( value = "AdminController::UploadPictures",
+            notes = "sube una imagen al sistema")
     @PostMapping(path="/UploadPictures", produces = "application/json; charset=utf-8")
     public String upload(
         @ApiParam(name = "request", value = "MultipartFile del archivo")
