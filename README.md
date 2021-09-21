@@ -5,7 +5,6 @@ Pet Store app Backend
 * adios
 * tres
 * cuatro
-* cinco
 
 **texto en negritas**
 - abc
