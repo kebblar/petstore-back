@@ -35,7 +35,7 @@
         </repository>
         <repository>
            <id>nexus.qbits.net</id>
-           <url>http://nexus.qbits.net/repository/all/</url>
+           <url>http://nexus.ci.ultrasist.net/repository/all/</url>
            <name>Kebblar Repository</name>
        </repository>
        
