@@ -1,7 +1,7 @@
 # petstore-back
 Pet Store app Backend
 
-* un
+* uno
 * dos
 * tres
 * cuatro
