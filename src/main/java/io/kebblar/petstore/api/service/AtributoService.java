@@ -56,7 +56,7 @@ public interface AtributoService {
      *
      * @param atributo objeto de tipo 'Atributo'.
      * @return int numero de registros insertados en la tabla'atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int insert(Atributo atributo) throws BusinessException;
 
@@ -65,7 +65,7 @@ public interface AtributoService {
      *
      * @param  atributo objeto de tipo 'Atributo'.
      * @return int numero de registros actualizados en la tabla'atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int update(Atributo atributo) throws BusinessException;
 
@@ -74,7 +74,7 @@ public interface AtributoService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param atributo Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws BusinessException En caso un error al momento de guardar los datos.
      */
     int save(Atributo atributo) throws BusinessException;
 
@@ -83,7 +83,7 @@ public interface AtributoService {
      *
      * @param atributo objeto de tipo 'Atributo'.
      * @return int numero de registros eliminados en la tabla'atributo'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int delete(Atributo atributo) throws BusinessException;
 

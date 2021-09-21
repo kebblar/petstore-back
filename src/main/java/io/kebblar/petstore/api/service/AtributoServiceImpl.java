@@ -52,9 +52,9 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
  */
 @Service("atributoService")
 public class AtributoServiceImpl implements AtributoService {
-    private static final Logger logger = LoggerFactory.getLogger(AtributoServiceImpl.class);
+    static final Logger logger = LoggerFactory.getLogger(AtributoServiceImpl.class);
 
-    private AtributoMapper atributoMapper;
+    private final AtributoMapper atributoMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -137,16 +137,13 @@ public class AtributoServiceImpl implements AtributoService {
     public List<AtributoTO> getAllAtributoDetalles() throws BusinessException {
         try {
             List<AtributoTO> ct = new ArrayList<>();
-            Map<Integer, AtributoTO> map = new HashMap<Integer, AtributoTO>();
+            Map<Integer, AtributoTO> map = new HashMap<>();
 
             for (AtributoDetalleTO c: atributoMapper.getAllAtributoDetalle()) {
                 if(map.containsKey(c.getIdAtributo())) {
-                    try {
-                        ValorAtributo auxVa = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
-                        map.get(c.getIdAtributo()).getRangos().add(auxVa);
-                    } catch (Exception e) {
-                        logger.error(e.getMessage());
-                    }
+                    ValorAtributo auxVa = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
+                    map.get(c.getIdAtributo()).getRangos().add(auxVa);
+
                 } else {
                     AtributoTO a = new AtributoTO(c.getIdAtributo(),c.getNombreAtributo(),c.getEstatusAtributo());
                     List<ValorAtributo> lva = new ArrayList<>();
@@ -163,7 +160,7 @@ public class AtributoServiceImpl implements AtributoService {
                 ct.add(value);
             }
             return ct;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DatabaseException(e);
         }
     }
