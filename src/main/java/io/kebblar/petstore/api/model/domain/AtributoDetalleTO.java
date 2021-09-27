@@ -41,6 +41,9 @@ public class AtributoDetalleTO {
     private String rango;
     private int estatusRango;
 
+    /**
+     * <p>Default constructor.</p>
+     */
     public AtributoDetalleTO(){}
 
     /*
