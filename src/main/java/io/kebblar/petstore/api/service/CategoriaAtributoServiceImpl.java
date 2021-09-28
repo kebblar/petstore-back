@@ -49,7 +49,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 public class CategoriaAtributoServiceImpl implements CategoriaAtributoService {
     private static final Logger logger = LoggerFactory.getLogger(CategoriaAtributoServiceImpl.class);
 
-    private CategoriaAtributoMapper categoriaAtributoMapper;
+    private final CategoriaAtributoMapper categoriaAtributoMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los

@@ -57,8 +57,8 @@ import org.springframework.stereotype.Service;
 public class CarritoServiceImpl implements CarritoService {
     private static final Logger logger = LoggerFactory.getLogger(CarritoServiceImpl.class);
 
-    private CarritoMapper carritoMapper;
-    private AnuncioService anuncioService;
+    private final CarritoMapper carritoMapper;
+    private final AnuncioService anuncioService;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -89,7 +89,7 @@ public class CarritoServiceImpl implements CarritoService {
         List<CarritoDatosFactura> carro;
         try {
             carro = carritoMapper.getByCve(cve);
-            if (carro.size()==0) throw new VistaCarritoException(cve);
+            if (carro.isEmpty()) throw new VistaCarritoException(cve);
         } catch (SQLException e) {
             throw new DatabaseException(e);
         }
@@ -101,7 +101,7 @@ public class CarritoServiceImpl implements CarritoService {
     public List<Carrito> getCarritoByUserId(int id) throws BusinessException {
         try {
             return carritoMapper.getAll(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DatabaseException(e);
         }
     }
@@ -111,7 +111,7 @@ public class CarritoServiceImpl implements CarritoService {
     public int insert(Carrito carrito) throws BusinessException {
         try {
             return carritoMapper.insert(carrito);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DatabaseException(e);
         }
     }
@@ -121,7 +121,7 @@ public class CarritoServiceImpl implements CarritoService {
     public int update(Carrito carrito) throws BusinessException {
         try {
             return carritoMapper.update(carrito);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DatabaseException(e);
         }
     }
@@ -131,7 +131,7 @@ public class CarritoServiceImpl implements CarritoService {
     public int delete(int id) throws BusinessException {
         try {
             return carritoMapper.delete(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DatabaseException(e);
         }
     }
@@ -146,7 +146,7 @@ public class CarritoServiceImpl implements CarritoService {
                 DetalleAnuncioResponse d = anuncioService.detalleAnuncio(elem.getIdAnuncio());
                 String imagen = d.getImagenes().get(0).getUuid();
                 lista.add(new CarritoVista(elem.getId(), "https://photos.ci.ultrasist.net/"+imagen, d.getTitulo(), elem.getIdAnuncio(), d.getPrecio().doubleValue()));
-            } catch(BusinessException e) {
+            } catch(BusinessException | NullPointerException e) {
                 logger.error(e.getMessage());
             }
         }
@@ -160,7 +160,7 @@ public class CarritoServiceImpl implements CarritoService {
             try {
                 carrito.setCveOrdenCompra(cveCompra);
                 carritoMapper.update(carrito);
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 throw new DatabaseException(e);
             }
         }
@@ -175,7 +175,7 @@ public class CarritoServiceImpl implements CarritoService {
                 c.setCveOrdenCompra(cveOrdenCompra);
                 carritoMapper.update(c);
              }
-        } catch (Exception b) {
+        } catch (SQLException b) {
             throw new CarritoException(idUser);
         }
     }
@@ -189,7 +189,7 @@ public class CarritoServiceImpl implements CarritoService {
             } else {
                 return carritoMapper.update(carrito);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DatabaseException(e);
         }
     }

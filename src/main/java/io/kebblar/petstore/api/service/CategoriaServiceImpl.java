@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoriaServiceImpl.class);
 
-    private CategoriaMapper categoriaMapper;
+    private final CategoriaMapper categoriaMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -175,107 +176,54 @@ public class CategoriaServiceImpl implements CategoriaService {
     /** {@inheritDoc} */
     @Override
     public List<CategoriaTO> getAllCategoriaDetalles() throws BusinessException {
-        try {
-            //System.out.println("Tamaño: "+ categoriaMapper.getAllCategoriaDetalle().size());
+
             List<CategoriaTO> ct = new ArrayList<>();
-            Map<Integer, CategoriaTO> map = new HashMap<Integer, CategoriaTO>();
-           // Map<Integer, List<AtributoTO>> mapA = new HashMap<Integer, List<AtributoTO>>();
-            //Map<Integer, List<ValorAtributo>> mapVA = new HashMap<Integer, List<ValorAtributo>>();
+            Map<Integer, CategoriaTO> map = new HashMap<>();
+            try {
+                for (CategoriaDetallesTO c : categoriaMapper.getAllCategoriaDetalle()) {
+                    if (map.containsKey(c.getIdCategoria())) {
+                        if (c.getIdAtrib() > 0) {
+                            List<AtributoTO> a = map.get(c.getIdCategoria()).getAtributos();
+                            AtributoTO aux = new AtributoTO(c.getIdAtrib(), c.getNombreAtributo(), c.getEstatusAtributo());
 
-            for (CategoriaDetallesTO c: categoriaMapper.getAllCategoriaDetalle()) {
-                if(map.containsKey(c.getIdCategoria())) {
-                    //if(mapA.containsKey(c.getIdCategoria())) {
-                        try {
-                            if(c.getIdAtrib()>0) {
-                                //List<AtributoTO> a = mapA.get(c.getIdCategoria());
-                                List<AtributoTO> a = map.get(c.getIdCategoria()).getAtributos();
-                                AtributoTO aux = new AtributoTO(c.getIdAtrib(),c.getNombreAtributo(),c.getEstatusAtributo());
-                                Boolean agregarAtributo = true;
-                                for (int i = 0; i < a.size(); i++) {
-
-                                    if(a.get(i).getId().intValue() == aux.getId().intValue() ) {
-                                        agregarAtributo = false;
-                                        ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
-                                        a.get(i).getRangos().add(auxVa);
-                                        map.get(c.getIdCategoria()).setAtributos(a);
-                                        break;
-                                    }
-                                }
-
-                                if(agregarAtributo) {
-                                    //mapVA.get(c.getIdCategoria()).add(auxVa);
-                                    List<ValorAtributo> va = new ArrayList<ValorAtributo>();
-                                    //ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
+                            for (int i = 0; i < a.size(); i++) {
+                                if (a.get(i).getId().intValue() != aux.getId().intValue()) {
+                                    List<ValorAtributo> va = new ArrayList<>();
                                     aux.setRangos(va);
                                     map.get(c.getIdCategoria()).getAtributos().add(aux);
-
+                                } else {
+                                    ValorAtributo auxVa = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
+                                    a.get(i).getRangos().add(auxVa);
+                                    map.get(c.getIdCategoria()).setAtributos(a);
+                                    break;
                                 }
-                             /*
-                                if(mapVA.containsKey(c.getIdCategoria())) {
-                                    List<ValorAtributo> va = mapVA.get(c.getIdCategoria());
-                                    ValorAtributo auxVa = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
-                                    Boolean agregar = true;
-                                    for (ValorAtributo lis : va) {
-                                        if(lis.getId() == auxVa.getId() ) {
-                                            agregar = false;
-                                            break;
-                                        }
-                                    }
-
-                                }
-
-                                if(agregarAtributo) {
-                                    //mapA.get(c.getIdCategoria()).add(aux);
-                                    a.add(aux);
-                                }
-                                */
                             }
-                        }  catch (Exception e) {
-
                         }
-                    //}
-
-
-                } else {
-                    CategoriaTO cto = new CategoriaTO();
-                    Categoria cat = new Categoria(c.getIdCategoria(),c.getCategoriaNombre(),c.getEstatusCategoria());
-                    List<AtributoTO> la = new ArrayList<>();
-
-                    try {
-                        if (c.getIdCateg()> 0) {
-                            AtributoTO a = new AtributoTO(c.getIdAtrib(),c.getNombreAtributo(),c.getEstatusAtributo());
-                                                        //la.add(a);
-                            //mapA.put(c.getId_categoria(), la);
-
-                             if(c.getIdRango() > 0) {
-                                 List<ValorAtributo> lva = new ArrayList<>();
-                                 ValorAtributo va = new ValorAtributo(c.getIdRango(),c.getRangoIdAtributo(),c.getRango(),c.getEstatusRango());
-                                 lva.add(va);
-                                 a.setRangos(lva);
-                                 //mapVA.put(c.getId_categoria(), lva);
-                             }
-                             la.add(a);
+                    } else {
+                        CategoriaTO cto = new CategoriaTO();
+                        Categoria cat = new Categoria(c.getIdCategoria(), c.getCategoriaNombre(), c.getEstatusCategoria());
+                        List<AtributoTO> la = new ArrayList<>();
+                        if (c.getIdCateg() > 0) {
+                            AtributoTO a = new AtributoTO(c.getIdAtrib(), c.getNombreAtributo(), c.getEstatusAtributo());
+                            if (c.getIdRango() > 0) {
+                                List<ValorAtributo> lva = new ArrayList<>();
+                                ValorAtributo va = new ValorAtributo(c.getIdRango(), c.getRangoIdAtributo(), c.getRango(), c.getEstatusRango());
+                                lva.add(va);
+                                a.setRangos(lva);
+                            }
+                            la.add(a);
                         }
-                    } catch (Exception e) {
-                        logger.error("Excepción NO tratada");
-                        logger.error(e.getMessage());
+                        cto.setCategoria(cat);
+                        cto.setAtributos(la);
+                        map.put(c.getIdCategoria(), cto);
                     }
-                    cto.setCategoria(cat);
-                    cto.setAtributos(la);
-                    map.put(c.getIdCategoria(), cto);
                 }
-                //System.out.println(c.toString());
+            }catch (SQLException e) {
+                throw new BusinessException("error consultando categoria detalle", "Ha fallado el obtener el conjunto de categorias");
             }
-
-            for (Integer key : map.keySet()) {
-                CategoriaTO value = map.get(key);
-               ct.add(value);
+            for (Map.Entry<Integer,CategoriaTO> entry : map.entrySet()) {
+               ct.add(entry.getValue());
             }
-
-
             return ct;
-        } catch (SQLException e) {
-            throw new DatabaseException(e);
-        }
     }
 }

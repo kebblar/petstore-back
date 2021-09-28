@@ -26,12 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,10 +36,7 @@ import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.request.*;
 import io.kebblar.petstore.api.model.response.*;
 import io.kebblar.petstore.api.utils.AnuncioEstatusEnum;
-import io.kebblar.petstore.api.utils.AnuncioUtil;
 import org.apache.commons.lang.time.DateUtils;
-import org.assertj.core.util.DateUtil;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -60,8 +54,6 @@ import io.kebblar.petstore.api.model.domain.Categoria;
 import io.kebblar.petstore.api.support.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>TestAnuncioService class.</p>

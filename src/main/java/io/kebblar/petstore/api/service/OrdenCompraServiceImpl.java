@@ -95,8 +95,7 @@ public class OrdenCompraServiceImpl implements OrdenCompraService {
             Environment environment,
             CarritoService carritoService,
             DireccionService direccionService,
-            SmsService smsService, 
-            CreatePDF createPDF) {
+            SmsService smsService) {
         this.ordenCompraMapper = ordenCompraMapper;
         this.usuarioDetalleMapper = usuarioDetalleMapper;
         this.usuarioMapper = usuarioMapper;
