@@ -26,6 +26,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,8 +141,9 @@ public class DigestEncoder  {
         StringBuilder result = new StringBuilder();
         String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         for(int i =0; i<len; i++) {
-            double position = Math.random()*(base.length());
-            result.append(base.charAt((int)position));
+            SecureRandom random = new SecureRandom();
+            int num = random.nextInt(base.length());
+            result.append(base.charAt(num));
         }
         return result.toString();
     }
