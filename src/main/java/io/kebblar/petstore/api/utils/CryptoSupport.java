@@ -57,7 +57,7 @@ public class CryptoSupport {
     private static final String CERTIFICATE_FILE = ROOT_PATH + "ok.cer";
     private static final String PASS = "password";
     private static final String CADENA_ORIGINAL_PARA_FIRMA = "parangaricutirimicuaro";
-    private static final String RSA = "RSA/None/OAEPWITHSHA-256ANDMGF1PADDING";
+    private static final String RSA = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
 
     public static void main(String...argv) throws Exception {
         new CryptoSupport().ok();
