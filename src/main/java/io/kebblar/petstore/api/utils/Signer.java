@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.utils;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -57,10 +56,10 @@ import org.apache.commons.ssl.PKCS8Key;
  */
 public class Signer {
 
-    private String privateKeyFile;
-    private String certificateFile;
-    private String pass = "hwb4aet!$fser";
-    private String file;
+    private final String privateKeyFile;
+    private final String certificateFile;
+    private static final String PASS = "hwb4aet!$fser";
+    private final String file;
 
     /*
      * Constructor unico de la clase
@@ -87,8 +86,7 @@ public class Signer {
      */
     public String signPdf() throws Exception{
         String hash = createSum(this.file);
-        String signedFile = signWithPrivateKey(hash);
-        return signedFile;
+        return signWithPrivateKey(hash);
 
     }
 
@@ -112,7 +110,6 @@ public class Signer {
                 }
             } while (numRead != -1);
 
-            //fis.close();
             byte[] digestion = complete.digest();
 
             return toHexString(digestion);
@@ -196,7 +193,7 @@ public class Signer {
      */
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
         byte[] textoEncriptadoEnBytes = getTextoEncriptadoFromPrivateKeyFile(
-                textoParaEncripcion, this.privateKeyFile, this.pass);
+                textoParaEncripcion, this.privateKeyFile, PASS);
         return new String(textoEncriptadoEnBytes);
     }
 
@@ -225,7 +222,7 @@ public class Signer {
      * @return arreglo de byte que contiene el texto desencryptado.
      */
     private byte[] decryptWithPublicKey(byte[] text, PublicKey publicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA/None/OAEPWITHSHA-256ANDMGF1PADDING");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
         return cipher.doFinal(text);
     }
@@ -239,7 +236,7 @@ public class Signer {
      * @return objeto de tipo string que representa al certificado recibido
      * como parametro.
      */
-    private Certificate getCertificateFromString(String certificateString) throws CertificateException, FileNotFoundException {
+    private Certificate getCertificateFromString(String certificateString) throws CertificateException {
         InputStream stream = new ByteArrayInputStream(certificateString.getBytes(StandardCharsets.UTF_8));
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         return cf.generateCertificate(stream);
