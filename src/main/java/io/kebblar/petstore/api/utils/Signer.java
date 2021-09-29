@@ -100,7 +100,7 @@ public class Signer {
     public String createSum(String fileName) {
         try (InputStream fis =  new FileInputStream(fileName)) {
             byte[] buffer = new byte[1024];
-            MessageDigest complete = MessageDigest.getInstance("SHA-256");
+            MessageDigest complete = MessageDigest.getInstance("RSA");
             int numRead;
 
             do {
