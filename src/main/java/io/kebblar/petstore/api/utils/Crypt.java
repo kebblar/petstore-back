@@ -136,7 +136,7 @@ public class Crypt {
         return convert(decripted);
     }
     private byte[] decryptWithPublicKey(byte[] text, PublicKey publicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256");
+        Cipher cipher = Cipher.getInstance("RSA/None/OAEPWITHSHA-256ANDMGF1PADDING");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
         return cipher.doFinal(text);
     }
