@@ -32,6 +32,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -63,12 +64,14 @@ public class AnuncioUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
     private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
-    private static final Random random = new Random();
+    private static final SecureRandom random = new SecureRandom();
 
     /**
      * Constructor sin parámetros.
      */
-    public AnuncioUtil(){}
+    public AnuncioUtil(){
+
+    }
 
     /**
      * <p>Método que permite genera un folio para la entidad de 'anuncio'.</p>
@@ -81,7 +84,9 @@ public class AnuncioUtil {
     public static String generaFolio() {
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyMMddHHmm");
         String folio=dateFormat.format(new Date());
-        return folio+String.format("%04d", random.nextInt(10000));
+        int num = random.nextInt(10000);
+        String clave = String.format("%04d", num);
+        return folio+clave;
     }
 
     /**

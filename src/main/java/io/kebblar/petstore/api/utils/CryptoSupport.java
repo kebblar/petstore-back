@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.utils;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -53,33 +52,38 @@ import org.apache.commons.ssl.PKCS8Key;
 public class CryptoSupport {
     private static final Logger logger = LoggerFactory.getLogger(CryptoSupport.class);
 
-    private static String rootPath = "/Users/garellano/emisor/";
-    private static String privateKeyFile = rootPath + "ok.key";
-    private static String certificateFile = rootPath + "ok.cer";
-    private static String pass = "password";
-    private static String cadenaOriginalParaFirma = "parangaricutirimicuaro";
+    private static final  String ROOT_PATH = "/Users/garellano/emisor/";
+    private static final String PRIVATE_KEY_FILE = ROOT_PATH + "ok.key";
+    private static final String CERTIFICATE_FILE = ROOT_PATH + "ok.cer";
+    private static final String PASS = "password";
+    private static final String CADENA_ORIGINAL_PARA_FIRMA = "parangaricutirimicuaro";
+    private static final String RSA = "RSA/None/OAEPWITHSHA-256ANDMGF1PADDING";
 
     public static void main(String...argv) throws Exception {
         new CryptoSupport().ok();
     }
 
     public void ok() throws Exception {
-        prn("Cadena original para firma:"+cadenaOriginalParaFirma);
-        String cadenaFirmada = signWithPrivateKey(cadenaOriginalParaFirma, privateKeyFile, pass);
+        prn("Cadena original para firma:"+ CADENA_ORIGINAL_PARA_FIRMA);
+        String cadenaFirmada = signWithPrivateKey(CADENA_ORIGINAL_PARA_FIRMA, PRIVATE_KEY_FILE, PASS);
         prn("Cadena firmada:"+ cadenaFirmada);
-        String data = verifySignature(cadenaFirmada, certificateFile); // Verificando con el certificado (que contiene la llave pública)
+        String data = verifySignature(cadenaFirmada, CERTIFICATE_FILE); // Verificando con el certificado (que contiene la llave pública)
         prn("Verificación de cadena firmada: "+data);
 
-        byte[] textoEncriptado = signWithCert(cadenaOriginalParaFirma, readFile(certificateFile));
-        System.out.println(textoEncriptado.length);
+        byte[] textoEncriptado = signWithCert(CADENA_ORIGINAL_PARA_FIRMA, readFile(CERTIFICATE_FILE));
+        String longitud = String.valueOf(textoEncriptado.length);
+        logger.info(longitud);
 
         byte[] r = Base64.getEncoder().encode(textoEncriptado);
-        System.out.println(convert(r));
-        System.out.println(r.length);
+        String s = convert(r);
+        logger.info(s);
+        String long2 = String.valueOf(r.length);
+        logger.info(long2);
 
-        //byte[] res = cs.decodeWithPrivateKey(r, cs.getPrivateKeyFromFile(privateKeyFile, pass));
-        //byte[] decriptado = cs.getTextoEncriptadoFromPrivateKeyFile(new String(textoEncriptado), privateKeyFile, pass);
-        //System.out.println(cs.convert(decriptado));
+        /*
+        byte[] res = cs.decodeWithPrivateKey(r, cs.getPrivateKeyFromFile(privateKeyFile, pass));
+        byte[] decriptado = cs.getTextoEncriptadoFromPrivateKeyFile(new String(textoEncriptado), privateKeyFile, pass);
+        System.out.println(cs.convert(decriptado));*/
     }
 
     // Usa el certificado para verifcar que cierto texto encriptado con una llave privada es válido.
@@ -117,7 +121,7 @@ public class CryptoSupport {
         return convert(textoEncriptadoEnBytes);
     }
     public String signWithPrivateKey(String textoParaEncripcion) throws Exception {
-        return signWithPrivateKey(textoParaEncripcion, privateKeyFile, pass) ;
+        return signWithPrivateKey(textoParaEncripcion, PRIVATE_KEY_FILE, PASS) ;
     }
 
     /**  **/
@@ -130,14 +134,14 @@ public class CryptoSupport {
     public byte[] signWithCert(String text, String certificateString) throws Exception {
         X509Certificate cert =  (X509Certificate)getCertificateFromString(certificateString);
         PublicKey publicKey = cert.getPublicKey();
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         return cipher.doFinal(text.getBytes());
     }
 
     // Usando la llave privada de desencripta lo que encripto una llave publica
     public byte[] decodeWithPrivateKey(byte[] text, PrivateKey privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         return cipher.doFinal(text);
     }
@@ -228,11 +232,11 @@ public class CryptoSupport {
         return new String(encoded, Charset.defaultCharset());
     }
     private byte[] decryptWithPublicKey(byte[] text, PublicKey publicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
         return cipher.doFinal(text);
     }
-    private Certificate getCertificateFromString(String certificateString) throws CertificateException, FileNotFoundException {
+    private Certificate getCertificateFromString(String certificateString) throws CertificateException {
         InputStream stream = new ByteArrayInputStream(certificateString.getBytes(StandardCharsets.UTF_8));
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         return cf.generateCertificate(stream);

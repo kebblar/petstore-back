@@ -28,6 +28,8 @@ import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 import io.kebblar.petstore.api.support.InvokeRestService;
 
+import java.security.SecureRandom;
+
 /**
  * Implementación de la interfaz {@link io.kebblar.petstore.api.service.SmsService}.
  *
@@ -40,8 +42,8 @@ import io.kebblar.petstore.api.support.InvokeRestService;
 public class SmsServiceImpl implements SmsService {
     private static final Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
 
-    private Environment environment;
-    private InvokeRestService invokeRestSMSService;
+    private final Environment environment;
+    private final InvokeRestService invokeRestSMSService;
 
     /**
      * <p>Constructor for SmsServiceImpl.</p>
@@ -61,15 +63,17 @@ public class SmsServiceImpl implements SmsService {
             String urlSMS= environment.getProperty( "app.sms.urlservice" );
             String credential = environment.getProperty( "app.sms.credentials" );
             SmsResponse responseSMS = invokeRestSMSService.smsSend(urlSMS, credential, "+52"+numero, msj);
-            logger.info("Response:"+responseSMS.isExito());
+            logger.info("Response: {}", responseSMS.isExito());
     }
 
     /** {@inheritDoc} */
     @Override
     public String getCveSMS() {
-        double cve = 10000 + Math.random() * 90000;
-        String clave = String.valueOf((int) cve);
-        logger.info("Clave Generada para la apertura del PDF via SMS: -->"+clave+"<--");
+        SecureRandom rand = new SecureRandom();
+        int num = rand.nextInt(100000);
+        String cve = String.format("%05d", num);
+        String clave = String.valueOf(Integer.parseInt(cve));
+        logger.info("Clave Generada para la apertura del PDF via SMS: --> {} <--", clave);
         return clave;
     }
 }

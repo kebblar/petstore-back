@@ -51,7 +51,7 @@ import io.kebblar.petstore.api.utils.WaterMark;
 @Service
 public class UploadServiceImpl implements UploadService {
     /** logger. */
-    private Logger logger = LoggerFactory.getLogger(UploadServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(UploadServiceImpl.class);
 
     /** tika. */
     private Tika tika = new Tika();
@@ -75,8 +75,7 @@ public class UploadServiceImpl implements UploadService {
     private void valida(MultipartFile mpf, long max) throws UploadException {
         long peso = mpf.getSize();
         if (peso>max) {
-            UploadException ue = new UploadException(max, peso);
-            throw ue;
+            throw new UploadException(max, peso);
         }
 
         String mimeType = "no-pude-detectar-el-tipo-mime";
@@ -133,7 +132,7 @@ public class UploadServiceImpl implements UploadService {
      */
     private static String getMd5(MultipartFile mpf) throws UploadException {
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(mpf.getBytes());
             BigInteger container = new BigInteger(1, messageDigest);
             String hashtext = container.toString(16);
