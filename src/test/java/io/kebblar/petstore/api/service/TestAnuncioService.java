@@ -23,12 +23,17 @@ package io.kebblar.petstore.api.service;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -179,8 +184,8 @@ public class TestAnuncioService {
             anuncio.setIdEstatus(3);
             anuncios.add(anuncio);
         }
-        when(anuncioMapper.busquedaAnuncio(Mockito.any())).thenReturn(anuncios);
-        when(anuncioMapper.obtieneCantidad(Mockito.any())).thenReturn(anuncios);
+        when(anuncioMapper.busquedaAnuncio(any())).thenReturn(anuncios);
+        when(anuncioMapper.obtieneCantidad(any())).thenReturn(anuncios);
         when(anuncioMapper.obtieneDescPorId(Mockito.anyInt())).thenReturn("Activo");
         when(anuncioMapper.obtieneCategoria(1)).thenReturn(new Categoria(1,"Caninos",1));
 
@@ -223,8 +228,8 @@ public class TestAnuncioService {
                 foto.setPrincipal(true);
                 foto.setUuid("23423gf34g34");
             }
-            when(anuncioMapper.busquedaFiltro(Mockito.any())).thenReturn(anuncios);
-            when(anuncioMapper.totalAnuncioFiltro(Mockito.any())).thenReturn(anuncios);
+            when(anuncioMapper.busquedaFiltro(any())).thenReturn(anuncios);
+            when(anuncioMapper.totalAnuncioFiltro(any())).thenReturn(anuncios);
             when(anuncioMapper.obtieneCategoria(Mockito.anyInt())).thenReturn(categoria);
             when(anuncioImagenMapper.getImagenes(Mockito.anyInt())).thenReturn(media);
 
@@ -539,7 +544,7 @@ public class TestAnuncioService {
             String url = anuncio.getSearchUrl();
             lista.add(anuncio);
             when(anuncioMapper.getAll()).thenReturn(lista);
-            when(anuncioMapper.update(Mockito.any())).thenReturn(1);
+            when(anuncioMapper.update(any())).thenReturn(1);
             logger.info(anuncio.getSearchUrl());
             anuncioService.updateSearchUrl();
             assertFalse(url.equals(anuncio.getSearchUrl()));
@@ -609,7 +614,30 @@ public class TestAnuncioService {
         when(anuncioMapper.getBySearchUrl("perritos")).thenReturn(lista);
         List<DetalleAnuncioResponse> d = anuncioService.getBySearchUrl("perritos");
         assertEquals(anuncio.getTitulo(), d.get(0).getTitulo());
+    }
 
+    @Test
+    public void testScheduled() throws Exception {
+        List<Anuncio> anuncios = new ArrayList<>();
+        anuncios.add(new Anuncio(1));
+        try {
+            anuncioService.schedulerPublicarAnuncio();
+            when(anuncioMapper.anunciosPorPublicar(any(String.class), any(String.class), anyShort())).thenReturn(anuncios);
+            anuncioService.schedulerPublicarAnuncio();
+            assertTrue(true);
+        } catch (Exception e) {
+            logger.error("cuando algo sale mal");
+        } try {
+            when(anuncioMapper.anunciosPorPublicar(any(String.class), any(String.class), anyShort())).thenThrow(SQLException.class);
+            anuncioService.schedulerPublicarAnuncio();
+        } catch (Exception e) {
+            logger.error("la atrapa pero no debe ser lanzada");
+        } try {
+            when(anuncioMapper.anunciosPorVencer(any(String.class), anyShort())).thenReturn(anuncios);
+            anuncioService.schedulerPublicarAnuncio();
+        } catch (Exception e) {
+            logger.error("la atrapa pero no debe ser lanzada");
+        }
     }
 
 }
