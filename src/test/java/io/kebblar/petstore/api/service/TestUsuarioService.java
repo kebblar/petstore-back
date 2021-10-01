@@ -47,6 +47,7 @@ public class TestUsuarioService {
     private Usuario usuario1;
     private List<Usuario> lista;
     private List<Rol> roles;
+    Preregistro p;
     private UsuarioDetalle usuarioDetalle;
     private static final Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
     private PreregistroRequest preregistro;
@@ -60,10 +61,11 @@ public class TestUsuarioService {
         lista = new ArrayList<>();
         roles = new ArrayList<>();
         lista.add(usuario1);
+        p = new Preregistro(1,"a", "abc@gmail.com", "Alphhha40#.", "5554444444", new Date(), "xxx", 231233213);
         lista.add(new Usuario(2, "correo2@correo.com", "abc"));
         roles.add(new Rol(1, "admin", true));
         usuarioDetalle = new UsuarioDetalle(1, "fher", "romo", "olea", "apodo", new Date(), "tel");
-        preregistro = new PreregistroRequest(10, "nick", "abc@gmail.com", "Fher1234.#", "5540170234", "dsjfh", 60550000, 2000, 1, 11);
+        preregistro = new PreregistroRequest(10, "nick", "abc@gmail.com", "Fher1234.#", "5540170234", "xxx", 60550000, 2000, 1, 11);
     }
 
     @Test
@@ -155,15 +157,80 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void testExtras () throws Exception {
-        UsuarioServiceImpl usuarioService1 = new UsuarioServiceImpl(usuarioMapper,rolMapper,usuarioDetalleMapper,registroMapper,mailSenderService);
+    public void testExtras() throws Exception {
+        //Test metodo extra
+        UsuarioServiceImpl usuarioService1 = new UsuarioServiceImpl(usuarioMapper, rolMapper, usuarioDetalleMapper, registroMapper, mailSenderService);
         assertEquals(3, usuarioService1.daysBetweenDates(new GregorianCalendar(2016, Calendar.JANUARY, 11).getTime(), new GregorianCalendar(2016, Calendar.JANUARY, 14).getTime()));
+    }
 
+        @Test
+    public void testClaves() throws Exception {
+        when(usuarioMapper.getByCorreo("correo@correo.com")).thenReturn(usuario1);
+        assertEquals(usuario1, usuarioService.solicitaRegeneracionClave("correo@correo.com"));
+
+        when(usuarioMapper.getByCorreo("correo@correo.com")).thenReturn(null);
+        assertEquals(new Usuario(0, "err", "err"), usuarioService.solicitaRegeneracionClave("correo@correo.com"));
+
+        try {
+            when(usuarioMapper.getByCorreo("correo@correo.com")).thenThrow(SQLException.class);
+            usuarioService.solicitaRegeneracionClave("correo@correo.com");
+            assertEquals(new Usuario(0, "err", "err"), usuarioService.solicitaRegeneracionClave("correo@correo.com"));
+        } catch (Exception e) {
+            logger.error("esto no pasa");
+        } try {
+            when(usuarioMapper.getByToken("xxx")).thenReturn(null);
+            usuarioService.confirmaRegeneraClave("xxx", "Clave1234$#");
+        } catch (TokenNotExistException d) {
+            assertTrue(true);
+        } try {
+            when(usuarioMapper.getByToken("xxx")).thenReturn(usuario1);
+            usuario1.setRegeneraClaveInstante(System.currentTimeMillis() - (60000 * 80L));
+            usuarioService.confirmaRegeneraClave("xxx", "Clave12213#");
+        } catch (TokenExpiredException e) {
+            assertTrue(true);
+        } try {
+            when(usuarioMapper.getByToken("xxx")).thenReturn(usuario1);
+            when(usuarioMapper.confirmaRegeneraClave(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(1);
+            usuario1.setRegeneraClaveInstante(System.currentTimeMillis()-60000);
+            assertEquals(usuario1, usuarioService.confirmaRegeneraClave("xxx", "Clave1234$#"));
+        } catch (TokenExpiredException t) {
+            logger.error("esto no pasa");
+        }
+    }
+
+    @Test
+    public void testClaves2 () throws Exception {
+        try {
+            when(usuarioDetalleMapper.update(usuarioDetalle)).thenReturn(1);
+            assertEquals(usuarioDetalle, usuarioService.actualizaUsuarioDetalle(usuarioDetalle));
+        } catch (Exception e) {
+            logger.error("No debe de lanzarse");
+        }
+        try {
+            when(usuarioMapper.getByCorreo("correo@correo.com")).thenReturn(null);
+            usuarioService.cambiaClave("correo@correo.com", "Hola123453$.");
+        } catch (UserNotExistsException v) {
+            assertTrue(true);
+        } try {
+            when(usuarioMapper.getByCorreo("correo@correo.com")).thenReturn(usuario1);
+            assertEquals(usuario1, usuarioService.cambiaClave("correo@correo.com", "Hola123453$."));
+        } catch (Exception e) {
+            logger.error("no debe pasar");
+        } try {
+            when(usuarioMapper.getByCorreo("correo@correo.com")).thenThrow(SQLException.class);
+            usuarioService.cambiaClave("correo@correo.com", "Hola123453$.");
+        } catch (BusinessException d) {
+            assertTrue(true);
+        } try {
+            when(usuarioDetalleMapper.update(usuarioDetalle)).thenThrow(SQLException.class);
+            usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
     }
 
     @Test
     public void testRegistro () throws Exception {
-
         try {
             preregistro.setDay(31);
             preregistro.setMonth(2);
@@ -218,6 +285,53 @@ public class TestUsuarioService {
             assertNotNull(usuarioService.preRegistro2(preregistro));
         } catch (BusinessException b) {
             logger.error("no debe de pasar esto");
+        }
+        try {
+            when(usuarioMapper.getByCorreo("abc@gmail.com")).thenThrow(SQLException.class);
+            usuarioService.preRegistro(p);
+        } catch (DatabaseException d) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void confirmacionTest() throws Exception {
+        try {
+            when(registroMapper.getByRandomString("xxx")).thenReturn(null);
+            usuarioService.confirmaPreregistro("xxx");
+        }catch (TokenNotExistException t) {
+            assertTrue(true);
+        } try {
+            when(registroMapper.getByRandomString("454")).thenThrow(SQLException.class);
+            usuarioService.confirmaPreregistro("454");
+        } catch (BusinessException b) {
+            assertTrue(true);
+        } try {
+            when(registroMapper.getByRandomString("xxx")).thenReturn(p);
+            p.setInstanteRegistro(800);
+            usuarioService.confirmaPreregistro("xxx");
+        } catch (TokenExpiredException t) {
+            assertTrue(true);
+        } try {
+            when(registroMapper.getByRandomString("xx")).thenReturn(p);
+            p.setInstanteRegistro(System.currentTimeMillis()-60000);
+            usuarioService.confirmaPreregistro("xx");
+        } catch (WrongTokenException t) {
+            assertTrue(true);
+        } try {
+            when(registroMapper.getByRandomString("xxx")).thenReturn(p);
+            when(usuarioMapper.insert(Mockito.any(Usuario.class))).thenThrow(SQLException.class);
+            usuarioService.confirmaPreregistro("xxx");
+        } catch (TransactionException t) {
+            assertTrue(true);
+        } try {
+            when(usuarioMapper.insert(Mockito.any(Usuario.class))).thenReturn(1);
+            when(usuarioDetalleMapper.insert(Mockito.any(UsuarioDetalle.class))).thenReturn(1);
+            when(rolMapper.insertUserRol(0,2)).thenReturn(1);
+            when(registroMapper.deleteByRandomString("xxx")).thenReturn(1);
+            usuarioService.confirmaPreregistro("xxx");
+        } catch (TransactionException t) {
+            logger.info("esto no pasa");
         }
     }
 
