@@ -40,14 +40,14 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  */
 @Service
 public class ContadorServiceImpl implements ContadorService {
-    private ContadorMapper contadorMapper;
+    private final ContadorMapper contadorMapper;
 
     /**
-     * Constructor que realiza el setting de todos
+     * Constructor que realiza el setting de
      * los Mappers y todos los servicios adicionales
      * a ser empleados en esta clase.
      *
-     * @param contadorMapper
+     * @param contadorMapper instancia de {@link ContadorMapper}
      */
     public ContadorServiceImpl(ContadorMapper contadorMapper) {
         this.contadorMapper = contadorMapper;
@@ -80,10 +80,10 @@ public class ContadorServiceImpl implements ContadorService {
 
     @Override
     public Integer getTableCounter(String tabla) throws BusinessException {
-        String ESQUEMA = "petstore";
+        String esquema = "petstore";
         // ********************************** Change previous var 'ESQUEMAS' Accordingly !!!
         try {
-            return this.contadorMapper.getTableCount(ESQUEMA, tabla);
+            return this.contadorMapper.getTableCount(esquema, tabla);
         } catch (Exception e) {
             throw new MapperCallException("Error al obtener el número de tuplas de la tabla: "+ tabla + " (tabla posiblemente inexistente)", e.getMessage());
         }

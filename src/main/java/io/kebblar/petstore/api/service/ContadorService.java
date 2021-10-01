@@ -34,7 +34,7 @@ public interface ContadorService {
      * Regresa el número de tuplas que actualmente tiene la tabla 'usuario_detalle'
      *
      * @return Entero con el número de tuplas que actualmente tiene la tabla 'usuario_detalle'
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException cuando ocurre algun imprevisto.
      */
     int getUsuarioDetalleCounter() throws BusinessException;
 

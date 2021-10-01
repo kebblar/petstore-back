@@ -80,17 +80,17 @@ import io.kebblar.petstore.api.utils.ValidadorClave;
 public class UsuarioServiceImpl implements UsuarioService {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
-    private UsuarioMapper usuarioMapper;
-    private RolMapper rolMapper;
-    private RegistroMapper registroMapper;
-    private UsuarioDetalleMapper usuarioDetalleMapper;
-    private MailSenderService mailSenderService;
+    private final UsuarioMapper usuarioMapper;
+    private final RolMapper rolMapper;
+    private final RegistroMapper registroMapper;
+    private final UsuarioDetalleMapper usuarioDetalleMapper;
+    private final MailSenderService mailSenderService;
 
     private static final int RANDOM_STRING_LEN = 6;
 
     /**
-     * Constructor que realiza el setting de todos
-     * los Mappers y todos los servicios adicionales
+     * Constructor que realiza el setting de
+     * los Mappers y los servicios adicionales
      * a ser empleados en esta clase.
      *
      * @param usuarioMapper a {@link io.kebblar.petstore.api.mapper.UsuarioMapper} object.
@@ -103,7 +103,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioServiceImpl(
             UsuarioMapper usuarioMapper,
             RolMapper rolMapper,
-            DireccionMapper direccionMapper,
             UsuarioDetalleMapper usuarioDetalleMapper,
             RegistroMapper registroMapper,
             MailSenderService mailSenderService) {
@@ -339,7 +338,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 preRegistroRequest.getCorreo(),
                 randomString,
                 "Clave de confirmación de registro");
-        logger.info("Se ha enviado un correo para confirmación a: " + preRegistroRequest.getCorreo());
+        logger.info("Se ha enviado un correo para confirmación a: {}", preRegistroRequest.getCorreo());
         return preRegistroRequest;
     }
 
@@ -352,7 +351,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             rollbackFor = TransactionException.class)
     public Usuario confirmaPreregistro(String token) throws BusinessException {
         // El token sirve sólo 10 minutes:
-        long DELTA = 1000*60*10L;
+        long delta = 1000*60*10L;
 
         // Obtén la túpla asociada al token de confirmación
         Preregistro preregistro = getPreregistroByRandomString(token);
@@ -362,7 +361,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         // Si ya expiró el token, notifica el error:
         long age = System.currentTimeMillis()-preregistro.getInstanteRegistro();
-        if(age>DELTA) { // token expirado
+        if(age>delta) { // token expirado
             throw new TokenExpiredException();
         }
 
@@ -422,7 +421,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.registroMapper.deleteByRandomString(randomString);
 
         // Notifica al log y retorna el id del usuario recién creado:
-        logger.info("Nevo Usuario Creado con ID: " + idUsuario);
+        logger.info("Nevo Usuario Creado con ID: {}", idUsuario);
         return usuario;
     }
 
@@ -492,11 +491,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
         ValidadorClave.validate(clave);
-        long UNA_HORA = 1000*60*60L;
+        long unaHora = 1000*60*60L;
         Usuario usuario = usuarioMapper.getByToken(token);
         if(usuario==null) throw new TokenNotExistException();
         long remaining = System.currentTimeMillis()-usuario.getRegeneraClaveInstante();
-        if(remaining<UNA_HORA) {
+        if(remaining<unaHora) {
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
             usuarioMapper.confirmaRegeneraClave(token, claveHash);
             return usuarioMapper.getByToken(token);
