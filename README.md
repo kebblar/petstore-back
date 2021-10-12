@@ -9,21 +9,21 @@
 
 *Se depuran utilidades:*
 
-*Commit #cb1567b*
+**Commit #cb1567b**
 1. AdministracionComprasController (el servicio solamente contaba con dos endpoints, un get y un post, eran muy basicos ademas). Las funcionalidades de administracion y gestion de compras de la organizacion quedan deshabilitadas.
 2. HistorialComprasController (solo era un get de las compras de un usuario) Las funcionalidades de historial compra de un usuario quedan deshabilitadas. 
 
-*Endpoints fuera de servicio*
+**Endpoints fuera de servicio**
 
 - api/administracion-compras-update.json
 - api/administracion-compras.json
 - api/historial-compras.json
 
-*Commit #ce460da*
+**Commit #ce460da**
 
 3. Depuracion del microservicio que generaba las graficas, 4 controladores quedaron fuera.
 
-*Endpoints eliminados*
+**Endpoints eliminados**
 
 - api/grafica-comprador-asiduo-rango/{}/{}.json
 - api/grafica-comprador-asiduo.json
@@ -42,3 +42,20 @@
 - api/grafica-total-importe-ventas.json
 - api/grafica-total-numero-ordenes-ventas-filtro.json
 - api/grafica-total-numero-ordenes-ventas.json
+
+**Commit #**
+
+4. Depuracion del microservicio de Anuncio.
+
+**Endpoints eliminados**
+
+- api/counter
+- api/anuncios.json (GET PUT DELETE POST)
+- api/content/{description}
+- api/anuncios/imagen/principal.json
+- api/anuncio/filter.json
+- api/anuncio/search.json
+- api/anuncios/imagen.json (DELETE POST)
+- api/anuncios/imagen2.json
+- api/anuncios/{id}.json (GET)
+- api/anuncios/confirmar/{id}.json (PUT)
