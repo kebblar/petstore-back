@@ -59,3 +59,21 @@
 - api/anuncios/imagen2.json
 - api/anuncios/{id}.json (GET)
 - api/anuncios/confirmar/{id}.json (PUT)
+
+5. Depuracion de carrito
+
+**Endpoints eliminados**
+
+- api/carritoVista/{id}.json
+- api/carritoUser/{id}.json
+- api/carrito/{id}.json (GET POST PUT DELETE)
+- api/carritoCve/{cve}.json
+- api/procesa-orden.json
+
+6.Depuracuion de criptoController
+
+**Endpoints eliminados**
+
+- api/wallet/{id}.json
+- api/monto-btc/{monto}.json
+- api/orden.json
