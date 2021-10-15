@@ -116,9 +116,6 @@ public class FileUploadController {
         return uploadService.storeOne(files, destinationFolder, max);
     }
 
-    @ApiOperation(
-    value = "AnuncioController::Registro",
-    notes = "Recibe una imagen que sera asociada a un anuncio")
     @PostMapping(
         path = "/up/imagen.json",
         produces = "application/json; charset=utf-8")
@@ -130,9 +127,6 @@ public class FileUploadController {
         return uploadService.storeOne(file, destinationFolder, max);
     }
 
-    @ApiOperation(
-    value = "AnuncioController::Registro",
-    notes = "Recibe una imagen que sera asociada a un anuncio")
     @PostMapping(
         path = "/up/imagen2.json",
         produces = "application/json; charset=utf-8")

@@ -29,28 +29,17 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.HttpStatus;
-import io.kebblar.petstore.api.model.request.AnuncioRequest;
-import io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest;
-import io.kebblar.petstore.api.model.request.BusquedaRequest;
 
 /**
  * <p>Descripción:</p>
@@ -63,7 +52,6 @@ import io.kebblar.petstore.api.model.request.BusquedaRequest;
 public class AnuncioUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(AnuncioUtil.class);
-    private static final String TEMPLATE = "SELECT id_anuncio FROM mascota_valor_atributo WHERE id_valor_atributo = %d ";
     private static final SecureRandom random = new SecureRandom();
 
     /**
@@ -99,33 +87,25 @@ public class AnuncioUtil {
      * @return a boolean.
      */
     public static boolean validaFechasPeriodo(Date fechaInicioVigencia, Date fechaFinVigencia){
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-            String sFechaBase=dateFormat.format(new Date());
-            String sFechaIniVigencia=fechaInicioVigencia!=null ? dateFormat.format(fechaInicioVigencia):null;
-            String sFechaFinVigencia=fechaFinVigencia!=null?dateFormat.format(fechaFinVigencia):null;
-            Date fechaBase = dateFormat.parse(sFechaBase);
-            fechaInicioVigencia = sFechaIniVigencia!=null?dateFormat.parse(sFechaIniVigencia):null;
-            fechaFinVigencia = sFechaFinVigencia!=null?dateFormat.parse(sFechaFinVigencia):null;
-            boolean fechasValidas = true;
-            //Se valida que la fecha de inicio no sea anterior a la fecha actual
-            if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)){
-                fechasValidas = false;
-            }
-            //Se valida que la fecha de fin sno sea anterior a la fecha actual
-            if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)){
-                fechasValidas = false;
-            }
-            //Se valida que la fecha de fin no sea mayor fecha inicio
-            if(fechaInicioVigencia!=null && fechaFinVigencia!=null
-                    && fechaInicioVigencia.after(fechaFinVigencia)){
-                fechasValidas = false;
-            }
-            return fechasValidas;
-        } catch (ParseException ex) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+        String sFechaBase=dateFormat.format(new Date());
+        String sFechaIniVigencia=fechaInicioVigencia!=null ? dateFormat.format(fechaInicioVigencia):null;
+        String sFechaFinVigencia=fechaFinVigencia!=null?dateFormat.format(fechaFinVigencia):null;
 
+        try {
+            Date fechaBase = dateFormat.parse(sFechaBase);
+            fechaInicioVigencia = sFechaIniVigencia != null ? dateFormat.parse(sFechaIniVigencia) : null;
+            fechaFinVigencia = sFechaFinVigencia != null ? dateFormat.parse(sFechaFinVigencia) : null;
+        //Se valida que la fecha de inicio no sea anterior a la fecha actual
+            if(fechaInicioVigencia!=null && fechaBase.after(fechaInicioVigencia)) return false;
+            //Se valida que la fecha de fin sno sea anterior a la fecha actual
+            if(fechaFinVigencia!=null && fechaBase.after(fechaFinVigencia)) return false;
+            //Se valida que la fecha de fin no sea mayor fecha inicio
+            return fechaInicioVigencia == null || fechaFinVigencia == null || !fechaInicioVigencia.after(fechaFinVigencia);
+        }catch (ParseException p) {
+            logger.error("Ha ocurrido un problema de parseo");
         }
-        return false;
+    return false;
     }
 
     /**
@@ -146,118 +126,9 @@ public class AnuncioUtil {
             fechaAComparar = dateFormat.parse(sFechaAComparar);
             return fechaBase.compareTo(fechaAComparar);
         } catch (ParseException ex) {
-
+            logger.error("Ha ocurrido un problema de parseo");
         }
         return 0;
-    }
-
-    /**
-     * Método que concatena las condiciones de consulta a la cadena SQL.
-     *
-     * @param filtros a {@link io.kebblar.petstore.api.model.request.BusquedaAdministracionRequest} object.
-     * @return String que contiene toda la cadena para la sentencia SQL
-     */
-    public static List<String> busquedaFiltros(BusquedaAdministracionRequest filtros) {
-        StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id IS NOT NULL");
-        List<String> response = new ArrayList<>();
-        int getPageSize = filtros.getTamPaginas();
-        int getPageNumber = filtros.getNumPaginas();
-
-        String startRow = Integer.toString((getPageNumber-1)*getPageSize) ;
-        String pageSize = Integer.toString(getPageSize);
-        if (filtros.getIdCategoria() != 0) {
-            consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
-        }
-        if (filtros.getFolio() != null && !filtros.getFolio().isEmpty()) {
-            consultaBase.append(" AND folio LIKE '").append(filtros.getFolio()).append("%' ");
-        }
-        if (filtros.getEstatus() != 0) {
-            consultaBase.append(" AND id_estatus = ").append(filtros.getEstatus());
-        }
-        if (filtros.getTitulo() != null && !filtros.getTitulo().equals("")) {
-            consultaBase.append(" AND UPPER( titulo) LIKE ").append(" '%").append(filtros.getTitulo().toUpperCase()).append("%'");
-        }
-        if (filtros.getFechaFinVigencia() != null && !filtros.getFechaFinVigencia().toString().isEmpty() ) {
-            consultaBase.append(" AND fecha_fin_vigencia <= ").append("'").append(filtros.getFechaFinVigencia()).append("'");
-        }
-        if (filtros.getFechaInicioVigencia() != null && !filtros.getFechaInicioVigencia().toString().isEmpty()) {
-            consultaBase.append(" AND fecha_inicio_vigencia >= ").append("'").append(filtros.getFechaInicioVigencia()).append("'");
-        }
-        response.add(consultaBase.toString());
-        consultaBase.append(" ORDER BY fecha_alta DESC ");
-        consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
-        response.add(consultaBase.toString());
-        return response;
-
-    }
-
-    /**
-     * Filtra la búsqueda de usuario final.
-     *
-     * @param filtros a {@link io.kebblar.petstore.api.model.request.BusquedaRequest} object.
-     * @return Lista de strings
-     */
-    public static List<String> busqueda(BusquedaRequest filtros) {
-        StringBuilder consultaBase = new StringBuilder("SELECT * FROM anuncio WHERE id_estatus = ").append(AnuncioEstatusEnum.PUBLICADO.getId());
-        List<String> response = new ArrayList<>();
-        int getPageSize = filtros.getTamPaginas();
-        int getPageNumber = filtros.getNumPaginas();
-
-        String startRow = getPageNumber >= 1 ? Integer.toString((getPageNumber-1)*getPageSize) : Integer.toString(getPageNumber);
-        String pageSize = Integer.toString(getPageSize);
-        if (filtros.getIdCategoria() != null && filtros.getIdCategoria() != 0 ) {
-            consultaBase.append(" AND id_categoria = ").append(filtros.getIdCategoria());
-        }
-        if (filtros.getPrecio() != null && filtros.getPrecio() != BigDecimal.ZERO) {
-            consultaBase.append(" AND precio <= ").append(filtros.getPrecio());
-        }
-        if(filtros.getAtributos() != null && !filtros.getAtributos().isEmpty()) {
-            consultaBase.append(" AND id IN (");
-            int i=1;
-            StringBuilder sb = new StringBuilder();
-            int size = filtros.getAtributos().size();
-
-            for (Integer atributo : filtros.getAtributos()) {
-                if (atributo != 0 ) {
-                    sb.append("(");
-                    sb.append(String.format(TEMPLATE, atributo));
-                    sb.append(")");
-                    sb.append((i++<size)?" INTERSECT ":"");
-                }
-            }
-            consultaBase.append(sb).append(")");
-        }
-        response.add(consultaBase.toString());
-        consultaBase.append(" ORDER BY fecha_alta DESC ");
-        consultaBase.append(" LIMIT ").append(startRow).append(",").append(pageSize);
-        response.add(consultaBase.toString());
-        return response;
-    }
-
-    /**
-     * Método privado que permite realizar validaciones de negocio para confirmar el guardado.
-     *
-     * @param request Clase que contiene los campos a validar
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException - xcepcion lanzada con el mensaje de error correspondiente
-     */
-    public static void validaCampos(AnuncioRequest request) throws BusinessException {
-        //Validacion de campos obligatorios
-        if(request.getMascotaValorAtributo()==null || request.getMascotaValorAtributo().isEmpty()) {
-            throw new BusinessException("Error de datos","El registro de un anuncio debe tener al menos un atributo asociado",4091,"CVE_4091",HttpStatus.CONFLICT);
-        }
-        if(request.getIdCategoria()==0) {
-            throw new BusinessException("Error de datos","Categoria no valida",4091,"CVE_4091",HttpStatus.CONFLICT);
-        }
-        //Validacion de fechas de vigencia
-        Date fechaInicio = request.getFechaInicioVigencia() != null ?
-                java.util.Date.from(request.getFechaInicioVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-                :null;
-        Date fechaFin =request.getFechaFinVigencia() != null ?
-                java.util.Date.from(request.getFechaFinVigencia().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-                :null;
-        if(!AnuncioUtil.validaFechasPeriodo(fechaInicio, fechaFin)) {
-            throw new BusinessException("Error de datos","Fechas de vigencia no validas",4091,"CVE_4091",HttpStatus.CONFLICT);
-        }
     }
 
     /**
@@ -272,15 +143,14 @@ public class AnuncioUtil {
             ImageIcon logoSistema=new ImageIcon(destinationFolder+File.separator+"logo.png");
             ImageIcon imagenBase=new ImageIcon(destinationFolder+File.separator+uuidImagenBase);
             //Se agrega marca de agua al logotipo del sistema
-            ImageIcon watermarkLogo = logoSistema;
-            BufferedImage bi = makeTransparent(watermarkLogo.getImage(), 50);
+            BufferedImage bi = makeTransparent(logoSistema.getImage(), 50);
             //Se renderiza la imagen proporcionada
             BufferedImage imagenRender = renderizar(imagenBase.getImage(), altoImagen);
             BufferedImage bufferedImage = new BufferedImage(imagenRender.getWidth(), imagenRender.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics graphics = bufferedImage.getGraphics();
             graphics.drawImage(imagenRender, 0, 0, null);
             graphics.setFont(new Font("Arial", Font.BOLD, 15));
-            //Se agrega la leyenda de la empresaunicode caracter (c) is \u00a9
+            //Se agrega la leyenda de la empresa unicode caracter (c) is \u00a9
             String watermark = "\u00a9 "+nomEmpresa;
             //Se calcula la poscion de la marca de agua con base al tamaño de la iamgen
             int posicionLeyendaX=imagenRender.getWidth()-((int)(imagenRender.getWidth()*0.30));
