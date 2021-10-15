@@ -43,7 +43,7 @@
 - api/grafica-total-numero-ordenes-ventas-filtro.json
 - api/grafica-total-numero-ordenes-ventas.json
 
-**Commit #**
+**Commit #32a967b**
 
 4. Depuracion del microservicio de Anuncio.
 
@@ -77,3 +77,5 @@
 - api/wallet/{id}.json
 - api/monto-btc/{monto}.json
 - api/orden.json
+
+**Commit #72dd60f**
