@@ -79,3 +79,21 @@
 - api/orden.json
 
 **Commit #72dd60f**
+Todo lo relacionado a catalogos
+
+**Endpoints eliminados**
+
+- api/atributos.json
+- api/atributo.json (GET POST PUT DELETE)
+- api/atributos/list/{nombre}.json
+- api/atributos-detalles.json
+- api/atributos-detalles.json
+- api/categoria-atributos.json (GET POST PUT DELETE)
+- api/categoria-atributo/categoria/{id}.json
+- api/categoria-atributos-faltantes/categoria/{id}.json
+- api/categorias.json
+- api/categoria.json (GET POST PUT DELETE)
+- api/categorias/list/{nombre}.json
+- api/valor-atributos.json
+- api/valor-atributo.json (DELETE PUT POST GET)
+- api/valor-atributo/atributo/{id}.json
