@@ -6,6 +6,7 @@
 1. AccessController (sign in, sign up and captcha)
 2. Admin controller(upload and health)
 3. DireccionController
+4. FileUploadController
 
 
 *Se depuran utilidades:*
@@ -105,3 +106,13 @@ Todo lo relacionado a estatus de anuncios
 **Endpoints eliminados**
 - api/estatus-anuncios.json (GET POST PUT DELETE)
 - api/estatusanuncios/list/{nombre}.json" (GET)
+
+**Commit #11ab316**
+Todo lo relacionado a mascota
+
+**Endpoints eliminados**
+- api//mascotas.json (GET PU POST DELETE)
+- api/mascotas/filtro.json (POST)
+- api//media-tipo.json (GET POST PUT DELETE)
+- api/mediatipos/list/{nombre}.json
+
