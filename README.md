@@ -5,6 +5,7 @@
 
 1. AccessController (sign in, sign up and captcha)
 2. Admin controller(upload and health)
+3. DireccionController
 
 
 *Se depuran utilidades:*
@@ -97,3 +98,10 @@ Todo lo relacionado a catalogos
 - api/valor-atributos.json
 - api/valor-atributo.json (DELETE PUT POST GET)
 - api/valor-atributo/atributo/{id}.json
+
+**Commit #f796bb6**
+Todo lo relacionado a estatus de anuncios
+
+**Endpoints eliminados**
+- api/estatus-anuncios.json (GET POST PUT DELETE)
+- api/estatusanuncios/list/{nombre}.json" (GET)
