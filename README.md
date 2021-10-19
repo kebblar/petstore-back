@@ -3,10 +3,16 @@
 
 *Permanecen utilidades:*
 
-1. AccessController (sign in, sign up and captcha)
+1. AccessController (sign in, sign up and captcha, passwords)
 2. Admin controller(upload and health)
 3. DireccionController
-4. FileUploadController
+4. TipoDireccionController
+5. FileUploadController
+6. QRController
+7. RolController
+8. RouterController
+9. UsusarioController
+10. UsuarioCompletoController
 
 
 *Se depuran utilidades:*
@@ -115,4 +121,15 @@ Todo lo relacionado a mascota
 - api/mascotas/filtro.json (POST)
 - api//media-tipo.json (GET POST PUT DELETE)
 - api/mediatipos/list/{nombre}.json
+
+**Commit #ff0b604**
+Todo lo relacionado a mmetodos de pago y paqueterias
+
+**Endpoints eliminados**
+- api/metodo-pagos.json
+- api/user-metodo-pago/{id}.json GET
+- api/metodo-pago.json (GET POST DELETE PUT)
+- api/paqueterias.json
+- api/paqueteria.json (GET PUT PUSH DELETE)
+- api/paqueteria/list/{nombre}.json
 
