@@ -37,7 +37,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.kebblar.petstore.api.mapper.DireccionMapper;
 import io.kebblar.petstore.api.mapper.RegistroMapper;
 import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;

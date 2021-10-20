@@ -30,8 +30,6 @@ package io.kebblar.petstore.api.utils;
 //import com.lowagie.text.pdf.PdfContentByte;
 //import com.lowagie.text.pdf.PdfWriter;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**

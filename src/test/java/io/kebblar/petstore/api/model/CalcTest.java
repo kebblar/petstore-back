@@ -2,12 +2,6 @@ package io.kebblar.petstore.api.model;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-//import org.mockito.runners.MockitoJUnitRunner;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.junit.runner.RunWith;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import io.kebblar.petstore.Calculadora;
 
 //@RunWith(MockitoJUnitRunner.class) 

@@ -39,7 +39,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.FilenameUtils;

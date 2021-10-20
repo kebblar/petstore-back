@@ -3,7 +3,6 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.mapper.AtributoMapper;
 import io.kebblar.petstore.api.model.domain.Atributo;
 import io.kebblar.petstore.api.model.domain.AtributoDetalleTO;
-import io.kebblar.petstore.api.model.domain.ValorAtributo;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import org.junit.Before;

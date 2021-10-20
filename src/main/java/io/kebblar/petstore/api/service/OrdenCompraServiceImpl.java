@@ -43,7 +43,6 @@ import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.CarritoDatosFactura;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
 import io.kebblar.petstore.api.support.MailSenderService;
-import io.kebblar.petstore.api.utils.CreatePDF;
 import io.kebblar.petstore.api.utils.Signer;
 
 /**
