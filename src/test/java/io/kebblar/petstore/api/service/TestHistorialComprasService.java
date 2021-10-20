@@ -20,7 +20,6 @@
  */
 package io.kebblar.petstore.api.service;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
