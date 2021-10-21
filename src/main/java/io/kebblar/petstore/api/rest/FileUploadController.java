@@ -39,7 +39,6 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
@@ -116,9 +115,6 @@ public class FileUploadController {
         return uploadService.storeOne(files, destinationFolder, max);
     }
 
-    @ApiOperation(
-    value = "AnuncioController::Registro",
-    notes = "Recibe una imagen que sera asociada a un anuncio")
     @PostMapping(
         path = "/up/imagen.json",
         produces = "application/json; charset=utf-8")
@@ -130,9 +126,6 @@ public class FileUploadController {
         return uploadService.storeOne(file, destinationFolder, max);
     }
 
-    @ApiOperation(
-    value = "AnuncioController::Registro",
-    notes = "Recibe una imagen que sera asociada a un anuncio")
     @PostMapping(
         path = "/up/imagen2.json",
         produces = "application/json; charset=utf-8")

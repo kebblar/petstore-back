@@ -3,10 +3,10 @@ spring:
     config:
       enabled: true
       uri: https://config.qbits.mx
-      name: petstore-back
+      name: petstore-back, c3p0, ValidationMessages, passay
       label: master
       allow-override: true
-      failFast: false
+      failFast: true
       retry:
         initialInterval: 6000
         multiplier: 1.5
@@ -16,3 +16,4 @@ spring:
 
 # Probar primero el servidor de configuración asi: 
 # https://config.qbits.mx/application/default
+

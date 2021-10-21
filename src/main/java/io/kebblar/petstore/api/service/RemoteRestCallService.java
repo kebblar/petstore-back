@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
+import io.kebblar.petstore.api.model.response.MontoBitcoin;
 
 public interface RemoteRestCallService {
     /**
@@ -47,4 +48,12 @@ public interface RemoteRestCallService {
      * @return Objeto con la información del cambio y el monto el btc.
      */
     String convierte();
+
+    /**
+     * Realiza una conversion del monto ingresado en pesos mexicanos a bitcoin, devolviendo la conversion
+     * a la criptomoneda y el tipo de cambio al momento que se invoco el metodo.
+     * @param monto Monto en pesos mexicanos a convertir en Bitcoin
+     * @return Objeto {@link MontoBitcoin} con el monto convertido y el tipo de cambio al momento de la solicitud.
+     */
+    public MontoBitcoin getMonto(double monto);
 }
