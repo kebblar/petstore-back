@@ -35,8 +35,9 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.BadCredentialsException;
 import io.kebblar.petstore.api.model.exceptions.DisabledUserException;
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
+import io.kebblar.petstore.api.model.exceptions.NegocioException;
 import io.kebblar.petstore.api.model.exceptions.WaitLoginException;
-import io.kebblar.petstore.api.model.exceptions.BlockedUserException;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
@@ -123,7 +124,7 @@ public class AccessServiceImpl implements AccessService {
             if(numeroDeIntentosFallidos >= maximoNumeroIntentosConcedidos) {
                 usuario.setInstanteBloqueo(instanteActual);
                 this.update(usuario);
-                throw new BlockedUserException(maximoNumeroIntentosConcedidos);
+                throw new NegocioException(MAX_FAILED_LOGIN_EXCEPTION, maximoNumeroIntentosConcedidos);
             }
 
             // Si no se disparó la Notificación anterior, de todas formas notifica un intento

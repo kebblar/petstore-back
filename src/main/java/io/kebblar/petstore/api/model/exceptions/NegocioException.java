@@ -29,7 +29,7 @@ package io.kebblar.petstore.api.model.exceptions;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class NegocioException extends ControllerException {
+public class NegocioException extends BusinessException {
     private static final long serialVersionUID = -1218087669509474484L;
     
     public NegocioException(EnumMessage message, Object... messageParams) {
