@@ -21,19 +21,15 @@
 package io.kebblar.petstore.api.model.response;
 
 import java.util.Objects;
-
+/**
+ * <p>Descripción:</p>
+ * Apoya a recupoerar almacenar la informacion de on objeto media.
+ *
+ * @author fher
+ * @version 1.0-SNAPSHOT
+ * @since 1.0-SNAPSHOT
+ */
 public class InformacionMedia {
-
-    /**
-     * <p>Descripción:</p>
-     * Apoya a recupoerar almacenar la informacion de on objeto media.
-     *
-     * @author fher
-     * @version 1.0-SNAPSHOT
-     * @since 1.0-SNAPSHOT
-     */
-    private static final long serialVersionUID = -4759453261602831311L;
-
     /*
      * Atributos de la clase.
      */
