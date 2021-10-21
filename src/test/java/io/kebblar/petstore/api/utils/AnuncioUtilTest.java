@@ -1,10 +1,9 @@
 package io.kebblar.petstore.api.utils;
-import io.kebblar.petstore.api.utils.AnuncioUtil;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 

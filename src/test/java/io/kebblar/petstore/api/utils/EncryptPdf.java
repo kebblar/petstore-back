@@ -40,9 +40,9 @@ import java.io.IOException;
  * @since 1.0
  */
 public class EncryptPdf {
-    private static final String base = "/Users/garellano/Desktop/";
-    private static final String path = base + "archivo-pdf-generado.pdf";
-    private static final String imagen = base + "work/hola/logo.png";
+    //private static final String base = "/Users/garellano/Desktop/";
+    //private static final String path = base + "archivo-pdf-generado.pdf";
+    //private static final String imagen = base + "work/hola/logo.png";
 
 
     /**

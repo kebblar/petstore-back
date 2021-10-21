@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.utils;
 
+import java.security.SecureRandom;
+
 /**
  * <p>StringUtils class.</p>
  *
@@ -54,5 +56,23 @@ public class StringUtils {
     private static char separa(char s) {
         if(s>47 && s<=57) return s;
         return '@';
+    }
+    
+
+    /**
+     * Retorna una cadena de 'len' caracteres aleatoria
+     *
+     * @param len longitud de la cadena retornada
+     * @return String aleatorio
+     */
+    public static String getRandomString(int len) {
+        StringBuilder result = new StringBuilder();
+        String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for(int i =0; i<len; i++) {
+            SecureRandom random = new SecureRandom();
+            int num = random.nextInt(base.length());
+            result.append(base.charAt(num));
+        }
+        return result.toString();
     }
 }

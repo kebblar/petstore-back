@@ -312,7 +312,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Preregistro registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
 
         // Genera una cadena aleatoria de caracteres y crea un objeto de tipo 'PreRegistro':
-        String randomString = DigestEncoder.getRandomString(RANDOM_STRING_LEN);
+        String randomString = StringUtils.getRandomString(RANDOM_STRING_LEN);
 
         // Calcula el Hash de la clave con un salt del correo:
         String claveHasheada = DigestEncoder.digest(preRegistroRequest.getClaveHash(), preRegistroRequest.getCorreo());
@@ -471,7 +471,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario solicitaRegeneracionClave(String correo) {
         Usuario dummyUser = new Usuario(0, "err","err");
-        String token = DigestEncoder.getRandomString(6);
+        String token = StringUtils.getRandomString(6);
         try {
             Usuario usuario = usuarioMapper.getByCorreo(correo);
             if(usuario==null) return dummyUser;
