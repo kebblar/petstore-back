@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+      uri: https://config.qbits.mx
+      name: petstore-back
+      label: master
+      allow-override: true
+      failFast: false
+      retry:
+        initialInterval: 6000
+        multiplier: 1.5
+        maxInterval: 30000
+  profiles:
+    active: gus
+
+# Probar primero el servidor de configuración asi: 
+# https://config.qbits.mx/application/default
