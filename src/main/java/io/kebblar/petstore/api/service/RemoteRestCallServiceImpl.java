@@ -21,11 +21,16 @@
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
+import io.kebblar.petstore.api.model.exceptions.BitcoinTransactionException;
+import io.kebblar.petstore.api.model.response.MontoBitcoin;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import io.kebblar.petstore.api.model.domain.TickerWrapper;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Service
 public class RemoteRestCallServiceImpl implements RemoteRestCallService {
@@ -57,6 +62,28 @@ public class RemoteRestCallServiceImpl implements RemoteRestCallService {
 
         return restTemplate.postForObject(url, entity, String.class);
      //   return "abc";
+    }
+
+    @Override
+    public MontoBitcoin getMonto(double monto) {
+        String claseMonto = convierte();
+        int loc = claseMonto.indexOf("last");
+        double price = Double.parseDouble(claseMonto.substring(loc).split("\"")[2]);
+        return new MontoBitcoin(round(monto/price,5), price);
+    }
+
+    /**
+     * Método que redondea un número a determinados decimales.
+     * @param value Número a redondear.
+     * @param places Cantidad de decimales a los que se redondeará.
+     * @return Resultado después del redondeo.
+     */
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }

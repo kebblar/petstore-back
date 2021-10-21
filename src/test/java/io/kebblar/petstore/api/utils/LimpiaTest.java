@@ -24,8 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import io.kebblar.petstore.api.service.AnuncioServiceImpl;
-
 /**
  * <p>LimpiaTest class.</p>
  *
@@ -76,7 +74,7 @@ public class LimpiaTest {
     }
 
     private void prueba(String cadena, String esperada) {
-        String result = AnuncioServiceImpl.limpia(cadena);
+        String result = LimpiadorTexto.limpia(cadena);
         boolean test = esperada.equals(result);
         if(!test) {
             System.out.println(cadena);
