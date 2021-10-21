@@ -37,7 +37,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +50,6 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
  *
  */
 @Service
-@PropertySource("classpath:c3p0.properties")
 @EnableEncryptableProperties
 public class HealthServiceImpl implements HealthService {
     /**

@@ -21,6 +21,7 @@
 package io.kebblar.petstore.api.rest;
 
 import io.kebblar.petstore.api.model.domain.BlockCyperChecker;
+import io.kebblar.petstore.api.model.domain.TickerWrapper;
 import io.kebblar.petstore.api.service.RemoteRestCallService;
 import io.swagger.annotations.Api;
 
@@ -80,6 +81,13 @@ public class RouterController {
             @ApiParam(name="add", value ="Direccion wallet buscada." )
             @PathVariable String add){
         return remoteRestCallService.verifyBalance(add);
+    }
+
+    @GetMapping(
+            path = "/tickers.json",
+            produces = "application/json; charset=utf-8")
+    public TickerWrapper getTicker() {
+        return remoteRestCallService.callTickerMicroservice();
     }
 
 }
