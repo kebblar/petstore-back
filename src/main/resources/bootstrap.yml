@@ -12,7 +12,7 @@ spring:
         multiplier: 1.5
         maxInterval: 30000
   profiles:
-    active: gus
+    active: ${AMBIENTE:gus}
 
 # Probar primero el servidor de configuración asi: 
 # https://config.qbits.mx/application/default
