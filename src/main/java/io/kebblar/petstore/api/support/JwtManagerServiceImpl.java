@@ -70,7 +70,7 @@ public class JwtManagerServiceImpl implements JwtManagerService {
             this.securityTokenLasts = 27; // 27 minutos dura el jwt
         }
         logger.info("Duración de token de seguridad: "+securityTokenLasts);
-        logger.info("Llave de encripción para el token JWT: >>>"+ENCRYPT_KEY+"<<<");
+        logger.debug("Llave de encripción para el token JWT: >>>"+ENCRYPT_KEY+"<<<");
     }
 
     /** {@inheritDoc} */
