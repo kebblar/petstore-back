@@ -16,3 +16,5 @@ spring:
 
 # Probar primero el servidor de configuración asi: 
 # https://config.qbits.mx/application/default
+# it comes from:
+# https://github.com/qbits-mx/configuration-tienda
