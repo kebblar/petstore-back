@@ -101,7 +101,7 @@ public class TestUsuarioService {
         try {
             when(usuarioMapper.update(Mockito.any(Usuario.class))).thenThrow(SQLException.class);
             usuarioService.actualizaUsuario(usuario1);
-        } catch (MapperCallException m) {
+        } catch (NegocioException m) {
             assertTrue(true);
         } try {
             when(usuarioMapper.delete(0)).thenThrow(SQLException.class);
@@ -141,17 +141,17 @@ public class TestUsuarioService {
         } try {
             when(usuarioMapper.getByCorreo(".")).thenThrow(SQLException.class);
             usuarioService.obtenUsuarioPorCorreo(".");
-        } catch (MapperCallException m) {
+        } catch (NegocioException m) {
             assertTrue(true);
         } try {
             when(rolMapper.getUserRoles(0)).thenThrow(SQLException.class);
             usuarioService.obtenRolesDeUsuario(0);
-        } catch (MapperCallException m) {
+        } catch (NegocioException m) {
             assertTrue(true);
         } try {
             when(usuarioDetalleMapper.getById(0)).thenThrow(SQLException.class);
             usuarioService.obtenDetallesDeUsuario(0);
-        } catch (MapperCallException m) {
+        } catch (NegocioException m) {
             assertTrue(true);
         }
     }
