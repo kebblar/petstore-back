@@ -26,6 +26,7 @@ import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.NegocioException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
@@ -63,9 +64,9 @@ public interface UsuarioService {
      *
      * @param Objeto de tipo {@link Usuario} con la información a actualizar.
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws BusinessException
+     * @throws NegocioException
      */
-    Usuario actualizaUsuario(Usuario usuario) throws BusinessException;
+    Usuario actualizaUsuario(Usuario usuario) throws NegocioException;
 
     /**
      * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
@@ -92,9 +93,9 @@ public interface UsuarioService {
      *
      * @param correo Cadena que contiene el correo de un usuario específico.
      * @return Objeto de tipo {@link Usuario}.
-     * @throws BusinessException
+     * @throws NegocioException
      */
-    Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException;
+    Usuario obtenUsuarioPorCorreo(String correo) throws NegocioException;
 
     /**
      * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
@@ -114,9 +115,9 @@ public interface UsuarioService {
      * de tipo: {@link BusinessException}.
      * @param id Entero asociado a un usuario específico
      * @return Lista de objetos de tipo {@link Rol}.
-     * @throws BusinessException
+     * @throws NegocioException
      */
-    List<Rol> obtenRolesDeUsuario(int id) throws BusinessException;
+    List<Rol> obtenRolesDeUsuario(int id) throws NegocioException;
 
     /**
      * <p>Retorna una lista de objetos de tipo {@link Direccion} que están
@@ -137,9 +138,9 @@ public interface UsuarioService {
      *
      * @param id Entero asociado a un usuario específico
      * @return Objeto {@link UsuarioDetalle}
-     * @throws BusinessException
+     * @throws NegocioException
      */
-    UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException;
+    UsuarioDetalle obtenDetallesDeUsuario(int id) throws NegocioException;
 
     /**
      * Realiza el preregistro de un potencial usuario al sistema

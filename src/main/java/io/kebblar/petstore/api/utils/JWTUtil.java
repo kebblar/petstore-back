@@ -35,9 +35,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
-import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
+import io.kebblar.petstore.api.model.exceptions.NegocioException;
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
+
+
 
 /**
  * Clase JWTUtil.
@@ -130,9 +131,9 @@ public class JWTUtil {
      * @param jwt a {@link java.lang.String} object.
      * @param user a {@link java.lang.String} object.
      * @param encryptKey a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException
      */
-    public void verifyToken(String jwt, String user, String encryptKey) throws BusinessException {
+    public void verifyToken(String jwt, String user, String encryptKey) throws NegocioException {
         try {
             Claims claims = Jwts.parser()
                .setSigningKey(encryptKey.getBytes())
@@ -145,10 +146,10 @@ public class JWTUtil {
                 logger.info("IssuedAt: " + claims.getIssuedAt());
             }
             if(!user.equals(claims.getId())) {
-                throw new WrongTokenException("issuer not verfied");
+                throw new NegocioException(ISSUER_NOT_VERIFIED);
             }
         } catch(Exception e) {
-            throw new WrongTokenException(e);
+            throw new NegocioException(e, WRONG_TOKEN);
         }
     }
 
@@ -160,19 +161,19 @@ public class JWTUtil {
      * @param encryptKey a {@link java.lang.String} object.
      * @param ahorita a long.
      * @return Cadena con el ID contenido en un Token válido
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException
      */
-    public String verifyToken(String jwt, String encryptKey, long ahorita) throws BusinessException {
+    public String verifyToken(String jwt, String encryptKey, long ahorita) throws NegocioException {
         try {
             Claims claims = Jwts.parser()
                .setSigningKey(encryptKey.getBytes())
                .parseClaimsJws(jwt).getBody();
             long expiration = claims.getExpiration().getTime();
-            if(expiration < ahorita) throw new TokenExpiredException();
+            if(expiration < ahorita) throw new NegocioException(TOKEN_EXPIRED);
             //showInfo(claims);
             return claims.getId();
         } catch(Exception e) {
-            throw new WrongTokenException(e);
+        	throw new NegocioException(e, WRONG_TOKEN);
         }
     }
 
@@ -199,25 +200,24 @@ public class JWTUtil {
      */
     public void valida(String token, String encryptKey, long currentTime) throws Exception {
         if(token==null || token.trim().length()<1) return;
-        String estructuraInvalida = "El token posee una estructra inválida: --->"+token+"<---";
         // from: https://jwt.io/
         Base64.Decoder decoder = Base64.getDecoder();
         String[] chunks = token.split("\\.");
-        if(chunks.length<2) throw new Exception(estructuraInvalida);
+        if(chunks.length<2) throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
         String payload = new String(decoder.decode(chunks[1]));
 
-        if(!payload.contains("\"exp\":")) throw new Exception(estructuraInvalida);
+        if(!payload.contains("\"exp\":")) throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
         Long inst = 0L;
         String instante = "";
         for(String parte : payload.split(",")) {
             if(parte.contains("\"exp\":")) {
                 try {
                     instante = parte.substring(6, parte.length()-1)+"000";
-                    inst = new Long(instante);
+                    inst = Long.parseLong(instante);
                 } catch(Exception e) {
-                    throw new Exception(estructuraInvalida);
+                    throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
                 }
-                if (inst < currentTime) throw new Exception("El token ha expirado");
+                if (inst < currentTime) throw new NegocioException(TOKEN_EXPIRED);
             }
         }
     }
@@ -262,14 +262,14 @@ public class JWTUtil {
      * @param jwt a {@link java.lang.String} object.
      * @param encryptKey a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException if any.
      */
-    public String getMail(String jwt, String encryptKey) throws BusinessException {
+    public String getMail(String jwt, String encryptKey) throws NegocioException {
         Claims claim;
         try{
             claim = Jwts.parser().setSigningKey(encryptKey.getBytes()).parseClaimsJws(jwt).getBody();
         } catch (Exception e){
-            throw new WrongTokenException(e);
+            throw new NegocioException(e, TOKEN_INVALID_STRUCTURE, jwt);
         }
         return claim.getId();
     }

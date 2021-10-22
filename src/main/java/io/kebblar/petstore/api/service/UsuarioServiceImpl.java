@@ -48,6 +48,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.NegocioException;
 import io.kebblar.petstore.api.model.exceptions.RuleException;
 import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
@@ -63,6 +64,8 @@ import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
+
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.UsuarioService}.
@@ -137,11 +140,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario actualizaUsuario(Usuario usuario) throws BusinessException {
+    public Usuario actualizaUsuario(Usuario usuario) throws NegocioException {
         try {
             usuarioMapper.update(usuario);
         } catch (Exception e) {
-            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
+            throw new NegocioException(e, MAPPER_CALL, "Error al actualizar un usuario");
         }
         return usuario;
     }
@@ -179,21 +182,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
+    public Usuario obtenUsuarioPorCorreo(String correo) throws NegocioException {
         try {
             return usuarioMapper.getByCorreo(correo);
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener el usuario con base en su correo", e.getMessage());
+            throw new NegocioException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Rol> obtenRolesDeUsuario(int id) throws BusinessException {
+    public List<Rol> obtenRolesDeUsuario(int id) throws NegocioException {
         try {
             return rolMapper.getUserRoles(id);
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener los roles de un usuario", e.toString());
+            throw new NegocioException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
 
@@ -208,11 +211,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException {
+    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws NegocioException {
         try {
             return usuarioDetalleMapper.getById(id);
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener los detalles de un usuario", e.toString());
+            throw new NegocioException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
         }
     }
 
