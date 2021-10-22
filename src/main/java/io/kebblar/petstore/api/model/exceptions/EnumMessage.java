@@ -53,7 +53,7 @@ public enum EnumMessage {
     INTERNAL_SERVER(
     		903,
     		"Error Interno",
-    		"Ocurrió un error en el servidor. ID de correlación: $s",
+    		"Info: $s",
     		HttpStatus.INTERNAL_SERVER_ERROR),
     
     SEND_MAIL(
@@ -104,11 +104,12 @@ public enum EnumMessage {
     		"El token referido no existe",
     		HttpStatus.UNAUTHORIZED),
     
-    TRANSACTION(
-    		1012,
-    		"Error en la transacción",
-    		"La transacción no pudo ser procesada correctamente.",
-    		HttpStatus.INTERNAL_SERVER_ERROR),
+//    TRANSACTION(
+//    		1012,
+//    		"Error en la transacción",
+//    		"La transacción no pudo ser procesada correctamente.",
+//    		HttpStatus.INTERNAL_SERVER_ERROR),
+    // OJO: HACER UNA EXCEPCIÓN DEDICADA A ESTE RUBRO  !!!!!!!!!!!
     
     UPLOAD_FILE(
     		906,

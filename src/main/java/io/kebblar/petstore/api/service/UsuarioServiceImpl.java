@@ -121,7 +121,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
         try {
             usuarioMapper.insert(usuario);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
         }
         return usuario;
@@ -132,7 +132,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario creaUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.insert(usuario);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
         }
         return usuario;
@@ -143,7 +143,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario actualizaUsuario(Usuario usuario) throws NegocioException {
         try {
             usuarioMapper.update(usuario);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new NegocioException(e, MAPPER_CALL, "Error al actualizar un usuario");
         }
         return usuario;
@@ -154,7 +154,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario obtenUsuarioPorId(int id) throws BusinessException {
         try {
             return usuarioMapper.getById(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error al obtener un usuario", e.getMessage());
         }
     }
@@ -164,7 +164,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> obtenTodosUsuarios() throws BusinessException {
         try {
             return usuarioMapper.getAll();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
@@ -175,7 +175,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             usuarioMapper.delete(id);
             return usuarioMapper.getById(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
@@ -185,7 +185,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario obtenUsuarioPorCorreo(String correo) throws NegocioException {
         try {
             return usuarioMapper.getByCorreo(correo);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new NegocioException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
         }
     }
@@ -195,7 +195,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Rol> obtenRolesDeUsuario(int id) throws NegocioException {
         try {
             return rolMapper.getUserRoles(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new NegocioException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
@@ -204,7 +204,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 //    public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {
 //        try {
 //            return direccionMapper.getUserDirecciones(id);
-//        } catch (Exception e) {
+//        } catch (SQLException e) {
 //            throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
 //        }
 //    }
@@ -214,7 +214,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioDetalle obtenDetallesDeUsuario(int id) throws NegocioException {
         try {
             return usuarioDetalleMapper.getById(id);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new NegocioException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
         }
     }
@@ -288,7 +288,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return preRegistroHelper(preRegistro);
         } catch (SQLException e) {
-            throw new DatabaseException(e.toString());
+            throw new NegocioException(e, DATABASE, e.toString());
         }
     }
     
@@ -431,7 +431,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
         try {
             body = getTemplate(nick, randomString);
-        } catch (InternalServerException e) {
+        } catch (NegocioException e) {
             logger.error(e.toString());
         }
         this.mailSenderService.sendHtmlMail(correo, titulo, body);
@@ -445,14 +445,14 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
      * @throws BusinessException
      */
-    private Preregistro getPreregistroByRandomString(String token) throws BusinessException {
+    private Preregistro getPreregistroByRandomString(String token) throws NegocioException {
         try {
             return this.registroMapper.getByRandomString(token);
         } catch (SQLException e) {
-            throw new BusinessException("getRegistroByRandomString", e.toString());
+            throw new NegocioException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
         }
     }
-    private String getTemplate(String user, String randStr) throws InternalServerException {
+    private String getTemplate(String user, String randStr) throws NegocioException {
         String archivo = "public/mail/templateMail.html";
         try {
             // Accedemos al recurso
@@ -465,7 +465,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             template = template.replace("%TOKEN%",randStr);
             return template;
         } catch (IOException e) {
-            throw new InternalServerException("IO Error", "No se ha podido leer el archivo " + archivo);
+            throw new NegocioException(e, INTERNAL_SERVER, "No se ha podido leer el archivo " + archivo);
         }
 
     }
