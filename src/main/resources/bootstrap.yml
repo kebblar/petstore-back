@@ -3,7 +3,7 @@ spring:
     config:
       enabled: true
       uri: https://config.qbits.mx
-      name: petstore-back, c3p0, ValidationMessages, passay
+      name: petstore-back, c3p0, ValidationMessages, passay, router
       label: master
       allow-override: true
       failFast: true

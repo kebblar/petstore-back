@@ -38,7 +38,7 @@ import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
 import io.kebblar.petstore.api.service.UsuarioService;
-import io.kebblar.petstore.api.support.InvokeRestService;
+import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -64,7 +64,7 @@ import io.swagger.annotations.ApiParam;
 public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
-    private InvokeRestService invokeRestService;
+    private InvokeRemoteRestService invokeRestService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -75,7 +75,7 @@ public class AccessController {
     public AccessController(
             AccessService accessService,
             UsuarioService usuarioService,
-            InvokeRestService invokeRestService) {
+            InvokeRemoteRestService invokeRestService) {
         this.accessService = accessService;
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
@@ -177,13 +177,22 @@ public class AccessController {
 
     @ApiOperation(
             value = "AccessController::bitso",
-            notes = "Se utiliza para recuperar el precio actual de BTC en moneda" +
-                    "mexicana.")
+            notes = "Se utiliza para recuperar el precio actual de BTC en moneda mexicana.")
     @GetMapping(
             path = "/bitso.json",
             produces = "application/json; charset=utf-8")
     public String bitso() {
-        return invokeRestService.getBitsoInfo2();
+        return invokeRestService.getBitsoInfo();
     }
-
+    
+    @ApiOperation(
+            value = "AccessController::binance",
+            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
+    @GetMapping(
+            path = "/binance.json",
+            produces = "application/json; charset=utf-8")
+    public String binance() {
+        return invokeRestService.getBinanceInfo();
+    }
+    
 }

@@ -22,11 +22,10 @@ package io.kebblar.petstore.api.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.SmsResponse;
-import io.kebblar.petstore.api.support.InvokeRestService;
+import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 
 import java.security.SecureRandom;
 
@@ -41,18 +40,15 @@ import java.security.SecureRandom;
 @Service("smsService")
 public class SmsServiceImpl implements SmsService {
     private static final Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
-
-    private final Environment environment;
-    private final InvokeRestService invokeRestSMSService;
+    private final InvokeRemoteRestService invokeRestSMSService;
 
     /**
      * <p>Constructor for SmsServiceImpl.</p>
      *
      * @param environment a {@link org.springframework.core.env.Environment} object.
-     * @param invokeRestSMSService a {@link io.kebblar.petstore.api.support.InvokeRestService} object.
+     * @param invokeRestSMSService a {@link io.kebblar.petstore.api.support.InvokeRemoteRestService} object.
      */
-    public SmsServiceImpl(Environment environment, InvokeRestService invokeRestSMSService) {
-        this.environment=environment;
+    public SmsServiceImpl(InvokeRemoteRestService invokeRestSMSService) {
         this.invokeRestSMSService=invokeRestSMSService;
     }
 
@@ -60,9 +56,7 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public void envioSms(String numero, String msj) throws ProcessPDFException {
         logger.info("Inicia envio SMS");
-            String urlSMS= environment.getProperty( "app.sms.urlservice" );
-            String credential = environment.getProperty( "app.sms.credentials" );
-            SmsResponse responseSMS = invokeRestSMSService.smsSend(urlSMS, credential, "+52"+numero, msj);
+            SmsResponse responseSMS = invokeRestSMSService.smsSend("+52"+numero, msj);
             logger.info("Response: {}", responseSMS.isExito());
     }
 

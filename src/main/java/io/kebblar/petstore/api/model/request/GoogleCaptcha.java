@@ -30,9 +30,8 @@ public class GoogleCaptcha {
     // https://www.google.com/recaptcha/admin/site/315317938/settings
     // arellano.gustavo@gmail.com account
     /** Constant <code>GOOGLE_RECAPTCHA_VERIFY_URL="https://www.google.com/recaptcha/api/si"{trunked}</code> */
-    public static final String GOOGLE_RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
     /** Constant <code>GOOGLE_RECAPTCHA_SECRET_CODE="6LffEdkaAAAAAHjf_29VgTHm1RUIgvhnFOAGDN6"{trunked}</code> */
-    public static final String GOOGLE_RECAPTCHA_SECRET_CODE = "6LffEdkaAAAAAHjf_29VgTHm1RUIgvhnFOAGDN6q";
+    //public static final String GOOGLE_RECAPTCHA_SECRET_CODE = "6LffEdkaAAAAAHjf_29VgTHm1RUIgvhnFOAGDN6q";
     private String response;
     private String ip = "127.0.0.1";
 

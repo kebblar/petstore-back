@@ -10,7 +10,7 @@
  * Paquete:     io.kebblar.petstore.api.support
  * Proyecto:    petstore-back
  * Tipo:        Interface
- * Nombre:      InvokeRestService
+ * Nombre:      InvokeRemoteRestService
  * Autor:       Gustavo Adolfo Arellano (GAA)
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
@@ -26,13 +26,13 @@ import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 
 /**
- * <p>Definición de la interfaz de servicios para 'InvokeRestService'.
+ * <p>Definición de la interfaz de servicios para 'InvokeRemoteRestService'.
  *
  * @author  dalvarez
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public interface InvokeRestService {
+public interface InvokeRemoteRestService {
     /**
      * <p>Método utilizado para procesar validación por captcha
      *
@@ -43,21 +43,26 @@ public interface InvokeRestService {
     String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException;
 
     /**
-     * <p>getBitsoInfo2.</p>
+     * <p>getBitsoInfo.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    String getBitsoInfo2();
+    String getBitsoInfo();
+    
+    /**
+     * <p>getBinanceInfo.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    String getBinanceInfo();
 
     /**
      * <p>Método utilizado para envio de mensajes SMS
      *
      * @return SmsResponse que contiene la información de  respuesta del servicio.
      * @throws io.kebblar.petstore.api.model.exceptions.ProcessPDFException
-     * @param url a {@link java.lang.String} object.
-     * @param credential a {@link java.lang.String} object.
      * @param tel a {@link java.lang.String} object.
      * @param msj a {@link java.lang.String} object.
      */
-    SmsResponse smsSend(String url, String credential, String tel, String msj) throws ProcessPDFException;
+    SmsResponse smsSend(String tel, String msj) throws ProcessPDFException;
 }
