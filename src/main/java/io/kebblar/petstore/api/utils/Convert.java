@@ -38,7 +38,11 @@ public class Convert {
       * @return String cadena convertida
       * @param n a int.
       */
+    
      public String convertir(int n) {
+         return convertir2(n).replace("  ", " ").trim();
+     }
+     private String convertir2(int n) {
           if (n<0) return "MENOS "+convertir(-n);
           if (n>=0 && n<21) return UNIDADES[n];
           if (n>=21 && n<100) return DECENAS[(n/10)-2] + ((n%10)==0 || (n/10)-2==0 ? "" : "Y ") + convertir(n%10);

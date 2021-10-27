@@ -36,7 +36,7 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 
-import io.kebblar.petstore.api.model.exceptions.NegocioException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
@@ -44,7 +44,7 @@ import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
  *
  * <p>Implementación de la interfaz {@link AccessService}.</p>
  *
- * <p>Todos los métodos de esta clase disparan {@link NegocioException}</p>
+ * <p>Todos los métodos de esta clase disparan {@link CustomException}</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -78,7 +78,7 @@ public class AccessServiceImpl implements AccessService {
 
     /** {@inheritDoc} */
     @Override
-    public LoginResponse login(String usr, String clave) throws NegocioException {
+    public LoginResponse login(String usr, String clave) throws CustomException {
         logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
         this.valida(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
@@ -95,12 +95,12 @@ public class AccessServiceImpl implements AccessService {
             String claveProporcionada,
             long delta,
             int maximoNumeroIntentosConcedidos,
-            long instanteActual) throws NegocioException {
+            long instanteActual) throws CustomException {
         // Si el usuario NO es nulo, procederé a calcular sus roles y sus direcciones:
-        if(usuario==null) throw new NegocioException(BAD_CREDENTIALS);
+        if(usuario==null) throw new CustomException(BAD_CREDENTIALS);
 
         // Si el usuario fue encontrado, pero está inactivo, Notifica
-        if(!usuario.isActivo()) throw new NegocioException(DISABLED_USER);
+        if(!usuario.isActivo()) throw new CustomException(DISABLED_USER);
 
         // Calcula cuanto tiempo lleva bloqueado el usuario. Si lleva menos de lo establecido, Notifica
         long instanteDeBloqueo = usuario.getInstanteBloqueo();
@@ -109,7 +109,7 @@ public class AccessServiceImpl implements AccessService {
         if(instanteDeBloqueo>0 && restante>0) {
         	long totalSegundos = restante/1000;
         	long totalMinutos = totalSegundos/60;
-        	throw new NegocioException(WAIT_LOGIN, totalMinutos, totalSegundos%60);
+        	throw new CustomException(WAIT_LOGIN, totalMinutos, totalSegundos%60);
         }
 
         // Clave dada que debe ser validado contra el que está en la base de datos
@@ -125,12 +125,12 @@ public class AccessServiceImpl implements AccessService {
             if(numeroDeIntentosFallidos >= maximoNumeroIntentosConcedidos) {
                 usuario.setInstanteBloqueo(instanteActual);
                 this.update(usuario);
-                throw new NegocioException(MAX_FAILED_LOGIN_EXCEPTION, maximoNumeroIntentosConcedidos);
+                throw new CustomException(MAX_FAILED_LOGIN_EXCEPTION, maximoNumeroIntentosConcedidos);
             }
 
             // Si no se disparó la Notificación anterior, de todas formas notifica un intento
             // fallido de ingreso al sistema:
-            throw new NegocioException(BAD_CREDENTIALS, numeroDeIntentosFallidos, maximoNumeroIntentosConcedidos);
+            throw new CustomException(BAD_CREDENTIALS, numeroDeIntentosFallidos, maximoNumeroIntentosConcedidos);
 
         } else {
             // Credenciales CORRECTAS
@@ -158,18 +158,18 @@ public class AccessServiceImpl implements AccessService {
      * Método auxiliar que valida si se ingreso alguna credencial vacía.
      * @param usr corresponde al usuariuo de inicio de sesión.
      * @param clave corresponde a la clave de inicio de sesión.
-     * @throws NegocioException
+     * @throws CustomException
      */
-    private void valida(String usr, String clave) throws NegocioException {
-        if(usr.trim().length()<1 || clave.trim().length()<1) throw new NegocioException(BAD_CREDENTIALS);
+    private void valida(String usr, String clave) throws CustomException {
+        if(usr.trim().length()<1 || clave.trim().length()<1) throw new CustomException(BAD_CREDENTIALS);
     }
 
     /**
      * Método privado para actualizar la información de un usuario en el sistema.
      * @param usuario objeto usuario a actualizar.
-     * @throws NegocioException En caso que ocurra algún problema con la actualización.
+     * @throws CustomException En caso que ocurra algún problema con la actualización.
      */
-    private void update(Usuario usuario) throws NegocioException {
+    private void update(Usuario usuario) throws CustomException {
         usuarioService.actualizaUsuario(usuario);
     }
 
@@ -178,9 +178,9 @@ public class AccessServiceImpl implements AccessService {
      * @param idUsuario entero que representa al identificador único del usuario.
      * @param correo correo electrónico o usuario.
      * @return Regresa el objeto {@link UserFoundWrapper}, conjunto de la lista de roles, detalles e información interna de un usuario.
-     * @throws NegocioException En caso que el onjeto no pueda ser devuelto.
+     * @throws CustomException En caso que el onjeto no pueda ser devuelto.
      */
-    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws NegocioException {
+    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws CustomException {
         List<Rol> roles = usuarioService.obtenRolesDeUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = usuarioService.obtenDetallesDeUsuario(idUsuario);
         String jwt = jwtManagerService.createToken(correo);

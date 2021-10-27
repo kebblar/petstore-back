@@ -35,7 +35,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.kebblar.petstore.api.model.exceptions.NegocioException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 
@@ -131,9 +131,9 @@ public class JWTUtil {
      * @param jwt a {@link java.lang.String} object.
      * @param user a {@link java.lang.String} object.
      * @param encryptKey a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException
+     * @throws io.kebblar.petstore.api.model.exceptions.CustomException
      */
-    public void verifyToken(String jwt, String user, String encryptKey) throws NegocioException {
+    public void verifyToken(String jwt, String user, String encryptKey) throws CustomException {
         try {
             Claims claims = Jwts.parser()
                .setSigningKey(encryptKey.getBytes())
@@ -146,10 +146,10 @@ public class JWTUtil {
                 logger.info("IssuedAt: " + claims.getIssuedAt());
             }
             if(!user.equals(claims.getId())) {
-                throw new NegocioException(ISSUER_NOT_VERIFIED);
+                throw new CustomException(ISSUER_NOT_VERIFIED);
             }
         } catch(Exception e) {
-            throw new NegocioException(e, WRONG_TOKEN);
+            throw new CustomException(e, WRONG_TOKEN);
         }
     }
 
@@ -161,19 +161,19 @@ public class JWTUtil {
      * @param encryptKey a {@link java.lang.String} object.
      * @param ahorita a long.
      * @return Cadena con el ID contenido en un Token válido
-     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException
+     * @throws io.kebblar.petstore.api.model.exceptions.CustomException
      */
-    public String verifyToken(String jwt, String encryptKey, long ahorita) throws NegocioException {
+    public String verifyToken(String jwt, String encryptKey, long ahorita) throws CustomException {
         try {
             Claims claims = Jwts.parser()
                .setSigningKey(encryptKey.getBytes())
                .parseClaimsJws(jwt).getBody();
             long expiration = claims.getExpiration().getTime();
-            if(expiration < ahorita) throw new NegocioException(TOKEN_EXPIRED);
+            if(expiration < ahorita) throw new CustomException(TOKEN_EXPIRED);
             //showInfo(claims);
             return claims.getId();
         } catch(Exception e) {
-        	throw new NegocioException(e, WRONG_TOKEN);
+        	throw new CustomException(e, WRONG_TOKEN);
         }
     }
 
@@ -203,10 +203,10 @@ public class JWTUtil {
         // from: https://jwt.io/
         Base64.Decoder decoder = Base64.getDecoder();
         String[] chunks = token.split("\\.");
-        if(chunks.length<2) throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
+        if(chunks.length<2) throw new CustomException(TOKEN_INVALID_STRUCTURE, token);
         String payload = new String(decoder.decode(chunks[1]));
 
-        if(!payload.contains("\"exp\":")) throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
+        if(!payload.contains("\"exp\":")) throw new CustomException(TOKEN_INVALID_STRUCTURE, token);
         Long inst = 0L;
         String instante = "";
         for(String parte : payload.split(",")) {
@@ -215,9 +215,9 @@ public class JWTUtil {
                     instante = parte.substring(6, parte.length()-1)+"000";
                     inst = Long.parseLong(instante);
                 } catch(Exception e) {
-                    throw new NegocioException(TOKEN_INVALID_STRUCTURE, token);
+                    throw new CustomException(TOKEN_INVALID_STRUCTURE, token);
                 }
-                if (inst < currentTime) throw new NegocioException(TOKEN_EXPIRED);
+                if (inst < currentTime) throw new CustomException(TOKEN_EXPIRED);
             }
         }
     }
@@ -262,14 +262,14 @@ public class JWTUtil {
      * @param jwt a {@link java.lang.String} object.
      * @param encryptKey a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.NegocioException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.CustomException if any.
      */
-    public String getMail(String jwt, String encryptKey) throws NegocioException {
+    public String getMail(String jwt, String encryptKey) throws CustomException {
         Claims claim;
         try{
             claim = Jwts.parser().setSigningKey(encryptKey.getBytes()).parseClaimsJws(jwt).getBody();
         } catch (Exception e){
-            throw new NegocioException(e, TOKEN_INVALID_STRUCTURE, jwt);
+            throw new CustomException(e, TOKEN_INVALID_STRUCTURE, jwt);
         }
         return claim.getId();
     }

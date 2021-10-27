@@ -21,8 +21,6 @@
 package io.kebblar.petstore.api.utils;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * <p>LimpiaTest class.</p>
@@ -31,7 +29,6 @@ import org.mockito.junit.MockitoJUnitRunner;
  * @version $Id: $Id
  * @since 1.0
  */
-@RunWith(MockitoJUnitRunner.class)
 public class LimpiaTest {
 
     /**

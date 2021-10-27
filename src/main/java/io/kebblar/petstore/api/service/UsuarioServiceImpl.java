@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
-import io.kebblar.petstore.api.model.exceptions.NegocioException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.exceptions.RuleException;
 import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
@@ -140,11 +140,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario actualizaUsuario(Usuario usuario) throws NegocioException {
+    public Usuario actualizaUsuario(Usuario usuario) throws CustomException {
         try {
             usuarioMapper.update(usuario);
         } catch (SQLException e) {
-            throw new NegocioException(e, MAPPER_CALL, "Error al actualizar un usuario");
+            throw new CustomException(e, MAPPER_CALL, "Error al actualizar un usuario");
         }
         return usuario;
     }
@@ -182,21 +182,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario obtenUsuarioPorCorreo(String correo) throws NegocioException {
+    public Usuario obtenUsuarioPorCorreo(String correo) throws CustomException {
         try {
             return usuarioMapper.getByCorreo(correo);
         } catch (SQLException e) {
-            throw new NegocioException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Rol> obtenRolesDeUsuario(int id) throws NegocioException {
+    public List<Rol> obtenRolesDeUsuario(int id) throws CustomException {
         try {
             return rolMapper.getUserRoles(id);
         } catch (SQLException e) {
-            throw new NegocioException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
 
@@ -211,11 +211,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws NegocioException {
+    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException {
         try {
             return usuarioDetalleMapper.getById(id);
         } catch (SQLException e) {
-            throw new NegocioException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
         }
     }
 
@@ -288,7 +288,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return preRegistroHelper(preRegistro);
         } catch (SQLException e) {
-            throw new NegocioException(e, DATABASE, e.toString());
+            throw new CustomException(e, DATABASE, e.toString());
         }
     }
     
@@ -431,7 +431,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
         try {
             body = getTemplate(nick, randomString);
-        } catch (NegocioException e) {
+        } catch (CustomException e) {
             logger.error(e.toString());
         }
         this.mailSenderService.sendHtmlMail(correo, titulo, body);
@@ -445,14 +445,14 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
      * @throws BusinessException
      */
-    private Preregistro getPreregistroByRandomString(String token) throws NegocioException {
+    private Preregistro getPreregistroByRandomString(String token) throws CustomException {
         try {
             return this.registroMapper.getByRandomString(token);
         } catch (SQLException e) {
-            throw new NegocioException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
+            throw new CustomException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
         }
     }
-    private String getTemplate(String user, String randStr) throws NegocioException {
+    private String getTemplate(String user, String randStr) throws CustomException {
         String archivo = "public/mail/templateMail.html";
         try {
             // Accedemos al recurso
@@ -465,7 +465,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             template = template.replace("%TOKEN%",randStr);
             return template;
         } catch (IOException e) {
-            throw new NegocioException(e, INTERNAL_SERVER, "No se ha podido leer el archivo " + archivo);
+            throw new CustomException(e, INTERNAL_SERVER, "No se ha podido leer el archivo " + archivo);
         }
 
     }
