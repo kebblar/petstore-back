@@ -20,6 +20,9 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.model.domain.Consulta;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
@@ -193,6 +197,20 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public String binance() {
         return invokeRestService.getBinanceInfo();
+    }
+    
+    @ApiOperation(
+            value = "AccessController::consulta",
+            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
+    @GetMapping(
+            path = "/consulta.json",
+            produces = "application/json; charset=utf-8")
+    public List<Consulta> consulta() {
+    	List<Consulta> resultado = new ArrayList<>();
+    	resultado.add(new Consulta(3,1));
+    	resultado.add(new Consulta(0,1));
+    	resultado.add(new Consulta(1,3));
+        return resultado;
     }
     
 }
