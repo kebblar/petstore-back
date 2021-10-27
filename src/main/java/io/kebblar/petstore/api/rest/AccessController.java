@@ -20,7 +20,6 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -41,6 +40,7 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
+import io.kebblar.petstore.api.service.ConsultaService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 import io.swagger.annotations.ApiOperation;
@@ -69,6 +69,7 @@ public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
     private InvokeRemoteRestService invokeRestService;
+    private ConsultaService consultaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -79,10 +80,12 @@ public class AccessController {
     public AccessController(
             AccessService accessService,
             UsuarioService usuarioService,
-            InvokeRemoteRestService invokeRestService) {
+            InvokeRemoteRestService invokeRestService,
+            ConsultaService consultaService) {
         this.accessService = accessService;
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
+        this.consultaService = consultaService;
     }
 
     @ApiOperation(
@@ -206,11 +209,16 @@ public class AccessController {
             path = "/consulta.json",
             produces = "application/json; charset=utf-8")
     public List<Consulta> consulta() {
-    	List<Consulta> resultado = new ArrayList<>();
-    	resultado.add(new Consulta(3,1));
-    	resultado.add(new Consulta(0,1));
-    	resultado.add(new Consulta(1,3));
-        return resultado;
+        return consultaService.consulta();
     }
     
+    @ApiOperation(
+            value = "AccessController::guarda",
+            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
+    @PostMapping(
+            path = "/guarda.json",
+            produces = "application/json; charset=utf-8")
+    public List<Consulta> guarda(@RequestBody List<Consulta> datos) {
+        return consultaService.guarda(datos);
+    }    
 }
