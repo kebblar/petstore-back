@@ -20,11 +20,6 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
-import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * <p>Descripción:</p>
  * Excepción que modela la respuesta a una petición de autenticación cuyas
@@ -40,9 +35,7 @@ import org.slf4j.LoggerFactory;
  * @since 1.0-SNAPSHOT
  */
 public class MapperCallException extends BusinessException {
-
     private static final long serialVersionUID = -7083159020205284484L;
-    private static final Logger logger = LoggerFactory.getLogger(MapperCallException.class);
 
     /**
      * Brinda la oportunidad de especificar una breve descripción y un mensaje detallado a la
@@ -52,23 +45,17 @@ public class MapperCallException extends BusinessException {
      * @param technicalDescription Descripción específica
      */
     public MapperCallException(String shortMessage, String technicalDescription) {
-        super(
-            shortMessage,
-            buildMessage(technicalDescription),
-            1012,
-            "CVE_1012",
-            HttpStatus.BAD_REQUEST);
+        this(new Exception(), shortMessage, technicalDescription);
     }
-
-    /**
-     * Método auxiliar para dar formato
-     * @param technicalDescription descripción específica
-     * @return cadena con la descripción técnica construida
-     */
-    private static String buildMessage(String technicalDescription) {
-        String uid = UUID.randomUUID().toString();
-        logger.error("UID: {}. Desc: {}", uid, technicalDescription);
-        return "Codigo de error: " + uid;
+    
+    public MapperCallException(Throwable throwable, String shortMessage, String technicalDescription) {
+        super(
+            throwable,
+            shortMessage,
+            technicalDescription,
+            701,
+            throwable.getMessage(),
+            EnumMessage.DATABASE.getHttpStatus());
     }
 
 }
