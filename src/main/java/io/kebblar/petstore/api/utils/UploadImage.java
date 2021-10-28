@@ -55,7 +55,6 @@ public class UploadImage {
     private int imagenAltura;
     UploadService uploadService;
 
-    //TODO: test this class
     public UploadImage() {
         this.uploadService = new UploadServiceImpl();
     }

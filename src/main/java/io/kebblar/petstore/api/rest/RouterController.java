@@ -50,7 +50,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @Api(value = "router")
 @RequestMapping(value = "/")
-//TODO: clase que tambien tiene algunos m'etodos extranos
 public class RouterController {
 
     private final RemoteRestCallService remoteRestCallService;
