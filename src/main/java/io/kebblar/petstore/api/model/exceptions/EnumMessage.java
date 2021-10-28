@@ -131,8 +131,8 @@ public enum EnumMessage {
 
     WAIT_LOGIN(
     		1015,
-    		"Tiempo de espera para eliminar el bloqueo",
-    		"%d minutos %d segundos",
+    		"Usuario bloqueado",
+    		"Tiempo de espera para eliminar el bloqueo %d minutos %d segundos",
     		HttpStatus.UNAUTHORIZED),
     
     ISSUER_NOT_VERIFIED(
