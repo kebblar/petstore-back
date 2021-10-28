@@ -110,7 +110,7 @@ public class EstadoController {
             value = "EstadoController::getByPais",
             notes = "Regresa los estados de determinado país")
     @GetMapping(
-            value = "/estado-por-pais/{id}.json",
+            value = "/estados/pais/{id}.json",
             produces = "application/json; charset=utf-8")
     public List<Estado> getByPais(
             @ApiParam(name = "id", value = "Representa el id del pais")
@@ -167,25 +167,5 @@ public class EstadoController {
             @ApiParam(name = "idPais", value = "Pais seleccionado", defaultValue = "1") @PathVariable int idPais) throws ControllerException {
         return this.estadoService.getByNombre(nombre, idPais);
     }
-
-    @GetMapping(
-        path = "/estados/pais/{id}.json",
-        produces = "application/json; charset=utf-8")
-    public List<Estado> getEstadosbyPais(
-            @ApiParam(name = "id", value = "ID del Estado", defaultValue = "1")
-            @PathVariable int id
-            ) throws ControllerException {
-        return this.estadoService.getEstadosByPais(id);
-    }
-
-    @ApiOperation(
-            value = "EstadoController::getAllNombrePais",
-            notes = "Regresa una lista de todos los objetos Estado ")
-        @GetMapping(
-            value = "/estados-nombre-pais.json",
-            produces = "application/json; charset=utf-8")
-        public List<Estado> getAllEstadosNombrePAis() throws ControllerException {
-            return estadoService.getAllNombrePais();
-        }
 
 }

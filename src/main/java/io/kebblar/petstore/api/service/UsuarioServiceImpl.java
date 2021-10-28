@@ -45,14 +45,9 @@ import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
-import io.kebblar.petstore.api.model.exceptions.InternalServerException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.exceptions.RuleException;
-import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
-import io.kebblar.petstore.api.model.exceptions.TokenExpiredException;
-import io.kebblar.petstore.api.model.exceptions.TokenNotExistException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
 import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
 import io.kebblar.petstore.api.model.exceptions.UserNotExistsException;
@@ -97,7 +92,6 @@ public class UsuarioServiceImpl implements UsuarioService {
      *
      * @param usuarioMapper a {@link io.kebblar.petstore.api.mapper.UsuarioMapper} object.
      * @param rolMapper a {@link io.kebblar.petstore.api.mapper.RolMapper} object.
-     * @param direccionMapper a {@link io.kebblar.petstore.api.mapper.DireccionMapper} object.
      * @param usuarioDetalleMapper a {@link io.kebblar.petstore.api.mapper.UsuarioDetalleMapper} object.
      * @param registroMapper a {@link io.kebblar.petstore.api.mapper.RegistroMapper} object.
      * @param mailSenderService a {@link io.kebblar.petstore.api.support.MailSenderService} object.
@@ -225,7 +219,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             return preRegistroHelper(preRegistroRequest);
         } catch (SQLException e) {
-            throw new DatabaseException(e.toString());
+            throw new MapperCallException("Error en el registro del nuevo usuario", e.toString());
         }
     }
     
@@ -293,9 +287,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
     
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
-            StrengthPasswordValidatorException,
-            InternalServerException,
-            UserAlreadyExistsException,
+            BusinessException,
             SQLException {
         // Quitale los caracteres raros al teléfono.
         String nuevoCel = StringUtils.limpia(preRegistroRequest.getTelefono());
@@ -359,12 +351,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         Preregistro preregistro = getPreregistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
-        if(preregistro==null) throw new TokenNotExistException();
+        if(preregistro==null) throw new CustomException(TOKEN_NOT_EXIST);
 
         // Si ya expiró el token, notifica el error:
         long age = System.currentTimeMillis()-preregistro.getInstanteRegistro();
         if(age>delta) { // token expirado
-            throw new TokenExpiredException();
+            throw new CustomException(TOKEN_EXPIRED);
         }
 
         // Si la clave no es la misma, notifica el error:
@@ -443,7 +435,7 @@ public class UsuarioServiceImpl implements UsuarioService {
      *
      * @param token proporcionado por correo al momento del registro.
      * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
-     * @throws BusinessException
+     * @throws CustomException if any
      */
     private Preregistro getPreregistroByRandomString(String token) throws CustomException {
         try {
@@ -495,14 +487,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         ValidadorClave.validate(clave);
         long unaHora = 1000*60*60L;
         Usuario usuario = usuarioMapper.getByToken(token);
-        if(usuario==null) throw new TokenNotExistException();
+        if(usuario==null) throw new CustomException(TOKEN_NOT_EXIST);
         long remaining = System.currentTimeMillis()-usuario.getRegeneraClaveInstante();
         if(remaining<unaHora) {
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
             usuarioMapper.confirmaRegeneraClave(token, claveHash);
             return usuarioMapper.getByToken(token);
         } else {
-            throw new TokenExpiredException();
+            throw new CustomException(TOKEN_EXPIRED);
         }
     }
 
@@ -528,7 +520,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioMapper.update(usuario);
             return usuario;
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al modificar la clave", e.getMessage());
         }
     }
 
@@ -541,7 +533,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDetalleMapper.update(usuarioDetalle);
             return usuarioDetalle;
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error actualizando los datos del usuario", e.getMessage());
         }
     }
 

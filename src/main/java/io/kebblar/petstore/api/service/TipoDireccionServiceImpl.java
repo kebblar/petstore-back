@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.TipoDireccion;
 import io.kebblar.petstore.api.mapper.TipoDireccionMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.TipoDireccionService}.
@@ -45,7 +45,7 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 public class TipoDireccionServiceImpl implements TipoDireccionService {
     private static final Logger logger = LoggerFactory.getLogger(TipoDireccionServiceImpl.class);
 
-    private TipoDireccionMapper tipoDireccionMapper;
+    private final TipoDireccionMapper tipoDireccionMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -64,7 +64,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         try {
             return tipoDireccionMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener el tipo de dirección: "+id, e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         try {
             return tipoDireccionMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar la lista de tipo dirección", e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         try {
             return tipoDireccionMapper.insert(tipoDireccion);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al insertar un nuevo tipo de dirección "+tipoDireccion.getNombre(), e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         try {
             return tipoDireccionMapper.update(tipoDireccion);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
         try {
             return tipoDireccionMapper.delete(tipoDireccion.getId());
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al borrar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
                 return tipoDireccionMapper.update(tipoDireccion);
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 

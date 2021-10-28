@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
@@ -42,9 +43,9 @@ public interface UsuarioService {
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
      *
-     * @param Objeto de tipo {@link CredencialesRequest} con la información de su correo y su clave.
+     * @param cred de tipo {@link CredencialesRequest} con la información de su correo y su clave.
      * @return Objeto de tipo {@link Usuario} que es creado.
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario creaUsuario(CredencialesRequest cred) throws BusinessException;
 
@@ -52,9 +53,9 @@ public interface UsuarioService {
      * <p>Crea un objeto de tipo {@link Usuario} a partir del nuevo
      * usuario dado usando como pivote su id.
      *
-     * @param Objeto de tipo {@link Usuario} con la información a insertar.
+     * @param usuario de tipo {@link Usuario} con la información a insertar.
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario creaUsuario(Usuario usuario) throws BusinessException;
 
@@ -62,9 +63,9 @@ public interface UsuarioService {
      * <p>Actualiza un objeto de tipo {@link Usuario} a partir del nuevo
      * usuario dado usando como pivote su id.
      *
-     * @param Objeto de tipo {@link Usuario} con la información a actualizar.
+     * @param usuario de tipo {@link Usuario} con la información a actualizar.
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws CustomException
+     * @throws CustomException if any
      */
     Usuario actualizaUsuario(Usuario usuario) throws CustomException;
 
@@ -73,7 +74,7 @@ public interface UsuarioService {
      *
      * @param id Entero asociado a un usuario específico.
      * @return Objeto de tipo {@link Usuario}.
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario obtenUsuarioPorId(int id) throws BusinessException;
 
@@ -82,9 +83,9 @@ public interface UsuarioService {
      * tipo {@link Usuario} a partir del ID dado. Adicionalmente,
      * retorna el objeo eleiminado.
      *
-     * @param Entero con el ID de un usuario específico.
+     * @param id con el ID de un usuario específico.
      * @return Objeto de tipo {@link Usuario} dado originalmente.
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario eliminaUsuario(int id) throws BusinessException;
 
@@ -93,7 +94,7 @@ public interface UsuarioService {
      *
      * @param correo Cadena que contiene el correo de un usuario específico.
      * @return Objeto de tipo {@link Usuario}.
-     * @throws CustomException
+     * @throws CustomException if any
      */
     Usuario obtenUsuarioPorCorreo(String correo) throws CustomException;
 
@@ -103,7 +104,7 @@ public interface UsuarioService {
      * <p>Si ocurre algún error en su recuperación, se dispara la excepción
      * de tipo: {@link BusinessException}.
      * @return Lista de objetos de tipo {@link Usuario}.
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     List<Usuario> obtenTodosUsuarios() throws BusinessException;
 
@@ -115,39 +116,39 @@ public interface UsuarioService {
      * de tipo: {@link BusinessException}.
      * @param id Entero asociado a un usuario específico
      * @return Lista de objetos de tipo {@link Rol}.
-     * @throws CustomException
+     * @throws CustomException if any
      */
     List<Rol> obtenRolesDeUsuario(int id) throws CustomException;
 
-    /**
-     * <p>Retorna una lista de objetos de tipo {@link Direccion} que están
-     * asociadas a un usuario específico identificado por su ID.
-     * <p>Si el usuario no tiene direcciones asociadas, regresa una lista vacía.
-     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-     * de tipo: {@link BusinessException}.
-     * @param id Entero asociado a un usuario específico
-     * @return Lista de objetos de tipo {@link Direccion}.
-     * @throws BusinessException
-     */
-    //List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
+//    /**
+//     * <p>Retorna una lista de objetos de tipo {@link Direccion} que están
+//     * asociadas a un usuario específico identificado por su ID.
+//     * <p>Si el usuario no tiene direcciones asociadas, regresa una lista vacía.
+//     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
+//     * de tipo: {@link BusinessException}.
+//     * @param id Entero asociado a un usuario específico
+//     * @return Lista de objetos de tipo {@link Direccion}.
+//     * @throws BusinessException if any
+//     */
+//    List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
 
     /**
      * <p>Retorna los detalles de un usuario cuyo ID es dado como parámetro formal.
-     * <p>En caso de que no sea posile obtener sus detalles, se dispara una
+     * <p>En caso de que no sea posible obtener sus detalles, se dispara una
      * excepción de tipo {@link BusinessException}.
      *
      * @param id Entero asociado a un usuario específico
      * @return Objeto {@link UsuarioDetalle}
-     * @throws CustomException
+     * @throws CustomException if any
      */
     UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
 
     /**
      * Realiza el preregistro de un potencial usuario al sistema
      *
-     * @param preRegistroRequest
+     * @param preRegistroRequest conjunto de datos a registrar como un usuario.
      * @return Preregistro mismo objeto recibido
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException;
 
@@ -155,10 +156,10 @@ public interface UsuarioService {
      * Similar a preRegistro. La diferencia es que PreregistroRequest no tiene Date y a cambio,
      * tiene tres campos numéricos: year, month y day
      *
-     * @param preRegistroRequest
+     * @param preRegistroRequest conjunto de datos a registrar como un usuario.
      * @return Retorna la estructura de datos que recive transformada en un objeto de tipo Preregistro
      *
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException;
 
@@ -167,7 +168,7 @@ public interface UsuarioService {
      *
      * @param token Cadena con la clave de confirmación del registro
      * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario confirmaPreregistro(String token) throws BusinessException;
 
@@ -175,19 +176,19 @@ public interface UsuarioService {
      * Solicita la regeneración de una clave perdida u olvidada
      *
      * @param correo String asociado a la clave olvidada
-     * @return
-     * @throws BusinessException
+     * @return objeto de la clase {@link Usuario}
+     * @throws BusinessException if any
      */
-    Usuario solicitaRegeneracionClave(String correo);
+    Usuario solicitaRegeneracionClave(String correo) throws BusinessException;
 
     /**
-     * Confirma la regeneracion de una nueva clave a un usuario
+     * Confirma la regeneración de una nueva clave a un usuario
      *
      * @param token String asociado a un usuario
      * @param clave Nueva clave
      *
      * @return Usuario asignado
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException;
 
@@ -195,9 +196,9 @@ public interface UsuarioService {
      * Cambia la clave de un usuario por la que de proporciona
      *
      * @param correo Correo asociado al usuario
-     * @param clave Nueva clave entexto plano
+     * @param clave Nueva clave en texto plano
      * @return el objeto de tipo Usuario con la clave cambiada
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     Usuario cambiaClave(String correo, String clave) throws BusinessException;
 
@@ -206,7 +207,7 @@ public interface UsuarioService {
      *
      * @param usuarioDetalle Información a ser actualizada
      * @return Información actualizada
-     * @throws BusinessException
+     * @throws BusinessException if any
      */
     UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 }

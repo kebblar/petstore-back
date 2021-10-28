@@ -20,10 +20,12 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.nio.BufferOverflowException;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -98,7 +100,7 @@ public class AccessController {
     public LoginResponse login(
             @ApiParam(name="cred", value="Representa las credenciales (usuario y clave) " +
                     "de quien intenta ingresar al sistema")
-            @RequestBody CredencialesRequest cred) throws ControllerException {
+            @RequestBody CredencialesRequest cred) throws BusinessException {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
@@ -110,7 +112,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
-            @RequestBody Preregistro preRegistroRequest) throws ControllerException {
+            @RequestBody Preregistro preRegistroRequest) throws BusinessException {
         return this.usuarioService.preRegistro(preRegistroRequest);
     }
 
@@ -122,7 +124,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro2(
             @ApiParam(name = "preRegistroRequest", value = "Información con el detalle de un Usuario")
-            @RequestBody @Valid PreregistroRequest preRegistroRequest) throws ControllerException {
+            @RequestBody @Valid PreregistroRequest preRegistroRequest) throws BusinessException {
         return this.usuarioService.preRegistro2(preRegistroRequest);
     }
 
@@ -134,7 +136,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public String checkCaptcha(
             @ApiParam(name = "googleCaptcha", value = "Google Captcha V2.0")
-            @RequestBody GoogleCaptcha googleCaptcha) throws ControllerException {
+            @RequestBody GoogleCaptcha googleCaptcha) throws BusinessException {
         return invokeRestService.checkCaptcha(googleCaptcha);
     }
 
@@ -148,7 +150,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
-            @RequestParam String token) throws ControllerException {
+            @RequestParam String token) throws BusinessException {
         return usuarioService.confirmaPreregistro(token);
     }
 
@@ -162,7 +164,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Usuario regeneraClave(
             @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
-            @RequestParam String correo){
+            @RequestParam String correo) throws BusinessException {
         // pase lo que pase esté endpoint siempre regresa algo "bueno", para no alentar el "enumeration atack"
         return usuarioService.solicitaRegeneracionClave(correo);
     }
@@ -178,7 +180,7 @@ public class AccessController {
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token,
             @ApiParam(name = "clave", value = "Nueva clave a actualizar")
-            @RequestParam String clave) throws ControllerException {
+            @RequestParam String clave) throws BusinessException {
         return usuarioService.confirmaRegeneraClave(token, clave);
     }
 

@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * Servicio asociado a la entidad 'rol'.
@@ -49,7 +49,7 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 public class RolServiceImpl implements RolService {
     private static final Logger logger = LoggerFactory.getLogger(RolServiceImpl.class);
 
-    private RolMapper rolMapper;
+    private final RolMapper rolMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -67,7 +67,7 @@ public class RolServiceImpl implements RolService {
         try {
             return rolMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener el rol "+id, e.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class RolServiceImpl implements RolService {
         try {
             return rolMapper.getAllSinFiltros();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener la lista de roles", e.getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class RolServiceImpl implements RolService {
         try {
             return rolMapper.insert(rol);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al insertar un nuevo rol "+rol.getNombre(), e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class RolServiceImpl implements RolService {
         try {
             return rolMapper.update(rol);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ public class RolServiceImpl implements RolService {
         try {
             return rolMapper.delete(rol.getId());
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al borrar el rol "+rol.getNombre(), e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ public class RolServiceImpl implements RolService {
                 return rolMapper.update(rol);
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
         }
     }
 

@@ -20,8 +20,7 @@
  */
 package io.kebblar.petstore.api.support;
 
-import io.kebblar.petstore.api.model.exceptions.GoogleCaptchaException;
-import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 
@@ -40,7 +39,7 @@ public interface InvokeRemoteRestService {
      * @throws io.kebblar.petstore.api.model.exceptions.GoogleCaptchaException
      * @param googleCaptcha a {@link io.kebblar.petstore.api.model.request.GoogleCaptcha} object.
      */
-    String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException;
+    String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException;
 
     /**
      * <p>getBitsoInfo.</p>
@@ -64,5 +63,5 @@ public interface InvokeRemoteRestService {
      * @param tel a {@link java.lang.String} object.
      * @param msj a {@link java.lang.String} object.
      */
-    SmsResponse smsSend(String tel, String msj) throws ProcessPDFException;
+    SmsResponse smsSend(String tel, String msj) throws BusinessException;
 }

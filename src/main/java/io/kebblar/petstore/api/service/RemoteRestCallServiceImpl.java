@@ -34,7 +34,7 @@ import java.math.RoundingMode;
 @Service
 public class RemoteRestCallServiceImpl implements RemoteRestCallService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public RemoteRestCallServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -53,22 +53,20 @@ public class RemoteRestCallServiceImpl implements RemoteRestCallService {
     @Override
     public String convierte() {
         String url = "https://api.bitso.com/v3/ticker/?book=btc_mxn";
-        RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "curl");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
         return restTemplate.postForObject(url, entity, String.class);
-     //   return "abc";
     }
 
     @Override
-    public MontoBitcoin getMonto(double monto) {
+    public MontoBitcoin getMonto(double monto, int decimas) {
         String claseMonto = convierte();
         int loc = claseMonto.indexOf("last");
         double price = Double.parseDouble(claseMonto.substring(loc).split("\"")[2]);
-        return new MontoBitcoin(round(monto/price,5), price);
+        return new MontoBitcoin(round(monto/price,decimas), price);
     }
 
     /**

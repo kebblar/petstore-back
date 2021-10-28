@@ -36,9 +36,10 @@ public interface EstadoService {
     /**
      * Método utilizado para recuperar un elemento de la tabla 'estado'. por medio de su llave primaria.
      *
-     * @param id Id del objeto buscado
+     * @param id Id del objeto buscado.
      * @return La información del elemento recuperado en una instacia de la clase Estado
      * o nulo si no se encuentra ese elemento en la tabla.
+     * @throws BusinessException cuando hay un error en la recuperación de la dirección.
      */
     Estado getById(int id) throws BusinessException;
 
@@ -46,6 +47,7 @@ public interface EstadoService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
      *
      * @return Lista con todos los elementos de la tabla 'estado'.
+     * @throws BusinessException cuando ocurre un problema al recuperar los estados.
      */
     List<Estado> getAll() throws BusinessException;
 
@@ -54,7 +56,7 @@ public interface EstadoService {
      *
      * @param estado objeto de tipo 'Estado'.
      * @return int numero de registros insertados en la tabla'estado'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int insert(Estado estado) throws BusinessException;
 
@@ -63,7 +65,7 @@ public interface EstadoService {
      *
      * @param  estado objeto de tipo 'Estado'.
      * @return int numero de registros actualizados en la tabla'estado'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int update(Estado estado) throws BusinessException;
 
@@ -72,7 +74,7 @@ public interface EstadoService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param estado Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws BusinessException En caso un error al momento de guardar los datos.
      */
     int save(Estado estado) throws BusinessException;
 
@@ -81,7 +83,7 @@ public interface EstadoService {
      *
      * @param estado objeto de tipo 'Estado'.
      * @return int numero de registros eliminados en la tabla'estado'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int delete(Estado estado) throws BusinessException;
 
@@ -101,19 +103,6 @@ public interface EstadoService {
      */
     List<Estado> getByNombre(String nombre, int idPais) throws BusinessException;
 
-    /**
-     * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su pais.
-     *
-     * @param id Id de Pais.
-     * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
-     */
-    List<Estado> getEstadosByPais(int id) throws BusinessException;
 
-    /**
-     * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
-     *
-     * @return Lista con todos los elementos de la tabla 'estado'.
-     */
-    List<Estado> getAllNombrePais() throws BusinessException;
 
 }

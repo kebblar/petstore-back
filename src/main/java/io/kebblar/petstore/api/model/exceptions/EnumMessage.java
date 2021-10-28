@@ -145,7 +145,26 @@ public enum EnumMessage {
     		1017,
     		"Token erróneo",
     		"El token proporcionado es erróneo",
-    		HttpStatus.UNAUTHORIZED);
+    		HttpStatus.UNAUTHORIZED),
+
+	PDF_GENERATION(
+			907,
+			"Error al generar el documento PDF",
+			"%s",
+			HttpStatus.BAD_REQUEST
+	),
+
+	FILE_MAX_UPLOAD(
+			908,
+			"Error en la carga de archivos al sistema",
+			"El archivo tiene un tamaño de %d, la talla máxima es de %d",
+			HttpStatus.BAD_REQUEST),
+
+	NOT_VALID_IMAGE(
+			909,
+			"Error en la carga de archivos al sistema",
+			"Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi",
+			HttpStatus.BAD_REQUEST);
     
 /** ************************************************************ **/
 /** ************************************************************ **/

@@ -180,20 +180,20 @@ public class TestUsuarioService {
         } try {
             when(usuarioMapper.getByToken("xxx")).thenReturn(null);
             usuarioService.confirmaRegeneraClave("xxx", "Clave1234$#");
-        } catch (TokenNotExistException d) {
+        } catch (CustomException d) {
             assertTrue(true);
         } try {
             when(usuarioMapper.getByToken("xxx")).thenReturn(usuario1);
             usuario1.setRegeneraClaveInstante(System.currentTimeMillis() - (60000 * 80L));
             usuarioService.confirmaRegeneraClave("xxx", "Clave12213#");
-        } catch (TokenExpiredException e) {
+        } catch (CustomException e) {
             assertTrue(true);
         } try {
             when(usuarioMapper.getByToken("xxx")).thenReturn(usuario1);
             when(usuarioMapper.confirmaRegeneraClave(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(1);
             usuario1.setRegeneraClaveInstante(System.currentTimeMillis()-60000);
             assertEquals(usuario1, usuarioService.confirmaRegeneraClave("xxx", "Clave1234$#"));
-        } catch (TokenExpiredException t) {
+        } catch (CustomException t) {
             logger.error("esto no pasa");
         }
     }
@@ -224,7 +224,7 @@ public class TestUsuarioService {
         } try {
             when(usuarioDetalleMapper.update(usuarioDetalle)).thenThrow(SQLException.class);
             usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
-        } catch (DatabaseException d) {
+        } catch (MapperCallException d) {
             assertTrue(true);
         }
     }
@@ -273,7 +273,7 @@ public class TestUsuarioService {
         try {
             preregistro.setClaveHash("xxx");
             usuarioService.preRegistro2(preregistro);
-        } catch (StrengthPasswordValidatorException D) {
+        } catch (CustomException D) {
             assertTrue(true);
         }
         try {
@@ -289,7 +289,7 @@ public class TestUsuarioService {
         try {
             when(usuarioMapper.getByCorreo("abc@gmail.com")).thenThrow(SQLException.class);
             usuarioService.preRegistro(p);
-        } catch (DatabaseException d) {
+        } catch (MapperCallException d) {
             assertTrue(true);
         }
     }
@@ -299,7 +299,7 @@ public class TestUsuarioService {
         try {
             when(registroMapper.getByRandomString("xxx")).thenReturn(null);
             usuarioService.confirmaPreregistro("xxx");
-        }catch (TokenNotExistException t) {
+        }catch (CustomException t) {
             assertTrue(true);
         } try {
             when(registroMapper.getByRandomString("454")).thenThrow(SQLException.class);
@@ -310,7 +310,7 @@ public class TestUsuarioService {
             when(registroMapper.getByRandomString("xxx")).thenReturn(p);
             p.setInstanteRegistro(800);
             usuarioService.confirmaPreregistro("xxx");
-        } catch (TokenExpiredException t) {
+        } catch (CustomException t) {
             assertTrue(true);
         } try {
             when(registroMapper.getByRandomString("xx")).thenReturn(p);

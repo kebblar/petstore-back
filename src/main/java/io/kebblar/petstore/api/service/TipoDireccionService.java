@@ -56,7 +56,7 @@ public interface TipoDireccionService {
      *
      * @param tipoDireccion objeto de tipo 'TipoDireccion'.
      * @return int numero de registros insertados en la tabla'tipo_direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int insert(TipoDireccion tipoDireccion) throws BusinessException;
 
@@ -65,7 +65,7 @@ public interface TipoDireccionService {
      *
      * @param  tipoDireccion objeto de tipo 'TipoDireccion'.
      * @return int numero de registros actualizados en la tabla'tipo_direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int update(TipoDireccion tipoDireccion) throws BusinessException;
 
@@ -74,7 +74,7 @@ public interface TipoDireccionService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param tipoDireccion Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws BusinessException En caso un error al momento de guardar los datos.
      */
     int save(TipoDireccion tipoDireccion) throws BusinessException;
 
@@ -83,7 +83,7 @@ public interface TipoDireccionService {
      *
      * @param tipoDireccion objeto de tipo 'TipoDireccion'.
      * @return int numero de registros eliminados en la tabla'tipo_direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int delete(TipoDireccion tipoDireccion) throws BusinessException;
 

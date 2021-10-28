@@ -20,6 +20,7 @@
  */
 package io.kebblar.petstore.api.support;
 
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -27,7 +28,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MailException;
 
 import java.io.File;
 import java.util.concurrent.Executors;
@@ -38,6 +38,8 @@ import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.SEND_MAIL;
 
 /**
  * <p>
@@ -54,16 +56,16 @@ public class MailSenderServiceImpl implements MailSenderService {
     private static final String ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD = "error in mail service sendHtmlMail method {}";
 
     /** logger. */
-    private Logger logger = LoggerFactory.getLogger(MailSenderServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(MailSenderServiceImpl.class);
 
     /** java mail sender. */
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     /** Constante NUM_QUICK_SERVICE_THREADS. */
     public static final int NUM_QUICK_SERVICE_THREADS = 20;
 
     /** quick service. */
-    private ScheduledExecutorService quickService = Executors
+    private final ScheduledExecutorService quickService = Executors
             .newScheduledThreadPool(NUM_QUICK_SERVICE_THREADS);
 
     /**
@@ -117,7 +119,7 @@ public class MailSenderServiceImpl implements MailSenderService {
             javaMailSender.send(mail);
             return "";
         } catch (MessagingException me) {
-            throw new MailException(me);
+            throw new CustomException(SEND_MAIL);
         }
     }
 
@@ -135,7 +137,6 @@ public class MailSenderServiceImpl implements MailSenderService {
             javaMailSender.send(mail);
             return "";
         } catch (MessagingException me) {
-            logger.error(ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD, me.getMessage());
             return ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD;
         }
     }

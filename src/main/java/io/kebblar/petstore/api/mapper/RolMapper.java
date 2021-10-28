@@ -66,7 +66,8 @@ public interface RolMapper {
      * @return Lista de roles asociados a esta cuenta
      * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
-    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
+    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} " +
+            "and rol.id=usuario_rol.id_rol and rol.activo=true;")
     List<Rol> getUserRoles(int idUser) throws SQLException;
 
     /**

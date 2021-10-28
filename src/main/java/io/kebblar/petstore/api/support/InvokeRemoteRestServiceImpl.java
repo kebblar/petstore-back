@@ -20,6 +20,7 @@
  */
 package io.kebblar.petstore.api.support;
 
+import io.kebblar.petstore.api.model.exceptions.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -28,11 +29,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import io.kebblar.petstore.api.model.exceptions.GoogleCaptchaException;
-import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.SmsRequest;
 import io.kebblar.petstore.api.model.response.SmsResponse;
+
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.GOOGLE_CAPTCHA;
 
 /**
  * Implementación de la interfaz {@link io.kebblar.petstore.api.support.InvokeRemoteRestService}.
@@ -43,7 +44,7 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
  */
 @Service("invokeRestService")
 public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     
     @Value("${bitso}")
     private String bitso; // loading something like https://api.bitso.com/v3/
@@ -81,10 +82,9 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
         String url = this.bitso + "ticker/?book=btc_mxn";
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "curl");     //"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         return restTemplate.postForObject(url, entity, String.class);
         // https://stackoverflow.com/questions/16781680/http-get-with-headers-using-resttemplate
-        //return restTemplate.exchange(smsUrl, HttpMethod.GET, entity, String.class).getBody();
     }
     
     /**
@@ -99,15 +99,14 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
     
     /** {@inheritDoc} */
     @Override
-    public String checkCaptcha(GoogleCaptcha googleCaptcha) throws GoogleCaptchaException {
+    public String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException {
         try {
-            String result = genericChecker(
+            return genericChecker(
                     googleRecaptchaUrl,
                     googleRecaptchaSecret,
                     googleCaptcha.getResponse());
-            return result;
         } catch (RestClientException e) {
-            throw new GoogleCaptchaException(e);
+            throw new CustomException(GOOGLE_CAPTCHA);
         }
     }
 
@@ -120,7 +119,6 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
         redirectUrl.append(response);
         redirectUrl.append("&remoteip=127.0.0.1");
 
-        //RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/x-www-form-urlencoded");
         String body = ""; // No recibe nada en su body... lo manda como parámetros en el smsUrl
@@ -130,7 +128,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
 
     /** {@inheritDoc} */
     @Override
-    public SmsResponse smsSend(String tel, String msj) throws ProcessPDFException {
+    public SmsResponse smsSend(String tel, String msj) throws BusinessException {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -141,7 +139,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
             SmsResponse resp= result.getBody();
             return resp;
         } catch (Exception e) {
-            throw new ProcessPDFException(e);
+            throw new CustomException(EnumMessage.PDF_GENERATION, e.getCause());
         }
     }
 }

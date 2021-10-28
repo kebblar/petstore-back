@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
@@ -47,7 +47,7 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 @Service("estadoService")
 public class EstadoServiceImpl implements EstadoService {
     private static final Logger logger = LoggerFactory.getLogger(EstadoServiceImpl.class);
-    private EstadoMapper estadoMapper;
+    private final EstadoMapper estadoMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -66,7 +66,7 @@ public class EstadoServiceImpl implements EstadoService {
         try {
             return estadoMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar el estado con el id "+id,e.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class EstadoServiceImpl implements EstadoService {
         try {
             return estadoMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar la lista de estados", e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class EstadoServiceImpl implements EstadoService {
         try {
             return estadoMapper.insert(estado);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al insertar el estado "+estado.getNombre(), e.getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ public class EstadoServiceImpl implements EstadoService {
         try {
             return estadoMapper.update(estado);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ public class EstadoServiceImpl implements EstadoService {
         try{
             return estadoMapper.getByPais(id);
         }catch (SQLException e){
-            throw new BusinessException(e);
+            throw new BusinessException("Error en obtener los estados asociados al pais "+id, e.getMessage());
         }
     }
 
@@ -130,7 +130,7 @@ public class EstadoServiceImpl implements EstadoService {
                 return estadoMapper.update(estado);
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
         }
     }
 
@@ -144,28 +144,8 @@ public class EstadoServiceImpl implements EstadoService {
                 return estadoMapper.getByNombre(nombre);
             }
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar el estado "+nombre, e.getMessage());
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
-        try {
-            return estadoMapper.getEstadosByPais(idPais);
-        } catch (Exception e) {
-            throw new DatabaseException(e);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public List<Estado> getAllNombrePais() throws BusinessException {
-        try {
-            return estadoMapper.getAllNombrePais();
-        } catch (SQLException e) {
-            throw new DatabaseException(e);
-        }
-    }
+    }    
 
 }
