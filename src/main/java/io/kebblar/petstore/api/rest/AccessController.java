@@ -20,10 +20,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Consulta;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
@@ -40,7 +36,6 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
-import io.kebblar.petstore.api.service.ConsultaService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 import io.swagger.annotations.ApiOperation;
@@ -69,7 +64,6 @@ public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
     private InvokeRemoteRestService invokeRestService;
-    private ConsultaService consultaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -80,12 +74,10 @@ public class AccessController {
     public AccessController(
             AccessService accessService,
             UsuarioService usuarioService,
-            InvokeRemoteRestService invokeRestService,
-            ConsultaService consultaService) {
+            InvokeRemoteRestService invokeRestService) {
         this.accessService = accessService;
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
-        this.consultaService = consultaService;
     }
 
     @ApiOperation(
@@ -201,24 +193,5 @@ public class AccessController {
     public String binance() {
         return invokeRestService.getBinanceInfo();
     }
-    
-    @ApiOperation(
-            value = "AccessController::consulta",
-            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
-    @GetMapping(
-            path = "/consulta.json",
-            produces = "application/json; charset=utf-8")
-    public List<Consulta> consulta() {
-        return consultaService.consulta();
-    }
-    
-    @ApiOperation(
-            value = "AccessController::guarda",
-            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
-    @PostMapping(
-            path = "/guarda.json",
-            produces = "application/json; charset=utf-8")
-    public List<Consulta> guarda(@RequestBody List<Consulta> datos) {
-        return consultaService.guarda(datos);
-    }    
+       
 }

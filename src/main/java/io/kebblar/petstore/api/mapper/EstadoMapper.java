@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.Estado;
 @Repository
 public interface EstadoMapper {
 
-    /** Constant <code>CAMPOS_EDO=" id, id_pais, nombre "</code> */
+    /** Constant <code>CAMPOS_CONSULTA=" id, id_pais, nombre "</code> */
     String CAMPOS_EDO = " id, id_pais, nombre ";
 
     /**

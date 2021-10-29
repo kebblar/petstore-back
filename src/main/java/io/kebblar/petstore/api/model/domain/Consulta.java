@@ -1,30 +1,40 @@
 package io.kebblar.petstore.api.model.domain;
 
 public class Consulta {
-	private int id;
-	private int selected;
+    private int idUsuario;
+	private int idCombo;
+	private int idOpcion;
 	
 	public Consulta() {}
-	
-	public Consulta(int id, int selected) {
-		this.id = id;
-		this.selected = selected;
-	}
 
-	public int getId() {
-		return id;
-	}
+    public Consulta(int idUsuario, int idCombo, int idOpcion) {
+        this.idUsuario = idUsuario;
+        this.idCombo = idCombo;
+        this.idOpcion = idOpcion;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
-	public int getSelected() {
-		return selected;
-	}
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public void setSelected(int selected) {
-		this.selected = selected;
-	}
-	
+    public int getIdCombo() {
+        return idCombo;
+    }
+
+    public void setIdCombo(int idCombo) {
+        this.idCombo = idCombo;
+    }
+
+    public int getIdOpcion() {
+        return idOpcion;
+    }
+
+    public void setIdOpcion(int idOpcion) {
+        this.idOpcion = idOpcion;
+    }
+
 }

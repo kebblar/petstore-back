@@ -78,7 +78,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
      * Atributos logger y jwt.
      */
     private final Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
-    private final String jwtToken;
+    private final String encryptKey;
 
     /**
      * Constructor que recibe el jwtoken para validar los tokens que vienen en el header.
@@ -86,8 +86,8 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
      *
      * @param jwtToken jwt token a asignar
      */
-    public CustomInterceptor(String jwtToken) {
-        this.jwtToken = jwtToken;
+    public CustomInterceptor(String encryptKey) {
+        this.encryptKey = encryptKey;
     }
 
     /** {@inheritDoc} */
@@ -98,13 +98,14 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             Enumeration<String> headerNames = request.getHeaderNames();
             ArrayList<String> lista = Collections.list(headerNames);
             for (String headerName : lista) {
-                String valor = request.getHeader(headerName);
-                if (headerName.contains("jwt") && valor != null && valor.trim().length() > 0) {
+                String headerValue = request.getHeader(headerName);
+                if (headerName.contains("jwt") && headerValue != null && headerValue.trim().length() > 0) {
                     logger.info("App caller IP detected:: {}", request.getRemoteAddr());
                     logger.info("App current uri detected:: {}", uri);
-                    logger.info("El header {} tiene el valor: {}", headerName, valor);
+                    logger.info("El header {} tiene el valor: {}", headerName, headerValue);
+                    String jwtToken = headerValue;
                     try {
-                        JWTUtil.getInstance().verifyToken(valor, jwtToken, System.currentTimeMillis());
+                        JWTUtil.getInstance().verifyToken(jwtToken, encryptKey, System.currentTimeMillis());
                     } catch (Exception e) {
                         construye(response, e.getMessage());
                         return false;

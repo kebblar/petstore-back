@@ -2,9 +2,10 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
-import io.kebblar.petstore.api.model.domain.Consulta;
+import io.kebblar.petstore.api.model.request.ConsultaRequest;
+import io.kebblar.petstore.api.model.response.ConsultaResponse;
 
 public interface ConsultaService {
-	List<Consulta> consulta();
-	List<Consulta> guarda(List<Consulta> datos);
+	List<ConsultaResponse> consulta(String jwt, String encryptKey);
+	List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos);
 }
