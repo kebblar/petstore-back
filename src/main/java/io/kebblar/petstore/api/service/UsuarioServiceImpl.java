@@ -127,11 +127,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario actualizaUsuario(Usuario usuario) throws CustomException {
+    public Usuario actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.update(usuario);
         } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al actualizar un usuario");
+            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
         }
         return usuario;
     }

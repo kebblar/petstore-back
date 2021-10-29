@@ -67,7 +67,7 @@ public interface UsuarioService {
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
      * @throws CustomException if any
      */
-    Usuario actualizaUsuario(Usuario usuario) throws CustomException;
+    Usuario actualizaUsuario(Usuario usuario) throws BusinessException;
 
     /**
      * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
@@ -96,7 +96,7 @@ public interface UsuarioService {
      * @return Objeto de tipo {@link Usuario}.
      * @throws CustomException if any
      */
-    Usuario obtenUsuarioPorCorreo(String correo) throws CustomException;
+    Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException;
 
     /**
      * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
@@ -118,7 +118,7 @@ public interface UsuarioService {
      * @return Lista de objetos de tipo {@link Rol}.
      * @throws CustomException if any
      */
-    List<Rol> obtenRolesDeUsuario(int id) throws CustomException;
+    List<Rol> obtenRolesDeUsuario(int id) throws BusinessException;
 
 //    /**
 //     * <p>Retorna una lista de objetos de tipo {@link Direccion} que están
@@ -141,7 +141,7 @@ public interface UsuarioService {
      * @return Objeto {@link UsuarioDetalle}
      * @throws CustomException if any
      */
-    UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
+    UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException;
 
     /**
      * Realiza el preregistro de un potencial usuario al sistema

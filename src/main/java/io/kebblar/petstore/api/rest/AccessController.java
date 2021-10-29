@@ -20,7 +20,6 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.nio.BufferOverflowException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -35,7 +34,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Consulta;
 import io.kebblar.petstore.api.model.domain.Usuario;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -68,10 +66,10 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class AccessController {
-    private AccessService accessService;
-    private UsuarioService usuarioService;
-    private InvokeRemoteRestService invokeRestService;
-    private ConsultaService consultaService;
+    private final AccessService accessService;
+    private final UsuarioService usuarioService;
+    private final InvokeRemoteRestService invokeRestService;
+    private final ConsultaService consultaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
