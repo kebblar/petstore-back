@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ import io.kebblar.petstore.api.utils.JWTUtil;
 public class ConsultaServiceImpl implements ConsultaService {
     private static final Logger logger = LoggerFactory.getLogger(ConsultaServiceImpl.class);
     
-    private ConsultaMapper consultaMapper;
-    private UsuarioService usuarioService;
+    private final ConsultaMapper consultaMapper;
+    private final UsuarioService usuarioService;
 	List<Consulta> resultado = new ArrayList<>();
 
 	public ConsultaServiceImpl(UsuarioService usuarioService, ConsultaMapper consultaMapper) {
@@ -30,11 +31,10 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public List<ConsultaResponse> consulta(String jwt, String encryptKey) {
+	public List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException {
 	    int id = getUserIdFromJwt(jwt, encryptKey);
         try {
-            List<ConsultaResponse> result = consultaMapper.getById(id);
-            return result;
+            return consultaMapper.getById(id);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             return new ArrayList<>();
@@ -42,7 +42,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
+	public List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) throws BusinessException {
         int id = getUserIdFromJwt(jwt, encryptKey);
         if(id<1) {
             // NO guardes nada y retorna lo que te mandaron
@@ -65,7 +65,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		return datos;
 	}
 	
-	private int getUserIdFromJwt(String jwt, String encryptKey) {
+	private int getUserIdFromJwt(String jwt, String encryptKey) throws BusinessException {
 	    try {
             String correo = JWTUtil.getInstance().getMail(jwt, encryptKey);
             Usuario usr = usuarioService.obtenUsuarioPorCorreo(correo);
