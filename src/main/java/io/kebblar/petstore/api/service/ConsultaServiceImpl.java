@@ -56,7 +56,7 @@ public class ConsultaServiceImpl implements ConsultaService {
         }
         for(ConsultaRequest current : datos) {
             try {
-                Consulta consulta = new Consulta(id, current.getSelected(), current.getSelected());
+                Consulta consulta = new Consulta(id, current.getId(), current.getSelected());
                 consultaMapper.insert(consulta);
             } catch (SQLException e) {
                 logger.error(e.getMessage());
