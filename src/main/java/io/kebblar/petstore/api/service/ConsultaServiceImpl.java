@@ -49,6 +49,11 @@ public class ConsultaServiceImpl implements ConsultaService {
             return datos;
         }
         // Ve a la base de datos y guarda los resultados:
+        try {
+            consultaMapper.delete(id);
+        } catch (SQLException e1) {
+            logger.error(e1.getMessage());
+        }
         for(ConsultaRequest current : datos) {
             try {
                 Consulta consulta = new Consulta(id, current.getSelected(), current.getSelected());
