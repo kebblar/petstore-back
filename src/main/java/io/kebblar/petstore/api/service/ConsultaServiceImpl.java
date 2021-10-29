@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.ConsultaMapper;
-import io.kebblar.petstore.api.model.domain.Consulta;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.request.ConsultaRequest;
@@ -22,7 +21,6 @@ public class ConsultaServiceImpl implements ConsultaService {
     
     private ConsultaMapper consultaMapper;
     private UsuarioService usuarioService;
-	List<Consulta> resultado = new ArrayList<>();
 
 	public ConsultaServiceImpl(UsuarioService usuarioService, ConsultaMapper consultaMapper) {
 	    this.usuarioService = usuarioService;
@@ -43,21 +41,20 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Override
 	public List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
+	    // Obtén el id asociado al usuario que mandó el jwt:
         int id = getUserIdFromJwt(jwt, encryptKey);
-        if(id<1) {
-            // NO guardes nada y retorna lo que te mandaron
-            return datos;
-        }
-        // Ve a la base de datos y guarda los resultados:
+        
+        // Ve a la base de datos y borra todos los datos asociados:
         try {
             consultaMapper.delete(id);
         } catch (SQLException e1) {
             logger.error(e1.getMessage());
         }
+        
+        // Ve a la base de datos y guarda los resultados:
         for(ConsultaRequest current : datos) {
             try {
-                Consulta consulta = new Consulta(id, current.getId(), current.getSelected());
-                consultaMapper.insert(consulta);
+                if(id>0) consultaMapper.insert(id, current.getId(), current.getSelected());
             } catch (SQLException e) {
                 logger.error(e.getMessage());
             }
