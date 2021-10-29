@@ -39,7 +39,13 @@ public class UsuarioCompleto implements Serializable {
      * Atributos de la clase
      */
     private int id;
+    private String nickName;
     private String correo;
+    private String telefonoCelular;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private Date fechaNacimiento;
     private String clave;
     private long creado;
     private boolean activo;
@@ -49,12 +55,6 @@ public class UsuarioCompleto implements Serializable {
     private long instanteUltimoCambioClave;
     private String regeneraClaveToken;
     private long regeneraClaveInstante;
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private Date fechaNacimiento;
-    private String nickName;
-    private String telefonoCelular;
 
     /**
      * Constructor por default (sin parámetros).

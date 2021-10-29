@@ -20,12 +20,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.nio.BufferOverflowException;
-import java.util.List;
-
 import javax.validation.Valid;
-
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Consulta;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
@@ -42,7 +36,6 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
-import io.kebblar.petstore.api.service.ConsultaService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 import io.swagger.annotations.ApiOperation;
@@ -71,7 +64,6 @@ public class AccessController {
     private AccessService accessService;
     private UsuarioService usuarioService;
     private InvokeRemoteRestService invokeRestService;
-    private ConsultaService consultaService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -82,12 +74,10 @@ public class AccessController {
     public AccessController(
             AccessService accessService,
             UsuarioService usuarioService,
-            InvokeRemoteRestService invokeRestService,
-            ConsultaService consultaService) {
+            InvokeRemoteRestService invokeRestService) {
         this.accessService = accessService;
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
-        this.consultaService = consultaService;
     }
 
     @ApiOperation(
@@ -100,7 +90,7 @@ public class AccessController {
     public LoginResponse login(
             @ApiParam(name="cred", value="Representa las credenciales (usuario y clave) " +
                     "de quien intenta ingresar al sistema")
-            @RequestBody CredencialesRequest cred) throws BusinessException {
+            @RequestBody CredencialesRequest cred) throws ControllerException {
         return accessService.login(cred.getUsuario(), cred.getClave());
     }
 
@@ -112,7 +102,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
-            @RequestBody Preregistro preRegistroRequest) throws BusinessException {
+            @RequestBody Preregistro preRegistroRequest) throws ControllerException {
         return this.usuarioService.preRegistro(preRegistroRequest);
     }
 
@@ -124,7 +114,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro2(
             @ApiParam(name = "preRegistroRequest", value = "Información con el detalle de un Usuario")
-            @RequestBody @Valid PreregistroRequest preRegistroRequest) throws BusinessException {
+            @RequestBody @Valid PreregistroRequest preRegistroRequest) throws ControllerException {
         return this.usuarioService.preRegistro2(preRegistroRequest);
     }
 
@@ -136,7 +126,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public String checkCaptcha(
             @ApiParam(name = "googleCaptcha", value = "Google Captcha V2.0")
-            @RequestBody GoogleCaptcha googleCaptcha) throws BusinessException {
+            @RequestBody GoogleCaptcha googleCaptcha) throws ControllerException {
         return invokeRestService.checkCaptcha(googleCaptcha);
     }
 
@@ -150,7 +140,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
-            @RequestParam String token) throws BusinessException {
+            @RequestParam String token) throws ControllerException {
         return usuarioService.confirmaPreregistro(token);
     }
 
@@ -164,7 +154,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Usuario regeneraClave(
             @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
-            @RequestParam String correo) throws BusinessException {
+            @RequestParam String correo){
         // pase lo que pase esté endpoint siempre regresa algo "bueno", para no alentar el "enumeration atack"
         return usuarioService.solicitaRegeneracionClave(correo);
     }
@@ -180,7 +170,7 @@ public class AccessController {
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
             @RequestParam String token,
             @ApiParam(name = "clave", value = "Nueva clave a actualizar")
-            @RequestParam String clave) throws BusinessException {
+            @RequestParam String clave) throws ControllerException {
         return usuarioService.confirmaRegeneraClave(token, clave);
     }
 
@@ -203,24 +193,5 @@ public class AccessController {
     public String binance() {
         return invokeRestService.getBinanceInfo();
     }
-    
-    @ApiOperation(
-            value = "AccessController::consulta",
-            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
-    @GetMapping(
-            path = "/consulta.json",
-            produces = "application/json; charset=utf-8")
-    public List<Consulta> consulta() {
-        return consultaService.consulta();
-    }
-    
-    @ApiOperation(
-            value = "AccessController::guarda",
-            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
-    @PostMapping(
-            path = "/guarda.json",
-            produces = "application/json; charset=utf-8")
-    public List<Consulta> guarda(@RequestBody List<Consulta> datos) {
-        return consultaService.guarda(datos);
-    }    
+       
 }
