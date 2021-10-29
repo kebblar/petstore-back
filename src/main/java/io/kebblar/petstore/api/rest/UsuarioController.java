@@ -41,12 +41,12 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 /**
- * Implementacion  del controlador REST asociado a los endpoints
+ * Implementación  del controlador REST asociado a los endpoints
  * de gestión del POJO Usuario.
  *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}
  *
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
  *
@@ -60,7 +60,7 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 @RestController
 @RequestMapping(value = "/api")
 public class UsuarioController {
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán

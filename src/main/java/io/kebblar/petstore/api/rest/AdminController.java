@@ -48,12 +48,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * Implementacion  del controlador REST asociado a los endpoints
+ * Implementación  del controlador REST asociado a los endpoints
  * de gestión por HealthService.
  *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.</p>
  *
@@ -67,7 +67,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-    private HealthService healthService;
+    private final HealthService healthService;
 
     @Value("${app.profile.identifier}")
     private String appProfileIdentifier;

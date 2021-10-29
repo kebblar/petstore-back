@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.TipoDireccion;
 import io.kebblar.petstore.api.service.TipoDireccionService;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 
 import io.swagger.annotations.Api;
@@ -45,7 +45,7 @@ import io.swagger.annotations.ApiOperation;
  * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'tipo_direccion'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
@@ -63,7 +63,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class TipoDireccionController {
 
-    private TipoDireccionService tipoDireccionService;
+    private final TipoDireccionService tipoDireccionService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -91,7 +91,7 @@ public class TipoDireccionController {
     @GetMapping(
         value = "/tipo-direcciones.json",
         produces = "application/json; charset=utf-8")
-    public List<TipoDireccion> getAllTipoDireccion() throws BusinessException {
+    public List<TipoDireccion> getAllTipoDireccion() throws ControllerException {
         return tipoDireccionService.getAll();
     }
 
@@ -105,7 +105,7 @@ public class TipoDireccionController {
     public TipoDireccion getTipoDireccion(
     @ApiParam(name="id", value="Representa el id del tipoDireccion buscado.")
     @PathVariable int id
-    ) throws BusinessException {
+    ) throws ControllerException {
         return this.tipoDireccionService.getById(id);
     }
 
@@ -119,7 +119,7 @@ public class TipoDireccionController {
     public int insert(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será insertado en el sistema.")
     @RequestBody TipoDireccion tipoDireccion
-    ) throws BusinessException {
+    ) throws ControllerException {
         return tipoDireccionService.insert(tipoDireccion);
     }
 
@@ -134,7 +134,7 @@ public class TipoDireccionController {
     public int update(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
     @RequestBody TipoDireccion tipoDireccion
-    ) throws BusinessException {
+    ) throws ControllerException {
         return tipoDireccionService.update(tipoDireccion);
     }
 
@@ -148,7 +148,7 @@ public class TipoDireccionController {
     public int delete(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será removido del sistema.")
     @RequestBody TipoDireccion tipoDireccion
-    ) throws BusinessException {
+    ) throws ControllerException {
         return tipoDireccionService.delete(tipoDireccion);
     }
 

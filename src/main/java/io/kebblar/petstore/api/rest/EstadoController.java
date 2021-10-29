@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.EstadoService;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -44,7 +44,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'estado'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
@@ -102,7 +102,7 @@ public class EstadoController {
     public Estado getEstado(
     @ApiParam(name="id", value="Representa el id del estado buscado.")
     @PathVariable int id
-    ) throws BusinessException {
+    ) throws ControllerException {
         return this.estadoService.getById(id);
     }
 
@@ -114,7 +114,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public List<Estado> getByPais(
             @ApiParam(name = "id", value = "Representa el id del pais")
-            @PathVariable int id) throws BusinessException {
+            @PathVariable int id) throws ControllerException {
         return estadoService.getByPais(id);
     }
 
@@ -127,7 +127,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="estado", value="Estado que será insertado en el sistema.")
-    @RequestBody Estado estado) throws BusinessException {
+    @RequestBody Estado estado) throws ControllerException {
         return estadoService.insert(estado);
     }
 
@@ -141,7 +141,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="estado", value="Estado que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody Estado estado) throws BusinessException {
+    @RequestBody Estado estado) throws ControllerException {
         return estadoService.update(estado);
     }
 
@@ -154,7 +154,7 @@ public class EstadoController {
             produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="estado", value="Estado que será removido del sistema.")
-    @RequestBody Estado estado) throws BusinessException {
+    @RequestBody Estado estado) throws ControllerException {
         return estadoService.delete(estado);
     }
 

@@ -24,7 +24,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
-import io.kebblar.petstore.api.model.exceptions.UploadException;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 /**
  * Interface UploadService.
@@ -41,9 +41,9 @@ public interface UploadService {
      * @param destinationFolder String path to file destination
      * @param max long max size allowed for the file
      * @return Lista de objetos de tipo UploadModel
-     * @throws io.kebblar.petstore.api.model.exceptions.UploadException Se dispara en caso de que el proceso de upload falle
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException Se dispara en caso de que el proceso de upload falle
      */
-    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws UploadException;
+    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws BusinessException;
 
     /**
      * Procesa un archivos que le es enviado desde el front.
@@ -52,7 +52,7 @@ public interface UploadService {
      * @param destinationFolder String path to file destination
      * @param max long max size allowed for the file
      * @return Objetos de tipo UploadModel
-     * @throws io.kebblar.petstore.api.model.exceptions.UploadException Se dispara en caso de que el proceso de upload falle
+     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException Se dispara en caso de que el proceso de upload falle
      */
-    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException;
+    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws BusinessException;
 }

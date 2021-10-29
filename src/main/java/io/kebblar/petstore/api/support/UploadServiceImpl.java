@@ -31,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
 import org.slf4j.Logger;
@@ -39,8 +41,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
-import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.utils.WaterMark;
+
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
  * Clase encargada de gestionar los archivos que se suben desde el cliente web.
@@ -54,11 +57,11 @@ public class UploadServiceImpl implements UploadService {
     private final Logger logger = LoggerFactory.getLogger(UploadServiceImpl.class);
 
     /** tika. */
-    private Tika tika = new Tika();
+    private final Tika tika = new Tika();
 
     /** {@inheritDoc} */
     @Override
-    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws UploadException {
+    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws BusinessException {
         List<UploadModel> lista = new ArrayList<>();
         for (MultipartFile mpf : mpfArray) {
             lista.add(storeOne(mpf, destinationFolder, max));
@@ -70,19 +73,19 @@ public class UploadServiceImpl implements UploadService {
      * Valida.
      *
      * @param mpf the mpf
-     * @throws UploadException the upload exception
+     * @throws BusinessException the upload exception
      */
-    private void valida(MultipartFile mpf, long max) throws UploadException {
+    private void valida(MultipartFile mpf, long max) throws BusinessException {
         long peso = mpf.getSize();
         if (peso>max) {
-            throw new UploadException(max, peso);
+            throw new CustomException(FILE_MAX_UPLOAD, peso, max);
         }
 
         String mimeType = "no-pude-detectar-el-tipo-mime";
         try {
             mimeType = this.tika.detect(mpf.getInputStream());
         } catch (IOException e) {
-            throw new UploadException();
+            throw new CustomException(e, UPLOAD_SERVICE_LOG);
             // AQUI, ADEMÁS, VALIDAR QUE EL MIME TYPE ES DE UNA IMAGEN Y NO UNA COSA RARA, COMO UN VIRUS
             // SI SE DETECTA UN ARCHIVO RARO, LANZAR UNA EXCEPCIÓN Y GRABAR EN LA BITACORA UN INCIDENTE GRAVE
         }
@@ -94,7 +97,7 @@ public class UploadServiceImpl implements UploadService {
      *
      * Store one.
      */
-    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws UploadException {
+    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws BusinessException {
         UUID uuid = UUID.randomUUID();
         String newName = uuid.toString() + "."+(FilenameUtils.getExtension(mpf.getOriginalFilename()));
         int autoIncremental = 0;
@@ -119,7 +122,7 @@ public class UploadServiceImpl implements UploadService {
             // poner: storageMapper.insert(uploadModel)
             return uploadModel;
         } catch (IllegalStateException | IOException e) {
-            throw new UploadException(e);
+            throw new CustomException(e, UPLOAD_SERVICE_LOG);
         }
     }
 
@@ -128,9 +131,9 @@ public class UploadServiceImpl implements UploadService {
      *
      * @param mpf the mpf
      * @return the md 5
-     * @throws UploadException the upload exception
+     * @throws BusinessException the upload exception
      */
-    private static String getMd5(MultipartFile mpf) throws UploadException {
+    private static String getMd5(MultipartFile mpf) throws BusinessException {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(mpf.getBytes());
@@ -141,7 +144,7 @@ public class UploadServiceImpl implements UploadService {
             }
             return hashtext;
         } catch (NoSuchAlgorithmException | IOException e) {
-            throw new UploadException(e);
+            throw new CustomException(e, UPLOAD_SERVICE_LOG);
         }
     }
 

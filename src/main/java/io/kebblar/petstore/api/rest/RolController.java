@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.service.RolService;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 
 import io.swagger.annotations.Api;
@@ -45,7 +45,7 @@ import io.swagger.annotations.ApiOperation;
  * <p>Descripción:</p>
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'rol'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
@@ -91,7 +91,7 @@ public class RolController {
     @GetMapping(
         value = "/roles.json",
         produces = "application/json; charset=utf-8")
-    public List<Rol> getAllRol() throws BusinessException {
+    public List<Rol> getAllRol() throws ControllerException {
         return rolService.getAll();
     }
 
@@ -105,7 +105,7 @@ public class RolController {
     public Rol getRol(
     @ApiParam(name="id", value="Representa el id del rol buscado.")
     @PathVariable int id
-    ) throws BusinessException {
+    ) throws ControllerException {
         return this.rolService.getById(id);
     }
 
@@ -119,7 +119,7 @@ public class RolController {
     public int insert(
     @ApiParam(name="rol", value="Rol que será insertado en el sistema.")
     @RequestBody Rol rol
-    ) throws BusinessException {
+    ) throws ControllerException {
         return rolService.insert(rol);
     }
 
@@ -134,7 +134,7 @@ public class RolController {
     public int update(
     @ApiParam(name="rol", value="Rol que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
     @RequestBody Rol rol
-    ) throws BusinessException {
+    ) throws ControllerException {
         return rolService.update(rol);
     }
 
@@ -148,7 +148,7 @@ public class RolController {
     public int delete(
     @ApiParam(name="rol", value="Rol que será removido del sistema.")
     @RequestBody Rol rol
-    ) throws BusinessException {
+    ) throws ControllerException {
         return rolService.delete(rol);
     }
 

@@ -136,8 +136,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
             SmsRequest smsRequest = new SmsRequest(tel, msj);
             HttpEntity<SmsRequest> request = new HttpEntity<>(smsRequest, headers);
             ResponseEntity<SmsResponse> result = restTemplate.postForEntity(smsUrl, request, SmsResponse.class);
-            SmsResponse resp= result.getBody();
-            return resp;
+            return result.getBody();
         } catch (Exception e) {
             throw new CustomException(EnumMessage.PDF_GENERATION, e.getCause());
         }

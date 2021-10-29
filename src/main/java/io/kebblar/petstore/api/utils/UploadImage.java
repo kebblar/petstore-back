@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.utils;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
-import io.kebblar.petstore.api.model.exceptions.UploadException;
 import io.kebblar.petstore.api.model.response.InformacionMedia;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.support.UploadServiceImpl;
@@ -100,7 +99,7 @@ public class UploadImage {
                 AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", uuid, imagenAltura);
             }
             return imagenEnt;
-        }catch (UploadException e) {
+        }catch (BusinessException e) {
             throw new CustomException(e,FILE_UPLOAD);
         }
     }

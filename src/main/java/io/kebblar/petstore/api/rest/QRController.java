@@ -20,7 +20,7 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
@@ -29,8 +29,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.support.QRService;
 
 /**
@@ -83,7 +81,7 @@ public class QRController {
             produces = "image/jpg")
     public @ResponseBody String generateQRBytesBase64(
             @ApiParam(name = "Informacion con la que se genera el QR")
-            @PathVariable("data") String data) throws BusinessException {
+            @PathVariable("data") String data) throws ControllerException {
         return qrService.getQRBytesBase64(data);
     }
 

@@ -35,9 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * <p>Descripción:</p>
- * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'rol'.
- *
- * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}</p>
+ * Implementación  del REST Controller asociado a los endpoints de  gestión de llamadas a apis externas'.
  *
  * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.</p>
