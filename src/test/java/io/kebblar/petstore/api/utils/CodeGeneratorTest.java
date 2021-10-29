@@ -40,7 +40,7 @@ import mx.com.ultrasist.ci.generator.model.Entidad;
  * @since 1.0
  */
 public class CodeGeneratorTest {
-    private static Log logger = LogFactory.getLog(CodeGeneratorTest.class);
+    private final static Log logger = LogFactory.getLog(CodeGeneratorTest.class);
 
     /**
      * <p>main.</p>

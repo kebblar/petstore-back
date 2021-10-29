@@ -46,12 +46,12 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 /**
- * Implementacion  del controlador REST asociado a los endpoints
+ * Implementación  del controlador REST asociado a los endpoints
  * de gestión del POJO Usuario.
  *
  * <p>Todos los métodos de esta clase disparan {@link ControllerException}
  *
- * <p>NOTA IMPORTANTE: Los  distntos métodos de este controlador no
+ * <p>NOTA IMPORTANTE: Los  distintos métodos de este controlador no
  * llevan  javadoc  debido a que la  documentación  Swagger  API
  * cumple con ese objetivo.
  *
@@ -68,7 +68,7 @@ public class UsuarioController {
     @Value("${jwt.encryptor.password}")
     private String encryptKey;
 
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
     private ConsultaService consultaService;
 
     /**
@@ -177,17 +177,17 @@ public class UsuarioController {
             ) throws ControllerException {
          return this.usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
     }
-    
+
     @ApiOperation(
             value = "AccessController::consulta",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
     @GetMapping(
             path = "/consulta.json",
             produces = "application/json; charset=utf-8")
-    public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) { 
+    public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) {
         return consultaService.consulta(jwt, encryptKey);
     }
-    
+
     @ApiOperation(
             value = "AccessController::guarda",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
@@ -196,5 +196,5 @@ public class UsuarioController {
             produces = "application/json; charset=utf-8")
     public List<ConsultaRequest> guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) {
         return consultaService.guarda(jwt, encryptKey, datos);
-    } 
+    }
 }

@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 import io.kebblar.petstore.api.service.UsuarioCompletoService;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -41,7 +41,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * Implementacion  del REST Controller asociado a los endpoints de  gestión del POJO 'usuario_completo'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}
  *
  * <p>NOTA IMPORTANTE: Los distntos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.
@@ -58,7 +58,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/api")
 public class UsuarioCompletoController {
 
-    private UsuarioCompletoService usuarioCompletoService;
+    private final UsuarioCompletoService usuarioCompletoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -86,7 +86,7 @@ public class UsuarioCompletoController {
     @GetMapping(
         value = "/usuario-completos.json",
         produces = "application/json; charset=utf-8")
-    public List<UsuarioCompleto> getAllUsuarioCompleto() throws BusinessException {
+    public List<UsuarioCompleto> getAllUsuarioCompleto() throws ControllerException {
         return usuarioCompletoService.getAll();
     }
 
@@ -100,7 +100,7 @@ public class UsuarioCompletoController {
     public UsuarioCompleto getUsuarioCompleto(
     @ApiParam(name="id", value="Representa el id del usuarioCompleto buscado.")
     @PathVariable int id
-    ) throws BusinessException {
+    ) throws ControllerException {
         return this.usuarioCompletoService.getById(id);
     }
 
@@ -115,14 +115,14 @@ public class UsuarioCompletoController {
     public int update(
     @ApiParam(name="usuarioCompleto", value="UsuarioCompleto que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
     @RequestBody UsuarioCompleto usuarioCompleto
-    ) throws BusinessException {
+    ) throws ControllerException {
         return usuarioCompletoService.update(usuarioCompleto);
     }
 
     @GetMapping(
             value = "/usuario-completos-paginated.json",
             produces = "application/json; charset=utf-8")
-        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws BusinessException {
+        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
             return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
         }
 }

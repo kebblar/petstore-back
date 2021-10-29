@@ -146,6 +146,26 @@ public class EstadoServiceImpl implements EstadoService {
         } catch (Exception e) {
             throw new MapperCallException("Error al recuperar el estado "+nombre, e.getMessage());
         }
-    }    
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
+        try {
+            return estadoMapper.getEstadosByPais(idPais);
+        } catch (Exception e) {
+            throw new MapperCallException("Error en el get del estado", e.getMessage());
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public List<Estado> getAllNombrePais() throws BusinessException {
+        try {
+            return estadoMapper.getAllNombrePais();
+        } catch (SQLException e) {
+            throw new MapperCallException("Error en el get del estado", e.getMessage());
+        }
+    }
 
 }

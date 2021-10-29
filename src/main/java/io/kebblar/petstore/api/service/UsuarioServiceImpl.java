@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.kebblar.petstore.api.model.exceptions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -44,14 +45,6 @@ import io.kebblar.petstore.api.mapper.UsuarioMapper;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
-import io.kebblar.petstore.api.model.exceptions.CustomException;
-import io.kebblar.petstore.api.model.exceptions.RuleException;
-import io.kebblar.petstore.api.model.exceptions.TransactionException;
-import io.kebblar.petstore.api.model.exceptions.UserAlreadyExistsException;
-import io.kebblar.petstore.api.model.exceptions.UserNotExistsException;
-import io.kebblar.petstore.api.model.exceptions.WrongTokenException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
@@ -134,11 +127,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario actualizaUsuario(Usuario usuario) throws CustomException {
+    public Usuario actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.update(usuario);
         } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al actualizar un usuario");
+            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
         }
         return usuario;
     }
@@ -218,7 +211,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
             return preRegistroHelper(preRegistroRequest);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new MapperCallException("Error en el registro del nuevo usuario", e.toString());
         }
     }
@@ -238,18 +231,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     private void validaFechaPropuesta(int anio, int mes, int dia) throws BusinessException {
         // NOTA: Ya hay prevalidaciones en el POJO: PreregistroRequest
-        if(dia==31) {
-            if(mes==2 || mes==4 || mes==6 || mes==9 || mes==11) throw new RuleException("Este mes NO posee 31 dias");
-        }
-        if(dia==30 && mes==2) {
-            throw new RuleException("Febrero no posee 30 dias");
-        }
+        if(dia==31 && (mes==2 || mes==4 || mes==6 || mes==9 || mes==11))
+            throw new CustomException(INCORRECT_DATE, "Este mes NO posee 31 dias");
+
+        if(dia==30 && mes==2)
+            throw new CustomException(INCORRECT_DATE, "Febrero no posee 30 dias");
+
         if(dia==29 && mes==2) {
            for(int i=0; i<30; i++) {
                int comp = 1900+(4*i);
                if(anio==comp) return;
            }
-           throw new RuleException("En "+anio+" febrero no fué biciesto"); 
+           throw new CustomException(INCORRECT_DATE, "Febrero no fué biciesto en el "+anio);
         }
     }
     
@@ -269,7 +262,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Date now = new Date();
         int diff = daysBetweenDates(now, fechaNacimiento);
         int min = 1+ 365*edadMinima + 21/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
-        if(diff<min) throw new RuleException("La edad mínima para pertenecer a este sitio es de "+edadMinima+" años cumplidos.");
+        if(diff<min) throw new CustomException(TOO_YOUNG, edadMinima);
         Preregistro preRegistro = new Preregistro
                 (preRegistroRequest.getId(), 
                  preRegistroRequest.getNick(), 
@@ -281,14 +274,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                  preRegistroRequest.getInstanteRegistro());
         try {
             return preRegistroHelper(preRegistro);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new CustomException(e, DATABASE, e.toString());
         }
     }
     
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
-            BusinessException,
-            SQLException {
+            BusinessException {
         // Quitale los caracteres raros al teléfono.
         String nuevoCel = StringUtils.limpia(preRegistroRequest.getTelefono());
         preRegistroRequest.setTelefono(nuevoCel);
@@ -296,15 +288,20 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Valida si la clave proporcionada es compatible con el
         // patrón de seguridad de claves solicitado por el sistema:
         ValidadorClave.validate(preRegistroRequest.getClaveHash());
+        Preregistro registro;
 
         // Busca al usuario por su correo en la tabla de 'usuario'
-        Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
+        try {
+            Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
 
-        // Si el usuario ya está en la tabla 'usuario', avisa error:
-        if(usuario!=null) throw new UserAlreadyExistsException();
+            // Si el usuario ya está en la tabla 'usuario', avisa error:
+            if(usuario!=null) throw new CustomException(USER_ALREADY_EXISTS, usuario.getCorreo());
 
-        // Busca el registro por mail en la tabla de 'registro':
-        Preregistro registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
+            // Busca el registro por mail en la tabla de 'registro':
+            registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
+        } catch (SQLException s) {
+            throw new MapperCallException("No se ha podido asociar el correo "+ preRegistroRequest.getCorreo() + "con ningún registro", s.getMessage());
+        }
 
         // Genera una cadena aleatoria de caracteres y crea un objeto de tipo 'PreRegistro':
         String randomString = StringUtils.getRandomString(RANDOM_STRING_LEN);
@@ -317,13 +314,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         preRegistroRequest.setInstanteRegistro(System.currentTimeMillis());
         preRegistroRequest.setClaveHash(claveHasheada);
 
-        // Si el usuario NO está en la tabla de 'registro', insertar info:
-        if(registro==null) {
-            logger.info("Creando registro en la tabla 'Registro'");
-            this.registroMapper.insertRegistro(preRegistroRequest);
-        } else { // Si el usuario SI está: actualizar info:
-            logger.info("Actualizando registro en la tabla 'Registro'");
-            this.registroMapper.update(preRegistroRequest);
+        try {
+            // Si el usuario NO está en la tabla de 'registro', insertar info:
+            if (registro == null) {
+                logger.info("Creando registro en la tabla 'Registro'");
+                this.registroMapper.insertRegistro(preRegistroRequest);
+            } else { // Si el usuario SI está: actualizar info:
+                logger.info("Actualizando registro en la tabla 'Registro'");
+                this.registroMapper.update(preRegistroRequest);
+            }
+        } catch (SQLException s) {
+            throw new MapperCallException("La información del registro no ha podido almacenarse", s.getMessage());
         }
 
         // Envia correo de notificación:
@@ -361,7 +362,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         // Si la clave no es la misma, notifica el error:
         if(!token.equals(preregistro.getRandomString())) {
-            throw new WrongTokenException("Error al comparar el token registrado con el token proporcionado");
+            throw new CustomException(WRONG_TOKEN);
         }
 
         // Si todito lo anterior salió bien, actualiza los
@@ -512,7 +513,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             Usuario usuario = usuarioMapper.getByCorreo(correo);
             if(usuario==null) {
-                throw new UserNotExistsException(correo);
+                throw new CustomException(USER_NOT_EXIST, correo);
             }
             ValidadorClave.validate(clave);
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());

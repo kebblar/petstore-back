@@ -37,15 +37,6 @@ public class TransactionException extends BusinessException {
     private static final long serialVersionUID = -7083159020205284484L;
 
     /**
-     * Por medio de la excepción original se genera la nueva excepción.
-     *
-     * @param e excepción lanzada en un inicio
-     */
-    public TransactionException(Exception e) {
-        super(e);
-    }
-
-    /**
      * Cuando ocurre un problema con una transacción o se proporciona un token incorrecto.
      *
      * @param msg detalles del problema
@@ -54,8 +45,8 @@ public class TransactionException extends BusinessException {
         super(
             "Transacción fallida. Haciendo rollback del proceso.",
             msg,
-            1019,
-            "CVE_1019",
+            702,
+            "CVE_702",
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

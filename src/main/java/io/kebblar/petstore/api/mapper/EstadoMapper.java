@@ -114,6 +114,31 @@ public interface EstadoMapper {
     List<Estado> getByPais(int id) throws SQLException;
 
     /**
+     * Obtiene una lista de objetos de tipo 'estado' haciendo INNER JOIN con la tabla Pais para la obtencion del nombre del Pais.
+     *
+     * @return Lista de objetos de tipo estado
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     */
+    @Results(id="EstadoNombreMap", value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "idPais", column = "id_pais"),
+            @Result(property = "nombrePais", column = "nombre_pais"),
+            @Result(property = "nombre", column = "nombre")
+    })
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais ")
+    List<Estado> getAllNombrePais() throws SQLException;
+
+    /**
+     * Obtiene una lista de objetos de tipo 'estado' filtrado por el id ingresado.
+     *
+     * @param  idPais del pais.
+     * @return Lista de objetos de tipo estado filtrado por el id ingresado
+     */
+    @ResultMap("EstadoNombreMap")
+    @Select("SELECT e.id, e.id_pais, e.nombre, p.nombre as nombre_pais FROM estado e INNER JOIN pais p on  p.id=e.id_pais WHERE e.id_pais = #{idPais}")
+    List<Estado> getEstadosByPais(int idPais);
+
+    /**
      * Obtiene una lista de objetos de tipo 'estado' filtrado por el nombre ingresado.
      *
      * @param  nombre del estado.
