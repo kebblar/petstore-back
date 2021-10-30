@@ -194,7 +194,7 @@ public class UsuarioController {
     @PostMapping(
             path = "/guarda.json",
             produces = "application/json; charset=utf-8")
-    public List<ConsultaRequest> guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) {
+    public String guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) {
         return consultaService.guarda(jwt, encryptKey, datos);
     } 
 }

@@ -40,7 +40,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
+	public String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
 	    // Obtén el id asociado al usuario que mandó el jwt:
         int id = getUserIdFromJwt(jwt, encryptKey);
         
@@ -59,7 +59,7 @@ public class ConsultaServiceImpl implements ConsultaService {
                 logger.error(e.getMessage());
             }
         }
-		return datos;
+		return "{'succeed':'true'}".replace('\'', '\"');
 	}
 	
 	private int getUserIdFromJwt(String jwt, String encryptKey) {

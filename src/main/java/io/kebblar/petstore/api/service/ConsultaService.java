@@ -7,5 +7,5 @@ import io.kebblar.petstore.api.model.response.ConsultaResponse;
 
 public interface ConsultaService {
 	List<ConsultaResponse> consulta(String jwt, String encryptKey);
-	List<ConsultaRequest> guarda(String jwt, String encryptKey, List<ConsultaRequest> datos);
+	String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos);
 }
