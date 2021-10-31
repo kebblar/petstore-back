@@ -30,7 +30,6 @@ import io.kebblar.petstore.api.model.exceptions.*;
 import org.passay.*;
 
 import static io.kebblar.petstore.api.model.exceptions.EnumMessage.INTERNAL_SERVER;
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.STRENGTH_PASSWORD_VALIDATOR;
 
 /**
  * <p>ValidadorClave class.</p>
@@ -78,10 +77,16 @@ public class ValidadorClave {
         PasswordData password = new PasswordData(clave);
         RuleResult result = validator.validate(password);
 
+
         if(!result.isValid()) { // NOT valid !!!!
            List<String> messages = validator.getMessages(result);
-           throw new CustomException(STRENGTH_PASSWORD_VALIDATOR);
+           StringBuilder sb = new StringBuilder();
+           for(String msg : messages) {
+               sb.append(msg);
+               sb.append("\n");
+           }
+           throw new StrengthPasswordValidatorException(messages);
         }
         return true;
-      }
+    }
 }

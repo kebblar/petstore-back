@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -57,7 +58,19 @@ public class CustomControllerAdvice {
      * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
      */
     private final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
-
+    
+    /**
+     * <p>userErrorHandler.</p>
+     *
+     * @param geEx a {@link io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException} object.
+     * @return a {@link org.springframework.http.ResponseEntity} object.
+     */
+    @ResponseBody
+    @ExceptionHandler(value = StrengthPasswordValidatorException.class)
+    public ResponseEntity<Map<String, Object>> userErrorHandler(StrengthPasswordValidatorException geEx) {
+        logger.error(getStackTraceExStr(geEx));
+        return new ResponseEntity<>(buildValidationErrorResponse(geEx), HttpStatus.BAD_REQUEST);
+    }
     /**
      * Método que maneja las excepciones de {@link org.springframework.web.bind.MethodArgumentNotValidException}.
      *
@@ -159,6 +172,18 @@ public class CustomControllerAdvice {
         }
         return errorGenerica.toString();
     }
-
+    
+    /**
+     * Construye una respuesta que contiene el consolidado de violaciones en una clave dada.
+     *
+     * @param spve
+     * @return Mapa con la lista de errores detectados
+     */
+    private Map<String, Object> buildValidationErrorResponse(StrengthPasswordValidatorException spve) {
+        List<String> messages = spve.getMessages();
+        Map<String, Object> result = crearMapaRetorno(spve);
+        result.put("strengthViolations", messages);
+        return result;
+    }
 }
 
