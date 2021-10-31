@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.service;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +40,6 @@ import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 
 import io.kebblar.petstore.api.model.exceptions.CustomException;
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
  * Servicio asociado a la funcionalidad de ingreso al sistema.

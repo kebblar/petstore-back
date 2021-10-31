@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.utils;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.INTERNAL_SERVER;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -28,8 +30,6 @@ import java.util.Properties;
 
 import io.kebblar.petstore.api.model.exceptions.*;
 import org.passay.*;
-
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.INTERNAL_SERVER;
 
 /**
  * <p>ValidadorClave class.</p>

@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
+import io.kebblar.petstore.api.model.enumerations.HttpStatus;
+
 /**
  * <p>Descripción:</p>
  * Excepción general que define que se ha violado una regla de la lógica de negocio.
@@ -48,7 +50,7 @@ public class BusinessException extends ControllerException {
      * @param detailedMessage a {@link java.lang.String} object.
      * @param localExceptionNumber a int.
      * @param localExceptionKey a {@link java.lang.String} object.
-     * @param httpStatus a {@link io.kebblar.petstore.api.model.exceptions.HttpStatus} object.
+     * @param httpStatus a {@link io.kebblar.petstore.api.model.enumerations.HttpStatus} object.
      */
     public BusinessException(
             String shortMessage,

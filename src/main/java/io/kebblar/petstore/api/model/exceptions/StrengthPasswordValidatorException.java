@@ -22,6 +22,8 @@ package io.kebblar.petstore.api.model.exceptions;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.model.enumerations.HttpStatus;
+
 /**
  * <p>Descripción</p>
  * Excepción que determina cuando existe un problema con la fortaleza de una clave.

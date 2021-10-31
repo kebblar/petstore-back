@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.utils;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -36,7 +38,6 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 
 

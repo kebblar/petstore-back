@@ -20,7 +20,11 @@
  */
 package io.kebblar.petstore.api.support;
 
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.exceptions.*;
+
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.GOOGLE_CAPTCHA;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -32,8 +36,6 @@ import org.springframework.web.client.RestTemplate;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.SmsRequest;
 import io.kebblar.petstore.api.model.response.SmsResponse;
-
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.GOOGLE_CAPTCHA;
 
 /**
  * Implementación de la interfaz {@link io.kebblar.petstore.api.support.InvokeRemoteRestService}.

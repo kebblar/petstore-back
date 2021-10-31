@@ -29,6 +29,8 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.SEND_MAIL;
+
 import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -38,8 +40,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.SEND_MAIL;
 
 /**
  * <p>

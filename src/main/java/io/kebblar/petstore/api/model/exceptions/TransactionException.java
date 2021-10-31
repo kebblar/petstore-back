@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
+import io.kebblar.petstore.api.model.enumerations.HttpStatus;
+
 /**
  * <p>Descripción</p>
  * Excepción que modela la respuesta a una petición cuyo token fue incorrecto.

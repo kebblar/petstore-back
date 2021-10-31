@@ -18,7 +18,7 @@
  * Historia: 
  *              Creación: 5 Sep 2021 @ 07:56:47
  */
-package io.kebblar.petstore.api.model.exceptions;
+package io.kebblar.petstore.api.model.enumerations;
 
 /**
  * Enumeration of HTTP status codes.
@@ -452,7 +452,7 @@ public enum HttpStatus {
      * Return the HTTP status series of this status code.
      *
      * @see HttpStatus.Series
-     * @return a {@link io.kebblar.petstore.api.model.exceptions.HttpStatus.Series} object.
+     * @return a {@link io.kebblar.petstore.api.model.enumerations.HttpStatus.Series} object.
      */
     public Series series() {
         return Series.valueOf(this);

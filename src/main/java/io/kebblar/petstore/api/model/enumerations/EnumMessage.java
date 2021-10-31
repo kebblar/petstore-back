@@ -1,4 +1,4 @@
-package io.kebblar.petstore.api.model.exceptions;
+package io.kebblar.petstore.api.model.enumerations;
 
 public enum EnumMessage {
         

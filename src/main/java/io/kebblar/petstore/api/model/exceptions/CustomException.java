@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.model.exceptions;
 
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
+
 /**
  * <p>Descripción:</p>
  * Excepción general que define que se ha violado una regla de la lógica de negocio.

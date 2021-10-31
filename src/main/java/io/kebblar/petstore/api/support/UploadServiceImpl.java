@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.support;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Path;
@@ -42,8 +44,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.utils.WaterMark;
-
-import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
  * Clase encargada de gestionar los archivos que se suben desde el cliente web.

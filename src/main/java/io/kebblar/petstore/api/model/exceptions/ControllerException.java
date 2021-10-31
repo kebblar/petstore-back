@@ -21,6 +21,7 @@ package io.kebblar.petstore.api.model.exceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.kebblar.petstore.api.model.enumerations.HttpStatus;
 import io.kebblar.petstore.api.utils.StringUtils;
 
 /**
@@ -153,7 +154,7 @@ public class ControllerException extends Exception {
     /**
      * <p>Getter for the field <code>httpStatus</code>.</p>
      *
-     * @return a {@link mx.qbits.tienda.api.model.exceptions.HttpStatus} object.
+     * @return a {@link io.kebblar.petstore.api.model.enumerations.qbits.tienda.api.model.exceptions.HttpStatus} object.
      */
     public HttpStatus getHttpStatus() {
         return httpStatus;
