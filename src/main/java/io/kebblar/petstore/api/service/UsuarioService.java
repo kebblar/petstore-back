@@ -21,8 +21,6 @@
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-
-import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
@@ -31,6 +29,7 @@ import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
+
 /**
  * <p>Definición de la interfaz de servicios para 'Usuario'.
  *

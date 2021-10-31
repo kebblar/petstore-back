@@ -26,8 +26,6 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
 import io.kebblar.petstore.api.model.request.NuevaDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.mapper.DireccionMapper;
@@ -47,8 +45,6 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
  */
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
-    private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
-
     private final DireccionMapper direccionMapper;
 
     /**

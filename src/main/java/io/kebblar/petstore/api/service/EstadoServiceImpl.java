@@ -29,7 +29,6 @@ import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * Servicio asociado a la entidad 'estado'.

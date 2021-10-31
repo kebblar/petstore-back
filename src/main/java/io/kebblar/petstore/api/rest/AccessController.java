@@ -20,11 +20,9 @@
  */
 package io.kebblar.petstore.api.rest;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +39,8 @@ import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.service.AccessService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 

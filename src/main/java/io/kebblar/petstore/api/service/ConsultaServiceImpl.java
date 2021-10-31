@@ -29,7 +29,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException {
+	public List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException{
 	    int id = getUserIdFromJwt(jwt, encryptKey);
         try {
             return consultaMapper.getById(id);
@@ -40,7 +40,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
+	public String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) throws BusinessException{
 	      // Obtén el id asociado al usuario que mandó el jwt:
         int id = getUserIdFromJwt(jwt, encryptKey);
         

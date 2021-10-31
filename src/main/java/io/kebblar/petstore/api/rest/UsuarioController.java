@@ -184,7 +184,7 @@ public class UsuarioController {
     @GetMapping(
             path = "/consulta.json",
             produces = "application/json; charset=utf-8")
-    public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) throws ControllerException{
+    public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) throws ControllerException {
         return consultaService.consulta(jwt, encryptKey);
     }
 
@@ -194,7 +194,7 @@ public class UsuarioController {
     @PostMapping(
             path = "/guarda.json",
             produces = "application/json; charset=utf-8")
-    public String guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) {
+    public String guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) throws ControllerException {
         return consultaService.guarda(jwt, encryptKey, datos);
     }
 }

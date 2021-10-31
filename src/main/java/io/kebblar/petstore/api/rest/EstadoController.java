@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.service.EstadoService;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
