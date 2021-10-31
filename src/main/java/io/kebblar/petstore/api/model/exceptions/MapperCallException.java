@@ -45,7 +45,7 @@ public class MapperCallException extends BusinessException {
      * @param technicalDescription Descripción específica
      */
     public MapperCallException(String shortMessage, String technicalDescription) {
-        this(new Exception(), shortMessage, technicalDescription);
+        this(new Exception(""), shortMessage, technicalDescription);
     }
     
     public MapperCallException(Throwable throwable, String shortMessage, String technicalDescription) {

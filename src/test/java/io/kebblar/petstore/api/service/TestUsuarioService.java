@@ -99,7 +99,7 @@ public class TestUsuarioService {
         when(usuarioMapper.getById(1)).thenReturn(usuario1);
         assertEquals(usuario1.getId(), usuarioService.eliminaUsuario(1).getId());
         try {
-            when(usuarioMapper.update(Mockito.any(Usuario.class))).thenThrow(SQLException.class);
+            when(usuarioMapper.update(Mockito.any(Usuario.class))).thenThrow(new SQLException("test"));
             usuarioService.actualizaUsuario(usuario1);
         } catch (CustomException m) {
             assertTrue(true);
