@@ -27,13 +27,14 @@ import io.kebblar.petstore.api.model.domain.TablasContadorEnum;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
+import java.sql.SQLException;
+
 /**
  * <p>Implementación de la interfaz {@link ContadorService}.
  *
  * <p>Todos los métodos de esta clase disparan {@link BusinessException}
  *
  * @author  garellano
- * @see     io.kebblar.petstore.api.model.domain.Contador
  * @see     io.kebblar.petstore.api.service.ContadorService
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
@@ -84,7 +85,7 @@ public class ContadorServiceImpl implements ContadorService {
         // ********************************** Change previous var 'ESQUEMAS' Accordingly !!!
         try {
             return this.contadorMapper.getTableCount(esquema, tabla);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error al obtener el número de tuplas de la tabla: "+ tabla + " (tabla posiblemente inexistente)", e.getMessage());
         }
     }

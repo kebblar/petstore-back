@@ -40,7 +40,7 @@ public interface UsuarioCompletoService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase UsuarioCompleto
      * o nulo si no se encuentra ese elemento en la tabla.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws BusinessException if any.
      */
     UsuarioCompleto getById(int id) throws BusinessException;
 
@@ -48,7 +48,7 @@ public interface UsuarioCompletoService {
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'usuario_completo'.
      *
      * @return Lista con todos los elementos de la tabla 'usuario_completo'.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws BusinessException if any.
      */
     List<UsuarioCompleto> getAll() throws BusinessException;
 
@@ -57,7 +57,7 @@ public interface UsuarioCompletoService {
      *
      * @param  usuarioCompleto objeto de tipo 'UsuarioCompleto'.
      * @return int numero de registros actualizados en la tabla'usuario_completo'.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int update(UsuarioCompleto usuarioCompleto) throws BusinessException;
 
@@ -67,7 +67,7 @@ public interface UsuarioCompletoService {
      * @return Lista con todos los elementos de la tabla 'usuario_completo'.
      * @param startRow a int.
      * @param pageSize a int.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws BusinessException if any.
      */
     List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException;
 
@@ -75,7 +75,7 @@ public interface UsuarioCompletoService {
      * Regresa el Conteo de usuarios en el sistema.
      *
      * @return entero con el Conteo de usuarios en el sistema.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws BusinessException si ocurre un problema al contar a los usuarios.
      */
     int countUsuarios() throws BusinessException;
 }

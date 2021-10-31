@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Municipio;
 import io.kebblar.petstore.api.mapper.MunicipioMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
  * Servicio asociado a la entidad 'municipio'.
@@ -48,7 +48,7 @@ import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 @Service("municipioService")
 public class MunicipioServiceImpl implements MunicipioService {
     private static final Logger logger = LoggerFactory.getLogger(MunicipioServiceImpl.class);
-    private MunicipioMapper municipioMapper;
+    private final MunicipioMapper municipioMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
@@ -67,7 +67,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar el municipio con el id "+id, e.getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar la lista de municipios", e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.insert(municipio);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al insertar el municipio "+municipio.getNombre(), e.getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.update(municipio);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el municipio con el id " +municipio.getId(), e.getMessage());
         }
     }
 
@@ -107,7 +107,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.delete(municipio.getId());
         } catch (Exception e) {
-            throw new MapperCallException("Error en la eliminación del Municipio seleccionado ", e.getMessage());
+            throw new MapperCallException("Error en la eliminación del Municipio "+municipio.getNombre(), e.getMessage());
         }
     }
 
@@ -117,7 +117,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getByEstado(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener los muncipios asociados al estado " +id, e.getMessage());
         }
     }
 
@@ -131,7 +131,7 @@ public class MunicipioServiceImpl implements MunicipioService {
                 return municipioMapper.update(municipio);
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el municipio con el id " +municipio.getId(), e.getMessage());
         }
     }
 
@@ -151,7 +151,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getMunicipiosDescripcion();
         } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+            throw new MapperCallException("Error de obtención de las descripciones de los municipios", e.getMessage());
         }
     }
 
@@ -162,7 +162,7 @@ public class MunicipioServiceImpl implements MunicipioService {
         try {
             return municipioMapper.getByNombre(nombre);
         } catch (Exception e) {
-            throw new MapperCallException("Error de obtención de los Municipios asociados a un Estado", e.getMessage());
+            throw new MapperCallException("Error de obtención de los Municipios por nombre", e.getMessage());
         }
     }
 

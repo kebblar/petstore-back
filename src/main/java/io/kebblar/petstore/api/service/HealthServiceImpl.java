@@ -64,7 +64,7 @@ public class HealthServiceImpl implements HealthService {
     private static final Logger logger = LoggerFactory.getLogger(HealthServiceImpl.class);
 
     /** System environment property. */
-    private Environment environment;
+    private final Environment environment;
 
     @Value("${logging.file.name}")
     private String logfile;
@@ -150,7 +150,7 @@ public class HealthServiceImpl implements HealthService {
             if (last < 1) {
                 return allLines;
             }
-            for (int i = max(0, len - last); i < len; i++) {
+            for (int i = Math.max(0, len - last); i < len; i++) {
                 lista.add(allLines.get(i));
             }
             return lista;
@@ -159,8 +159,5 @@ public class HealthServiceImpl implements HealthService {
             return lista;
         }
     }
-    public int max(int a, int b) {
-        if(a>b) return a;
-        return b;
-    }
+
 }

@@ -23,6 +23,7 @@ package io.kebblar.petstore.api.service;
 import java.util.Date;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +45,7 @@ import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
  *
  * <p>Implementación de la interfaz {@link AccessService}.</p>
  *
- * <p>Todos los métodos de esta clase disparan {@link CustomException}</p>
+ * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -78,7 +79,7 @@ public class AccessServiceImpl implements AccessService {
 
     /** {@inheritDoc} */
     @Override
-    public LoginResponse login(String usr, String clave) throws CustomException {
+    public LoginResponse login(String usr, String clave) throws BusinessException {
         logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
         this.valida(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
@@ -95,7 +96,7 @@ public class AccessServiceImpl implements AccessService {
             String claveProporcionada,
             long delta,
             int maximoNumeroIntentosConcedidos,
-            long instanteActual) throws CustomException {
+            long instanteActual) throws BusinessException {
         // Si el usuario NO es nulo, procederé a calcular sus roles y sus direcciones:
         if(usuario==null) throw new CustomException(BAD_CREDENTIALS);
 
@@ -169,7 +170,7 @@ public class AccessServiceImpl implements AccessService {
      * @param usuario objeto usuario a actualizar.
      * @throws CustomException En caso que ocurra algún problema con la actualización.
      */
-    private void update(Usuario usuario) throws CustomException {
+    private void update(Usuario usuario) throws BusinessException {
         usuarioService.actualizaUsuario(usuario);
     }
 
@@ -178,9 +179,9 @@ public class AccessServiceImpl implements AccessService {
      * @param idUsuario entero que representa al identificador único del usuario.
      * @param correo correo electrónico o usuario.
      * @return Regresa el objeto {@link UserFoundWrapper}, conjunto de la lista de roles, detalles e información interna de un usuario.
-     * @throws CustomException En caso que el onjeto no pueda ser devuelto.
+     * @throws BusinessException En caso que el onjeto no pueda ser devuelto.
      */
-    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws CustomException {
+    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
         List<Rol> roles = usuarioService.obtenRolesDeUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = usuarioService.obtenDetallesDeUsuario(idUsuario);
         String jwt = jwtManagerService.createToken(correo);

@@ -22,6 +22,8 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import java.sql.SQLException;
+
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,6 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.mapper.UsuarioCompletoMapper;
 import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
 
 /**
  * Servicio asociado a la entidad 'usuario_completo'.
@@ -53,14 +54,14 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioCompletoServiceImpl.class);
 
-    private UsuarioCompletoMapper usuarioCompletoMapper;
-    private UsuarioDetalleMapper usuarioDetalleMapper;
+    private final UsuarioCompletoMapper usuarioCompletoMapper;
+    private final UsuarioDetalleMapper usuarioDetalleMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
      *
-     * @param usuarioCompletoMapper mapper utilizado para llamar a metodos de persistencia
+     * @param usuarioCompletoMapper mapper utilizado para llamar a métodos de persistencia
      */
     public UsuarioCompletoServiceImpl(
             UsuarioDetalleMapper usuarioDetalleMapper,
@@ -76,7 +77,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getById(id);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener el usuario con el id "+id, e.getMessage());
         }
     }
 
@@ -85,7 +86,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAll();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
 
@@ -118,7 +119,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
             int b = usuarioDetalleMapper.update(ud);
             return a+b;
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el usuario con el id "+usuarioCompleto.getId(), e.getMessage());
         }
     }
 
@@ -127,7 +128,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.getAllPaginated((pageNumber-1)*pageSize, pageSize);
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("No ha sido posible recuperar la lista de usuarios", e.getMessage());
         }
     }
 
@@ -136,7 +137,7 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         try {
             return usuarioCompletoMapper.countUsuarios();
         } catch (SQLException e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al retornar la cuenta de los usuarios", e.getMessage());
         }
     }
 

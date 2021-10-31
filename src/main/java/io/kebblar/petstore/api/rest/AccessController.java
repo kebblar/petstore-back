@@ -20,7 +20,11 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.util.List;
+
 import javax.validation.Valid;
+
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
-import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -61,9 +64,9 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class AccessController {
-    private AccessService accessService;
-    private UsuarioService usuarioService;
-    private InvokeRemoteRestService invokeRestService;
+    private final AccessService accessService;
+    private final UsuarioService usuarioService;
+    private final InvokeRemoteRestService invokeRestService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -154,7 +157,7 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Usuario regeneraClave(
             @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
-            @RequestParam String correo){
+            @RequestParam String correo) throws ControllerException {
         // pase lo que pase esté endpoint siempre regresa algo "bueno", para no alentar el "enumeration atack"
         return usuarioService.solicitaRegeneracionClave(correo);
     }
@@ -193,5 +196,5 @@ public class AccessController {
     public String binance() {
         return invokeRestService.getBinanceInfo();
     }
-       
+
 }

@@ -22,9 +22,7 @@ package io.kebblar.petstore.api.utils;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.FileUploadException;
-import io.kebblar.petstore.api.model.exceptions.InternalServerException;
-import io.kebblar.petstore.api.model.exceptions.UploadException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.response.InformacionMedia;
 import io.kebblar.petstore.api.support.UploadService;
 import io.kebblar.petstore.api.support.UploadServiceImpl;
@@ -33,6 +31,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.*;
 
 /**
  * <p>Descripción:</p>
@@ -64,11 +64,11 @@ public class UploadImage {
         try {
             contentType = tika.detect(file.getInputStream());
         } catch (IOException e) {
-            throw new InternalServerException("Error al leer el archivo", e.toString());
+            throw new CustomException(INTERNAL_SERVER);
         }
         long size = file.getSize();
         if (size > max) {
-            throw new FileUploadException(size, max);
+            throw new CustomException(FILE_MAX_UPLOAD, size, max);
         }
         try {
             int tipoMedia=0;
@@ -90,7 +90,7 @@ public class UploadImage {
                     carpetaDestino = destinationFolderVideo;
                     break;
                 default:
-                    throw new FileUploadException("Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi");
+                    throw new CustomException(NOT_VALID_IMAGE);
             }
             UploadModel upload = uploadService.storeOne(file, carpetaDestino, max);
             InformacionMedia imagenEnt= new InformacionMedia(uuid,upload.getNuevoNombre(),tipoMedia);
@@ -99,8 +99,8 @@ public class UploadImage {
                 AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", uuid, imagenAltura);
             }
             return imagenEnt;
-        }catch (UploadException e) {
-            throw new FileUploadException(e.getShortMessage());
+        }catch (BusinessException e) {
+            throw new CustomException(e,FILE_UPLOAD);
         }
     }
 }

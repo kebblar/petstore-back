@@ -38,19 +38,20 @@ import io.kebblar.petstore.api.utils.JWTUtil;
  */
 @Service
 public class JwtManagerServiceImpl implements JwtManagerService {
-    private Logger logger = LoggerFactory.getLogger(JwtManagerServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(JwtManagerServiceImpl.class);
 
-    private JWTUtil jwUtil = JWTUtil.getInstance();
+    private final JWTUtil jwUtil = JWTUtil.getInstance();
 
     @Value("${security.token.lasts}")
     private String securityTokenLastsString;
 
     @Value("${jwt.encryptor.password}")
-    private String ENCRYPT_KEY;
+    private String encryptKey;
     private int securityTokenLasts;
 
     /**
      * <p>Constructor for JwtManagerServiceImpl.</p>
+     * Constructor sin parametros.
      */
     public JwtManagerServiceImpl() {
     }
@@ -62,33 +63,33 @@ public class JwtManagerServiceImpl implements JwtManagerService {
     public void init() {
         // es obvio que estos valores los tengo hasta después de
         // que se terminó de ejecutar el constrctor de la clase
-        logger.info("securityTokenLastsString: " + this.securityTokenLastsString);
+        logger.info("securityTokenLastsString: {}", this.securityTokenLastsString);
         try {
             this.securityTokenLasts =Integer.parseInt(securityTokenLastsString);
         } catch (Exception e) {
             logger.error(e.getMessage());
             this.securityTokenLasts = 27; // 27 minutos dura el jwt
         }
-        logger.info("Duración de token de seguridad: "+securityTokenLasts);
-        logger.debug("Llave de encripción para el token JWT: >>>"+ENCRYPT_KEY+"<<<");
+        logger.info("Duración de token de seguridad: {}", securityTokenLasts);
+        logger.debug("Llave de encripción para el token JWT: >>> {} <<<", encryptKey);
     }
 
     /** {@inheritDoc} */
     @Override
     public String createToken(final String username) {
-        return jwUtil.createToken(username, securityTokenLasts, ENCRYPT_KEY);
+        return jwUtil.createToken(username, securityTokenLasts, encryptKey);
     }
 
     /** {@inheritDoc} */
     @Override
     public void verifyToken(String jwt, String user) throws BusinessException {
-        jwUtil.verifyToken(jwt, user, ENCRYPT_KEY);
+        jwUtil.verifyToken(jwt, user, encryptKey);
     }
 
     /** {@inheritDoc} */
     @Override
     public String getMail(String jwt) throws BusinessException {
-        return jwUtil.getMail(jwt, ENCRYPT_KEY);
+        return jwUtil.getMail(jwt, encryptKey);
     }
 
 }

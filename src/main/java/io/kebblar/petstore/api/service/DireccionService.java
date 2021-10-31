@@ -56,7 +56,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo {@link Direccion}.
      * @return int numero de registros insertados en la tabla'direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int insert(Direccion direccion) throws BusinessException;
 
@@ -65,7 +65,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo {@link Direccion}.
      * @return int numero de registros actualizados en la tabla'direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int update(Direccion direccion) throws BusinessException;
 
@@ -74,7 +74,7 @@ public interface DireccionService {
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param direccion Información del elemento a guardar.
-     * @throws Exception En caso un error al momento de guardar los datos.
+     * @throws BusinessException En caso un error al momento de guardar los datos.
      */
     int save(Direccion direccion) throws BusinessException;
 
@@ -83,7 +83,7 @@ public interface DireccionService {
      *
      * @param direccion objeto de tipo {@link Direccion}.
      * @return int numero de registros eliminados en la tabla'direccion'.
-     * @throws Exception es disparada por una regla de negocio
+     * @throws BusinessException es disparada por una regla de negocio
      */
     int delete(Direccion direccion) throws BusinessException;
 
@@ -101,19 +101,10 @@ public interface DireccionService {
      * Metodo que recibe los datos de una direccion agregada durante el proceso de compra y distribuye su
      * contenido para almacenarlo de forma correcta en el sistema.
      * @param nuevaDireccion objeto con los datos de la nueva dirección a insertar.
-     * @return entero si todo sale bien.
+     * @return entero si sale bien.
      * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
      */
     int agregaDireccion(NuevaDireccion nuevaDireccion) throws BusinessException;
 
-    /**
-     * Metodo que recibe los datos de una direccion espesifica para un usuario y regresa la dirección asociada para el envio de su compra
-     * @param idUser Id del usuario
-     * @param idDir Id de la direccion
-     * @return La información del elemento recuperado en una instacia de la clase DireccionConNombre
-     * o nulo si no se encuentra ese elemento en la tabla.
-     * @throws BusinessException En caso que ocurra un error en el sistema o en el proceso de inserción.
-     */
-    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException;
 }
 

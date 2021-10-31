@@ -20,6 +20,7 @@
  */
 package io.kebblar.petstore.api.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
@@ -48,7 +49,7 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 public class DireccionServiceImpl implements DireccionService {
     private static final Logger logger = LoggerFactory.getLogger(DireccionServiceImpl.class);
 
-    private DireccionMapper direccionMapper;
+    private final DireccionMapper direccionMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los servicios adicionales a ser empleados en esta clase.
@@ -64,8 +65,7 @@ public class DireccionServiceImpl implements DireccionService {
     public Direccion getById(Direccion direccion) throws BusinessException {
         try {
             return direccionMapper.getById(direccion);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("Error de obtención de una Dirección", e.getMessage());
         }
     }
@@ -75,8 +75,7 @@ public class DireccionServiceImpl implements DireccionService {
     public List<Direccion> getAll() throws BusinessException {
         try {
             return direccionMapper.getAll();
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("Error de obtención de las Direcciones", e.getMessage());
         }
     }
@@ -86,7 +85,7 @@ public class DireccionServiceImpl implements DireccionService {
     public int insert(Direccion direccion) throws BusinessException {
         try {
             return direccionMapper.insert(direccion);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new MapperCallException("Error de inserción de la Dirección", e.getMessage());
         }
     }
@@ -96,8 +95,7 @@ public class DireccionServiceImpl implements DireccionService {
     public int update(Direccion direccion) throws BusinessException {
         try {
             return direccionMapper.update(direccion);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("Error de actualización de una Dirección", e.getMessage());
         }
     }
@@ -107,8 +105,7 @@ public class DireccionServiceImpl implements DireccionService {
     public int delete(Direccion direccion) throws BusinessException {
         try {
             return direccionMapper.delete(direccion.getId());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("Error de borrado de una Dirección", e.getMessage());
         }
     }
@@ -122,8 +119,7 @@ public class DireccionServiceImpl implements DireccionService {
             } else {
                 return direccionMapper.update(direccion);
             }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("Error de salvado de una Dirección", e.getMessage());
         }
     }
@@ -133,19 +129,7 @@ public class DireccionServiceImpl implements DireccionService {
     public List<DireccionConNombre> getDireccionesNombre(int idUser) throws BusinessException {
         try {
             return direccionMapper.getDireccionesNombre(idUser);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws BusinessException {
-        try {
-            return direccionMapper.getDireccionEnvio(idUser, idDir);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
             throw new MapperCallException("No pudieron recuperarse las direcciones", e.getMessage());
         }
     }
@@ -173,7 +157,7 @@ public class DireccionServiceImpl implements DireccionService {
             //El id de esa dirección se asocia al id del usuario que la ingresó
             ud = new UsuarioDireccion(nuevaDireccion.getIdUsuario(), idDireccion);
             return direccionMapper.insertUsuarioDireccion(ud);
-        } catch(Exception e) {
+        } catch(SQLException e) {
             throw new MapperCallException("Error al insertar la nueva dirección y asociarla con el usuario", e.getMessage());
         }
     }

@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.service.PaisService;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -43,7 +42,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * Implementación  del REST Controller asociado a los endpoints de  gestión del POJO 'pais'.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}</p>
+ * <p>Todos los métodos de esta clase disparan {@link ControllerException}</p>
  *
  * <p>NOTA IMPORTANTE: Los distintos métodos de este controlador no llevan javadoc debido
  *                     a que la  documentación Swagger API cumple con ese objetivo.</p>

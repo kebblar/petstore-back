@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import io.kebblar.petstore.api.utils.JWTUtil;
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
     private static final Logger logger = LoggerFactory.getLogger(ConsultaServiceImpl.class);
-    
+   
     private ConsultaMapper consultaMapper;
     private UsuarioService usuarioService;
 
@@ -28,11 +29,10 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public List<ConsultaResponse> consulta(String jwt, String encryptKey) {
+	public List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException {
 	    int id = getUserIdFromJwt(jwt, encryptKey);
         try {
-            List<ConsultaResponse> result = consultaMapper.getById(id);
-            return result;
+            return consultaMapper.getById(id);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             return new ArrayList<>();
@@ -41,7 +41,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Override
 	public String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) {
-	    // Obtén el id asociado al usuario que mandó el jwt:
+	      // Obtén el id asociado al usuario que mandó el jwt:
         int id = getUserIdFromJwt(jwt, encryptKey);
         
         // Ve a la base de datos y borra todos los datos asociados:
@@ -62,7 +62,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		return "{'succeed':'true'}".replace('\'', '\"');
 	}
 	
-	private int getUserIdFromJwt(String jwt, String encryptKey) {
+	private int getUserIdFromJwt(String jwt, String encryptKey) throws BusinessException {
 	    try {
             String correo = JWTUtil.getInstance().getMail(jwt, encryptKey);
             Usuario usr = usuarioService.obtenUsuarioPorCorreo(correo);

@@ -26,10 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import io.kebblar.petstore.api.model.exceptions.*;
 import org.passay.*;
 
-import io.kebblar.petstore.api.model.exceptions.InternalServerException;
-import io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException;
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.INTERNAL_SERVER;
+import static io.kebblar.petstore.api.model.exceptions.EnumMessage.STRENGTH_PASSWORD_VALIDATOR;
 
 /**
  * <p>ValidadorClave class.</p>
@@ -46,10 +47,9 @@ public class ValidadorClave {
      *
      * @param clave a {@link java.lang.String} object.
      * @return a boolean.
-     * @throws io.kebblar.petstore.api.model.exceptions.StrengthPasswordValidatorException if any.
-     * @throws io.kebblar.petstore.api.model.exceptions.InternalServerException if any.
+     * @throws BusinessException if any
      */
-    public static boolean validate(String clave) throws StrengthPasswordValidatorException, InternalServerException {
+    public static boolean validate(String clave) throws BusinessException {
         List<Rule> rules = new ArrayList<>();
         //Rule 1: Password length should be in between
         //8 and 16 characters
@@ -70,7 +70,7 @@ public class ValidadorClave {
         try {
             props.load(is);
         } catch (IOException e) {
-            throw new InternalServerException("Ha ocurrido un error en el servidor", e.getMessage());
+            throw new CustomException(e, INTERNAL_SERVER);
         }
         MessageResolver resolver = new PropertiesMessageResolver(props);
         PasswordValidator validator = new PasswordValidator(resolver, rules);
@@ -80,7 +80,7 @@ public class ValidadorClave {
 
         if(!result.isValid()) { // NOT valid !!!!
            List<String> messages = validator.getMessages(result);
-           throw new StrengthPasswordValidatorException(messages);
+           throw new CustomException(STRENGTH_PASSWORD_VALIDATOR);
         }
         return true;
       }

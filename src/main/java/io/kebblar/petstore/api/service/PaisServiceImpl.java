@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.mapper.PaisMapper;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.DatabaseException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 
 /**
@@ -47,13 +47,13 @@ import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 @Service("paisService")
 public class PaisServiceImpl implements PaisService {
     private static final Logger logger = LoggerFactory.getLogger(PaisServiceImpl.class);
-    private PaisMapper paisMapper;
+    private final PaisMapper paisMapper;
 
     /**
      * Constructor que realiza el setting de todos los Mappers y todos los
      * servicios adicionales a ser empleados en esta clase.
      *
-     * @param paisMapper mapper utilizado para llamar a metodos de persistencia
+     * @param paisMapper mapper utilizado para llamar a métodos de persistencia
      */
     public PaisServiceImpl(PaisMapper paisMapper) {
         logger.debug("Invoking PaisServiceImpl constructor");
@@ -65,7 +65,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.getById(id);
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener el país con el id "+id, e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.getAll();
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al obtener la lista de países", e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.insert(pais);
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al insertar el pais "+pais.getNombre(), e.getMessage());
         }
     }
 
@@ -92,7 +92,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.update(pais);
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
         }
     }
 
@@ -114,7 +114,7 @@ public class PaisServiceImpl implements PaisService {
                 return paisMapper.update(pais);
             }
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
         }
     }
 
@@ -123,7 +123,7 @@ public class PaisServiceImpl implements PaisService {
         try {
             return paisMapper.getByNombre(nombre);
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            throw new MapperCallException("Error al recuperar el país "+nombre, e.getMessage());
         }
     }
 

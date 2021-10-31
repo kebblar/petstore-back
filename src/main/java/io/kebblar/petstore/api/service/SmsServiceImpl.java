@@ -20,10 +20,10 @@
  */
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import io.kebblar.petstore.api.model.exceptions.ProcessPDFException;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 
@@ -45,7 +45,6 @@ public class SmsServiceImpl implements SmsService {
     /**
      * <p>Constructor for SmsServiceImpl.</p>
      *
-     * @param environment a {@link org.springframework.core.env.Environment} object.
      * @param invokeRestSMSService a {@link io.kebblar.petstore.api.support.InvokeRemoteRestService} object.
      */
     public SmsServiceImpl(InvokeRemoteRestService invokeRestSMSService) {
@@ -54,7 +53,7 @@ public class SmsServiceImpl implements SmsService {
 
     /** {@inheritDoc} */
     @Override
-    public void envioSms(String numero, String msj) throws ProcessPDFException {
+    public void envioSms(String numero, String msj) throws BusinessException {
         logger.info("Inicia envio SMS");
             SmsResponse responseSMS = invokeRestSMSService.smsSend("+52"+numero, msj);
             logger.info("Response: {}", responseSMS.isExito());

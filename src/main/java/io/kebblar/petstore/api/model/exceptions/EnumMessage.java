@@ -40,7 +40,7 @@ public enum EnumMessage {
     
     FILE_UPLOAD(
     		902,
-    		"Error en la carga de archivos al sistema",
+    		"Error en la carga de archivos",
     		"El archivo %S no pudo ser cargado",
     		HttpStatus.BAD_REQUEST),
     
@@ -103,20 +103,7 @@ public enum EnumMessage {
     		"Token inexistente",
     		"El token referido no existe",
     		HttpStatus.UNAUTHORIZED),
-    
-//    TRANSACTION(
-//    		1012,
-//    		"Error en la transacción",
-//    		"La transacción no pudo ser procesada correctamente.",
-//    		HttpStatus.INTERNAL_SERVER_ERROR),
-    // OJO: HACER UNA EXCEPCIÓN DEDICADA A ESTE RUBRO  !!!!!!!!!!!
-    
-    UPLOAD_FILE(
-    		906,
-    		"Error al cargar un archivo",
-    		"El archivo %s no pudo ser cargado",
-    		HttpStatus.BAD_REQUEST),
-    
+
     USER_ALREADY_EXISTS(
     		1013,
     		"Usuario existente",
@@ -145,17 +132,62 @@ public enum EnumMessage {
     		1017,
     		"Token erróneo",
     		"El token proporcionado es erróneo",
-    		HttpStatus.UNAUTHORIZED);
+    		HttpStatus.UNAUTHORIZED),
+
+	PDF_GENERATION(
+			907,
+			"Error al generar el documento PDF",
+			"%s",
+			HttpStatus.BAD_REQUEST
+	),
+
+	FILE_MAX_UPLOAD(
+			908,
+			"Error en la carga de archivos al sistema",
+			"El archivo tiene un tamaño de %d, la talla máxima es de %d",
+			HttpStatus.BAD_REQUEST),
+
+	NOT_VALID_IMAGE(
+			909,
+			"Error en la carga de archivos al sistema",
+			"Formato de imagen no valido. Solo se aceptan: jpg, jpeg, png, mp4, avi",
+			HttpStatus.BAD_REQUEST),
+
+	TOO_YOUNG(
+			1018,
+			"El usuario no puede crear una cuenta",
+			"La edad mínima para pertenecer a este sitio es de %d años cumplidos.",
+			HttpStatus.BAD_REQUEST
+	),
+
+	INCORRECT_DATE(
+			1019,
+			"La fecha ingresada es incorrecta",
+			"%s",
+			HttpStatus.BAD_REQUEST
+	),
+
+	UPLOAD_SERVICE(
+			1020,
+			"Error al cargar el archivo",
+			"%s",
+			HttpStatus.BAD_REQUEST
+	),
+
+	UPLOAD_SERVICE_LOG(
+			910,
+			"Error en la carga de archivos",
+			"Error fatal",
+			HttpStatus.BAD_REQUEST
+	);
+
+
+/** ************************************************************ **/
     
-/** ************************************************************ **/
-/** ************************************************************ **/
-/** ************************************************************ **/
-/** ************************************************************ **/
-    
-    private int exceptionNumber;
-    private String shortMessage;
-    private String detailedMessage;
-    private HttpStatus httpStatus;
+    private final int exceptionNumber;
+    private final String shortMessage;
+    private final String detailedMessage;
+    private final HttpStatus httpStatus;
     
     EnumMessage(
             int exceptionNumber, 

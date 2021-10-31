@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.domain.Direccion;
 import io.kebblar.petstore.api.service.DireccionService;
 
@@ -57,7 +57,7 @@ public class DireccionController {
             notes = "Devuelve una lista de todas las direcciones"
     )
     @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
-    public List<Direccion> getAll() throws BusinessException {
+    public List<Direccion> getAll() throws ControllerException {
         return servicio.getAll();
     }
 
@@ -69,7 +69,7 @@ public class DireccionController {
     public List<DireccionConNombre> getByUsuario(
             @ApiParam(name="userId", value="Id del usuario")
             @PathVariable int userId
-    ) throws BusinessException {
+    ) throws ControllerException {
         return servicio.getDireccionesNombre(userId);
     }
 
@@ -80,7 +80,7 @@ public class DireccionController {
     @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
     public int nuevaDireccion(
             @ApiParam(name="nuevaDireccion", value="Direccion ingresada por el usuario")
-            @RequestBody NuevaDireccion nuevaDireccion) throws BusinessException{
+            @RequestBody NuevaDireccion nuevaDireccion) throws ControllerException{
         return servicio.agregaDireccion(nuevaDireccion);
     }
 }
