@@ -31,7 +31,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.*;
+import io.kebblar.petstore.api.support.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -50,10 +52,10 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
-import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.utils.DigestEncoder;
 import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.UsuarioService}.
@@ -77,6 +79,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final MailSenderService mailSenderService;
 
     private static final int RANDOM_STRING_LEN = 6;
+    private final UploadService uploadService;
+    /** jwt service. */
+    private final JwtManagerService jwtManagerService = new JwtManagerServiceImpl();
 
     /**
      * Constructor que realiza el setting de
@@ -100,6 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.registroMapper = registroMapper;
         this.usuarioDetalleMapper = usuarioDetalleMapper;
         this.mailSenderService = mailSenderService;
+        uploadService = new UploadServiceImpl();
     }
 
     /** {@inheritDoc} */
@@ -538,5 +544,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    @Override
+    public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, String jwt, int idUser) throws BusinessException {
+        try {
+            String mail = jwtManagerService.getMail(jwt);
+            if (usuarioMapper.getByCorreo(mail).getId() != idUser) throw new CustomException(UPLOAD_SERVICE);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al subir el archivo, el jwt del usuario es incorrecto", e.getMessage());
+        }
+        UploadModel um;
+        try {
+            um = uploadService.storeOne(files, destinationFolder, max);
+            usuarioDetalleMapper.subeFotoPerfil(idUser, um.getNuevoNombre());
+        } catch (SQLException | BusinessException e) {
+            throw new CustomException(UPLOAD_SERVICE);
+        }
+        return um;
+    }
 
 }

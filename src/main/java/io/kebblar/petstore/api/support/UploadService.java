@@ -55,4 +55,5 @@ public interface UploadService {
      * @throws io.kebblar.petstore.api.model.exceptions.BusinessException Se dispara en caso de que el proceso de upload falle
      */
     public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws BusinessException;
+
 }

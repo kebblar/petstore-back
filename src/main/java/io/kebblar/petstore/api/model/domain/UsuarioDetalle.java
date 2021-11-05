@@ -42,6 +42,7 @@ public class UsuarioDetalle {
     private Date fechaNacimiento;
     private String nickName;
     private String telefonoCelular;
+    private String fotoPerfil;
 
     /**
      * Constructor por default (sin parámetros).
@@ -97,6 +98,24 @@ public class UsuarioDetalle {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * <p>Getter for the field <code>fotoPerfil</code>.</p>
+     *
+     * @return a String.
+     */
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    /**
+     * <p>Setter for the field <code>fotoPerfil</code>.</p>
+     *
+     * @param fotoPerfil a String.
+     */
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     /**
@@ -221,22 +240,7 @@ public class UsuarioDetalle {
     public String toString() {
         return "UsuarioDetalle [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
                 + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", nickName="
-                + nickName + ", telefonoCelular=" + telefonoCelular + "]";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((apellidoMaterno == null) ? 0 : apellidoMaterno.hashCode());
-        result = prime * result + ((apellidoPaterno == null) ? 0 : apellidoPaterno.hashCode());
-        result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
-        result = prime * result + id;
-        result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((telefonoCelular == null) ? 0 : telefonoCelular.hashCode());
-        return result;
+                + nickName + ", telefonoCelular=" + telefonoCelular + ", fotoPerfil=" + fotoPerfil + "]";
     }
 
     /** {@inheritDoc} */
@@ -245,8 +249,15 @@ public class UsuarioDetalle {
         if (this == o) return true;
         if (!(o instanceof UsuarioDetalle)) return false;
         UsuarioDetalle that = (UsuarioDetalle) o;
-        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(apellidoPaterno, that.apellidoPaterno)
-                && Objects.equals(apellidoMaterno, that.apellidoMaterno) && Objects.equals(fechaNacimiento, that.fechaNacimiento)
-                && Objects.equals(nickName, that.nickName) && Objects.equals(telefonoCelular, that.telefonoCelular);
+        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(apellidoPaterno, that.apellidoPaterno) &&
+                Objects.equals(apellidoMaterno, that.apellidoMaterno) && Objects.equals(fechaNacimiento, that.fechaNacimiento) &&
+                Objects.equals(nickName, that.nickName) && Objects.equals(telefonoCelular, that.telefonoCelular) &&
+                Objects.equals(fotoPerfil, that.fotoPerfil);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, nickName, telefonoCelular, fotoPerfil);
     }
 }

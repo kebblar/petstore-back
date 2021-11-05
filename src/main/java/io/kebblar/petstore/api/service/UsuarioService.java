@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Rol;
+import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
@@ -29,6 +30,7 @@ import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>Definición de la interfaz de servicios para 'Usuario'.
@@ -209,4 +211,13 @@ public interface UsuarioService {
      * @throws BusinessException if any
      */
     UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+
+    /**
+     * Permite subir una foto de perfil.
+     * @param files MultipartFile archivo enviados desde el front.
+     * @param destinationFolder String path to file destination.
+     * @param max long max size allowed for the file.
+     * @return Objeto de tipo UploadModel.
+     */
+    UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, String jwt, int idUser) throws BusinessException;
 }

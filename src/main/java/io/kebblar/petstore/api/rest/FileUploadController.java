@@ -22,6 +22,7 @@ package io.kebblar.petstore.api.rest;
 
 import java.util.List;
 
+import io.kebblar.petstore.api.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,7 @@ public class FileUploadController {
     private long max;
 
     private final UploadService uploadService;
+    private final UsuarioService usuarioService;
     private final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     /**
@@ -62,10 +64,11 @@ public class FileUploadController {
      *
      * @param uploadService el servicio que ofrece almacenamiento
      */
-    @Autowired
-    public FileUploadController(UploadService uploadService) {
+    public FileUploadController(UploadService uploadService, UsuarioService usuarioService) {
         this.uploadService = uploadService;
+        this.usuarioService = usuarioService;
     }
+
 
     /**
      * Recibe un(os) archivo(s) del front y lo almacena en la carpeta y almacena una copia en
@@ -134,6 +137,19 @@ public class FileUploadController {
     @ApiParam(name = "file", value = "Imagen a guardar.")
     @RequestParam("file") MultipartFile[] files) throws ControllerException {
         return uploadService.store(files, destinationFolder, max);
+    }
+
+    @PostMapping(
+        path = "/foto-perfil.json",
+        produces = "application/json; charset=utf-8")
+    public UploadModel subeFotoPerfil(
+    @ApiParam(name = "jwt", value = "JWT del usuario")
+    @RequestHeader("jwt") String jwt,
+    @ApiParam(name = "idUser", value = "JWT del usuario")
+    @RequestHeader("idUser") int idUser,
+    @ApiParam(name = "file", value = "Imagen a guardar.")
+    @RequestParam("file") MultipartFile files) throws ControllerException {
+        return usuarioService.storeProfilePicture(files, destinationFolder, max, jwt, idUser);
     }
 }
 /*
