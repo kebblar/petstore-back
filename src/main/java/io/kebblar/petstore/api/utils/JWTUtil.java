@@ -199,7 +199,7 @@ public class JWTUtil {
      * @param currentTime a long.
      * @throws java.lang.Exception if any.
      */
-    public void valida(String token, String encryptKey, long currentTime) throws Exception {
+    public void valida(String token, long currentTime) throws Exception {
         if(token==null || token.trim().length()<1) return;
         // from: https://jwt.io/
         Base64.Decoder decoder = Base64.getDecoder();

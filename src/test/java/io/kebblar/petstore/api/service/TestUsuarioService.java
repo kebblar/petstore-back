@@ -243,14 +243,14 @@ public class TestUsuarioService {
         try {
             preregistro.setDay(31);
             preregistro.setMonth(2);
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException d) {
             assertTrue(true);
         }
         try {
             preregistro.setDay(30);
             preregistro.setMonth(2);
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException r) {
             assertTrue(true);
         }
@@ -258,7 +258,7 @@ public class TestUsuarioService {
             preregistro.setDay(29);
             preregistro.setMonth(2);
             preregistro.setYear(1997);
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException r) {
             assertTrue(true);
         }
@@ -266,7 +266,7 @@ public class TestUsuarioService {
             preregistro.setDay(31);
             preregistro.setMonth(3);
             preregistro.setYear(2019);
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException r) {
             assertTrue(true);
         }
@@ -275,23 +275,23 @@ public class TestUsuarioService {
             preregistro.setDay(29);
             preregistro.setMonth(2);
             preregistro.setYear(2000);
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException b) {
             assertTrue(true);
         }
         try {
             preregistro.setClaveHash("xxx");
-            usuarioService.preRegistro2(preregistro);
+            usuarioService.preRegistro(preregistro);
         } catch (CustomException D) {
             assertTrue(true);
         }
         try {
             when((usuarioMapper.getByCorreo(preregistro.getCorreo()))).thenReturn(null);
             preregistro.setClaveHash("Fher1234#");
-            assertNotNull(usuarioService.preRegistro2(preregistro));
+            assertNotNull(usuarioService.preRegistro(preregistro));
 
             when(registroMapper.getByMail(Mockito.any())).thenReturn(new Preregistro());
-            assertNotNull(usuarioService.preRegistro2(preregistro));
+            assertNotNull(usuarioService.preRegistro(preregistro));
         } catch (BusinessException b) {
             logger.error("no debe de pasar esto");
         }

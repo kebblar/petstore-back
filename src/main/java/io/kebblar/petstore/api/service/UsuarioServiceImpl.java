@@ -32,10 +32,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
-import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.support.*;
-import org.apache.ibatis.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -82,8 +80,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private static final int RANDOM_STRING_LEN = 6;
     private final UploadService uploadService;
-    /** jwt service. */
-    private final JwtManagerService jwtManagerService = new JwtManagerServiceImpl();
 
     /**
      * Constructor que realiza el setting de
@@ -256,7 +252,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     /** {@inheritDoc} */
     @Override
-    public Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException {
+    public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException {
         int edadMinima=21;
         int dia = preRegistroRequest.getDay();
         int mes = preRegistroRequest.getMonth();

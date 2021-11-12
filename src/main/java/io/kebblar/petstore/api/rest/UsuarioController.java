@@ -39,11 +39,14 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.response.ConsultaResponse;
 import io.kebblar.petstore.api.service.ConsultaService;
 import io.kebblar.petstore.api.service.UsuarioService;
+import io.kebblar.petstore.api.utils.JWTUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 
 /**
  * Implementación  del controlador REST asociado a los endpoints
@@ -160,9 +163,18 @@ public class UsuarioController {
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
+         
+         valida(jwt, credenciales.getUsuario());
          return this.usuarioService.cambiaClave(
                  credenciales.getUsuario(),
                  credenciales.getClave());
+    }
+    
+    private void valida(String token, String correo) throws CustomException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        if(!mail.equals(correo)) { 
+            throw new CustomException(EnumMessage.BAD_CREDENTIALS);
+        }
     }
 
     @PutMapping(

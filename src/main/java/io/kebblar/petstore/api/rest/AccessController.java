@@ -105,8 +105,8 @@ public class AccessController {
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
-            @RequestBody Preregistro preRegistroRequest) throws ControllerException {
-        return this.usuarioService.preRegistro(preRegistroRequest);
+            @RequestBody Preregistro preRegistro) throws ControllerException {
+        return this.usuarioService.preRegistro(preRegistro);
     }
 
     @ApiOperation(
@@ -118,7 +118,7 @@ public class AccessController {
     public Preregistro preRegistro2(
             @ApiParam(name = "preRegistroRequest", value = "Información con el detalle de un Usuario")
             @RequestBody @Valid PreregistroRequest preRegistroRequest) throws ControllerException {
-        return this.usuarioService.preRegistro2(preRegistroRequest);
+        return this.usuarioService.preRegistro(preRegistroRequest);
     }
 
     @ApiOperation(

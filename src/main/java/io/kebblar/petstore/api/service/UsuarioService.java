@@ -162,7 +162,7 @@ public interface UsuarioService {
      *
      * @throws BusinessException if any
      */
-    Preregistro preRegistro2(PreregistroRequest preRegistroRequest) throws BusinessException;
+    Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException;
 
     /**
      * Confirma el registro de un usuario al sistema
