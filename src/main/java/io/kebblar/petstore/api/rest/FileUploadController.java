@@ -133,7 +133,7 @@ public class FileUploadController {
     @RequestHeader("idAnuncio") int idAnuncio,
     @ApiParam(name = "file", value = "Imagen a guardar.")
     @RequestParam("file") MultipartFile[] files) throws ControllerException {
-        return uploadService.store(files, "/home/fher/petStore/petstore-back/upload", max);
+        return uploadService.store(files, destinationFolder, max);
     }
 
     @PostMapping(
@@ -144,7 +144,7 @@ public class FileUploadController {
     @RequestHeader("idUser") int idUser,
     @ApiParam(name = "image", value = "Imagen a guardar.")
     @RequestParam("image") MultipartFile files) throws ControllerException {
-        return usuarioService.storeProfilePicture(files, "/home/fher/petStore/petstore-back/upload", max, idUser);
+        return usuarioService.storeProfilePicture(files, destinationFolder, max, idUser);
     }
 
    @GetMapping(
