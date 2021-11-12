@@ -20,19 +20,16 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.kebblar.petstore.api.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
@@ -136,21 +133,30 @@ public class FileUploadController {
     @RequestHeader("idAnuncio") int idAnuncio,
     @ApiParam(name = "file", value = "Imagen a guardar.")
     @RequestParam("file") MultipartFile[] files) throws ControllerException {
-        return uploadService.store(files, destinationFolder, max);
+        return uploadService.store(files, "/home/fher/petStore/petstore-back/upload", max);
     }
 
     @PostMapping(
         path = "/foto-perfil.json",
         produces = "application/json; charset=utf-8")
     public UploadModel subeFotoPerfil(
-    @ApiParam(name = "jwt", value = "JWT del usuario")
-    @RequestHeader("jwt") String jwt,
-    @ApiParam(name = "idUser", value = "JWT del usuario")
+    @ApiParam(name = "idUser", value = "id del usuario")
     @RequestHeader("idUser") int idUser,
-    @ApiParam(name = "file", value = "Imagen a guardar.")
-    @RequestParam("file") MultipartFile files) throws ControllerException {
-        return usuarioService.storeProfilePicture(files, destinationFolder, max, jwt, idUser);
+    @ApiParam(name = "image", value = "Imagen a guardar.")
+    @RequestParam("image") MultipartFile files) throws ControllerException {
+        return usuarioService.storeProfilePicture(files, "/home/fher/petStore/petstore-back/upload", max, idUser);
     }
+
+   @GetMapping(
+           path = "/get-foto-perfil/{idUser}.json",
+           produces = "application/json; charset=utf-8")
+    public Map<String, String> getFotoPerfil(
+            @ApiParam(name = "idUser", value="id del usuario") @PathVariable int idUser)
+           throws ControllerException {
+        Map<String, String> elemento = new HashMap<>();
+        elemento.put("foto",usuarioService.getProfilePic(idUser));
+        return elemento;
+   }
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \

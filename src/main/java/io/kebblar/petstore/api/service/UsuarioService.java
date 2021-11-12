@@ -219,5 +219,12 @@ public interface UsuarioService {
      * @param max long max size allowed for the file.
      * @return Objeto de tipo UploadModel.
      */
-    UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, String jwt, int idUser) throws BusinessException;
+    UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException;
+
+    /**
+     * Obtiene la foto de perfil de un usuario.
+     * @param idUser id del usuario
+     * @return cadena que corresponde al nombre de su foto
+     */
+    String getProfilePic(int idUser) throws BusinessException;
 }

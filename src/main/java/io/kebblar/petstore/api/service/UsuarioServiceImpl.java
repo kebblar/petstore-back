@@ -32,8 +32,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.support.*;
+import org.apache.ibatis.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -545,21 +547,29 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, String jwt, int idUser) throws BusinessException {
+    public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException {
         try {
-            String mail = jwtManagerService.getMail(jwt);
-            if (usuarioMapper.getByCorreo(mail).getId() != idUser) throw new CustomException(UPLOAD_SERVICE);
+            if (usuarioMapper.getById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
         } catch (SQLException e) {
-            throw new MapperCallException("Error al subir el archivo, el jwt del usuario es incorrecto", e.getMessage());
+            throw new MapperCallException("Error al subir el archivo, el usuario es incorrecto", e.getMessage());
         }
         UploadModel um;
         try {
             um = uploadService.storeOne(files, destinationFolder, max);
             usuarioDetalleMapper.subeFotoPerfil(idUser, um.getNuevoNombre());
         } catch (SQLException | BusinessException e) {
-            throw new CustomException(UPLOAD_SERVICE);
+            throw new CustomException(UPLOAD_SERVICE, "El archivo es demasiado grande");
         }
         return um;
+    }
+
+    @Override
+    public String getProfilePic(int idUser) throws BusinessException {
+        try {
+            return usuarioDetalleMapper.getProfilePic(idUser);
+        } catch (SQLException e) {
+            throw new CustomException(NOT_FOUND);
+        }
     }
 
 }

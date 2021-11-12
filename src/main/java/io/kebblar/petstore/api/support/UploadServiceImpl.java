@@ -113,7 +113,7 @@ public class UploadServiceImpl implements UploadService {
                 true);
         String uploadModelString = uploadModel.toString();
         logger.info("Upload model: {}", uploadModelString);
-        Path filepath = Paths.get(destinationFolder, newName);
+        Path filepath = Paths.get(destinationFolder, newName); //destinationFolder
         //Path filepath = Paths.get("/Users/garellano/Desktop/peliculas", newName);
         try {
             mpf.transferTo(filepath);

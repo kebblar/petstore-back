@@ -108,6 +108,9 @@ public interface UsuarioDetalleMapper {
     @Delete("DELETE FROM usuario_detalle WHERE id_usuario = #{id} ")
     Integer delete(int id) throws SQLException;
 
-    @Insert("insert into usuario_detalle(foto_perfil) values(#{nuevoNombre}) where id_usuario = #{idUser}")
+    @Insert("update usuario_detalle set foto_perfil = #{nuevoNombre} where id_usuario=#{idUser}")
     int subeFotoPerfil(int idUser, String nuevoNombre) throws SQLException;
+
+    @Select("SELECT foto_perfil FROM usuario_detalle WHERE id_usuario = #{idUser}")
+    String getProfilePic(int idUser) throws SQLException;
 }
