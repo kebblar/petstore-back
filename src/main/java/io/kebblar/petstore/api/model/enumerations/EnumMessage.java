@@ -173,6 +173,13 @@ public enum EnumMessage {
 			"%s",
 			HttpStatus.BAD_REQUEST
 	),
+	
+	NOT_AUTHORIZED(
+			1021,
+			"Privilegios insuficientes",
+			"El usuario actual no tiene los privilegios suficientes para ejecutar esta acción",
+			HttpStatus.UNAUTHORIZED
+	),
 
 	UPLOAD_SERVICE_LOG(
 			910,

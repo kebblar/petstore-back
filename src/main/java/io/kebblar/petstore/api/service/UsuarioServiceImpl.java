@@ -190,6 +190,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public List<Rol> obtenRolesDeUsuario(String correo) throws CustomException {
+        try {
+            return rolMapper.getUserRolesByMail(correo);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
+        }
+    }
 
 //    @Override
 //    public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {

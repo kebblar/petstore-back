@@ -66,9 +66,18 @@ public interface RolMapper {
      * @return Lista de roles asociados a esta cuenta
      * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
      */
-    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} " +
-            "and rol.id=usuario_rol.id_rol and rol.activo=true;")
+    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.id=#{idUser} and rol.id=usuario_rol.id_rol and rol.activo=true;")
     List<Rol> getUserRoles(int idUser) throws SQLException;
+
+    /**
+     * Dado el correo de un usuario, la función nos devuelve la lista de roles que este tiene.
+     *
+     * @param correo mail del usuario buscado
+     * @return Lista de roles asociados a esta cuenta
+     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos
+     */
+    @Select("select rol.* from usuario, rol, usuario_rol WHERE usuario.id=usuario_rol.id_usuario and usuario.correo=#{correo} and rol.id=usuario_rol.id_rol and rol.activo=true;")
+    List<Rol> getUserRolesByMail(String correo) throws SQLException;
 
     /**
      * Inserta un usuario y su rol en una tabla que relaciona ambas características.

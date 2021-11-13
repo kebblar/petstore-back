@@ -120,6 +120,16 @@ public interface UsuarioService {
      * @throws CustomException if any
      */
     List<Rol> obtenRolesDeUsuario(int id) throws BusinessException;
+    
+    /**
+     * <p>Retorna una lista de objetos de tipo {@link Rol} que están
+     * asociadas a un usuario específico identificado por su correo.
+     * 
+     * @param correo Cadena asociada al mail de un usuario específico
+     * @return Lista de objetos de tipo {@link Rol}.
+     * @throws CustomException if any
+     */
+    List<Rol> obtenRolesDeUsuario(String correo) throws BusinessException;
 
 //    /**
 //     * <p>Retorna una lista de objetos de tipo {@link Direccion} que están

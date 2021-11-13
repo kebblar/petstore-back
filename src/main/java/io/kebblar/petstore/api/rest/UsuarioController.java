@@ -42,9 +42,11 @@ import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.utils.JWTUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.enumerations.EnumMessage;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 
@@ -110,11 +112,13 @@ public class UsuarioController {
             path = "/usuarios-thin.json",
             produces = "application/json; charset=utf-8")
     public Usuario createUserThin(
+            @RequestHeader("jwt") String jwt,
             @ApiParam(
                     name = "credenciales",
                     value = "Crea un Usuario empleando sólo sus credenciales")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
+    	this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
         return this.usuarioService.creaUsuario(credenciales);
     }
 
@@ -122,11 +126,13 @@ public class UsuarioController {
             path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public Usuario createUser(
+            @RequestHeader("jwt") String jwt,
             @ApiParam(
                     name = "usuario",
                     value = "Crea un Usuario empleando todos sus atributos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
+    	this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
         return this.usuarioService.creaUsuario(usuario);
     }
 
@@ -134,11 +140,13 @@ public class UsuarioController {
             path = "/usuarios.json",
             produces = "application/json; charset=utf-8")
     public Usuario updateUsuario(
+            @RequestHeader("jwt") String jwt,
             @ApiParam(
                     name = "usuario",
                     value = "Actualiza un Usuario empleando todos los atributos provistos")
             @RequestBody Usuario usuario
             ) throws ControllerException {
+         this.verifica(jwt, "ADMIN"); // o sea: sólo un administrador puede actualizar a un usuario cualquiera
          return this.usuarioService.actualizaUsuario(usuario);
     }
 
@@ -163,8 +171,7 @@ public class UsuarioController {
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
-         
-         valida(jwt, credenciales.getUsuario());
+         this.valida(jwt, credenciales.getUsuario());
          return this.usuarioService.cambiaClave(
                  credenciales.getUsuario(),
                  credenciales.getClave());
@@ -176,7 +183,37 @@ public class UsuarioController {
             throw new CustomException(EnumMessage.BAD_CREDENTIALS);
         }
     }
-
+    private void verifica(String token, String targetRol) throws BusinessException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        List<Rol> rolesForToken = this.usuarioService.obtenRolesDeUsuario(mail);
+        for(Rol rol : rolesForToken) {
+        	if(rol.getNombre().equalsIgnoreCase(targetRol)) {
+        		return;
+        	}
+        }
+        throw new CustomException(EnumMessage.NOT_AUTHORIZED);        
+    }
+    
+    /*
+    private void verifica(String token, String correo, String targetRol) throws BusinessException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        List<Rol> rolesForToken = this.usuarioService.obtenRolesDeUsuario(mail);
+        List<Rol> rolesForUsuario = this.usuarioService.obtenRolesDeUsuario(correo);
+        if(rolesForToken==null || rolesForUsuario==null || rolesForUsuario.size()<1 || rolesForToken.size()<1) { 
+            throw new CustomException(EnumMessage.ISSUER_NOT_VERIFIED);
+        }
+        for(Rol x : rolesForToken) {
+        	for(Rol y : rolesForUsuario) {
+        		if(x.getId()==y.getId()) {
+        			if(x.getNombre().equals(targetRol)) {
+            			return;        				
+        			}
+        		}
+        	}
+        }
+        throw new CustomException(EnumMessage.ISSUER_NOT_VERIFIED);
+    }
+*/
     @PutMapping(
             path = "/usuario-detalles.json",
             produces = "application/json; charset=utf-8")
@@ -206,7 +243,9 @@ public class UsuarioController {
     @PostMapping(
             path = "/guarda.json",
             produces = "application/json; charset=utf-8")
-    public String guarda(@RequestHeader("jwt") String jwt, @RequestBody List<ConsultaRequest> datos) throws ControllerException {
+    public String guarda(
+    		@RequestHeader("jwt") String jwt, 
+    		@RequestBody List<ConsultaRequest> datos) throws ControllerException {
         return consultaService.guarda(jwt, encryptKey, datos);
     }
 }
