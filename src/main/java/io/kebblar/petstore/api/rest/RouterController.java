@@ -68,12 +68,12 @@ public class RouterController {
         return new ModelAndView("forward:/", model);
     }
 
-    @GetMapping("/token.json")
+    @GetMapping("/token")
     public String getToken(){
         return "token-de-prueba_RouterController-getToken";
     }
 
-    @GetMapping("/info-cripto/{add}.json")
+    @GetMapping("/info-cripto/{add}")
     public BlockCyperChecker getInfo(
             @ApiParam(name="add", value ="Direccion wallet buscada." )
             @PathVariable String add){
@@ -81,7 +81,7 @@ public class RouterController {
     }
 
     @GetMapping(
-            path = "/tickers.json",
+            path = "/tickers",
             produces = "application/json; charset=utf-8")
     public TickerWrapper getTicker() {
         return remoteRestCallService.callTickerMicroservice();

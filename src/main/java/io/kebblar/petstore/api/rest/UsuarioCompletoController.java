@@ -84,7 +84,7 @@ public class UsuarioCompletoController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/usuario-completos.json",
+        value = "/usuario-completos",
         produces = "application/json; charset=utf-8")
     public List<UsuarioCompleto> getAllUsuarioCompleto() throws ControllerException {
         return usuarioCompletoService.getAll();
@@ -95,11 +95,11 @@ public class UsuarioCompletoController {
         notes = "Regresa un objeto UsuarioCompleto cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/usuario-completo/{id}.json",
+        value = "/usuario-completo/{id}",
         produces = "application/json; charset=utf-8")
     public UsuarioCompleto getUsuarioCompleto(
-    @ApiParam(name="id", value="Representa el id del usuarioCompleto buscado.")
-    @PathVariable int id
+        @ApiParam(name="id", value="Representa el id del usuarioCompleto buscado.")
+        @PathVariable int id
     ) throws ControllerException {
         return this.usuarioCompletoService.getById(id);
     }
@@ -110,19 +110,19 @@ public class UsuarioCompletoController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/usuario-completo.json",
+            value = "/usuario-completo",
             produces = "application/json; charset=utf-8")
     public int update(
-    @ApiParam(name="usuarioCompleto", value="UsuarioCompleto que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
-    @RequestBody UsuarioCompleto usuarioCompleto
+        @ApiParam(name="usuarioCompleto", value="UsuarioCompleto que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+        @RequestBody UsuarioCompleto usuarioCompleto
     ) throws ControllerException {
         return usuarioCompletoService.update(usuarioCompleto);
     }
 
     @GetMapping(
-            value = "/usuario-completos-paginated.json",
+            value = "/usuario-completos-paginated",
             produces = "application/json; charset=utf-8")
-        public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
-            return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
-        }
+    public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
+        return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
+    }
 }

@@ -56,7 +56,7 @@ public class DireccionController {
             value= "DireccionController::getAll",
             notes = "Devuelve una lista de todas las direcciones"
     )
-    @GetMapping(path = "/direcciones.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/direcciones", produces = "application/json; charset=utf-8")
     public List<Direccion> getAll() throws ControllerException {
         return servicio.getAll();
     }
@@ -65,7 +65,7 @@ public class DireccionController {
             value = "DireccionController::getByUsuario",
             notes = "Devuelve las direcciones de determinado usuario"
     )
-    @GetMapping(path = "/direcciones-con-nombre/{userId}.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/direcciones-con-nombre/{userId}", produces = "application/json; charset=utf-8")
     public List<DireccionConNombre> getByUsuario(
             @ApiParam(name="userId", value="Id del usuario")
             @PathVariable int userId
@@ -77,7 +77,7 @@ public class DireccionController {
             value = "DireccionController::nuevaDireccion",
             notes = "Inserta la dirección desde la pantalla de proceso de compra"
     )
-    @PostMapping(path = "/nueva-direccion.json", produces = "application/json; charset=utf-8")
+    @PostMapping(path = "/nueva-direccion", produces = "application/json; charset=utf-8")
     public int nuevaDireccion(
             @ApiParam(name="nuevaDireccion", value="Direccion ingresada por el usuario")
             @RequestBody NuevaDireccion nuevaDireccion) throws ControllerException{

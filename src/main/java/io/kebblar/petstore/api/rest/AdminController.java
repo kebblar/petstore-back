@@ -116,7 +116,7 @@ public class AdminController {
     }
 
     @ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
-    @GetMapping(path = "/logout.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/logout", produces = "application/json; charset=utf-8")
     public String logout(HttpServletRequest request) throws ServletException {
         String name = "tavo";
         request.logout();
@@ -125,7 +125,7 @@ public class AdminController {
     }
 
     @ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
-    @GetMapping(path = "/health.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/health", produces = "application/json; charset=utf-8")
     public Map<String, String> health(
             @ApiParam(name = "inputData", value = "Los datos de entrada", defaultValue = "ls")
             @RequestParam String inputData, HttpServletRequest request
@@ -142,14 +142,14 @@ public class AdminController {
     }
 
     @ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
-    @GetMapping(path = "/log.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/log", produces = "application/json; charset=utf-8")
     public List<String> getLog(
             @ApiParam(name = "last", value = "Número de lineas", defaultValue = "1")
             @RequestParam Integer last) {
         return healthService.getLog(last);
     }
 
-    @GetMapping(path = "/qa-stats.json", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/qa-stats", produces = "application/json; charset=utf-8")
     public String getQualityStats(
             @RequestParam int page, @RequestParam int len) {
         final String uri = "https://sonar.ci.ultrasist.net/api/issues/search?ps=" + len + "&p="

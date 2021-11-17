@@ -84,7 +84,7 @@ public class PaisController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/paises.json",
+        value = "/paises",
         produces = "application/json; charset=utf-8")
     public List<Pais> getAllPais() throws ControllerException {
         return paisService.getAll();
@@ -95,7 +95,7 @@ public class PaisController {
         notes = "Regresa un objeto Pais cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/pais/{id}.json",
+        value = "/pais/{id}",
         produces = "application/json; charset=utf-8")
     public Pais getPais(
             @ApiParam(name="id", value="Representa el id del pais buscado.")
@@ -109,7 +109,7 @@ public class PaisController {
         notes = "Recibe un objeto Pais el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/pais.json",
+            value = "/pais",
             produces = "application/json; charset=utf-8")
     public int insert(
             @ApiParam(name="pais", value="Pais que será insertado en el sistema.")
@@ -124,7 +124,7 @@ public class PaisController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/pais.json",
+            value = "/pais",
             produces = "application/json; charset=utf-8")
     public int update(
             @ApiParam(name="pais", value="Pais que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
@@ -138,7 +138,7 @@ public class PaisController {
         notes = "Recibe un objeto Pais, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/pais.json",
+            value = "/pais",
             produces = "application/json; charset=utf-8")
     public int delete(
             @ApiParam(name="pais", value="Pais que será removido del sistema.")
@@ -147,7 +147,9 @@ public class PaisController {
         return paisService.delete(pais);
     }
 
-    @GetMapping(path = "/paises/list/{nombre}.json", produces = "application/json; charset=utf-8")
+    @GetMapping(
+            value = "/paises/list/{nombre}", 
+            produces = "application/json; charset=utf-8")
     public List<Pais> getPais(
             @ApiParam(name = "nombre", value = "Nombre del Pais", defaultValue = "Mexico")
             @PathVariable String nombre) throws ControllerException {

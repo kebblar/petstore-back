@@ -89,7 +89,7 @@ public class UsuarioController {
     }
 
     @GetMapping(
-            path = "/usuarios/{id}.json",
+            path = "/usuarios/{id}",
             produces = "application/json; charset=utf-8")
     public Usuario getUser(
             @ApiParam(
@@ -102,14 +102,14 @@ public class UsuarioController {
     }
 
     @GetMapping(
-            path = "/usuarios.json",
+            path = "/usuarios",
             produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws ControllerException {
         return this.usuarioService.obtenTodosUsuarios();
     }
 
     @PostMapping(
-            path = "/usuarios-thin.json",
+            path = "/usuarios-thin",
             produces = "application/json; charset=utf-8")
     public Usuario createUserThin(
             @RequestHeader("jwt") String jwt,
@@ -123,7 +123,7 @@ public class UsuarioController {
     }
 
     @PostMapping(
-            path = "/usuarios.json",
+            path = "/usuarios",
             produces = "application/json; charset=utf-8")
     public Usuario createUser(
             @RequestHeader("jwt") String jwt,
@@ -137,7 +137,7 @@ public class UsuarioController {
     }
 
     @PutMapping(
-            path = "/usuarios.json",
+            path = "/usuarios",
             produces = "application/json; charset=utf-8")
     public Usuario updateUsuario(
             @RequestHeader("jwt") String jwt,
@@ -151,7 +151,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping(
-            path = "/usuarios.json",
+            path = "/usuarios",
             produces = "application/json; charset=utf-8")
     public Usuario borraUsuario(
             @ApiParam(
@@ -162,7 +162,7 @@ public class UsuarioController {
     }
 
     @PutMapping(
-            path = "/cambia-clave.json",
+            path = "/cambia-clave",
             produces = "application/json; charset=utf-8")
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
@@ -215,7 +215,7 @@ public class UsuarioController {
     }
 */
     @PutMapping(
-            path = "/usuario-detalles.json",
+            path = "/usuario-detalles",
             produces = "application/json; charset=utf-8")
     public UsuarioDetalle updateUsuarioDetalles(
             @RequestHeader("jwt") String jwt,
@@ -231,7 +231,7 @@ public class UsuarioController {
             value = "AccessController::consulta",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
     @GetMapping(
-            path = "/consulta.json",
+            path = "/consulta",
             produces = "application/json; charset=utf-8")
     public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) throws ControllerException {
         return consultaService.consulta(jwt, encryptKey);
@@ -241,7 +241,7 @@ public class UsuarioController {
             value = "AccessController::guarda",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
     @PostMapping(
-            path = "/guarda.json",
+            path = "/guarda",
             produces = "application/json; charset=utf-8")
     public String guarda(
     		@RequestHeader("jwt") String jwt, 

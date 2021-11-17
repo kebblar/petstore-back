@@ -89,7 +89,7 @@ public class TipoDireccionController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/tipo-direcciones.json",
+        value = "/tipo-direcciones",
         produces = "application/json; charset=utf-8")
     public List<TipoDireccion> getAllTipoDireccion() throws ControllerException {
         return tipoDireccionService.getAll();
@@ -100,7 +100,7 @@ public class TipoDireccionController {
         notes = "Regresa un objeto TipoDireccion cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/tipo-direccion/{id}.json",
+        value = "/tipo-direccion/{id}",
         produces = "application/json; charset=utf-8")
     public TipoDireccion getTipoDireccion(
     @ApiParam(name="id", value="Representa el id del tipoDireccion buscado.")
@@ -114,7 +114,7 @@ public class TipoDireccionController {
         notes = "Recibe un objeto TipoDireccion el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/tipo-direccion.json",
+            value = "/tipo-direccion",
             produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será insertado en el sistema.")
@@ -129,7 +129,7 @@ public class TipoDireccionController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/tipo-direccion.json",
+            value = "/tipo-direccion",
             produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
@@ -143,7 +143,7 @@ public class TipoDireccionController {
         notes = "Recibe un objeto TipoDireccion, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/tipo-direccion.json",
+            value = "/tipo-direccion",
             produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="tipoDireccion", value="TipoDireccion que será removido del sistema.")

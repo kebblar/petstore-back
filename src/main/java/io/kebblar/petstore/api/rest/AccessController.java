@@ -88,7 +88,7 @@ public class AccessController {
             notes = "Recibe las credenciales de inicio de sesión y las valida," +
                     "en caso de ser incorrectas, regresa un ControllerException.")
     @PostMapping(
-            path = "/login.json",
+            path = "/login",
             produces = "application/json; charset=utf-8")
     public LoginResponse login(
             @ApiParam(name="cred", value="Representa las credenciales (usuario y clave) " +
@@ -101,7 +101,7 @@ public class AccessController {
             value = "AccessController::UsuarioPreregistro",
             notes = "Recibe la información de registro de un nuevo usuario al sistema.")
     @PostMapping(
-            path = "/usuario-preregistro.json",
+            path = "/usuario-preregistro",
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro(
             @ApiParam(name = "dato", value = "Información con el detalle de un Usuario")
@@ -113,7 +113,7 @@ public class AccessController {
             value = "AccessController::?",
             notes = "Mismo de arriba?")
     @PostMapping(
-            path = "/usuario-preregistro2.json",
+            path = "/usuario-preregistro2",
             produces = "application/json; charset=utf-8")
     public Preregistro preRegistro2(
             @ApiParam(name = "preRegistroRequest", value = "Información con el detalle de un Usuario")
@@ -125,7 +125,7 @@ public class AccessController {
             value = "RegistroController::VerificarCaptcha",
             notes = "Verifica que el Google captcha V 2.0 sea correcto")
     @PostMapping(
-            value = "/check-captcha.json",
+            value = "/check-captcha",
             produces = "application/json; charset=utf-8")
     public String checkCaptcha(
             @ApiParam(name = "googleCaptcha", value = "Google Captcha V2.0")
@@ -139,7 +139,7 @@ public class AccessController {
                     "al usuario por correo electrónico para confirmar que este ultimo" +
                     "existe.")
     @GetMapping(
-            path = "/confirma-preregistro.json",
+            path = "/confirma-preregistro",
             produces = "application/json; charset=utf-8")
     public Usuario confirmaPreregistro(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
@@ -153,7 +153,7 @@ public class AccessController {
                     "el sistema internamente le envía un token de recuperación a su correo" +
                     "electrónico.")
     @GetMapping(
-            path = "/regenera-clave.json",
+            path = "/regenera-clave",
             produces = "application/json; charset=utf-8")
     public Usuario regeneraClave(
             @ApiParam(name = "correo", value = "Correo al que pertenece la clave a regenerar")
@@ -167,7 +167,7 @@ public class AccessController {
             notes = "Para regenerar su clave el usuario envía el token recibido por correo electrónico" +
                     "e introduce su nueva clave de acceso.")
     @GetMapping(
-            path = "/confirma-regenera-clave.json",
+            path = "/confirma-regenera-clave",
             produces = "application/json; charset=utf-8")
     public Usuario confirmaRegeneraClave(
             @ApiParam(name = "token", value = "Token de confirmación del registro enviado por correo")
@@ -181,7 +181,7 @@ public class AccessController {
             value = "AccessController::bitso",
             notes = "Se utiliza para recuperar el precio actual de BTC en moneda mexicana.")
     @GetMapping(
-            path = "/bitso.json",
+            path = "/bitso",
             produces = "application/json; charset=utf-8")
     public String bitso() {
         return invokeRestService.getBitsoInfo();
@@ -191,7 +191,7 @@ public class AccessController {
             value = "AccessController::binance",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
     @GetMapping(
-            path = "/binance.json",
+            path = "/binance",
             produces = "application/json; charset=utf-8")
     public String binance() {
         return invokeRestService.getBinanceInfo();

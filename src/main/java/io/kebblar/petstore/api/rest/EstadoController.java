@@ -85,7 +85,7 @@ public class EstadoController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/estados.json",
+        value = "/estados",
         produces = "application/json; charset=utf-8")
     public List<Estado> getAllEstados() throws ControllerException {
         return estadoService.getAll();
@@ -96,7 +96,7 @@ public class EstadoController {
         notes = "Regresa un objeto Estado cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/estado/{id}.json",
+        value = "/estado/{id}",
         produces = "application/json; charset=utf-8")
     public Estado getEstado(
     @ApiParam(name="id", value="Representa el id del estado buscado.")
@@ -109,7 +109,7 @@ public class EstadoController {
             value = "EstadoController::getByPais",
             notes = "Regresa los estados de determinado país")
     @GetMapping(
-            value = "/get-by-pais.json",
+            value = "/get-by-pais",
             produces = "application/json; charset=utf-8")
     public List<Estado> getByPais(
             @ApiParam(name = "id", value = "Representa el id del pais")
@@ -122,7 +122,7 @@ public class EstadoController {
         notes = "Recibe un objeto Estado el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/estado.json",
+            value = "/estado",
             produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="estado", value="Estado que será insertado en el sistema.")
@@ -136,7 +136,7 @@ public class EstadoController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/estado.json",
+            value = "/estado",
             produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="estado", value="Estado que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
@@ -149,7 +149,7 @@ public class EstadoController {
         notes = "Recibe un objeto Estado, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/estado.json",
+            value = "/estado",
             produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="estado", value="Estado que será removido del sistema.")

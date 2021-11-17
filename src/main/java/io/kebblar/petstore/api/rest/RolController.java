@@ -89,7 +89,7 @@ public class RolController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/roles.json",
+        value = "/roles",
         produces = "application/json; charset=utf-8")
     public List<Rol> getAllRol() throws ControllerException {
         return rolService.getAll();
@@ -100,7 +100,7 @@ public class RolController {
         notes = "Regresa un objeto Rol cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/rol/{id}.json",
+        value = "/rol/{id}",
         produces = "application/json; charset=utf-8")
     public Rol getRol(
     @ApiParam(name="id", value="Representa el id del rol buscado.")
@@ -114,7 +114,7 @@ public class RolController {
         notes = "Recibe un objeto Rol el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-            value = "/rol.json",
+            value = "/rol",
             produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="rol", value="Rol que será insertado en el sistema.")
@@ -129,7 +129,7 @@ public class RolController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-            value = "/rol.json",
+            value = "/rol",
             produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="rol", value="Rol que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
@@ -143,7 +143,7 @@ public class RolController {
         notes = "Recibe un objeto Rol, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-            value = "/rol.json",
+            value = "/rol",
             produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="rol", value="Rol que será removido del sistema.")

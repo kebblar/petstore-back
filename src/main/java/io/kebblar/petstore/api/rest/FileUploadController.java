@@ -75,7 +75,7 @@ public class FileUploadController {
      * @throws ControllerException si hay algun error
      */
     @PostMapping(
-            path = "/upload.json",
+            path = "/upload",
             produces = "application/json; charset=utf-8"
             )
     public UploadModel handleFileUploadWithKDMCopy(
@@ -95,7 +95,7 @@ public class FileUploadController {
     // https://github.com/ozkanpakdil/spring-examples/blob/master/demoMultiFileUpload/src/main/java/com/mascix/demoMultiFileUpload/Uploader.java
 
     @PutMapping(
-            path = "/upload.json",
+            path = "/upload",
             produces = "application/json; charset=utf-8",
             consumes = { "multipart/*" }
             )
@@ -105,7 +105,7 @@ public class FileUploadController {
     // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
 
     @PutMapping(
-            path = "/upload2.json",
+            path = "/upload2",
             produces = "application/json; charset=utf-8",
             consumes = { "multipart/*" }
             )
@@ -114,7 +114,7 @@ public class FileUploadController {
     }
 
     @PostMapping(
-        path = "/up/imagen.json",
+        path = "/up/imagen",
         produces = "application/json; charset=utf-8")
     public UploadModel guardarImagen(
     @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
@@ -125,7 +125,7 @@ public class FileUploadController {
     }
 
     @PostMapping(
-        path = "/up/imagen2.json",
+        path = "/up/imagen2",
         produces = "application/json; charset=utf-8")
     public List<UploadModel> guardarImagen2(
     @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
@@ -136,7 +136,7 @@ public class FileUploadController {
     }
 
     @PostMapping(
-        path = "/foto-perfil.json",
+        path = "/foto-perfil",
         produces = "application/json; charset=utf-8")
     public UploadModel subeFotoPerfil(
     @ApiParam(name = "idUser", value = "id del usuario")
@@ -147,7 +147,7 @@ public class FileUploadController {
     }
 
    @GetMapping(
-           path = "/get-foto-perfil/{idUser}.json",
+           path = "/get-foto-perfil/{idUser}",
            produces = "application/json; charset=utf-8")
     public Map<String, String> getFotoPerfil(
             @ApiParam(name = "idUser", value="id del usuario") @PathVariable int idUser)

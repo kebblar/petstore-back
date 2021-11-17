@@ -86,7 +86,7 @@ public class MunicipioController {
             + "capaz de ajustar lo necesario para que la lista resultante "
             + "sea suceptible de ser manipulada adecuadamente.")
     @GetMapping(
-        value = "/municipios.json",
+        value = "/municipios",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getAllMunicipio() throws ControllerException {
         return municipioService.getAll();
@@ -97,7 +97,7 @@ public class MunicipioController {
         notes = "Regresa un objeto Municipio cuyo id "
             + "coincide con el entero recibido como parametro.")
     @GetMapping(
-        value = "/municipio/{id}.json",
+        value = "/municipio/{id}",
         produces = "application/json; charset=utf-8")
     public Municipio getMunicipio(
     @ApiParam(name="id", value="Representa el id del municipio buscado.")
@@ -110,7 +110,7 @@ public class MunicipioController {
         notes = "Recibe un objeto Municipio el cual debe de ser insertado "
             + " como dato dentro de la base de datos del sistema.")
     @PostMapping(
-        value = "/municipio.json",
+        value = "/municipio",
         produces = "application/json; charset=utf-8")
     public int insert(
     @ApiParam(name="municipio", value="Municipio que será insertado en el sistema.")
@@ -124,7 +124,7 @@ public class MunicipioController {
             + "id dentro de la base de datos y es actualizado con el resto de "
             + "datos proporcionados si es que el id en efecto existe. ")
     @PutMapping(
-        value = "/municipio.json",
+        value = "/municipio",
         produces = "application/json; charset=utf-8")
     public int update(
     @ApiParam(name="municipio", value="Municipio que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
@@ -137,7 +137,7 @@ public class MunicipioController {
         notes = "Recibe un objeto Municipio, el cual es buscado dentro de "
         +"la base de datos y en caso de existir es eliminado.")
     @DeleteMapping(
-        value = "/municipio.json",
+        value = "/municipio",
         produces = "application/json; charset=utf-8")
     public int delete(
     @ApiParam(name="municipio", value="Municipio que será removido del sistema.")
@@ -146,14 +146,14 @@ public class MunicipioController {
     }
 
     @GetMapping(
-        value= "/municipio-por-estado/{id}.json",
+        value= "/municipio-por-estado/{id}",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstado(@PathVariable int id) throws ControllerException{
         return municipioService.getByEstado(id);
     }
 
     @GetMapping(
-        value= "/municipios-por-estado-paginados.json",
+        value= "/municipios-por-estado-paginados",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getByEstadoPaginados(
             @RequestParam int idEstado,
@@ -164,14 +164,14 @@ public class MunicipioController {
     }
 
     @GetMapping(
-        path = "/municipios/list/descripcion.json",
+        path = "/municipios/list/descripcion",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosDescripcion() throws ControllerException {
         return this.municipioService.getMunicipiosDescripcion();
     }
 
     @GetMapping(
-        path = "/municipios/list/{nombre}.json",
+        path = "/municipios/list/{nombre}",
         produces = "application/json; charset=utf-8")
     public List<Municipio> getMunicipiosbyEstado(
             @ApiParam(name = "nombre", value = "nombre del Municipio", defaultValue = "Ixtapaluca")
@@ -181,7 +181,7 @@ public class MunicipioController {
     }
 
     @GetMapping(
-            path = "/municipios/pais/{id}/{nombre}.json",
+            path = "/municipios/pais/{id}/{nombre}",
             produces = "application/json; charset=utf-8")
         public List<Municipio> getMunicipiosbyPaisId(
                 @ApiParam(name = "id", value = "id del pais", defaultValue = "1") @PathVariable int id,
@@ -191,7 +191,7 @@ public class MunicipioController {
         }
 
     @GetMapping(
-            path = "/municipios/estado/{id}/{nombre}.json",
+            path = "/municipios/estado/{id}/{nombre}",
             produces = "application/json; charset=utf-8")
         public List<Municipio> getMunicipiosbyEstadoId(
                 @ApiParam(name = "id", value = "id del estado", defaultValue = "1") @PathVariable int id,
