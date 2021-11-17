@@ -21,6 +21,8 @@
 package io.kebblar.petstore.api.support;
 
 import io.kebblar.petstore.api.model.exceptions.CustomException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -52,6 +54,8 @@ import org.slf4j.LoggerFactory;
  */
 @Service
 public class MailSenderServiceImpl implements MailSenderService {
+    @Value("${spring.mail.from}")
+    private String from;
 
     private static final String ERROR_IN_MAIL_SERVICE_SEND_HTML_MAIL_METHOD = "error in mail service sendHtmlMail method {}";
 
@@ -100,6 +104,7 @@ public class MailSenderServiceImpl implements MailSenderService {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(body, true);
+            helper.setFrom(from);
             javaMailSender.send(mail);
             return "succeed";
         } catch (MessagingException me) {
