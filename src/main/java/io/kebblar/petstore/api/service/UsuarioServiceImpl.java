@@ -243,42 +243,35 @@ public class UsuarioServiceImpl implements UsuarioService {
         return Math.abs(diffDays);
     }
     
-    private void validaFechaPropuesta(int anio, int mes, int dia) throws BusinessException {
-        // NOTA: Ya hay prevalidaciones en el POJO: PreregistroRequest
+    private Date validaFechaPropuesta(int anio, int mes, int dia) throws BusinessException {
+        if(dia>31)
+            throw new CustomException(INCORRECT_DATE, "Ningún mes posee mas de 31 dias");
+        
         if(dia==31 && (mes==2 || mes==4 || mes==6 || mes==9 || mes==11))
-            throw new CustomException(INCORRECT_DATE, "Este mes NO posee 31 dias");
+            throw new CustomException(INCORRECT_DATE, "El mes " + mes + "NO posee "+dia+" dias");
 
-        if(dia==30 && mes==2)
-            throw new CustomException(INCORRECT_DATE, "Febrero no posee 30 dias");
+        if(dia>=30 && mes==2)
+            throw new CustomException(INCORRECT_DATE, "Febrero no posee "+dia+" dias");
 
-        if(dia==29 && mes==2) {
-           for(int i=0; i<30; i++) {
-               int comp = 1900+(4*i);
-               if(anio==comp) return;
-           }
+        if(dia==29 && mes==2 && anio%4!=0) {
            throw new CustomException(INCORRECT_DATE, "Febrero no fué biciesto en el "+anio);
         }
+        
+        @SuppressWarnings("deprecation")
+        Date fecha = new Date(anio-1900, mes-1, dia);
+        return fecha;
     }
     
     /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException {
-        int edadMinima=21;
         int dia = preRegistroRequest.getDay();
         int mes = preRegistroRequest.getMonth();
         int anio = preRegistroRequest.getYear();
-        validaFechaPropuesta(anio, mes, dia);
-        //Calendar cal = Calendar.getInstance();
-        //cal.set(preRegistroRequest.getYear(), preRegistroRequest.getMonth()-1, preRegistroRequest.getDay());
-        //Date fechaNacimiento = cal.getTime();
-        @SuppressWarnings("deprecation")
-        Date fechaNacimiento = new Date(anio-1900, mes-1, dia);
-        Date now = new Date();
-        int diff = daysBetweenDates(now, fechaNacimiento);
-        int min = 1+ 365*edadMinima + 21/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
-        if(diff<min) throw new CustomException(TOO_YOUNG, edadMinima);
-        Preregistro preRegistro = new Preregistro
-                (preRegistroRequest.getId(), 
+        Date fechaNacimiento = validaFechaPropuesta(anio, mes, dia);
+        validaEdad(fechaNacimiento, 21); // 21 años es la edad mínima (OJO: Convertir en valor de properties)
+        Preregistro preRegistro = new Preregistro(
+                 preRegistroRequest.getId(), 
                  preRegistroRequest.getNick(), 
                  preRegistroRequest.getCorreo(), 
                  preRegistroRequest.getClaveHash(), 
@@ -286,11 +279,15 @@ public class UsuarioServiceImpl implements UsuarioService {
                  fechaNacimiento, 
                  preRegistroRequest.getRandomString(), 
                  preRegistroRequest.getInstanteRegistro());
-        try {
-            return preRegistroHelper(preRegistro);
-        } catch (Exception e) {
-            throw new CustomException(e, DATABASE, e.toString());
-        }
+        return preRegistroHelper(preRegistro);
+    }
+    
+    private Date validaEdad(Date fechaNacimiento, int edadMinima) throws BusinessException {
+        Date now = new Date();
+        int diff = daysBetweenDates(now, fechaNacimiento);
+        int min = 1+ 365*edadMinima + edadMinima/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
+        if(diff<min) throw new CustomException(TOO_YOUNG, edadMinima);
+        return fechaNacimiento;
     }
     
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
@@ -306,10 +303,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         // Busca al usuario por su correo en la tabla de 'usuario'
         try {
-            Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
+            //Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
 
             // Si el usuario ya está en la tabla 'usuario', avisa error:
-            if(usuario!=null) throw new CustomException(USER_ALREADY_EXISTS, usuario.getCorreo());
+            //if(usuario!=null) throw new CustomException(USER_ALREADY_EXISTS, usuario.getCorreo());
+            // SE COMENTAN LAS LINEAS ANTERIORES PARA EVITAR UN ATEQUE DE ENUMERACIÓN.
+            // si el correo ya está registrado, simplemente se vuelve a enviar una clave de re-registro
 
             // Busca el registro por mail en la tabla de 'registro':
             registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
@@ -347,7 +346,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 preRegistroRequest.getCorreo(),
                 randomString,
                 "Clave de confirmación de registro");
-        logger.info("Se ha enviado un correo para confirmación a: {}", preRegistroRequest.getCorreo());
+        logger.info("Se ha enviado un correo para confirmación a: {} con la clave: {}", preRegistroRequest.getCorreo(), randomString);
         return preRegistroRequest;
     }
 
@@ -389,7 +388,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private Usuario doTransaction(Preregistro preregistro, String randomString) throws SQLException {
-        // Crea un usuario e insertalo en la base:
+        Usuario testUser = usuarioMapper.getByCorreo(preregistro.getCorreo());
+        if(testUser != null) {
+            // Si el usuario SI existe, sólo actualiza su password y el instante de ultimo cambio
+            testUser.setClave(preregistro.getClaveHash());
+            testUser.setInstanteUltimoCambioClave(System.currentTimeMillis());
+            usuarioMapper.update(testUser);
+            return testUser;
+        }
+        
+        // Si el usuario NO existe, Créalo e insértalo en la base:
         Usuario usuario = new Usuario(
             0, //id (que va a ser autogenerado)
             preregistro.getCorreo(),       // correo
@@ -402,13 +410,11 @@ public class UsuarioServiceImpl implements UsuarioService {
             System.currentTimeMillis(),  // instanteUltimoCambioClave
             "", // regeneraClaveToken
             0   // regeneraClaveTokenInstante
-        );
-        usuarioMapper.insert(usuario);
-
+        );            
+        usuarioMapper.insert(usuario); 
 
         // Obtén el id autogenerado del usuario recién creado:
         int idUsuario = usuario.getId();
-
 
         // Crea un objeto 'usuarioDetalles' (con el ID autogenerado) e insértalo en la DB:
         UsuarioDetalle usuarioDetalle = new UsuarioDetalle(
