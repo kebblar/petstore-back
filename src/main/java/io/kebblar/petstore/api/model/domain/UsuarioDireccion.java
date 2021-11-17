@@ -116,4 +116,9 @@ public class UsuarioDireccion {
                 ", idDireccion=" + idDireccion +
                 '}';
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

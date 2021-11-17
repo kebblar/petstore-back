@@ -138,4 +138,9 @@ public class SmsRequest {
             return false;
         return true;
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

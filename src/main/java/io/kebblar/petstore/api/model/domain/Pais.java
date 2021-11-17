@@ -138,4 +138,8 @@ public class Pais implements Serializable {
         );
     }
 
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

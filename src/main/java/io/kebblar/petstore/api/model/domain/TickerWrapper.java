@@ -394,4 +394,137 @@ public class TickerWrapper {
         this.count = count;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((askPrice == null) ? 0 : askPrice.hashCode());
+        result = prime * result + ((askQty == null) ? 0 : askQty.hashCode());
+        result = prime * result + ((bidPrice == null) ? 0 : bidPrice.hashCode());
+        result = prime * result + ((bidQty == null) ? 0 : bidQty.hashCode());
+        result = prime * result + (int) (closeTime ^ (closeTime >>> 32));
+        result = prime * result + (int) (count ^ (count >>> 32));
+        result = prime * result + (int) (firstId ^ (firstId >>> 32));
+        result = prime * result + ((highPrice == null) ? 0 : highPrice.hashCode());
+        result = prime * result + (int) (lastId ^ (lastId >>> 32));
+        result = prime * result + ((lastPrice == null) ? 0 : lastPrice.hashCode());
+        result = prime * result + ((lastQty == null) ? 0 : lastQty.hashCode());
+        result = prime * result + ((lowPrice == null) ? 0 : lowPrice.hashCode());
+        result = prime * result + ((openPrice == null) ? 0 : openPrice.hashCode());
+        result = prime * result + (int) (openTime ^ (openTime >>> 32));
+        result = prime * result + ((prevClosePrice == null) ? 0 : prevClosePrice.hashCode());
+        result = prime * result + ((priceChange == null) ? 0 : priceChange.hashCode());
+        result = prime * result + ((priceChangePercent == null) ? 0 : priceChangePercent.hashCode());
+        result = prime * result + ((quoteVolume == null) ? 0 : quoteVolume.hashCode());
+        result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+        result = prime * result + ((volume == null) ? 0 : volume.hashCode());
+        result = prime * result + ((weightedAvgPrice == null) ? 0 : weightedAvgPrice.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TickerWrapper other = (TickerWrapper) obj;
+        if (askPrice == null) {
+            if (other.askPrice != null)
+                return false;
+        } else if (!askPrice.equals(other.askPrice))
+            return false;
+        if (askQty == null) {
+            if (other.askQty != null)
+                return false;
+        } else if (!askQty.equals(other.askQty))
+            return false;
+        if (bidPrice == null) {
+            if (other.bidPrice != null)
+                return false;
+        } else if (!bidPrice.equals(other.bidPrice))
+            return false;
+        if (bidQty == null) {
+            if (other.bidQty != null)
+                return false;
+        } else if (!bidQty.equals(other.bidQty))
+            return false;
+        if (closeTime != other.closeTime)
+            return false;
+        if (count != other.count)
+            return false;
+        if (firstId != other.firstId)
+            return false;
+        if (highPrice == null) {
+            if (other.highPrice != null)
+                return false;
+        } else if (!highPrice.equals(other.highPrice))
+            return false;
+        if (lastId != other.lastId)
+            return false;
+        if (lastPrice == null) {
+            if (other.lastPrice != null)
+                return false;
+        } else if (!lastPrice.equals(other.lastPrice))
+            return false;
+        if (lastQty == null) {
+            if (other.lastQty != null)
+                return false;
+        } else if (!lastQty.equals(other.lastQty))
+            return false;
+        if (lowPrice == null) {
+            if (other.lowPrice != null)
+                return false;
+        } else if (!lowPrice.equals(other.lowPrice))
+            return false;
+        if (openPrice == null) {
+            if (other.openPrice != null)
+                return false;
+        } else if (!openPrice.equals(other.openPrice))
+            return false;
+        if (openTime != other.openTime)
+            return false;
+        if (prevClosePrice == null) {
+            if (other.prevClosePrice != null)
+                return false;
+        } else if (!prevClosePrice.equals(other.prevClosePrice))
+            return false;
+        if (priceChange == null) {
+            if (other.priceChange != null)
+                return false;
+        } else if (!priceChange.equals(other.priceChange))
+            return false;
+        if (priceChangePercent == null) {
+            if (other.priceChangePercent != null)
+                return false;
+        } else if (!priceChangePercent.equals(other.priceChangePercent))
+            return false;
+        if (quoteVolume == null) {
+            if (other.quoteVolume != null)
+                return false;
+        } else if (!quoteVolume.equals(other.quoteVolume))
+            return false;
+        if (symbol == null) {
+            if (other.symbol != null)
+                return false;
+        } else if (!symbol.equals(other.symbol))
+            return false;
+        if (volume == null) {
+            if (other.volume != null)
+                return false;
+        } else if (!volume.equals(other.volume))
+            return false;
+        if (weightedAvgPrice == null) {
+            if (other.weightedAvgPrice != null)
+                return false;
+        } else if (!weightedAvgPrice.equals(other.weightedAvgPrice))
+            return false;
+        return true;
+    }
+    
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

@@ -123,4 +123,9 @@ public class InformacionMedia {
                 ", idTipo=" + idTipo +
                 '}';
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

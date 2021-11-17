@@ -207,4 +207,8 @@ public class SmsResponse {
                 && Objects.equals(resultMsg, that.resultMsg);
     }
 
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

@@ -278,4 +278,9 @@ public class Preregistro {
                 Objects.equals(telefono, that.telefono) && Objects.equals(fechaNacimiento, that.fechaNacimiento) &&
                 Objects.equals(randomString, that.randomString);
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

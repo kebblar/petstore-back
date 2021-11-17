@@ -74,4 +74,38 @@ public class GoogleCaptcha {
     public String getIp() {
         return ip;
     }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+        result = prime * result + ((response == null) ? 0 : response.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GoogleCaptcha other = (GoogleCaptcha) obj;
+        if (ip == null) {
+            if (other.ip != null)
+                return false;
+        } else if (!ip.equals(other.ip))
+            return false;
+        if (response == null) {
+            if (other.response != null)
+                return false;
+        } else if (!response.equals(other.response))
+            return false;
+        return true;
+    }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

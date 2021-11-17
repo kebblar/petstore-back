@@ -155,7 +155,7 @@ public class Rol {
      *
      * @return entero representando el hash
      */
-    public long getHash() {
+    public int getHash() {
         return hashCode();
     }
 }

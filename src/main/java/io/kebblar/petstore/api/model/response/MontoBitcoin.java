@@ -125,4 +125,9 @@ public class MontoBitcoin {
                 ", cambio=" + cambio +
                 '}';
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

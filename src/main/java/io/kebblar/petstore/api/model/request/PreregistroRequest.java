@@ -338,4 +338,9 @@ public class PreregistroRequest {
                 Objects.equals(claveHash, that.claveHash) && Objects.equals(telefono, that.telefono) &&
                 Objects.equals(randomString, that.randomString);
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

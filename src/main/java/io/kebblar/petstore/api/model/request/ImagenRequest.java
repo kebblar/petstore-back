@@ -91,4 +91,6 @@ public class ImagenRequest {
     public String toString() {
         return "ImagenRequest [id=" + id + ", files=" + Arrays.toString(files) + "]";
     }
+    
+    
 }

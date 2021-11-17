@@ -113,4 +113,9 @@ public class CredencialesRequest {
             return false;
         return true;
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

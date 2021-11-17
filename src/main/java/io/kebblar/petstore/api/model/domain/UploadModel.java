@@ -191,4 +191,61 @@ public class UploadModel {
         return "UploadModel [id=" + id + ", nombreOriginal=" + nombreOriginal + ", nuevoNombre=" + nuevoNombre
                 + ", md5=" + md5 + ", fechaCarga=" + fechaCarga + ", peso=" + peso + ", activo=" + activo + "]";
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (activo ? 1231 : 1237);
+        result = prime * result + ((fechaCarga == null) ? 0 : fechaCarga.hashCode());
+        result = prime * result + id;
+        result = prime * result + ((md5 == null) ? 0 : md5.hashCode());
+        result = prime * result + ((nombreOriginal == null) ? 0 : nombreOriginal.hashCode());
+        result = prime * result + ((nuevoNombre == null) ? 0 : nuevoNombre.hashCode());
+        result = prime * result + (int) (peso ^ (peso >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UploadModel other = (UploadModel) obj;
+        if (activo != other.activo)
+            return false;
+        if (fechaCarga == null) {
+            if (other.fechaCarga != null)
+                return false;
+        } else if (!fechaCarga.equals(other.fechaCarga))
+            return false;
+        if (id != other.id)
+            return false;
+        if (md5 == null) {
+            if (other.md5 != null)
+                return false;
+        } else if (!md5.equals(other.md5))
+            return false;
+        if (nombreOriginal == null) {
+            if (other.nombreOriginal != null)
+                return false;
+        } else if (!nombreOriginal.equals(other.nombreOriginal))
+            return false;
+        if (nuevoNombre == null) {
+            if (other.nuevoNombre != null)
+                return false;
+        } else if (!nuevoNombre.equals(other.nuevoNombre))
+            return false;
+        if (peso != other.peso)
+            return false;
+        return true;
+    }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

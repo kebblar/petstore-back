@@ -311,4 +311,9 @@ public class NuevaDireccion {
                 ", idMunicipio=" + idMunicipio +
                 '}';
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

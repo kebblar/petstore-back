@@ -105,6 +105,10 @@ public class Criterio {
         return Objects.hash(idCategoria, valor);
     }
 
+    public int getHash() {
+        return this.hashCode();
+    }
+    
     /** {@inheritDoc} */
     @Override
     public String toString() {

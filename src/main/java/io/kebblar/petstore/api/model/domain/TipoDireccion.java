@@ -160,4 +160,9 @@ public class TipoDireccion implements Serializable {
             activo
         );
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

@@ -234,4 +234,9 @@ public class DireccionConNombre implements Serializable {
     public int hashCode() {
         return Objects.hash(id, calleNumero, colonia, cp, municipioNombre, estadoNombre, paisNombre);
     }
+
+    public int getHash() {
+        return this.hashCode();
+    }
+    
 }

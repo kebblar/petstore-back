@@ -308,6 +308,10 @@ public class Direccion implements Serializable {
         return result;
     }
 
+    public int getHash() {
+        return this.hashCode();
+    }
+    
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
