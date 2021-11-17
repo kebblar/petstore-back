@@ -104,7 +104,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
     public String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException {
         try {
             return genericChecker(
-                    googleRecaptchaUrl,
+                    "https://www.google.com/recaptcha/api/siteverify",
                     googleRecaptchaSecret,
                     googleCaptcha.getResponse());
         } catch (RestClientException e) {
