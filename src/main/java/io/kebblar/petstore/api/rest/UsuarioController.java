@@ -108,6 +108,13 @@ public class UsuarioController {
         return this.usuarioService.obtenTodosUsuarios();
     }
 
+    @GetMapping(
+            path = "/count-users",
+            produces = "application/json; charset=utf-8")
+    public int countUsers() throws ControllerException {
+        return this.usuarioService.obtenTodosUsuarios().size();
+    }
+
     @PostMapping(
             path = "/usuarios-thin",
             produces = "application/json; charset=utf-8")
