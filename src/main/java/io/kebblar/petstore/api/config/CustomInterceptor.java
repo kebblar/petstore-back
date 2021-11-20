@@ -107,7 +107,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
                     try {
                         JWTUtil.getInstance().verifyToken(jwtToken, encryptKey, System.currentTimeMillis());
                     } catch (Exception e) {
-                        construye(response, e.getMessage());
+                        construye(response, e.getMessage(), jwtToken);
                         return false;
                     }
                 }
@@ -122,10 +122,14 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
      * @param response código de error Http
      * @param message corresponde al texto que explica la situación
      */
-    private void construye(HttpServletResponse response, String message) {
+    private void construye(HttpServletResponse response, String message, String token) {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> map = new HashMap<>();
-        map.put("invalid-token", message);
+        Map<String, Object> map = new HashMap<>();        
+        map.put("exceptionTypeNumber", 1090);
+        map.put("exceptionTypeKey", "EX_1090");
+        map.put("exceptionLongDescription", message + " (" + token + ")");
+        map.put("exceptionShortDescription", "Invalid Token");
+        map.put("httpResponse",  HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         try {
