@@ -141,4 +141,24 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
         }
     }
 
+    @Override
+    public List<UsuarioCompleto> getByOrder(int element, String order) throws BusinessException{
+        try {
+            if (element == 1) {
+                return (order.equals("asc" )) ? usuarioCompletoMapper.orderByAsc("nombre, apellido_paterno, apellido_materno" ) :
+                        usuarioCompletoMapper.orderByDesc("nombre, apellido_paterno, apellido_materno" );
+            }else if (element == 2) {
+                return (order.equals("asc" )) ? usuarioCompletoMapper.orderByAsc("correo" ) :
+                        usuarioCompletoMapper.orderByDesc("correo" );
+            }else if (element == 3) {
+                return (order.equals("asc")) ? usuarioCompletoMapper.orderByAsc("telefono_celular"):
+                        usuarioCompletoMapper.orderByDesc("telefono_celular");
+            } else {
+                throw new MapperCallException("Parametros incorrectos", "la columna no exite" );
+            }
+        } catch (SQLException s) {
+            throw new MapperCallException("Error al devolver los elementos ordenados", s.getMessage());
+        }
+    }
+
 }

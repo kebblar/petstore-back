@@ -78,4 +78,12 @@ public interface UsuarioCompletoService {
      * @throws BusinessException si ocurre un problema al contar a los usuarios.
      */
     int countUsuarios() throws BusinessException;
+
+    /**
+     * Retorna en el orden especificado por sus parametros los elementos de la lista de usuarios
+     * @param element elemento numerico que representa la columna por la que se va a ordenar
+     * @param order ascendente o descendente.
+     * @return lista de usuarios ordenados
+     */
+    List<UsuarioCompleto> getByOrder(int element, String order) throws BusinessException;
 }

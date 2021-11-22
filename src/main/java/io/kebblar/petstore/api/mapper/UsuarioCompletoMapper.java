@@ -119,4 +119,13 @@ public interface UsuarioCompletoMapper {
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo LIMIT #{startRow},#{pageSize}")
     List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over() as num,"+ CAMPOS_USER_C + "FROM usuario_completo ORDER BY #{s} asc")
+    List<UsuarioCompleto> orderByAsc(String s) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over() as num,"+ CAMPOS_USER_C + "FROM usuario_completo ORDER BY #{s} desc")
+    List<UsuarioCompleto> orderByDesc(String s) throws SQLException;
+
 }

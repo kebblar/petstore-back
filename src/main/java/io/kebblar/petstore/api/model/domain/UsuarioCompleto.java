@@ -39,6 +39,7 @@ public class UsuarioCompleto implements Serializable {
      * Atributos de la clase
      */
     private int id;
+    private int num;
     private String nickName;
     private String correo;
     private String telefonoCelular;
@@ -85,6 +86,7 @@ public class UsuarioCompleto implements Serializable {
      */
     public UsuarioCompleto(
             int id,
+            int num,
             String correo,
             String clave,
             long creado,
@@ -102,6 +104,7 @@ public class UsuarioCompleto implements Serializable {
             String nickName,
             String telefonoCelular) {
         this.id = id;
+        this.num = num;
         this.correo = correo;
         this.clave = clave;
         this.creado = creado;
@@ -294,6 +297,14 @@ public class UsuarioCompleto implements Serializable {
         return regeneraClaveToken;
     }
 
+    public int getnum() {
+        return num;
+    }
+
+    public void setnum(int num) {
+        this.num = num;
+    }
+
     /**
      * <p>Setter for the field <code>regeneraClaveToken</code>.</p>
      *
@@ -435,6 +446,7 @@ public class UsuarioCompleto implements Serializable {
     public String toString() {
         return "[UsuarioCompleto] : ["
                 + " id =" + this.id
+                + " num =" + this.num
                 + " correo =" + this.correo
                 + " clave =" + this.clave
                 + " creado =" + this.creado
@@ -466,6 +478,7 @@ public class UsuarioCompleto implements Serializable {
         UsuarioCompleto other = (UsuarioCompleto) obj;
         return
                id == other.id &&
+               num == other.num &&
                correo == other.correo &&
                clave == other.clave &&
                creado == other.creado &&
@@ -489,6 +502,7 @@ public class UsuarioCompleto implements Serializable {
     public int hashCode() {
         return Objects.hash(
             id,
+            num,
             correo,
             clave,
             creado,

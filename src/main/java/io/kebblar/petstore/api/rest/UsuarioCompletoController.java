@@ -125,4 +125,11 @@ public class UsuarioCompletoController {
     public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
         return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
     }
+
+    @GetMapping(
+            path="/usuario-order",
+            produces="application/json; charset=utf-8")
+    public List<UsuarioCompleto> getByOrder(int element, String order) throws ControllerException {
+        return usuarioCompletoService.getByOrder(element,order);
+    }
 }
