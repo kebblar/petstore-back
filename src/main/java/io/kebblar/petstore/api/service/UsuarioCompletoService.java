@@ -85,5 +85,5 @@ public interface UsuarioCompletoService {
      * @param order ascendente o descendente.
      * @return lista de usuarios ordenados
      */
-    List<UsuarioCompleto> getByOrder(int element, String order) throws BusinessException;
+    List<UsuarioCompleto> getByOrder(int element, String order, int pageNumber, int pageSize) throws BusinessException;
 }

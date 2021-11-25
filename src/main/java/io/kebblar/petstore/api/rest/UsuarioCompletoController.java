@@ -129,7 +129,7 @@ public class UsuarioCompletoController {
     @GetMapping(
             path="/usuario-order",
             produces="application/json; charset=utf-8")
-    public List<UsuarioCompleto> getByOrder(int element, String order) throws ControllerException {
-        return usuarioCompletoService.getByOrder(element,order);
+    public List<UsuarioCompleto> getByOrder(int element, String order, int pageNumber, int pageSize) throws ControllerException {
+        return usuarioCompletoService.getByOrder(element,order,pageNumber,pageSize);
     }
 }

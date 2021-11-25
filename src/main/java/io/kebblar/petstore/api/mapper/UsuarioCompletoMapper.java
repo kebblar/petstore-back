@@ -121,11 +121,28 @@ public interface UsuarioCompletoMapper {
     List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;
 
     @ResultMap("UsuarioCompletoMap")
-    @Select("SELECT row_number() over() as num,"+ CAMPOS_USER_C + "FROM usuario_completo ORDER BY #{s} asc")
-    List<UsuarioCompleto> orderByAsc(String s) throws SQLException;
+    @Select("SELECT row_number() over(ORDER BY nombre, apellido_paterno, apellido_materno, correo asc) as num, "+CAMPOS_USER_C+" FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderByNombreAsc(int startRow, int pageSize) throws SQLException;
 
     @ResultMap("UsuarioCompletoMap")
-    @Select("SELECT row_number() over() as num,"+ CAMPOS_USER_C + "FROM usuario_completo ORDER BY #{s} desc")
-    List<UsuarioCompleto> orderByDesc(String s) throws SQLException;
+    @Select("SELECT row_number() over(ORDER BY nombre desc, apellido_paterno desc, apellido_materno desc, correo desc) as num, "+CAMPOS_USER_C+" FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderByNombreDesc(int startRow, int pageSize) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over(ORDER BY correo asc) as num,"+ CAMPOS_USER_C + "FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderMailByAsc(int startRow, int pageSize) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over(ORDER BY correo desc) as num,"+ CAMPOS_USER_C + "FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderMailByDesc(int startRow, int pageSize) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over(ORDER BY telefono_celular desc) as num,"+ CAMPOS_USER_C + "FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderTelByDesc(int startRow, int pageSize) throws SQLException;
+
+    @ResultMap("UsuarioCompletoMap")
+    @Select("SELECT row_number() over(ORDER BY telefono_celular asc) as num,"+ CAMPOS_USER_C + "FROM usuario_completo LIMIT #{startRow},#{pageSize}")
+    List<UsuarioCompleto> orderTelByAsc(int startRow, int pageSize) throws SQLException;
 
 }
+

@@ -142,18 +142,18 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
     }
 
     @Override
-    public List<UsuarioCompleto> getByOrder(int element, String order) throws BusinessException{
+    public List<UsuarioCompleto> getByOrder(int element, String order, int pageNumber, int pageSize) throws BusinessException{
         try {
             if (element == 1) {
-                return (order.equals("asc" )) ? usuarioCompletoMapper.orderByAsc("nombre, apellido_paterno, apellido_materno" ) :
-                        usuarioCompletoMapper.orderByDesc("nombre, apellido_paterno, apellido_materno" );
+                return (order.equals("asc")) ? usuarioCompletoMapper.orderByNombreAsc((pageNumber-1)*pageSize, pageSize) :
+                        usuarioCompletoMapper.orderByNombreDesc((pageNumber-1)*pageSize, pageSize);
             }else if (element == 2) {
-                return (order.equals("asc" )) ? usuarioCompletoMapper.orderByAsc("correo" ) :
-                        usuarioCompletoMapper.orderByDesc("correo" );
-            }else if (element == 3) {
-                return (order.equals("asc")) ? usuarioCompletoMapper.orderByAsc("telefono_celular"):
-                        usuarioCompletoMapper.orderByDesc("telefono_celular");
-            } else {
+                return (order.equals("asc")) ? usuarioCompletoMapper.orderMailByAsc( (pageNumber-1)*pageSize, pageSize) :
+                        usuarioCompletoMapper.orderMailByDesc( (pageNumber-1)*pageSize, pageSize);
+            } else if (element == 3) {
+                return (order.equals("asc")) ? usuarioCompletoMapper.orderTelByAsc((pageNumber-1)*pageSize, pageSize) :
+                        usuarioCompletoMapper.orderTelByDesc((pageNumber-1)*pageSize, pageSize);
+            }else {
                 throw new MapperCallException("Parametros incorrectos", "la columna no exite" );
             }
         } catch (SQLException s) {
