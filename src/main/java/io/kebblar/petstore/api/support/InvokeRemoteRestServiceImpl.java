@@ -103,7 +103,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
     @Override
     public String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException {
         try {
-            return genericChecker(
+            return genericRecaptchaChecker(
                     googleRecaptchaUrl,
                     googleRecaptchaSecret,
                     googleCaptcha.getResponse());
@@ -111,8 +111,12 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
             throw new CustomException(GOOGLE_CAPTCHA);
         }
     }
+    /*
+    Cuenta: petstore@i11.mx 
+    https://www.google.com/recaptcha/admin/site/490448818/settings    
+    */
 
-    private String genericChecker(String url, String secret, String response) {
+    private String genericRecaptchaChecker(String url, String secret, String response) {
         StringBuilder redirectUrl = new StringBuilder();
         redirectUrl.append(url);
         redirectUrl.append("?secret=");

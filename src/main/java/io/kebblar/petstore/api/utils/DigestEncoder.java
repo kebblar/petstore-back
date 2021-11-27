@@ -78,8 +78,7 @@ public class DigestEncoder  {
         try {
             return toHexString(getSHA256(source, salt));
         } catch (NoSuchAlgorithmException e) {
-            logger.error("This Wouldn't ocurr never ever...");
-            logger.error(e.getMessage());
+            logger.error("This Wouldn't ocurr never ever... "+ e.getMessage());
             return null;
         }
     }
@@ -118,8 +117,11 @@ public class DigestEncoder  {
         // Convert byte array into signum representation
         BigInteger number = new BigInteger(1, hash);
 
-        // Convert message digest into hex value
-        StringBuilder hexString = new StringBuilder(number.toString(16));
+        // get hexadecimal format
+        String hexa = number.toString(16);
+        
+        // Prepare for padding
+        StringBuilder hexString = new StringBuilder(hexa);
 
         // Pad with leading zeros
         while (hexString.length() < 32) {
