@@ -273,7 +273,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private void sendMail(String nick, String correo, String randomString, String titulo) {
-        String body="<h1>Hola, "+nick+". Tu calve es: "+randomString+" y tiene una validez de 10 minutos</h1>";
+        String body= String.format("<h1>Hola %s. Tu clave de acceso es %s y tiene una validez de %d minutos. (body auxiliar) </h1>", nick, randomString, 10);
         try {
             body = getTemplate(nick, randomString);
         } catch (CustomException e) {
@@ -297,7 +297,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         } catch (IOException e) {
             throw new CustomException(e, INTERNAL_SERVER, "No se ha podido leer el archivo " + archivo);
         }
-
     }
 
     /** {@inheritDoc} */
