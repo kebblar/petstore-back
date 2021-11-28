@@ -21,26 +21,20 @@
 package io.kebblar.petstore.api.rest;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import io.kebblar.petstore.api.service.HealthService;
 import io.swagger.annotations.Api;
@@ -93,36 +87,6 @@ public class AdminController {
         this.healthService = healthService;
     }
 
-    @ApiOperation( value = "AdminController::UploadPictures",
-            notes = "sube una imagen al sistema")
-    @PostMapping(path="/UploadPictures", produces = "application/json; charset=utf-8")
-    public String upload(
-        @ApiParam(name = "request", value = "MultipartFile del archivo")
-        MultipartHttpServletRequest request,
-        HttpServletResponse response){
-
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while(parameterNames.hasMoreElements()) {
-            String name = parameterNames.nextElement();
-            String value = request.getParameter(name);
-            logger.info("{} : {}", name, value);
-        }
-
-        Map<String, MultipartFile> fileMap = request.getFileMap();
-        for (MultipartFile multipartFile : fileMap.values()) {
-            logger.info(multipartFile.getOriginalFilename());
-        }
-        return "ok";
-    }
-
-    @ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
-    @GetMapping(path = "/logout", produces = "application/json; charset=utf-8")
-    public String logout(HttpServletRequest request) throws ServletException {
-        String name = "tavo";
-        request.logout();
-        String res = "{-" + name + "-:-you have been loged out-}";
-        return res.replace('-', '"');
-    }
 
     @ApiOperation(value = "AdminController::health", notes = "Entrega un informe a cerca de las variables del sistema")
     @GetMapping(path = "/health", produces = "application/json; charset=utf-8")

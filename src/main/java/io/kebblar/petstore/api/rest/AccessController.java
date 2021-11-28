@@ -21,6 +21,8 @@
 package io.kebblar.petstore.api.rest;
 
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -197,4 +199,13 @@ public class AccessController {
         return invokeRestService.getBinanceInfo();
     }
 
+    @ApiOperation(value = "AdminController::logout", notes = "Provoca un 'logout' del usuario firmado en el sistema")
+    @GetMapping(path = "/logout", produces = "application/json; charset=utf-8")
+    public String logout(HttpServletRequest request) throws ServletException {
+        String name = "tavo";
+        request.logout();
+        String res = "{-" + name + "-:-you have been loged out-}";
+        return res.replace('-', '"');
+    }
+    
 }

@@ -20,9 +20,12 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import io.kebblar.petstore.api.service.UsuarioService;
 import org.slf4j.Logger;
@@ -30,11 +33,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
@@ -156,6 +161,29 @@ public class FileUploadController {
         elemento.put("foto",usuarioService.getProfilePic(idUser));
         return elemento;
    }
+
+   @ApiOperation( value = "AdminController::UploadPictures",
+           notes = "sube una imagen al sistema")
+   @PostMapping(path="/UploadPictures", produces = "application/json; charset=utf-8")
+   public String upload(
+       @ApiParam(name = "request", value = "MultipartFile del archivo")
+       MultipartHttpServletRequest request,
+       HttpServletResponse response){
+
+       Enumeration<String> parameterNames = request.getParameterNames();
+       while(parameterNames.hasMoreElements()) {
+           String name = parameterNames.nextElement();
+           String value = request.getParameter(name);
+           logger.info("{} : {}", name, value);
+       }
+
+       Map<String, MultipartFile> fileMap = request.getFileMap();
+       for (MultipartFile multipartFile : fileMap.values()) {
+           logger.info(multipartFile.getOriginalFilename());
+       }
+       return "ok";
+   }
+   
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \
