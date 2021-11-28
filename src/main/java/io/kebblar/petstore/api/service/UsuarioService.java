@@ -20,16 +20,14 @@
  */
 package io.kebblar.petstore.api.service;
 
-import java.util.List;
-import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.CustomException;
-import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
+import io.kebblar.petstore.api.model.response.LoginResponse;
+
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -41,95 +39,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @since   1.0-SNAPSHOT
  */
 public interface UsuarioService {
-    /**
-     * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
-     *
-     * @param cred de tipo {@link CredencialesRequest} con la información de su correo y su clave.
-     * @return Objeto de tipo {@link Usuario} que es creado.
-     * @throws BusinessException if any
-     */
-    Usuario creaUsuario(CredencialesRequest cred) throws BusinessException;
-
-    /**
-     * <p>Crea un objeto de tipo {@link Usuario} a partir del nuevo
-     * usuario dado usando como pivote su id.
-     *
-     * @param usuario de tipo {@link Usuario} con la información a insertar.
-     * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws BusinessException if any
-     */
-    Usuario creaUsuario(Usuario usuario) throws BusinessException;
-
-    /**
-     * <p>Actualiza un objeto de tipo {@link Usuario} a partir del nuevo
-     * usuario dado usando como pivote su id.
-     *
-     * @param usuario de tipo {@link Usuario} con la información a actualizar.
-     * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws CustomException if any
-     */
-    Usuario actualizaUsuario(Usuario usuario) throws BusinessException;
-
-    /**
-     * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
-     *
-     * @param id Entero asociado a un usuario específico.
-     * @return Objeto de tipo {@link Usuario}.
-     * @throws BusinessException if any
-     */
-    Usuario obtenUsuarioPorId(int id) throws BusinessException;
-
-    /**
-     * <p>Elimina de manera lógina (y no física) a un objeto de
-     * tipo {@link Usuario} a partir del ID dado. Adicionalmente,
-     * retorna el objeo eleiminado.
-     *
-     * @param id con el ID de un usuario específico.
-     * @return Objeto de tipo {@link Usuario} dado originalmente.
-     * @throws BusinessException if any
-     */
-    Usuario eliminaUsuario(int id) throws BusinessException;
-
-    /**
-     * <p>Retorna un objeto de tipo {@link Usuario} a partir del correo dado.
-     *
-     * @param correo Cadena que contiene el correo de un usuario específico.
-     * @return Objeto de tipo {@link Usuario}.
-     * @throws CustomException if any
-     */
-    Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException;
-
-    /**
-     * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
-     * en el sistema.
-     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-     * de tipo: {@link BusinessException}.
-     * @return Lista de objetos de tipo {@link Usuario}.
-     * @throws BusinessException if any
-     */
-    List<Usuario> obtenTodosUsuarios() throws BusinessException;
-
-    /**
-     * <p>Retorna una lista de objetos de tipo {@link Rol} que están
-     * asociadas a un usuario específico identificado por su ID.
-     * <p>Si el usuario no tiene Roles asociadas, regresa una lista vacía.
-     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-     * de tipo: {@link BusinessException}.
-     * @param id Entero asociado a un usuario específico
-     * @return Lista de objetos de tipo {@link Rol}.
-     * @throws CustomException if any
-     */
-    List<Rol> obtenRolesDeUsuario(int id) throws BusinessException;
-    
-    /**
-     * <p>Retorna una lista de objetos de tipo {@link Rol} que están
-     * asociadas a un usuario específico identificado por su correo.
-     * 
-     * @param correo Cadena asociada al mail de un usuario específico
-     * @return Lista de objetos de tipo {@link Rol}.
-     * @throws CustomException if any
-     */
-    List<Rol> obtenRolesDeUsuario(String correo) throws BusinessException;
 
 //    /**
 //     * <p>Retorna una lista de objetos de tipo {@link Direccion} que están
@@ -142,17 +51,6 @@ public interface UsuarioService {
 //     * @throws BusinessException if any
 //     */
 //    List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
-
-    /**
-     * <p>Retorna los detalles de un usuario cuyo ID es dado como parámetro formal.
-     * <p>En caso de que no sea posible obtener sus detalles, se dispara una
-     * excepción de tipo {@link BusinessException}.
-     *
-     * @param id Entero asociado a un usuario específico
-     * @return Objeto {@link UsuarioDetalle}
-     * @throws CustomException if any
-     */
-    UsuarioDetalle obtenDetallesDeUsuario(int id) throws BusinessException;
 
     /**
      * Realiza el preregistro de un potencial usuario al sistema
@@ -232,9 +130,43 @@ public interface UsuarioService {
     UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException;
 
     /**
-     * Obtiene la foto de perfil de un usuario.
-     * @param idUser id del usuario
-     * @return cadena que corresponde al nombre de su foto
+     * Valida si las credencials proporcionadas son correctas o no.
+     * En caso de éxito, retorna un objeto LoginResponse cargado con
+     * la información requerida por su cliente.
+     * Si las credenciales son inválidas, dispara una excepción acorde
+     * a el grado de violación de ingreso.
+     * Se requiere que el método siga las siguientes reglas:
+     *     - No admite usuario ni clave vacios
+     *     - Si el usuario no existe, sólo pide que intente de nuevo
+     *     - Si el usuaro existe y la clave es errónea, le indicará que le quedan menos intentos
+     *     - Si el usuario está bloqueado (con o sin clave correcta) le indicará que debe esperar cierto tiempo
+     * @param usuario cadena que contiene el usuario
+     * @param clave  cadena que contiene la contraseña
+     * @return Objeto {@link LoginResponse}
+     * @throws BusinessException
      */
-    String getProfilePic(int idUser) throws BusinessException;
+    LoginResponse login(String usuario, String clave) throws BusinessException;
+
+    /**
+     * Valida si las credencials proporcionadas son correctas o no.
+     * En caso de éxito, retorna un objeto LoginResponse cargado con
+     * la información requerida por su cliente.
+     * Si las credenciales son inválidas, dispara una excepción acorde
+     * a el grado de violación de ingreso.
+     * Se requiere que el método siga las siguientes reglas:
+     *     - No admite usuario ni clave vacios
+     *     - Si el usuario no existe, sólo pide que intente de nuevo
+     *     - Si el usuaro existe y la clave es errónea, le indicará que le quedan menos intentos
+     *     - Si el usuario está bloqueado (con o sin clave correcta) le indicará que debe esperar cierto tiempo
+     * @param usuario información del usuario
+     * @param claveProporcionada cadena que contiene la contraseña enviada
+     * @param delta tiempo de bloqueo
+     * @param maximoNumeroIntentosConcedidos numero maximo de intentos permitidos
+     * @param instanteActual fecha actual
+     * @return Objeto {@link LoginResponse}
+     * @throws BusinessException
+     */
+    LoginResponse login(Usuario usuario, String claveProporcionada, long delta, int maximoNumeroIntentosConcedidos,
+            long instanteActual) throws BusinessException;
+
 }

@@ -91,6 +91,12 @@ public enum EnumMessage {
     		"Token Expirado",
     		"El token proporcionado ya no es válido y ha expirado",
     		HttpStatus.FORBIDDEN),
+
+    TOKEN_INVALID(
+            1110,
+            "Token Inválido",
+            "El token proporcionado no es válido",
+            HttpStatus.FORBIDDEN),
     
     TOKEN_INVALID_STRUCTURE(
     		801,

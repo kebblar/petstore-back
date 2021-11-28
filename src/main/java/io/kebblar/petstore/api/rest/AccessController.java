@@ -20,29 +20,45 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
+import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
+import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
+import io.kebblar.petstore.api.model.request.ConsultaRequest;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
+import io.kebblar.petstore.api.model.response.ConsultaResponse;
 import io.kebblar.petstore.api.model.response.LoginResponse;
-import io.kebblar.petstore.api.service.AccessService;
+import io.kebblar.petstore.api.service.AccessHelperService;
+import io.kebblar.petstore.api.service.ConsultaService;
+import io.kebblar.petstore.api.service.UsuarioCompletoService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
+import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
-
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -66,9 +82,14 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class AccessController {
-    private final AccessService accessService;
+    @Value("${jwt.encryptor.password}")
+    private String encryptKey;
+
+    private final ConsultaService consultaService;
     private final UsuarioService usuarioService;
+    private final AccessHelperService accessHelperService;
     private final InvokeRemoteRestService invokeRestService;
+    private final UsuarioCompletoService usuarioCompletoService;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -77,12 +98,16 @@ public class AccessController {
      * @param accessService Servicios de AccessService
      */
     public AccessController(
-            AccessService accessService,
+            AccessHelperService accessHelperService,
             UsuarioService usuarioService,
-            InvokeRemoteRestService invokeRestService) {
-        this.accessService = accessService;
+            InvokeRemoteRestService invokeRestService, 
+            UsuarioCompletoService usuarioCompletoService, 
+            ConsultaService consultaService) {
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
+        this.usuarioCompletoService = usuarioCompletoService;
+        this.consultaService = consultaService;
+        this.accessHelperService = accessHelperService;
     }
 
     @ApiOperation(
@@ -96,7 +121,7 @@ public class AccessController {
             @ApiParam(name="cred", value="Representa las credenciales (usuario y clave) " +
                     "de quien intenta ingresar al sistema")
             @RequestBody CredencialesRequest cred) throws ControllerException {
-        return accessService.login(cred.getUsuario(), cred.getClave());
+        return usuarioService.login(cred.getUsuario(), cred.getClave());
     }
 
     @ApiOperation(
@@ -178,7 +203,23 @@ public class AccessController {
             @RequestParam String clave) throws ControllerException {
         return usuarioService.confirmaRegeneraClave(token, clave);
     }
-
+    
+    @PutMapping(
+            path = "/cambia-clave",
+            produces = "application/json; charset=utf-8")
+    public Usuario cambiaClave(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "credenciales",
+                    value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
+            @RequestBody CredencialesRequest credenciales
+            ) throws ControllerException {
+         this.valida(jwt, credenciales.getUsuario());
+         return this.usuarioService.cambiaClave(
+                 credenciales.getUsuario(),
+                 credenciales.getClave());
+    }
+    
     @ApiOperation(
             value = "AccessController::bitso",
             notes = "Se utiliza para recuperar el precio actual de BTC en moneda mexicana.")
@@ -208,4 +249,215 @@ public class AccessController {
         return res.replace('-', '"');
     }
     
+    
+
+    @ApiOperation(
+        value = "UsuarioCompletoController::getAll",
+        notes = "Regresa una lista de todos los objetos UsuarioCompleto "
+            + "debidamente paginados con base en el payload de "
+            + "request que determina el tamaño de la página, la "
+            + "longitud de la página, el campo por el que se va a "
+            + "ordenar y si el orden es ascendente o descendente."
+            + "<br/><br/>"
+            + "En el caso de que los parámetros proporcionados "
+            + "<b><i><label style='color:blue;'>excedan</label><i></b> las "
+            + "dimensiones de la lista real de datos, este método es "
+            + "capaz de ajustar lo necesario para que la lista resultante "
+            + "sea suceptible de ser manipulada adecuadamente.")
+    @GetMapping(
+        value = "/usuario-completos",
+        produces = "application/json; charset=utf-8")
+    public List<UsuarioCompleto> getAllUsuarioCompleto() throws ControllerException {
+        return usuarioCompletoService.getAll();
+    }
+
+    @ApiOperation(
+        value = "UsuarioCompletoController::get",
+        notes = "Regresa un objeto UsuarioCompleto cuyo id "
+            + "coincide con el entero recibido como parametro.")
+    @GetMapping(
+        value = "/usuario-completo/{id}",
+        produces = "application/json; charset=utf-8")
+    public UsuarioCompleto getUsuarioCompleto(
+        @ApiParam(name="id", value="Representa el id del usuarioCompleto buscado.")
+        @PathVariable int id
+    ) throws ControllerException {
+        return this.usuarioCompletoService.getById(id);
+    }
+
+    @ApiOperation(
+        value = "UsuarioCompletoController::update",
+        notes = "Recibe un objeto UsuarioCompleto, este objeto es buscado por "
+            + "id dentro de la base de datos y es actualizado con el resto de "
+            + "datos proporcionados si es que el id en efecto existe. ")
+    @PutMapping(
+            value = "/usuario-completo",
+            produces = "application/json; charset=utf-8")
+    public int update(
+        @ApiParam(name="usuarioCompleto", value="UsuarioCompleto que será actualizado en el sistema, el id debe coincidir con el id del objeto que se desea actualizar.")
+        @RequestBody UsuarioCompleto usuarioCompleto
+    ) throws ControllerException {
+        return usuarioCompletoService.update(usuarioCompleto);
+    }
+
+    @GetMapping(
+            value = "/usuario-completos-paginated",
+            produces = "application/json; charset=utf-8")
+    public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
+        return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
+    }
+    
+    @GetMapping(
+            path = "/usuarios/{id}",
+            produces = "application/json; charset=utf-8")
+    public Usuario getUser(
+            @ApiParam(
+                    name = "id",
+                    value = "ID del Usuario",
+                    defaultValue = "1")
+            @PathVariable int id
+            ) throws ControllerException {
+        return this.accessHelperService.obtenUsuarioPorId(id);
+    }
+
+    @GetMapping(
+            path = "/usuarios",
+            produces = "application/json; charset=utf-8")
+    public List<Usuario> getAllUsers() throws ControllerException {
+        return this.accessHelperService.obtenTodosUsuarios();
+    }
+
+    @GetMapping(
+            path = "/count-users",
+            produces = "application/json; charset=utf-8")
+    public int countUsers() throws ControllerException {
+        return this.accessHelperService.obtenTodosUsuarios().size();
+    }
+
+    @PostMapping(
+            path = "/usuarios-thin",
+            produces = "application/json; charset=utf-8")
+    public Usuario createUserThin(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "credenciales",
+                    value = "Crea un Usuario empleando sólo sus credenciales")
+            @RequestBody CredencialesRequest credenciales
+            ) throws ControllerException {
+        this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
+        return this.accessHelperService.creaUsuario(credenciales);
+    }
+
+    @PostMapping(
+            path = "/usuarios",
+            produces = "application/json; charset=utf-8")
+    public Usuario createUser(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "usuario",
+                    value = "Crea un Usuario empleando todos sus atributos")
+            @RequestBody Usuario usuario
+            ) throws ControllerException {
+        this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
+        return this.accessHelperService.creaUsuario(usuario);
+    }
+
+    @PutMapping(
+            path = "/usuarios",
+            produces = "application/json; charset=utf-8")
+    public Usuario updateUsuario(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "usuario",
+                    value = "Actualiza un Usuario empleando todos los atributos provistos")
+            @RequestBody Usuario usuario
+            ) throws ControllerException {
+         this.verifica(jwt, "ADMIN"); // o sea: sólo un administrador puede actualizar a un usuario cualquiera
+         this.accessHelperService.actualizaUsuario(usuario);
+         return usuario;
+    }
+
+    @DeleteMapping(
+            path = "/usuarios",
+            produces = "application/json; charset=utf-8")
+    public Usuario borraUsuario(
+            @ApiParam(
+                    name = "id",
+                    value = "Borra un Usuario cuyo ID es dado")
+            @RequestParam int id) throws ControllerException {
+         return this.accessHelperService.eliminaUsuario(id);
+    }
+    
+    private void valida(String token, String correo) throws CustomException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        if(!mail.equals(correo)) { 
+            throw new CustomException(EnumMessage.BAD_CREDENTIALS);
+        }
+    }
+    private void verifica(String token, String targetRol) throws BusinessException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        List<Rol> rolesForToken = this.accessHelperService.obtenRolesDeUsuario(mail);
+        for(Rol rol : rolesForToken) {
+            if(rol.getNombre().equalsIgnoreCase(targetRol)) {
+                return;
+            }
+        }
+        throw new CustomException(EnumMessage.NOT_AUTHORIZED);        
+    }
+    
+    /*
+    private void verifica(String token, String correo, String targetRol) throws BusinessException {
+        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        List<Rol> rolesForToken = this.usuarioService.obtenRolesDeUsuario(mail);
+        List<Rol> rolesForUsuario = this.usuarioService.obtenRolesDeUsuario(correo);
+        if(rolesForToken==null || rolesForUsuario==null || rolesForUsuario.size()<1 || rolesForToken.size()<1) { 
+            throw new CustomException(EnumMessage.ISSUER_NOT_VERIFIED);
+        }
+        for(Rol x : rolesForToken) {
+            for(Rol y : rolesForUsuario) {
+                if(x.getId()==y.getId()) {
+                    if(x.getNombre().equals(targetRol)) {
+                        return;                     
+                    }
+                }
+            }
+        }
+        throw new CustomException(EnumMessage.ISSUER_NOT_VERIFIED);
+    }
+*/
+    @PutMapping(
+            path = "/usuario-detalles",
+            produces = "application/json; charset=utf-8")
+    public UsuarioDetalle updateUsuarioDetalles(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "usuarioDetalle",
+                    value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
+            @RequestBody UsuarioDetalle usuarioDetalle
+            ) throws ControllerException {
+         return this.accessHelperService.actualizaUsuarioDetalle(usuarioDetalle);
+    }
+
+    @ApiOperation(
+            value = "AccessController::consulta",
+            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
+    @GetMapping(
+            path = "/consulta",
+            produces = "application/json; charset=utf-8")
+    public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) throws ControllerException {
+        return consultaService.consulta(jwt, encryptKey);
+    }
+
+    @ApiOperation(
+            value = "AccessController::guarda",
+            notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
+    @PostMapping(
+            path = "/guarda",
+            produces = "application/json; charset=utf-8")
+    public String guarda(
+            @RequestHeader("jwt") String jwt, 
+            @RequestBody List<ConsultaRequest> datos) throws ControllerException {
+        return consultaService.guarda(jwt, encryptKey, datos);
+    }
+
 }

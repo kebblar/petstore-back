@@ -7,9 +7,17 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
+import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 
 public interface AccessHelperService {
+    
+    /**
+     * Obtiene la foto de perfil de un usuario.
+     * @param idUser id del usuario
+     * @return cadena que corresponde al nombre de su foto
+     */
+    String getProfilePic(int idUser) throws BusinessException;
 
     /**
      * Método auxiliar que valida si se ingreso alguna credencial vacía.
@@ -24,7 +32,7 @@ public interface AccessHelperService {
      * @param usuario objeto usuario a actualizar.
      * @throws CustomException En caso que ocurra algún problema con la actualización.
      */
-    void updateUsuario(Usuario usuario) throws BusinessException;
+    void actualizaUsuario(Usuario usuario) throws BusinessException;
 
     Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException;
 
@@ -55,4 +63,99 @@ public interface AccessHelperService {
     void insertUserRol(int idUsuario, int rolId) throws BusinessException;
 
     void deletePreregistroByRandomString(String randomString) throws BusinessException;
+    
+    /**
+     * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
+     *
+     * @param cred de tipo {@link CredencialesRequest} con la información de su correo y su clave.
+     * @return Objeto de tipo {@link Usuario} que es creado.
+     * @throws BusinessException if any
+     */
+    Usuario creaUsuario(CredencialesRequest cred) throws BusinessException;
+
+    /**
+     * <p>Crea un objeto de tipo {@link Usuario} a partir del nuevo
+     * usuario dado usando como pivote su id.
+     *
+     * @param usuario de tipo {@link Usuario} con la información a insertar.
+     * @return Objeto de tipo {@link Usuario} que es el usuario dado.
+     * @throws BusinessException if any
+     */
+    Usuario creaUsuario(Usuario usuario) throws BusinessException;
+
+    /**
+     * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
+     *
+     * @param id Entero asociado a un usuario específico.
+     * @return Objeto de tipo {@link Usuario}.
+     * @throws BusinessException if any
+     */
+    Usuario obtenUsuarioPorId(int id) throws BusinessException;
+
+    /**
+     * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
+     * en el sistema.
+     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
+     * de tipo: {@link BusinessException}.
+     * @return Lista de objetos de tipo {@link Usuario}.
+     * @throws BusinessException if any
+     */
+    List<Usuario> obtenTodosUsuarios() throws BusinessException;
+
+    /**
+     * <p>Elimina de manera lógina (y no física) a un objeto de
+     * tipo {@link Usuario} a partir del ID dado. Adicionalmente,
+     * retorna el objeo eleiminado.
+     *
+     * @param id con el ID de un usuario específico.
+     * @return Objeto de tipo {@link Usuario} dado originalmente.
+     * @throws BusinessException if any
+     */
+    Usuario eliminaUsuario(int id) throws BusinessException;
+
+    /**
+     * <p>Retorna una lista de objetos de tipo {@link Rol} que están
+     * asociadas a un usuario específico identificado por su ID.
+     * <p>Si el usuario no tiene Roles asociadas, regresa una lista vacía.
+     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
+     * de tipo: {@link BusinessException}.
+     * @param id Entero asociado a un usuario específico
+     * @return Lista de objetos de tipo {@link Rol}.
+     * @throws CustomException if any
+     */
+    List<Rol> obtenRolesDeUsuario(int id) throws CustomException;
+
+    /**
+     * <p>Retorna una lista de objetos de tipo {@link Rol} que están
+     * asociadas a un usuario específico identificado por su correo.
+     * 
+     * @param correo Cadena asociada al mail de un usuario específico
+     * @return Lista de objetos de tipo {@link Rol}.
+     * @throws CustomException if any
+     */
+    List<Rol> obtenRolesDeUsuario(String correo) throws CustomException;
+
+    /**
+     * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado
+     * por correo al momento del registro.
+     *
+     * @param token proporcionado por correo al momento del registro.
+     * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
+     * @throws CustomException if any
+     */
+    Preregistro getPreregistroByRandomString(String token) throws CustomException;
+
+    /**
+     * <p>Retorna los detalles de un usuario cuyo ID es dado como parámetro formal.
+     * <p>En caso de que no sea posible obtener sus detalles, se dispara una
+     * excepción de tipo {@link BusinessException}.
+     *
+     * @param id Entero asociado a un usuario específico
+     * @return Objeto {@link UsuarioDetalle}
+     * @throws CustomException if any
+     */
+    UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
+
+    void subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
+    
 }

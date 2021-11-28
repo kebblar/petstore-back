@@ -105,7 +105,10 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
                     logger.info("El header {} tiene el valor: {}", headerName, headerValue);
                     String jwtToken = headerValue;
                     try {
-                        JWTUtil.getInstance().verifyToken(jwtToken, encryptKey, System.currentTimeMillis());
+                        // valida firma
+                        String jwtDecoded = JWTUtil.getInstance().revisaToken(jwtToken, encryptKey);
+                        // valida expiración
+                        JWTUtil.getInstance().revisaExpiracion(jwtDecoded);
                     } catch (Exception e) {
                         construye(response, e.getMessage(), jwtToken);
                         return false;

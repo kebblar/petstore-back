@@ -16,6 +16,8 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
+import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 
 import io.kebblar.petstore.api.support.JwtManagerService;
@@ -67,20 +69,21 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     }
     
     @Override
-    public void updateUsuario(Usuario usuario) throws BusinessException {
+    public void actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.update(usuario);
         } catch (SQLException e) {
-            throw new CustomException(e, DATABASE, "login::update");
+            throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
         try {
             return usuarioMapper.getByCorreo(correo);
         } catch (SQLException e) {
-            throw new CustomException(e, DATABASE, "login::update");
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
         }
     }
     
@@ -151,17 +154,18 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUsuarioDetalle");
         }
     }
-
+    
     /** {@inheritDoc} */
     @Override
-    public void insertUserRol(int idUsuario, int rolId) throws BusinessException {
+    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
         try {
-            rolMapper.insertUserRol(idUsuario, rolId);
+            usuarioMapper.insert(usuario);
         } catch (SQLException e) {
-            throw new CustomException(e, DATABASE, "AccessHelper::insertUserRol");
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
         }
+        return usuario;
     }
-
+    
     /** {@inheritDoc} */
     @Override
     public void deletePreregistroByRandomString(String randomString) throws BusinessException {
@@ -172,6 +176,37 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
     }
     
+    @Override
+    public String getProfilePic(int idUser) throws BusinessException {
+        try {
+            return usuarioDetalleMapper.getProfilePic(idUser);
+        } catch (SQLException e) {
+            throw new CustomException(NOT_FOUND);
+        }
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public void insertUserRol(int idUsuario, int rolId) throws BusinessException {
+        try {
+            rolMapper.insertUserRol(idUsuario, rolId);
+        } catch (SQLException e) {
+            throw new CustomException(e, DATABASE, "AccessHelper::insertUserRol");
+        }
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
+        Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
+        try {
+            usuarioMapper.insert(usuario);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
+        }
+        return usuario;
+    }
+    
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
@@ -179,7 +214,6 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         String correo = JWTUtil.getInstance().getCorreo(decoded);
         return correo;
     }
-    
     
     /** {@inheritDoc} */
     @Override
@@ -193,5 +227,101 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "Error actualizando los datos del usuario");
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    /** {@inheritDoc} */
+    @Override
+    public Usuario obtenUsuarioPorId(int id) throws BusinessException {
+        try {
+            return usuarioMapper.getById(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener un usuario", e.getMessage());
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public List<Usuario> obtenTodosUsuarios() throws BusinessException {
+        try {
+            return usuarioMapper.getAll();
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Usuario eliminaUsuario(int id) throws BusinessException {
+        try {
+            usuarioMapper.delete(id);
+            return usuarioMapper.getById(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public List<Rol> obtenRolesDeUsuario(int id) throws CustomException {
+        try {
+            return rolMapper.getUserRoles(id);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
+        }
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public List<Rol> obtenRolesDeUsuario(String correo) throws CustomException {
+        try {
+            return rolMapper.getUserRolesByMail(correo);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
+        }
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Preregistro getPreregistroByRandomString(String token) throws CustomException {
+        try {
+            return this.registroMapper.getByRandomString(token);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
+        }
+    }
+//    @Override
+//    public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {
+//        try {
+//            return direccionMapper.getUserDirecciones(id);
+//        } catch (SQLException e) {
+//            throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
+//        }
+//    }
+
+    /** {@inheritDoc} */
+    @Override
+    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException {
+        try {
+            return usuarioDetalleMapper.getById(id);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al obtener los detalles de un usuario");
+        }
+    }
+
+    @Override
+    public void subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
+        try {
+            usuarioDetalleMapper.subeFotoPerfil(idUser, nuevoNombre);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al subir la foto de perfil");
+        }
+    }    
     
 }

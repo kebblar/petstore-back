@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.UPLOAD_SERVICE;
+
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import io.kebblar.petstore.api.service.UsuarioService;
+import io.kebblar.petstore.api.service.AccessHelperService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +39,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
+import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.support.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +60,7 @@ public class FileUploadController {
     private long max;
 
     private final UploadService uploadService;
-    private final UsuarioService usuarioService;
+    private final AccessHelperService accessHelperService;
     private final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     /**
@@ -65,9 +68,11 @@ public class FileUploadController {
      *
      * @param uploadService el servicio que ofrece almacenamiento
      */
-    public FileUploadController(UploadService uploadService, UsuarioService usuarioService) {
+    public FileUploadController(
+            UploadService uploadService, 
+            AccessHelperService accessHelperService) {
         this.uploadService = uploadService;
-        this.usuarioService = usuarioService;
+        this.accessHelperService = accessHelperService;
     }
 
 
@@ -148,7 +153,10 @@ public class FileUploadController {
     @RequestHeader("idUser") int idUser,
     @ApiParam(name = "image", value = "Imagen a guardar.")
     @RequestParam("image") MultipartFile files) throws ControllerException {
-        return usuarioService.storeProfilePicture(files, destinationFolder, max, idUser);
+        if (accessHelperService.obtenUsuarioPorId(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
+        UploadModel um = uploadService.storeOne(files, destinationFolder, max);
+        accessHelperService.subeFotoPerfil(idUser, um.getNuevoNombre());
+        return um;
     }
 
    @GetMapping(
@@ -158,7 +166,7 @@ public class FileUploadController {
             @ApiParam(name = "idUser", value="id del usuario") @PathVariable int idUser)
            throws ControllerException {
         Map<String, String> elemento = new HashMap<>();
-        elemento.put("foto",usuarioService.getProfilePic(idUser));
+        elemento.put("foto",accessHelperService.getProfilePic(idUser));
         return elemento;
    }
 

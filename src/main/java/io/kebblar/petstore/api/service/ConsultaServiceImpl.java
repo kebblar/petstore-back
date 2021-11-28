@@ -21,10 +21,12 @@ public class ConsultaServiceImpl implements ConsultaService {
     private static final Logger logger = LoggerFactory.getLogger(ConsultaServiceImpl.class);
    
     private ConsultaMapper consultaMapper;
-    private UsuarioService usuarioService;
+    private AccessHelperService accessHelperService;
 
-	public ConsultaServiceImpl(UsuarioService usuarioService, ConsultaMapper consultaMapper) {
-	    this.usuarioService = usuarioService;
+	public ConsultaServiceImpl(
+	        AccessHelperService accessHelperService, 
+	        ConsultaMapper consultaMapper) {
+	    this.accessHelperService = accessHelperService;
 	    this.consultaMapper = consultaMapper;
 	}
 
@@ -65,7 +67,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private int getUserIdFromJwt(String jwt, String encryptKey) throws BusinessException {
 	    try {
             String correo = JWTUtil.getInstance().getMail(jwt, encryptKey);
-            Usuario usr = usuarioService.obtenUsuarioPorCorreo(correo);
+            Usuario usr = accessHelperService.obtenUsuarioPorCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {
             return 0;
