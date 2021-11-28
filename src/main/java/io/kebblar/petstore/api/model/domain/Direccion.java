@@ -311,7 +311,7 @@ public class Direccion implements Serializable {
     public int getHash() {
         return this.hashCode();
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {

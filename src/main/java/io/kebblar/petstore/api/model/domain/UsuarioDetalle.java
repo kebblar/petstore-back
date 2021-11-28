@@ -260,5 +260,5 @@ public class UsuarioDetalle {
     public int hashCode() {
         return Objects.hash(id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, nickName, telefonoCelular, fotoPerfil);
     }
-    
+
 }

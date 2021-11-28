@@ -12,8 +12,8 @@ public class ConvertTest {
         String toTest = "CIENTO VENTITRES MILLONES CUATROCIENTOS CINCUENTA Y SEIS MIL SETECIENTOS OCHENTA Y NUEVE";
         assertTrue(s.equals(toTest));
     }
-    
-   
+
+
     @Test
     public void prueba2() {
         String s = cnv.convertir(999000001);

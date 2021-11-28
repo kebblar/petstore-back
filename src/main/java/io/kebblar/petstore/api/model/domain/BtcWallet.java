@@ -129,11 +129,11 @@ public class BtcWallet {
     public int hashCode() {
         return Objects.hash(idUser, address, privateKey);
     }
-    
+
     public int getHash() {
         return this.hashCode();
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String toString() {

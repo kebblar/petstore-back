@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class JasyptTest {
     private static final Logger logger = LoggerFactory.getLogger(JasyptTest.class);
-    
+
     @Test
     public void test() {
         String data="gustavo";

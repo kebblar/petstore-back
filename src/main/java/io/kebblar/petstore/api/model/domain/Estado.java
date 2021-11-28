@@ -200,5 +200,5 @@ public class Estado implements Serializable {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

@@ -11,7 +11,7 @@ import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 
 public interface AccessHelperService {
-    
+
     /**
      * Obtiene la foto de perfil de un usuario.
      * @param idUser id del usuario
@@ -43,7 +43,7 @@ public interface AccessHelperService {
     String createToken(String mail);
 
     UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
-    
+
     String getCorreoFromJwt(String jwt);
 
     Usuario getByToken(String token);
@@ -63,7 +63,7 @@ public interface AccessHelperService {
     void insertUserRol(int idUsuario, int rolId) throws BusinessException;
 
     void deletePreregistroByRandomString(String randomString) throws BusinessException;
-    
+
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
      *
@@ -128,7 +128,7 @@ public interface AccessHelperService {
     /**
      * <p>Retorna una lista de objetos de tipo {@link Rol} que están
      * asociadas a un usuario específico identificado por su correo.
-     * 
+     *
      * @param correo Cadena asociada al mail de un usuario específico
      * @return Lista de objetos de tipo {@link Rol}.
      * @throws CustomException if any
@@ -157,5 +157,5 @@ public interface AccessHelperService {
     UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
 
     void subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
-    
+
 }

@@ -1,10 +1,10 @@
 /*
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
- *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
  *              mostrado  a ninguna persona o institución sin el permiso expli-
- *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo cualquier criterio, el único dueño de la totalidad de este 
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo cualquier criterio, el único dueño de la totalidad de este
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.rest
@@ -15,7 +15,7 @@
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
- * Historia: 
+ * Historia:
  *              Creación: 5 Sep 2021 @ 08:22:06
  */
 package io.kebblar.petstore.api.rest;
@@ -100,8 +100,8 @@ public class AccessController {
     public AccessController(
             AccessHelperService accessHelperService,
             UsuarioService usuarioService,
-            InvokeRemoteRestService invokeRestService, 
-            UsuarioCompletoService usuarioCompletoService, 
+            InvokeRemoteRestService invokeRestService,
+            UsuarioCompletoService usuarioCompletoService,
             ConsultaService consultaService) {
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
@@ -203,7 +203,7 @@ public class AccessController {
             @RequestParam String clave) throws ControllerException {
         return usuarioService.confirmaRegeneraClave(token, clave);
     }
-    
+
     @PutMapping(
             path = "/cambia-clave",
             produces = "application/json; charset=utf-8")
@@ -219,7 +219,7 @@ public class AccessController {
                  credenciales.getUsuario(),
                  credenciales.getClave());
     }
-    
+
     @ApiOperation(
             value = "AccessController::bitso",
             notes = "Se utiliza para recuperar el precio actual de BTC en moneda mexicana.")
@@ -229,7 +229,7 @@ public class AccessController {
     public String bitso() {
         return invokeRestService.getBitsoInfo();
     }
-    
+
     @ApiOperation(
             value = "AccessController::binance",
             notes = "Se utiliza para recuperar el precio actual de BTC en dólares.")
@@ -248,8 +248,8 @@ public class AccessController {
         String res = "{-" + name + "-:-you have been loged out-}";
         return res.replace('-', '"');
     }
-    
-    
+
+
 
     @ApiOperation(
         value = "UsuarioCompletoController::getAll",
@@ -306,7 +306,7 @@ public class AccessController {
     public List<UsuarioCompleto> getAllUsuarioCompletoPaginado(int pageNumber, int pageSize) throws ControllerException {
         return usuarioCompletoService.getAllPaginated(pageNumber, pageSize);
     }
-    
+
     @GetMapping(
             path = "/usuarios/{id}",
             produces = "application/json; charset=utf-8")
@@ -387,10 +387,10 @@ public class AccessController {
             @RequestParam int id) throws ControllerException {
          return this.accessHelperService.eliminaUsuario(id);
     }
-    
+
     private void valida(String token, String correo) throws CustomException {
         String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
-        if(!mail.equals(correo)) { 
+        if(!mail.equals(correo)) {
             throw new CustomException(EnumMessage.BAD_CREDENTIALS);
         }
     }
@@ -402,22 +402,22 @@ public class AccessController {
                 return;
             }
         }
-        throw new CustomException(EnumMessage.NOT_AUTHORIZED);        
+        throw new CustomException(EnumMessage.NOT_AUTHORIZED);
     }
-    
+
     /*
     private void verifica(String token, String correo, String targetRol) throws BusinessException {
         String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
         List<Rol> rolesForToken = this.usuarioService.obtenRolesDeUsuario(mail);
         List<Rol> rolesForUsuario = this.usuarioService.obtenRolesDeUsuario(correo);
-        if(rolesForToken==null || rolesForUsuario==null || rolesForUsuario.size()<1 || rolesForToken.size()<1) { 
+        if(rolesForToken==null || rolesForUsuario==null || rolesForUsuario.size()<1 || rolesForToken.size()<1) {
             throw new CustomException(EnumMessage.ISSUER_NOT_VERIFIED);
         }
         for(Rol x : rolesForToken) {
             for(Rol y : rolesForUsuario) {
                 if(x.getId()==y.getId()) {
                     if(x.getNombre().equals(targetRol)) {
-                        return;                     
+                        return;
                     }
                 }
             }
@@ -455,7 +455,7 @@ public class AccessController {
             path = "/guarda",
             produces = "application/json; charset=utf-8")
     public String guarda(
-            @RequestHeader("jwt") String jwt, 
+            @RequestHeader("jwt") String jwt,
             @RequestBody List<ConsultaRequest> datos) throws ControllerException {
         return consultaService.guarda(jwt, encryptKey, datos);
     }

@@ -151,5 +151,5 @@ public class UserFoundWrapper {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

@@ -88,13 +88,13 @@ public class BusinessException extends ControllerException {
             String detailedMessage) {
         super(shortMessage, detailedMessage, 0, "CVE_0000");
     }
-    
+
     public BusinessException(
-            Throwable throwable, 
-            String shortMessage, 
-            String detailedMessage, 
-            int exceptionNumber, 
-            String message, 
+            Throwable throwable,
+            String shortMessage,
+            String detailedMessage,
+            int exceptionNumber,
+            String message,
             HttpStatus httpStatus) {
         super(throwable,shortMessage,detailedMessage,exceptionNumber,message,httpStatus);
     }

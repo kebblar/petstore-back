@@ -25,16 +25,16 @@ import io.kebblar.petstore.api.utils.JWTUtil;
 import io.kebblar.petstore.api.utils.StringUtils;
 
 @Service
-public class AccessHelperServiceImpl implements AccessHelperService {    
+public class AccessHelperServiceImpl implements AccessHelperService {
     private UsuarioDetalleMapper usuarioDetalleMapper;
     private UsuarioMapper usuarioMapper;
     private RegistroMapper registroMapper;
     private RolMapper rolMapper;
     private JwtManagerService jwtManagerService;
-    
+
     public AccessHelperServiceImpl(
             UsuarioDetalleMapper usuarioDetalleMapper,
-            UsuarioMapper usuarioMapper, 
+            UsuarioMapper usuarioMapper,
             RolMapper rolMapper,
             JwtManagerService jwtManagerService,
             RegistroMapper registroMapper) {
@@ -44,7 +44,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         this.jwtManagerService = jwtManagerService;
         this.registroMapper = registroMapper;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Usuario getByToken(String token) {
@@ -62,12 +62,12 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     public void valida(String usr, String clave) throws CustomException {
         if(usr.trim().length()<1 || clave.trim().length()<1) throw new CustomException(BAD_CREDENTIALS);
     }
-    
+
     @Override
     public String createToken(String mail) {
         return jwtManagerService.createToken(mail);
     }
-    
+
     @Override
     public void actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
@@ -76,7 +76,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new MapperCallException("Error al actualizar un usuario", e.getMessage());
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
@@ -86,7 +86,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, MAPPER_CALL, "Error al obtener el usuario con base en su correo");
         }
     }
-    
+
     @Override
     public List<Rol> getUserRoles(int userId) throws BusinessException {
         try {
@@ -95,7 +95,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "login::update");
         }
     }
-    
+
     @Override
     public UsuarioDetalle getUsuarioDetalle(int userId) throws BusinessException {
         try {
@@ -154,7 +154,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUsuarioDetalle");
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Usuario creaUsuario(Usuario usuario) throws BusinessException {
@@ -165,7 +165,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
         return usuario;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public void deletePreregistroByRandomString(String randomString) throws BusinessException {
@@ -175,7 +175,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "AccessHelper::deletePreregistroByRandomString");
         }
     }
-    
+
     @Override
     public String getProfilePic(int idUser) throws BusinessException {
         try {
@@ -184,7 +184,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(NOT_FOUND);
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public void insertUserRol(int idUsuario, int rolId) throws BusinessException {
@@ -194,7 +194,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUserRol");
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
@@ -206,7 +206,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
         return usuario;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
@@ -214,7 +214,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         String correo = JWTUtil.getInstance().getCorreo(decoded);
         return correo;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
@@ -227,14 +227,14 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, DATABASE, "Error actualizando los datos del usuario");
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
 
     /** {@inheritDoc} */
     @Override
@@ -276,7 +276,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public List<Rol> obtenRolesDeUsuario(String correo) throws CustomException {
@@ -286,7 +286,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, MAPPER_CALL, "Error al obtener los roles de un usuario");
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Preregistro getPreregistroByRandomString(String token) throws CustomException {
@@ -322,6 +322,6 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         } catch (SQLException e) {
             throw new CustomException(e, MAPPER_CALL, "Error al subir la foto de perfil");
         }
-    }    
-    
+    }
+
 }

@@ -366,5 +366,5 @@ public class Usuario {
                 regeneraClaveInstante == usuario.regeneraClaveInstante && Objects.equals(correo, usuario.correo) &&
                 Objects.equals(clave, usuario.clave) && Objects.equals(regeneraClaveToken, usuario.regeneraClaveToken);
     }
-    
+
 }

@@ -247,5 +247,5 @@ public class UploadModel {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

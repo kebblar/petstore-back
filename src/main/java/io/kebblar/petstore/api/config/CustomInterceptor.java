@@ -127,7 +127,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
      */
     private void construye(HttpServletResponse response, String message, String token) {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = new HashMap<>();        
+        Map<String, Object> map = new HashMap<>();
         map.put("exceptionTypeNumber", 1090);
         map.put("exceptionTypeKey", "EX_1090");
         map.put("exceptionLongDescription", message + " (" + token + ")");

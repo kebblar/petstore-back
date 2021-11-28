@@ -522,9 +522,9 @@ public class TickerWrapper {
             return false;
         return true;
     }
-    
+
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

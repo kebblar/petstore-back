@@ -99,7 +99,7 @@ public class TestUsuarioService {
             assertTrue(true);
         }
     }
-    
+
     public void testActualizaElimina2 () throws Exception {
         when(usuarioMapper.update(Mockito.any(Usuario.class))).thenReturn(1);
         assertEquals(usuario1.getId(), usuarioService.actualizaUsuario(usuario1).getId());

@@ -7,6 +7,6 @@ import io.kebblar.petstore.api.model.request.ConsultaRequest;
 import io.kebblar.petstore.api.model.response.ConsultaResponse;
 
 public interface ConsultaService {
-	List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException;
-	String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) throws BusinessException;
+    List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException;
+    String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) throws BusinessException;
 }

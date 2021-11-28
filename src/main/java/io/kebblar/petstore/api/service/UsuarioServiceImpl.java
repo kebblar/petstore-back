@@ -1,10 +1,10 @@
 /*
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
- *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
  *              mostrado  a ninguna persona o institución sin el permiso expli-
- *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo cualquier criterio, el único dueño de la totalidad de este 
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo cualquier criterio, el único dueño de la totalidad de este
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.service
@@ -15,7 +15,7 @@
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
- * Historia: 
+ * Historia:
  *              Creación: 5 Sep 2021 @ 09:25:12
  */
 package io.kebblar.petstore.api.service;
@@ -69,14 +69,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
-    
+
     @Value("${proyecto.message}")
     private String message;
 
     private final UploadService uploadService;
     private final MailSenderService mailSenderService;
     private final AccessHelperService accessHelperService;
-    
+
     private static final int RANDOM_STRING_LEN = 6;
 
     /**
@@ -108,7 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new MapperCallException("Error en el registro del nuevo usuario", e.toString());
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException {
@@ -119,17 +119,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         Date fechaNacimiento = md.validaFechaPropuesta(anio, mes, dia);
         md.validaEdad(new Date(), fechaNacimiento, 21); // 21 años es la edad mínima (OJO: Convertir en valor de properties)
         Preregistro preRegistro = new Preregistro(
-                 preRegistroRequest.getId(), 
-                 preRegistroRequest.getNick(), 
-                 preRegistroRequest.getCorreo(), 
-                 preRegistroRequest.getClaveHash(), 
-                 preRegistroRequest.getTelefono(), 
-                 fechaNacimiento, 
-                 preRegistroRequest.getRandomString(), 
+                 preRegistroRequest.getId(),
+                 preRegistroRequest.getNick(),
+                 preRegistroRequest.getCorreo(),
+                 preRegistroRequest.getClaveHash(),
+                 preRegistroRequest.getTelefono(),
+                 fechaNacimiento,
+                 preRegistroRequest.getRandomString(),
                  preRegistroRequest.getInstanteRegistro());
         return preRegistroHelper(preRegistro);
     }
-    
+
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
             BusinessException {
         // Quitale los caracteres raros al teléfono.
@@ -228,7 +228,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             accessHelperService.actualizaUsuario(testUser);
             return testUser;
         }
-        
+
         // Si el usuario NO existe, Créalo e insértalo en la base:
         Usuario usuario = new Usuario(
             0, //id (que va a ser autogenerado)
@@ -242,8 +242,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             System.currentTimeMillis(),  // instanteUltimoCambioClave
             "", // regeneraClaveToken
             0   // regeneraClaveTokenInstante
-        );            
-        accessHelperService.insertUsuario(usuario); 
+        );
+        accessHelperService.insertUsuario(usuario);
 
         // Obtén el id autogenerado del usuario recién creado:
         int idUsuario = usuario.getId();
@@ -339,10 +339,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     /** {@inheritDoc} */
     @Override
     public Usuario cambiaClave(String correo, String clave) throws BusinessException {
-        // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede 
+        // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede
         // invocar este servicio y cambiarle la clave a cualquiera !!!!!
         // Para corregir este bug de seguridad, este servicio DEBE recibir el JWT y
-        // A) verificar que es un JWT de un usuario con rol 'admin' 
+        // A) verificar que es un JWT de un usuario con rol 'admin'
         // o bien que:
         // B) el JWT es del usuario para el cual se está dando el correo
         // Si no se cumple con alguna de estas dos condiciones, se deberá impedir el cambio
@@ -382,8 +382,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         UploadModel um = uploadService.storeOne(files, destinationFolder, max);
         accessHelperService.subeFotoPerfil(idUser, um.getNuevoNombre());
         return um;
-    }    
-    
+    }
+
     /** {@inheritDoc} */
     @Override
     public LoginResponse login(String usr, String clave) throws BusinessException {
@@ -474,5 +474,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         String jwt = accessHelperService.createToken(correo);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
-    
+
 }

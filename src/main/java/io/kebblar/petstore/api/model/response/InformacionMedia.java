@@ -127,5 +127,5 @@ public class InformacionMedia {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

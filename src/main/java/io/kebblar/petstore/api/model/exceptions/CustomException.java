@@ -33,11 +33,11 @@ import io.kebblar.petstore.api.model.enumerations.EnumMessage;
  */
 public class CustomException extends BusinessException {
     private static final long serialVersionUID = -1218087669509474484L;
-    
+
     public CustomException(EnumMessage message, Object... messageParams) {
         this(new Exception(), message, messageParams);
     }
-    
+
     public CustomException(Throwable throwable, EnumMessage message, Object... messageParams) {
         super(throwable,
         String.format(message.getShortMessage(), messageParams),
@@ -46,5 +46,5 @@ public class CustomException extends BusinessException {
         message.toString(),
         message.getHttpStatus());
     }
-    
+
 }

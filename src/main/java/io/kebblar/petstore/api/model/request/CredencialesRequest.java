@@ -1,10 +1,10 @@
 /*
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
- *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
  *              mostrado  a ninguna persona o institución sin el permiso expli-
- *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo cualquier criterio, el único dueño de la totalidad de este 
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo cualquier criterio, el único dueño de la totalidad de este
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.model.request
@@ -15,7 +15,7 @@
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
- * Historia: 
+ * Historia:
  *              Creación: 5 Sep 2021 @ 08:00:43
  */
 package io.kebblar.petstore.api.model.request;
@@ -117,5 +117,5 @@ public class CredencialesRequest {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

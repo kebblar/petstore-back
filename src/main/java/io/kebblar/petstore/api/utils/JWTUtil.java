@@ -90,7 +90,7 @@ public class JWTUtil {
             //showInfo(claims);
             return claims.getId();
         } catch(Exception e) {
-        	throw new CustomException(e, WRONG_TOKEN);
+            throw new CustomException(e, WRONG_TOKEN);
         }
     }
 
@@ -166,7 +166,7 @@ public class JWTUtil {
         logger.info("Expiration: " + claims.getExpiration());
         logger.info("IssuedAt: " + claims.getIssuedAt());
     }
-    
+
     /**
      * <p>getMail.</p>
      *
@@ -184,7 +184,7 @@ public class JWTUtil {
         }
         return claim.getId();
     }
-    
+
     public String decodeJwt(String jwt) {
         String[] chunks = jwt.split("\\.");
         if(chunks.length<3) throw new RuntimeException("Bad jwt");
@@ -194,25 +194,25 @@ public class JWTUtil {
             //String header = new String(decoder.decode(chunks[0]));
             //System.out.println(header);
             String payload = new String(decoder.decode(chunks[1]));
-            
+
             //String signature = new String(chunks[2]);
             //System.out.println(signature);
-            
+
             return payload;
         } catch(IllegalArgumentException e) {
             throw new RuntimeException("Bad jwt");
         }
     }
-    
+
     public String getCorreo(String decodedJwt) {
         return getValueFromDecodedJwtString(decodedJwt, "jti");
     }
-    
+
     public long getExpiration(String decodedJwt) {
         String expStr = getValueFromDecodedJwtString(decodedJwt, "exp");
         return new Long(expStr);
     }
-    
+
     public String getValueFromDecodedJwtString(String decodedJwt, String field) {
         String[] partes = decodedJwt.substring(1, decodedJwt.length()-1).replaceAll("\"", "").split(",");
         Map<String, String> mapa = new HashMap<>();
@@ -222,18 +222,18 @@ public class JWTUtil {
         }
         return mapa.get(field);
     }
-    
+
     /**
      * Checa si un token dado (con estructira correcta) ha sido firmado adecuadamente.
-     * En caso de que sea un token con una estructira inválida o no esté firmado de una 
+     * En caso de que sea un token con una estructira inválida o no esté firmado de una
      * manera adecuada, dispara una excepción. Si todo esta bien, retorna "true".
      * <p> Es interesante mencionar que si a cadena jwt es verificada exitosamente, entonces
      * es posible parsear (hacer decode) al jwt de manera simple y confiar en la decodificación.
      * Ver decodeJwt para un decode en forma de cadena json.
-     * 
+     *
      * @param jwt Cadena jwt a verificar
      * @param encryptKey Clave de encripción
-     * 
+     *
      * @return Cadena jwt decodificada
      * @throws CustomException
      */
@@ -248,20 +248,20 @@ public class JWTUtil {
             throw new CustomException(e, WRONG_TOKEN);
         }
     }
-    
+
     public boolean revisaExpiracion(String decodedJwt) throws CustomException {
         long now = System.currentTimeMillis();
         long someFutureDay = this.getExpiration(decodedJwt);
         if(someFutureDay< now) throw new CustomException(TOKEN_EXPIRED);
         return true;
     }
-    
+
     public boolean revisaSender(String decodedJwt, String sender) throws CustomException {
         String correo = this.getCorreo(decodedJwt);
         if(!sender.equals(correo)) throw new CustomException(TOKEN_INVALID);
         return true;
     }
-    
+
 }
 
 /*

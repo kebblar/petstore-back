@@ -58,7 +58,7 @@ public class CustomControllerAdvice {
      * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
      */
     private final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
-    
+
     /**
      * <p>userErrorHandler.</p>
      *
@@ -172,7 +172,7 @@ public class CustomControllerAdvice {
         }
         return errorGenerica.toString();
     }
-    
+
     /**
      * Construye una respuesta que contiene el consolidado de violaciones en una clave dada.
      *

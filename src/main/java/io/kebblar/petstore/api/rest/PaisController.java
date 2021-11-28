@@ -1,10 +1,10 @@
 /*
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
- *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
  *              mostrado  a ninguna persona o institución sin el permiso expli-
- *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo cualquier criterio, el único dueño de la totalidad de este 
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo cualquier criterio, el único dueño de la totalidad de este
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.rest
@@ -15,7 +15,7 @@
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
- * Historia: 
+ * Historia:
  *              Creación: 5 Sep 2021 @ 08:26:20
  */
 package io.kebblar.petstore.api.rest;
@@ -148,7 +148,7 @@ public class PaisController {
     }
 
     @GetMapping(
-            value = "/paises/list/{nombre}", 
+            value = "/paises/list/{nombre}",
             produces = "application/json; charset=utf-8")
     public List<Pais> getPais(
             @ApiParam(name = "nombre", value = "Nombre del Pais", defaultValue = "Mexico")

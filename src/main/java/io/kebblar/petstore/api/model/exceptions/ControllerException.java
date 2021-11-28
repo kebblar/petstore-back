@@ -44,13 +44,13 @@ public class ControllerException extends Exception {
     private final int localExceptionNumber;
     private final String localExceptionKey;
     private final HttpStatus httpStatus;
-    
+
     public ControllerException(
-            Throwable rootException, 
-            String shortMessage, 
+            Throwable rootException,
+            String shortMessage,
             String detailedMessage,
-            int localExceptionNumber, 
-            String localExceptionKey, 
+            int localExceptionNumber,
+            String localExceptionKey,
             HttpStatus httpStatus) {
         this.rootException = rootException;
         this.localExceptionNumber = localExceptionNumber;
@@ -102,7 +102,7 @@ public class ControllerException extends Exception {
         this(shortMessage, detailedMessage, localExceptionNumber, localExceptionKey, HttpStatus.ACCEPTED);
     }
 
-    
+
     /**
      * Genera una excepción por default con clave 1000, dada otra excepción pasada como parámetro.
      * Convierte la excepción recibida en una excepción ControllerException.

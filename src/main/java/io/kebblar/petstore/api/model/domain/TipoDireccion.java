@@ -164,5 +164,5 @@ public class TipoDireccion implements Serializable {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

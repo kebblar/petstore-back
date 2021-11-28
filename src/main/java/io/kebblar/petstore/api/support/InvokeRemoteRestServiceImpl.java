@@ -1,10 +1,10 @@
 /*
  * Licencia:    Este  código y cualquier  derivado  de  el, es  propiedad de la
  *              empresa Metasoft SA de CV y no debe, bajo ninguna circunstancia
- *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o 
+ *              ser copiado, donado,  cedido, modificado, prestado, rentado y/o
  *              mostrado  a ninguna persona o institución sin el permiso expli-
- *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es, 
- *              bajo cualquier criterio, el único dueño de la totalidad de este 
+ *              cito  y  por  escrito de  la empresa Metasoft SA de CV, que es,
+ *              bajo cualquier criterio, el único dueño de la totalidad de este
  *              código y cualquier derivado de el.
  *              ---------------------------------------------------------------
  * Paquete:     io.kebblar.petstore.api.support
@@ -15,7 +15,7 @@
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
  *
- * Historia: 
+ * Historia:
  *              Creación: 5 Sep 2021 @ 08:28:57
  */
 package io.kebblar.petstore.api.support;
@@ -47,22 +47,22 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
 @Service("invokeRestService")
 public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
     private final RestTemplate restTemplate;
-    
+
     @Value("${bitso}")
     private String bitso; // loading something like https://api.bitso.com/v3/
-    
+
     @Value("${binance}")
     private String binance;
-    
+
     @Value("${google_recaptcha_url}")
     private String googleRecaptchaUrl;
-    
+
     @Value("${google.recaptcha.secret}")
     private String googleRecaptchaSecret;
-    
+
     @Value("${sms_url}")
-    String smsUrl; 
-    
+    String smsUrl;
+
     @Value("${sms.secret}")
     String smsSecret;
 
@@ -88,7 +88,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
         return restTemplate.postForObject(url, entity, String.class);
         // https://stackoverflow.com/questions/16781680/http-get-with-headers-using-resttemplate
     }
-    
+
     /**
      * <p>getBinanceInfo.</p>
      *
@@ -98,7 +98,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
         String url = this.binance + "ticker/24hr?symbol=BTCUSDT";
         return restTemplate.getForObject(url, String.class);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException {
@@ -112,8 +112,8 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
         }
     }
     /*
-    Cuenta: petstore@i11.mx 
-    https://www.google.com/recaptcha/admin/site/490448818/settings    
+    Cuenta: petstore@i11.mx
+    https://www.google.com/recaptcha/admin/site/490448818/settings
     */
 
     private String genericRecaptchaChecker(String url, String secret, String response) {

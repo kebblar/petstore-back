@@ -511,5 +511,5 @@ public class UsuarioCompleto implements Serializable {
     public int getHash() {
         return this.hashCode();
     }
-    
+
 }

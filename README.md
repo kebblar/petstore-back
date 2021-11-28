@@ -1,4 +1,4 @@
-# petstore-back 
+# petstore-back
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
 *Permanecen utilidades:*
@@ -19,7 +19,7 @@
 
 **Commit #cb1567b**
 1. AdministracionComprasController (el servicio solamente contaba con dos endpoints, un get y un post, eran muy basicos ademas). Las funcionalidades de administracion y gestion de compras de la organizacion quedan deshabilitadas.
-2. HistorialComprasController (solo era un get de las compras de un usuario) Las funcionalidades de historial compra de un usuario quedan deshabilitadas. 
+2. HistorialComprasController (solo era un get de las compras de un usuario) Las funcionalidades de historial compra de un usuario quedan deshabilitadas.
 
 **Endpoints fuera de servicio**
 

@@ -108,7 +108,7 @@ public class Criterio {
     public int getHash() {
         return this.hashCode();
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String toString() {

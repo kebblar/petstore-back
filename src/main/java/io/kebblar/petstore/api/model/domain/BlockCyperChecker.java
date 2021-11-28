@@ -232,7 +232,7 @@ public class BlockCyperChecker {
     public int hashCode() {
         return Objects.hash(address, totalReceived, totalSent, balance, finalBalance, nTx, unconfirmedNTx, finalNTx);
     }
-    
+
     public int getHash() {
         return this.hashCode();
     }
