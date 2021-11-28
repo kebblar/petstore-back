@@ -117,7 +117,7 @@ public interface RegistroMapper {
      */
     @Insert("INSERT INTO preregistro(nick, clave_hash, correo, telefono, fecha_nacimiento, random_string, instante_registro) VALUES(#{nick}, #{claveHash}, #{correo}, #{telefono}, #{fechaNacimiento}, #{randomString}, #{instanteRegistro} ) ON DUPLICATE KEY UPDATE nick=#{nick}, telefono=#{telefono}, fecha_nacimiento=#{fechaNacimiento}, clave_hash=#{claveHash}, random_string=#{randomString}, instante_registro=#{instanteRegistro}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    Integer insertRegistro(Preregistro preregistro) throws SQLException;
+    Integer insert(Preregistro preregistro) throws SQLException;
 
     /**
      * Modifica un preregistro ya existente.

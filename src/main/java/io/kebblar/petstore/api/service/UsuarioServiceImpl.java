@@ -331,7 +331,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             // Si el usuario NO está en la tabla de 'registro', insertar info:
             if (registro == null) {
                 logger.info("Creando registro en la tabla 'Registro'");
-                this.registroMapper.insertRegistro(preRegistroRequest);
+                this.registroMapper.insert(preRegistroRequest);
             } else { // Si el usuario SI está: actualizar info:
                 logger.info("Actualizando registro en la tabla 'Registro'");
                 this.registroMapper.update(preRegistroRequest);
