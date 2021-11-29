@@ -249,8 +249,6 @@ public class AccessController {
         return res.replace('-', '"');
     }
 
-
-
     @ApiOperation(
         value = "UsuarioCompletoController::getAll",
         notes = "Regresa una lista de todos los objetos UsuarioCompleto "
@@ -435,7 +433,7 @@ public class AccessController {
                     value = "Actualiza un UsuarioDetalle empleando todos los atributos provistos")
             @RequestBody UsuarioDetalle usuarioDetalle
             ) throws ControllerException {
-         return this.accessHelperService.actualizaUsuarioDetalle(usuarioDetalle);
+         return this.usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
     }
 
     @ApiOperation(

@@ -22,7 +22,6 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 
 import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.JWTUtil;
-import io.kebblar.petstore.api.utils.StringUtils;
 
 @Service
 public class AccessHelperServiceImpl implements AccessHelperService {
@@ -67,7 +66,14 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     public String createToken(String mail) {
         return jwtManagerService.createToken(mail);
     }
-
+    
+    /** {@inheritDoc} */
+    @Override
+    public String getCorreoFromJwt(String jwt) {
+        String decoded = JWTUtil.getInstance().decodeJwt(jwt);
+        return JWTUtil.getInstance().getCorreo(decoded);
+    }
+    
     @Override
     public void actualizaUsuario(Usuario usuario) throws BusinessException {
         try {
@@ -117,9 +123,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void insertRegistro(Preregistro preRegistroRequest) throws BusinessException {
+    public int insertRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
-            registroMapper.insert(preRegistroRequest);
+            return registroMapper.insert(preRegistroRequest);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::insertRegistro");
         }
@@ -127,9 +133,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void updateRegistro(Preregistro preRegistroRequest) throws BusinessException {
+    public int updateRegistro(Preregistro preRegistroRequest) throws BusinessException {
         try {
-            registroMapper.update(preRegistroRequest);
+            return registroMapper.update(preRegistroRequest);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::updateRegistro");
         }
@@ -137,9 +143,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void insertUsuario(Usuario usuario) throws BusinessException {
+    public int insertUsuario(Usuario usuario) throws BusinessException {
         try {
-            usuarioMapper.update(usuario);
+            return usuarioMapper.update(usuario);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUsuario");
         }
@@ -147,9 +153,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
+    public int insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
         try {
-            usuarioDetalleMapper.insert(usuarioDetalle);
+            return usuarioDetalleMapper.insert(usuarioDetalle);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUsuarioDetalle");
         }
@@ -157,20 +163,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
+    public int deletePreregistroByRandomString(String randomString) throws BusinessException {
         try {
-            usuarioMapper.insert(usuario);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
-        }
-        return usuario;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void deletePreregistroByRandomString(String randomString) throws BusinessException {
-        try {
-            registroMapper.deleteByRandomString(randomString);
+            return registroMapper.deleteByRandomString(randomString);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::deletePreregistroByRandomString");
         }
@@ -187,55 +182,14 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void insertUserRol(int idUsuario, int rolId) throws BusinessException {
+    public int insertUserRol(int idUsuario, int rolId) throws BusinessException {
         try {
-            rolMapper.insertUserRol(idUsuario, rolId);
+            return rolMapper.insertUserRol(idUsuario, rolId);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUserRol");
         }
     }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
-        Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
-        try {
-            usuarioMapper.insert(usuario);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
-        }
-        return usuario;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getCorreoFromJwt(String jwt) {
-        String decoded = JWTUtil.getInstance().decodeJwt(jwt);
-        String correo = JWTUtil.getInstance().getCorreo(decoded);
-        return correo;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
-        try {
-            String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
-            usuarioDetalle.setTelefonoCelular(nuevoCel);
-            usuarioDetalleMapper.update(usuarioDetalle);
-            return usuarioDetalle;
-        } catch (Exception e) {
-            throw new CustomException(e, DATABASE, "Error actualizando los datos del usuario");
-        }
-    }
-
-
-
-
-
-
-
-
-
+    
     /** {@inheritDoc} */
     @Override
     public Usuario obtenUsuarioPorId(int id) throws BusinessException {
@@ -255,18 +209,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
-
-    /** {@inheritDoc} */
-    @Override
-    public Usuario eliminaUsuario(int id) throws BusinessException {
-        try {
-            usuarioMapper.delete(id);
-            return usuarioMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
-        }
-    }
-
+    
     /** {@inheritDoc} */
     @Override
     public List<Rol> obtenRolesDeUsuario(int id) throws CustomException {
@@ -296,6 +239,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(e, MAPPER_CALL, "getRegistroByRandomString: " + e.toString());
         }
     }
+    
 //    @Override
 //    public List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException {
 //        try {
@@ -304,7 +248,15 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 //            throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
 //        }
 //    }
-
+    @Override
+    public int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
+        try {
+            return usuarioDetalleMapper.update(usuarioDetalle);
+        } catch (SQLException e) {
+            throw new CustomException(e, MAPPER_CALL, "Error al actualiza los detalles de un usuario");
+        }
+    }
+    
     /** {@inheritDoc} */
     @Override
     public UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException {
@@ -316,12 +268,59 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     }
 
     @Override
-    public void subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
+    public int subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
         try {
-            usuarioDetalleMapper.subeFotoPerfil(idUser, nuevoNombre);
+            return usuarioDetalleMapper.subeFotoPerfil(idUser, nuevoNombre);
         } catch (SQLException e) {
             throw new CustomException(e, MAPPER_CALL, "Error al subir la foto de perfil");
         }
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
+        try {
+            usuarioMapper.insert(usuario);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
+        }
+        return usuario;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
+        Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
+        try {
+            usuarioMapper.insert(usuario);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error de inserción de un usuario", e.getMessage());
+        }
+        return usuario;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Usuario eliminaUsuario(int id) throws BusinessException {
+        try {
+            usuarioMapper.delete(id);
+            return usuarioMapper.getById(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
+        }
+    }
+
+    /** {@inheritDoc} */
+//    @Override
+//    public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
+//        try {
+//            String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
+//            usuarioDetalle.setTelefonoCelular(nuevoCel);
+//            usuarioDetalleMapper.update(usuarioDetalle);
+//            return usuarioDetalle;
+//        } catch (Exception e) {
+//            throw new CustomException(e, DATABASE, "Error actualizando los datos del usuario");
+//        }
+//    }
 
 }

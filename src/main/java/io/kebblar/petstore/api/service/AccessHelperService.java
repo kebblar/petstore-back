@@ -42,7 +42,7 @@ public interface AccessHelperService {
 
     String createToken(String mail);
 
-    UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    //UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 
     String getCorreoFromJwt(String jwt);
 
@@ -52,17 +52,17 @@ public interface AccessHelperService {
 
     Preregistro getRegistroByMail(String correo) throws BusinessException;
 
-    void insertRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    int insertRegistro(Preregistro preRegistroRequest) throws BusinessException;
 
-    void updateRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    int updateRegistro(Preregistro preRegistroRequest) throws BusinessException;
 
-    void insertUsuario(Usuario usuario) throws BusinessException;
+    int insertUsuario(Usuario usuario) throws BusinessException;
 
-    void insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    int insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 
-    void insertUserRol(int idUsuario, int rolId) throws BusinessException;
+    int insertUserRol(int idUsuario, int rolId) throws BusinessException;
 
-    void deletePreregistroByRandomString(String randomString) throws BusinessException;
+    int deletePreregistroByRandomString(String randomString) throws BusinessException;
 
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
@@ -156,6 +156,8 @@ public interface AccessHelperService {
      */
     UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
 
-    void subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
+    int subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
+
+    int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 
 }

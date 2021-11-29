@@ -28,9 +28,9 @@ import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class TestUsuarioService {
-
+/*
     @Mock
     UsuarioMapper usuarioMapper;
     @Mock
@@ -343,5 +343,5 @@ public class TestUsuarioService {
             logger.info("esto no pasa");
         }
     }
-
+*/
 }
