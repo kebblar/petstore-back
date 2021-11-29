@@ -31,8 +31,9 @@ public class ConsultaServiceImpl implements ConsultaService {
     }
 
     @Override
-    public List<ConsultaResponse> consulta(String jwt, String encryptKey) throws BusinessException{
-        int id = getUserIdFromJwt(jwt, encryptKey);
+    public List<ConsultaResponse> consulta(String jwt) throws BusinessException {
+        // Obtén el id asociado al usuario que mandó el jwt:
+        int id = this.getUserIdFromJwt(jwt);
         try {
             return consultaMapper.getById(id);
         } catch (SQLException e) {
@@ -42,9 +43,9 @@ public class ConsultaServiceImpl implements ConsultaService {
     }
 
     @Override
-    public String guarda(String jwt, String encryptKey, List<ConsultaRequest> datos) throws BusinessException{
+    public String guarda(String jwt, List<ConsultaRequest> datos) throws BusinessException{
           // Obtén el id asociado al usuario que mandó el jwt:
-        int id = getUserIdFromJwt(jwt, encryptKey);
+        int id = this.getUserIdFromJwt(jwt);
 
         // Ve a la base de datos y borra todos los datos asociados:
         try {
@@ -64,9 +65,9 @@ public class ConsultaServiceImpl implements ConsultaService {
         return "{'succeed':'true'}".replace('\'', '\"');
     }
 
-    private int getUserIdFromJwt(String jwt, String encryptKey) throws BusinessException {
+    private int getUserIdFromJwt(String jwt) throws BusinessException {
         try {
-            String correo = JWTUtil.getInstance().getMail(jwt, encryptKey);
+            String correo = JWTUtil.getInstance().getCorreoFromDecoded(jwt);
             Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {

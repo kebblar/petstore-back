@@ -94,13 +94,16 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        String remoteAddress = request.getRemoteAddr();
+        
         if (uri.startsWith("/api/")) {
-            Enumeration<String> headerNames = request.getHeaderNames();
             ArrayList<String> lista = Collections.list(headerNames);
             for (String headerName : lista) {
+                // for unit testing, we will have to mock the HttpServletRequest
                 String headerValue = request.getHeader(headerName);
                 if (headerName.contains("jwt") && headerValue != null && headerValue.trim().length() > 0) {
-                    logger.info("App caller IP detected:: {}", request.getRemoteAddr());
+                    logger.info("App caller IP detected:: {}", remoteAddress);
                     logger.info("App current uri detected:: {}", uri);
                     logger.info("El header {} tiene el valor: {}", headerName, headerValue);
                     String jwtToken = headerValue;
@@ -110,6 +113,7 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
                         // valida expiración
                         JWTUtil.getInstance().revisaExpiracion(jwtDecoded);
                     } catch (Exception e) {
+                        // also, for UT, we need to mock HttpServletResponse
                         construye(response, e.getMessage(), jwtToken);
                         return false;
                     }

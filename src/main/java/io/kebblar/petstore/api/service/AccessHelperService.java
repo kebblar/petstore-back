@@ -40,8 +40,6 @@ public interface AccessHelperService {
 
     UsuarioDetalle getUsuarioDetalle(int userId) throws BusinessException;
 
-    String createToken(String mail);
-
     //UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 
     String getCorreoFromJwt(String jwt);

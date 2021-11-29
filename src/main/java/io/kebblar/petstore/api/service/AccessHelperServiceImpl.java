@@ -19,8 +19,6 @@ import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.exceptions.MapperCallException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
-
-import io.kebblar.petstore.api.support.JwtManagerService;
 import io.kebblar.petstore.api.utils.JWTUtil;
 
 @Service
@@ -29,18 +27,15 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     private UsuarioMapper usuarioMapper;
     private RegistroMapper registroMapper;
     private RolMapper rolMapper;
-    private JwtManagerService jwtManagerService;
 
     public AccessHelperServiceImpl(
             UsuarioDetalleMapper usuarioDetalleMapper,
             UsuarioMapper usuarioMapper,
             RolMapper rolMapper,
-            JwtManagerService jwtManagerService,
             RegistroMapper registroMapper) {
         this.usuarioDetalleMapper = usuarioDetalleMapper;
         this.usuarioMapper = usuarioMapper;
         this.rolMapper = rolMapper;
-        this.jwtManagerService = jwtManagerService;
         this.registroMapper = registroMapper;
     }
 
@@ -61,19 +56,15 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     public void validateCredentialsFormat(String usr, String clave) throws CustomException {
         if(usr.trim().length()<1 || clave.trim().length()<1) throw new CustomException(BAD_CREDENTIALS);
     }
-
-    @Override
-    public String createToken(String mail) {
-        return jwtManagerService.createToken(mail);
-    }
     
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
         String decoded = JWTUtil.getInstance().decodeJwt(jwt);
-        return JWTUtil.getInstance().getCorreo(decoded);
+        return JWTUtil.getInstance().getCorreoFromDecoded(decoded);
     }
     
+    /** {@inheritDoc} */
     @Override
     public void updateUsuario(Usuario usuario) throws BusinessException {
         try {
@@ -93,6 +84,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Rol> getUserRoles(int userId) throws BusinessException {
         try {
@@ -102,6 +94,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public UsuarioDetalle getUsuarioDetalle(int userId) throws BusinessException {
         try {
@@ -171,6 +164,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getProfilePic(int idUser) throws BusinessException {
         try {
@@ -248,6 +242,8 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 //            throw new MapperCallException("Error al obtener las direcciones de un usuario", e.toString());
 //        }
 //    }
+    
+    /** {@inheritDoc} */
     @Override
     public int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
         try {
@@ -267,6 +263,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int uploadFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
         try {

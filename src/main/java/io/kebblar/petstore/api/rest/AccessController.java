@@ -26,7 +26,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -82,14 +81,12 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(value = "/api")
 public class AccessController {
-    @Value("${jwt.encryptor.password}")
-    private String encryptKey;
-
     private final ConsultaService consultaService;
     private final UsuarioService usuarioService;
     private final AccessHelperService accessHelperService;
     private final InvokeRemoteRestService invokeRestService;
     private final UsuarioCompletoService usuarioCompletoService;
+    private final JWTUtil jwtInstance;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -108,6 +105,7 @@ public class AccessController {
         this.usuarioCompletoService = usuarioCompletoService;
         this.consultaService = consultaService;
         this.accessHelperService = accessHelperService;
+        this.jwtInstance = JWTUtil.getInstance();
     }
 
     @ApiOperation(
@@ -214,7 +212,8 @@ public class AccessController {
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
-         this.valida(jwt, credenciales.getUsuario());
+         String decoded = jwtInstance.decodeJwt(jwt);
+         jwtInstance.revisaSender(decoded, credenciales.getUsuario());
          return this.usuarioService.cambiaClave(
                  credenciales.getUsuario(),
                  credenciales.getClave());
@@ -386,14 +385,8 @@ public class AccessController {
          return this.accessHelperService.deleteUsuario(id);
     }
 
-    private void valida(String token, String correo) throws CustomException {
-        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
-        if(!mail.equals(correo)) {
-            throw new CustomException(EnumMessage.BAD_CREDENTIALS);
-        }
-    }
     private void verifica(String token, String targetRol) throws BusinessException {
-        String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
+        String mail = jwtInstance.getCorreoFromDecoded(token);
         List<Rol> rolesForToken = this.accessHelperService.getRolesDelCorreo(mail);
         for(Rol rol : rolesForToken) {
             if(rol.getNombre().equalsIgnoreCase(targetRol)) {
@@ -443,7 +436,7 @@ public class AccessController {
             path = "/consulta",
             produces = "application/json; charset=utf-8")
     public List<ConsultaResponse> consulta(@RequestHeader("jwt") String jwt) throws ControllerException {
-        return consultaService.consulta(jwt, encryptKey);
+        return consultaService.consulta(jwt);
     }
 
     @ApiOperation(
@@ -455,7 +448,7 @@ public class AccessController {
     public String guarda(
             @RequestHeader("jwt") String jwt,
             @RequestBody List<ConsultaRequest> datos) throws ControllerException {
-        return consultaService.guarda(jwt, encryptKey, datos);
+        return consultaService.guarda(jwt, datos);
     }
 
 }

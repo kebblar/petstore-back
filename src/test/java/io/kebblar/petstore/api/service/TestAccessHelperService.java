@@ -43,7 +43,6 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.BusinessException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
-import io.kebblar.petstore.api.support.JwtManagerService;
 
 /**
  * <p>TestAccessHelperService class.</p>
@@ -66,9 +65,6 @@ public class TestAccessHelperService {
     private RolMapper rolMapper;
     
     @Mock
-    private JwtManagerService jwtManagerService;
-    
-    @Mock
     private RegistroMapper registroMapper;
     
     @Before
@@ -77,7 +73,6 @@ public class TestAccessHelperService {
                 usuarioDetalleMapper, 
                 usuarioMapper, 
                 rolMapper, 
-                jwtManagerService, 
                 registroMapper);
     }
     
@@ -100,7 +95,6 @@ public class TestAccessHelperService {
         UsuarioDetalle usuarioDetalle = new UsuarioDetalle();
 
         try {
-            accessHelperService.createToken("");
             accessHelperService.createUsuario(cred);
             accessHelperService.createUsuario(usuario);
             

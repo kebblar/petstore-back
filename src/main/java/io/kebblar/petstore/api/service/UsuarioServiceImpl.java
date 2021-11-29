@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.domain.UserFoundWrapper;
 import io.kebblar.petstore.api.model.exceptions.*;
@@ -49,6 +51,7 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.utils.DigestEncoder;
+import io.kebblar.petstore.api.utils.JWTUtil;
 import io.kebblar.petstore.api.utils.ManageDates;
 import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
@@ -72,6 +75,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Value("${proyecto.message}")
     private String message;
 
+    @Value("${security.token.lasts}")
+    private String securityTokenLastsString;
+
+    @Value("${jwt.encryptor.password}")
+    private String encryptKey;
+    private int securityTokenLasts;
+    
     private final UploadService uploadService;
     private final MailSenderService mailSenderService;
     private final AccessHelperService accessHelperService;
@@ -97,7 +107,25 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.uploadService = uploadService;
         this.accessHelperService = accessHelperService;
     }
-
+    
+    /**
+     * <p>init.</p>
+     */
+    @PostConstruct
+    public void init() {
+        // es obvio que estos valores los tengo hasta después de
+        // que se terminó de ejecutar el constrctor de la clase
+        logger.info("securityTokenLastsString: {}", this.securityTokenLastsString);
+        try {
+            this.securityTokenLasts =Integer.parseInt(securityTokenLastsString);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            this.securityTokenLasts = 27; // 27 minutos dura el jwt
+        }
+        logger.info("Duración de token de seguridad: {}", securityTokenLasts);
+        logger.debug("Llave de encripción para el token JWT: >>> {} <<<", encryptKey);
+    }
+    
     /** {@inheritDoc} */
     @Override
     public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
@@ -469,7 +497,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
         List<Rol> roles = accessHelperService.getRolesDelUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = accessHelperService.getDetallesDeUsuario(idUsuario);
-        String jwt = accessHelperService.createToken(correo);
+        if(encryptKey==null) encryptKey = "secreto";
+        String jwt = JWTUtil.getInstance().createToken(correo, securityTokenLasts, encryptKey);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 
