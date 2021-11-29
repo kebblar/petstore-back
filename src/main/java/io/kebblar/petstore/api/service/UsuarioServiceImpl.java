@@ -23,7 +23,6 @@ package io.kebblar.petstore.api.service;
 import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
@@ -294,7 +293,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             template = template.replace("%NAME%",user);
             template = template.replace("%TOKEN%",randStr);
             return template;
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CustomException(e, INTERNAL_SERVER, "No se ha podido leer el archivo " + archivo);
         }
     }

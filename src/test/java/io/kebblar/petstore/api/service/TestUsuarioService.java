@@ -1,5 +1,6 @@
 package io.kebblar.petstore.api.service;
 
+import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -11,6 +12,8 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+
 //import org.mockito.Mockito;
 //import org.junit.Before;
 //import static org.mockito.Mockito.when;
@@ -31,26 +34,105 @@ public class TestUsuarioService {
     private AccessHelperService accessHelperService;
 
     @Test
-    public void usuarioServiceTest() {
+    public void loginTest() {
+        Usuario usuario = new Usuario();
+        usuario.setActivo(true);
+        usuario.setClave("a7cf8fe83b806ae522cafed8af7600c2b1e9f2668654c2a39cf1bef21711b945");
         usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
-        assertTrue(true);
+        
+        // exitoso
+        try {
+            usuarioService.login(usuario, "Kebblar2017_", 1000, 2, 0);
+            assertTrue(true);
+        } catch (BusinessException e) {
+            assertTrue(false);
+        }
+        
+        // bad password, try #2
+        try {
+            usuarioService.login(usuario, "Kebblar", 1000, 2, 0);
+            assertTrue(false);
+        } catch (BusinessException e) {
+            assertTrue("BAD_CREDENTIALS".equals(e.getLocalExceptionKey()));
+        }
+        
+        // bad password, try #5
+        try {
+            usuario.setAccesoNegadoContador(5);
+            usuarioService.login(usuario, "Kebblar", 1000, 5, 0);
+            assertTrue(false);
+        } catch (BusinessException e) {
+            assertTrue("MAX_FAILED_LOGIN_EXCEPTION".equals(e.getLocalExceptionKey()));
+        }
+        
+        // good password, still bloqued
+        try {
+            usuario.setAccesoNegadoContador(0);
+            usuario.setInstanteBloqueo(1000);
+            usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
+            assertTrue(false);
+        } catch (BusinessException e) {
+            assertTrue("WAIT_LOGIN".equals(e.getLocalExceptionKey()));
+        }
+        
+        // usuario no existe
+        try {
+            usuarioService.login(null, "Kebblar2017_", 1000, 5, 1000);
+            assertTrue(false);
+        } catch (BusinessException e) {
+            assertTrue("BAD_CREDENTIALS".equals(e.getLocalExceptionKey()));
+        }  
+        
+        // user disables, no matter what
+        try {
+            usuario.setActivo(false);
+            usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
+            assertTrue(false);
+        } catch (BusinessException e) {
+            assertTrue("DISABLED_USER".equals(e.getLocalExceptionKey()));
+        }        
+        
     }
     
+    @Test
     public void usuarioServiceTest2() {
+        Usuario usuario = new Usuario();
+        usuario.setRegeneraClaveInstante(Long.MAX_VALUE);
+        
         Preregistro preRegistro = new Preregistro();
+        preRegistro.setNick("Goose");
+        preRegistro.setTelefono("5587654321");
+        preRegistro.setClaveHash("Kebblar2017_");
+        preRegistro.setCorreo("gustavo-arellano@gmail.com");
+        
         UsuarioDetalle usuarioDetalle = new UsuarioDetalle();
         Preregistro preRegistroRequest = new Preregistro();
+        preRegistroRequest.setInstanteRegistro(Long.MAX_VALUE);
+        preRegistroRequest.setRandomString("123456");
+        preRegistroRequest.setNick("Goose");
+        preRegistroRequest.setTelefono("5587654321");
+        preRegistroRequest.setClaveHash("Kebblar2017_");
+        preRegistroRequest.setCorreo("gustavo-arellano@gmail.com");
 
         usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
         try {
+            usuarioDetalle.setTelefonoCelular("5587654321");
             usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
-            usuarioService.cambiaClave("", "");
-            usuarioService.confirmaPreregistro("");
-            usuarioService.confirmaRegeneraClave("", "");
-            usuarioService.login("", "");
+            
+            when(accessHelperService.getUsuarioByCorreo("gustavo-arellano@gmail.com")).thenReturn(usuario);
+            usuarioService.cambiaClave("gustavo-arellano@gmail.com", "Kebblar2017_");
+            
+            when(accessHelperService.getPreregistroByRandomString("123456")).thenReturn(preRegistroRequest);
+            usuarioService.confirmaPreregistro("123456");
+            
+            when(accessHelperService.getByToken("123456")).thenReturn(usuario);
+            usuarioService.confirmaRegeneraClave("123456", "Kebblar2017_");
+                        
+            when(accessHelperService.getRegistroByMail("gustavo-arellano@gmail.com")).thenReturn(preRegistroRequest);
             usuarioService.preRegistro(preRegistro);
+            
             usuarioService.preRegistro(preRegistroRequest);
-            usuarioService.solicitaRegeneracionClave("");
+            usuarioService.solicitaRegeneracionClave("gustavo-arellano@gmail.com");
         } catch(BusinessException be) {
             assertTrue(false);
         }
