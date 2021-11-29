@@ -14,10 +14,6 @@ import static org.junit.Assert.*;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 
-//import org.mockito.Mockito;
-//import org.junit.Before;
-//import static org.mockito.Mockito.when;
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,7 +36,7 @@ public class TestUsuarioService {
         usuario.setClave("a7cf8fe83b806ae522cafed8af7600c2b1e9f2668654c2a39cf1bef21711b945");
         usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
         
-        // exitoso
+        // successful login
         try {
             usuarioService.login(usuario, "Kebblar2017_", 1000, 2, 0);
             assertTrue(true);
@@ -75,7 +71,7 @@ public class TestUsuarioService {
             assertTrue("WAIT_LOGIN".equals(e.getLocalExceptionKey()));
         }
         
-        // usuario no existe
+        // uses doesn't exist
         try {
             usuarioService.login(null, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
@@ -83,7 +79,7 @@ public class TestUsuarioService {
             assertTrue("BAD_CREDENTIALS".equals(e.getLocalExceptionKey()));
         }  
         
-        // user disables, no matter what
+        // user disabled, no matter what
         try {
             usuario.setActivo(false);
             usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
@@ -95,7 +91,7 @@ public class TestUsuarioService {
     }
     
     @Test
-    public void usuarioServiceTest2() {
+    public void usuarioServiceTest() {
         Usuario usuario = new Usuario();
         usuario.setRegeneraClaveInstante(Long.MAX_VALUE);
         
