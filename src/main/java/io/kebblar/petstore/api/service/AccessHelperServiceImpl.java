@@ -58,7 +58,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public void valida(String usr, String clave) throws CustomException {
+    public void validateCredentialsFormat(String usr, String clave) throws CustomException {
         if(usr.trim().length()<1 || clave.trim().length()<1) throw new CustomException(BAD_CREDENTIALS);
     }
 
@@ -75,7 +75,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     }
     
     @Override
-    public void actualizaUsuario(Usuario usuario) throws BusinessException {
+    public void updateUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.update(usuario);
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException {
+    public Usuario getUsuarioByCorreo(String correo) throws BusinessException {
         try {
             return usuarioMapper.getByCorreo(correo);
         } catch (SQLException e) {
@@ -192,7 +192,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public Usuario obtenUsuarioPorId(int id) throws BusinessException {
+    public Usuario getUsuarioById(int id) throws BusinessException {
         try {
             return usuarioMapper.getById(id);
         } catch (SQLException e) {
@@ -202,7 +202,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public List<Usuario> obtenTodosUsuarios() throws BusinessException {
+    public List<Usuario> getTodosUsuarios() throws BusinessException {
         try {
             return usuarioMapper.getAll();
         } catch (SQLException e) {
@@ -212,7 +212,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public List<Rol> obtenRolesDeUsuario(int id) throws CustomException {
+    public List<Rol> getRolesDelUsuario(int id) throws CustomException {
         try {
             return rolMapper.getUserRoles(id);
         } catch (SQLException e) {
@@ -222,7 +222,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
 
     /** {@inheritDoc} */
     @Override
-    public List<Rol> obtenRolesDeUsuario(String correo) throws CustomException {
+    public List<Rol> getRolesDelCorreo(String correo) throws CustomException {
         try {
             return rolMapper.getUserRolesByMail(correo);
         } catch (SQLException e) {
@@ -259,7 +259,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException {
+    public UsuarioDetalle getDetallesDeUsuario(int id) throws CustomException {
         try {
             return usuarioDetalleMapper.getById(id);
         } catch (SQLException e) {
@@ -268,7 +268,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     }
 
     @Override
-    public int subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
+    public int uploadFotoPerfil(int idUser, String nuevoNombre) throws CustomException {
         try {
             return usuarioDetalleMapper.subeFotoPerfil(idUser, nuevoNombre);
         } catch (SQLException e) {
@@ -278,7 +278,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public Usuario creaUsuario(Usuario usuario) throws BusinessException {
+    public Usuario createUsuario(Usuario usuario) throws BusinessException {
         try {
             usuarioMapper.insert(usuario);
         } catch (SQLException e) {
@@ -289,7 +289,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public Usuario creaUsuario(CredencialesRequest cred) throws BusinessException {
+    public Usuario createUsuario(CredencialesRequest cred) throws BusinessException {
         Usuario usuario = new Usuario(-1, cred.getUsuario(), cred.getClave());
         try {
             usuarioMapper.insert(usuario);
@@ -301,7 +301,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public Usuario eliminaUsuario(int id) throws BusinessException {
+    public Usuario deleteUsuario(int id) throws BusinessException {
         try {
             usuarioMapper.delete(id);
             return usuarioMapper.getById(id);

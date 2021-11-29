@@ -25,16 +25,16 @@ public interface AccessHelperService {
      * @param clave corresponde a la clave de inicio de sesión.
      * @throws CustomException
      */
-    void valida(String usr, String clave) throws CustomException;
+    void validateCredentialsFormat(String usr, String clave) throws CustomException;
 
     /**
      * Método privado para actualizar la información de un usuario en el sistema.
      * @param usuario objeto usuario a actualizar.
      * @throws CustomException En caso que ocurra algún problema con la actualización.
      */
-    void actualizaUsuario(Usuario usuario) throws BusinessException;
+    void updateUsuario(Usuario usuario) throws BusinessException;
 
-    Usuario obtenUsuarioPorCorreo(String correo) throws BusinessException;
+    Usuario getUsuarioByCorreo(String correo) throws BusinessException;
 
     List<Rol> getUserRoles(int userId) throws BusinessException;
 
@@ -71,7 +71,7 @@ public interface AccessHelperService {
      * @return Objeto de tipo {@link Usuario} que es creado.
      * @throws BusinessException if any
      */
-    Usuario creaUsuario(CredencialesRequest cred) throws BusinessException;
+    Usuario createUsuario(CredencialesRequest cred) throws BusinessException;
 
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir del nuevo
@@ -81,7 +81,7 @@ public interface AccessHelperService {
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
      * @throws BusinessException if any
      */
-    Usuario creaUsuario(Usuario usuario) throws BusinessException;
+    Usuario createUsuario(Usuario usuario) throws BusinessException;
 
     /**
      * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
@@ -90,7 +90,7 @@ public interface AccessHelperService {
      * @return Objeto de tipo {@link Usuario}.
      * @throws BusinessException if any
      */
-    Usuario obtenUsuarioPorId(int id) throws BusinessException;
+    Usuario getUsuarioById(int id) throws BusinessException;
 
     /**
      * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
@@ -100,7 +100,7 @@ public interface AccessHelperService {
      * @return Lista de objetos de tipo {@link Usuario}.
      * @throws BusinessException if any
      */
-    List<Usuario> obtenTodosUsuarios() throws BusinessException;
+    List<Usuario> getTodosUsuarios() throws BusinessException;
 
     /**
      * <p>Elimina de manera lógina (y no física) a un objeto de
@@ -111,7 +111,7 @@ public interface AccessHelperService {
      * @return Objeto de tipo {@link Usuario} dado originalmente.
      * @throws BusinessException if any
      */
-    Usuario eliminaUsuario(int id) throws BusinessException;
+    Usuario deleteUsuario(int id) throws BusinessException;
 
     /**
      * <p>Retorna una lista de objetos de tipo {@link Rol} que están
@@ -123,7 +123,7 @@ public interface AccessHelperService {
      * @return Lista de objetos de tipo {@link Rol}.
      * @throws CustomException if any
      */
-    List<Rol> obtenRolesDeUsuario(int id) throws CustomException;
+    List<Rol> getRolesDelUsuario(int id) throws CustomException;
 
     /**
      * <p>Retorna una lista de objetos de tipo {@link Rol} que están
@@ -133,7 +133,7 @@ public interface AccessHelperService {
      * @return Lista de objetos de tipo {@link Rol}.
      * @throws CustomException if any
      */
-    List<Rol> obtenRolesDeUsuario(String correo) throws CustomException;
+    List<Rol> getRolesDelCorreo(String correo) throws CustomException;
 
     /**
      * Obtiene la tupla de la tabla preregistro que tiene asociado el token proporcionado
@@ -154,9 +154,9 @@ public interface AccessHelperService {
      * @return Objeto {@link UsuarioDetalle}
      * @throws CustomException if any
      */
-    UsuarioDetalle obtenDetallesDeUsuario(int id) throws CustomException;
+    UsuarioDetalle getDetallesDeUsuario(int id) throws CustomException;
 
-    int subeFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
+    int uploadFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
 
     int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
 

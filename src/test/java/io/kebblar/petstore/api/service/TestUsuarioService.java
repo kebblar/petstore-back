@@ -1,35 +1,60 @@
 package io.kebblar.petstore.api.service;
 
-import io.kebblar.petstore.api.mapper.RegistroMapper;
-import io.kebblar.petstore.api.mapper.RolMapper;
-import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
-import io.kebblar.petstore.api.mapper.UsuarioMapper;
-import io.kebblar.petstore.api.model.domain.Rol;
-import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.*;
-import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
-import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.support.MailSenderService;
-import org.junit.Before;
+import io.kebblar.petstore.api.support.UploadService;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.SQLException;
-import java.util.*;
-
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
+import org.mockito.Mock;
+//import org.mockito.Mockito;
+//import org.junit.Before;
+//import static org.mockito.Mockito.when;
 
-//@RunWith(MockitoJUnitRunner.class)
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
 public class TestUsuarioService {
+    private UsuarioService usuarioService;
+    
+    @Mock
+    private UploadService uploadService;
+    
+    @Mock
+    private MailSenderService mailSenderService;
+    
+    @Mock
+    private AccessHelperService accessHelperService;
+
+    @Test
+    public void usuarioServiceTest() {
+        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
+        assertTrue(true);
+    }
+    
+    public void usuarioServiceTest2() {
+        Preregistro preRegistro = new Preregistro();
+        UsuarioDetalle usuarioDetalle = new UsuarioDetalle();
+        Preregistro preRegistroRequest = new Preregistro();
+
+        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
+        try {
+            usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
+            usuarioService.cambiaClave("", "");
+            usuarioService.confirmaPreregistro("");
+            usuarioService.confirmaRegeneraClave("", "");
+            usuarioService.login("", "");
+            usuarioService.preRegistro(preRegistro);
+            usuarioService.preRegistro(preRegistroRequest);
+            usuarioService.solicitaRegeneracionClave("");
+        } catch(BusinessException be) {
+            assertTrue(false);
+        }
+    }
 /*
     @Mock
     UsuarioMapper usuarioMapper;
@@ -344,4 +369,117 @@ public class TestUsuarioService {
         }
     }
 */
+    
+    
+/*
+    @Mock
+    private UsuarioService usuarioService;
+    @Mock
+    private JwtManagerService jwtManagerService;
+
+    private Usuario usuario = new Usuario(
+            1, "gustavo_arellano@gmail.com",
+            "399a89d772ebdc27d7dff05af2877b58f87c3a04086cd32db71bcd3b2c1dc5c4",
+            1875437L, true, 3, 0, 0, 0, "regenra-clave-token", 0);
+
+
+    @Before
+    public void prepara() {
+        when(jwtManagerService.createToken(Mockito.any())).thenReturn("token-bxcdhjbshjc7382gyd");
+        this.usuarioService = new UsuarioServiceImpl(usuarioService, jwtManagerService);
+    }
+
+ 
+    @Test
+    public void loginOkTest() {
+        try {
+            when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
+            LoginResponse response = this.usuarioService.login(
+                    "gustavo_arellano@gmail.com",
+                    "Kebblar2017");
+            System.out.println(response);
+            assert(true);
+        } catch (BusinessException e) {
+            assert(false);
+        }
+    }
+    @Test
+    public void revienta() {
+        assert(true);
+    }
+
+    @Test
+    public void loginBadTest() {
+        this.usuario.setAccesoNegadoContador(2);
+        try {
+            when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
+            this.usuarioService.login(
+                    "gustavo_arellano@gmail.com",
+                    "Kebblar2017_");
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void loginBadUserTest() {
+        this.usuario.setAccesoNegadoContador(2);
+        try {
+            when(usuarioService.obtenUsuarioPorCorreo("xgustavo_arellano@gmail.com")).thenReturn(null);
+            this.usuarioService.login(
+                    "xgustavo_arellano@gmail.com",
+                    "Kebblar2017_");
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void login2OkUserTest() {
+        this.usuario.setAccesoNegadoContador(5);
+        long tiempo = System.currentTimeMillis()-2*60*1000+ 1234;
+        this.usuario.setInstanteBloqueo(tiempo);
+        try {
+            this.usuarioService.login(usuario, "Kebblar2017", 5*60*1000, 4, System.currentTimeMillis());
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void loginVeryBadTest() {
+        this.usuario.setAccesoNegadoContador(5);
+        try {
+            when(usuarioService.obtenUsuarioPorCorreo(usuario.getCorreo())).thenReturn(usuario);
+            this.usuarioService.login(
+                    "gustavo_arellano@gmail.com",
+                    "Kebblar2017_");
+            assert(false);
+        } catch (BusinessException e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void DateTest() {
+        long oneday = 1000*60*60*24;
+        long oneYear = oneday*365;
+        Date origen = new Date(0); //Wed Dec 31 18:00:00 CST 1969
+        long gus = -83495789067L+oneday*165; // Sun Oct 22 08:43:30 CST 1967 // -69239789067
+        Date cumple = new Date(gus);
+        long x = origen.getTime();
+        long now = System.currentTimeMillis();
+        long year1967 = now - oneYear*54;
+        Date d = new Date(year1967); // -83495789067 // Wed May 10 08:43:30 CST 1967
+        System.out.println(d);
+        System.out.println(cumple);
+
+        System.out.println(origen);
+        System.out.println(x);
+        assert(year1967!=0);
+    }
+    */    
 }

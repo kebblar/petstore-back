@@ -315,21 +315,21 @@ public class AccessController {
                     defaultValue = "1")
             @PathVariable int id
             ) throws ControllerException {
-        return this.accessHelperService.obtenUsuarioPorId(id);
+        return this.accessHelperService.getUsuarioById(id);
     }
 
     @GetMapping(
             path = "/usuarios",
             produces = "application/json; charset=utf-8")
     public List<Usuario> getAllUsers() throws ControllerException {
-        return this.accessHelperService.obtenTodosUsuarios();
+        return this.accessHelperService.getTodosUsuarios();
     }
 
     @GetMapping(
             path = "/count-users",
             produces = "application/json; charset=utf-8")
     public int countUsers() throws ControllerException {
-        return this.accessHelperService.obtenTodosUsuarios().size();
+        return this.accessHelperService.getTodosUsuarios().size();
     }
 
     @PostMapping(
@@ -343,7 +343,7 @@ public class AccessController {
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
         this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
-        return this.accessHelperService.creaUsuario(credenciales);
+        return this.accessHelperService.createUsuario(credenciales);
     }
 
     @PostMapping(
@@ -357,7 +357,7 @@ public class AccessController {
             @RequestBody Usuario usuario
             ) throws ControllerException {
         this.verifica(jwt, "ADMIN"); // o sea: CUALQUIER administrador (y no otro rol) puede crear un nuevo usuario
-        return this.accessHelperService.creaUsuario(usuario);
+        return this.accessHelperService.createUsuario(usuario);
     }
 
     @PutMapping(
@@ -371,7 +371,7 @@ public class AccessController {
             @RequestBody Usuario usuario
             ) throws ControllerException {
          this.verifica(jwt, "ADMIN"); // o sea: sólo un administrador puede actualizar a un usuario cualquiera
-         this.accessHelperService.actualizaUsuario(usuario);
+         this.accessHelperService.updateUsuario(usuario);
          return usuario;
     }
 
@@ -383,7 +383,7 @@ public class AccessController {
                     name = "id",
                     value = "Borra un Usuario cuyo ID es dado")
             @RequestParam int id) throws ControllerException {
-         return this.accessHelperService.eliminaUsuario(id);
+         return this.accessHelperService.deleteUsuario(id);
     }
 
     private void valida(String token, String correo) throws CustomException {
@@ -394,7 +394,7 @@ public class AccessController {
     }
     private void verifica(String token, String targetRol) throws BusinessException {
         String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
-        List<Rol> rolesForToken = this.accessHelperService.obtenRolesDeUsuario(mail);
+        List<Rol> rolesForToken = this.accessHelperService.getRolesDelCorreo(mail);
         for(Rol rol : rolesForToken) {
             if(rol.getNombre().equalsIgnoreCase(targetRol)) {
                 return;

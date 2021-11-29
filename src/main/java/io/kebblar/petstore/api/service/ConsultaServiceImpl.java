@@ -67,7 +67,7 @@ public class ConsultaServiceImpl implements ConsultaService {
     private int getUserIdFromJwt(String jwt, String encryptKey) throws BusinessException {
         try {
             String correo = JWTUtil.getInstance().getMail(jwt, encryptKey);
-            Usuario usr = accessHelperService.obtenUsuarioPorCorreo(correo);
+            Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {
             return 0;

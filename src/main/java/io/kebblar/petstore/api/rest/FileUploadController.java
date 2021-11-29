@@ -153,9 +153,9 @@ public class FileUploadController {
     @RequestHeader("idUser") int idUser,
     @ApiParam(name = "image", value = "Imagen a guardar.")
     @RequestParam("image") MultipartFile files) throws ControllerException {
-        if (accessHelperService.obtenUsuarioPorId(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
+        if (accessHelperService.getUsuarioById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
         UploadModel um = uploadService.storeOne(files, destinationFolder, max);
-        accessHelperService.subeFotoPerfil(idUser, um.getNuevoNombre());
+        accessHelperService.uploadFotoPerfil(idUser, um.getNuevoNombre());
         return um;
     }
 

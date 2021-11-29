@@ -220,12 +220,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private Usuario doTransaction(Preregistro preregistro, String randomString) throws BusinessException {
-        Usuario testUser = accessHelperService.obtenUsuarioPorCorreo(preregistro.getCorreo());
+        Usuario testUser = accessHelperService.getUsuarioByCorreo(preregistro.getCorreo());
         if(testUser != null) {
             // Si el usuario SI existe, sólo actualiza su password y el instante de ultimo cambio
             testUser.setClave(preregistro.getClaveHash());
             testUser.setInstanteUltimoCambioClave(System.currentTimeMillis());
-            accessHelperService.actualizaUsuario(testUser);
+            accessHelperService.updateUsuario(testUser);
             return testUser;
         }
 
@@ -305,11 +305,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario dummyUser = new Usuario(0, "err","err");
         String token = StringUtils.getRandomString(6);
         try {
-            Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(correo);
+            Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
             if(usuario==null) return dummyUser;
             usuario.setRegeneraClaveInstante(System.currentTimeMillis());
             usuario.setRegeneraClaveToken(token);
-            accessHelperService.actualizaUsuario(usuario);
+            accessHelperService.updateUsuario(usuario);
             sendMail("Estimado Usuario", correo, token, "Clave de recuperación");
             return usuario;
         } catch (BusinessException e) {
@@ -347,14 +347,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Si no se cumple con alguna de estas dos condiciones, se deberá impedir el cambio
         // y se deberá disparar la excepción de NO autorizado (401: unauthorized)
         try {
-            Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(correo);
+            Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
             if(usuario==null) {
                 throw new CustomException(USER_NOT_EXIST, correo);
             }
             ValidadorClave.validate(clave);
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
             usuario.setClave(claveHash);
-            accessHelperService.actualizaUsuario(usuario);
+            accessHelperService.updateUsuario(usuario);
             return usuario;
         } catch (BusinessException e) {
             throw new MapperCallException("Error al modificar la clave", e.getMessage());
@@ -377,9 +377,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     /** {@inheritDoc} */
     @Override
     public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException {
-        if (accessHelperService.obtenUsuarioPorId(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
+        if (accessHelperService.getUsuarioById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
         UploadModel um = uploadService.storeOne(files, destinationFolder, max);
-        accessHelperService.subeFotoPerfil(idUser, um.getNuevoNombre());
+        accessHelperService.uploadFotoPerfil(idUser, um.getNuevoNombre());
         return um;
     }
 
@@ -387,11 +387,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public LoginResponse login(String usr, String clave) throws BusinessException {
         logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
-        accessHelperService.valida(usr, clave);
+        accessHelperService.validateCredentialsFormat(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
         long delta = 1000*60*5L; // 5 minutos
         long instanteActual = System.currentTimeMillis();
-        Usuario usuario = accessHelperService.obtenUsuarioPorCorreo(usr);
+        Usuario usuario = accessHelperService.getUsuarioByCorreo(usr);
         return login(usuario, clave, delta, maximoNumeroIntentosConcedidos, instanteActual);
     }
 
@@ -426,12 +426,12 @@ public class UsuarioServiceImpl implements UsuarioService {
             // Incrementa el contador de intentos erroneos de ingreso y actualiza:
             int numeroDeIntentosFallidos = usuario.getAccesoNegadoContador()+1;
             usuario.setAccesoNegadoContador(numeroDeIntentosFallidos);
-            accessHelperService.actualizaUsuario(usuario);
+            accessHelperService.updateUsuario(usuario);
 
             // Si los intentos de ingreso inválidos superan un limite, actualiza y Notifica:
             if(numeroDeIntentosFallidos >= maximoNumeroIntentosConcedidos) {
                 usuario.setInstanteBloqueo(instanteActual);
-                accessHelperService.actualizaUsuario(usuario);
+                accessHelperService.updateUsuario(usuario);
                 throw new CustomException(MAX_FAILED_LOGIN_EXCEPTION, maximoNumeroIntentosConcedidos);
             }
 
@@ -447,7 +447,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setAccesoNegadoContador(0);
             usuario.setInstanteBloqueo(0);
             usuario.setInstanteUltimoAcceso(instanteActual);
-            accessHelperService.actualizaUsuario(usuario);
+            accessHelperService.updateUsuario(usuario);
             // Esto va al front y se almacena en 'localStorage' (setItem)
             // https://gitlab.ci.ultrasist.net/root/impi-chatbot-frontend/blob/develop/src/components/04-LogIn/login.vue
             UserFoundWrapper wrapper = getUserFoundWrapper(usuario.getId(), usuario.getCorreo());
@@ -468,8 +468,8 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @throws BusinessException En caso que el onjeto no pueda ser devuelto.
      */
     private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
-        List<Rol> roles = accessHelperService.obtenRolesDeUsuario(idUsuario);
-        UsuarioDetalle usuarioDetalle = accessHelperService.obtenDetallesDeUsuario(idUsuario);
+        List<Rol> roles = accessHelperService.getRolesDelUsuario(idUsuario);
+        UsuarioDetalle usuarioDetalle = accessHelperService.getDetallesDeUsuario(idUsuario);
         String jwt = accessHelperService.createToken(correo);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
