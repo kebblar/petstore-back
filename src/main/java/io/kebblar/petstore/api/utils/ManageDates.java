@@ -11,7 +11,7 @@ public class ManageDates {
 
     public Date validaEdad(Date now, Date fechaNacimiento, int edadMinima) throws BusinessException {
         long diff = daysBetweenDates(now, fechaNacimiento);
-        long min = 1+ 365*edadMinima + edadMinima/4; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
+        long min = 1L+ 365*edadMinima + edadMinima/4L; // lo último es por los años biciestos que suman 1 a cada 4 (y el 1 es porque debe ser MAYOR que)
         if(diff<min) throw new CustomException(TOO_YOUNG, edadMinima);
         return fechaNacimiento;
     }
