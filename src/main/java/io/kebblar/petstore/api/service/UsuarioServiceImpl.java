@@ -75,10 +75,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Value("${proyecto.message}")
     private String message;
 
-    @Value("${security.token.lasts}")
+    @Value("${security.token.lasts:30}")
     private String securityTokenLastsString;
 
-    @Value("${register.token.lasts}")
+    @Value("${register.token.lasts:10}")
     private String registerTokenLastsString;
     
     @Value("${jwt.encryptor.password}")
