@@ -2,6 +2,9 @@ package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
+import io.kebblar.petstore.api.model.enumerations.EnumMessage;
+
+import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
 import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.support.MailSenderService;
@@ -29,6 +32,10 @@ public class TestUsuarioService {
     @Mock
     private AccessHelperService accessHelperService;
 
+    private boolean checa(BusinessException e, EnumMessage m) {
+    	return m.toString().equals(e.getLocalExceptionKey());    	
+    }
+    
     @Test
     public void loginTest() {
         Usuario usuario = new Usuario();
@@ -49,7 +56,7 @@ public class TestUsuarioService {
             usuarioService.login(usuario, "Kebblar", 1000, 2, 0);
             assertTrue(false);
         } catch (BusinessException e) {
-            assertTrue("BAD_CREDENTIALS".equals(e.getLocalExceptionKey()));
+            assertTrue(checa(e, BAD_CREDENTIALS));
         }
         
         // bad password, try #5
@@ -58,7 +65,7 @@ public class TestUsuarioService {
             usuarioService.login(usuario, "Kebblar", 1000, 5, 0);
             assertTrue(false);
         } catch (BusinessException e) {
-            assertTrue("MAX_FAILED_LOGIN_EXCEPTION".equals(e.getLocalExceptionKey()));
+            assertTrue(checa(e, MAX_FAILED_LOGIN_EXCEPTION));
         }
         
         // good password, still bloqued
@@ -68,7 +75,7 @@ public class TestUsuarioService {
             usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
         } catch (BusinessException e) {
-            assertTrue("WAIT_LOGIN".equals(e.getLocalExceptionKey()));
+            assertTrue(checa(e, WAIT_LOGIN));
         }
         
         // uses doesn't exist
@@ -76,7 +83,7 @@ public class TestUsuarioService {
             usuarioService.login(null, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
         } catch (BusinessException e) {
-            assertTrue("BAD_CREDENTIALS".equals(e.getLocalExceptionKey()));
+            assertTrue(checa(e, BAD_CREDENTIALS));
         }  
         
         // user disabled, no matter what
@@ -85,7 +92,7 @@ public class TestUsuarioService {
             usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
         } catch (BusinessException e) {
-            assertTrue("DISABLED_USER".equals(e.getLocalExceptionKey()));
+            assertTrue(checa(e, DISABLED_USER));
         }        
         
     }

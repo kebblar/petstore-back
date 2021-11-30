@@ -130,7 +130,7 @@ public class JWTUtil {
 
     public long getExpirationFromDecoded(String decodedJwt) {
         String expStr = getValueFromDecodedJwtString(decodedJwt, "exp");
-        return new Long(expStr);
+        return Long.valueOf(expStr);
     }
     
     public boolean revisaExpiracion(String decodedJwt) throws CustomException {
