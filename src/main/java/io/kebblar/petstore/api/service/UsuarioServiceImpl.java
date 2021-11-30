@@ -291,9 +291,11 @@ public class UsuarioServiceImpl implements UsuarioService {
             "",     // nombre
             "",     // apellidoPaterno
             "",     // apellidoMaterno
-            preregistro.getNick(),     // nickName
             preregistro.getFechaNacimiento(),   // fechaNacimiento
-            preregistro.getTelefono()    // telefonoCelular
+            preregistro.getNick(),     // nickName
+            preregistro.getTelefono(),     // telefono
+            "",     // descripcion
+            ""    // fotoPerfil
         );
         this.accessHelperService.insertUsuarioDetalle(usuarioDetalle);
 

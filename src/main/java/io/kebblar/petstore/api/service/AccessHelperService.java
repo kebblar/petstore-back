@@ -151,11 +151,17 @@ public interface AccessHelperService {
      * @param id Entero asociado a un usuario específico
      * @return Objeto {@link UsuarioDetalle}
      * @throws CustomException if any
-     */
+     @Override
+    */
     UsuarioDetalle getDetallesDeUsuario(int id) throws CustomException;
 
     int uploadFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
 
     int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    
+    String getProfileDesc(int idUser) throws BusinessException;
+
+    int updateProfileDesc(int idUser, String desc) throws BusinessException;
 
 }
+    

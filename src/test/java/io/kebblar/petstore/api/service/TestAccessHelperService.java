@@ -124,6 +124,7 @@ public class TestAccessHelperService {
             accessHelperService.getCorreoFromJwt("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjcnlwdG8tZXhlY3V0b3Itand0TWFuYWdlciIsImlhdCI6MTYzODE1MzYwOSwic3ViIjoiQ29vbCBqd3QgVG9rZW4gb246IDE2MzgxNTM2MDk2NzciLCJqdGkiOiJndXN0YXZvLWFyZWxsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTYzODE1NDUwOX0.o0oEGuL9pbrc4mCS3ZbCXFxmqZaW6VfSAKoDBXmsa9E");
             accessHelperService.getPreregistroByRandomString("");
             accessHelperService.getProfilePic(0);
+            accessHelperService.getProfileDesc(0);
             accessHelperService.getRegistroByMail("");
             accessHelperService.getUserRoles(0);
             accessHelperService.getUsuarioDetalle(0);
@@ -139,6 +140,7 @@ public class TestAccessHelperService {
             accessHelperService.insertUsuario(usuario);
             accessHelperService.insertUsuarioDetalle(usuarioDetalle);
             
+            accessHelperService.updateProfileDesc(0, "");
             accessHelperService.updateUsuario(usuario);
             accessHelperService.updateRegistro(preRegistro);
             accessHelperService.updateUsuarioDetalle(usuarioDetalle);

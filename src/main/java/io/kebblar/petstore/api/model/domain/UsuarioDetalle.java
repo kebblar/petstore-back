@@ -42,6 +42,7 @@ public class UsuarioDetalle {
     private Date fechaNacimiento;
     private String nickName;
     private String telefonoCelular;
+    private String descripcion;
     private String fotoPerfil;
 
     /**
@@ -57,19 +58,22 @@ public class UsuarioDetalle {
      * @param nombre a {@link java.lang.String} object.
      * @param apellidoPaterno a {@link java.lang.String} object.
      * @param apellidoMaterno a {@link java.lang.String} object.
+     * @param fechaNacimiento
      * @param nickName a {@link java.lang.String} object.
-     * @param fechaNacimiento a {@link java.util.Date} object.
-     * @param telefonoCelular a {@link java.lang.String} object.
+     * @param telefonoCelular
+     * @param descripcion a {@link java.util.Date} object.
+     * @param fotoPerfil a {@link java.lang.String} object.
      */
     public UsuarioDetalle(
-            int id,
-            String nombre,
-            String apellidoPaterno,
-            String apellidoMaterno,
-            String nickName,
+            int id, 
+            String nombre, 
+            String apellidoPaterno, 
+            String apellidoMaterno, 
             Date fechaNacimiento,
-            String telefonoCelular) {
-        super();
+            String nickName, 
+            String telefonoCelular, 
+            String descripcion, 
+            String fotoPerfil) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -77,7 +81,10 @@ public class UsuarioDetalle {
         this.fechaNacimiento = fechaNacimiento;
         this.nickName = nickName;
         this.telefonoCelular = telefonoCelular;
+        this.descripcion = descripcion;
+        this.fotoPerfil = fotoPerfil;
     }
+
 
     /*
      * Getter y Setter.
@@ -259,6 +266,14 @@ public class UsuarioDetalle {
     @Override
     public int hashCode() {
         return Objects.hash(id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, nickName, telefonoCelular, fotoPerfil);
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

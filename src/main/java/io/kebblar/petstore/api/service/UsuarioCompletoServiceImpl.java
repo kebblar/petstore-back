@@ -110,9 +110,11 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
                 usuarioCompleto.getNombre(),
                 usuarioCompleto.getApellidoPaterno(),
                 usuarioCompleto.getApellidoMaterno(),
-                usuarioCompleto.getNickName(),
                 usuarioCompleto.getFechaNacimiento(),
-                usuarioCompleto.getTelefonoCelular()
+                usuarioCompleto.getNickName(),
+                usuarioCompleto.getTelefonoCelular(),
+                "usuarioCompleto.getDescripcion()",
+                "usuarioCompleto.getFotoPerfil()"
                 );
         try {
             int a = usuarioCompletoMapper.updateUsuarioPlano(u);

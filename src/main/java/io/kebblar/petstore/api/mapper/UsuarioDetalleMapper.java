@@ -46,8 +46,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 public interface UsuarioDetalleMapper {
 
     /** Constant <code>CAMPOS_USER_D=" id_usuario, nombre, apellido_paterno, "{trunked}</code> */
-    String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, " +
-            "fecha_nacimiento, telefono_celular ";
+    String CAMPOS_USER_D = " id_usuario, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular, descripcion, foto_perfil ";
 
     /**
      * Obtiene un objeto de tipo '{@link io.kebblar.petstore.api.model.domain.UsuarioDetalle} ' realizando la búsqueda con base en el 'id' del Usuario.
@@ -57,13 +56,15 @@ public interface UsuarioDetalleMapper {
      * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="UsuarioDetalleMap", value = {
-        @Result(property = "id", column = "id_usuario"),
-        @Result(property = "nombre", column = "nombre"),
+        @Result(property = "id",              column = "id_usuario"),
+        @Result(property = "nombre",          column = "nombre"),
         @Result(property = "apellidoPaterno", column = "apellido_paterno"),
         @Result(property = "apellidoMaterno", column = "apellido_materno"),
-        @Result(property = "nickName", column = "nick_name"),
         @Result(property = "fechaNacimiento", column = "fecha_nacimiento"),
-        @Result(property = "telefonoCelular", column = "telefono_celular")
+        @Result(property = "nickName",        column = "nick_name"),
+        @Result(property = "telefonoCelular", column = "telefono_celular"),
+        @Result(property = "descripcion",     column = "descripcion"),
+        @Result(property = "fotoPerfil",      column = "foto_perfil")
     })
     @Select("SELECT " + CAMPOS_USER_D + " FROM usuario_detalle WHERE id_usuario = #{idUsuario} ")
     UsuarioDetalle getById(int idUsuario) throws SQLException;
@@ -85,7 +86,7 @@ public interface UsuarioDetalleMapper {
      * @return el auto incremental asociado a esa inserción.
      * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular) VALUES(#{id}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular} )")
+    @Insert("INSERT INTO usuario_detalle(id_usuario, nombre, apellido_paterno, apellido_materno, nick_name, fecha_nacimiento, telefono_celular, descripcion, foto_perfil) VALUES(#{id}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{nickName}, #{fechaNacimiento}, #{telefonoCelular}, #{descripcion}, #{fotoPerfil} )")
     Integer insert(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
@@ -95,7 +96,7 @@ public interface UsuarioDetalleMapper {
      * @return el número de registros actualizados.
      * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
-    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{id} ")
+    @Update("UPDATE usuario_detalle SET nombre = #{nombre}, apellido_paterno = #{apellidoPaterno}, apellido_materno = #{apellidoMaterno}, fecha_nacimiento = #{fechaNacimiento}, foto_perfil = #{fotoPerfil}, descripcion = #{descripcion}, nick_name = #{nickName}, telefono_celular = #{telefonoCelular} WHERE id_usuario = #{id} ")
     Integer update(UsuarioDetalle usuarioDetalle) throws SQLException;
 
     /**
@@ -113,4 +114,13 @@ public interface UsuarioDetalleMapper {
 
     @Select("SELECT foto_perfil FROM usuario_detalle WHERE id_usuario = #{idUser}")
     String getProfilePic(int idUser) throws SQLException;
+    
+    
+    
+    @Insert("update usuario_detalle set descripcin = #{descripcion} where id_usuario=#{idUser}")
+    int updateDescripcion(int idUser, String descripcion) throws SQLException;
+
+    @Select("SELECT descripcion FROM usuario_detalle WHERE id_usuario = #{idUser}")
+    String getDescripcion(int idUser) throws SQLException;
+
 }

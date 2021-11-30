@@ -173,7 +173,27 @@ public class AccessHelperServiceImpl implements AccessHelperService {
             throw new CustomException(NOT_FOUND);
         }
     }
-
+    
+    /** {@inheritDoc} */
+    @Override
+    public String getProfileDesc(int idUser) throws BusinessException {
+        try {
+            return usuarioDetalleMapper.getDescripcion(idUser);
+        } catch (SQLException e) {
+            throw new CustomException(e, DATABASE, "AccessHelper::getProfileDesc");
+        }
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public int updateProfileDesc(int idUser, String desc) throws BusinessException {
+        try {
+            return usuarioDetalleMapper.updateDescripcion(idUser, desc);
+        } catch (SQLException e) {
+            throw new CustomException(e, DATABASE, "AccessHelper::updateProfileDesc");
+        }
+    }
+    
     /** {@inheritDoc} */
     @Override
     public int insertUserRol(int idUsuario, int rolId) throws BusinessException {

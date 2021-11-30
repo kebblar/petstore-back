@@ -44,7 +44,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 public interface UsuarioCompletoMapper {
 
     /** Constant <code>CAMPOS_USER_C=" id, correo, clave, creado, activo, acc"{trunked}</code> */
-    String CAMPOS_USER_C = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular ";
+    String CAMPOS_USER_C = " id, correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, nick_name, telefono_celular, descripcion, foto_perfil ";
 
     /**
      * Obtiene un objeto de tipo 'UsuarioCompleto' dado su id.
@@ -54,23 +54,25 @@ public interface UsuarioCompletoMapper {
      * @param id a int.
      */
     @Results(id="UsuarioCompletoMap", value = {
-            @Result(property = "id",   column = "id"),
-            @Result(property = "correo",   column = "correo"),
-            @Result(property = "clave",   column = "clave"),
-            @Result(property = "creado",   column = "creado"),
-            @Result(property = "activo",   column = "activo"),
-            @Result(property = "accesoNegadoContador",   column = "acceso_negado_contador"),
-            @Result(property = "instanteBloqueo",   column = "instante_bloqueo"),
-            @Result(property = "instanteUltimoAcceso",   column = "instante_ultimo_acceso"),
-            @Result(property = "instanteUltimoCambioClave",   column = "instante_ultimo_cambio_clave"),
-            @Result(property = "regeneraClaveToken",   column = "regenera_clave_token"),
-            @Result(property = "regeneraClaveInstante",   column = "regenera_clave_instante"),
-            @Result(property = "nombre",   column = "nombre"),
-            @Result(property = "apellidoPaterno",   column = "apellido_paterno"),
-            @Result(property = "apellidoMaterno",   column = "apellido_materno"),
-            @Result(property = "fechaNacimiento",   column = "fecha_nacimiento"),
-            @Result(property = "nickName",   column = "nick_name"),
-            @Result(property = "telefonoCelular",   column = "telefono_celular")
+            @Result(property = "id",                        column = "id"),
+            @Result(property = "correo",                    column = "correo"),
+            @Result(property = "clave",                     column = "clave"),
+            @Result(property = "creado",                    column = "creado"),
+            @Result(property = "activo",                    column = "activo"),
+            @Result(property = "accesoNegadoContador",      column = "acceso_negado_contador"),
+            @Result(property = "instanteBloqueo",           column = "instante_bloqueo"),
+            @Result(property = "instanteUltimoAcceso",      column = "instante_ultimo_acceso"),
+            @Result(property = "instanteUltimoCambioClave", column = "instante_ultimo_cambio_clave"),
+            @Result(property = "regeneraClaveToken",        column = "regenera_clave_token"),
+            @Result(property = "regeneraClaveInstante",     column = "regenera_clave_instante"),
+            @Result(property = "nombre",                    column = "nombre"),
+            @Result(property = "apellidoPaterno",           column = "apellido_paterno"),
+            @Result(property = "apellidoMaterno",           column = "apellido_materno"),
+            @Result(property = "fechaNacimiento",           column = "fecha_nacimiento"),
+            @Result(property = "nickName",                  column = "nick_name"),
+            @Result(property = "telefonoCelular",           column = "telefono_celular"),
+            @Result(property = "descripcion",               column = "descripcion"),
+            @Result(property = "fotoPerfil",                column = "foto_perfil")
     })
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo WHERE id=#{id}")
     UsuarioCompleto getById(int id) throws SQLException;
