@@ -119,7 +119,7 @@ public class TestUsuarioService {
             usuarioService.cambiaClave("gustavo-arellano@gmail.com", "Kebblar2017_");
             
             when(accessHelperService.getPreregistroByRandomString("123456")).thenReturn(preRegistroRequest);
-            usuarioService.confirmaPreregistro("123456");
+            usuarioService.confirmaPreregistro("123456", 10);
             
             when(accessHelperService.getByToken("123456")).thenReturn(usuario);
             usuarioService.confirmaRegeneraClave("123456", "Kebblar2017_");

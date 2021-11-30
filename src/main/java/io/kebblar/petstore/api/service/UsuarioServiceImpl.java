@@ -78,9 +78,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Value("${security.token.lasts}")
     private String securityTokenLastsString;
 
+    @Value("${register.token.lasts}")
+    private String registerTokenLastsString;
+    
     @Value("${jwt.encryptor.password}")
     private String encryptKey;
+    
     private int securityTokenLasts;
+    private int registerTokenLasts;
     
     private final UploadService uploadService;
     private final MailSenderService mailSenderService;
@@ -116,12 +121,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         // es obvio que estos valores los tengo hasta después de
         // que se terminó de ejecutar el constrctor de la clase
         logger.info("securityTokenLastsString: {}", this.securityTokenLastsString);
+        logger.info("registerTokenLastsString: {}", this.registerTokenLastsString);
         try {
-            this.securityTokenLasts =Integer.parseInt(securityTokenLastsString);
+            this.securityTokenLasts = Integer.parseInt(securityTokenLastsString);
+            this.registerTokenLasts = Integer.parseInt(registerTokenLastsString);
         } catch (Exception e) {
             logger.error(e.getMessage());
             this.securityTokenLasts = 27; // 27 minutos dura el jwt
+            this.registerTokenLasts = 10; // 10 minutos dura el token de registro
         }
+        logger.info("Duración de token de registro: {}", registerTokenLasts);
         logger.info("Duración de token de seguridad: {}", securityTokenLasts);
         logger.debug("Llave de encripción para el token JWT: >>> {} <<<", encryptKey);
     }
@@ -166,7 +175,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Valida si la clave proporcionada es compatible con el
         // patrón de seguridad de claves solicitado por el sistema:
         ValidadorClave.validate(preRegistroRequest.getClaveHash());
-        Preregistro registro;
 
         // Busca al usuario por su correo en la tabla de 'usuario'
             //Usuario usuario = this.usuarioMapper.getByCorreo(preRegistroRequest.getCorreo());
@@ -177,7 +185,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             // si el correo ya está registrado, simplemente se vuelve a enviar una clave de re-registro
 
             // Busca el registro por mail en la tabla de 'registro':
-            registro = this.accessHelperService.getRegistroByMail(preRegistroRequest.getCorreo());
+        Preregistro registro = this.accessHelperService.getRegistroByMail(preRegistroRequest.getCorreo());
 
         // Genera una cadena aleatoria de caracteres y crea un objeto de tipo 'PreRegistro':
         String randomString = StringUtils.getRandomString(RANDOM_STRING_LEN);
@@ -208,6 +216,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         logger.info("Se ha enviado un correo para confirmación a: {} con la clave: {}", preRegistroRequest.getCorreo(), randomString);
         return preRegistroRequest;
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Usuario confirmaPreregistro(String token) throws BusinessException {
+        return confirmaPreregistro(token, registerTokenLasts);
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -216,26 +230,22 @@ public class UsuarioServiceImpl implements UsuarioService {
             isolation = Isolation.DEFAULT,
             timeout = 36000,
             rollbackFor = TransactionException.class)
-    public Usuario confirmaPreregistro(String token) throws BusinessException {
-        // El token sirve sólo 10 minutes:
-        long delta = 1000*60*10L;
-
+    public Usuario confirmaPreregistro(String token, long delta) throws BusinessException {
+        // No consideres los espacios que pueda tener de padding:
+        token = token.trim();
+        
         // Obtén la túpla asociada al token de confirmación
         Preregistro preregistro = accessHelperService.getPreregistroByRandomString(token);
 
         // Si no hay un registro asociado a tal token, notifica el error:
         if(preregistro==null) throw new CustomException(TOKEN_NOT_EXIST);
 
-        // Si ya expiró el token, notifica el error:
+        // Si ya expiró el token, notifica el evento:
         long age = System.currentTimeMillis()-preregistro.getInstanteRegistro();
-        if(age>delta) { // token expirado
-            throw new CustomException(TOKEN_EXPIRED);
-        }
+        if(age>delta) throw new CustomException(TOKEN_EXPIRED);
 
-        // Si la clave no es la misma, notifica el error:
-        if(!token.equals(preregistro.getRandomString())) {
-            throw new CustomException(WRONG_TOKEN);
-        }
+        // Si la clave no es la misma, notifica el evento:
+        if(!token.equals(preregistro.getRandomString())) throw new CustomException(WRONG_TOKEN);
 
         // Si todito lo anterior salió bien, actualiza los
         // datos, guárdalos y elimina el preregistro auxiliar:

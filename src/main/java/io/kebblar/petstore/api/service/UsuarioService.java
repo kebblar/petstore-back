@@ -76,9 +76,11 @@ public interface UsuarioService {
      * Confirma el registro de un usuario al sistema
      *
      * @param token Cadena con la clave de confirmación del registro
+     * @param delta duración del token
      * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
      * @throws BusinessException if any
      */
+    Usuario confirmaPreregistro(String token, long delta) throws BusinessException;
     Usuario confirmaPreregistro(String token) throws BusinessException;
 
     /**
