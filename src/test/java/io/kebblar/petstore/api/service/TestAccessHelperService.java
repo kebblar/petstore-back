@@ -76,17 +76,39 @@ public class TestAccessHelperService {
                 registroMapper);
     }
     
+    private void ok() {
+        assertTrue(true);                    
+    }
+    private void bad() {
+        assertTrue(false);                    
+    }
+    
     @Test
     public void failedCasesTest() {
         Usuario usuario = new Usuario();
+        
+        // preparacion
         try {
             when(usuarioMapper.update(usuario)).thenThrow(new SQLException(""));
-            usuarioMapper.update(usuario);
+            when(usuarioMapper.insert(usuario)).thenThrow(new SQLException(""));            
         } catch (SQLException e) {
-            assertTrue(true);
+            bad();
         }
+        
+        // caso 1
+        try {
+            accessHelperService.updateUsuario(usuario);
+            bad();
+        } catch (BusinessException e) { ok(); }
+        
+        // caso 2
+        try {
+            accessHelperService.insertUsuario(usuario);
+            bad();
+        } catch (BusinessException e) { ok(); }
+        
     }
-    
+        
     @Test
     public void succeedCasesTest() {
         Usuario usuario = new Usuario();

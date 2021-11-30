@@ -138,7 +138,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     @Override
     public int insertUsuario(Usuario usuario) throws BusinessException {
         try {
-            return usuarioMapper.update(usuario);
+            return usuarioMapper.insert(usuario);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::insertUsuario");
         }
@@ -300,6 +300,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     @Override
     public Usuario deleteUsuario(int id) throws BusinessException {
         try {
+            //usuarioMapper.delete = @Update("Update usuario SET actvo=false where id=#{id}")
             usuarioMapper.delete(id);
             return usuarioMapper.getById(id);
         } catch (SQLException e) {
