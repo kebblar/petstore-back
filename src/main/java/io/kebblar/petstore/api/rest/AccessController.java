@@ -44,6 +44,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.request.ConsultaRequest;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
+import io.kebblar.petstore.api.model.request.DescripcionRequest;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
@@ -450,5 +451,17 @@ public class AccessController {
             @RequestBody List<ConsultaRequest> datos) throws ControllerException {
         return consultaService.guarda(jwt, datos);
     }
-
+    @ApiOperation(
+            value = "AccessController::descripcion",
+            notes = "Se utiliza para guardar la descripción de un usuario")
+    @PostMapping(
+            path = "/descripcion",
+            produces = "application/json; charset=utf-8")
+    public Usuario guardaDescripcion(
+            @RequestHeader("jwt") String jwt,
+            @RequestBody DescripcionRequest descripcionRequest) throws ControllerException {
+        jwtInstance.revisaSender(jwtInstance.decodeJwt(jwt), descripcionRequest.getCorreo());
+        return this.usuarioService.updateProfileDesc(descripcionRequest.getCorreo(), descripcionRequest.getDescripcion());
+    }
+    
 }

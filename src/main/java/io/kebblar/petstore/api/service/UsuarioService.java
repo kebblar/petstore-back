@@ -170,5 +170,6 @@ public interface UsuarioService {
      */
     LoginResponse login(Usuario usuario, String claveProporcionada, long delta, int maximoNumeroIntentosConcedidos,
             long instanteActual) throws BusinessException;
-
+    
+    Usuario updateProfileDesc(String correo, String descripcion) throws BusinessException;
 }

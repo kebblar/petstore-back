@@ -387,9 +387,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // y se deberá disparar la excepción de NO autorizado (401: unauthorized)
         try {
             Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
-            if(usuario==null) {
-                throw new CustomException(USER_NOT_EXIST, correo);
-            }
+            if(usuario==null) throw new CustomException(USER_NOT_EXIST, correo);
             ValidadorClave.validate(clave);
             String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
             usuario.setClave(claveHash);
@@ -514,4 +512,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public Usuario updateProfileDesc(String correo, String descripcion) throws BusinessException {
+        Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
+        if(usr==null) throw new CustomException(USER_NOT_EXIST, correo);
+        accessHelperService.updateProfileDesc(usr.getId(), descripcion);
+        return usr;
+    }
+    
 }
