@@ -98,7 +98,7 @@ public class JWTUtil {
         } catch(ExpiredJwtException e) {
             throw new CustomException(e, TOKEN_EXPIRED);
         } catch(SignatureException e) {
-            throw new CustomException(e, TOKEN_INVALID);
+            throw new CustomException(e, TOKEN_INVALID_SIGNATURE);
         } catch(MalformedJwtException e) {
             throw new CustomException(e, TOKEN_INVALID_STRUCTURE);
         } catch(UnsupportedJwtException e) {

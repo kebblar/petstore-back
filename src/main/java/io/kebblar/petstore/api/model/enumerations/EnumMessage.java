@@ -98,6 +98,13 @@ public enum EnumMessage {
             "El token proporcionado no es válido",
             HttpStatus.FORBIDDEN),
 
+    TOKEN_INVALID_SIGNATURE(
+            1111,
+            "Firma del token inválida",
+            "El token proporcionado no posee una firma válida",
+            HttpStatus.FORBIDDEN),
+
+
     TOKEN_INVALID_STRUCTURE(
             801,
             "Estructura inválida del Token",
