@@ -9,10 +9,15 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.jsonwebtoken.ExpiredJwtException;
 //import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+
 import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 
@@ -90,8 +95,16 @@ public class JWTUtil {
                .setSigningKey(encryptKey.getBytes())
                .parseClaimsJws(jwt).getBody();
             return decodeJwt(jwt);
-        } catch(Exception e) {
+        } catch(ExpiredJwtException e) {
+            throw new CustomException(e, TOKEN_EXPIRED);
+        } catch(SignatureException e) {
+            throw new CustomException(e, TOKEN_INVALID);
+        } catch(MalformedJwtException e) {
+            throw new CustomException(e, TOKEN_INVALID_STRUCTURE);
+        } catch(UnsupportedJwtException e) {
             throw new CustomException(e, WRONG_TOKEN);
+        } catch(IllegalArgumentException e) {
+            throw new CustomException(e, INTERNAL_SERVER);
         }
     }
     
@@ -131,16 +144,6 @@ public class JWTUtil {
     public long getExpirationFromDecoded(String decodedJwt) {
         String expStr = getValueFromDecodedJwtString(decodedJwt, "exp");
         return Long.valueOf(expStr);
-    }
-    
-    public boolean revisaExpiracion(String decodedJwt) throws CustomException {
-        return revisaExpiracion(decodedJwt, System.currentTimeMillis());
-    }
-    
-    public boolean revisaExpiracion(String decodedJwt, long now) throws CustomException {
-        long someFutureDay = this.getExpirationFromDecoded(decodedJwt);
-        if(someFutureDay< now) throw new CustomException(TOKEN_EXPIRED);
-        return true;
     }
 
     public boolean revisaSender(String decodedJwt, String sender) throws CustomException {

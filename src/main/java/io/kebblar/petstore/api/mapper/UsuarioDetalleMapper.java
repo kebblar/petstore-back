@@ -117,7 +117,7 @@ public interface UsuarioDetalleMapper {
     
     
     
-    @Insert("update usuario_detalle set descripcin = #{descripcion} where id_usuario=#{idUser}")
+    @Insert("update usuario_detalle set descripcion = #{descripcion} where id_usuario=#{idUser}")
     int updateDescripcion(int idUser, String descripcion) throws SQLException;
 
     @Select("SELECT descripcion FROM usuario_detalle WHERE id_usuario = #{idUser}")

@@ -460,7 +460,8 @@ public class AccessController {
     public Usuario guardaDescripcion(
             @RequestHeader("jwt") String jwt,
             @RequestBody DescripcionRequest descripcionRequest) throws ControllerException {
-        jwtInstance.revisaSender(jwtInstance.decodeJwt(jwt), descripcionRequest.getCorreo());
+        String decoded = jwtInstance.decodeJwt(jwt);
+        jwtInstance.revisaSender(decoded, descripcionRequest.getCorreo());
         return this.usuarioService.updateProfileDesc(descripcionRequest.getCorreo(), descripcionRequest.getDescripcion());
     }
     
