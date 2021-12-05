@@ -186,9 +186,9 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     
     /** {@inheritDoc} */
     @Override
-    public int updateProfileDesc(int idUser, String desc) throws BusinessException {
+    public int updateProfileDesc(int idUser, String descripcion, String descripcionPlaneText) throws BusinessException {
         try {
-            return usuarioDetalleMapper.updateDescripcion(idUser, desc);
+            return usuarioDetalleMapper.updateDescripcion(idUser, descripcion, descripcionPlaneText);
         } catch (SQLException e) {
             throw new CustomException(e, DATABASE, "AccessHelper::updateProfileDesc");
         }

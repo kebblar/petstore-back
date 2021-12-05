@@ -140,7 +140,7 @@ public class TestAccessHelperService {
             accessHelperService.insertUsuario(usuario);
             accessHelperService.insertUsuarioDetalle(usuarioDetalle);
             
-            accessHelperService.updateProfileDesc(0, "");
+            accessHelperService.updateProfileDesc(0, "", "");
             accessHelperService.updateUsuario(usuario);
             accessHelperService.updateRegistro(preRegistro);
             accessHelperService.updateUsuarioDetalle(usuarioDetalle);

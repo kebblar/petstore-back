@@ -161,7 +161,7 @@ public interface AccessHelperService {
     
     String getProfileDesc(int idUser) throws BusinessException;
 
-    int updateProfileDesc(int idUser, String desc) throws BusinessException;
+    int updateProfileDesc(int idUser, String descripcion, String descripcionPlaneText) throws BusinessException;
 
 }
     

@@ -514,10 +514,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario updateProfileDesc(String correo, String descripcion) throws BusinessException {
+    public Usuario updateProfileDesc(String correo, String descripcion, String decripcionPlaneText) throws BusinessException {
         Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
         if(usr==null) throw new CustomException(USER_NOT_EXIST, correo);
-        accessHelperService.updateProfileDesc(usr.getId(), descripcion);
+        accessHelperService.updateProfileDesc(usr.getId(), descripcion, decripcionPlaneText);
         return usr;
     }
     
