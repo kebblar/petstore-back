@@ -45,11 +45,11 @@ public class ConsultaServiceImpl implements ConsultaService {
     @Override
     public String guarda(String jwt, List<ConsultaRequest> datos) throws BusinessException{
           // Obtén el id asociado al usuario que mandó el jwt:
-        int id = this.getUserIdFromJwt(jwt);
+        int idUser = this.getUserIdFromJwt(jwt);
 
         // Ve a la base de datos y borra todos los datos asociados:
         try {
-            consultaMapper.delete(id);
+            consultaMapper.delete(idUser);
         } catch (SQLException e1) {
             logger.error(e1.getMessage());
         }
@@ -57,7 +57,7 @@ public class ConsultaServiceImpl implements ConsultaService {
         // Ve a la base de datos y guarda los resultados:
         for(ConsultaRequest current : datos) {
             try {
-                if(id>0) consultaMapper.insert(id, current.getId(), current.getSelected());
+                if(idUser>0 && current.getSelected()>0) consultaMapper.insert(idUser, current.getId(), current.getSelected());
             } catch (SQLException e) {
                 logger.error(e.getMessage());
             }
@@ -67,7 +67,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     private int getUserIdFromJwt(String jwt) throws BusinessException {
         try {
-            String correo = JWTUtil.getInstance().getCorreoFromDecoded(jwt);
+            String decoded = JWTUtil.getInstance().decodeJwt(jwt);
+            String correo = JWTUtil.getInstance().getCorreoFromDecoded(decoded);
             Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {
