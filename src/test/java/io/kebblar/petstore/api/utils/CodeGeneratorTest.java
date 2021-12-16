@@ -63,7 +63,7 @@ public class CodeGeneratorTest {
                 "garellano",
                 "garellano",
                 "org.mariadb.jdbc.Driver");
-        String[] seleccionTablas = {"usuario_completo"};
+        String[] seleccionTablas = {"usuario_habilidad", "habilidad", "categoria", "categ_att"};
         go(seleccionTablas, listaCompleta);
     }
 
@@ -96,6 +96,9 @@ public class CodeGeneratorTest {
         logger.info(all);
 
         List<Entidad> obj = mapper.readValue(all, new TypeReference<List<Entidad>>(){});
+        for(Entidad e : obj) {
+            System.out.println(e.getTableCat());
+        }
         List<Entidad> seleccion = GenCode.filter(obj, tablas);
 
         logger.info("Procesando sólo las tablas seleccionadas");

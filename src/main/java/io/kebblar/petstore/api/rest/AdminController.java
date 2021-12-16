@@ -36,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import io.kebblar.petstore.api.model.response.CategoriaAtributoList;
+import io.kebblar.petstore.api.service.CategoriaService;
 import io.kebblar.petstore.api.service.HealthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,6 +64,8 @@ import io.swagger.annotations.ApiParam;
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
     private final HealthService healthService;
+    
+    private final CategoriaService categoriaService;
 
     @Value("${app.profile.identifier}")
     private String appProfileIdentifier;
@@ -83,8 +87,9 @@ public class AdminController {
      *
      * @param healthService Servicios de HealthService
      */
-    public AdminController(HealthService healthService) {
+    public AdminController(HealthService healthService, CategoriaService categoriaService) {
         this.healthService = healthService;
+        this.categoriaService = categoriaService;
     }
 
 
@@ -103,6 +108,13 @@ public class AdminController {
         result.put("remote.add",request.getRemoteAddr());
         result.put("remote.add.2",request.getHeader("X-Forwarded-For"));
         return result;
+    }
+    
+    @GetMapping(
+            path = "/attribute-list", 
+            produces = "application/json; charset=utf-8")
+    public CategoriaAtributoList getCategoriaAtributoList() {
+        return categoriaService.buildList();
     }
 
     @ApiOperation(value = "AdminController::health", notes = "Entrega el log del sistema")
