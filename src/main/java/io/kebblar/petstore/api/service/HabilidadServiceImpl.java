@@ -25,15 +25,6 @@ public class HabilidadServiceImpl implements HabilidadService {
     }
     
     @Override
-    public List<HabilidadResponse> getHabilidadResponseList(int id) throws BusinessException {
-        try {
-            return habilidadMapper.getHabilidadResponseList(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
-        }
-    }
-
-    @Override
     public List<Habilidad> getHabilidades() throws BusinessException {
         try {
             return habilidadMapper.getHabilidades();
@@ -76,6 +67,33 @@ public class HabilidadServiceImpl implements HabilidadService {
             }
         }
         return usuarioHabilidadesList.size();
+    }
+    
+    @Override
+    public List<HabilidadResponse> getHabilidadResponseList(int id) throws BusinessException {
+        try {
+            return habilidadMapper.getHabilidadResponseList(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        }
+    }
+
+    @Override
+    public List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws BusinessException {
+        try {
+            return habilidadMapper.getHabilidadResponseListGratis(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        }
+    }
+
+    @Override
+    public List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws BusinessException {
+        try {
+            return habilidadMapper.getHabilidadResponseListConCosto(id);
+        } catch (SQLException e) {
+            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        }
     }
 
 }

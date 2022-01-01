@@ -26,6 +26,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -48,7 +49,7 @@ public interface HabilidadMapper {
 
     String CAMPOS = "  usuario_id, habilidad_id, nombre, costo ";
 
-    @Results(id="UsuarioMap", value = {
+    @Results(id="HabilidadMap", value = {
             @Result(property = "usuarioId",  column = "usuario_id"),
             @Result(property = "habilidadId",column = "habilidad_id"),
             @Result(property = "nombre",     column = "nombre"),
@@ -56,6 +57,14 @@ public interface HabilidadMapper {
             })
     @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE usuario_id = #{id}")
     List<HabilidadResponse> getHabilidadResponseList(int id) throws SQLException;
+
+    @ResultMap("HabilidadMap")
+    @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE costo=0 and usuario_id = #{id}")
+    List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws SQLException;
+
+    @ResultMap("HabilidadMap")
+    @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE costo>0 and usuario_id = #{id}")
+    List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws SQLException;
 
     @Select("SELECT id, nombre, activo FROM habilidad")
     List<Habilidad> getHabilidades() throws SQLException;

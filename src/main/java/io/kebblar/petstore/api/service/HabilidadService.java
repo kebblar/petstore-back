@@ -13,4 +13,6 @@ public interface HabilidadService {
     int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws BusinessException;
     int deleteUsuarioHabilidades(int id) throws BusinessException;
     int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws BusinessException;
+    List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws BusinessException;
+    List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws BusinessException;
 }

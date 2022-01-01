@@ -86,4 +86,22 @@ public class HabilidadController {
         return this.habilidadService.deleteUsuarioHabilidades(id);
     }
 
+    @GetMapping(
+            value = "/habilidad/gratis/{id}",
+            produces = "application/json; charset=utf-8")
+    public List<HabilidadResponse> getHabilidadResponseListGratis(
+            @ApiParam(name = "id", value = "Id del Usuario")
+            @PathVariable int id) throws ControllerException {
+        return this.habilidadService.getHabilidadResponseListGratis(id);
+    }
+    
+    @GetMapping(
+            value = "/habilidad/costo/{id}",
+            produces = "application/json; charset=utf-8")
+    public List<HabilidadResponse> getHabilidadResponseListConCosto(
+            @ApiParam(name = "id", value = "Id del Usuario")
+            @PathVariable int id) throws ControllerException {
+        return this.habilidadService.getHabilidadResponseListConCosto(id);
+    }
+    
 }
