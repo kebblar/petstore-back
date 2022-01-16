@@ -1,6 +1,5 @@
 package io.kebblar.petstore.api.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,12 +8,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.kebblar.petstore.api.mapper.HabilidadMapper;
-import io.kebblar.petstore.api.model.domain.Habilidad;
 import io.kebblar.petstore.api.model.domain.UsuarioHabilidad;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 import io.kebblar.petstore.api.model.exceptions.TransactionException;
-import io.kebblar.petstore.api.model.response.HabilidadResponse;
+import io.kebblar.petstore.api.model.response.HabResponse;
 
 @Service
 public class HabilidadServiceImpl implements HabilidadService {
@@ -25,29 +23,29 @@ public class HabilidadServiceImpl implements HabilidadService {
     }
     
     @Override
-    public List<Habilidad> getHabilidades() throws BusinessException {
+    public List<HabResponse> getHabilidades() throws ServiceException {
         try {
-            return habilidadMapper.getHabilidades();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener las habilidades. Msg: ", e.getMessage());
+            return habilidadMapper.getAllPlainHabilidades();
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener las habilidades. Msg: ", e.getMessage());
         }
     }
 
     @Override
-    public int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws BusinessException {
+    public int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws ServiceException {
         try {
             return habilidadMapper.insertUsuarioHabilidad(usuarioHabilidad);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al insertar la habilidad. Msg: ", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al insertar la habilidad. Msg: ", e.getMessage());
         }
     }
 
     @Override
-    public int deleteUsuarioHabilidades(int id) throws BusinessException {
+    public int deleteUsuarioHabilidades(int id) throws ServiceException {
         try {
             return habilidadMapper.deleteUsuarioHabilidades(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al eliminar la habilidad. Msg: ", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al eliminar la habilidad. Msg: ", e.getMessage());
         }
     }
 
@@ -57,12 +55,12 @@ public class HabilidadServiceImpl implements HabilidadService {
             isolation = Isolation.DEFAULT,
             timeout = 36000,
             rollbackFor = TransactionException.class)
-    public int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws BusinessException {
+    public int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws ServiceException {
         // esto es una transacción ACID :
         for(UsuarioHabilidad habilidad : usuarioHabilidadesList) {
             try {
                 this.insertUsuarioHabilidad(habilidad);
-            } catch (BusinessException e) {
+            } catch (ServiceException e) {
                 throw new TransactionException(e.getMessage());
             }
         }
@@ -70,30 +68,37 @@ public class HabilidadServiceImpl implements HabilidadService {
     }
     
     @Override
-    public List<HabilidadResponse> getHabilidadResponseList(int id) throws BusinessException {
+    public List<HabResponse> getHabilidadResponseList(int id) throws ServiceException {
         try {
             return habilidadMapper.getHabilidadResponseList(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
         }
     }
 
     @Override
-    public List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws BusinessException {
+    public List<HabResponse> getHabilidadResponseListGratis(int id) throws ServiceException {
         try {
             return habilidadMapper.getHabilidadResponseListGratis(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
         }
     }
 
     @Override
-    public List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws BusinessException {
+    public List<HabResponse> getHabilidadResponseListConCosto(int id) throws ServiceException {
         try {
             return habilidadMapper.getHabilidadResponseListConCosto(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener la habilidad. Msg: "+id, e.getMessage());
         }
     }
 
+//    private List<HabResponse> transform(List<HabilidadResponse> list) throws ServiceException {
+//        List<HabResponse> result = new ArrayList<>();
+//        for(HabilidadResponse h : list) {
+//            result.add(new HabResponse(h.getHabilidadId(), h.getNombre(), h.getCosto()));
+//        }
+//        return result; 
+//    }
 }

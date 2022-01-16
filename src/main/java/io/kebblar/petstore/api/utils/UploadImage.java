@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.utils;
 
 import io.kebblar.petstore.api.model.domain.UploadModel;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.response.InformacionMedia;
 import io.kebblar.petstore.api.support.UploadService;
@@ -59,7 +59,7 @@ public class UploadImage {
         this.uploadService = new UploadServiceImpl();
     }
 
-    public InformacionMedia guardarImagen(String uuid, MultipartFile file) throws BusinessException {
+    public InformacionMedia guardarImagen(String uuid, MultipartFile file) throws ServiceException {
         String contentType = "no-pude-detectar-el-tipo-mime";
         try {
             contentType = tika.detect(file.getInputStream());
@@ -99,7 +99,7 @@ public class UploadImage {
                 AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", uuid, imagenAltura);
             }
             return imagenEnt;
-        }catch (BusinessException e) {
+        }catch (ServiceException e) {
             throw new CustomException(e,FILE_UPLOAD);
         }
     }

@@ -21,21 +21,20 @@
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Estado;
 import io.kebblar.petstore.api.mapper.EstadoMapper;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 
 /**
  * Servicio asociado a la entidad 'estado'.
  *
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.EstadoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.ServiceException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -61,81 +60,81 @@ public class EstadoServiceImpl implements EstadoService {
 
     /** {@inheritDoc} */
     @Override
-    public Estado getById(int id) throws BusinessException {
+    public Estado getById(int id) throws ServiceException {
         try {
             return estadoMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al recuperar el estado con el id "+id,e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al recuperar el estado con el id "+id,e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Estado> getAll() throws BusinessException {
+    public List<Estado> getAll() throws ServiceException {
         try {
             return estadoMapper.getAll();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al recuperar la lista de estados", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al recuperar la lista de estados", e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int insert(Estado estado) throws BusinessException {
+    public int insert(Estado estado) throws ServiceException {
         try {
             return estadoMapper.insert(estado);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al insertar el estado "+estado.getNombre(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al insertar el estado "+estado.getNombre(), e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int update(Estado estado) throws BusinessException {
+    public int update(Estado estado) throws ServiceException {
         try {
             return estadoMapper.update(estado);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int delete(Estado estado) throws BusinessException {
+    public int delete(Estado estado) throws ServiceException {
         try {
             return estadoMapper.delete(estado.getId());
         } catch (Exception e) {
-            throw new MapperCallException("Error en la eliminación del estado seleccionado ", e.getMessage());
+            throw new MapperException("Error en la eliminación del estado seleccionado ", e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Estado> getByPais(int id) throws BusinessException {
+    public List<Estado> getByPais(int id) throws ServiceException {
         try{
             return estadoMapper.getByPais(id);
-        }catch (SQLException e){
-            throw new BusinessException("Error en obtener los estados asociados al pais "+id, e.getMessage());
+        }catch (Exception e){
+            throw new ServiceException("Error en obtener los estados asociados al pais "+id, e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int save(Estado estado) throws BusinessException {
+    public int save(Estado estado) throws ServiceException {
         try {
             if (getById(estado.getId()) == null) {
                 return estadoMapper.insert(estado);
             } else {
                 return estadoMapper.update(estado);
             }
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el estado con el id "+estado.getId(),e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Estado> getByNombre(String nombre, int idPais) throws BusinessException {
+    public List<Estado> getByNombre(String nombre, int idPais) throws ServiceException {
         try {
             if(idPais > 0) {
                 return estadoMapper.getByNombreAndIdPais(nombre, idPais);
@@ -143,27 +142,27 @@ public class EstadoServiceImpl implements EstadoService {
                 return estadoMapper.getByNombre(nombre);
             }
         } catch (Exception e) {
-            throw new MapperCallException("Error al recuperar el estado "+nombre, e.getMessage());
+            throw new MapperException("Error al recuperar el estado "+nombre, e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Estado> getEstadosByPais(int idPais) throws BusinessException {
+    public List<Estado> getEstadosByPais(int idPais) throws ServiceException {
         try {
             return estadoMapper.getEstadosByPais(idPais);
         } catch (Exception e) {
-            throw new MapperCallException("Error en el get del estado", e.getMessage());
+            throw new MapperException("Error en el get del estado", e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<Estado> getAllNombrePais() throws BusinessException {
+    public List<Estado> getAllNombrePais() throws ServiceException {
         try {
             return estadoMapper.getAllNombrePais();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error en el get del estado", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error en el get del estado", e.getMessage());
         }
     }
 

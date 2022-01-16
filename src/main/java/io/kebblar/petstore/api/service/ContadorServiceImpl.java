@@ -24,15 +24,13 @@ import org.springframework.stereotype.Service;
 
 import io.kebblar.petstore.api.mapper.ContadorMapper;
 import io.kebblar.petstore.api.model.domain.TablasContadorEnum;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
-
-import java.sql.SQLException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 
 /**
  * <p>Implementación de la interfaz {@link ContadorService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ServiceException}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.service.ContadorService
@@ -55,43 +53,43 @@ public class ContadorServiceImpl implements ContadorService {
     }
 
     @Override
-    public int getUsuarioDetalleCounter() throws BusinessException {
+    public int getUsuarioDetalleCounter() throws ServiceException {
         return this.getTableCounter("usuario_detalle");
     }
 
     @Override
-    public int getUsuarioCounter() throws BusinessException {
+    public int getUsuarioCounter() throws ServiceException {
         return this.getTableCounter("usuario");
     }
 
     @Override
-    public int getPaisCounter() throws BusinessException {
+    public int getPaisCounter() throws ServiceException {
         return this.getTableCounter("pais");
     }
 
     @Override
-    public int getEstadoCounter() throws BusinessException {
+    public int getEstadoCounter() throws ServiceException {
         return this.getTableCounter("estado");
     }
 
     @Override
-    public int getMunicipioCounter() throws BusinessException {
+    public int getMunicipioCounter() throws ServiceException {
         return this.getTableCounter("municipio");
     }
 
     @Override
-    public Integer getTableCounter(String tabla) throws BusinessException {
+    public Integer getTableCounter(String tabla) throws ServiceException {
         String esquema = "petstore";
         // ********************************** Change previous var 'ESQUEMAS' Accordingly !!!
         try {
             return this.contadorMapper.getTableCount(esquema, tabla);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener el número de tuplas de la tabla: "+ tabla + " (tabla posiblemente inexistente)", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener el número de tuplas de la tabla: "+ tabla + " (tabla posiblemente inexistente)", e.getMessage());
         }
     }
 
     @Override
-    public String getTableCounter2(TablasContadorEnum contador) throws BusinessException {
+    public String getTableCounter2(TablasContadorEnum contador) throws ServiceException {
         int response = getTableCounter(contador.getTabla());
         return "{\"tabla\":\""+contador.getTabla()+"\", \"contador\": "+response+"}";
     }

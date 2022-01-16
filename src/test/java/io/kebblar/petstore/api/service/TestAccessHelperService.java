@@ -22,6 +22,8 @@ package io.kebblar.petstore.api.service;
 
 import static org.junit.Assert.assertTrue;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 //import static org.mockito.Mockito.when;
 //import org.mockito.Mockito;
 
@@ -32,15 +34,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.when;
 
-import java.sql.SQLException;
-
 import io.kebblar.petstore.api.mapper.RegistroMapper;
 import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
 import io.kebblar.petstore.api.mapper.UsuarioMapper;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
 
@@ -89,9 +89,9 @@ public class TestAccessHelperService {
         
         // preparacion
         try {
-            when(usuarioMapper.update(usuario)).thenThrow(new SQLException(""));
-            when(usuarioMapper.insert(usuario)).thenThrow(new SQLException(""));            
-        } catch (SQLException e) {
+            when(usuarioMapper.update(usuario)).thenThrow(new PersistenceException(""));
+            when(usuarioMapper.insert(usuario)).thenThrow(new PersistenceException(""));            
+        } catch (Exception e) {
             bad();
         }
         
@@ -99,13 +99,13 @@ public class TestAccessHelperService {
         try {
             accessHelperService.updateUsuario(usuario);
             bad();
-        } catch (BusinessException e) { ok(); }
+        } catch (ServiceException e) { ok(); }
         
         // caso 2
         try {
             accessHelperService.insertUsuario(usuario);
             bad();
-        } catch (BusinessException e) { ok(); }
+        } catch (ServiceException e) { ok(); }
         
     }
         
@@ -153,7 +153,7 @@ public class TestAccessHelperService {
             accessHelperService.validateCredentialsFormat("gustavo", "arellano");
             
             assertTrue(true);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(false);
         }
     }

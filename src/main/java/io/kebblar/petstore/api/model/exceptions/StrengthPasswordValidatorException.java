@@ -33,11 +33,11 @@ import io.kebblar.petstore.api.model.enumerations.HttpStatus;
  * código HTTP que será devuelto.
  *
  * @author  garellano
- * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @see     io.kebblar.petstore.api.model.exceptions.ServiceException
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class StrengthPasswordValidatorException extends BusinessException {
+public class StrengthPasswordValidatorException extends ServiceException {
 
     private static final long serialVersionUID = -1222301152057974505L;
     private final List<String> messages;

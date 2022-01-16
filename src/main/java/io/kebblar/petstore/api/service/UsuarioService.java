@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.service;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
@@ -45,21 +45,21 @@ public interface UsuarioService {
 //     * asociadas a un usuario específico identificado por su ID.
 //     * <p>Si el usuario no tiene direcciones asociadas, regresa una lista vacía.
 //     * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-//     * de tipo: {@link BusinessException}.
+//     * de tipo: {@link ServiceException}.
 //     * @param id Entero asociado a un usuario específico
 //     * @return Lista de objetos de tipo {@link Direccion}.
-//     * @throws BusinessException if any
+//     * @throws ServiceException if any
 //     */
-//    List<Direccion> obtenDireccionesDeUsuario(int id) throws BusinessException;
+//    List<Direccion> obtenDireccionesDeUsuario(int id) throws ServiceException;
 
     /**
      * Realiza el preregistro de un potencial usuario al sistema
      *
      * @param preRegistroRequest conjunto de datos a registrar como un usuario.
      * @return Preregistro mismo objeto recibido
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    Preregistro preRegistro(Preregistro preRegistroRequest) throws ServiceException;
 
     /**
      * Similar a preRegistro. La diferencia es que PreregistroRequest no tiene Date y a cambio,
@@ -68,9 +68,9 @@ public interface UsuarioService {
      * @param preRegistroRequest conjunto de datos a registrar como un usuario.
      * @return Retorna la estructura de datos que recive transformada en un objeto de tipo Preregistro
      *
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException;
+    Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws ServiceException;
 
     /**
      * Confirma el registro de un usuario al sistema
@@ -78,19 +78,19 @@ public interface UsuarioService {
      * @param token Cadena con la clave de confirmación del registro
      * @param delta duración del token
      * @return entero con el id del usuario recién confirmado (debe ser mayor a cero)
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario confirmaPreregistro(String token, long delta) throws BusinessException;
-    Usuario confirmaPreregistro(String token) throws BusinessException;
+    Usuario confirmaPreregistro(String token, long delta) throws ServiceException;
+    Usuario confirmaPreregistro(String token) throws ServiceException;
 
     /**
      * Solicita la regeneración de una clave perdida u olvidada
      *
      * @param correo String asociado a la clave olvidada
      * @return objeto de la clase {@link Usuario}
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario solicitaRegeneracionClave(String correo) throws BusinessException;
+    Usuario solicitaRegeneracionClave(String correo) throws ServiceException;
 
     /**
      * Confirma la regeneración de una nueva clave a un usuario
@@ -99,9 +99,9 @@ public interface UsuarioService {
      * @param clave Nueva clave
      *
      * @return Usuario asignado
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException;
+    Usuario confirmaRegeneraClave(String token, String clave) throws ServiceException;
 
     /**
      * Cambia la clave de un usuario por la que de proporciona
@@ -109,18 +109,18 @@ public interface UsuarioService {
      * @param correo Correo asociado al usuario
      * @param clave Nueva clave en texto plano
      * @return el objeto de tipo Usuario con la clave cambiada
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario cambiaClave(String correo, String clave) throws BusinessException;
+    Usuario cambiaClave(String correo, String clave) throws ServiceException;
 
     /**
      * Actualiza la información adicional de un usuario en su tabla "usuario_detalle".
      *
      * @param usuarioDetalle Información a ser actualizada
      * @return Información actualizada
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException;
 
     /**
      * Permite subir una foto de perfil.
@@ -129,7 +129,7 @@ public interface UsuarioService {
      * @param max long max size allowed for the file.
      * @return Objeto de tipo UploadModel.
      */
-    UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException;
+    UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws ServiceException;
 
     /**
      * Valida si las credencials proporcionadas son correctas o no.
@@ -145,9 +145,9 @@ public interface UsuarioService {
      * @param usuario cadena que contiene el usuario
      * @param clave  cadena que contiene la contraseña
      * @return Objeto {@link LoginResponse}
-     * @throws BusinessException
+     * @throws ServiceException
      */
-    LoginResponse login(String usuario, String clave) throws BusinessException;
+    LoginResponse login(String usuario, String clave) throws ServiceException;
 
     /**
      * Valida si las credencials proporcionadas son correctas o no.
@@ -166,10 +166,10 @@ public interface UsuarioService {
      * @param maximoNumeroIntentosConcedidos numero maximo de intentos permitidos
      * @param instanteActual fecha actual
      * @return Objeto {@link LoginResponse}
-     * @throws BusinessException
+     * @throws ServiceException
      */
     LoginResponse login(Usuario usuario, String claveProporcionada, long delta, int maximoNumeroIntentosConcedidos,
-            long instanteActual) throws BusinessException;
+            long instanteActual) throws ServiceException;
     
-    Usuario updateProfileDesc(String correo, String descripcion, String decripcionPlaneText) throws BusinessException;
+    Usuario updateProfileDesc(String correo, String descripcion, String decripcionPlaneText) throws ServiceException;
 }

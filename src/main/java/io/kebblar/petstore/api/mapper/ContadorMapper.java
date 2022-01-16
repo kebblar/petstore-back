@@ -20,9 +20,9 @@
  */
 package io.kebblar.petstore.api.mapper;
 
-import java.sql.SQLException;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 /**
  * <p>Descripción:</p>
@@ -41,9 +41,9 @@ public interface ContadorMapper {
      * @param databaseName a {@link java.lang.String} object.
      * @param tableName a {@link java.lang.String} object.
      * @return a int.
-     * @throws java.sql.SQLException if any.
+     * @throws java.sql.PersistenceException if any.
      */
     @Select("SELECT table_rows FROM information_schema.tables WHERE table_schema = #{databaseName} AND table_name = #{tableName}")
-    int getTableCount(String databaseName, String tableName) throws SQLException;
+    int getTableCount(String databaseName, String tableName) throws PersistenceException;
 
 }

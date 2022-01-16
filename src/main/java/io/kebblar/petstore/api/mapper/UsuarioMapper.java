@@ -20,7 +20,7 @@
  */
 package io.kebblar.petstore.api.mapper;
 
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -54,7 +54,7 @@ public interface UsuarioMapper {
      * Obtiene una lista de objetos de tipo 'usuario'.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="UsuarioMap", value = {
@@ -71,76 +71,76 @@ public interface UsuarioMapper {
         @Result(property = "regeneraClaveInstante",     column = "regenera_clave_instante")
         })
     @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE id = #{id} ")
-    Usuario getById(int id) throws SQLException;
+    Usuario getById(int id) throws PersistenceException;
 
     /**
      * <p>getAll.</p>
      *
      * @return a {@link java.util.List} object.
-     * @throws java.sql.SQLException if any.
+     * @throws java.sql.PersistenceException if any.
      */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario ")
-    List<Usuario> getAll() throws SQLException;
+    List<Usuario> getAll() throws PersistenceException;
 
     /**
      * <p>getAllAscendingByCorreo.</p>
      *
      * @return a {@link java.util.List} object.
-     * @throws java.sql.SQLException if any.
+     * @throws java.sql.PersistenceException if any.
      */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario order by correo asc")
-    List<Usuario> getAllAscendingByCorreo() throws SQLException;
+    List<Usuario> getAllAscendingByCorreo() throws PersistenceException;
 
     /**
      * Obtiene un objeto de tipo 'usuario' realizando la búsqueda con base en el 'mail' del Usuario.
      *
      * @param correo mail del usuario.
      * @return el usuario encontrado con el criterio de búsqueda.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioMap")
     @Select("SELECT " + CAMPOS_USER + " FROM usuario WHERE correo = #{correo} ")
-    Usuario getByCorreo(String correo) throws SQLException;
+    Usuario getByCorreo(String correo) throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo 'usuario' con base en la información dada por el objeto de tipo 'usuario'.
      *
      * @param usr a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO usuario(correo, clave, creado, activo, acceso_negado_contador, instante_bloqueo, "
             + "instante_ultimo_acceso, instante_ultimo_cambio_clave, regenera_clave_token, regenera_clave_instante) "
             + "VALUES(#{correo}, #{clave}, #{creado}, #{activo}, #{accesoNegadoContador}, #{instanteBloqueo}, "
             + "#{instanteUltimoAcceso}, #{instanteUltimoCambioClave}, #{regeneraClaveToken}, #{regeneraClaveInstante} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Usuario usr) throws SQLException;
+    int insert(Usuario usr) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo 'usuario' con base en la infrmación dada por el objeto de tipo 'usuario'.
      *
      * @param usr a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE usuario SET correo = #{correo}, clave = #{clave}, creado = #{creado}, activo = #{activo}, "
             + "acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, "
             + "instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, "
             + "regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante} "
             + "WHERE id = #{id} ")
-    int update(Usuario usr) throws SQLException;
+    int update(Usuario usr) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de usuario.
      *
      * @param id id del usuario a ser borrado
      * @return id del usuario borrado
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("Update usuario SET actvo=false where id=#{id}")
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
     /**
      * <p>confirmaRegeneraClave.</p>

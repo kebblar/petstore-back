@@ -22,7 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Estado;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * Interface para el servicio asociado a la entidad 'estado'.
@@ -39,61 +39,61 @@ public interface EstadoService {
      * @param id Id del objeto buscado.
      * @return La información del elemento recuperado en una instacia de la clase Estado
      * o nulo si no se encuentra ese elemento en la tabla.
-     * @throws BusinessException cuando hay un error en la recuperación de la dirección.
+     * @throws ServiceException cuando hay un error en la recuperación de la dirección.
      */
-    Estado getById(int id) throws BusinessException;
+    Estado getById(int id) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
      *
      * @return Lista con todos los elementos de la tabla 'estado'.
-     * @throws BusinessException cuando ocurre un problema al recuperar los estados.
+     * @throws ServiceException cuando ocurre un problema al recuperar los estados.
      */
-    List<Estado> getAll() throws BusinessException;
+    List<Estado> getAll() throws ServiceException;
 
     /**
      * Método utilizado para insertar un registro en la tabla 'estado'.
      *
      * @param estado objeto de tipo 'Estado'.
      * @return int numero de registros insertados en la tabla'estado'.
-     * @throws BusinessException es disparada por una regla de negocio
+     * @throws ServiceException es disparada por una regla de negocio
      */
-    int insert(Estado estado) throws BusinessException;
+    int insert(Estado estado) throws ServiceException;
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'estado'.
      *
      * @param  estado objeto de tipo 'Estado'.
      * @return int numero de registros actualizados en la tabla'estado'.
-     * @throws BusinessException es disparada por una regla de negocio
+     * @throws ServiceException es disparada por una regla de negocio
      */
-    int update(Estado estado) throws BusinessException;
+    int update(Estado estado) throws ServiceException;
 
     /**
      * Método utilizado para guardar la información de un elemento en la tabla 'estado'.
      * si el elemento no existe se agrega a la base de datos.
      *
      * @param estado Información del elemento a guardar.
-     * @throws BusinessException En caso un error al momento de guardar los datos.
+     * @throws ServiceException En caso un error al momento de guardar los datos.
      */
-    int save(Estado estado) throws BusinessException;
+    int save(Estado estado) throws ServiceException;
 
     /**
      * Método utilizado para eliminar un registro en la tabla 'estado'.
      *
      * @param estado objeto de tipo 'Estado'.
      * @return int numero de registros eliminados en la tabla'estado'.
-     * @throws BusinessException es disparada por una regla de negocio
+     * @throws ServiceException es disparada por una regla de negocio
      */
-    int delete(Estado estado) throws BusinessException;
+    int delete(Estado estado) throws ServiceException;
 
     /**
      * Método que regresa la lista de estados pertenecientes a determinado país.
      * @param id Id del pais que contiene a los estados retornados.
      * @return Lista de Estados del pais 'íd'.
-     * @throws BusinessException En caso que ocurra un problema con la recuperación de la información.
+     * @throws ServiceException En caso que ocurra un problema con la recuperación de la información.
      */
-    List<Estado> getByPais(int id) throws BusinessException;
+    List<Estado> getByPais(int id) throws ServiceException;
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su nombre.
@@ -101,14 +101,14 @@ public interface EstadoService {
      * @param nombre Nombre de Estado.
      * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
      */
-    List<Estado> getByNombre(String nombre, int idPais) throws BusinessException;
+    List<Estado> getByNombre(String nombre, int idPais) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'estado'.
      *
      * @return Lista con todos los elementos de la tabla 'estado'.
      */
-    List<Estado> getAllNombrePais() throws BusinessException;
+    List<Estado> getAllNombrePais() throws ServiceException;
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'estado'. por medio de su pais.
@@ -116,6 +116,6 @@ public interface EstadoService {
      * @param id Id de Pais.
      * @return La información del elemento recuperado en una instacia de la clase Estado o nulo si no se encuentra ese elemento en la tabla.
      */
-    List<Estado> getEstadosByPais(int id) throws BusinessException;
+    List<Estado> getEstadosByPais(int id) throws ServiceException;
 
 }

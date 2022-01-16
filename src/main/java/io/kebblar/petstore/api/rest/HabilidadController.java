@@ -31,10 +31,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.Habilidad;
 import io.kebblar.petstore.api.model.domain.UsuarioHabilidad;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
-import io.kebblar.petstore.api.model.response.HabilidadResponse;
+import io.kebblar.petstore.api.model.response.HabResponse;
 import io.kebblar.petstore.api.service.HabilidadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -52,7 +51,7 @@ public class HabilidadController {
     @GetMapping(
             value = "/habilidad/{id}",
             produces = "application/json; charset=utf-8")
-    public List<HabilidadResponse> getHabilidadResponseList(
+    public List<HabResponse> getHabilidadResponseList(
             @ApiParam(name = "id", value = "Id del Usuario")
             @PathVariable int id) throws ControllerException {
         return this.habilidadService.getHabilidadResponseList(id);
@@ -61,7 +60,7 @@ public class HabilidadController {
     @GetMapping(
             value = "/habilidad",
             produces = "application/json; charset=utf-8")
-    public List<Habilidad> getHabilidades() throws ControllerException {
+    public List<HabResponse> getHabilidades() throws ControllerException {
         return this.habilidadService.getHabilidades();
     }
     
@@ -89,7 +88,7 @@ public class HabilidadController {
     @GetMapping(
             value = "/habilidad/gratis/{id}",
             produces = "application/json; charset=utf-8")
-    public List<HabilidadResponse> getHabilidadResponseListGratis(
+    public List<HabResponse> getHabilidadResponseListGratis(
             @ApiParam(name = "id", value = "Id del Usuario")
             @PathVariable int id) throws ControllerException {
         return this.habilidadService.getHabilidadResponseListGratis(id);
@@ -98,7 +97,7 @@ public class HabilidadController {
     @GetMapping(
             value = "/habilidad/costo/{id}",
             produces = "application/json; charset=utf-8")
-    public List<HabilidadResponse> getHabilidadResponseListConCosto(
+    public List<HabResponse> getHabilidadResponseListConCosto(
             @ApiParam(name = "id", value = "Id del Usuario")
             @PathVariable int id) throws ControllerException {
         return this.habilidadService.getHabilidadResponseListConCosto(id);

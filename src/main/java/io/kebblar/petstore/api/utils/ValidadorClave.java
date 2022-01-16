@@ -46,9 +46,9 @@ public class ValidadorClave {
      *
      * @param clave a {@link java.lang.String} object.
      * @return a boolean.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    public static boolean validate(String clave) throws BusinessException {
+    public static boolean validate(String clave) throws ServiceException {
         List<Rule> rules = new ArrayList<>();
         //Rule 1: Password length should be in between
         //8 and 16 characters

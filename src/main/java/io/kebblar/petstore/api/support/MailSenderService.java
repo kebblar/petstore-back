@@ -23,7 +23,7 @@ package io.kebblar.petstore.api.support;
 import java.io.File;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>
@@ -87,9 +87,9 @@ public interface MailSenderService {
      *
      * @param helperConfig Helper que recibe el objeto MimeMessageHelper
      * @return a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    String sendHtmlMail(HelperConfig helperConfig) throws BusinessException;
+    String sendHtmlMail(HelperConfig helperConfig) throws ServiceException;
 
     /**
      * Clase auxiliar para exponer el MimeMessageHelper a los clientes.
@@ -105,6 +105,6 @@ public interface MailSenderService {
          * @param helper El objeto que se utiliza para configurar el mensaje.
          * @throws MessagingException En caso de error al configurar el mensaje.
          */
-        String configure(MimeMessageHelper helper) throws BusinessException;
+        String configure(MimeMessageHelper helper) throws ServiceException;
     }
 }

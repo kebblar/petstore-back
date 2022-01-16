@@ -20,7 +20,7 @@
  */
 package io.kebblar.petstore.api.service;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class SmsServiceImpl implements SmsService {
 
     /** {@inheritDoc} */
     @Override
-    public void envioSms(String numero, String msj) throws BusinessException {
+    public void envioSms(String numero, String msj) throws ServiceException {
         logger.info("Inicia envio SMS");
             SmsResponse responseSMS = invokeRestSMSService.smsSend("+52"+numero, msj);
             logger.info("Response: {}", responseSMS.isExito());

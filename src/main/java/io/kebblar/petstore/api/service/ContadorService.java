@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.model.domain.TablasContadorEnum;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>ContadorService interface.</p>
@@ -34,53 +34,53 @@ public interface ContadorService {
      * Regresa el número de tuplas que actualmente tiene la tabla 'usuario_detalle'
      *
      * @return Entero con el número de tuplas que actualmente tiene la tabla 'usuario_detalle'
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException cuando ocurre algun imprevisto.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException cuando ocurre algun imprevisto.
      */
-    int getUsuarioDetalleCounter() throws BusinessException;
+    int getUsuarioDetalleCounter() throws ServiceException;
 
     /**
      * <p>getUsuarioCounter.</p>
      *
      * @return a int.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    int getUsuarioCounter() throws BusinessException;
+    int getUsuarioCounter() throws ServiceException;
     /**
      * <p>getPaisCounter.</p>
      *
      * @return a int.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    int getPaisCounter() throws BusinessException;
+    int getPaisCounter() throws ServiceException;
     /**
      * <p>getEstadoCounter.</p>
      *
      * @return a int.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    int getEstadoCounter() throws BusinessException;
+    int getEstadoCounter() throws ServiceException;
     /**
      * <p>getMunicipioCounter.</p>
      *
      * @return a int.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    int getMunicipioCounter() throws BusinessException;
+    int getMunicipioCounter() throws ServiceException;
 
     /**
      * <p>getTableCounter.</p>
      *
      * @param tabla a {@link java.lang.String} object.
      * @return a {@link java.lang.Integer} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    Integer getTableCounter(String tabla) throws BusinessException;
+    Integer getTableCounter(String tabla) throws ServiceException;
     /**
      * <p>getTableCounter2.</p>
      *
      * @param contador a {@link io.kebblar.petstore.api.model.domain.TablasContadorEnum} object.
      * @return a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    String getTableCounter2(TablasContadorEnum contador) throws BusinessException;
+    String getTableCounter2(TablasContadorEnum contador) throws ServiceException;
 }

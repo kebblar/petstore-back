@@ -2,8 +2,10 @@ package io.kebblar.petstore.api.service;
 
 import io.kebblar.petstore.api.mapper.ContadorMapper;
 import io.kebblar.petstore.api.model.domain.TablasContadorEnum;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
+
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +31,7 @@ public class TestContador {
     }
 
     @Test
-    public void tests () throws BusinessException, SQLException {
+    public void tests () throws ServiceException, SQLException {
         try {
             when(contadorMapper.getTableCount("petstore", "usuario_detalle")).thenReturn(100);
             assertEquals(100, contadorService.getUsuarioDetalleCounter());
@@ -45,9 +47,9 @@ public class TestContador {
             assertNotNull(contadorService.getTableCounter2(TablasContadorEnum.ESTADOS));
         }catch (Exception e) {}
         try {
-            when(contadorMapper.getTableCount("petstore","x")).thenThrow(SQLException.class);
+            when(contadorMapper.getTableCount("petstore","x")).thenThrow(PersistenceException.class);
             contadorService.getTableCounter("x");
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         }
     }

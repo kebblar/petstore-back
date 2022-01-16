@@ -22,7 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>Descripción:</p>
@@ -40,26 +40,26 @@ public interface UsuarioCompletoService {
      * @param id Id del objeto buscado
      * @return La información del elemento recuperado en una instacia de la clase UsuarioCompleto
      * o nulo si no se encuentra ese elemento en la tabla.
-     * @throws BusinessException if any.
+     * @throws ServiceException if any.
      */
-    UsuarioCompleto getById(int id) throws BusinessException;
+    UsuarioCompleto getById(int id) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'usuario_completo'.
      *
      * @return Lista con todos los elementos de la tabla 'usuario_completo'.
-     * @throws BusinessException if any.
+     * @throws ServiceException if any.
      */
-    List<UsuarioCompleto> getAll() throws BusinessException;
+    List<UsuarioCompleto> getAll() throws ServiceException;
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'usuario_completo'.
      *
      * @param  usuarioCompleto objeto de tipo 'UsuarioCompleto'.
      * @return int numero de registros actualizados en la tabla'usuario_completo'.
-     * @throws BusinessException es disparada por una regla de negocio
+     * @throws ServiceException es disparada por una regla de negocio
      */
-    int update(UsuarioCompleto usuarioCompleto) throws BusinessException;
+    int update(UsuarioCompleto usuarioCompleto) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista PAGINADA con todos los elementos de la tabla 'usuario_completo'.
@@ -67,15 +67,15 @@ public interface UsuarioCompletoService {
      * @return Lista con todos los elementos de la tabla 'usuario_completo'.
      * @param startRow a int.
      * @param pageSize a int.
-     * @throws BusinessException if any.
+     * @throws ServiceException if any.
      */
-    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws BusinessException;
+    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws ServiceException;
 
     /**
      * Regresa el Conteo de usuarios en el sistema.
      *
      * @return entero con el Conteo de usuarios en el sistema.
-     * @throws BusinessException si ocurre un problema al contar a los usuarios.
+     * @throws ServiceException si ocurre un problema al contar a los usuarios.
      */
-    int countUsuarios() throws BusinessException;
+    int countUsuarios() throws ServiceException;
 }

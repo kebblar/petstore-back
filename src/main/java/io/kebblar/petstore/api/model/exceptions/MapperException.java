@@ -10,7 +10,7 @@
  * Paquete:     io.kebblar.petstore.api.model.exceptions
  * Proyecto:    petstore-back
  * Tipo:        Clase
- * Nombre:      MapperCallException
+ * Nombre:      MapperException
  * Autor:       Gustavo Adolfo Arellano (GAA)
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
@@ -32,11 +32,11 @@ import io.kebblar.petstore.api.model.enumerations.EnumMessage;
  * código HTTP que será devuelto.
  *
  * @author garellano
- * @see io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @see io.kebblar.petstore.api.model.exceptions.ServiceException
  * @version 1.0-SNAPSHOT
  * @since 1.0-SNAPSHOT
  */
-public class MapperCallException extends BusinessException {
+public class MapperException extends ServiceException {
     private static final long serialVersionUID = -7083159020205284484L;
 
     /**
@@ -46,11 +46,11 @@ public class MapperCallException extends BusinessException {
      * @param shortMessage Breve descripción del problema
      * @param technicalDescription Descripción específica
      */
-    public MapperCallException(String shortMessage, String technicalDescription) {
+    public MapperException(String shortMessage, String technicalDescription) {
         this(new Exception(""), shortMessage, technicalDescription);
     }
 
-    public MapperCallException(Throwable throwable, String shortMessage, String technicalDescription) {
+    public MapperException(Throwable throwable, String shortMessage, String technicalDescription) {
         super(
             throwable,
             shortMessage,

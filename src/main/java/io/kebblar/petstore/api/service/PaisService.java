@@ -22,7 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Pais;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * Interface para el servicio asociado a la entidad 'pais'.
@@ -39,14 +39,14 @@ public interface PaisService {
      * @param id ID de Pais (la llave).
      * @return La información del elemento recuperado en una instacia de la clase Empleado o nulo si no se encuentra ese elemento en la tabla.
      */
-    Pais getById(int id) throws BusinessException;
+    Pais getById(int id) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'pais'.
      *
      * @return Lista con todos los elementos de la tabla 'pais'.
      */
-    List<Pais> getAll() throws BusinessException;
+    List<Pais> getAll() throws ServiceException;
 
     /**
      * Método utilizado para insertar un registro en la tabla 'pais'.
@@ -55,7 +55,7 @@ public interface PaisService {
      * @return int numero de registros insertados en la tabla'pais'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int insert(Pais pais) throws BusinessException;
+    int insert(Pais pais) throws ServiceException;
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'pais'.
@@ -64,7 +64,7 @@ public interface PaisService {
      * @return int numero de registros actualizados en la tabla'pais'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int update(Pais pais) throws BusinessException;
+    int update(Pais pais) throws ServiceException;
 
     /**
      * Método utilizado para guardar la información de un elemento en la tabla 'pais'.
@@ -73,7 +73,7 @@ public interface PaisService {
      * @param pais Información del elemento a guardar.
      * @throws Exception En caso un error al momento de guardar los datos.
      */
-    int save(Pais pais) throws BusinessException;
+    int save(Pais pais) throws ServiceException;
 
     /**
      * Método utilizado para eliminar un registro en la tabla 'pais'.
@@ -82,7 +82,7 @@ public interface PaisService {
      * @return int numero de registros eliminados en la tabla'pais'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int delete(Pais pais) throws BusinessException;
+    int delete(Pais pais) throws ServiceException;
 
     /**
      * Método utilizado para recuperar varios elementos de la tabla 'pais'. por medio de su nombre.
@@ -90,5 +90,5 @@ public interface PaisService {
      * @param nombre Nombre de Pais.
      * @return La información del elemento recuperado en una instacia de la clase País o nulo si no se encuentra ese elemento en la tabla.
      */
-    List<Pais> getByNombre(String nombre) throws BusinessException;
+    List<Pais> getByNombre(String nombre) throws ServiceException;
 }

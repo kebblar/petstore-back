@@ -21,21 +21,20 @@
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.mapper.RolMapper;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 
 /**
  * Servicio asociado a la entidad 'rol'.
  *
  * <p>Implementación de la interfaz {@link RolService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ServiceException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -63,60 +62,60 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public Rol getById(int id) throws BusinessException {
+    public Rol getById(int id) throws ServiceException {
         try {
             return rolMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener el rol "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener el rol "+id, e.getMessage());
         }
     }
 
     @Override
-    public List<Rol> getAll() throws BusinessException {
+    public List<Rol> getAll() throws ServiceException {
         try {
             return rolMapper.getAllSinFiltros();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la lista de roles", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener la lista de roles", e.getMessage());
         }
     }
 
     @Override
-    public int insert(Rol rol) throws BusinessException {
+    public int insert(Rol rol) throws ServiceException {
         try {
             return rolMapper.insert(rol);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al insertar un nuevo rol "+rol.getNombre(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al insertar un nuevo rol "+rol.getNombre(), e.getMessage());
         }
     }
 
     @Override
-    public int update(Rol rol) throws BusinessException {
+    public int update(Rol rol) throws ServiceException {
         try {
             return rolMapper.update(rol);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
         }
     }
 
     @Override
-    public int delete(Rol rol) throws BusinessException {
+    public int delete(Rol rol) throws ServiceException {
         try {
             return rolMapper.delete(rol.getId());
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al borrar el rol "+rol.getNombre(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al borrar el rol "+rol.getNombre(), e.getMessage());
         }
     }
 
     @Override
-    public int save(Rol rol) throws BusinessException {
+    public int save(Rol rol) throws ServiceException {
         try {
             if (getById(rol.getId()) == null) {
                 return rolMapper.insert(rol);
             } else {
                 return rolMapper.update(rol);
             }
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el rol con el id "+rol.getId(), e.getMessage());
         }
     }
 

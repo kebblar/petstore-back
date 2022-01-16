@@ -10,7 +10,7 @@
  * Paquete:     io.kebblar.petstore.api.model.exceptions
  * Proyecto:    petstore-back
  * Tipo:        Clase
- * Nombre:      BusinessException
+ * Nombre:      ServiceException
  * Autor:       Gustavo Adolfo Arellano (GAA)
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
@@ -27,11 +27,11 @@ import io.kebblar.petstore.api.model.enumerations.HttpStatus;
  * Excepción general que define que se ha violado una regla de la lógica de negocio.
  *
  * @author  fhernanda
- * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @see     io.kebblar.petstore.api.model.exceptions.ServiceException
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class BusinessException extends ControllerException {
+public class ServiceException extends ControllerException {
     private static final long serialVersionUID = -1218087669509474484L;
 
     /**
@@ -39,12 +39,12 @@ public class BusinessException extends ControllerException {
      *
      * @param e excepción usada por el constructor
      */
-    public BusinessException(Exception e) {
+    public ServiceException(Exception e) {
         super(e);
     }
 
     /**
-     * <p>Constructor for BusinessException.</p>
+     * <p>Constructor for ServiceException.</p>
      *
      * @param shortMessage a {@link java.lang.String} object.
      * @param detailedMessage a {@link java.lang.String} object.
@@ -52,7 +52,7 @@ public class BusinessException extends ControllerException {
      * @param localExceptionKey a {@link java.lang.String} object.
      * @param httpStatus a {@link io.kebblar.petstore.api.model.enumerations.HttpStatus} object.
      */
-    public BusinessException(
+    public ServiceException(
             String shortMessage,
             String detailedMessage,
             int localExceptionNumber,
@@ -62,14 +62,14 @@ public class BusinessException extends ControllerException {
     }
 
     /**
-     * <p>Constructor for BusinessException.</p>
+     * <p>Constructor for ServiceException.</p>
      *
      * @param shortMessage a {@link java.lang.String} object.
      * @param detailedMessage a {@link java.lang.String} object.
      * @param localExceptionNumber a int.
      * @param localExceptionKey a {@link java.lang.String} object.
      */
-    public BusinessException(
+    public ServiceException(
             String shortMessage,
             String detailedMessage,
             int localExceptionNumber,
@@ -78,18 +78,18 @@ public class BusinessException extends ControllerException {
     }
 
     /**
-     * <p>Constructor for BusinessException.</p>
+     * <p>Constructor for ServiceException.</p>
      *
      * @param shortMessage a {@link java.lang.String} object.
      * @param detailedMessage a {@link java.lang.String} object.
      */
-    public BusinessException(
+    public ServiceException(
             String shortMessage,
             String detailedMessage) {
         super(shortMessage, detailedMessage, 0, "CVE_0000");
     }
 
-    public BusinessException(
+    public ServiceException(
             Throwable throwable,
             String shortMessage,
             String detailedMessage,

@@ -56,7 +56,7 @@ import io.kebblar.petstore.api.service.UsuarioCompletoService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
 import io.kebblar.petstore.api.utils.JWTUtil;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.swagger.annotations.ApiOperation;
@@ -386,7 +386,7 @@ public class AccessController {
          return this.accessHelperService.deleteUsuario(id);
     }
 
-    private void verifica(String token, String targetRol) throws BusinessException {
+    private void verifica(String token, String targetRol) throws ServiceException {
         String mail = jwtInstance.getCorreoFromDecoded(token);
         List<Rol> rolesForToken = this.accessHelperService.getRolesDelCorreo(mail);
         for(Rol rol : rolesForToken) {
@@ -398,7 +398,7 @@ public class AccessController {
     }
 
     /*
-    private void verifica(String token, String correo, String targetRol) throws BusinessException {
+    private void verifica(String token, String correo, String targetRol) throws ServiceException {
         String mail = JWTUtil.getInstance().getMail(token, this.encryptKey);
         List<Rol> rolesForToken = this.usuarioService.obtenRolesDeUsuario(mail);
         List<Rol> rolesForUsuario = this.usuarioService.obtenRolesDeUsuario(correo);

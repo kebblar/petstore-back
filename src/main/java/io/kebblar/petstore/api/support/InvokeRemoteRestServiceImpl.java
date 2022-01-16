@@ -101,7 +101,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
 
     /** {@inheritDoc} */
     @Override
-    public String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException {
+    public String checkCaptcha(GoogleCaptcha googleCaptcha) throws ServiceException {
         try {
             return genericRecaptchaChecker(
                     googleRecaptchaUrl,
@@ -134,7 +134,7 @@ public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
 
     /** {@inheritDoc} */
     @Override
-    public SmsResponse smsSend(String tel, String msj) throws BusinessException {
+    public SmsResponse smsSend(String tel, String msj) throws ServiceException {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

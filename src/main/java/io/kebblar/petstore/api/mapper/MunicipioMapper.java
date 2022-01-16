@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -54,7 +54,7 @@ public interface MunicipioMapper {
      * Obtiene un objeto de tipo 'Municipio' dado su id.
      *
      * @return Municipio que tiene asignado el id pasado como parámetro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="MunicipioMap", value = {
@@ -63,58 +63,58 @@ public interface MunicipioMapper {
             @Result(property = "nombre",   column = "nombre")
     })
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio WHERE     id = #{id}     ")
-    Municipio getById(int id) throws SQLException;
+    Municipio getById(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Municipio'.
      *
      * @return Lista de objetos de tipo Municipio
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("MunicipioMap")
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio ")
-    List<Municipio> getAll() throws SQLException;
+    List<Municipio> getAll() throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo 'Municipio' con base en la información dada por el objeto de tipo 'Municipio'.
      *
      * @param municipio a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO municipio(id, id_estado, nombre) VALUES(#{id}, #{idEstado}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Municipio municipio) throws SQLException;
+    int insert(Municipio municipio) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo 'Municipio' con base en la información dada por el objeto de tipo 'Municipio'.
      *
      * @param municipio a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE municipio SET id_estado = #{idEstado}, nombre = #{nombre} WHERE id = #{id} ")
-    int update(Municipio municipio) throws SQLException;
+    int update(Municipio municipio) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de Municipio.
      *
      * @param id id del Municipio a ser borrado
      * @return id del Municipio borrado
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM municipio WHERE id = #{id} ")
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
     /**
      * Dado determinado estado, el método retorna los municipios pertenecientes a este.
      *
      * @param id id del estado que contiene a los municipios.
      * @return Lista con los municipios de determinado estado.
-     * @throws java.sql.SQLException en caso de un error en el servidor o en la consulta.
+     * @throws java.sql.PersistenceException en caso de un error en el servidor o en la consulta.
      */
     @Select("SELECT " + CAMPOS_MUN + " FROM municipio WHERE id_estado=#{id}" )
-    List<Municipio> getByEstado(int id) throws SQLException;
+    List<Municipio> getByEstado(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objectos de tipo 'municipio' realizando la búsqueda con base en el 'idEstado','starRow','pageSize'.
@@ -133,7 +133,7 @@ public interface MunicipioMapper {
      * y el nombre del estado filtrando el nombre del municipio.
      *
      * @return Lista de objetos de tipo Municipio
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param nombre a {@link java.lang.String} object.
      */
     @Results(id="PaisEstadoMunicipioMap", value = {
@@ -147,7 +147,7 @@ public interface MunicipioMapper {
             + "INNER JOIN estado e on m.id_estado = e.id "
             + "INNER JOIN pais p on e.id_pais = p.id "
             + "WHERE m.nombre LIKE '%' #{nombre} '%'")
-    List<Municipio> getByNombre(String nombre) throws SQLException;
+    List<Municipio> getByNombre(String nombre) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Municipio' que trae el nombre del pais

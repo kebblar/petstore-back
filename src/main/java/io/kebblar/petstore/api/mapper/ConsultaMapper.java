@@ -21,8 +21,8 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -44,7 +44,7 @@ public interface ConsultaMapper {
      * Obtiene un objeto de tipo 'ConsultaResponse' dado su id.
      *
      * @return ConsultaResponse que tiene asignado el id pasado como parámetro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="ConsultaMap", value = {
@@ -52,26 +52,26 @@ public interface ConsultaMapper {
             @Result(property = "selected", column = "id_opcion")
     })
     @Select("SELECT id_combo, id_opcion FROM consulta WHERE id_usuario = #{idUsuario}     ")
-    List<ConsultaResponse> getById(int idUsuario) throws SQLException;
+    List<ConsultaResponse> getById(int idUsuario) throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo 'ConsultaResponse' con base en la información dada por el objeto de tipo 'ConsultaResponse'.
      *
      * @param consulta a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO consulta(id_usuario, id_combo, id_opcion) VALUES(#{idUsuario}, #{idCombo}, #{idOpcion} )")
-    int insert(int idUsuario, int idCombo, int idOpcion) throws SQLException;
+    int insert(int idUsuario, int idCombo, int idOpcion) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de ConsultaResponse.
      *
      * @param idUsuario id del ConsultaResponse a ser borrado
      * @return id de la ConsultaResponse borrada
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM consulta WHERE id_usuario = #{idUsuario} ")
-    int delete(int idUsuario) throws SQLException;
+    int delete(int idUsuario) throws PersistenceException;
 
 }

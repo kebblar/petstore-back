@@ -22,7 +22,7 @@ package io.kebblar.petstore.api.support;
 
 import java.awt.image.BufferedImage;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>QRService interface.</p>
@@ -36,23 +36,23 @@ public interface QRService {
      *
      * @param barcodeText a {@link java.lang.String} object.
      * @return a {@link java.awt.image.BufferedImage} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    BufferedImage generateQRCodeImage(String barcodeText) throws BusinessException;
+    BufferedImage generateQRCodeImage(String barcodeText) throws ServiceException;
     /**
      * <p>getQRBytes.</p>
      *
      * @param text a {@link java.lang.String} object.
      * @return an array of {@link byte} objects.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    byte[] getQRBytes(String text) throws BusinessException ;
+    byte[] getQRBytes(String text) throws ServiceException ;
     /**
      * <p>getQRBytesBase64.</p>
      *
      * @param textToEncode a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException if any.
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException if any.
      */
-    String getQRBytesBase64(String textToEncode) throws BusinessException;
+    String getQRBytesBase64(String textToEncode) throws ServiceException;
 }

@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -51,7 +51,7 @@ public interface PaisMapper {
      * Obtiene un objeto de tipo 'Pais' dado su id.
      *
      * @return Pais que tiene asignado el id pasado como parámetro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="PaisMap", value = {
@@ -59,58 +59,58 @@ public interface PaisMapper {
             @Result(property = "nombre",   column = "nombre")
     })
     @Select("SELECT " + CAMPOS_PAIS + " FROM pais WHERE id = #{id} ")
-    Pais getById(int id) throws SQLException;
+    Pais getById(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Pais'.
      *
      * @return Lista de obetos de tipo Pais
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS_PAIS + " FROM pais ")
-    List<Pais> getAll() throws SQLException;
+    List<Pais> getAll() throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo 'Pais' con base en la información dada por el objeto de tipo 'Pais'.
      *
      * @param pais a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO pais(id, nombre) VALUES(#{id}, #{nombre} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Pais pais) throws SQLException;
+    int insert(Pais pais) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo 'Pais' con base en la información dada por el objeto de tipo 'Pais'.
      *
      * @param pais a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE pais SET nombre = #{nombre} WHERE id = #{id} ")
-    int update(Pais pais) throws SQLException;
+    int update(Pais pais) throws PersistenceException;
 
     /**
      * Borra (física) el registro de Pais.
      *
      * @param id id del Pais a ser borrado
      * @return id del Pais borrado
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM pais WHERE id = #{id} ")
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'pais' filtrado por el nombre ingresado.
      *
      * @param  nombre del pais.
      * @return Lista de objetos de tipo pais filtrado por el nombre ingresado
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("PaisMap")
     @Select("SELECT " + CAMPOS_PAIS + " FROM pais WHERE nombre LIKE '%' #{nombre} '%'")
-    List<Pais> getByNombre(String nombre) throws SQLException;
+    List<Pais> getByNombre(String nombre) throws PersistenceException;
 
 }
