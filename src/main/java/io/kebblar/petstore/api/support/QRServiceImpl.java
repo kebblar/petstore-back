@@ -35,7 +35,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>QRServiceImpl class.</p>
@@ -49,36 +49,36 @@ public class QRServiceImpl implements QRService {
 
     /** {@inheritDoc} */
     @Override
-    public BufferedImage generateQRCodeImage(String barcodeText) throws BusinessException {
+    public BufferedImage generateQRCodeImage(String barcodeText) throws ServiceException {
         try {
             logger.info("Processing: " + barcodeText);
             QRCodeWriter barcodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
         } catch(Exception e) {
-            throw new BusinessException(e.toString(), e.toString());
+            throw new ServiceException(e.toString(), e.toString());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public byte[] getQRBytes(String text) throws BusinessException {
+    public byte[] getQRBytes(String text) throws ServiceException {
         try {
             BufferedImage data = this.generateQRCodeImage(text);
             return toByteArray(data, "png");
         } catch(Exception e) {
-            throw new BusinessException(e.toString(), e.toString());
+            throw new ServiceException(e.toString(), e.toString());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public String getQRBytesBase64(String textToEncode) throws BusinessException {
+    public String getQRBytesBase64(String textToEncode) throws ServiceException {
         try {
             BufferedImage data = this.generateQRCodeImage(textToEncode);
             return Base64.getEncoder().encodeToString(toByteArray(data, "jpg"));
         } catch(Exception e) {
-            throw new BusinessException(e.toString(), e.toString());
+            throw new ServiceException(e.toString(), e.toString());
         }
     }
 

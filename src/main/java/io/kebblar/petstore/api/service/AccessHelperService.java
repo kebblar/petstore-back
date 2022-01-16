@@ -5,7 +5,7 @@ import java.util.List;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
@@ -17,7 +17,7 @@ public interface AccessHelperService {
      * @param idUser id del usuario
      * @return cadena que corresponde al nombre de su foto
      */
-    String getProfilePic(int idUser) throws BusinessException;
+    String getProfilePic(int idUser) throws ServiceException;
 
     /**
      * Método auxiliar que valida si se ingreso alguna credencial vacía.
@@ -32,15 +32,15 @@ public interface AccessHelperService {
      * @param usuario objeto usuario a actualizar.
      * @throws CustomException En caso que ocurra algún problema con la actualización.
      */
-    void updateUsuario(Usuario usuario) throws BusinessException;
+    void updateUsuario(Usuario usuario) throws ServiceException;
 
-    Usuario getUsuarioByCorreo(String correo) throws BusinessException;
+    Usuario getUsuarioByCorreo(String correo) throws ServiceException;
 
-    List<Rol> getUserRoles(int userId) throws BusinessException;
+    List<Rol> getUserRoles(int userId) throws ServiceException;
 
-    UsuarioDetalle getUsuarioDetalle(int userId) throws BusinessException;
+    UsuarioDetalle getUsuarioDetalle(int userId) throws ServiceException;
 
-    //UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    //UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException;
 
     String getCorreoFromJwt(String jwt);
 
@@ -48,28 +48,28 @@ public interface AccessHelperService {
 
     void confirmaRegeneraClave(String token, String claveHash);
 
-    Preregistro getRegistroByMail(String correo) throws BusinessException;
+    Preregistro getRegistroByMail(String correo) throws ServiceException;
 
-    int insertRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    int insertRegistro(Preregistro preRegistroRequest) throws ServiceException;
 
-    int updateRegistro(Preregistro preRegistroRequest) throws BusinessException;
+    int updateRegistro(Preregistro preRegistroRequest) throws ServiceException;
 
-    int insertUsuario(Usuario usuario) throws BusinessException;
+    int insertUsuario(Usuario usuario) throws ServiceException;
 
-    int insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    int insertUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException;
 
-    int insertUserRol(int idUsuario, int rolId) throws BusinessException;
+    int insertUserRol(int idUsuario, int rolId) throws ServiceException;
 
-    int deletePreregistroByRandomString(String randomString) throws BusinessException;
+    int deletePreregistroByRandomString(String randomString) throws ServiceException;
 
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir su correo y una clave.
      *
      * @param cred de tipo {@link CredencialesRequest} con la información de su correo y su clave.
      * @return Objeto de tipo {@link Usuario} que es creado.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario createUsuario(CredencialesRequest cred) throws BusinessException;
+    Usuario createUsuario(CredencialesRequest cred) throws ServiceException;
 
     /**
      * <p>Crea un objeto de tipo {@link Usuario} a partir del nuevo
@@ -77,28 +77,28 @@ public interface AccessHelperService {
      *
      * @param usuario de tipo {@link Usuario} con la información a insertar.
      * @return Objeto de tipo {@link Usuario} que es el usuario dado.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario createUsuario(Usuario usuario) throws BusinessException;
+    Usuario createUsuario(Usuario usuario) throws ServiceException;
 
     /**
      * <p>Retorna un objeto de tipo {@link Usuario} a partir del ID dado.
      *
      * @param id Entero asociado a un usuario específico.
      * @return Objeto de tipo {@link Usuario}.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario getUsuarioById(int id) throws BusinessException;
+    Usuario getUsuarioById(int id) throws ServiceException;
 
     /**
      * <p>Retorna la lista todos los objetos de tipo {@link Usuario} registrados
      * en el sistema.
      * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-     * de tipo: {@link BusinessException}.
+     * de tipo: {@link ServiceException}.
      * @return Lista de objetos de tipo {@link Usuario}.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    List<Usuario> getTodosUsuarios() throws BusinessException;
+    List<Usuario> getTodosUsuarios() throws ServiceException;
 
     /**
      * <p>Elimina de manera lógina (y no física) a un objeto de
@@ -107,16 +107,16 @@ public interface AccessHelperService {
      *
      * @param id con el ID de un usuario específico.
      * @return Objeto de tipo {@link Usuario} dado originalmente.
-     * @throws BusinessException if any
+     * @throws ServiceException if any
      */
-    Usuario deleteUsuario(int id) throws BusinessException;
+    Usuario deleteUsuario(int id) throws ServiceException;
 
     /**
      * <p>Retorna una lista de objetos de tipo {@link Rol} que están
      * asociadas a un usuario específico identificado por su ID.
      * <p>Si el usuario no tiene Roles asociadas, regresa una lista vacía.
      * <p>Si ocurre algún error en su recuperación, se dispara la excepción
-     * de tipo: {@link BusinessException}.
+     * de tipo: {@link ServiceException}.
      * @param id Entero asociado a un usuario específico
      * @return Lista de objetos de tipo {@link Rol}.
      * @throws CustomException if any
@@ -146,7 +146,7 @@ public interface AccessHelperService {
     /**
      * <p>Retorna los detalles de un usuario cuyo ID es dado como parámetro formal.
      * <p>En caso de que no sea posible obtener sus detalles, se dispara una
-     * excepción de tipo {@link BusinessException}.
+     * excepción de tipo {@link ServiceException}.
      *
      * @param id Entero asociado a un usuario específico
      * @return Objeto {@link UsuarioDetalle}
@@ -157,11 +157,11 @@ public interface AccessHelperService {
 
     int uploadFotoPerfil(int idUser, String nuevoNombre) throws CustomException;
 
-    int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException;
+    int updateUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException;
     
-    String getProfileDesc(int idUser) throws BusinessException;
+    String getProfileDesc(int idUser) throws ServiceException;
 
-    int updateProfileDesc(int idUser, String descripcion, String descripcionPlaneText) throws BusinessException;
+    int updateProfileDesc(int idUser, String descripcion, String descripcionPlaneText) throws ServiceException;
 
 }
     

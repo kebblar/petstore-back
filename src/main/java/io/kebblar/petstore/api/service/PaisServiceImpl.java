@@ -26,15 +26,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.Pais;
 import io.kebblar.petstore.api.mapper.PaisMapper;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 
 /**
  * Servicio asociado a la entidad 'pais'.
  *
  * <p>Implementación de la interfaz {@link PaisService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ServiceException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -60,52 +60,52 @@ public class PaisServiceImpl implements PaisService {
     }
 
     @Override
-    public Pais getById(int id) throws BusinessException {
+    public Pais getById(int id) throws ServiceException {
         try {
             return paisMapper.getById(id);
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener el país con el id "+id, e.getMessage());
+            throw new MapperException("Error al obtener el país con el id "+id, e.getMessage());
         }
     }
 
     @Override
-    public List<Pais> getAll() throws BusinessException {
+    public List<Pais> getAll() throws ServiceException {
         try {
             return paisMapper.getAll();
         } catch (Exception e) {
-            throw new MapperCallException("Error al obtener la lista de países", e.getMessage());
+            throw new MapperException("Error al obtener la lista de países", e.getMessage());
         }
     }
 
     @Override
-    public int insert(Pais pais) throws BusinessException {
+    public int insert(Pais pais) throws ServiceException {
         try {
             return paisMapper.insert(pais);
         } catch (Exception e) {
-            throw new MapperCallException("Error al insertar el pais "+pais.getNombre(), e.getMessage());
+            throw new MapperException("Error al insertar el pais "+pais.getNombre(), e.getMessage());
         }
     }
 
     @Override
-    public int update(Pais pais) throws BusinessException {
+    public int update(Pais pais) throws ServiceException {
         try {
             return paisMapper.update(pais);
         } catch (Exception e) {
-            throw new MapperCallException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
+            throw new MapperException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
         }
     }
 
     @Override
-    public int delete(Pais pais) throws BusinessException {
+    public int delete(Pais pais) throws ServiceException {
         try {
             return paisMapper.delete(pais.getId());
         } catch (Exception e) {
-            throw new MapperCallException("Error en la eliminación del pais seleccionado ", e.getMessage());
+            throw new MapperException("Error en la eliminación del pais seleccionado ", e.getMessage());
         }
     }
 
     @Override
-    public int save(Pais pais) throws BusinessException {
+    public int save(Pais pais) throws ServiceException {
         try {
             if (getById(pais.getId()) == null) {
                 return paisMapper.insert(pais);
@@ -113,16 +113,16 @@ public class PaisServiceImpl implements PaisService {
                 return paisMapper.update(pais);
             }
         } catch (Exception e) {
-            throw new MapperCallException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
+            throw new MapperException("Error al actualizar el país con el id "+pais.getId(), e.getMessage());
         }
     }
 
     @Override
-    public List<Pais> getByNombre(String nombre) throws BusinessException {
+    public List<Pais> getByNombre(String nombre) throws ServiceException {
         try {
             return paisMapper.getByNombre(nombre);
         } catch (Exception e) {
-            throw new MapperCallException("Error al recuperar el país "+nombre, e.getMessage());
+            throw new MapperException("Error al recuperar el país "+nombre, e.getMessage());
         }
     }
 

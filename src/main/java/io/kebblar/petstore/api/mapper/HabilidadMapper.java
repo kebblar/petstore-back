@@ -20,7 +20,7 @@
  */
 package io.kebblar.petstore.api.mapper;
 
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -31,9 +31,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import io.kebblar.petstore.api.model.domain.Habilidad;
 import io.kebblar.petstore.api.model.domain.UsuarioHabilidad;
-import io.kebblar.petstore.api.model.response.HabilidadResponse;
+import io.kebblar.petstore.api.model.response.HabResponse;
 
 /**
  * <p>Descripción:</p>
@@ -47,32 +46,34 @@ import io.kebblar.petstore.api.model.response.HabilidadResponse;
 @Repository
 public interface HabilidadMapper {
 
-    String CAMPOS = "  usuario_id, habilidad_id, nombre, costo ";
+    String CAMPOS = "  habilidad_id, nombre, costo ";
 
     @Results(id="HabilidadMap", value = {
-            @Result(property = "usuarioId",  column = "usuario_id"),
-            @Result(property = "habilidadId",column = "habilidad_id"),
-            @Result(property = "nombre",     column = "nombre"),
-            @Result(property = "costo",      column = "costo")
+            @Result(property = "id",column = "habilidad_id"),
+            @Result(property = "label",     column = "nombre"),
+            @Result(property = "val",      column = "costo")
             })
     @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE usuario_id = #{id}")
-    List<HabilidadResponse> getHabilidadResponseList(int id) throws SQLException;
+    List<HabResponse> getHabilidadResponseList(int id) throws PersistenceException;
 
     @ResultMap("HabilidadMap")
     @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE costo=0 and usuario_id = #{id}")
-    List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws SQLException;
+    List<HabResponse> getHabilidadResponseListGratis(int id) throws PersistenceException;
 
     @ResultMap("HabilidadMap")
     @Select("SELECT " + CAMPOS + " FROM vw_habilidad WHERE costo>0 and usuario_id = #{id}")
-    List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws SQLException;
+    List<HabResponse> getHabilidadResponseListConCosto(int id) throws PersistenceException;
 
-    @Select("SELECT id, nombre, activo FROM habilidad")
-    List<Habilidad> getHabilidades() throws SQLException;
+//    @Select("SELECT id, nombre, activo FROM habilidad")
+//    List<Habilidad> getHabilidades() throws PersistenceException;
+    
+    @Select("SELECT id, nombre as label, 0 as val FROM habilidad")
+    List<HabResponse> getAllPlainHabilidades() throws PersistenceException;
 
     @Insert("INSERT INTO usuario_habilidad VALUES(#{idUsuario}, #{idHabilidad}, #{costo})")
-    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws SQLException;
+    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws PersistenceException;
 
     @Delete("DELETE FROM usuario_habilidad where id_usuario=#{id}")
-    int deleteUsuarioHabilidades(int id) throws SQLException;
+    int deleteUsuarioHabilidades(int id) throws PersistenceException;
 
 }

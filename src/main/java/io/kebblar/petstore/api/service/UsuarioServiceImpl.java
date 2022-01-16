@@ -60,7 +60,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.UsuarioService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.ServiceException}
  *
  * @author  garellano
  * @see     io.kebblar.petstore.api.model.domain.Usuario
@@ -137,17 +137,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     /** {@inheritDoc} */
     @Override
-    public Preregistro preRegistro(Preregistro preRegistroRequest) throws BusinessException {
+    public Preregistro preRegistro(Preregistro preRegistroRequest) throws ServiceException {
         try {
             return preRegistroHelper(preRegistroRequest);
         } catch (Exception e) {
-            throw new MapperCallException("Error en el registro del nuevo usuario", e.toString());
+            throw new MapperException("Error en el registro del nuevo usuario", e.toString());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws BusinessException {
+    public Preregistro preRegistro(PreregistroRequest preRegistroRequest) throws ServiceException {
         int dia = preRegistroRequest.getDay();
         int mes = preRegistroRequest.getMonth();
         int anio = preRegistroRequest.getYear();
@@ -167,7 +167,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private Preregistro preRegistroHelper(Preregistro preRegistroRequest) throws
-            BusinessException {
+            ServiceException {
         // Quitale los caracteres raros al teléfono.
         String nuevoCel = StringUtils.limpia(preRegistroRequest.getTelefono());
         preRegistroRequest.setTelefono(nuevoCel);
@@ -219,7 +219,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     /** {@inheritDoc} */
     @Override
-    public Usuario confirmaPreregistro(String token) throws BusinessException {
+    public Usuario confirmaPreregistro(String token) throws ServiceException {
         return confirmaPreregistro(token, registerTokenLasts);
     }
 
@@ -230,7 +230,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             isolation = Isolation.DEFAULT,
             timeout = 36000,
             rollbackFor = TransactionException.class)
-    public Usuario confirmaPreregistro(String token, long delta) throws BusinessException {
+    public Usuario confirmaPreregistro(String token, long delta) throws ServiceException {
         // No consideres los espacios que pueda tener de padding:
         token = token.trim();
         
@@ -251,12 +251,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         // datos, guárdalos y elimina el preregistro auxiliar:
         try {
             return doTransaction(preregistro, token);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             throw new TransactionException("Registro fallido. Haciendo rollback a la transaccion");
         }
     }
 
-    private Usuario doTransaction(Preregistro preregistro, String randomString) throws BusinessException {
+    private Usuario doTransaction(Preregistro preregistro, String randomString) throws ServiceException {
         Usuario testUser = accessHelperService.getUsuarioByCorreo(preregistro.getCorreo());
         if(testUser != null) {
             // Si el usuario SI existe, sólo actualiza su password y el instante de ultimo cambio
@@ -351,7 +351,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             accessHelperService.updateUsuario(usuario);
             sendMail("Estimado Usuario", correo, token, "Clave de recuperación");
             return usuario;
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             logger.error(e.toString());
             return dummyUser;
         }
@@ -359,7 +359,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario confirmaRegeneraClave(String token, String clave) throws BusinessException {
+    public Usuario confirmaRegeneraClave(String token, String clave) throws ServiceException {
         ValidadorClave.validate(clave);
         long unaHora = 1000*60*60L;
         Usuario usuario = accessHelperService.getByToken(token);
@@ -376,7 +376,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario cambiaClave(String correo, String clave) throws BusinessException {
+    public Usuario cambiaClave(String correo, String clave) throws ServiceException {
         // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede
         // invocar este servicio y cambiarle la clave a cualquiera !!!!!
         // Para corregir este bug de seguridad, este servicio DEBE recibir el JWT y
@@ -393,27 +393,27 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setClave(claveHash);
             accessHelperService.updateUsuario(usuario);
             return usuario;
-        } catch (BusinessException e) {
-            throw new MapperCallException("Error al modificar la clave", e.getMessage());
+        } catch (ServiceException e) {
+            throw new MapperException("Error al modificar la clave", e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws BusinessException {
+    public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException {
         try {
             String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
             usuarioDetalle.setTelefonoCelular(nuevoCel);
             accessHelperService.updateUsuarioDetalle(usuarioDetalle);
             return usuarioDetalle;
         } catch (Exception e) {
-            throw new MapperCallException("Error actualizando los datos del usuario", e.getMessage());
+            throw new MapperException("Error actualizando los datos del usuario", e.getMessage());
         }
     }
   
     /** {@inheritDoc} */
     @Override
-    public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws BusinessException {
+    public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws ServiceException {
         if (accessHelperService.getUsuarioById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
         UploadModel um = uploadService.storeOne(files, destinationFolder, max);
         accessHelperService.uploadFotoPerfil(idUser, um.getNuevoNombre());
@@ -422,7 +422,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public LoginResponse login(String usr, String clave) throws BusinessException {
+    public LoginResponse login(String usr, String clave) throws ServiceException {
         logger.info(" ***** Invocando al servicio llamado 'AccessService'. Message: {}", message);
         accessHelperService.validateCredentialsFormat(usr, clave);
         int maximoNumeroIntentosConcedidos = 5; // 5 intentos
@@ -439,7 +439,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             String claveProporcionada,
             long delta,
             int maximoNumeroIntentosConcedidos,
-            long instanteActual) throws BusinessException {
+            long instanteActual) throws ServiceException {
         // Si el usuario NO es nulo, procederé a calcular sus roles y sus direcciones:
         if(usuario==null) throw new CustomException(BAD_CREDENTIALS);
 
@@ -502,9 +502,9 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @param idUsuario entero que representa al identificador único del usuario.
      * @param correo correo electrónico o usuario.
      * @return Regresa el objeto {@link UserFoundWrapper}, conjunto de la lista de roles, detalles e información interna de un usuario.
-     * @throws BusinessException En caso que el onjeto no pueda ser devuelto.
+     * @throws ServiceException En caso que el onjeto no pueda ser devuelto.
      */
-    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws BusinessException {
+    private UserFoundWrapper getUserFoundWrapper(int idUsuario, String correo) throws ServiceException {
         List<Rol> roles = accessHelperService.getRolesDelUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = accessHelperService.getDetallesDeUsuario(idUsuario);
         if(encryptKey==null) encryptKey = "secreto";
@@ -514,7 +514,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /** {@inheritDoc} */
     @Override
-    public Usuario updateProfileDesc(String correo, String descripcion, String decripcionPlaneText) throws BusinessException {
+    public Usuario updateProfileDesc(String correo, String descripcion, String decripcionPlaneText) throws ServiceException {
         Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
         if(usr==null) throw new CustomException(USER_NOT_EXIST, correo);
         accessHelperService.updateProfileDesc(usr.getId(), descripcion, decripcionPlaneText);

@@ -21,6 +21,7 @@
 package io.kebblar.petstore.api.support;
 
 import io.kebblar.petstore.api.model.exceptions.CustomException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -28,8 +29,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
 
 import static io.kebblar.petstore.api.model.enumerations.EnumMessage.SEND_MAIL;
 
@@ -116,7 +115,7 @@ public class MailSenderServiceImpl implements MailSenderService {
     /** {@inheritDoc} */
     @Override
     @Async
-    public String sendHtmlMail(HelperConfig helperConfig) throws BusinessException {
+    public String sendHtmlMail(HelperConfig helperConfig) throws ServiceException {
         try {
             MimeMessage mail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);

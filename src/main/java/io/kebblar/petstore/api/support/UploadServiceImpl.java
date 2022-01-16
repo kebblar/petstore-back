@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 
 import org.apache.commons.io.FilenameUtils;
@@ -62,7 +62,7 @@ public class UploadServiceImpl implements UploadService {
 
     /** {@inheritDoc} */
     @Override
-    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws BusinessException {
+    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws ServiceException {
         List<UploadModel> lista = new ArrayList<>();
         for (MultipartFile mpf : mpfArray) {
             lista.add(storeOne(mpf, destinationFolder, max));
@@ -74,9 +74,9 @@ public class UploadServiceImpl implements UploadService {
      * Valida.
      *
      * @param mpf the mpf
-     * @throws BusinessException the upload exception
+     * @throws ServiceException the upload exception
      */
-    private void valida(MultipartFile mpf, long max) throws BusinessException {
+    private void valida(MultipartFile mpf, long max) throws ServiceException {
         long peso = mpf.getSize();
         if (peso>max) {
             throw new CustomException(FILE_MAX_UPLOAD, peso, max);
@@ -98,7 +98,7 @@ public class UploadServiceImpl implements UploadService {
      *
      * Store one.
      */
-    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws BusinessException {
+    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws ServiceException {
         UUID uuid = UUID.randomUUID();
         String newName = uuid.toString() + "."+(FilenameUtils.getExtension(mpf.getOriginalFilename()));
         int autoIncremental = 0;
@@ -132,9 +132,9 @@ public class UploadServiceImpl implements UploadService {
      *
      * @param mpf the mpf
      * @return the md 5
-     * @throws BusinessException the upload exception
+     * @throws ServiceException the upload exception
      */
-    private static String getMd5(MultipartFile mpf) throws BusinessException {
+    private static String getMd5(MultipartFile mpf) throws ServiceException {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(mpf.getBytes());

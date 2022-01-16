@@ -22,7 +22,7 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 import io.kebblar.petstore.api.model.domain.Rol;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * <p>Descripción:</p>
@@ -42,14 +42,14 @@ public interface RolService {
      * @return La información del elemento recuperado en una instacia de la clase Rol
      * o nulo si no se encuentra ese elemento en la tabla.
      */
-    Rol getById(int id) throws BusinessException;
+    Rol getById(int id) throws ServiceException;
 
     /**
      * Método utilizado para obtener una lista con todos los elementos de la tabla 'rol'.
      *
      * @return Lista con todos los elementos de la tabla 'rol'.
      */
-    List<Rol> getAll() throws BusinessException;
+    List<Rol> getAll() throws ServiceException;
 
     /**
      * Método utilizado para insertar un registro en la tabla 'rol'.
@@ -58,7 +58,7 @@ public interface RolService {
      * @return int numero de registros insertados en la tabla'rol'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int insert(Rol rol) throws BusinessException;
+    int insert(Rol rol) throws ServiceException;
 
     /**
      * Método utilizado para actualizar un registro en la tabla 'rol'.
@@ -67,7 +67,7 @@ public interface RolService {
      * @return int numero de registros actualizados en la tabla'rol'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int update(Rol rol) throws BusinessException;
+    int update(Rol rol) throws ServiceException;
 
     /**
      * Método utilizado para guardar la información de un elemento en la tabla 'rol'.
@@ -76,7 +76,7 @@ public interface RolService {
      * @param rol Información del elemento a guardar.
      * @throws Exception En caso un error al momento de guardar los datos.
      */
-    int save(Rol rol) throws BusinessException;
+    int save(Rol rol) throws ServiceException;
 
     /**
      * Método utilizado para eliminar un registro en la tabla 'rol'.
@@ -85,6 +85,6 @@ public interface RolService {
      * @return int numero de registros eliminados en la tabla'rol'.
      * @throws Exception es disparada por una regla de negocio
      */
-    int delete(Rol rol) throws BusinessException;
+    int delete(Rol rol) throws ServiceException;
 
 }

@@ -31,11 +31,11 @@ import io.kebblar.petstore.api.model.enumerations.HttpStatus;
  * código HTTP que será devuelto.
  *
  * @author  garellano
- * @see     io.kebblar.petstore.api.model.exceptions.BusinessException
+ * @see     io.kebblar.petstore.api.model.exceptions.ServiceException
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class TransactionException extends BusinessException {
+public class TransactionException extends ServiceException {
     private static final long serialVersionUID = -7083159020205284484L;
 
     /**

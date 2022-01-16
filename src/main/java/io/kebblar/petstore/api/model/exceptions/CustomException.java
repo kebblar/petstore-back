@@ -10,7 +10,7 @@
  * Paquete:     mx.qbits.tienda.api.model.exceptions
  * Proyecto:    tienda
  * Tipo:        Clase
- * Nombre:      BusinessException
+ * Nombre:      ServiceException
  * Autor:       Gustavo Adolfo Arellano (GAA)
  * Correo:      gustavo.arellano@metasoft.com.mx
  * Versión:     0.0.1-SNAPSHOT
@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.model.enumerations.EnumMessage;
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
  */
-public class CustomException extends BusinessException {
+public class CustomException extends ServiceException {
     private static final long serialVersionUID = -1218087669509474484L;
 
     public CustomException(EnumMessage message, Object... messageParams) {

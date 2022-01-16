@@ -20,7 +20,7 @@
  */
 package io.kebblar.petstore.api.support;
 
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.request.GoogleCaptcha;
 import io.kebblar.petstore.api.model.response.SmsResponse;
 
@@ -36,10 +36,10 @@ public interface InvokeRemoteRestService {
      * <p>Método utilizado para procesar validación por captcha
      *
      * @return Cadena con el resultado de la validación captcha.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException
      * @param googleCaptcha a {@link io.kebblar.petstore.api.model.request.GoogleCaptcha} object.
      */
-    String checkCaptcha(GoogleCaptcha googleCaptcha) throws BusinessException;
+    String checkCaptcha(GoogleCaptcha googleCaptcha) throws ServiceException;
 
     /**
      * <p>getBitsoInfo.</p>
@@ -59,9 +59,9 @@ public interface InvokeRemoteRestService {
      * <p>Método utilizado para envio de mensajes SMS
      *
      * @return SmsResponse que contiene la información de  respuesta del servicio.
-     * @throws io.kebblar.petstore.api.model.exceptions.BusinessException
+     * @throws io.kebblar.petstore.api.model.exceptions.ServiceException
      * @param tel a {@link java.lang.String} object.
      * @param msj a {@link java.lang.String} object.
      */
-    SmsResponse smsSend(String tel, String msj) throws BusinessException;
+    SmsResponse smsSend(String tel, String msj) throws ServiceException;
 }

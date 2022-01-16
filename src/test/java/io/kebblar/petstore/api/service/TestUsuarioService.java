@@ -32,7 +32,7 @@ public class TestUsuarioService {
     @Mock
     private AccessHelperService accessHelperService;
 
-    private boolean checa(BusinessException e, EnumMessage m) {
+    private boolean checa(ServiceException e, EnumMessage m) {
     	return m.toString().equals(e.getLocalExceptionKey());    	
     }
     
@@ -47,7 +47,7 @@ public class TestUsuarioService {
         try {
             usuarioService.login(usuario, "Kebblar2017_", 1000, 2, 0);
             assertTrue(true);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(false);
         }
         
@@ -55,7 +55,7 @@ public class TestUsuarioService {
         try {
             usuarioService.login(usuario, "Kebblar", 1000, 2, 0);
             assertTrue(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(checa(e, BAD_CREDENTIALS));
         }
         
@@ -64,7 +64,7 @@ public class TestUsuarioService {
             usuario.setAccesoNegadoContador(5);
             usuarioService.login(usuario, "Kebblar", 1000, 5, 0);
             assertTrue(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(checa(e, MAX_FAILED_LOGIN_EXCEPTION));
         }
         
@@ -74,7 +74,7 @@ public class TestUsuarioService {
             usuario.setInstanteBloqueo(1000);
             usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(checa(e, WAIT_LOGIN));
         }
         
@@ -82,7 +82,7 @@ public class TestUsuarioService {
         try {
             usuarioService.login(null, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(checa(e, BAD_CREDENTIALS));
         }  
         
@@ -91,7 +91,7 @@ public class TestUsuarioService {
             usuario.setActivo(false);
             usuarioService.login(usuario, "Kebblar2017_", 1000, 5, 1000);
             assertTrue(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assertTrue(checa(e, DISABLED_USER));
         }        
         
@@ -136,7 +136,7 @@ public class TestUsuarioService {
             
             usuarioService.preRegistro(preRegistroRequest);
             usuarioService.solicitaRegeneracionClave("gustavo-arellano@gmail.com");
-        } catch(BusinessException be) {
+        } catch(ServiceException be) {
             assertTrue(false);
         }
     }
@@ -190,12 +190,12 @@ public class TestUsuarioService {
         } try {
             when(usuarioMapper.insert(Mockito.any(Usuario.class))).thenThrow(SQLException.class);
             usuarioService.creaUsuario(cred);
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         } try {
             when(usuarioMapper.insert(Mockito.any(Usuario.class))).thenThrow(SQLException.class);
             usuarioService.creaUsuario(usuario1);
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         }
     }
@@ -225,7 +225,7 @@ public class TestUsuarioService {
         } try {
             when(usuarioMapper.delete(0)).thenThrow(SQLException.class);
             usuarioService.eliminaUsuario(0);
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         }
     }
@@ -250,12 +250,12 @@ public class TestUsuarioService {
         try {
             when(usuarioMapper.getById(0)).thenThrow(SQLException.class);
             usuarioService.obtenUsuarioPorId(0);
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         } try {
             when(usuarioMapper.getAll()).thenThrow(SQLException.class);
             usuarioService.obtenTodosUsuarios();
-        } catch (MapperCallException m) {
+        } catch (MapperException m) {
             assertTrue(true);
         } try {
             when(usuarioMapper.getByCorreo(".")).thenThrow(SQLException.class);
@@ -338,12 +338,12 @@ public class TestUsuarioService {
         } try {
             when(usuarioMapper.getByCorreo("correo@correo.com")).thenThrow(SQLException.class);
             usuarioService.cambiaClave("correo@correo.com", "Hola123453$.");
-        } catch (BusinessException d) {
+        } catch (ServiceException d) {
             assertTrue(true);
         } try {
             when(usuarioDetalleMapper.update(usuarioDetalle)).thenThrow(SQLException.class);
             usuarioService.actualizaUsuarioDetalle(usuarioDetalle);
-        } catch (MapperCallException d) {
+        } catch (MapperException d) {
             assertTrue(true);
         }
     }
@@ -402,13 +402,13 @@ public class TestUsuarioService {
 
             when(registroMapper.getByMail(Mockito.any())).thenReturn(new Preregistro());
             assertNotNull(usuarioService.preRegistro(preregistro));
-        } catch (BusinessException b) {
+        } catch (ServiceException b) {
             logger.error("no debe de pasar esto");
         }
         try {
             when(usuarioMapper.getByCorreo("abc@gmail.com")).thenThrow(SQLException.class);
             usuarioService.preRegistro(p);
-        } catch (MapperCallException d) {
+        } catch (MapperException d) {
             assertTrue(true);
         }
     }
@@ -423,7 +423,7 @@ public class TestUsuarioService {
         } try {
             when(registroMapper.getByRandomString("454")).thenThrow(SQLException.class);
             usuarioService.confirmaPreregistro("454");
-        } catch (BusinessException b) {
+        } catch (ServiceException b) {
             assertTrue(true);
         } try {
             when(registroMapper.getByRandomString("xxx")).thenReturn(p);
@@ -484,7 +484,7 @@ public class TestUsuarioService {
                     "Kebblar2017");
             System.out.println(response);
             assert(true);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assert(false);
         }
     }
@@ -502,7 +502,7 @@ public class TestUsuarioService {
                     "gustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assert(true);
         }
     }
@@ -516,7 +516,7 @@ public class TestUsuarioService {
                     "xgustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assert(true);
         }
     }
@@ -529,7 +529,7 @@ public class TestUsuarioService {
         try {
             this.usuarioService.login(usuario, "Kebblar2017", 5*60*1000, 4, System.currentTimeMillis());
             assert(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assert(true);
         }
     }
@@ -543,7 +543,7 @@ public class TestUsuarioService {
                     "gustavo_arellano@gmail.com",
                     "Kebblar2017_");
             assert(false);
-        } catch (BusinessException e) {
+        } catch (ServiceException e) {
             assert(true);
         }
     }

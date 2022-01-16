@@ -31,7 +31,7 @@ import io.kebblar.petstore.api.utils.StringUtils;
  * @author  fhernanda
  * @version 1.0-SNAPSHOT
  * @since   1.0-SNAPSHOT
- * @see     mx.qbits.tienda.api.model.exceptions.BusinessException
+ * @see     mx.ServiceException.tienda.api.model.exceptions.BusinessException
  */
 public class ControllerException extends Exception {
 

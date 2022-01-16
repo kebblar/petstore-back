@@ -21,9 +21,8 @@
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-import java.sql.SQLException;
 
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,14 +32,14 @@ import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.mapper.UsuarioCompletoMapper;
 import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
 
 /**
  * Servicio asociado a la entidad 'usuario_completo'.
  *
  * <p>Implementación de la interfaz {@link UsuarioCompletoService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link ServiceException}
  *
  * @author Fhernanda Romo
  * @version 1.0-SNAPSHOT
@@ -73,25 +72,25 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
     }
 
     @Override
-    public UsuarioCompleto getById(int id) throws BusinessException {
+    public UsuarioCompleto getById(int id) throws ServiceException {
         try {
             return usuarioCompletoMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener el usuario con el id "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener el usuario con el id "+id, e.getMessage());
         }
     }
 
     @Override
-    public List<UsuarioCompleto> getAll() throws BusinessException {
+    public List<UsuarioCompleto> getAll() throws ServiceException {
         try {
             return usuarioCompletoMapper.getAll();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener la lista de usuarios", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener la lista de usuarios", e.getMessage());
         }
     }
 
     @Override
-    public int update(UsuarioCompleto usuarioCompleto) throws BusinessException {
+    public int update(UsuarioCompleto usuarioCompleto) throws ServiceException {
         Usuario u = new Usuario(
                 usuarioCompleto.getId(),
                 "", // el correo no se actualiza aqui
@@ -120,26 +119,26 @@ public class UsuarioCompletoServiceImpl implements UsuarioCompletoService {
             int a = usuarioCompletoMapper.updateUsuarioPlano(u);
             int b = usuarioDetalleMapper.update(ud);
             return a+b;
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el usuario con el id "+usuarioCompleto.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el usuario con el id "+usuarioCompleto.getId(), e.getMessage());
         }
     }
 
     @Override
-    public List<UsuarioCompleto> getAllPaginated(int pageNumber, int pageSize) throws BusinessException {
+    public List<UsuarioCompleto> getAllPaginated(int pageNumber, int pageSize) throws ServiceException {
         try {
             return usuarioCompletoMapper.getAllPaginated((pageNumber-1)*pageSize, pageSize);
-        } catch (SQLException e) {
-            throw new MapperCallException("No ha sido posible recuperar la lista de usuarios", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("No ha sido posible recuperar la lista de usuarios", e.getMessage());
         }
     }
 
     @Override
-    public int countUsuarios() throws BusinessException {
+    public int countUsuarios() throws ServiceException {
         try {
             return usuarioCompletoMapper.countUsuarios();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al retornar la cuenta de los usuarios", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al retornar la cuenta de los usuarios", e.getMessage());
         }
     }
 

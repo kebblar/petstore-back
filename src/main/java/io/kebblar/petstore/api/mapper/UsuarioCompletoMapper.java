@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
@@ -50,7 +50,7 @@ public interface UsuarioCompletoMapper {
      * Obtiene un objeto de tipo 'UsuarioCompleto' dado su id.
      *
      * @return UsuarioCompleto que tiene asignado el id pasado como parametro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="UsuarioCompletoMap", value = {
@@ -75,17 +75,17 @@ public interface UsuarioCompletoMapper {
             @Result(property = "fotoPerfil",                column = "foto_perfil")
     })
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo WHERE id=#{id}")
-    UsuarioCompleto getById(int id) throws SQLException;
+    UsuarioCompleto getById(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'UsuarioCompleto'.
      *
      * @return Lista de obetos de tipo UsuarioCompleto
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo ")
-    List<UsuarioCompleto> getAll() throws SQLException;
+    List<UsuarioCompleto> getAll() throws PersistenceException;
 
     /**
      * OJO : Actualiza un objeto de tipo 'Usuario' con base en la
@@ -93,32 +93,32 @@ public interface UsuarioCompletoMapper {
      *
      * @param usuario a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE usuario"
     + " SET activo = #{activo}, acceso_negado_contador = #{accesoNegadoContador}, instante_bloqueo = #{instanteBloqueo}, instante_ultimo_acceso = #{instanteUltimoAcceso}, instante_ultimo_cambio_clave = #{instanteUltimoCambioClave}, regenera_clave_token = #{regeneraClaveToken}, regenera_clave_instante = #{regeneraClaveInstante}"
     + " WHERE id = #{id}")
-    int updateUsuarioPlano(Usuario usuario) throws SQLException;
+    int updateUsuarioPlano(Usuario usuario) throws PersistenceException;
 
     /**
      * Cuenta el número de usuarios.
      *
      * @return Entero representando el número de usuarios
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @Select("SELECT count(*) from usuario_completo ")
-    int countUsuarios() throws SQLException;
+    int countUsuarios() throws PersistenceException;
 
     /**
      * <p>getAllPaginated.</p>
      *
      * @param startRow a int.
      * @param pageSize a int.
-     * @throws java.sql.SQLException
+     * @throws java.sql.PersistenceException
      * @return a {@link java.util.List} object.
      */
     @ResultMap("UsuarioCompletoMap")
     @Select("SELECT " + CAMPOS_USER_C + " FROM usuario_completo LIMIT #{startRow},#{pageSize}")
-    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws SQLException;
+    List<UsuarioCompleto> getAllPaginated(int startRow, int pageSize) throws PersistenceException;
 }

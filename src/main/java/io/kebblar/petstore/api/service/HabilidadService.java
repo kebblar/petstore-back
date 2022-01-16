@@ -2,17 +2,16 @@ package io.kebblar.petstore.api.service;
 
 import java.util.List;
 
-import io.kebblar.petstore.api.model.domain.Habilidad;
 import io.kebblar.petstore.api.model.domain.UsuarioHabilidad;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.response.HabilidadResponse;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.response.HabResponse;
 
 public interface HabilidadService {
-    List<HabilidadResponse> getHabilidadResponseList(int id) throws BusinessException;
-    List<Habilidad> getHabilidades() throws BusinessException;
-    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws BusinessException;
-    int deleteUsuarioHabilidades(int id) throws BusinessException;
-    int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws BusinessException;
-    List<HabilidadResponse> getHabilidadResponseListGratis(int id) throws BusinessException;
-    List<HabilidadResponse> getHabilidadResponseListConCosto(int id) throws BusinessException;
+    List<HabResponse> getHabilidadResponseList(int id) throws ServiceException;
+    List<HabResponse> getHabilidades() throws ServiceException;
+    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws ServiceException;
+    int deleteUsuarioHabilidades(int id) throws ServiceException;
+    int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws ServiceException;
+    List<HabResponse> getHabilidadResponseListGratis(int id) throws ServiceException;
+    List<HabResponse> getHabilidadResponseListConCosto(int id) throws ServiceException;
 }

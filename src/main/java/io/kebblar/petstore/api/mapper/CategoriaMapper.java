@@ -23,7 +23,8 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -47,7 +48,7 @@ public interface CategoriaMapper {
      * Obtiene un objeto de tipo 'Categoria' dado su id.
      *
      * @return Categoria que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * @throws PersistenceException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @Results(id="CategoriaMap", value = {
@@ -57,54 +58,54 @@ public interface CategoriaMapper {
             @Result(property = "activo",   column = "activo")    
     })
     @Select("SELECT " + CAMPOS + " FROM categoria WHERE     id = #{id}     ") 
-    Categoria getById(int id) throws SQLException;
+    Categoria getById(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'Categoria'.
      *
      * @return Lista de obetos de tipo Categoria
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * @throws PersistenceException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @ResultMap("CategoriaMap")
     @Select("SELECT " + CAMPOS + " FROM categoria ") 
-    List<Categoria> getAll() throws SQLException;
+    List<Categoria> getAll() throws PersistenceException;
     
     /**
      * Inserta un objeto de tipo 'Categoria' con base en la información dada por el objeto de tipo 'Categoria'.
      *
      * @param categoria a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO categoria(id, nombre, descripcion, activo) "
    + "VALUES(#{id}, #{nombre}, #{descripcion}, #{activo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(Categoria categoria) throws SQLException;
+    int insert(Categoria categoria) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo 'Categoria' con base en la infrmación dada por el objeto de tipo 'Categoria'.
      *
      * @param categoria a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE categoria" 
     + " SET nombre = #{nombre}, descripcion = #{descripcion}, activo = #{activo}"
     + " WHERE id = #{id} ")
-    int update(Categoria categoria) throws SQLException;
+    int update(Categoria categoria) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de Categoria.
      *
      * @param id id del Categoria a ser borrado
      * @return id del Categoria borrado
-     * @throws SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM categoria WHERE id = #{id} ") 
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
     
     
@@ -116,7 +117,7 @@ public interface CategoriaMapper {
      * Obtiene un objeto de tipo 'CategAtt' dado su id.
      *
      * @return CategAtt que tiene asignado el id pasado como parametro
-     * @throws SQLException Se dispara en caso de que ocurra un error en esta
+     * @throws PersistenceException Se dispara en caso de que ocurra un error en esta
      * operación desde la base de datos.
      */
     @Results(id="CategAttMap", value = {
@@ -126,5 +127,5 @@ public interface CategoriaMapper {
             @Result(property = "activo",   column = "activo")    
     })
     @Select("SELECT " + CAMPOS2 + " FROM categ_att WHERE id_categoria = #{idCateg} ") 
-    List<CategAtt> getCategAppById(int idCateg) throws SQLException;
+    List<CategAtt> getCategAppById(int idCateg) throws PersistenceException;
 }

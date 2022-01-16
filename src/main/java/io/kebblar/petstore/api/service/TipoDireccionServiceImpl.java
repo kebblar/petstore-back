@@ -21,19 +21,18 @@
 package io.kebblar.petstore.api.service;
 
 import java.util.List;
-import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import io.kebblar.petstore.api.model.domain.TipoDireccion;
 import io.kebblar.petstore.api.mapper.TipoDireccionMapper;
-import io.kebblar.petstore.api.model.exceptions.BusinessException;
-import io.kebblar.petstore.api.model.exceptions.MapperCallException;
+import io.kebblar.petstore.api.model.exceptions.ServiceException;
+import io.kebblar.petstore.api.model.exceptions.MapperException;
 
 /**
  * <p>Implementación de la interfaz {@link io.kebblar.petstore.api.service.TipoDireccionService}.
  *
- * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.BusinessException}
+ * <p>Todos los métodos de esta clase disparan {@link io.kebblar.petstore.api.model.exceptions.ServiceException}
  *
  * @author luz
  * @version 1.0-SNAPSHOT
@@ -60,65 +59,65 @@ public class TipoDireccionServiceImpl implements TipoDireccionService {
 
     /** {@inheritDoc} */
     @Override
-    public TipoDireccion getById(int id) throws BusinessException {
+    public TipoDireccion getById(int id) throws ServiceException {
         try {
             return tipoDireccionMapper.getById(id);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al obtener el tipo de dirección: "+id, e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al obtener el tipo de dirección: "+id, e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public List<TipoDireccion> getAll() throws BusinessException {
+    public List<TipoDireccion> getAll() throws ServiceException {
         try {
             return tipoDireccionMapper.getAll();
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al recuperar la lista de tipo dirección", e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al recuperar la lista de tipo dirección", e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int insert(TipoDireccion tipoDireccion) throws BusinessException {
+    public int insert(TipoDireccion tipoDireccion) throws ServiceException {
         try {
             return tipoDireccionMapper.insert(tipoDireccion);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al insertar un nuevo tipo de dirección "+tipoDireccion.getNombre(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al insertar un nuevo tipo de dirección "+tipoDireccion.getNombre(), e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int update(TipoDireccion tipoDireccion) throws BusinessException {
+    public int update(TipoDireccion tipoDireccion) throws ServiceException {
         try {
             return tipoDireccionMapper.update(tipoDireccion);
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int delete(TipoDireccion tipoDireccion) throws BusinessException {
+    public int delete(TipoDireccion tipoDireccion) throws ServiceException {
         try {
             return tipoDireccionMapper.delete(tipoDireccion.getId());
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al borrar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al borrar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public int save(TipoDireccion tipoDireccion) throws BusinessException {
+    public int save(TipoDireccion tipoDireccion) throws ServiceException {
         try {
             if (getById(tipoDireccion.getId()) == null) {
                 return tipoDireccionMapper.insert(tipoDireccion);
             } else {
                 return tipoDireccionMapper.update(tipoDireccion);
             }
-        } catch (SQLException e) {
-            throw new MapperCallException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
+        } catch (Exception e) {
+            throw new MapperException("Error al actualizar el tipo de dirección "+tipoDireccion.getId(), e.getMessage());
         }
     }
 

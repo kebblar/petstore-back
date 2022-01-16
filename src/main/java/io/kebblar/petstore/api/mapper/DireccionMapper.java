@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 import io.kebblar.petstore.api.model.domain.UsuarioDireccion;
 import io.kebblar.petstore.api.model.response.DireccionConNombre;
@@ -56,7 +56,7 @@ public interface DireccionMapper {
      *
      * @param direccion mail del usuario.
      * @return el {@link io.kebblar.petstore.api.model.domain.Direccion} encontrado con el criterio de búsqueda.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Results(id="DireccionMap", value = {
         @Result(property = "id",          column = "id"),
@@ -71,65 +71,65 @@ public interface DireccionMapper {
         @Result(property = "activo",      column = "activo")
     })
     @Select("SELECT " + CAMPOS_DIRECCION + " FROM direccion WHERE id = #{id} ")
-    Direccion getById(Direccion direccion) throws SQLException;
+    Direccion getById(Direccion direccion) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos {@link io.kebblar.petstore.api.model.domain.Direccion}.
      *
      * @return Lista de objetos de tipo usuario
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("DireccionMap")
     @Select("SELECT " + CAMPOS_DIRECCION + " FROM direccion ")
-    List<Direccion> getAll() throws SQLException;
+    List<Direccion> getAll() throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo {@link io.kebblar.petstore.api.model.domain.Direccion} con base en la información dada por el objeto de tipo {@link io.kebblar.petstore.api.model.domain.Direccion}.
      *
      * @param direccion {@link io.kebblar.petstore.api.model.domain.Direccion} a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert("INSERT INTO direccion(id, calle_numero, colonia, id_pais, id_estado, id_municipio, id_tipo_direccion, cp, referencias, activo) VALUES(#{id}, #{calleNumero}, #{colonia}, #{idPais}, #{idEstado}, #{idMunicipio}, #{idTipoDireccion}, #{cp}, #{referencias}, #{activo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
-    int insert(Direccion direccion) throws SQLException;
+    int insert(Direccion direccion) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo {@link io.kebblar.petstore.api.model.domain.Direccion} con base en la infrmación dada por el objeto de tipo {@link io.kebblar.petstore.api.model.domain.Direccion}.
      *
      * @param direccion {@link io.kebblar.petstore.api.model.domain.Direccion} a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE direccion SET calle_numero = #{calleNumero}, colonia = #{colonia}, id_pais = #{idPais}, id_estado = #{idEstado}, id_municipio = #{idMunicipio}, id_tipo_direccion = #{idTipoDireccion}, cp = #{cp}, referencias = #{referencias}, activo = #{activo} WHERE id = #{id} ")
-    int update(Direccion direccion) throws SQLException;
+    int update(Direccion direccion) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de {@link io.kebblar.petstore.api.model.domain.Direccion} .
      *
      * @param id del {@link io.kebblar.petstore.api.model.domain.Direccion}  a ser borrado
      * @return id del {@link io.kebblar.petstore.api.model.domain.Direccion}  borrado
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update("UPDATE direccion SET activo=false WHERE id_usuario = #{id}")
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos {@link io.kebblar.petstore.api.model.domain.Direccion}.
      *
      * @return Lista de obetos de tipo usuario
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param idUser a int.
      */
     @ResultMap("DireccionMap")
     @Select("select direccion.* from direccion, usuario_direccion where direccion.id=usuario_direccion.id_direccion and direccion.activo=true and id_usuario=#{idUser}")
-    List<Direccion> getUserDirecciones(int idUser) throws SQLException;
+    List<Direccion> getUserDirecciones(int idUser) throws PersistenceException;
 
     /**
      * Obtiene un objeto de tipo 'DireccionConNombre' dado su id.
      *
      * @return DireccionConNombre que tiene asignado el id pasado como parametro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="DireccionNombreMap", value = {
@@ -143,18 +143,18 @@ public interface DireccionMapper {
     })
     @Select("SELECT id_direccion, calle_numero, colonia, cp, municipio_nombre, estado_nombre, pais_nombre " +
             "from usuario_direccion inner join direccion_con_nombre on id=id_direccion and id_usuario=#{id} and activo=true")
-    List<DireccionConNombre> getDireccionesNombre(int id) throws SQLException;
+    List<DireccionConNombre> getDireccionesNombre(int id) throws PersistenceException;
 
     /**
      * Agrega a la tabla de intersección de usuarios y direcciones un nuevo elemento.
      *
      * @param ud Elemento que corresponde al id del usuario y el id de la dirección relacionados.
      * @return Un entero si es que salió bien la consulta.
-     * @throws java.sql.SQLException if any.
+     * @throws java.sql.PersistenceException if any.
      */
 
     @Insert("INSERT INTO usuario_direccion(id_usuario, id_direccion) VALUES( #{idUsuario} , #{idDireccion} )")
-    int insertUsuarioDireccion(UsuarioDireccion ud) throws SQLException;
+    int insertUsuarioDireccion(UsuarioDireccion ud) throws PersistenceException;
 
     /**
      * Obtiene un objeto de tipo 'DireccionConNombre' dado el id direccion y id usuario.
@@ -174,5 +174,5 @@ public interface DireccionMapper {
     })
     @Select("SELECT id_direccion, calle_numero, colonia, cp, municipio_nombre, estado_nombre, pais_nombre " +
             "from usuario_direccion inner join direccion_con_nombre on id=id_direccion and id_usuario=#{idUser} and id_direccion=#{idDir} and activo=true")
-    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws SQLException;
+    List<DireccionConNombre> getDireccionEnvio(int idUser, int idDir) throws PersistenceException;
 }

@@ -21,7 +21,7 @@
 package io.kebblar.petstore.api.mapper;
 
 import java.util.List;
-import java.sql.SQLException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
@@ -53,7 +53,7 @@ public interface TipoDireccionMapper {
      * Obtiene un objeto de tipo 'TipoDireccion' dado su id.
      *
      * @return TipoDireccion que tiene asignado el id pasado como parámetro
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      * @param id a int.
      */
     @Results(id="TipoDireccionMap", value = {
@@ -62,52 +62,52 @@ public interface TipoDireccionMapper {
             @Result(property = "activo",   column = "activo")
     })
     @Select("SELECT " + CAMPOS_T_DIRECC + " FROM tipo_direccion WHERE     id = #{id}     ")
-    TipoDireccion getById(int id) throws SQLException;
+    TipoDireccion getById(int id) throws PersistenceException;
 
     /**
      * Obtiene una lista de objetos de tipo 'TipoDireccion'.
      *
      * @return Lista de obetos de tipo TipoDireccion
-     * @throws java.sql.SQLException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que ocurra un error en esta operación desde la base de datos.
      */
     @ResultMap("TipoDireccionMap")
     @Select("SELECT " + CAMPOS_T_DIRECC + " FROM tipo_direccion ")
-    List<TipoDireccion> getAll() throws SQLException;
+    List<TipoDireccion> getAll() throws PersistenceException;
 
     /**
      * Inserta un objeto de tipo 'TipoDireccion' con base en la información dada por el objeto de tipo 'TipoDireccion'.
      *
      * @param tipoDireccion a ser insertado.
      * @return el auto incremental asociado a esa inserción.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Insert(
     "INSERT INTO tipo_direccion(id, nombre, activo) "
    + "VALUES(#{id}, #{nombre}, #{activo} )")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id")
-    int insert(TipoDireccion tipoDireccion) throws SQLException;
+    int insert(TipoDireccion tipoDireccion) throws PersistenceException;
 
     /**
      * Actualiza un objeto de tipo 'TipoDireccion' con base en la información dada por el objeto de tipo 'TipoDireccion'.
      *
      * @param tipoDireccion a ser actualizado.
      * @return el numero de registros actualizados.
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Update(
     "UPDATE tipo_direccion"
     + " SET nombre = #{nombre}, activo = #{activo}"
     + " WHERE id = #{id} ")
-    int update(TipoDireccion tipoDireccion) throws SQLException;
+    int update(TipoDireccion tipoDireccion) throws PersistenceException;
 
     /**
      * Borra (de manera lógica y no física) el registro de TipoDireccion.
      *
      * @param id id del TipoDireccion a ser borrado
      * @return id del TipoDireccion borrado
-     * @throws java.sql.SQLException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
+     * @throws java.sql.PersistenceException Se dispara en caso de que se dispare un error en esta operación desde la base de datos.
      */
     @Delete("DELETE FROM tipo_direccion WHERE id = #{id} ")
-    int delete(int id) throws SQLException;
+    int delete(int id) throws PersistenceException;
 
 }
