@@ -1,4 +1,21 @@
 # petstore-back
+
+## Logros a destacar
+
+1. Pipeline en Jenkins (con un Jenkinsfile en Github)
+2. Configuración de Springboot centralizada en Github con soporte a ambientes dev, qa y uat
+3. Manejo de Exepciones via Enums (con retro mensajes para trazas delicadas)
+4. Separación de los ambientes de front y back para trabajo asíncrono
+5. Encaje o inmerción del front en el paquete de despliegue del back
+6. Control total de exceciones hacia el front or parte de un ControllerAvice
+7. Uso de JWT para control de la seguridad
+8. Cambio de C3P0 por HikariCP
+9. Tren de CICD en una AMI de AWS
+10. Nginx como reverse proxy y como SSL terminator y como Balanceador de cargas
+
+
+
+
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
 *Permanecen utilidades:*
