@@ -13,7 +13,6 @@
 9. Tren de CICD en una AMI de AWS
 10. Nginx como reverse proxy y como SSL terminator y como Balanceador de cargas
 
-
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
 *Permanecen utilidades:*
