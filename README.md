@@ -13,6 +13,11 @@
 9. Tren de CICD en una AMI de AWS
 10. Nginx como reverse proxy y como SSL terminator y como Balanceador de cargas
 
+## Funcionalidades interesantes:
+1. Auto log off después de que el token jwt caduca
+2. Control total de las validaciones de los campos de entrada con decoraciones de correctéz
+3. Widget de carga de archivos con recorte y zoom
+
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
 *Permanecen utilidades:*
