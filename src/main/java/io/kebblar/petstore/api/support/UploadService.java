@@ -43,7 +43,7 @@ public interface UploadService {
      * @return Lista de objetos de tipo UploadModel
      * @throws io.kebblar.petstore.api.model.exceptions.ServiceException Se dispara en caso de que el proceso de upload falle
      */
-    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws ServiceException;
+    public List<UploadModel> store(int idAnuncio, MultipartFile[] mpfArray, String destinationFolder, long max) throws ServiceException;
 
     /**
      * Procesa un archivos que le es enviado desde el front.
@@ -54,6 +54,6 @@ public interface UploadService {
      * @return Objetos de tipo UploadModel
      * @throws io.kebblar.petstore.api.model.exceptions.ServiceException Se dispara en caso de que el proceso de upload falle
      */
-    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws ServiceException;
+    public UploadModel storeOne(int idAnuncio, MultipartFile mpf, String destinationFolder, long max) throws ServiceException;
 
 }

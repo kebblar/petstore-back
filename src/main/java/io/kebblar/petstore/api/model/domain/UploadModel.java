@@ -35,12 +35,15 @@ public class UploadModel {
      * Atributos de clase.
      */
     private int id;
+    private int idAnuncio;
     private String nombreOriginal;
     private String nuevoNombre;
     private String md5;
+    private String mimeType;
+    private int idTipo;
     private Date fechaCarga;
     private long peso;
-    private boolean activo;
+    private boolean principal;
 
     /**
      * Constructor por default (sin parámetros).
@@ -59,14 +62,28 @@ public class UploadModel {
      * @param peso a long.
      * @param activo a boolean.
      */
-    public UploadModel(int id, String nombreOriginal, String nuevoNombre, String md5, Date fechaCarga, long peso, boolean activo) {
+    public UploadModel(
+            int id, 
+            int idAnuncio,
+            String nombreOriginal, 
+            String nuevoNombre, 
+            String md5, 
+            String mimeType, 
+            int idTipo,
+            Date fechaCarga, 
+            long peso, 
+            boolean principal) {
         this.id = id;
+        this.idAnuncio = idAnuncio;
         this.nombreOriginal = nombreOriginal;
         this.nuevoNombre = nuevoNombre;
+        this.idTipo = idTipo;
+        this.principal = principal;
         this.md5 = md5;
-        this.fechaCarga = fechaCarga;
         this.peso = peso;
-        this.activo = activo;
+
+        this.mimeType = mimeType;
+        this.fechaCarga = fechaCarga;
     }
 
     /*
@@ -88,6 +105,14 @@ public class UploadModel {
     public void setId(int id) {
         this.id = id;
     }
+    
+    public int getIdAnuncio() {
+        return idAnuncio;
+    }
+    public void setIdAnuncio(int idAnuncio) {
+        this.idAnuncio = idAnuncio;
+    }    
+    
     /**
      * <p>Getter for the field <code>nombreOriginal</code>.</p>
      *
@@ -173,33 +198,57 @@ public class UploadModel {
      *
      * @return a boolean.
      */
-    public boolean isActivo() {
-        return activo;
+    public boolean isPrincipal() {
+        return principal;
     }
     /**
      * <p>Setter for the field <code>activo</code>.</p>
      *
      * @param activo a boolean.
      */
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
     }
-
+    
+    public String getMimeType() {
+        return this.mimeType;
+    }
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+    
+    public int getIdTipo() {
+        return idTipo;
+    }
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
+    
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return "UploadModel [id=" + id + ", nombreOriginal=" + nombreOriginal + ", nuevoNombre=" + nuevoNombre
-                + ", md5=" + md5 + ", fechaCarga=" + fechaCarga + ", peso=" + peso + ", activo=" + activo + "]";
+        return "UploadModel [id=" + id + 
+                ", idAnuncio=" + idAnuncio + 
+                ", nombreOriginal=" + nombreOriginal + 
+                ", nuevoNombre=" + nuevoNombre + 
+                ", md5=" + md5 + 
+                ", mimeType=" + mimeType +
+                ", idTipo=" + idTipo +
+                ", fechaCarga=" + fechaCarga + 
+                ", peso=" + peso + 
+                ", principal=" + principal + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (activo ? 1231 : 1237);
+        result = prime * result + (principal ? 1231 : 1237);
         result = prime * result + ((fechaCarga == null) ? 0 : fechaCarga.hashCode());
         result = prime * result + id;
+        result = prime * result + idTipo;
         result = prime * result + ((md5 == null) ? 0 : md5.hashCode());
+        result = prime * result + ((mimeType == null) ? 0 : mimeType.hashCode());
         result = prime * result + ((nombreOriginal == null) ? 0 : nombreOriginal.hashCode());
         result = prime * result + ((nuevoNombre == null) ? 0 : nuevoNombre.hashCode());
         result = prime * result + (int) (peso ^ (peso >>> 32));
@@ -215,7 +264,7 @@ public class UploadModel {
         if (getClass() != obj.getClass())
             return false;
         UploadModel other = (UploadModel) obj;
-        if (activo != other.activo)
+        if (principal != other.principal)
             return false;
         if (fechaCarga == null) {
             if (other.fechaCarga != null)
@@ -224,10 +273,17 @@ public class UploadModel {
             return false;
         if (id != other.id)
             return false;
+        if (idTipo != other.idTipo)
+            return false;
         if (md5 == null) {
             if (other.md5 != null)
                 return false;
         } else if (!md5.equals(other.md5))
+            return false;
+        if (mimeType == null) {
+            if (other.mimeType != null)
+                return false;
+        } else if (!mimeType.equals(other.mimeType))
             return false;
         if (nombreOriginal == null) {
             if (other.nombreOriginal != null)

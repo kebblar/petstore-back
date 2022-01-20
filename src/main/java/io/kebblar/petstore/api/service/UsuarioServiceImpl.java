@@ -415,7 +415,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UploadModel storeProfilePicture(MultipartFile files, String destinationFolder, long max, int idUser) throws ServiceException {
         if (accessHelperService.getUsuarioById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
-        UploadModel um = uploadService.storeOne(files, destinationFolder, max);
+        UploadModel um = uploadService.storeOne(idUser, files, destinationFolder, max);
         accessHelperService.uploadFotoPerfil(idUser, um.getNuevoNombre());
         return um;
     }
