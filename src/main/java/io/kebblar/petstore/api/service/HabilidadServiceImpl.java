@@ -1,5 +1,6 @@
 package io.kebblar.petstore.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -48,7 +49,25 @@ public class HabilidadServiceImpl implements HabilidadService {
             throw new MapperException("Error al eliminar la habilidad. Msg: ", e.getMessage());
         }
     }
-
+    
+    @Override
+    public int insertUsuarioHabilidad(List<Integer> usuarioHabilidadesList, String correo) throws ServiceException {
+        int size = usuarioHabilidadesList.size();
+        int idUser = usuarioHabilidadesList.get(0);
+        // if(idUser!=usuarioMapper.getByCorreo(correo).getId()) throw new ServiceException(UNAUTHORIZED);
+        this.deleteUsuarioHabilidades(idUser);
+        List<UsuarioHabilidad> lista = new ArrayList<>();
+        for(int i=1; i<size; i++) { // NO TOMAR EL 0 !!!!!!!!!!!
+            int estatus = usuarioHabilidadesList.get(i);
+            if(estatus>0) {
+                int costo = 0;
+                if(estatus==2) costo = 1;
+                lista.add(new UsuarioHabilidad(idUser, i, costo));
+            }
+        }
+        return this.insertUsuarioHabilidad(lista);
+    }
+    
     @Override
     @Transactional(
             propagation = Propagation.REQUIRED,
