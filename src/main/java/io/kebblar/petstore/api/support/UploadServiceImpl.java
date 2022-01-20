@@ -133,6 +133,7 @@ public class UploadServiceImpl implements UploadService {
      *
      * Store one.
      */
+    @Override
     public UploadModel storeOne(int idAnuncio, MultipartFile mpf, String destinationFolder, long max) throws ServiceException {
         UUID uuid = UUID.randomUUID();
         String ext = this.calculateExt(mpf.getOriginalFilename());
@@ -149,7 +150,7 @@ public class UploadServiceImpl implements UploadService {
                 calculaIdTipo(mimeType),
                 new Date(),
                 mpf.getSize(),
-                true);
+                false);
         String uploadModelString = uploadModel.toString();
         logger.info("Upload model: {}", uploadModelString);
         Path filepath = Paths.get(destinationFolder, newName); //destinationFolder
@@ -163,7 +164,7 @@ public class UploadServiceImpl implements UploadService {
             if(uploadMapper!=null) uploadMapper.insertMedia(uploadModel);
             return uploadModel;
         } catch (IllegalStateException | IOException e) {
-            throw new CustomException(e, UPLOAD_SERVICE_LOG);
+            throw new CustomException(e, UPLOAD_SERVICE, e.getMessage());
         }
     }
 
@@ -189,4 +190,12 @@ public class UploadServiceImpl implements UploadService {
         }
     }
 
+    @Override
+    public List<UploadModel> getMedia(int idAnuncio) throws ServiceException {
+        try {
+            return uploadMapper.getMedia(idAnuncio);            
+        } catch (Exception e) {
+            throw new CustomException(e, UPLOAD_SERVICE_LOG);
+        }
+    }
 }

@@ -56,4 +56,6 @@ public interface UploadService {
      */
     public UploadModel storeOne(int idAnuncio, MultipartFile mpf, String destinationFolder, long max) throws ServiceException;
 
+    List<UploadModel> getMedia(int idAnuncio) throws ServiceException;
+
 }

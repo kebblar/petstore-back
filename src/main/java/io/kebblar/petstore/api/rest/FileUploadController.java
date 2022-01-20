@@ -134,6 +134,7 @@ public class FileUploadController {
         return uploadService.storeOne(idAnuncio, file, destinationFolder, max);
     }
 
+    // ESTE ES EL QUE SE MANDA LLAMAR !!!!!!!!
     @PostMapping(
         path = "/up/imagen2",
         produces = "application/json; charset=utf-8")
@@ -193,6 +194,15 @@ public class FileUploadController {
        return "ok";
    }
 
+   @GetMapping(
+           path = "/get-media/{idUser}",
+           produces = "application/json; charset=utf-8")
+    public List<UploadModel> getMedia(
+            @ApiParam(name = "idUser", value="id del usuario") 
+            @PathVariable int idUser)
+           throws ControllerException {
+        return uploadService.getMedia(idUser);
+   }
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \
