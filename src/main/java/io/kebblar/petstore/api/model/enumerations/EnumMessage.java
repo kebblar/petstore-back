@@ -197,7 +197,7 @@ public enum EnumMessage {
     UPLOAD_SERVICE_LOG(
             910,
             "Error en la carga de archivos",
-            "%s",
+            "Fatal Error",
             HttpStatus.BAD_REQUEST
     );
 
