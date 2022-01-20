@@ -26,15 +26,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kebblar.petstore.api.model.domain.UsuarioHabilidad;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.response.HabResponse;
 import io.kebblar.petstore.api.service.HabilidadService;
+import io.kebblar.petstore.api.utils.JWTUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 
@@ -43,7 +43,8 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class HabilidadController {
     private final HabilidadService habilidadService;
-
+    private final JWTUtil jwtInstance = JWTUtil.getInstance();
+    
     public HabilidadController(HabilidadService habilidadService) {
         this.habilidadService = habilidadService;
     }
@@ -64,18 +65,15 @@ public class HabilidadController {
         return this.habilidadService.getHabilidades();
     }
     
-    @PutMapping(
-            value = "/habilidad",
-            produces = "application/json; charset=utf-8")
-    public int insertUsuarioHabilidad(@RequestBody UsuarioHabilidad usuarioHabilidad) throws ControllerException {
-        return this.habilidadService.insertUsuarioHabilidad(usuarioHabilidad);
-    }
-    
     @PostMapping(
             value = "/habilidad",
             produces = "application/json; charset=utf-8")
-    public int insertUsuarioHabilidades(@RequestBody List<UsuarioHabilidad> usuarioHabilidadesList) throws ControllerException {
-        return this.habilidadService.insertUsuarioHabilidad(usuarioHabilidadesList);
+    public int insertUsuarioHabilidades(
+            @RequestHeader("jwt") String jwt,
+            @RequestBody List<Integer> usuarioHabilidadesList) throws ControllerException {
+        String decoded = jwtInstance.decodeJwt(jwt);
+        String correo = jwtInstance.getCorreoFromDecoded(decoded);
+        return this.habilidadService.insertUsuarioHabilidad(usuarioHabilidadesList, correo);
     }    
     
     @DeleteMapping(

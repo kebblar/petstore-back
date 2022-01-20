@@ -9,9 +9,12 @@ import io.kebblar.petstore.api.model.response.HabResponse;
 public interface HabilidadService {
     List<HabResponse> getHabilidadResponseList(int id) throws ServiceException;
     List<HabResponse> getHabilidades() throws ServiceException;
-    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws ServiceException;
     int deleteUsuarioHabilidades(int id) throws ServiceException;
-    int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws ServiceException;
     List<HabResponse> getHabilidadResponseListGratis(int id) throws ServiceException;
     List<HabResponse> getHabilidadResponseListConCosto(int id) throws ServiceException;
+    
+    
+    int insertUsuarioHabilidad(UsuarioHabilidad usuarioHabilidad) throws ServiceException;
+    int insertUsuarioHabilidad(List<UsuarioHabilidad> usuarioHabilidadesList) throws ServiceException;
+    int insertUsuarioHabilidad(List<Integer> usuarioHabilidadesList, String correo) throws ServiceException;
 }
