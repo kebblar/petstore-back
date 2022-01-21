@@ -98,7 +98,7 @@ public class FileUploadController {
         String s = String.valueOf(uno);
         logger.info(s);
         logger.info(dos);
-        return uploadService.storeOne(file, destinationFolder, max);
+        return uploadService.storeOne(1, file, destinationFolder, max);
     }
     // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
     // https://github.com/ozkanpakdil/spring-examples/tree/master/demoMultiFileUpload
@@ -110,7 +110,7 @@ public class FileUploadController {
             consumes = { "multipart/*" }
             )
     public List<UploadModel> handleFileUploadWithKDMCopyPut(@RequestParam("files") MultipartFile[] files) throws ControllerException {
-        return uploadService.store(files, destinationFolder, max);
+        return uploadService.store(1, files, destinationFolder, max);
     }
     // https://stackoverflow.com/questions/54683075/how-to-implement-multiple-files-upload-with-extra-fields-per-each-file-in-spring
 
@@ -120,7 +120,7 @@ public class FileUploadController {
             consumes = { "multipart/*" }
             )
     public UploadModel upload2(@RequestParam("files") MultipartFile files) throws ControllerException {
-        return uploadService.storeOne(files, destinationFolder, max);
+        return uploadService.storeOne(1, files, destinationFolder, max);
     }
 
     @PostMapping(
@@ -131,18 +131,20 @@ public class FileUploadController {
     @RequestHeader("idAnuncio") int idAnuncio,
     @ApiParam(name = "file", value = "Imagen a guardar.")
     @RequestParam("file") MultipartFile file) throws ControllerException {
-        return uploadService.storeOne(file, destinationFolder, max);
+        return uploadService.storeOne(idAnuncio, file, destinationFolder, max);
     }
 
+    // ESTE ES EL QUE SE MANDA LLAMAR !!!!!!!!
     @PostMapping(
         path = "/up/imagen2",
         produces = "application/json; charset=utf-8")
     public List<UploadModel> guardarImagen2(
     @ApiParam(name = "idAnuncio", value = "Identificador del anuncio.")
     @RequestHeader("idAnuncio") int idAnuncio,
+    @RequestHeader("jwt") String jwt,
     @ApiParam(name = "file", value = "Imagen a guardar.")
     @RequestParam("file") MultipartFile[] files) throws ControllerException {
-        return uploadService.store(files, destinationFolder, max);
+        return uploadService.store(idAnuncio, files, destinationFolder, max);
     }
 
     @PostMapping(
@@ -154,7 +156,7 @@ public class FileUploadController {
     @ApiParam(name = "image", value = "Imagen a guardar.")
     @RequestParam("image") MultipartFile files) throws ControllerException {
         if (accessHelperService.getUsuarioById(idUser) == null) throw new CustomException(UPLOAD_SERVICE);
-        UploadModel um = uploadService.storeOne(files, destinationFolder, max);
+        UploadModel um = uploadService.storeOne(idUser, files, destinationFolder, max);
         accessHelperService.uploadFotoPerfil(idUser, um.getNuevoNombre());
         return um;
     }
@@ -192,6 +194,15 @@ public class FileUploadController {
        return "ok";
    }
 
+   @GetMapping(
+           path = "/get-media/{idUser}",
+           produces = "application/json; charset=utf-8")
+    public List<UploadModel> getMedia(
+            @ApiParam(name = "idUser", value="id del usuario") 
+            @PathVariable int idUser)
+           throws ControllerException {
+        return uploadService.getMedia(idUser);
+   }
 }
 /*
 curl http://localhost:9999/api/upload.json -X POST \

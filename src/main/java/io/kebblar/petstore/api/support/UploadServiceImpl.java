@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.kebblar.petstore.api.mapper.UploadMapper;
 import io.kebblar.petstore.api.model.domain.UploadModel;
 import io.kebblar.petstore.api.utils.WaterMark;
 
@@ -59,13 +60,19 @@ public class UploadServiceImpl implements UploadService {
 
     /** tika. */
     private final Tika tika = new Tika();
+    
+    private UploadMapper uploadMapper;
+    
+    public UploadServiceImpl(UploadMapper uploadMapper) {
+        this.uploadMapper = uploadMapper;
+    }
 
     /** {@inheritDoc} */
     @Override
-    public List<UploadModel> store(MultipartFile[] mpfArray, String destinationFolder, long max) throws ServiceException {
+    public List<UploadModel> store(int idAnuncio, MultipartFile[] mpfArray, String destinationFolder, long max) throws ServiceException {
         List<UploadModel> lista = new ArrayList<>();
         for (MultipartFile mpf : mpfArray) {
-            lista.add(storeOne(mpf, destinationFolder, max));
+            lista.add(storeOne(idAnuncio, mpf, destinationFolder, max));
         }
         return lista;
     }
@@ -76,7 +83,7 @@ public class UploadServiceImpl implements UploadService {
      * @param mpf the mpf
      * @throws ServiceException the upload exception
      */
-    private void valida(MultipartFile mpf, long max) throws ServiceException {
+    private String valida(MultipartFile mpf, long max) throws ServiceException {
         long peso = mpf.getSize();
         if (peso>max) {
             throw new CustomException(FILE_MAX_UPLOAD, peso, max);
@@ -91,6 +98,34 @@ public class UploadServiceImpl implements UploadService {
             // SI SE DETECTA UN ARCHIVO RARO, LANZAR UNA EXCEPCIÓN Y GRABAR EN LA BITACORA UN INCIDENTE GRAVE
         }
         logger.info("{}<-------------- mime type", mimeType);
+        return mimeType;
+    }
+    
+    private String calculateExt(String fullName) {
+        String ext = FilenameUtils.getExtension(fullName);
+        if(ext.trim().length()<1) ext = "png";
+        return ext;
+    }
+    private int calculaIdTipo(String ext) throws CustomException {
+        int tipoMedia=0;
+        switch (ext) {
+            case "image/jpg":
+            case "image/jpeg":
+                tipoMedia = 1;
+                break;
+            case "image/png":
+                tipoMedia = 2;
+                break;
+            case "video/mp4":
+                tipoMedia = 4;
+                break;
+            case "video/avi":
+                tipoMedia = 5;
+                break;
+            default:
+                throw new CustomException(NOT_VALID_IMAGE);
+        }
+        return tipoMedia;
     }
 
     /**
@@ -98,19 +133,24 @@ public class UploadServiceImpl implements UploadService {
      *
      * Store one.
      */
-    public UploadModel storeOne(MultipartFile mpf, String destinationFolder, long max) throws ServiceException {
+    @Override
+    public UploadModel storeOne(int idAnuncio, MultipartFile mpf, String destinationFolder, long max) throws ServiceException {
         UUID uuid = UUID.randomUUID();
-        String newName = uuid.toString() + "."+(FilenameUtils.getExtension(mpf.getOriginalFilename()));
-        int autoIncremental = 0;
-        valida(mpf, max);
+        String ext = this.calculateExt(mpf.getOriginalFilename());
+        String newName = uuid.toString() + "." + ext;
+        //int idAnuncio = 2; // CAMBIAR PRONTO AL ID CORRECTO
+        String mimeType = valida(mpf, max);
         UploadModel uploadModel = new UploadModel(
-                autoIncremental,
+                0,
+                idAnuncio,
                 mpf.getOriginalFilename(),
                 newName,
                 getMd5(mpf),
+                mimeType,
+                calculaIdTipo(mimeType),
                 new Date(),
                 mpf.getSize(),
-                true);
+                false);
         String uploadModelString = uploadModel.toString();
         logger.info("Upload model: {}", uploadModelString);
         Path filepath = Paths.get(destinationFolder, newName); //destinationFolder
@@ -121,9 +161,10 @@ public class UploadServiceImpl implements UploadService {
             // AQUI EN ESTA LINEA HAY QUE GUARDAR EL OBJETO "uploadModel" en la base...
             // Algo asi como la siguiente linea:
             // poner: storageMapper.insert(uploadModel)
+            if(uploadMapper!=null) uploadMapper.insertMedia(uploadModel);
             return uploadModel;
         } catch (IllegalStateException | IOException e) {
-            throw new CustomException(e, UPLOAD_SERVICE_LOG);
+            throw new CustomException(e, UPLOAD_SERVICE, e.getMessage());
         }
     }
 
@@ -149,4 +190,12 @@ public class UploadServiceImpl implements UploadService {
         }
     }
 
+    @Override
+    public List<UploadModel> getMedia(int idAnuncio) throws ServiceException {
+        try {
+            return uploadMapper.getMedia(idAnuncio);            
+        } catch (Exception e) {
+            throw new CustomException(e, UPLOAD_SERVICE_LOG);
+        }
+    }
 }

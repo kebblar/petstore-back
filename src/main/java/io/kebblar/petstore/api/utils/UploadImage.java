@@ -56,7 +56,7 @@ public class UploadImage {
     UploadService uploadService;
 
     public UploadImage() {
-        this.uploadService = new UploadServiceImpl();
+        this.uploadService = new UploadServiceImpl(null);
     }
 
     public InformacionMedia guardarImagen(String uuid, MultipartFile file) throws ServiceException {
@@ -92,10 +92,10 @@ public class UploadImage {
                 default:
                     throw new CustomException(NOT_VALID_IMAGE);
             }
-            UploadModel upload = uploadService.storeOne(file, carpetaDestino, max);
+            UploadModel upload = uploadService.storeOne(1, file, carpetaDestino, max);
             InformacionMedia imagenEnt= new InformacionMedia(uuid,upload.getNuevoNombre(),tipoMedia);
             //Renderizacion de imagen con marca de agua
-            if(tipoMedia!=4 && tipoMedia!=5) {
+            if(tipoMedia==1 || tipoMedia==2) {
                 AnuncioUtil.renderizarYMarcaDeAgua(destinationFolder,"petstore.com", uuid, imagenAltura);
             }
             return imagenEnt;
