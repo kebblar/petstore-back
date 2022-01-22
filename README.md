@@ -17,6 +17,11 @@
 1. Auto log off después de que el token jwt caduca
 2. Control total de las validaciones de los campos de entrada con decoraciones de correctéz
 3. Widget de carga de archivos con recorte y zoom
+4. Paginación de usuarios basada en el server (no lo fácil, que es el frontend)
+5. Bloqueo de usuario por 5 minutos después de N intentos fallidos, donde N es configurable en el properties del proyecto
+6. Control de fortaleza de password y verificación "en vivo desde el frontend"
+7. Re exposición de imágenes via un servidor secundario de http
+8. POR HACER: url's asociadas al tityulo de un anuncio
 
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
