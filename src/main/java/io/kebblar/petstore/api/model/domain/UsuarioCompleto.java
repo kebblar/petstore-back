@@ -46,6 +46,8 @@ public class UsuarioCompleto implements Serializable {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private Date fechaNacimiento;
+    private String descripcion;
+    private String fotoPerfil;
     private String clave;
     private long creado;
     private boolean activo;
@@ -98,6 +100,8 @@ public class UsuarioCompleto implements Serializable {
             String nombre,
             String apellidoPaterno,
             String apellidoMaterno,
+            String descripcion,
+            String fotoPerfil,
             Date fechaNacimiento,
             String nickName,
             String telefonoCelular) {
@@ -115,9 +119,27 @@ public class UsuarioCompleto implements Serializable {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.descripcion = descripcion;
+        this.fotoPerfil = fotoPerfil;
         this.fechaNacimiento = fechaNacimiento;
         this.nickName = nickName;
         this.telefonoCelular = telefonoCelular;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     /*
@@ -429,83 +451,51 @@ public class UsuarioCompleto implements Serializable {
         this.telefonoCelular = telefonoCelular;
     }
 
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return "[UsuarioCompleto] : ["
-                + " id =" + this.id
-                + " correo =" + this.correo
-                + " clave =" + this.clave
-                + " creado =" + this.creado
-                + " activo =" + this.activo
-                + " accesoNegadoContador =" + this.accesoNegadoContador
-                + " instanteBloqueo =" + this.instanteBloqueo
-                + " instanteUltimoAcceso =" + this.instanteUltimoAcceso
-                + " instanteUltimoCambioClave =" + this.instanteUltimoCambioClave
-                + " regeneraClaveToken =" + this.regeneraClaveToken
-                + " regeneraClaveInstante =" + this.regeneraClaveInstante
-                + " nombre =" + this.nombre
-                + " apellidoPaterno =" + this.apellidoPaterno
-                + " apellidoMaterno =" + this.apellidoMaterno
-                + " fechaNacimiento =" + this.fechaNacimiento
-                + " nickName =" + this.nickName
-                + " telefonoCelular =" + this.telefonoCelular
-                + "]";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof UsuarioCompleto)) {
-            return false;
-        }
-        UsuarioCompleto other = (UsuarioCompleto) obj;
-        return
-               id == other.id &&
-               correo == other.correo &&
-               clave == other.clave &&
-               creado == other.creado &&
-               activo == other.activo &&
-               accesoNegadoContador == other.accesoNegadoContador &&
-               instanteBloqueo == other.instanteBloqueo &&
-               instanteUltimoAcceso == other.instanteUltimoAcceso &&
-               instanteUltimoCambioClave == other.instanteUltimoCambioClave &&
-               regeneraClaveToken == other.regeneraClaveToken &&
-               regeneraClaveInstante == other.regeneraClaveInstante &&
-               nombre == other.nombre &&
-               apellidoPaterno == other.apellidoPaterno &&
-               apellidoMaterno == other.apellidoMaterno &&
-               fechaNacimiento == other.fechaNacimiento &&
-               nickName == other.nickName &&
-               telefonoCelular == other.telefonoCelular;
-    }
-
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            correo,
-            clave,
-            creado,
-            activo,
-            accesoNegadoContador,
-            instanteBloqueo,
-            instanteUltimoAcceso,
-            instanteUltimoCambioClave,
-            regeneraClaveToken,
-            regeneraClaveInstante,
-            nombre,
-            apellidoPaterno,
-            apellidoMaterno,
-            fechaNacimiento,
-            nickName,
-            telefonoCelular
-        );
+        return Objects.hash(accesoNegadoContador, activo, apellidoMaterno, apellidoPaterno, clave, correo, creado,
+                descripcion, fechaNacimiento, fotoPerfil, id, instanteBloqueo, instanteUltimoAcceso,
+                instanteUltimoCambioClave, nickName, nombre, regeneraClaveInstante, regeneraClaveToken,
+                telefonoCelular);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UsuarioCompleto other = (UsuarioCompleto) obj;
+        return accesoNegadoContador == other.accesoNegadoContador && activo == other.activo
+                && Objects.equals(apellidoMaterno, other.apellidoMaterno)
+                && Objects.equals(apellidoPaterno, other.apellidoPaterno) && Objects.equals(clave, other.clave)
+                && Objects.equals(correo, other.correo) && creado == other.creado
+                && Objects.equals(descripcion, other.descripcion)
+                && Objects.equals(fechaNacimiento, other.fechaNacimiento)
+                && Objects.equals(fotoPerfil, other.fotoPerfil) && id == other.id
+                && instanteBloqueo == other.instanteBloqueo && instanteUltimoAcceso == other.instanteUltimoAcceso
+                && instanteUltimoCambioClave == other.instanteUltimoCambioClave
+                && Objects.equals(nickName, other.nickName) && Objects.equals(nombre, other.nombre)
+                && regeneraClaveInstante == other.regeneraClaveInstante
+                && Objects.equals(regeneraClaveToken, other.regeneraClaveToken)
+                && Objects.equals(telefonoCelular, other.telefonoCelular);
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioCompleto [getDescripcion()=" + getDescripcion() + ", getFotoPerfil()=" + getFotoPerfil()
+                + ", getId()=" + getId() + ", getCorreo()=" + getCorreo() + ", getClave()=" + getClave()
+                + ", getCreado()=" + getCreado() + ", isActivo()=" + isActivo() + ", getAccesoNegadoContador()="
+                + getAccesoNegadoContador() + ", getInstanteBloqueo()=" + getInstanteBloqueo()
+                + ", getInstanteUltimoAcceso()=" + getInstanteUltimoAcceso() + ", getInstanteUltimoCambioClave()="
+                + getInstanteUltimoCambioClave() + ", getRegeneraClaveToken()=" + getRegeneraClaveToken()
+                + ", getRegeneraClaveInstante()=" + getRegeneraClaveInstante() + ", getNombre()=" + getNombre()
+                + ", getApellidoPaterno()=" + getApellidoPaterno() + ", getApellidoMaterno()=" + getApellidoMaterno()
+                + ", getFechaNacimiento()=" + getFechaNacimiento() + ", getNickName()=" + getNickName()
+                + ", getTelefonoCelular()=" + getTelefonoCelular() + ", hashCode()=" + hashCode() + ", getHash()="
+                + getHash() + "]";
     }
 
     public int getHash() {
