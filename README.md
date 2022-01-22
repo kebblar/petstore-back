@@ -21,7 +21,10 @@
 5. Bloqueo de usuario por 5 minutos después de N intentos fallidos, donde N es configurable en el properties del proyecto
 6. Control de fortaleza de password y verificación "en vivo desde el frontend"
 7. Re exposición de imágenes via un servidor secundario de http
-8. POR HACER: url's asociadas al tityulo de un anuncio
+8. Agregar Captcha al registro y a la recuperación de clave
+9. Correcto envío de correos electrónicos con posibilidad de personalización de estilo
+10. Hash de la clave de un usuario en la base de datos (con salt agregado, basado en su usuario)
+11. POR HACER: url's asociadas al tityulo de un anuncio
 
 ## Limpieza del aplicativo 1ra fase rama refactor/depuracion-microservicios
 
