@@ -61,6 +61,8 @@ import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Implementacion  del controlador REST asociado a los endpoints
@@ -116,6 +118,13 @@ public class AccessController {
     @PostMapping(
             path = "/login",
             produces = "application/json; charset=utf-8")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully sign in"), 
+            @ApiResponse(code = 400, message = "Missing or invalid request body"), 
+            @ApiResponse(code = 400, message = "Otro 400"), 
+            @ApiResponse(code = 404, message = "Schema not found"), 
+            @ApiResponse(code = 500, message = "Internal error")
+            })
     public LoginResponse login(
             @ApiParam(name="cred", value="Representa las credenciales (usuario y clave) " +
                     "de quien intenta ingresar al sistema")
