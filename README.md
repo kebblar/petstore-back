@@ -1,6 +1,6 @@
 # petstore-back
 
-## Logros a destacar
+## Logros a destacar.
 
 1. Pipeline en Jenkins (con un Jenkinsfile en Github)
 2. Configuración de Springboot centralizada en Github con soporte a ambientes dev, qa y uat
