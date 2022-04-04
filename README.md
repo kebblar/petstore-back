@@ -11,7 +11,7 @@
 7. Uso de JWT para control de la seguridad
 8. Cambio de C3P0 por HikariCP
 9. Tren de CICD en una AMI de AWS
-10. Nginx como reverse proxy y como SSL terminator y como Balanceador de cargas
+10. Nginx como reverse proxy y como SSL terminator y como Balanceador de cargas.
 
 ## Funcionalidades interesantes:
 1. Auto log off después de que el token jwt caduca
