@@ -13,7 +13,7 @@ import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.request.ConsultaRequest;
 import io.kebblar.petstore.api.model.response.ConsultaResponse;
-import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.utils.JwtHelper;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
@@ -66,8 +66,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     private int getUserIdFromJwt(String jwt) throws ServiceException {
         try {
-            String decoded = JWTUtil.getInstance().decodeJwt(jwt);
-            String correo = JWTUtil.getInstance().getCorreoFromDecoded(decoded);
+            String correo = JwtHelper.getInstance().bodyToObject(jwt).getMail();
             Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {

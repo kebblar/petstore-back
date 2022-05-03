@@ -20,6 +20,8 @@
  */
 package io.kebblar.petstore.api.rest;
 
+import static io.kebblar.petstore.api.model.enumerations.EnumRoles.*;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.kebblar.petstore.api.config.AuthorizedRoles;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioCompleto;
@@ -55,7 +58,7 @@ import io.kebblar.petstore.api.service.ConsultaService;
 import io.kebblar.petstore.api.service.UsuarioCompletoService;
 import io.kebblar.petstore.api.service.UsuarioService;
 import io.kebblar.petstore.api.support.InvokeRemoteRestService;
-import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.utils.JwtHelper;
 import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
@@ -89,7 +92,7 @@ public class AccessController {
     private final AccessHelperService accessHelperService;
     private final InvokeRemoteRestService invokeRestService;
     private final UsuarioCompletoService usuarioCompletoService;
-    private final JWTUtil jwtInstance;
+    private final JwtHelper jwtInstance;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -108,7 +111,7 @@ public class AccessController {
         this.usuarioCompletoService = usuarioCompletoService;
         this.consultaService = consultaService;
         this.accessHelperService = accessHelperService;
-        this.jwtInstance = JWTUtil.getInstance();
+        this.jwtInstance = JwtHelper.getInstance();
     }
 
     @ApiOperation(
@@ -215,6 +218,7 @@ public class AccessController {
     @PutMapping(
             path = "/cambia-clave",
             produces = "application/json; charset=utf-8")
+    @AuthorizedRoles({admin, normal})
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
             @ApiParam(
@@ -222,11 +226,9 @@ public class AccessController {
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
-         String decoded = jwtInstance.decodeJwt(jwt);
-         jwtInstance.revisaSender(decoded, credenciales.getUsuario());
-         return this.usuarioService.cambiaClave(
-                 credenciales.getUsuario(),
-                 credenciales.getClave());
+         // Esta única linea la necesito sólo para cechar que si NO es admin, tiene que ser el dueño del token:
+         JwtHelper.getInstance().sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
+         return this.usuarioService.cambiaClave(credenciales.getUsuario(), credenciales.getClave());
     }
 
     @ApiOperation(
@@ -396,7 +398,7 @@ public class AccessController {
     }
 
     private void verifica(String token, String targetRol) throws ServiceException {
-        String mail = jwtInstance.getCorreoFromDecoded(token);
+        String mail = jwtInstance.bodyToObject(token).getMail();
         List<Rol> rolesForToken = this.accessHelperService.getRolesDelCorreo(mail);
         for(Rol rol : rolesForToken) {
             if(rol.getNombre().equalsIgnoreCase(targetRol)) {
@@ -466,11 +468,11 @@ public class AccessController {
     @PostMapping(
             path = "/descripcion",
             produces = "application/json; charset=utf-8")
+    @AuthorizedRoles({admin, normal})
     public Usuario guardaDescripcion(
             @RequestHeader("jwt") String jwt,
             @RequestBody DescripcionRequest descripcionRequest) throws ControllerException {
-        String decoded = jwtInstance.decodeJwt(jwt);
-        jwtInstance.revisaSender(decoded, descripcionRequest.getCorreo());
+        JwtHelper.getInstance().sameUserOrSpecificRol(jwt, descripcionRequest.getCorreo(), admin);
         return this.usuarioService.updateProfileDesc(descripcionRequest.getCorreo(), descripcionRequest.getDescripcion(), descripcionRequest.getDescripcionPlaneText());
     }
     

@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kebblar.petstore.api.model.exceptions.ControllerException;
 import io.kebblar.petstore.api.model.response.HabResponse;
 import io.kebblar.petstore.api.service.HabilidadService;
-import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.utils.JwtHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 
@@ -43,7 +43,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class HabilidadController {
     private final HabilidadService habilidadService;
-    private final JWTUtil jwtInstance = JWTUtil.getInstance();
+    private final JwtHelper jwtInstance = JwtHelper.getInstance();
     
     public HabilidadController(HabilidadService habilidadService) {
         this.habilidadService = habilidadService;
@@ -71,8 +71,7 @@ public class HabilidadController {
     public int insertUsuarioHabilidades(
             @RequestHeader("jwt") String jwt,
             @RequestBody List<Integer> usuarioHabilidadesList) throws ControllerException {
-        String decoded = jwtInstance.decodeJwt(jwt);
-        String correo = jwtInstance.getCorreoFromDecoded(decoded);
+        String correo = jwtInstance.bodyToObject(jwt).getMail();
         return this.habilidadService.insertUsuarioHabilidad(usuarioHabilidadesList, correo);
     }    
     

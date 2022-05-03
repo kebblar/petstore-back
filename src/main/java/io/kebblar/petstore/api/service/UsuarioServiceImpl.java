@@ -25,6 +25,7 @@ import static io.kebblar.petstore.api.model.enumerations.EnumMessage.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +45,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.kebblar.petstore.api.model.domain.JwtBody;
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
@@ -51,7 +53,7 @@ import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.model.request.PreregistroRequest;
 import io.kebblar.petstore.api.model.response.LoginResponse;
 import io.kebblar.petstore.api.utils.DigestEncoder;
-import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.utils.JwtHelper;
 import io.kebblar.petstore.api.utils.ManageDates;
 import io.kebblar.petstore.api.utils.StringUtils;
 import io.kebblar.petstore.api.utils.ValidadorClave;
@@ -377,14 +379,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     /** {@inheritDoc} */
     @Override
     public Usuario cambiaClave(String correo, String clave) throws ServiceException {
-        // BUG: con un token cualquiera válido (hasta el de un usuario no 'admin') se puede
-        // invocar este servicio y cambiarle la clave a cualquiera !!!!!
-        // Para corregir este bug de seguridad, este servicio DEBE recibir el JWT y
-        // A) verificar que es un JWT de un usuario con rol 'admin'
-        // o bien que:
-        // B) el JWT es del usuario para el cual se está dando el correo
-        // Si no se cumple con alguna de estas dos condiciones, se deberá impedir el cambio
-        // y se deberá disparar la excepción de NO autorizado (401: unauthorized)
         try {
             Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
             if(usuario==null) throw new CustomException(USER_NOT_EXIST, correo);
@@ -508,7 +502,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Rol> roles = accessHelperService.getRolesDelUsuario(idUsuario);
         UsuarioDetalle usuarioDetalle = accessHelperService.getDetallesDeUsuario(idUsuario);
         if(encryptKey==null) encryptKey = "secreto";
-        String jwt = JWTUtil.getInstance().createToken(correo, securityTokenLasts, encryptKey);
+        //String jwt = JWTUtil.getInstance().createToken(correo, securityTokenLasts, encryptKey);
+        
+        List<String> rolesStr = new ArrayList<>();
+        for(Rol r : roles) {
+            rolesStr.add(r.getNombre());
+        }
+        JwtBody body = new JwtBody(idUsuario, correo, rolesStr , System.currentTimeMillis());
+        String jwt = JwtHelper.getInstance().createJwt(body);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 

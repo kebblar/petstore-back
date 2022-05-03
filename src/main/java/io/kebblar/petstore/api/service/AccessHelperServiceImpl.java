@@ -18,7 +18,7 @@ import io.kebblar.petstore.api.model.exceptions.CustomException;
 import io.kebblar.petstore.api.model.exceptions.MapperException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
-import io.kebblar.petstore.api.utils.JWTUtil;
+import io.kebblar.petstore.api.utils.JwtHelper;
 
 @Service
 public class AccessHelperServiceImpl implements AccessHelperService {
@@ -59,8 +59,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
-        String decoded = JWTUtil.getInstance().decodeJwt(jwt);
-        return JWTUtil.getInstance().getCorreoFromDecoded(decoded);
+        return JwtHelper.getInstance().bodyToObject(jwt).getMail();
     }
     
     /** {@inheritDoc} */
