@@ -34,7 +34,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import io.kebblar.petstore.api.utils.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -103,18 +102,19 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
                 // for unit testing, we will have to mock the HttpServletRequest
                 String headerValue = request.getHeader(headerName);
                 if (headerName.contains("jwt") && headerValue != null && headerValue.trim().length() > 0) {
+                    logger.info("Encryption key:", this.encryptKey);
                     logger.info("App caller IP detected:: {}", remoteAddress);
                     logger.info("App current uri detected:: {}", uri);
                     logger.info("El header {} tiene el valor: {}", headerName, headerValue);
-                    String jwtToken = headerValue;
-                    try {
-                        // valida firma y expiración
-                        JWTUtil.getInstance().revisaToken(jwtToken, encryptKey);
-                    } catch (Exception e) {
-                        // also, for UT, we need to mock HttpServletResponse
-                        construye(response, e.getMessage(), jwtToken);
-                        return false;
-                    }
+//                    String jwtToken = headerValue;
+//                    try {
+//                        // valida firma y expiración
+//                        //JWTUtil.getInstance().revisaToken(jwtToken, encryptKey);
+//                    } catch (Exception e) {
+//                        // also, for UT, we need to mock HttpServletResponse
+//                        construye(response, e.getMessage(), jwtToken);
+//                        return false;
+//                    }
                 }
             }
         }
@@ -127,16 +127,27 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
      * @param response código de error Http
      * @param message corresponde al texto que explica la situación
      */
-    private void construye(HttpServletResponse response, String message, String token) {
+    public void construye(HttpServletResponse response, String message, String token) {
+        build(response, 1090, "EX_1090", 
+                message + " (" + token + ")",
+                "Invalid Token", HttpServletResponse.SC_UNAUTHORIZED);
+    }
+    
+    private void build(HttpServletResponse response, 
+            int errorNumber,
+            String errorNumberString,
+            String longDescription, 
+            String shortDescription,
+            int httpResponse) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
-        map.put("exceptionTypeNumber", 1090);
-        map.put("exceptionTypeKey", "EX_1090");
-        map.put("exceptionLongDescription", message + " (" + token + ")");
-        map.put("exceptionShortDescription", "Invalid Token");
-        map.put("httpResponse",  HttpServletResponse.SC_UNAUTHORIZED);
+        map.put("exceptionTypeNumber", errorNumber);
+        map.put("exceptionTypeKey", errorNumberString);
+        map.put("exceptionLongDescription", longDescription);
+        map.put("exceptionShortDescription", shortDescription);
+        map.put("httpResponse",  httpResponse);
         response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(httpResponse);
         try {
             response.getWriter().write(mapper.writeValueAsString(map));
         } catch (IOException e) {
