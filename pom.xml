@@ -22,7 +22,7 @@
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <java.el.api.version>3.0.0</java.el.api.version>
         <java.el.impl.version>2.2.6</java.el.impl.version>
-        <jacoco.version>0.8.2</jacoco.version>
+        <jacoco.version>0.8.4</jacoco.version>
 
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
@@ -74,7 +74,10 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-sleuth-zipkin</artifactId>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+            </dependency>
 <!--         <dependency> -->
 <!--             <groupId>org.apache.pdfbox</groupId> -->
 <!--             <artifactId>pdfbox</artifactId> -->
@@ -230,6 +233,14 @@
            <artifactId>passay</artifactId>
            <version>1.6.0</version>
         </dependency>
+        
+        <dependency>
+	        <groupId>org.projectlombok</groupId>
+	        <artifactId>lombok</artifactId>
+	        <scope>provided</scope>
+	        <version>1.18.20</version>
+        </dependency>
+        
         <!-- Own custom libs -->
         <dependency>
             <groupId>mx.com.ultrasist.ci</groupId>
