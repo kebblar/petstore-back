@@ -26,6 +26,8 @@ import io.kebblar.petstore.api.model.exceptions.*;
 import static io.kebblar.petstore.api.model.enumerations.EnumMessage.GOOGLE_CAPTCHA;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -45,6 +47,10 @@ import io.kebblar.petstore.api.model.response.SmsResponse;
  * @since 1.0-SNAPSHOT
  */
 @Service("invokeRestService")
+@PropertySources({
+    @PropertySource(value = "classpath:router.properties", ignoreResourceNotFound = true),
+    @PropertySource(value = "classpath:aux-conf/router.properties", ignoreResourceNotFound = true)
+})
 public class InvokeRemoteRestServiceImpl implements InvokeRemoteRestService {
     private final RestTemplate restTemplate;
 
