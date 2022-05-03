@@ -65,7 +65,7 @@ public class AuthorizeUserAspect {
     }
     
     private long convierte(String stringSecurityTokenLasts) {
-        long minutos = 1000 * 60;
+        long minutos = 1000 * 60L;
         try {
             return minutos * Integer.parseInt(stringSecurityTokenLasts);
         } catch (Exception e) {
