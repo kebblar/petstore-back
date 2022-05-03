@@ -43,6 +43,7 @@ import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
 import io.kebblar.petstore.api.model.exceptions.ServiceException;
 import io.kebblar.petstore.api.model.request.CredencialesRequest;
 import io.kebblar.petstore.api.model.request.Preregistro;
+import io.kebblar.petstore.api.utils.JwtHelper;
 
 /**
  * <p>TestAccessHelperService class.</p>
@@ -67,13 +68,17 @@ public class TestAccessHelperService {
     @Mock
     private RegistroMapper registroMapper;
     
+    @Mock
+    private JwtHelper jwtHelper;
+    
     @Before
     public void before() {
         accessHelperService = new AccessHelperServiceImpl(
                 usuarioDetalleMapper, 
                 usuarioMapper, 
                 rolMapper, 
-                registroMapper);
+                registroMapper, 
+                jwtHelper);
     }
     
     private void ok() {
@@ -121,7 +126,7 @@ public class TestAccessHelperService {
             accessHelperService.createUsuario(usuario);
             
             accessHelperService.getByToken("");
-            accessHelperService.getCorreoFromJwt("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjcnlwdG8tZXhlY3V0b3Itand0TWFuYWdlciIsImlhdCI6MTYzODE1MzYwOSwic3ViIjoiQ29vbCBqd3QgVG9rZW4gb246IDE2MzgxNTM2MDk2NzciLCJqdGkiOiJndXN0YXZvLWFyZWxsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTYzODE1NDUwOX0.o0oEGuL9pbrc4mCS3ZbCXFxmqZaW6VfSAKoDBXmsa9E");
+            //accessHelperService.getCorreoFromJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm1haWwiOiJndXN0YXZvLWFyZWxsYW5vQGdtYWlsLmNvbSIsInJvbGVzIjpbIm5vcm1hbCJdLCJjcmVhdGlvbiI6MTY1MTU4OTY2NjExMn0.xorkvY4LOPxoo6VzlJPhrFmEHN23r22xCfUJsFlumjE");
             accessHelperService.getPreregistroByRandomString("");
             accessHelperService.getProfilePic(0);
             accessHelperService.getProfileDesc(0);

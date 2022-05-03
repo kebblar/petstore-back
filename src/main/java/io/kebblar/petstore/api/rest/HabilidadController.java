@@ -43,11 +43,11 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class HabilidadController {
     private final HabilidadService habilidadService;
-    private final JwtHelper jwtInstance;
+    private final JwtHelper jwtHelper;
     
-    public HabilidadController(HabilidadService habilidadService) {
+    public HabilidadController(HabilidadService habilidadService, JwtHelper jwtHelper) {
         this.habilidadService = habilidadService;
-        this.jwtInstance = JwtHelper.getInstance2();
+        this.jwtHelper = jwtHelper;
     }
 
     @GetMapping(
@@ -72,7 +72,7 @@ public class HabilidadController {
     public int insertUsuarioHabilidades(
             @RequestHeader("jwt") String jwt,
             @RequestBody List<Integer> usuarioHabilidadesList) throws ControllerException {
-        String correo = jwtInstance.bodyToObject(jwt).getMail();
+        String correo = this.jwtHelper.bodyToObject(jwt).getMail();
         return this.habilidadService.insertUsuarioHabilidad(usuarioHabilidadesList, correo);
     }    
     

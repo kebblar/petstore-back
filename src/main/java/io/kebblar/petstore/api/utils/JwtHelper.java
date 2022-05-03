@@ -14,18 +14,13 @@ import io.kebblar.petstore.api.model.enumerations.EnumMessage;
 import io.kebblar.petstore.api.model.enumerations.EnumRoles;
 import io.kebblar.petstore.api.model.exceptions.CustomException;
 
-public class JwtHelper {
-    private static JwtHelper instance = null;
+public class JwtHelper {    
+    private final ObjectMapper objectMapper = new ObjectMapper();
     
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final String clave;
     
-    private String clave = "gustavo"; // jwt.encryptor.password
-    
-    public static JwtHelper getInstance2() {
-        if(instance==null) instance = new JwtHelper();
-        return instance;
-    }
-    private JwtHelper() {
+    public JwtHelper(String clave) {
+        this.clave = clave;
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
     public String getHeader(String jwt) {

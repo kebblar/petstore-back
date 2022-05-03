@@ -92,7 +92,7 @@ public class AccessController {
     private final AccessHelperService accessHelperService;
     private final InvokeRemoteRestService invokeRestService;
     private final UsuarioCompletoService usuarioCompletoService;
-    private final JwtHelper jwtInstance;
+    private final JwtHelper jwtHelper;
 
     /**
      * Constructor que realiza el setting de los servicios que serán
@@ -105,13 +105,14 @@ public class AccessController {
             UsuarioService usuarioService,
             InvokeRemoteRestService invokeRestService,
             UsuarioCompletoService usuarioCompletoService,
-            ConsultaService consultaService) {
+            ConsultaService consultaService, 
+            JwtHelper jwtHelper) {
         this.usuarioService = usuarioService;
         this.invokeRestService = invokeRestService;
         this.usuarioCompletoService = usuarioCompletoService;
         this.consultaService = consultaService;
         this.accessHelperService = accessHelperService;
-        this.jwtInstance = JwtHelper.getInstance2();
+        this.jwtHelper = jwtHelper;
     }
 
     @ApiOperation(
@@ -227,7 +228,7 @@ public class AccessController {
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
          // Esta única linea la necesito sólo para cechar que si NO es admin, tiene que ser el dueño del token:
-         jwtInstance.sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
+         jwtHelper.sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
          return this.usuarioService.cambiaClave(credenciales.getUsuario(), credenciales.getClave());
     }
 
@@ -398,7 +399,7 @@ public class AccessController {
     }
 
     private void verifica(String token, String targetRol) throws ServiceException {
-        String mail = jwtInstance.bodyToObject(token).getMail();
+        String mail = jwtHelper.bodyToObject(token).getMail();
         List<Rol> rolesForToken = this.accessHelperService.getRolesDelCorreo(mail);
         for(Rol rol : rolesForToken) {
             if(rol.getNombre().equalsIgnoreCase(targetRol)) {
@@ -462,6 +463,7 @@ public class AccessController {
             @RequestBody List<ConsultaRequest> datos) throws ControllerException {
         return consultaService.guarda(jwt, datos);
     }
+    
     @ApiOperation(
             value = "AccessController::descripcion",
             notes = "Se utiliza para guardar la descripción de un usuario")
@@ -472,7 +474,7 @@ public class AccessController {
     public Usuario guardaDescripcion(
             @RequestHeader("jwt") String jwt,
             @RequestBody DescripcionRequest descripcionRequest) throws ControllerException {
-        jwtInstance.sameUserOrSpecificRol(jwt, descripcionRequest.getCorreo(), admin);
+        this.jwtHelper.sameUserOrSpecificRol(jwt, descripcionRequest.getCorreo(), admin);
         return this.usuarioService.updateProfileDesc(descripcionRequest.getCorreo(), descripcionRequest.getDescripcion(), descripcionRequest.getDescripcionPlaneText());
     }
     

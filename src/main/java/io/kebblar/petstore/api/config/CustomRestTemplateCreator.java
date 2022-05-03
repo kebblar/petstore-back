@@ -20,6 +20,7 @@
  */
 package io.kebblar.petstore.api.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 import io.kebblar.petstore.api.utils.Convert;
 import io.kebblar.petstore.api.utils.CreatePDF;
+import io.kebblar.petstore.api.utils.JwtHelper;
 
 /**
  * Esta clase auxiliar me permitirá invocar servicios REST de otras fuentes.
@@ -64,5 +66,15 @@ public class CustomRestTemplateCreator {
     @Bean
     public CreatePDF createPDF(Convert convert) {
         return null;
+    }
+    
+    
+    
+    @Value("${jwt.encryptor.password}")
+    private String clave;
+    
+    @Bean
+    public JwtHelper getJwtHelper() {
+        return new JwtHelper(this.clave);
     }
 }

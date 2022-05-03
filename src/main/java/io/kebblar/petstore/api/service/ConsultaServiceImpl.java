@@ -21,14 +21,15 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     private final ConsultaMapper consultaMapper;
     private final AccessHelperService accessHelperService;
-    private final JwtHelper jwtInstance;
+    private final JwtHelper jwtHelper;
 
     public ConsultaServiceImpl(
             AccessHelperService accessHelperService,
-            ConsultaMapper consultaMapper) {
+            ConsultaMapper consultaMapper,
+            JwtHelper jwtHelper) {
         this.accessHelperService = accessHelperService;
         this.consultaMapper = consultaMapper;
-        this.jwtInstance = JwtHelper.getInstance2();
+        this.jwtHelper = jwtHelper;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     private int getUserIdFromJwt(String jwt) throws ServiceException {
         try {
-            String correo = jwtInstance.bodyToObject(jwt).getMail();
+            String correo = jwtHelper.bodyToObject(jwt).getMail();
             Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {

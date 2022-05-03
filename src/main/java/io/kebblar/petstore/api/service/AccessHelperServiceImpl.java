@@ -8,7 +8,6 @@ import io.kebblar.petstore.api.mapper.RegistroMapper;
 import io.kebblar.petstore.api.mapper.RolMapper;
 import io.kebblar.petstore.api.mapper.UsuarioDetalleMapper;
 import io.kebblar.petstore.api.mapper.UsuarioMapper;
-
 import io.kebblar.petstore.api.model.domain.Rol;
 import io.kebblar.petstore.api.model.domain.Usuario;
 import io.kebblar.petstore.api.model.domain.UsuarioDetalle;
@@ -22,22 +21,23 @@ import io.kebblar.petstore.api.utils.JwtHelper;
 
 @Service
 public class AccessHelperServiceImpl implements AccessHelperService {
-    private UsuarioDetalleMapper usuarioDetalleMapper;
-    private UsuarioMapper usuarioMapper;
-    private RegistroMapper registroMapper;
-    private RolMapper rolMapper;
-    private JwtHelper jwtInstance;
+    private final UsuarioDetalleMapper usuarioDetalleMapper;
+    private final UsuarioMapper usuarioMapper;
+    private final RegistroMapper registroMapper;
+    private final RolMapper rolMapper;
+    private final JwtHelper jwtHelper;
 
     public AccessHelperServiceImpl(
             UsuarioDetalleMapper usuarioDetalleMapper,
             UsuarioMapper usuarioMapper,
             RolMapper rolMapper,
-            RegistroMapper registroMapper) {
+            RegistroMapper registroMapper, 
+            JwtHelper jwtHelper) {
         this.usuarioDetalleMapper = usuarioDetalleMapper;
         this.usuarioMapper = usuarioMapper;
         this.rolMapper = rolMapper;
         this.registroMapper = registroMapper;
-        this.jwtInstance = JwtHelper.getInstance2();
+        this.jwtHelper = jwtHelper;
     }
 
     /** {@inheritDoc} */
@@ -61,7 +61,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
-        return jwtInstance.bodyToObject(jwt).getMail();
+        return jwtHelper.bodyToObject(jwt).getMail();
     }
     
     /** {@inheritDoc} */

@@ -9,6 +9,7 @@ import io.kebblar.petstore.api.model.exceptions.*;
 import io.kebblar.petstore.api.model.request.Preregistro;
 import io.kebblar.petstore.api.support.MailSenderService;
 import io.kebblar.petstore.api.support.UploadService;
+import io.kebblar.petstore.api.utils.JwtHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,10 @@ public class TestUsuarioService {
     
     @Mock
     private AccessHelperService accessHelperService;
-
+    
+    @Mock
+    private JwtHelper jwtHelper;
+    
     private boolean checa(ServiceException e, EnumMessage m) {
     	return m.toString().equals(e.getLocalExceptionKey());    	
     }
@@ -41,7 +45,7 @@ public class TestUsuarioService {
         Usuario usuario = new Usuario();
         usuario.setActivo(true);
         usuario.setClave("a7cf8fe83b806ae522cafed8af7600c2b1e9f2668654c2a39cf1bef21711b945");
-        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
+        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService, jwtHelper);
         
         // successful login
         try {
@@ -117,7 +121,7 @@ public class TestUsuarioService {
         preRegistroRequest.setClaveHash("Kebblar2017_");
         preRegistroRequest.setCorreo("gustavo-arellano@gmail.com");
 
-        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService);
+        usuarioService = new UsuarioServiceImpl(mailSenderService, uploadService, accessHelperService, jwtHelper);
         try {
             usuarioDetalle.setTelefonoCelular("5587654321");
             usuarioService.actualizaUsuarioDetalle(usuarioDetalle);

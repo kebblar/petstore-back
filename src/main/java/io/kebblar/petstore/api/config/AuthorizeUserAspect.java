@@ -20,13 +20,13 @@ import io.kebblar.petstore.api.utils.JwtHelper;
 @Component
 public class AuthorizeUserAspect {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizeUserAspect.class);
-    private final JwtHelper jwtInstance;
+    private final JwtHelper jwtHelper;
 
     @Value("${security.token.lasts:120}")
     private String stringSecurityTokenLasts;
     
-    public AuthorizeUserAspect() {
-        jwtInstance = JwtHelper.getInstance2();
+    public AuthorizeUserAspect(JwtHelper jwtHelper) {
+        this.jwtHelper = jwtHelper;
     }
 
     @Around("@annotation(authorizedRoles)")
@@ -40,13 +40,13 @@ public class AuthorizeUserAspect {
         String jwt = cadena.toString();
         
         // se valida UNICAMENTE la estructura y la firma:
-        this.jwtInstance.valida(jwt); // esto dispara un CustomException si la validación falla
+        this.jwtHelper.valida(jwt); // esto dispara un CustomException si la validación falla
         
         // Los roles que provienen de la anotacion:
         EnumRoles[] roles = authorizedRoles.value();
         
         // se obtiene el body del JWT ya como objeto java:
-        JwtBody body = this.jwtInstance.bodyToObject(jwt);
+        JwtBody body = this.jwtHelper.bodyToObject(jwt);
         
         // se valida la caducidad
         long now = System.currentTimeMillis();

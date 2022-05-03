@@ -95,7 +95,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private static final int RANDOM_STRING_LEN = 6;
     
-    private final JwtHelper jwtInstance;
+    private final JwtHelper jwtHelper;
 
     /**
      * Constructor que realiza el setting de
@@ -111,11 +111,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioServiceImpl(
             MailSenderService mailSenderService,
             UploadService uploadService,
-            AccessHelperService accessHelperService) {
+            AccessHelperService accessHelperService, 
+            JwtHelper jwtHelper) {
         this.mailSenderService = mailSenderService;
         this.uploadService = uploadService;
         this.accessHelperService = accessHelperService;
-        this.jwtInstance = JwtHelper.getInstance2();
+        this.jwtHelper = jwtHelper;
     }
     
     /**
@@ -512,7 +513,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             rolesStr.add(r.getNombre());
         }
         JwtBody body = new JwtBody(idUsuario, correo, rolesStr , System.currentTimeMillis());
-        String jwt = jwtInstance.createJwt(body);
+        String jwt = jwtHelper.createJwt(body);
         return new UserFoundWrapper(roles, usuarioDetalle, jwt);
     }
 
