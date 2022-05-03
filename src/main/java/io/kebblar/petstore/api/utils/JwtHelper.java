@@ -19,9 +19,9 @@ public class JwtHelper {
     
     private ObjectMapper objectMapper = new ObjectMapper();
     
-    private String clave = "gustavo";
+    private String clave = "gustavo"; // jwt.encryptor.password
     
-    public static JwtHelper getInstance() {
+    public static JwtHelper getInstance2() {
         if(instance==null) instance = new JwtHelper();
         return instance;
     }
@@ -111,7 +111,7 @@ public class JwtHelper {
         }
     }
     public void sameUserOrSpecificRol(String jwt, String mail, EnumRoles theRole) throws CustomException {
-        JwtBody obj = JwtHelper.getInstance().bodyToObject(jwt);
+        JwtBody obj = this.bodyToObject(jwt);
         if(obj.getMail().equals(mail)) return;
         for(String r : obj.getRoles()) {
             if(theRole.toString().equals(r)) return;

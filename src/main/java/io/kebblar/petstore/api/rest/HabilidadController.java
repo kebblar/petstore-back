@@ -43,10 +43,11 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(value = "/api")
 public class HabilidadController {
     private final HabilidadService habilidadService;
-    private final JwtHelper jwtInstance = JwtHelper.getInstance();
+    private final JwtHelper jwtInstance;
     
     public HabilidadController(HabilidadService habilidadService) {
         this.habilidadService = habilidadService;
+        this.jwtInstance = JwtHelper.getInstance2();
     }
 
     @GetMapping(

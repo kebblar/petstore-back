@@ -19,14 +19,16 @@ import io.kebblar.petstore.api.utils.JwtHelper;
 public class ConsultaServiceImpl implements ConsultaService {
     private static final Logger logger = LoggerFactory.getLogger(ConsultaServiceImpl.class);
 
-    private ConsultaMapper consultaMapper;
-    private AccessHelperService accessHelperService;
+    private final ConsultaMapper consultaMapper;
+    private final AccessHelperService accessHelperService;
+    private final JwtHelper jwtInstance;
 
     public ConsultaServiceImpl(
             AccessHelperService accessHelperService,
             ConsultaMapper consultaMapper) {
         this.accessHelperService = accessHelperService;
         this.consultaMapper = consultaMapper;
+        this.jwtInstance = JwtHelper.getInstance2();
     }
 
     @Override
@@ -66,7 +68,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     private int getUserIdFromJwt(String jwt) throws ServiceException {
         try {
-            String correo = JwtHelper.getInstance().bodyToObject(jwt).getMail();
+            String correo = jwtInstance.bodyToObject(jwt).getMail();
             Usuario usr = accessHelperService.getUsuarioByCorreo(correo);
             return usr.getId();
         } catch (CustomException e) {

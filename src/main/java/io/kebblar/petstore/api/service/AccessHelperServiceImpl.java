@@ -26,6 +26,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     private UsuarioMapper usuarioMapper;
     private RegistroMapper registroMapper;
     private RolMapper rolMapper;
+    private JwtHelper jwtInstance;
 
     public AccessHelperServiceImpl(
             UsuarioDetalleMapper usuarioDetalleMapper,
@@ -36,6 +37,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
         this.usuarioMapper = usuarioMapper;
         this.rolMapper = rolMapper;
         this.registroMapper = registroMapper;
+        this.jwtInstance = JwtHelper.getInstance2();
     }
 
     /** {@inheritDoc} */
@@ -59,7 +61,7 @@ public class AccessHelperServiceImpl implements AccessHelperService {
     /** {@inheritDoc} */
     @Override
     public String getCorreoFromJwt(String jwt) {
-        return JwtHelper.getInstance().bodyToObject(jwt).getMail();
+        return jwtInstance.bodyToObject(jwt).getMail();
     }
     
     /** {@inheritDoc} */

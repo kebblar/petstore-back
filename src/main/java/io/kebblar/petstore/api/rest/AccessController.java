@@ -111,7 +111,7 @@ public class AccessController {
         this.usuarioCompletoService = usuarioCompletoService;
         this.consultaService = consultaService;
         this.accessHelperService = accessHelperService;
-        this.jwtInstance = JwtHelper.getInstance();
+        this.jwtInstance = JwtHelper.getInstance2();
     }
 
     @ApiOperation(
@@ -227,7 +227,7 @@ public class AccessController {
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
          // Esta única linea la necesito sólo para cechar que si NO es admin, tiene que ser el dueño del token:
-         JwtHelper.getInstance().sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
+         jwtInstance.sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
          return this.usuarioService.cambiaClave(credenciales.getUsuario(), credenciales.getClave());
     }
 
@@ -472,7 +472,7 @@ public class AccessController {
     public Usuario guardaDescripcion(
             @RequestHeader("jwt") String jwt,
             @RequestBody DescripcionRequest descripcionRequest) throws ControllerException {
-        JwtHelper.getInstance().sameUserOrSpecificRol(jwt, descripcionRequest.getCorreo(), admin);
+        jwtInstance.sameUserOrSpecificRol(jwt, descripcionRequest.getCorreo(), admin);
         return this.usuarioService.updateProfileDesc(descripcionRequest.getCorreo(), descripcionRequest.getDescripcion(), descripcionRequest.getDescripcionPlaneText());
     }
     
