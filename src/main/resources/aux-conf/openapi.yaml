@@ -1,0 +1,5207 @@
+openapi: 3.1.0
+info:
+  description: "Servicios REST de backend publicados en formato JSON: https://app-url/v2/api-docs"
+  version: "@PROJECT_VERSION@"
+  title: Cool, REST API Documentation by Super Goose !!!
+  termsOfService: http://www.qbits.mx
+  license:
+    name: Apache Licence
+    url: https://www.apache.org/licenses/LICENSE-2.0
+tags:
+  - name: access-controller
+    description: Access Controller
+  - name: admin-controller
+    description: Admin Controller
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: direccion-controller
+    description: Direccion Controller
+  - name: estado-controller
+    description: Estado Controller
+  - name: file-upload-controller
+    description: File Upload Controller
+  - name: habilidad-controller
+    description: Habilidad Controller
+  - name: municipio-controller
+    description: Municipio Controller
+  - name: operation-handler
+    description: Operation Handler
+  - name: pais-controller
+    description: Pais Controller
+  - name: qr-controller
+    description: QR Controller
+  - name: rol-controller
+    description: Rol Controller
+  - name: router-controller
+    description: Router Controller
+  - name: tipo-direccion-controller
+    description: Tipo Direccion Controller
+  - name: web-mvc-links-handler
+    description: Web Mvc Links Handler
+paths:
+  /actuator:
+    get:
+      tags:
+        - web-mvc-links-handler
+      summary: links
+      operationId: linksUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: "#/components/schemas/Link"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/beans:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/caches:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_2
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingDELETE_1
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/actuator/caches/{cache}":
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_1
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingDELETE
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /actuator/conditions:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_3
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/configprops:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_4
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/env:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_6
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingPOSTBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingDELETE_2
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/actuator/env/{toMatch}":
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_5
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/features:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_7
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/health:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_9
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/health/**:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_8
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/heapdump:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_10
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/info:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_11
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/logfile:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_12
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/loggers:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_14
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/actuator/loggers/{name}":
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_13
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST_1
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingPOSTBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/mappings:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_15
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/metrics:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_17
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/actuator/metrics/{requiredMetricName}":
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_16
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/pause:
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST_2
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/refresh:
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST_3
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/restart:
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST_4
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/resume:
+    post:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingPOST_5
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/scheduledtasks:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_18
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /actuator/threaddump:
+    get:
+      tags:
+        - operation-handler
+      summary: handle
+      operationId: handleUsingGET_19
+      requestBody:
+        $ref: "#/components/requestBodies/handleUsingGETBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/UploadPictures:
+    post:
+      tags:
+        - file-upload-controller
+      summary: AdminController::UploadPictures
+      description: sube una imagen al sistema
+      operationId: uploadUsingPOST
+      parameters:
+        - name: requestHeaders.ETag
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptCharset[0].registered
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.acceptLanguageAsLocales[0].ISO3Country
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].ISO3Language
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].country
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].displayCountry
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].displayLanguage
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].displayName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].displayScript
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].displayVariant
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].language
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].script
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].unicodeLocaleAttributes
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].unicodeLocaleKeys
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.acceptLanguageAsLocales[0].variant
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguage[0].range
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.acceptLanguage[0].weight
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: requestHeaders.accept[0].charset.registered
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.accept[0].concrete
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.accept[0].qualityValue
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: requestHeaders.accept[0].subtype
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.accept[0].type
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.accept[0].wildcardSubtype
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.accept[0].wildcardType
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.accessControlAllowCredentials
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.accessControlAllowHeaders
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.accessControlAllowMethods
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - GET
+                - HEAD
+                - POST
+                - PUT
+                - PATCH
+                - DELETE
+                - OPTIONS
+                - TRACE
+            enum:
+              - GET
+              - HEAD
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+              - TRACE
+        - name: requestHeaders.accessControlAllowOrigin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.accessControlExposeHeaders
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.accessControlMaxAge
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.accessControlRequestHeaders
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.accessControlRequestMethod
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - GET
+              - HEAD
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+              - TRACE
+        - name: requestHeaders.allow
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - GET
+                - HEAD
+                - POST
+                - PUT
+                - PATCH
+                - DELETE
+                - OPTIONS
+                - TRACE
+            enum:
+              - GET
+              - HEAD
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+              - TRACE
+        - name: requestHeaders.cacheControl
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.connection
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.contentDisposition.charset.registered
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.contentDisposition.creationDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: requestHeaders.contentDisposition.filename
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentDisposition.modificationDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: requestHeaders.contentDisposition.name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentDisposition.readDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: requestHeaders.contentDisposition.size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.contentDisposition.type
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.ISO3Country
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.ISO3Language
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.country
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.displayCountry
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.displayLanguage
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.displayName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.displayScript
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.displayVariant
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.language
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.script
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLanguage.unicodeLocaleAttributes
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.contentLanguage.unicodeLocaleKeys
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.contentLanguage.variant
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentLength
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.contentType.charset.registered
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.contentType.concrete
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.contentType.qualityValue
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: requestHeaders.contentType.subtype
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentType.type
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.contentType.wildcardSubtype
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.contentType.wildcardType
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.date
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.expires
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.host.address.MCGlobal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.MCLinkLocal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.MCNodeLocal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.MCOrgLocal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.MCSiteLocal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.address
+          in: query
+          required: false
+          schema:
+            type: string
+            format: byte
+        - name: requestHeaders.host.address.anyLocalAddress
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.canonicalHostName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.host.address.hostAddress
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.host.address.hostName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.host.address.linkLocalAddress
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.loopbackAddress
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.multicastAddress
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.address.siteLocalAddress
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.host.hostName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.host.hostString
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.host.port
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: requestHeaders.host.unresolved
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.ifMatch
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.ifModifiedSince
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.ifNoneMatch
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestHeaders.ifUnmodifiedSince
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.lastModified
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: requestHeaders.location.absolute
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.location.authority
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.fragment
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.host
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.opaque
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: requestHeaders.location.path
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.port
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: requestHeaders.location.query
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawAuthority
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawFragment
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawPath
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawQuery
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawSchemeSpecificPart
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.rawUserInfo
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.scheme
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.schemeSpecificPart
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.location.userInfo
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.origin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.pragma
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.upgrade
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: requestHeaders.vary
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: requestMethod
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - GET
+              - HEAD
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+              - TRACE
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/attribute-list:
+    get:
+      tags:
+        - admin-controller
+      summary: getCategoriaAtributoList
+      operationId: getCategoriaAtributoListUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/CategoriaAtributoList"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/binance:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::binance
+      description: Se utiliza para recuperar el precio actual de BTC en dólares.
+      operationId: binanceUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/bitso:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::bitso
+      description: Se utiliza para recuperar el precio actual de BTC en moneda mexicana.
+      operationId: bitsoUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/cambia-clave:
+    put:
+      tags:
+        - access-controller
+      summary: cambiaClave
+      operationId: cambiaClaveUsingPUT
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredencialesRequest"
+        description: Correo y clave nueva del usuario al que se piensa cambiar la clave
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/check-captcha:
+    post:
+      tags:
+        - access-controller
+      summary: RegistroController::VerificarCaptcha
+      description: Verifica que el Google captcha V 2.0 sea correcto
+      operationId: checkCaptchaUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCaptcha"
+        description: Google Captcha V2.0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/confirma-preregistro:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::ConfirmaPreregistro
+      description: Valida un registro por medio de un token que el sistema envíaal usuario
+        por correo electrónico para confirmar que este ultimoexiste.
+      operationId: confirmaPreregistroUsingGET
+      parameters:
+        - name: token
+          in: query
+          description: Token de confirmación del registro enviado por correo
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/confirma-regenera-clave:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::ConfirmaRegeneraClave
+      description: Para regenerar su clave el usuario envía el token recibido por correo
+        electrónicoe introduce su nueva clave de acceso.
+      operationId: confirmaRegeneraClaveUsingGET
+      parameters:
+        - name: clave
+          in: query
+          description: Nueva clave a actualizar
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+        - name: token
+          in: query
+          description: Token de confirmación del registro enviado por correo
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/consulta:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::consulta
+      description: Se utiliza para recuperar el precio actual de BTC en dólares.
+      operationId: consultaUsingGET
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConsultaResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/count-users:
+    get:
+      tags:
+        - access-controller
+      summary: countUsers
+      operationId: countUsersUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/descripcion:
+    post:
+      tags:
+        - access-controller
+      summary: AccessController::descripcion
+      description: Se utiliza para guardar la descripción de un usuario
+      operationId: guardaDescripcionUsingPOST
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DescripcionRequest"
+        description: descripcionRequest
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/direcciones:
+    get:
+      tags:
+        - direccion-controller
+      summary: DireccionController::getAll
+      description: Devuelve una lista de todas las direcciones
+      operationId: getAllUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Direccion"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/direcciones-con-nombre/{userId}":
+    get:
+      tags:
+        - direccion-controller
+      summary: DireccionController::getByUsuario
+      description: Devuelve las direcciones de determinado usuario
+      operationId: getByUsuarioUsingGET
+      parameters:
+        - name: userId
+          in: path
+          description: Id del usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DireccionConNombre"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/estado:
+    post:
+      tags:
+        - estado-controller
+      summary: EstadoController::insert
+      description: Recibe un objeto Estado el cual debe de ser insertado  como dato dentro
+        de la base de datos del sistema.
+      operationId: insertUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+        description: Estado que será insertado en el sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - estado-controller
+      summary: EstadoController::update
+      description: "Recibe un objeto Estado, este objeto es buscado por id dentro de la
+        base de datos y es actualizado con el resto de datos proporcionados si
+        es que el id en efecto existe. "
+      operationId: updateUsingPUT_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+        description: Estado que será actualizado en el sistema, el id debe coincidir con el
+          id del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - estado-controller
+      summary: EstadoController::delete
+      description: Recibe un objeto Estado, el cual es buscado dentro de la base de datos y
+        en caso de existir es eliminado.
+      operationId: deleteUsingDELETE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+        description: Estado que será removido del sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/api/estado/{id}":
+    get:
+      tags:
+        - estado-controller
+      summary: EstadoController::get
+      description: Regresa un objeto Estado cuyo id coincide con el entero recibido como
+        parametro.
+      operationId: getEstadoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del estado buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/estados:
+    get:
+      tags:
+        - estado-controller
+      summary: EstadoController::getAll
+      description: Regresa una lista de todos los objetos Est.
+      operationId: getAllEstadosUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/estados-nombre-pais.json:
+    get:
+      tags:
+        - estado-controller
+      summary: EstadoController::getAllNombrePais
+      description: "Regresa una lista de todos los objetos Estado "
+      operationId: getAllEstadosNombrePAisUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/estados/list/{nombre}/{idPais}.json":
+    get:
+      tags:
+        - estado-controller
+      summary: getEstado
+      operationId: getEstadoUsingGET_1
+      parameters:
+        - name: idPais
+          in: path
+          description: Pais seleccionado
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: nombre
+          in: path
+          description: Nombre del Estado
+          required: true
+          schema:
+            type: string
+            default: Mexico
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/estados/pais/{id}.json":
+    get:
+      tags:
+        - estado-controller
+      summary: getEstadosbyPais
+      operationId: getEstadosbyPaisUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: ID del Estado
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/foto-perfil:
+    post:
+      tags:
+        - file-upload-controller
+      summary: subeFotoPerfil
+      operationId: subeFotoPerfilUsingPOST
+      parameters:
+        - name: idUser
+          in: header
+          description: id del usuario
+          required: false
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  description: Imagen a guardar.
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/get-by-pais:
+    get:
+      tags:
+        - estado-controller
+      summary: EstadoController::getByPais
+      description: Regresa los estados de determinado país
+      operationId: getByPaisUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del pais
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/get-foto-perfil/{idUser}":
+    get:
+      tags:
+        - file-upload-controller
+      summary: getFotoPerfil
+      operationId: getFotoPerfilUsingGET
+      parameters:
+        - name: idUser
+          in: path
+          description: id del usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/get-media/{idUser}":
+    get:
+      tags:
+        - file-upload-controller
+      summary: getMedia
+      operationId: getMediaUsingGET
+      parameters:
+        - name: idUser
+          in: path
+          description: id del usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UploadModel"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/guarda:
+    post:
+      tags:
+        - access-controller
+      summary: AccessController::guarda
+      description: Se utiliza para recuperar el precio actual de BTC en dólares.
+      operationId: guardaUsingPOST
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/ConsultaRequest"
+        description: datos
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/habilidad:
+    get:
+      tags:
+        - habilidad-controller
+      summary: getHabilidades
+      operationId: getHabilidadesUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HabResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - habilidad-controller
+      summary: insertUsuarioHabilidades
+      operationId: insertUsuarioHabilidadesUsingPOST
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int32
+        description: usuarioHabilidadesList
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/habilidad/costo/{id}":
+    get:
+      tags:
+        - habilidad-controller
+      summary: getHabilidadResponseListConCosto
+      operationId: getHabilidadResponseListConCostoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Id del Usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HabResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/habilidad/gratis/{id}":
+    get:
+      tags:
+        - habilidad-controller
+      summary: getHabilidadResponseListGratis
+      operationId: getHabilidadResponseListGratisUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Id del Usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HabResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/habilidad/{id}":
+    get:
+      tags:
+        - habilidad-controller
+      summary: getHabilidadResponseList
+      operationId: getHabilidadResponseListUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Id del Usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HabResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - habilidad-controller
+      summary: delete
+      operationId: deleteUsingDELETE_1
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /api/health:
+    get:
+      tags:
+        - admin-controller
+      summary: AdminController::health
+      description: Entrega un informe a cerca de las variables del sistema
+      operationId: healthUsingGET
+      parameters:
+        - name: inputData
+          in: query
+          description: Los datos de entrada
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+            default: ls
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/log:
+    get:
+      tags:
+        - admin-controller
+      summary: AdminController::health
+      description: Entrega el log del sistema
+      operationId: getLogUsingGET
+      parameters:
+        - name: last
+          in: query
+          description: Número de lineas
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/login:
+    post:
+      tags:
+        - access-controller
+      summary: AccessController::login
+      description: Recibe las credenciales de inicio de sesión y las valida,en caso de ser
+        incorrectas, regresa un ControllerException.
+      operationId: loginUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredencialesRequest"
+        description: Representa las credenciales (usuario y clave) de quien intenta
+          ingresar al sistema
+      responses:
+        "200":
+          description: Successfully sign in
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "201":
+          description: Created
+        "400":
+          description: Missing or invalid request body
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Schema not found
+        "500":
+          description: Internal error
+      deprecated: false
+  /api/logout:
+    get:
+      tags:
+        - access-controller
+      summary: AdminController::logout
+      description: Provoca un 'logout' del usuario firmado en el sistema
+      operationId: logoutUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/municipio:
+    post:
+      tags:
+        - municipio-controller
+      summary: MunicipioController::insert
+      description: Recibe un objeto Municipio el cual debe de ser insertado  como dato
+        dentro de la base de datos del sistema.
+      operationId: insertUsingPOST_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Municipio"
+        description: Municipio que será insertado en el sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - municipio-controller
+      summary: MunicipioController::update
+      description: "Recibe un objeto Municipio, este objeto es buscado por id dentro de la
+        base de datos y es actualizado con el resto de datos proporcionados si
+        es que el id en efecto existe. "
+      operationId: updateUsingPUT_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Municipio"
+        description: Municipio que será actualizado en el sistema, el id debe coincidir con
+          el id del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - municipio-controller
+      summary: MunicipioController::delete
+      description: Recibe un objeto Municipio, el cual es buscado dentro de la base de
+        datos y en caso de existir es eliminado.
+      operationId: deleteUsingDELETE_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Municipio"
+        description: Municipio que será removido del sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/api/municipio-por-estado/{id}":
+    get:
+      tags:
+        - municipio-controller
+      summary: getByEstado
+      operationId: getByEstadoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/municipio/{id}":
+    get:
+      tags:
+        - municipio-controller
+      summary: MunicipioController::get
+      description: Regresa un objeto Municipio cuyo id coincide con el entero recibido como
+        parametro.
+      operationId: getMunicipioUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del municipio buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/municipios:
+    get:
+      tags:
+        - municipio-controller
+      summary: MunicipioController::getAll
+      description: Regresa una lista de todos los objetos Municipio debidamente.
+      operationId: getAllMunicipioUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/municipios-por-estado-paginados:
+    get:
+      tags:
+        - municipio-controller
+      summary: getByEstadoPaginados
+      operationId: getByEstadoPaginadosUsingGET
+      parameters:
+        - name: idEstado
+          in: query
+          description: idEstado
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageNumber
+          in: query
+          description: pageNumber
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: pageSize
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/municipios/estado/{id}/{nombre}":
+    get:
+      tags:
+        - municipio-controller
+      summary: getMunicipiosbyEstadoId
+      operationId: getMunicipiosbyEstadoIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id del estado
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: nombre
+          in: path
+          description: id del estado
+          required: true
+          schema:
+            type: string
+            default: Ixtapaluca
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/municipios/list/descripcion:
+    get:
+      tags:
+        - municipio-controller
+      summary: getMunicipiosDescripcion
+      operationId: getMunicipiosDescripcionUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/municipios/list/{nombre}":
+    get:
+      tags:
+        - municipio-controller
+      summary: getMunicipiosbyEstado
+      operationId: getMunicipiosbyEstadoUsingGET
+      parameters:
+        - name: nombre
+          in: path
+          description: nombre del Municipio
+          required: true
+          schema:
+            type: string
+            default: Ixtapaluca
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/municipios/pais/{id}/{nombre}":
+    get:
+      tags:
+        - municipio-controller
+      summary: getMunicipiosbyPaisId
+      operationId: getMunicipiosbyPaisIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id del pais
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: nombre
+          in: path
+          description: nombre del municipio
+          required: true
+          schema:
+            type: string
+            default: Ixtapaluca
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Municipio"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/nueva-direccion:
+    post:
+      tags:
+        - direccion-controller
+      summary: DireccionController::nuevaDireccion
+      description: Inserta la dirección desde la pantalla de proceso de compra
+      operationId: nuevaDireccionUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NuevaDireccion"
+        description: Direccion ingresada por el usuario
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/pais:
+    post:
+      tags:
+        - pais-controller
+      summary: PaisController::insert
+      description: Recibe un objeto Pais el cual debe de ser insertado  como dato dentro de
+        la base de datos del sistema.
+      operationId: insertUsingPOST_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pais"
+        description: Pais que será insertado en el sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - pais-controller
+      summary: PaisController::update
+      description: "Recibe un objeto Pais, este objeto es buscado por id dentro de la base
+        de datos y es actualizado con el resto de datos proporcionados si es que
+        el id en efecto existe. "
+      operationId: updateUsingPUT_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pais"
+        description: Pais que será actualizado en el sistema, el id debe coincidir con el
+          id del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - pais-controller
+      summary: PaisController::delete
+      description: Recibe un objeto Pais, el cual es buscado dentro de la base de datos y
+        en caso de existir es eliminado.
+      operationId: deleteUsingDELETE_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pais"
+        description: Pais que será removido del sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/api/pais/{id}":
+    get:
+      tags:
+        - pais-controller
+      summary: PaisController::get
+      description: Regresa un objeto Pais cuyo id coincide con el entero recibido como
+        parametro.
+      operationId: getPaisUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del pais buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Pais"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/paises:
+    get:
+      tags:
+        - pais-controller
+      summary: PaisController::getAll
+      description: Regresa una lista de todos los objetos Pais debidamente paginado.
+      operationId: getAllPaisUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pais"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/paises/list/{nombre}":
+    get:
+      tags:
+        - pais-controller
+      summary: getPais
+      operationId: getPaisUsingGET_1
+      parameters:
+        - name: nombre
+          in: path
+          description: Nombre del Pais
+          required: true
+          schema:
+            type: string
+            default: Mexico
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pais"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/qa-stats:
+    get:
+      tags:
+        - admin-controller
+      summary: getQualityStats
+      operationId: getQualityStatsUsingGET
+      parameters:
+        - name: len
+          in: query
+          description: len
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: page
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/qr-base64/{data}":
+    get:
+      tags:
+        - qr-controller
+      summary: QRController::generateQRBytesBase64
+      description: Devuelve el base 64 de la imagen de qr
+      operationId: generateQRBytesBase64UsingGET
+      parameters:
+        - name: Informacion con la que se genera el QR
+          in: path
+          description: data
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            image/jpg:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/qr/{data}":
+    get:
+      tags:
+        - qr-controller
+      summary: QRController::testphoto
+      description: Dada una entrada de datos, este endpoint transforma dicha entradaen una
+        imagen QR.
+      operationId: testphotoUsingGET
+      parameters:
+        - name: data
+          in: path
+          description: Información a convertir a QR
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: byte
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/regenera-clave:
+    get:
+      tags:
+        - access-controller
+      summary: AccessController::RegeneraClave
+      description: Recibido el correo de un usuario que desea recuperar su clave de
+        acceso,el sistema internamente le envía un token de recuperación a su
+        correoelectrónico.
+      operationId: regeneraClaveUsingGET
+      parameters:
+        - name: correo
+          in: query
+          description: Correo al que pertenece la clave a regenerar
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/rol:
+    post:
+      tags:
+        - rol-controller
+      summary: RolController::insert
+      description: Recibe un objeto Rol el cual debe de ser insertado  como dato dentro de
+        la base de datos del sistema.
+      operationId: insertUsingPOST_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rol"
+        description: Rol que será insertado en el sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - rol-controller
+      summary: RolController::update
+      description: "Recibe un objeto Rol, este objeto es buscado por id dentro de la base
+        de datos y es actualizado con el resto de datos proporcionados si es que
+        el id en efecto existe. "
+      operationId: updateUsingPUT_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rol"
+        description: Rol que será actualizado en el sistema, el id debe coincidir con el id
+          del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - rol-controller
+      summary: RolController::delete
+      description: Recibe un objeto Rol, el cual es buscado dentro de la base de datos y en
+        caso de existir es eliminado.
+      operationId: deleteUsingDELETE_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rol"
+        description: Rol que será removido del sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/api/rol/{id}":
+    get:
+      tags:
+        - rol-controller
+      summary: RolController::get
+      description: Regresa un objeto Rol cuyo id coincide con el entero recibido como
+        parametro.
+      operationId: getRolUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del rol buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Rol"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/roles:
+    get:
+      tags:
+        - rol-controller
+      summary: RolController::getAll
+      description: Regresa una lista de todos los objetos Rol debidamente.
+      operationId: getAllRolUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rol"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/tipo-direccion:
+    post:
+      tags:
+        - tipo-direccion-controller
+      summary: TipoDireccionController::insert
+      description: Recibe un objeto TipoDireccion el cual debe de ser insertado  como dato
+        dentro de la base de datos del sistema.
+      operationId: insertUsingPOST_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TipoDireccion"
+        description: TipoDireccion que será insertado en el sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - tipo-direccion-controller
+      summary: TipoDireccionController::update
+      description: "Recibe un objeto TipoDireccion, este objeto es buscado por id dentro de
+        la base de datos y es actualizado con el resto de datos proporcionados
+        si es que el id en efecto existe. "
+      operationId: updateUsingPUT_5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TipoDireccion"
+        description: TipoDireccion que será actualizado en el sistema, el id debe coincidir
+          con el id del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - tipo-direccion-controller
+      summary: TipoDireccionController::delete
+      description: Recibe un objeto TipoDireccion, el cual es buscado dentro de la base de
+        datos y en caso de existir es eliminado.
+      operationId: deleteUsingDELETE_5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TipoDireccion"
+        description: TipoDireccion que será removido del sistema.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/api/tipo-direccion/{id}":
+    get:
+      tags:
+        - tipo-direccion-controller
+      summary: TipoDireccionController::get
+      description: Regresa un objeto TipoDireccion cuyo id coincide con el entero recibido
+        como parametro.
+      operationId: getTipoDireccionUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del tipoDireccion buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/TipoDireccion"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/tipo-direcciones:
+    get:
+      tags:
+        - tipo-direccion-controller
+      summary: TipoDireccionController::getAll
+      description: Regresa una lista de todos los objetos TipoDireccion.
+      operationId: getAllTipoDireccionUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TipoDireccion"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/up/imagen:
+    post:
+      tags:
+        - file-upload-controller
+      summary: guardarImagen
+      operationId: guardarImagenUsingPOST
+      parameters:
+        - name: idAnuncio
+          in: header
+          description: Identificador del anuncio.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: Imagen a guardar.
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/up/imagen2:
+    post:
+      tags:
+        - file-upload-controller
+      summary: guardarImagen2
+      operationId: guardarImagen2UsingPOST
+      parameters:
+        - name: idAnuncio
+          in: header
+          description: Identificador del anuncio.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: Imagen a guardar.
+                  type: array
+                  items:
+                    type: file
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/upload:
+    post:
+      tags:
+        - file-upload-controller
+      summary: handleFileUploadWithKDMCopy
+      operationId: handleFileUploadWithKDMCopyUsingPOST
+      parameters:
+        - name: dos
+          in: query
+          description: dos
+          required: true
+          schema:
+            type: string
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+        - name: uno
+          in: query
+          description: uno
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: file
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - file-upload-controller
+      summary: handleFileUploadWithKDMCopyPut
+      operationId: handleFileUploadWithKDMCopyPutUsingPUT
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                files:
+                  description: files
+                  type: array
+                  items:
+                    type: file
+              required:
+                - files
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/upload2:
+    put:
+      tags:
+        - file-upload-controller
+      summary: upload2
+      operationId: upload2UsingPUT
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  description: files
+                  type: string
+                  format: binary
+              required:
+                - files
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UploadModel"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-completo:
+    put:
+      tags:
+        - access-controller
+      summary: UsuarioCompletoController::update
+      description: "Recibe un objeto UsuarioCompleto, este objeto es buscado por id dentro
+        de la base de datos y es actualizado con el resto de datos
+        proporcionados si es que el id en efecto existe. "
+      operationId: updateUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuarioCompleto"
+        description: UsuarioCompleto que será actualizado en el sistema, el id debe
+          coincidir con el id del objeto que se desea actualizar.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: integer
+                format: int32
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/usuario-completo/{id}":
+    get:
+      tags:
+        - access-controller
+      summary: UsuarioCompletoController::get
+      description: Regresa un objeto UsuarioCompleto cuyo id coincide con el entero
+        recibido como parametro.
+      operationId: getUsuarioCompletoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: Representa el id del usuarioCompleto buscado.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UsuarioCompleto"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-completos:
+    get:
+      tags:
+        - access-controller
+      summary: UsuarioCompletoController::getAll
+      description: Regresa una lista de.
+      operationId: getAllUsuarioCompletoUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioCompleto"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-completos-paginated:
+    get:
+      tags:
+        - access-controller
+      summary: getAllUsuarioCompletoPaginado
+      operationId: getAllUsuarioCompletoPaginadoUsingGET
+      parameters:
+        - name: pageNumber
+          in: query
+          description: pageNumber
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: pageSize
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioCompleto"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-detalles:
+    put:
+      tags:
+        - access-controller
+      summary: updateUsuarioDetalles
+      operationId: updateUsuarioDetallesUsingPUT
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuarioDetalle"
+        description: Actualiza un UsuarioDetalle empleando todos los atributos provistos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/UsuarioDetalle"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-preregistro:
+    post:
+      tags:
+        - access-controller
+      summary: AccessController::UsuarioPreregistro
+      description: Recibe la información de registro de un nuevo usuario al sistema.
+      operationId: preRegistroUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Preregistro"
+        description: Información con el detalle de un Usuario
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Preregistro"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuario-preregistro2:
+    post:
+      tags:
+        - access-controller
+      summary: AccessController::?
+      description: Mismo de arriba?
+      operationId: preRegistro2UsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreregistroRequest"
+        description: Información con el detalle de un Usuario
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Preregistro"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/usuarios:
+    get:
+      tags:
+        - access-controller
+      summary: getAllUsers
+      operationId: getAllUsersUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - access-controller
+      summary: createUser
+      operationId: createUserUsingPOST
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        description: Crea un Usuario empleando todos sus atributos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - access-controller
+      summary: updateUsuario
+      operationId: updateUsuarioUsingPUT
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        description: Actualiza un Usuario empleando todos los atributos provistos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - access-controller
+      summary: borraUsuario
+      operationId: borraUsuarioUsingDELETE
+      parameters:
+        - name: id
+          in: query
+          description: Borra un Usuario cuyo ID es dado
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /api/usuarios-thin:
+    post:
+      tags:
+        - access-controller
+      summary: createUserThin
+      operationId: createUserThinUsingPOST
+      parameters:
+        - name: jwt
+          in: header
+          description: jwt
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredencialesRequest"
+        description: Crea un Usuario empleando sólo sus credenciales
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/usuarios/{id}":
+    get:
+      tags:
+        - access-controller
+      summary: getUser
+      operationId: getUserUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: ID del Usuario
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /error:
+    get:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    head:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingHEAD
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingPOST
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingPUT
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingDELETE
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+    options:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingOPTIONS
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+    patch:
+      tags:
+        - basic-error-controller
+      summary: error
+      operationId: errorUsingPATCH
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  "/info-cripto/{add}":
+    get:
+      tags:
+        - router-controller
+      summary: getInfo
+      operationId: getInfoUsingGET
+      parameters:
+        - name: add
+          in: path
+          description: Direccion wallet buscada.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BlockCyperChecker"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /posts/**:
+    get:
+      tags:
+        - router-controller
+      summary: redirectQueryPath
+      operationId: redirectQueryPathUsingGET
+      parameters:
+        - name: model
+          in: query
+          description: model
+          required: false
+          schema:
+            type: string
+            items:
+              type: object
+              additionalProperties:
+                type: object
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /tickers:
+    get:
+      tags:
+        - router-controller
+      summary: getTicker
+      operationId: getTickerUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/TickerWrapper"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /token:
+    get:
+      tags:
+        - router-controller
+      summary: getToken
+      operationId: getTokenUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /ui/**:
+    get:
+      tags:
+        - router-controller
+      summary: redirectWithUsingForwardPrefix
+      operationId: redirectWithUsingForwardPrefixUsingGET
+      parameters:
+        - name: model
+          in: query
+          description: model
+          required: false
+          schema:
+            type: string
+            items:
+              type: object
+              additionalProperties:
+                type: object
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+servers:
+  - url: //localhost:9999/
+components:
+  requestBodies:
+    handleUsingGETBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+      description: body
+    handleUsingPOSTBody:
+      content:
+        application/vnd.spring-boot.actuator.v3+json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        application/vnd.spring-boot.actuator.v2+json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+      description: body
+  schemas:
+    BlockCyperChecker:
+      type: object
+      properties:
+        address:
+          type: string
+        balance:
+          type: number
+          format: double
+        finalBalance:
+          type: number
+          format: double
+        finalNTx:
+          type: number
+          format: double
+        hash:
+          type: integer
+          format: int32
+        nTx:
+          type: number
+          format: double
+        totalReceived:
+          type: number
+          format: double
+        totalSent:
+          type: number
+          format: double
+        unconfirmedNTx:
+          type: number
+          format: double
+      title: BlockCyperChecker
+    Cabecera:
+      type: object
+      properties:
+        desc:
+          type: string
+        id:
+          type: string
+        idacc:
+          type: string
+        longdesc:
+          type: string
+        name:
+          type: string
+      title: Cabecera
+    CategoriaAtributoList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataElement"
+        seleccion:
+          type: array
+          items:
+            type: integer
+            format: int32
+      title: CategoriaAtributoList
+    ConsultaRequest:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        selected:
+          type: integer
+          format: int32
+      title: ConsultaRequest
+    ConsultaResponse:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        selected:
+          type: integer
+          format: int32
+      title: ConsultaResponse
+    ContenidoDetalle:
+      type: object
+      properties:
+        leyenda:
+          type: string
+        valor:
+          type: integer
+          format: int32
+      title: ContenidoDetalle
+    CredencialesRequest:
+      type: object
+      properties:
+        clave:
+          type: string
+        hash:
+          type: integer
+          format: int32
+        usuario:
+          type: string
+      title: CredencialesRequest
+    DataElement:
+      type: object
+      properties:
+        cabecera:
+          $ref: "#/components/schemas/Cabecera"
+        contenido:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContenidoDetalle"
+        ordinal:
+          type: integer
+          format: int32
+      title: DataElement
+    DescripcionRequest:
+      type: object
+      properties:
+        correo:
+          type: string
+        descripcion:
+          type: string
+        descripcionPlaneText:
+          type: string
+        hash:
+          type: integer
+          format: int32
+      title: DescripcionRequest
+    Direccion:
+      type: object
+      properties:
+        activo:
+          type: boolean
+        calleNumero:
+          type: string
+        colonia:
+          type: string
+        cp:
+          type: string
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        idEstado:
+          type: integer
+          format: int32
+        idMunicipio:
+          type: integer
+          format: int32
+        idPais:
+          type: integer
+          format: int32
+        idTipoDireccion:
+          type: integer
+          format: int32
+        referencias:
+          type: string
+      title: Direccion
+    DireccionConNombre:
+      type: object
+      properties:
+        calleNumero:
+          type: string
+        colonia:
+          type: string
+        cp:
+          type: string
+        estadoNombre:
+          type: string
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        municipioNombre:
+          type: string
+        paisNombre:
+          type: string
+      title: DireccionConNombre
+    Estado:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        idPais:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        nombrePais:
+          type: string
+      title: Estado
+    GoogleCaptcha:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        ip:
+          type: string
+        response:
+          type: string
+      title: GoogleCaptcha
+    HabResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        label:
+          type: string
+        val:
+          type: integer
+          format: int32
+      title: HabResponse
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
+      title: Link
+    LoginResponse:
+      type: object
+      properties:
+        correo:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        jwt:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Rol"
+        ultimoAcceso:
+          type: string
+          format: date-time
+        usuarioDetalle:
+          $ref: "#/components/schemas/UsuarioDetalle"
+      title: LoginResponse
+    ModelAndView:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - 100 CONTINUE
+            - 101 SWITCHING_PROTOCOLS
+            - 102 PROCESSING
+            - 103 CHECKPOINT
+            - 200 OK
+            - 201 CREATED
+            - 202 ACCEPTED
+            - 203 NON_AUTHORITATIVE_INFORMATION
+            - 204 NO_CONTENT
+            - 205 RESET_CONTENT
+            - 206 PARTIAL_CONTENT
+            - 207 MULTI_STATUS
+            - 208 ALREADY_REPORTED
+            - 226 IM_USED
+            - 300 MULTIPLE_CHOICES
+            - 301 MOVED_PERMANENTLY
+            - 302 FOUND
+            - 302 MOVED_TEMPORARILY
+            - 303 SEE_OTHER
+            - 304 NOT_MODIFIED
+            - 305 USE_PROXY
+            - 307 TEMPORARY_REDIRECT
+            - 308 PERMANENT_REDIRECT
+            - 400 BAD_REQUEST
+            - 401 UNAUTHORIZED
+            - 402 PAYMENT_REQUIRED
+            - 403 FORBIDDEN
+            - 404 NOT_FOUND
+            - 405 METHOD_NOT_ALLOWED
+            - 406 NOT_ACCEPTABLE
+            - 407 PROXY_AUTHENTICATION_REQUIRED
+            - 408 REQUEST_TIMEOUT
+            - 409 CONFLICT
+            - 410 GONE
+            - 411 LENGTH_REQUIRED
+            - 412 PRECONDITION_FAILED
+            - 413 PAYLOAD_TOO_LARGE
+            - 413 REQUEST_ENTITY_TOO_LARGE
+            - 414 URI_TOO_LONG
+            - 414 REQUEST_URI_TOO_LONG
+            - 415 UNSUPPORTED_MEDIA_TYPE
+            - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+            - 417 EXPECTATION_FAILED
+            - 418 I_AM_A_TEAPOT
+            - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+            - 420 METHOD_FAILURE
+            - 421 DESTINATION_LOCKED
+            - 422 UNPROCESSABLE_ENTITY
+            - 423 LOCKED
+            - 424 FAILED_DEPENDENCY
+            - 425 TOO_EARLY
+            - 426 UPGRADE_REQUIRED
+            - 428 PRECONDITION_REQUIRED
+            - 429 TOO_MANY_REQUESTS
+            - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+            - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+            - 500 INTERNAL_SERVER_ERROR
+            - 501 NOT_IMPLEMENTED
+            - 502 BAD_GATEWAY
+            - 503 SERVICE_UNAVAILABLE
+            - 504 GATEWAY_TIMEOUT
+            - 505 HTTP_VERSION_NOT_SUPPORTED
+            - 506 VARIANT_ALSO_NEGOTIATES
+            - 507 INSUFFICIENT_STORAGE
+            - 508 LOOP_DETECTED
+            - 509 BANDWIDTH_LIMIT_EXCEEDED
+            - 510 NOT_EXTENDED
+            - 511 NETWORK_AUTHENTICATION_REQUIRED
+        view:
+          $ref: "#/components/schemas/View"
+        viewName:
+          type: string
+      title: ModelAndView
+    Municipio:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        idEstado:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        nombreEstado:
+          type: string
+        nombrePais:
+          type: string
+      title: Municipio
+    NuevaDireccion:
+      type: object
+      properties:
+        calleNumero:
+          type: string
+        colonia:
+          type: string
+        cp:
+          type: string
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        idEstado:
+          type: integer
+          format: int32
+        idMunicipio:
+          type: integer
+          format: int32
+        idPais:
+          type: integer
+          format: int32
+        idUsuario:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        referencias:
+          type: string
+        tipo:
+          type: integer
+          format: int32
+      title: NuevaDireccion
+    Pais:
+      type: object
+      properties:
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+      title: Pais
+    Preregistro:
+      type: object
+      properties:
+        claveHash:
+          type: string
+          example: 12345678aA
+        correo:
+          type: string
+          example: example@hotmail.com
+        fechaNacimiento:
+          type: string
+          format: date-time
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        instanteRegistro:
+          type: integer
+          format: int64
+        nick:
+          type: string
+        randomString:
+          type: string
+        telefono:
+          type: string
+          example: 5543562126
+      title: Preregistro
+    PreregistroRequest:
+      type: object
+      properties:
+        claveHash:
+          type: string
+          example: 12345678aA
+        correo:
+          type: string
+          example: example@hotmail.com
+        day:
+          type: integer
+          format: int32
+          example: 23
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        instanteRegistro:
+          type: integer
+          format: int64
+        month:
+          type: integer
+          format: int32
+          example: 10
+        nick:
+          type: string
+          example: superboy
+        randomString:
+          type: string
+        telefono:
+          type: string
+          example: 5543562126
+        year:
+          type: integer
+          format: int32
+          example: 1997
+      title: PreregistroRequest
+    Rol:
+      type: object
+      properties:
+        activo:
+          type: boolean
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+      title: Rol
+    TickerWrapper:
+      type: object
+      properties:
+        askPrice:
+          type: string
+        askQty:
+          type: string
+        bidPrice:
+          type: string
+        bidQty:
+          type: string
+        closeTime:
+          type: integer
+          format: int64
+        count:
+          type: integer
+          format: int64
+        firstId:
+          type: integer
+          format: int64
+        hash:
+          type: integer
+          format: int32
+        highPrice:
+          type: string
+        lastId:
+          type: integer
+          format: int64
+        lastPrice:
+          type: string
+        lastQty:
+          type: string
+        lowPrice:
+          type: string
+        openPrice:
+          type: string
+        openTime:
+          type: integer
+          format: int64
+        prevClosePrice:
+          type: string
+        priceChange:
+          type: string
+        priceChangePercent:
+          type: string
+        quoteVolume:
+          type: string
+        symbol:
+          type: string
+        volume:
+          type: string
+        weightedAvgPrice:
+          type: string
+      title: TickerWrapper
+    TipoDireccion:
+      type: object
+      properties:
+        activo:
+          type: boolean
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+      title: TipoDireccion
+    UploadModel:
+      type: object
+      properties:
+        fechaCarga:
+          type: string
+          format: date-time
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        idAnuncio:
+          type: integer
+          format: int32
+        idTipo:
+          type: integer
+          format: int32
+        md5:
+          type: string
+        mimeType:
+          type: string
+        nombreOriginal:
+          type: string
+        nuevoNombre:
+          type: string
+        peso:
+          type: integer
+          format: int64
+        principal:
+          type: boolean
+      title: UploadModel
+    Usuario:
+      type: object
+      properties:
+        accesoNegadoContador:
+          type: integer
+          format: int32
+        activo:
+          type: boolean
+        clave:
+          type: string
+        correo:
+          type: string
+        creado:
+          type: integer
+          format: int64
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int32
+        instanteBloqueo:
+          type: integer
+          format: int64
+        instanteUltimoAcceso:
+          type: integer
+          format: int64
+        instanteUltimoCambioClave:
+          type: integer
+          format: int64
+        regeneraClaveInstante:
+          type: integer
+          format: int64
+        regeneraClaveToken:
+          type: string
+      title: Usuario
+    UsuarioCompleto:
+      type: object
+      properties:
+        accesoNegadoContador:
+          type: integer
+          format: int32
+        activo:
+          type: boolean
+        apellidoMaterno:
+          type: string
+        apellidoPaterno:
+          type: string
+        clave:
+          type: string
+        correo:
+          type: string
+        creado:
+          type: integer
+          format: int64
+        descripcion:
+          type: string
+        fechaNacimiento:
+          type: string
+          format: date-time
+        fotoPerfil:
+          type: string
+        hash:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        instanteBloqueo:
+          type: integer
+          format: int64
+        instanteUltimoAcceso:
+          type: integer
+          format: int64
+        instanteUltimoCambioClave:
+          type: integer
+          format: int64
+        nickName:
+          type: string
+        nombre:
+          type: string
+        regeneraClaveInstante:
+          type: integer
+          format: int64
+        regeneraClaveToken:
+          type: string
+        telefonoCelular:
+          type: string
+      title: UsuarioCompleto
+    UsuarioDetalle:
+      type: object
+      properties:
+        apellidoMaterno:
+          type: string
+        apellidoPaterno:
+          type: string
+        descripcion:
+          type: string
+        fechaNacimiento:
+          type: string
+          format: date-time
+        fotoPerfil:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int32
+        nickName:
+          type: string
+        nombre:
+          type: string
+        telefonoCelular:
+          type: string
+      title: UsuarioDetalle
+    View:
+      type: object
+      properties:
+        contentType:
+          type: string
+      title: View
+    Map_string_Link_:
+      type: object
+      title: Map«string,Link»
+      additionalProperties:
+        $ref: "#/components/schemas/Link"
