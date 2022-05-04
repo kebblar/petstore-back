@@ -219,7 +219,7 @@ public class AccessController {
     @PutMapping(
             path = "/cambia-clave",
             produces = "application/json; charset=utf-8")
-    @AuthorizedRoles({admin, normal})
+    @AuthorizedRoles({ANY_ROLE})  // <-- tienes quer estar autenticado y tu token debe ser valido
     public Usuario cambiaClave(
             @RequestHeader("jwt") String jwt,
             @ApiParam(
@@ -227,11 +227,25 @@ public class AccessController {
                     value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
             @RequestBody CredencialesRequest credenciales
             ) throws ControllerException {
-         // Esta única linea la necesito sólo para cechar que si NO es admin, tiene que ser el dueño del token:
-         jwtHelper.sameUserOrSpecificRol(jwt, credenciales.getUsuario(), admin);
+         // para cechar que el solicitante tiene que ser el dueño del token:
+         jwtHelper.sameUserAsJwt(jwt, credenciales.getUsuario());
          return this.usuarioService.cambiaClave(credenciales.getUsuario(), credenciales.getClave());
     }
-
+    
+    @PutMapping(
+            path = "/cambia-clave-by-admin",
+            produces = "application/json; charset=utf-8")
+    @AuthorizedRoles({admin}) // <-- cualquier administrador con un tken válido puede cambiar la clave de quién sea
+    public Usuario cambiaClaveByAdmin(
+            @RequestHeader("jwt") String jwt,
+            @ApiParam(
+                    name = "credenciales",
+                    value = "Correo y clave nueva del usuario al que se piensa cambiar la clave")
+            @RequestBody CredencialesRequest credenciales
+            ) throws ControllerException {
+         return this.usuarioService.cambiaClave(credenciales.getUsuario(), credenciales.getClave());
+    }
+    
     @ApiOperation(
             value = "AccessController::bitso",
             notes = "Se utiliza para recuperar el precio actual de BTC en moneda mexicana.")

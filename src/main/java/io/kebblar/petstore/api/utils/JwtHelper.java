@@ -113,4 +113,9 @@ public class JwtHelper {
         }
         throw new CustomException(EnumMessage.NOT_AUTHORIZED);        
     }
+    public void sameUserAsJwt(String jwt, String mail) throws CustomException {
+        JwtBody obj = this.bodyToObject(jwt);
+        if(obj.getMail().equals(mail)) return;
+        throw new CustomException(EnumMessage.NOT_AUTHORIZED);        
+    }
 }

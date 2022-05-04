@@ -12,5 +12,6 @@ public enum EnumRoles {
     admin, 
     normal, 
     operador,
+    ANY_ROLE,
     ROLE9;
 }

@@ -238,7 +238,7 @@
 	        <groupId>org.projectlombok</groupId>
 	        <artifactId>lombok</artifactId>
 	        <scope>provided</scope>
-	        <version>1.18.20</version>
+	        <version>1.18.20</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         
         <!-- Own custom libs -->

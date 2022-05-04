@@ -383,7 +383,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     /** {@inheritDoc} */
     @Override
     public Usuario cambiaClave(String correo, String clave) throws ServiceException {
-        try {
             Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
             if(usuario==null) throw new CustomException(USER_NOT_EXIST, correo);
             ValidadorClave.validate(clave);
@@ -391,9 +390,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setClave(claveHash);
             accessHelperService.updateUsuario(usuario);
             return usuario;
-        } catch (ServiceException e) {
-            throw new MapperException("Error al modificar la clave", e.getMessage());
-        }
     }
 
     /** {@inheritDoc} */

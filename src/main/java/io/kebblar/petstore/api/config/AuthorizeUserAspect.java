@@ -53,6 +53,11 @@ public class AuthorizeUserAspect {
         long delta = now - body.getCreation();
         if(delta > validez) throw new CustomException(EnumMessage.TOKEN_EXPIRED);
         
+        // Si el rol en el REST endpoint es ABY_ROLE, está autorizado cualquier ROL:
+        for(EnumRoles e : roles) {
+            if(e == EnumRoles.ANY_ROLE) return joinPoint.proceed(); 
+        }
+        
         // se obtienen los roles del interior del jwt:
         List<String> rolesBody = body.getRoles();
         
@@ -61,8 +66,7 @@ public class AuthorizeUserAspect {
         for(EnumRoles e : roles) {
             for(String s : rolesBody) {
                 if(e.toString().equals(s)) {
-                    Object result = joinPoint.proceed();
-                    return result;                    
+                    return joinPoint.proceed();
                 }
             }
         }
