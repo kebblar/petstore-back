@@ -383,26 +383,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     /** {@inheritDoc} */
     @Override
     public Usuario cambiaClave(String correo, String clave) throws ServiceException {
-            Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
-            if(usuario==null) throw new CustomException(USER_NOT_EXIST, correo);
-            ValidadorClave.validate(clave);
-            String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
-            usuario.setClave(claveHash);
-            accessHelperService.updateUsuario(usuario);
-            return usuario;
+        Usuario usuario = accessHelperService.getUsuarioByCorreo(correo);
+        if(usuario==null) throw new CustomException(USER_NOT_EXIST, correo);
+        ValidadorClave.validate(clave);
+        String claveHash = DigestEncoder.digest(clave, usuario.getCorreo());
+        usuario.setClave(claveHash);
+        accessHelperService.updateUsuario(usuario);
+        return usuario;
     }
 
     /** {@inheritDoc} */
     @Override
     public UsuarioDetalle actualizaUsuarioDetalle(UsuarioDetalle usuarioDetalle) throws ServiceException {
-        try {
-            String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
-            usuarioDetalle.setTelefonoCelular(nuevoCel);
-            accessHelperService.updateUsuarioDetalle(usuarioDetalle);
-            return usuarioDetalle;
-        } catch (Exception e) {
-            throw new MapperException("Error actualizando los datos del usuario", e.getMessage());
-        }
+        String nuevoCel = StringUtils.limpia(usuarioDetalle.getTelefonoCelular());
+        usuarioDetalle.setTelefonoCelular(nuevoCel);
+        accessHelperService.updateUsuarioDetalle(usuarioDetalle);
+        return usuarioDetalle;
     }
   
     /** {@inheritDoc} */
